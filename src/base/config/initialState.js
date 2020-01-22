@@ -24,5 +24,8 @@ export default {
     messages: [],
     outputDoc: {},
     isConfForTurboTax: {}
-  }
+  }, 
+  links: [
+    
+  ]
 }

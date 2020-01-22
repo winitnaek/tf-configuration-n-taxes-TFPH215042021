@@ -8,7 +8,8 @@ import * as manifest from '../build/_manifest';
 import * as c from './base/constants/IndexConstants';
 import {makeNavs,makeSearch} from './base/template/navGenerator';
 import TFHome from './app/home/home.js';
-let store = configureStore();
+let store = configureStore()    //();
+export default store;
 
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem('up')) {
@@ -48,6 +49,7 @@ function renderTFApplication(elem, renderName) {
  * renderTFHome
  * @param {*} elem 
  */
+
 function renderTFHome(elem) {
     ReactDOM.render(
         <Provider store={store}>
