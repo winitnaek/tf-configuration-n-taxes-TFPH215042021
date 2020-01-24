@@ -1,9 +1,7 @@
 
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
-import styles from "./modal.css";
-import JqxGrid from '../deps/jqwidgets-react/react_jqxgrid';
-import mockData from './mockJson.json'
+import JqxGrid from '../../deps/jqwidgets-react/react_jqxgrid';
 import { getPayeeDetails } from '../../base/config/actions/payeeActions';
 import { connect } from 'react-redux';
 
@@ -63,7 +61,7 @@ class JqxGridModal extends React.PureComponent {
         }
 
         this.setPropDataToState = (data) => {
-            const details = this.props.payeeData[0].details;
+            const details = this.props.data;
             console.log(details)
             this.setState({
                 details,
@@ -86,7 +84,7 @@ class JqxGridModal extends React.PureComponent {
                 aysnc: false,
             },
             datatype: 'json',
-            localdata: this.props.payeeData.details
+            localdata: this.props.data
         };
         this.setState({
             data: this.props.data,
@@ -99,6 +97,8 @@ class JqxGridModal extends React.PureComponent {
 
     render() {
 
+console.log(this.props)
+
         const {
             buttonLabel,
             className,
@@ -110,16 +110,21 @@ class JqxGridModal extends React.PureComponent {
             toggle,
         } = this.props;
 
+    const Style = {
+        margin: '0 auto',
+        width: '50%',
+        top: '-200'
+    }
 
 
         if (this.props.data && this.props.data.details) {
             this.setPropDataToState(this.props.data)
         }
 
-
+         console.log(this.props.data)
         return (
-            <div>
-                <Modal isOpen={open} toggle={toggle} className={className}>
+            <div style={Style}>
+                <Modal isOpen={true} toggle={toggle} className={className}>
                     <ModalHeader toggle={toggle} style={headerStyle}> {title}
                     </ModalHeader>
                     <ModalBody>
@@ -153,7 +158,8 @@ class JqxGridModal extends React.PureComponent {
                             pageable={true} autoheight={true}
                             localization={this.state && this.state.localization} />
                         <ModalFooter>
-                            <Button color="primary" onClick={close()}>Close</Button>
+                         
+                             <Button color="primary">Close</Button> 
                         </ModalFooter>
                     </ModalBody>
                 </Modal>
@@ -164,11 +170,11 @@ class JqxGridModal extends React.PureComponent {
 
 const mapStateToProps = state => {
     return {
-        payeeData: state.payeeDetails
+        
     };
 }
 
 export default connect(
     mapStateToProps,
     null
-)(jqxGridModal);
+)(JqxGridModal);

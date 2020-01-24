@@ -8,8 +8,10 @@ import * as manifest from '../build/_manifest';
 import * as c from './base/constants/IndexConstants';
 import {makeNavs,makeSearch} from './base/template/navGenerator';
 import TFHome from './app/home/home.js';
-let store = configureStore()    //();
+let store = configureStore()    
 export default store;
+import 'bootstrap/dist/css/bootstrap.css';
+import Sidebar from './app/home/Sidebar';
 
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem('up')) {
@@ -51,6 +53,7 @@ function renderTFApplication(elem, renderName) {
  */
 
 function renderTFHome(elem) {
+    console.log(elem)
     ReactDOM.render(
         <Provider store={store}>
             <TFHome/>

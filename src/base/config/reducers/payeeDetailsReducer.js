@@ -1,12 +1,12 @@
-import { getPayeeDetails } from './actions/payeeActions';
-import initialState from './initialState';
-const test = getPayeeDetails()
+import { getPayeeDetails } from '../actions/payeeActions';
+import initialState from '../initialState';
+
 
 const payeeDetails = (state = initialState, action) => {
     console.log('Made it to the reducer')
     console.log(action.type)
     switch(action.type) {
-        case 'GET_PAYMENT_DETAILS':
+        case 'GET_PAYEE_DETAILS':
             console.log('This action type was found')
             // To do..  Need to fetch real data from api then return it
             return [
