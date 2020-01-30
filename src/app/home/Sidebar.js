@@ -156,28 +156,8 @@ class Sidebar extends Component {
       let isFavorite = false;
       return (
         <Row key={data} style={{ marginTop: "10px" , zIndex: '200'}}>
-          <Col  style={{ padding: "0px" }}>
-            <div
-              className="mylink"
-              style={{
-                textDecoration: "none",
-                // width: "90%",
-                marginLeft: "25px"
-              }}
-            >
-              <span id={`jumpto-${data.value}`}>
-                <Link to={`/${data.link}`}> {data.label} </Link>
-              </span>
-
-              <UncontrolledTooltip
-                placement="top"
-                target={`jumpto-${data.value}`}
-              >
-                Jump to {data.label}
-              </UncontrolledTooltip>
-            </div>
-          </Col>
-          <Col sm="2" style={{}}>
+         
+          <Col sm="2" style={{ padding: "0px" }}>
             <span id={`markas-${data.value}`}>
               {this.state.selected.map(item => {
                 if (item.value === data.value) {
@@ -209,6 +189,27 @@ class Sidebar extends Component {
                 <span> Add {data.label} to favorites </span>
               )}
             </UncontrolledTooltip>
+          </Col>
+          <Col>
+            <div
+              className="mylink"
+              style={{
+                textDecoration: "none",
+                // width: "90%",
+                marginLeft: "10px"
+              }}
+            >
+              <span id={`jumpto-${data.value}`}>
+                <Link to={`/${data.link}`}> {data.label} </Link>
+              </span>
+
+              <UncontrolledTooltip
+                placement="top"
+                target={`jumpto-${data.value}`}
+              >
+                Jump to {data.label}
+              </UncontrolledTooltip>
+            </div>
           </Col>
         </Row>
       );
