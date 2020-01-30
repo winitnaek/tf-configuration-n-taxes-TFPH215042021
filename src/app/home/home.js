@@ -3,20 +3,99 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Sidebar from "./Sidebar";
-import { Row, Col, Container, Button, Modal } from "reactstrap";
+import DrawerToggleButton from "./DrawerToggleButton";
+import {
+  Row,
+  Col,
+  Container,
+  Button,
+  Card,
+  CardBody,
+  Modal,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledCollapse,
+  Collapse
+} from "reactstrap";
 import DisplayLinks from "../components/DisplayLinks";
 import Grid from "../components/JqxGridModal";
 import { PortalWithState } from "react-portal";
-import ModalGrid from "./Modal";
-import Landing from './Landing';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
+
+import ModalGrid from "../components/JqxGridModal";
+import Test from "../components/test";
+import AddressOverrides from "./AddressOverrides";
+import Welcome from "./Welcome";
+import AuditLogViewer from "./AuditLogViewer";
+import "./home.css";
+
+// import Companies from './Companies';
+// import BatchTest from './BatchTest';
+// import ConnectToDataSets from './ConnectToDataSets';
+// import CustomBackupRestore from './CustomBackup'
+// import CustomFormulas from './CustomFormulas';
+// import CustomGarnishmentFormulas from './CustomGarnishmentsFormulas';
+// import CustomGarnishments from './CustomGarnishments'
+// import CustomNexusData from './CustomNexusData';
+// import CustomPaymentExceptions from './CustomPaymentExceptions';
+// import  CustomPayments from './CustomPayments';
+// import  CustomTaxCodes from './CustomTaxCodes';
+// import  CustomTaxPaymentOverrides from './CustomeTaxPaymentOverrides';
+// import  CyclicBulletin from './CyclicBulletin';
+// import  DataSets from './DataSets';
+// import  DatabaseLoad from './DatabaseLoad';
+// import  DisposableOverrides from './DisposableOverrides';
+// import  EmployeeGroups from './EmployeeGroups';
+// import  GarnishmentFormulaOverrides from './GarnishmentFormulaOverrides';
+// import  GarnishmentGroups from './GarnishmentGroups';
+// import  GroupOverrides from './GroupOverrides';
+// import  LocatorBulletins from './LocatorBulletins';
+// import  LoginsAndPermissions from './LoginsAndPermissions';
+// import  MapPaymentCodes from './MapPaymentCodes';
+// import  MapTaxCodes from './MapTaxcodes';
+// import  MapTaxTypes from "./MapTaxTypes";
+// import  MappingTools from "./MappingTools";
+// import  MaritalStatusReport from "./MaritalStausReport"
+// import  OptionalRateOverrides from "./OptionalRateOverrides"
+// import  PAServicesTaxReport from "./PAServicesTaxRepor"
+// import  PaymentOverrides from './PaymentOverrides';
+// import  PensionWhatIfTest from './PensionWhatIfTest';
+// import  ReciprocalOverrides from './ReciprocalOverrides';
+// import  RegulatoryBulletins from './RegulatoryBulletins';
+// import  ReportingTools from './ReportingTools';
+// import  SystemTools from './SystemTools';
+// import  TaxEffectiveDateOverrides from './TaxEffectiveDateOverrides';
+// import  TaxHistory from './TaxHistory';
+// import  TaxLabilityReport from './TaxLiabilityReport';
+// import  TaxLocator from './TaxLocator';
+// import  USPensionQuickFormulas from './USPensionQuickFormulas';
+// import  USQuickFormula from './USQuickFormula';
+// import  USWageAttachmentQuickFormulas from './USWageAttachmentQuickFormulas';
+// import  Welcome from './Welcome';
+// import  UnemploymentOverrides from './UnemployementOverrides';
+// import  UserDataQueries from './UserDataQueries';
+// import  WhatIfTest from './WhatIfTest';
+// import  Worksites from './Worksites';
+// import  DefineFavoriteLinks from './DefineFavoriteLinks';
+
+
+let sidebar;
 
 const handleRender = () => {
-  console.log(`I have been clicked`)
+  console.log(`I have been clicked`);
   ReactDOM.render(
     <h1> This is a test </h1>,
-    document.getElementById('pageContainer')
-  )
-}
+    document.getElementById("pageContainer")
+  );
+};
 
 class TFHome extends Component {
   constructor(props) {
@@ -24,26 +103,47 @@ class TFHome extends Component {
     this.state = {
       payeeDetails: null,
       isOpen: false,
+      dropdownOpen: false,
+      sideDrawerOpen: false,
       linksdata: {
         title: "",
         links: []
       }
     };
-    this.showModal = e => {
-      console.log("Trying to open modal");
+    this.drawerToggleClickHandler = () => {
+      console.log("I am being clicked from the drawer toggle button");
+      console.log(this.state.sideDrawerOpen);
       this.setState({
-        isOpen: true
+        sideDrawerOpen: !this.state.sideDrawerOpen
       });
     };
+    this.showModal = e => {
+      console.log("Trying to open modal");
+    };
 
-   
-    
+    this.handleGridLink = (link) => {
+      console.log(link)
+
+    }
+
 
   }
 
-  componentDidMount() {
-    console.log(this.props);
+  //   this.displaySidebar =  {
+  //  this.state.sideDrawerOpen ?
+  //      (
+  //    <Col className="side-bar">
+  //       <Sidebar
+  //         handleLink={this.handleLink}
+  //         options={this.props.data.sidebar.options}
+  //         favorites={this.props.data.sidebar.favorites}
+  //       />
+  //     </Col>
+  //      ):
 
+  // }
+
+  componentDidMount() {
     this.setState({
       payeeDetails: this.props.data.payeeDetails,
       linksdata: this.props.data.linksdata
@@ -52,12 +152,27 @@ class TFHome extends Component {
 
   handleClose() {
     console.log("You tried to close modal");
-    // this.setState({
-    //   isOpen: false
-    // });
   }
-  
 
+  handleLink(link) {
+    console.log(link);
+    return (
+      <Route>
+        <Redirect
+          to={{
+            pathname: `/${link}`
+          }}
+        />
+      </Route>
+    );
+  }
+
+  handleToggle() {
+    console.log("trying to toggle btn");
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
 
   handleModalOpen() {
     console.log("Trying to open Modal");
@@ -67,6 +182,13 @@ class TFHome extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    const sidebarOpen = (
+      <Sidebar
+        handleLink={this.handleLink}
+        options={this.props.data.sidebar.options}
+        favorites={this.props.data.sidebar.favorites}
+      />
+    );
     if (nextProps.data.linksdata !== this.state.linksdata) {
       console.log("Setting the state");
       this.setState({
@@ -83,8 +205,6 @@ class TFHome extends Component {
   render() {
     console.log(this.props);
 
-   
-  
     let isOpen = false;
 
     const toggelModal = () => {
@@ -94,45 +214,68 @@ class TFHome extends Component {
     };
 
     console.log(this.state.isOpen);
+    const handleToggle = () => {
+      console.log("I have been clicked");
+    };
+
+    const openNav = () => {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    };
+
     return (
-      <div style={{marginTop: 0}}>
-         <Sidebar
-          options={this.props.data.sidebar.options}
-          favorites={this.props.data.sidebar.favorites}
-        />
-        <Container id="pageContainer">
-        <ModalGrid data={this.props.data.payeeDetails} />
-     
-        {/* <Col>
-          <Row>
-            <h1 style={{ margin: "0 auto" }}>
-              Welcome to Tax Factory Home Page
-            </h1>
-          </Row>
-          <Row></Row>
-          <Row>
-            <DisplayLinks
-              title={this.props.data.linksdata.title}
-              links={this.props.data.linksdata.links}
-            />
-            {this.state.linksData}
-          </Row>
-        </Col>  */}
-        <Col style={{marginTop: 0}}> <Landing/> </Col>
-      </Container>
-      </div>
+      <Router>
+        <div style={{ marginTop: 0 }}>
+          <Container id="pageContainer">
+            <Col>
+              <span
+                id="toggler"
+                style={{ marginBottom: "1rem" }}
+              >
+              
+                 <DrawerToggleButton click={this.drawerToggleClickHandler} />
+              </span>
+              <UncontrolledCollapse toggler="#toggler">
+                <Sidebar
+                  handleLink={this.handleLink}
+                  options={this.props.data.sidebar.options}
+                  favorites={this.props.data.sidebar.favorites}
+                />
+              </UncontrolledCollapse>
+            </Col>
+            <ModalGrid data={this.props.data.payeeDetails}  renderLink={this.handleGridLink}/>
+            <Col>
+              <Switch>
+                <Route path="/welcome">
+                  <Welcome />
+                </Route>
+                <Route path="/addressOverrides">
+                  <AddressOverrides />
+                </Route>
+                <Route path="/auditLogViewer">
+                  <AuditLogViewer />
+                </Route>
+                <Route path="/grid">
+                  <Grid />
+                </Route>
+                <Route path="/">
+                <Welcome/>
+                </Route>
+              </Switch>
+            </Col>
+          </Container>
+        </div>
+      </Router>
     );
   }
 }
 function mapStateToProps(state) {
   return {
-    data: state.data
+    data: state.data,
+    options: state.data.sidebar.options
   };
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TFHome);
-
-
-

@@ -5,7 +5,7 @@ import { Row, Col, Container, Button, Modal } from "reactstrap";
 import SystemSummary from "./SystemSummary";
 import PayrollAndEmployeeTestMessages from "./PayrollAndEmployeeTestMessages";
 
-class Landing extends Component {
+class Welcome extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -18,38 +18,51 @@ class Landing extends Component {
   }
 
   render() {
-    const { taxCodes, unmappedAuthorites, overrides, testMessages } = this.props;
+    const {
+      taxCodes,
+      unmappedAuthorites,
+      overrides,
+      testMessages
+    } = this.props;
 
     return (
-  
-          <Container style={{marginTop: '-50px'}}>
+      <Container style={{ marginTop: "-50px" }}>
         <Col>
           <Row>
-            <p sytle={{fontSize: '24px'}}> <strong> Welcome! </strong></p>
+            <p sytle={{ fontSize: "24px" }}>
+              <strong> Welcome! </strong>
+            </p>
           </Row>
 
-          <Row style={{marginTop: "25px"}}>
-            <SystemSummary/>
+          <Row style={{ marginTop: "25px" }}>
+            <SystemSummary />
           </Row>
 
           <Row>
-           <PayrollAndEmployeeTestMessages/>
+            <PayrollAndEmployeeTestMessages />
           </Row>
         </Col>
-        </Container>
-  
+      </Container>
     );
   }
 }
+
+// function connectWithStore(store, WrappedComponent, ...args) {
+//   var ConnectedWrappedComponent = connect(...args)(WrappedComponent)
+//   return function (props) {
+//     return <ConnectedWrappedComponent {...props} store={store} />
+//   }
+// }
+
 function mapStateToProps(state) {
   return {
     taxCodes: state.data.taxCodes,
     unmappedAuthorites: state.data.unmappedAuthorites,
     overrides: state.data.overrides,
-    testMessages: state.data.testMessages,
+    testMessages: state.data.testMessages
   };
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({}, dispatch);
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Landing);
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

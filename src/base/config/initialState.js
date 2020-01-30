@@ -60,9 +60,9 @@ export default {
   sidebar: {
     options: [
 
-      { value: "home", label: "Home", link: "Landing" },
-      { value: "addressOverrides", label: "Address Overrides", link: "Modal" },
-      { value: "auditLogViewer", label: "Audit Log Viewer", link: "" },
+      { value: "welcome", label: "Home", link: "Welcome" },
+      { value: "AddressOverrides", label: "Address Overrides", link: "AddressOverrides" },
+      { value: "AuditLogViewer", label: "Audit Log Viewer", link: "AuditLogViewer" },
       { value: "companies", label: "Companies", link: "" },
       { value: "batchTest", label: "Batch Test", link: "" },
       { value: "connectToDataSets", label: "Connect To Data Sets", link: "" },
