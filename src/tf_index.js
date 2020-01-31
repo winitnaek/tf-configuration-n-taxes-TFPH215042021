@@ -11,7 +11,7 @@ import TFHome from "./app/home/home.js";
 let store = configureStore();
 export default store;
 import "bootstrap/dist/css/bootstrap.css";
-import Sidebar from "./app/home/Sidebar";
+
 
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {

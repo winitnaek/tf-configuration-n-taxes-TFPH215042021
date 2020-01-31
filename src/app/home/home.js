@@ -32,9 +32,9 @@ import {
 
 import ModalGrid from "../components/JqxGridModal";
 import Test from "../components/test";
-import AddressOverrides from "./AddressOverrides";
+import AddressOverrides from "../overrides/AddressOverrides";
 import Welcome from "./Welcome";
-import AuditLogViewer from "./AuditLogViewer";
+import AuditLogViewer from "../auditlogs/AuditLogViewer";
 import "./home.css";
 
 // import Companies from './Companies';
@@ -81,7 +81,7 @@ import "./home.css";
 // import  USWageAttachmentQuickFormulas from './USWageAttachmentQuickFormulas';
 // import  Welcome from './Welcome';
 // import  UnemploymentOverrides from './UnemployementOverrides';
-// import  UserDataQueries from './UserDataQueries';
+import  UserDataQueriesPg from '../userdataqueries/UserDataQueriesPg';
 // import  WhatIfTest from './WhatIfTest';
 // import  Worksites from './Worksites';
 // import  DefineFavoriteLinks from './DefineFavoriteLinks';
