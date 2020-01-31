@@ -31,11 +31,12 @@ import {
 } from "react-router-dom";
 
 import ModalGrid from "../components/JqxGridModal";
-import Test from "../components/test";
+import ReactStrapForm from "./Test";
 import AddressOverrides from "./AddressOverrides";
 import Welcome from "./Welcome";
 import AuditLogViewer from "./AuditLogViewer";
 import "./home.css";
+import Form from '../components/Forms/FormBuilder'
 
 // import Companies from './Companies';
 // import BatchTest from './BatchTest';
@@ -46,7 +47,7 @@ import "./home.css";
 // import CustomGarnishments from './CustomGarnishments'
 // import CustomNexusData from './CustomNexusData';
 // import CustomPaymentExceptions from './CustomPaymentExceptions';
-// import  CustomPayments from './CustomPayments';
+import  CustomPayments from './CustomPayments';
 // import  CustomTaxCodes from './CustomTaxCodes';
 // import  CustomTaxPaymentOverrides from './CustomeTaxPaymentOverrides';
 // import  CyclicBulletin from './CyclicBulletin';
@@ -85,7 +86,7 @@ import "./home.css";
 // import  WhatIfTest from './WhatIfTest';
 // import  Worksites from './Worksites';
 // import  DefineFavoriteLinks from './DefineFavoriteLinks';
-
+import data from '../components/Forms/formdata.json'
 
 let sidebar;
 
@@ -97,14 +98,16 @@ const handleRender = () => {
   );
 };
 
+
+
 class TFHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
       payeeDetails: null,
       isOpen: false,
-      dropdownOpen: false,
-      sideDrawerOpen: false,
+      dropdownOpen: true,
+      sideDrawerOpen: true,
       linksdata: {
         title: "",
         links: []
@@ -125,6 +128,10 @@ class TFHome extends Component {
       console.log(link)
 
     }
+    
+    this.makeActionWhenJsonChange = (json) => {
+      console.log(json)
+  }
 
 
   }
@@ -146,7 +153,7 @@ class TFHome extends Component {
   componentDidMount() {
     this.setState({
       payeeDetails: this.props.data.payeeDetails,
-      linksdata: this.props.data.linksdata
+      linksdata: this.props.data.linksdata,
     });
   }
 
@@ -201,6 +208,10 @@ class TFHome extends Component {
       this.setState({ isOpen: true });
     }
   }
+  getJsonCallback(){
+        console.log(this.refs.formBuilder.getJson(data));
+    }
+
 
   render() {
     console.log(this.props);
@@ -222,32 +233,38 @@ class TFHome extends Component {
       document.getElementById("mySidebar").style.width = "250px";
       document.getElementById("main").style.marginLeft = "250px";
     };
+   
 
     return (
       <Router>
         <div style={{ marginTop: 0 }}>
           <Container id="pageContainer">
             <Col>
-              <span
+              {/* <span
                 id="toggler"
                 style={{ marginBottom: "1rem" }}
               >
               
                  <DrawerToggleButton click={this.drawerToggleClickHandler} />
-              </span>
-              <UncontrolledCollapse toggler="#toggler">
+              </span> */}
+              {/* <UncontrolledCollapse toggler="#toggler"> */}
                 <Sidebar
                   handleLink={this.handleLink}
                   options={this.props.data.sidebar.options}
                   favorites={this.props.data.sidebar.favorites}
                 />
-              </UncontrolledCollapse>
+              {/* </UncontrolledCollapse> */}
             </Col>
-            <ModalGrid data={this.props.data.payeeDetails}  renderLink={this.handleGridLink}/>
+         
+    
+            {/* <ModalGrid data={this.props.data.payeeDetails}  renderLink={this.handleGridLink}/> */}
             <Col>
               <Switch>
                 <Route path="/welcome">
                   <Welcome />
+                </Route>
+                <Route path="/reactStrapForm">
+                  <ReactStrapForm />
                 </Route>
                 <Route path="/addressOverrides">
                   <AddressOverrides />
@@ -255,12 +272,13 @@ class TFHome extends Component {
                 <Route path="/auditLogViewer">
                   <AuditLogViewer />
                 </Route>
-                <Route path="/grid">
-                  <Grid />
+                <Route path="/customPayments">
+                  <CustomPayments />
                 </Route>
                 <Route path="/">
-                <Welcome/>
+               <ReactStrapForm/>
                 </Route>
+               
               </Switch>
             </Col>
           </Container>

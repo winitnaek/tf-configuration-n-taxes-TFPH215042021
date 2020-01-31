@@ -59,7 +59,7 @@ export default {
   },
   sidebar: {
     options: [
-
+      { value: "reactStrapForm", label: "React Strap Form Example", link: "ReactStrapForm" },
       { value: "welcome", label: "Home", link: "Welcome" },
       { value: "AddressOverrides", label: "Address Overrides", link: "AddressOverrides" },
       { value: "AuditLogViewer", label: "Audit Log Viewer", link: "AuditLogViewer" },
@@ -84,7 +84,7 @@ export default {
         label: "Custom Payment Exceptions",
         link: ""
       },
-      { value: "customPayments", label: "Custom Payments", link: "" },
+      { value: "customPayments", label: "Custom Payments", link: "CustomPayments" },
       { value: "customTaxCodes", label: "Custom Tax Codes", link: "" },
       {
         value: "customTaxPaymentOverrides",

@@ -39,7 +39,7 @@ class Sidebar extends Component {
     this.state = {
       selected: [],
       favorites: [],
-      isOpen: false,
+      isOpen: true,
       searchLinksIsOpen: true,
       sidebar: {
         options: [],

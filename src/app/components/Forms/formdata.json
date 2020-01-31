@@ -1,0 +1,123 @@
+[
+    {
+        "typeField": "header",
+        "headertext": "Enter Custom Payments",
+        "headerlevel": "h1",
+        "class": ""
+    },
+    {
+        "typeField": "text",
+        "label": "Code",
+        "required": true,
+        "type": "text",
+        "name": "code",
+        "class": "",
+        "tipText": "",
+        "placeholder": "",
+        "value": "",
+        "min_length": "",
+        "max_length": "",
+        "sufix": ""
+    },
+    {
+        "typeField": "select",
+        "label": "Type",
+        "required": false,
+        "options": [
+            {
+                "pos": 1,
+                "label": "Custom Earning",
+                "value": "customEarning"
+            },
+            {
+                "pos": 2,
+                "label": "Custom Benefit Plan",
+                "value": "customeBenefitPlan"
+            }
+        ],
+        "name": "type",
+        "class": "",
+        "tipText": "",
+        "value": ""
+    },
+    {
+        "typeField": "text",
+        "label": "Name",
+        "required": true,
+        "type": "text",
+        "name": "name",
+        "class": "",
+        "tipText": "",
+        "placeholder": "",
+        "value": "",
+        "min_length": "",
+        "max_length": "",
+        "sufix": ""
+    },
+    {
+        "typeField": "header",
+        "headertext": "Custom Earning Details",
+        "headerlevel": "h1",
+        "class": ""
+    },
+    {
+        "typeField": "select",
+        "label": "Taxability",
+        "required": false,
+        "options": [
+            {
+                "pos": 1,
+                "label": "Taxable",
+                "value": "taxable"
+            },
+            {
+                "pos": 2,
+                "label": "Limit-MTD",
+                "value": "limitMtd"
+            },
+            {
+                "pos": 4,
+                "label": "Taxable/Exclude",
+                "value": "taxableExclude"
+            },
+            {
+                "pos": 6,
+                "label": "Imputed",
+                "value": "imputed"
+            },
+            {
+                "pos": 2,
+                "label": "Limit-MTD",
+                "value": "limitMtd"
+            },
+            {
+                "pos": 4,
+                "label": "Taxable/Exclude",
+                "value": "taxableExclude"
+            },
+            {
+                "pos": 6,
+                "label": "Imputed",
+                "value": "imputed"
+            }
+        ],
+        "name": "taxability",
+        "class": "",
+        "tipText": "",
+        "value": ""
+    },
+    {
+        "typeField": "text",
+        "label": "Maximum Limit",
+        "required": false,
+        "type": "text",
+        "name": "maximumLimit",
+        "class": "",
+        "tipText": "",
+        "placeholder": "",
+        "value": "",
+        "min_length": "",
+        "max_length": "",
+        "sufix": ""
+    }
+]

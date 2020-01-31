@@ -49,3 +49,7 @@
     transition: margin-left .5s;
     padding: 16px;
   }
+
+  #appContent {
+    margin-top: 0;
+  }
