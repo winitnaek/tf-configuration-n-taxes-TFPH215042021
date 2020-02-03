@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {star, goldStar, link, linkStyle, CardStyle, Style, rowStyle, linkColStyle, buttonColStyle, favoriteLinkStyle, selectStyle, favoriteListStyle} from '../../css/sidebar-css'
@@ -10,28 +9,15 @@ import {
 
 import {
   Card,
-  Button,
-  CardTitle,
-  CardText,
   Collapse,
-  CardBody,
   Row,
   Col,
   UncontrolledTooltip,
   Container
 } from "reactstrap";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./sidebar.css";
 import Select, { components } from "react-select";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
-import Star from "./fontAwesome";
 
 class Sidebar extends Component {
   constructor(props) {
@@ -124,7 +110,7 @@ class Sidebar extends Component {
   _renderOption(option) {
     return (
       <div>
-        {option.label} test<small>small</small>
+        {option.label} <small>small</small>
       </div>
     );
   }
@@ -194,27 +180,6 @@ class Sidebar extends Component {
               )}
             </UncontrolledTooltip>
           </Col>
-          <Col>
-            <div
-              className="mylink"
-              style={{
-                textDecoration: "none",
-                // width: "90%",
-                marginLeft: "10px"
-              }}
-            >
-              <span id={`jumpto-${data.value}`}>
-                <Link to={`/${data.link}`}> {data.label} </Link>
-              </span>
-
-              <UncontrolledTooltip
-                placement="top"
-                target={`jumpto-${data.value}`}
-              >
-                Jump to {data.label}
-              </UncontrolledTooltip>
-            </div>
-          </Col>
         </Row>
       );
     };
@@ -280,7 +245,7 @@ class Sidebar extends Component {
                 singleValue
                 isSearchable
                 placeholder="Search Links"
-                 options={this.state.options}
+                options={this.state.options}
                 onChange={this.onChange}
                 value={this.state.currentSelected}
                 style={selectStyle}

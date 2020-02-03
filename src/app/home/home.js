@@ -31,14 +31,12 @@ import {
 } from "react-router-dom";
 
 import ModalGrid from "../components/JqxGridModal";
-import ReactStrapForm from "./Test";
-import AddressOverrides from "./AddressOverrides"
-import Test from "../components/test";
+import AddressOverrides from "./AddressOverrides";
 
 import Welcome from "./Welcome";
-import AuditLogViewer from "../auditlogs/AuditLogViewer"
+import AuditLogViewer from "../auditlogs/AuditLogViewer";
 import "./home.css";
-import Form from '../components/Forms/FormBuilder'
+import Form from "../components/Forms/FormBuilder";
 
 // import Companies from './Companies';
 // import BatchTest from './BatchTest';
@@ -84,23 +82,20 @@ import Form from '../components/Forms/FormBuilder'
 // import  USWageAttachmentQuickFormulas from './USWageAttachmentQuickFormulas';
 // import  Welcome from './Welcome';
 // import  UnemploymentOverrides from './UnemployementOverrides';
-import  UserDataQueriesPg from '../userdataqueries/UserDataQueriesPg';
+import UserDataQueriesPg from "../userdataqueries/UserDataQueriesPg";
 // import  WhatIfTest from './WhatIfTest';
 // import  Worksites from './Worksites';
 // import  DefineFavoriteLinks from './DefineFavoriteLinks';
-import data from '../components/Forms/formdata.json'
+import data from "../components/Forms/formdata.json";
 
 let sidebar;
 
 const handleRender = () => {
-  console.log(`I have been clicked`);
   ReactDOM.render(
     <h1> This is a test </h1>,
     document.getElementById("pageContainer")
   );
 };
-
-
 
 class TFHome extends Component {
   constructor(props) {
@@ -116,55 +111,20 @@ class TFHome extends Component {
       }
     };
     this.drawerToggleClickHandler = () => {
-      console.log("I am being clicked from the drawer toggle button");
-      console.log(this.state.sideDrawerOpen);
       this.setState({
         sideDrawerOpen: !this.state.sideDrawerOpen
       });
     };
-    this.showModal = e => {
-      console.log("Trying to open modal");
-    };
-
-    this.handleGridLink = (link) => {
-      console.log(link)
-
-    }
-    
-    this.makeActionWhenJsonChange = (json) => {
-      console.log(json)
   }
-
-
-  }
-
-  //   this.displaySidebar =  {
-  //  this.state.sideDrawerOpen ?
-  //      (
-  //    <Col className="side-bar">
-  //       <Sidebar
-  //         handleLink={this.handleLink}
-  //         options={this.props.data.sidebar.options}
-  //         favorites={this.props.data.sidebar.favorites}
-  //       />
-  //     </Col>
-  //      ):
-
-  // }
 
   componentDidMount() {
     this.setState({
       payeeDetails: this.props.data.payeeDetails,
-      linksdata: this.props.data.linksdata,
+      linksdata: this.props.data.linksdata
     });
   }
 
-  handleClose() {
-    console.log("You tried to close modal");
-  }
-
   handleLink(link) {
-    console.log(link);
     return (
       <Route>
         <Redirect
@@ -177,96 +137,50 @@ class TFHome extends Component {
   }
 
   handleToggle() {
-    console.log("trying to toggle btn");
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
   }
 
   handleModalOpen() {
-    console.log("Trying to open Modal");
     this.setState({
       isOpen: true
     });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // const sidebarOpen = (
-    //   <Sidebar
-    //     handleLink={this.handleLink}
-    //     options={this.props.data.sidebar.options}
-    //     favorites={this.props.data.sidebar.favorites}
-    //   />
-    // );
     if (nextProps.data.linksdata !== this.state.linksdata) {
-      console.log("Setting the state");
       this.setState({
         linksdata: nextProps.data.linksdata
       });
     }
 
     if (nextState.isOpen !== this.state.isOpen) {
-      console.log("A change is occuring");
       this.setState({ isOpen: true });
     }
   }
-  getJsonCallback(){
-        console.log(this.refs.formBuilder.getJson(data));
-    }
-
+  getJsonCallback() {
+    console.log(this.refs.formBuilder.getJson(data));
+  }
 
   render() {
-    console.log(this.props);
-
     let isOpen = false;
-
-    const toggelModal = () => {
-      console.log("you just tried to open Modal");
-      isOpen = !isOpen;
-      console.log(isOpen);
-    };
-
-    console.log(this.state.isOpen);
-    const handleToggle = () => {
-      console.log("I have been clicked");
-    };
-
-    const openNav = () => {
-      document.getElementById("mySidebar").style.width = "250px";
-      document.getElementById("main").style.marginLeft = "250px";
-    };
-   
 
     return (
       <Router>
         <div style={{ marginTop: 0 }}>
           <Container id="pageContainer">
             <Col>
-              {/* <span
-                id="toggler"
-                style={{ marginBottom: "1rem" }}
-              >
-              
-                 <DrawerToggleButton click={this.drawerToggleClickHandler} />
-              </span> */}
-              {/* <UncontrolledCollapse toggler="#toggler"> */}
-                <Sidebar
-                  handleLink={this.handleLink}
-                  options={this.props.data.sidebar.options}
-                  favorites={this.props.data.sidebar.favorites}
-                />
-              {/* </UncontrolledCollapse> */}
+              <Sidebar
+                handleLink={this.handleLink}
+                options={this.props.data.sidebar.options}
+                favorites={this.props.data.sidebar.favorites}
+              />
             </Col>
-         
-    
-            {/* <ModalGrid data={this.props.data.payeeDetails}  renderLink={this.handleGridLink}/> */}
             <Col>
               <Switch>
                 <Route path="/welcome">
                   <Welcome />
-                </Route>
-                <Route path="/reactStrapForm">
-                  <ReactStrapForm />
                 </Route>
                 <Route path="/addressOverrides">
                   <AddressOverrides />
@@ -274,13 +188,9 @@ class TFHome extends Component {
                 <Route path="/auditLogViewer">
                   <AuditLogViewer />
                 </Route>
-                {/* <Route path="/customPayments">
-                  <CustomPayments />
-                </Route> */}
                 <Route path="/">
-               <Welcome/>
+                  <Welcome />
                 </Route>
-               
               </Switch>
             </Col>
           </Container>
