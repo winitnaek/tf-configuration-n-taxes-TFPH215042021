@@ -31,15 +31,12 @@ import {
 } from "react-router-dom";
 
 import ModalGrid from "../components/JqxGridModal";
-<<<<<<< HEAD
 import ReactStrapForm from "./Test";
-import AddressOverrides from "./AddressOverrides";
-=======
+import AddressOverrides from "./AddressOverrides"
 import Test from "../components/test";
-import AddressOverrides from "../overrides/AddressOverrides";
->>>>>>> 55144c3f21589552d64abc7dcea22ded94fbf992
+
 import Welcome from "./Welcome";
-import AuditLogViewer from "../auditlogs/AuditLogViewer";
+import AuditLogViewer from "../auditlogs/AuditLogViewer"
 import "./home.css";
 import Form from '../components/Forms/FormBuilder'
 
@@ -52,7 +49,7 @@ import Form from '../components/Forms/FormBuilder'
 // import CustomGarnishments from './CustomGarnishments'
 // import CustomNexusData from './CustomNexusData';
 // import CustomPaymentExceptions from './CustomPaymentExceptions';
-import  CustomPayments from './CustomPayments';
+//import  CustomPayments from './CustomPayments';
 // import  CustomTaxCodes from './CustomTaxCodes';
 // import  CustomTaxPaymentOverrides from './CustomeTaxPaymentOverrides';
 // import  CyclicBulletin from './CyclicBulletin';
@@ -194,13 +191,13 @@ class TFHome extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const sidebarOpen = (
-      <Sidebar
-        handleLink={this.handleLink}
-        options={this.props.data.sidebar.options}
-        favorites={this.props.data.sidebar.favorites}
-      />
-    );
+    // const sidebarOpen = (
+    //   <Sidebar
+    //     handleLink={this.handleLink}
+    //     options={this.props.data.sidebar.options}
+    //     favorites={this.props.data.sidebar.favorites}
+    //   />
+    // );
     if (nextProps.data.linksdata !== this.state.linksdata) {
       console.log("Setting the state");
       this.setState({
@@ -277,9 +274,9 @@ class TFHome extends Component {
                 <Route path="/auditLogViewer">
                   <AuditLogViewer />
                 </Route>
-                <Route path="/customPayments">
+                {/* <Route path="/customPayments">
                   <CustomPayments />
-                </Route>
+                </Route> */}
                 <Route path="/">
                <Welcome/>
                 </Route>

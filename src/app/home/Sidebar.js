@@ -124,7 +124,7 @@ class Sidebar extends Component {
   _renderOption(option) {
     return (
       <div>
-        {option.label} <small>small</small>
+        {option.label} test<small>small</small>
       </div>
     );
   }
@@ -139,11 +139,6 @@ class Sidebar extends Component {
       const { data } = props;
       let isFavorite = false;
       return (
-<<<<<<< HEAD
-        <Row key={data} style={{ marginTop: "10px" , zIndex: '200'}}>
-         
-          <Col sm="2" style={{ padding: "0px" }}>
-=======
         <Row
           key={data}
           style={rowStyle}
@@ -166,7 +161,6 @@ class Sidebar extends Component {
             </div>
           </Col>
           <Col sm="2">
->>>>>>> cleanup-searchlinks
             <span id={`markas-${data.value}`}>
               {this.state.selected.map(item => {
                 if (item.value === data.value) {
@@ -286,7 +280,7 @@ class Sidebar extends Component {
                 singleValue
                 isSearchable
                 placeholder="Search Links"
-                options={this.state.options}
+                 options={this.state.options}
                 onChange={this.onChange}
                 value={this.state.currentSelected}
                 style={selectStyle}
