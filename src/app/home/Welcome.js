@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Row, Col, Container, Button, Modal } from "reactstrap";
 import SystemSummary from "./SystemSummary";
-import PayrollAndEmployeeTestMessages from "./PayrollAndEmployeeTestMessages";
+import PayrollAndEmployeeTestMessages from "../userdataqueries/PayrollAndEmployeeTestMessages";
 
 class Welcome extends Component {
   constructor(props) {
