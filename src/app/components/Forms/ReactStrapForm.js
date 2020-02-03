@@ -12,6 +12,8 @@ const Example = (props) => {
           <CardBody>
               <h3> This part is using the react jason schema form</h3>
     <FormBuilder schema={schema} uiSchema={uiSchema} >
+
+      
         
     <Form>
         <h3>   This part is using React Strap</h3>
