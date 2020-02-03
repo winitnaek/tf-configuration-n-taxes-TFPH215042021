@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import {star, goldStar, link, linkStyle, CardStyle, Style, rowStyle, linkColStyle, buttonColStyle, favoriteLinkStyle, selectStyle, favoriteListStyle} from '../../css/sidebar-css'
 import {
   getFavoriteLinks,
   saveFavoriteLinks
 } from "../../base/config/actions/favoriteLinksActions";
-
 
 import {
   Card,
@@ -130,23 +130,7 @@ class Sidebar extends Component {
   }
   render() {
     const { handleLink } = this.props;
-    const Style = {
-      height: "100%",
-      width: "18%",
-      position: "fixed",
-      zIndex: 1,
-      top: 60,
-      left: 0,
-      backgroundColor: "#dbdad7",
-      overflowX: "hidden",
-      paddingTop: "20px"
-    };
-
-    const CardStyle = {
-      height: "auto",
-      minHeight: "100%"
-    };
-
+    
     const toggle = () => {
       tooltipOpen = !tooltipOpen;
     };
@@ -155,9 +139,34 @@ class Sidebar extends Component {
       const { data } = props;
       let isFavorite = false;
       return (
+<<<<<<< HEAD
         <Row key={data} style={{ marginTop: "10px" , zIndex: '200'}}>
          
           <Col sm="2" style={{ padding: "0px" }}>
+=======
+        <Row
+          key={data}
+          style={rowStyle}
+        >
+          <Col sm="10" style={{ padding: "0px" }}>
+            <div
+              className="mylink"
+              style={link}
+            >
+              <span id={`jumpto-${data.value}`}>
+                <Link style={linkStyle} to={`/${data.link}`}> {data.label} </Link>
+              </span>
+
+              <UncontrolledTooltip
+                placement="top"
+                target={`jumpto-${data.value}`}
+              >
+                Jump to {data.label}
+              </UncontrolledTooltip>
+            </div>
+          </Col>
+          <Col sm="2">
+>>>>>>> cleanup-searchlinks
             <span id={`markas-${data.value}`}>
               {this.state.selected.map(item => {
                 if (item.value === data.value) {
@@ -166,17 +175,18 @@ class Sidebar extends Component {
               })}
 
               {isFavorite ? (
-                <FontAwesomeIcon
-                  icon={Star}
-                  style={{ color: "gold", marginLeft: '40px' }}
+            
+                <i
+                  className="fas fa-star"
+                  style={goldStar}
                   onClick={e => this.removeFavorite(data)}
-                />
+                ></i>
               ) : (
-                <FontAwesomeIcon
-                  icon={faStar}
-                  style={{  marginLeft: '40px' }}
+                <i
+                  class="far fa-star"
+                  style={star}
                   onClick={e => this.setFavorite(data)}
-                />
+                ></i>
               )}
             </span>
             <UncontrolledTooltip
@@ -219,16 +229,33 @@ class Sidebar extends Component {
     let displayFavorites = this.state.selected.sort().map(item => {
       return (
         <Row key={item.label} className="selected">
-          <Col sm="10" style={{ padding: "0px" }}>
-            <Link to={`/${item.link}`}> {item.label} </Link>
+          <Col sm="10" style={linkColStyle}>
+          <span id={`jumpto-${item.value}`}>
+            <Link style={linkStyle} to={`/${item.link}`}> {item.label} </Link>
+            </span>
+            <UncontrolledTooltip
+                placement="top"
+                target={`jumpto-${item.value}`}
+              >
+                Jump to {item.label}
+              </UncontrolledTooltip>
           </Col>
           <Col xs="2">
+
+            <span id={`remove-${item.value}`}>
             <button
-              style={{ border: "none", backgroundColor: "white" }}
+              style={buttonColStyle}
               onClick={e => this.removeFavorite(item)}
             >
               x
             </button>
+            </span>
+            <UncontrolledTooltip
+                placement="top"
+                target={`remove-${item.value}`}
+              >
+                Remove {item.label}
+              </UncontrolledTooltip>
           </Col>
         </Row>
       );
@@ -262,15 +289,15 @@ class Sidebar extends Component {
                 options={this.state.options}
                 onChange={this.onChange}
                 value={this.state.currentSelected}
-                style={{ marginTop: "150px" }}
+                style={selectStyle}
                 components={{ Option }}
               />
             </Collapse>
             <hr />
-            <p style={{ fontWeight: "bold" }}> Favorite Links</p>
+            <p style={favoriteLinkStyle}> Favorite Links</p>
 
             {this.state.selected ? (
-              <Container style={{ textAlign: "left" }}>
+              <Container style={favoriteListStyle}>
                 {displayFavorites.sort()}
               </Container>
             ) : (

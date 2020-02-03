@@ -281,7 +281,7 @@ class TFHome extends Component {
                   <CustomPayments />
                 </Route>
                 <Route path="/">
-               <ReactStrapForm/>
+               <Welcome/>
                 </Route>
                
               </Switch>

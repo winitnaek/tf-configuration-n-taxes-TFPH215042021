@@ -1,6 +1,7 @@
 import React from 'react';
 import {Col } from 'reactstrap';
 
+
 class AuditLogViewer extends React.Component {
   constructor(props) {
     super(props);
@@ -13,9 +14,7 @@ class AuditLogViewer extends React.Component {
   render() {
     return (
       <Col >
-        <h1>AuditLogViewer </h1>
-        
-        <p>{this.state.value}</p>
+        <h1>AuditLogViewer </h1> 
       </Col>
     );
   }
