@@ -36,7 +36,7 @@ import AddressOverrides from "./AddressOverrides";
 import Welcome from "./Welcome";
 import AuditLogViewer from "../auditlogs/AuditLogViewer";
 import "./home.css";
-import Form from "../components/Forms/FormBuilder";
+
 
 // import Companies from './Companies';
 // import BatchTest from './BatchTest';
@@ -86,7 +86,7 @@ import UserDataQueriesPg from "../userdataqueries/UserDataQueriesPg";
 // import  WhatIfTest from './WhatIfTest';
 // import  Worksites from './Worksites';
 // import  DefineFavoriteLinks from './DefineFavoriteLinks';
-import data from "../components/Forms/formdata.json";
+import Modules from './Modules';
 
 let sidebar;
 
@@ -173,7 +173,7 @@ class TFHome extends Component {
             <Col>
               <Sidebar
                 handleLink={this.handleLink}
-                options={this.props.data.sidebar.options}
+                // options={this.props.data.sidebar.options}
                 favorites={this.props.data.sidebar.favorites}
               />
             </Col>
@@ -189,7 +189,7 @@ class TFHome extends Component {
                   <AuditLogViewer />
                 </Route>
                 <Route path="/">
-                  <Welcome />
+                  <Modules />
                 </Route>
               </Switch>
             </Col>
@@ -202,7 +202,7 @@ class TFHome extends Component {
 function mapStateToProps(state) {
   return {
     data: state.data,
-    options: state.data.sidebar.options
+    options: state.moduleLinks
   };
 }
 function mapDispatchToProps(dispatch) {

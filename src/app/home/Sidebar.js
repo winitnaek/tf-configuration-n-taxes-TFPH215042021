@@ -116,6 +116,9 @@ class Sidebar extends Component {
     };
   }
   componentDidMount() {
+
+    console.log(this.props.modules)
+
     this.setState({
       selected: this.props.favorites,
       options: this.props.options
@@ -127,6 +130,10 @@ class Sidebar extends Component {
         {option.label} <small>small</small>
       </div>
     );
+  }
+
+  static getDerivedStateFromProps(nextProps, state) {
+    console.log(nextProps)
   }
   render() {
     const { handleLink } = this.props;
@@ -252,6 +259,16 @@ class Sidebar extends Component {
 
     displayFavorites = displayFavorites.sort(compare);
 
+
+    console.log(this.props.options)
+    let newOptions;
+    if(this.props.options[0]){
+      console.log(this.props.options[0])
+      newOptions = this.props.options[0]
+    } else {
+      newOptions = this.props.options
+    }
+
     return (
       <div style={Style}>
         <Col style={CardStyle}>
@@ -261,7 +278,7 @@ class Sidebar extends Component {
                 singleValue
                 isSearchable
                 placeholder="Search Links"
-                options={this.state.options}
+                options={this.props.options}
                 onChange={this.onChange}
                 value={this.state.currentSelected}
                 style={selectStyle}
@@ -287,7 +304,8 @@ class Sidebar extends Component {
 
 function mapStateToProps(state) {
   return {
-    options: state.data.sidebar.options,
+    options: state.moduleLinks,
+    modules: state.moduleLinks, 
     favorites: state.data.sidebar.favorites
   };
 }
