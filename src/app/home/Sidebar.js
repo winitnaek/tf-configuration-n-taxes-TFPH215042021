@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import ReactDom from "react-dom";
 import { bindActionCreators } from "redux";
+import Home from "./home";
 import {
   star,
   goldStar,
@@ -27,7 +29,11 @@ import {
   Row,
   Col,
   UncontrolledTooltip,
-  Container
+  Container,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./sidebar.css";
@@ -88,7 +94,7 @@ class Sidebar extends Component {
     };
 
     this.handleRender = link => {
-      let newLinkToRender;
+      console.log(link);
     };
 
     this.toggle = () => {
@@ -116,8 +122,7 @@ class Sidebar extends Component {
     };
   }
   componentDidMount() {
-
-    console.log(this.props.modules)
+    console.log(this.props.modules);
 
     this.setState({
       selected: this.props.favorites,
@@ -133,7 +138,7 @@ class Sidebar extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, state) {
-    console.log(nextProps)
+    console.log(nextProps);
   }
   render() {
     const { handleLink } = this.props;
@@ -257,14 +262,13 @@ class Sidebar extends Component {
 
     displayFavorites = displayFavorites.sort(compare);
 
-
-    console.log(this.props.options)
+    console.log(this.props.options);
     let newOptions;
-    if(this.props.options[0]){
-      console.log(this.props.options[0])
-      newOptions = this.props.options[0]
+    if (this.props.options[0]) {
+      console.log(this.props.options[0]);
+      newOptions = this.props.options[0];
     } else {
-      newOptions = this.props.options
+      newOptions = this.props.options;
     }
 
     return (
@@ -303,7 +307,7 @@ class Sidebar extends Component {
 function mapStateToProps(state) {
   return {
     options: state.moduleLinks,
-    modules: state.moduleLinks, 
+    modules: state.moduleLinks,
     favorites: state.data.sidebar.favorites
   };
 }

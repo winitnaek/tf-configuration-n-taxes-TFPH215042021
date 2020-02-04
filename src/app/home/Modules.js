@@ -15,7 +15,7 @@ const Container = {
 }
 
 const Header = {
-    marginLeft: "95px"
+    textAlign: "center"
 }
 
 const ButtonStyle = {
@@ -24,6 +24,10 @@ const ButtonStyle = {
     marginLeft: "10px",
     padding: "10px",
     marginTop: "25px"
+}
+const Buttons = {
+    width: "80%",
+    margin: "0 auto"
 }
 
 class Modules extends React.Component {
@@ -98,6 +102,7 @@ class Modules extends React.Component {
     return (
       <div style={Container}>
           <h3 style={Header}>  Please Choose a Module </h3> 
+          <div style={Buttons}>
         <Button color="primary" style={ButtonStyle} onClick={e => this.handleClick("All")}> All </Button>
         <Button color="primary" style={ButtonStyle} onClick={e => this.handleClick("Mapping Tools")}>
           Mapping Tools
@@ -105,6 +110,7 @@ class Modules extends React.Component {
         <Button  color="primary" style={ButtonStyle} onClick={e => this.handleClick("Reporting Tools")}>
           Reporting Tools
         </Button>
+        </div>
       </div>
     );
   }
