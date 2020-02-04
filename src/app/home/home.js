@@ -34,7 +34,7 @@ import ModalGrid from "../components/JqxGridModal";
 import Welcome from "./Welcome";
 import AuditLogViewer from "../auditlogs/AuditLogViewer";
 import "./home.css";
-
+import AddressOverrides from './AddressOverrides'
 
 // import Companies from './Companies';
 // import BatchTest from './BatchTest';
@@ -124,14 +124,19 @@ class TFHome extends Component {
 
   handleLink(link) {
     return (
-      <Route>
-        <Redirect
-          to={{
-            pathname: `/${link}`
-          }}
-        />
-      </Route>
-    );
+
+      ReactDOM.render(
+        <h1>Test </h1> ,
+        document.querySelector("#" + "appContent")
+      // <Route>
+      //   <Redirect
+      //     to={{
+      //       pathname: `/${link}`
+      //     }}
+      //   />
+      // </Route>
+    )
+    )
   }
 
   handleToggle() {

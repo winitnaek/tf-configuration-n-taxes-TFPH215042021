@@ -151,8 +151,7 @@ class Sidebar extends Component {
             <div className="mylink" style={link}>
               <span id={`jumpto-${data.value}`}>
                 <Link style={linkStyle} to={`/${data.link}`}>
-                  {" "}
-                  {data.label}{" "}
+                  {data.label}
                 </Link>
               </span>
 
@@ -208,8 +207,7 @@ class Sidebar extends Component {
           <Col sm="10" style={linkColStyle}>
             <span id={`jumpto-${item.value}`}>
               <Link style={linkStyle} to={`/${item.link}`}>
-                {" "}
-                {item.label}{" "}
+                {item.label}
               </Link>
             </span>
             <UncontrolledTooltip
