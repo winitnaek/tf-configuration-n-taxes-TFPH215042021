@@ -8,6 +8,10 @@ export const goldStar = {
   fontSize: "22px",
   color: "gold"
 };
+export const goldStar2 = {
+ fontSize: "22px",
+  color: "gold"
+};
 
 export const link = {
   textDecoration: "none",

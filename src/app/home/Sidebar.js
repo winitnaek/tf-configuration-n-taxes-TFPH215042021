@@ -275,6 +275,11 @@ class Sidebar extends Component {
       <div style={Style}>
         <Col style={CardStyle}>
           <Card style={CardStyle} body>
+{/* 
+         <Dropdown> 
+
+
+         </Dropdown> */}
             <Collapse isOpen={this.state.searchLinksIsOpen}>
               <Select
                 singleValue

@@ -11,6 +11,7 @@ import TFHome from "./app/home/home.js";
 let store = configureStore();
 export default store;
 import "bootstrap/dist/css/bootstrap.css";
+import Welcome from './app/home/Welcome';
 
 
 //Temporary set user in session:======Comment this when deployed with MAC======
@@ -62,6 +63,16 @@ function renderTFApplication(elem, renderName) {
  * renderTFHome
  * @param {*} elem
  */
+
+function renderNewPage(page){
+  ReactDOM.render(
+    <Provider store={store}>
+      <Welcome />
+    </Provider>,
+    document.querySelector("#" + elem)
+  );
+}
+
 
 function renderTFHome(elem) {
   console.log(elem);

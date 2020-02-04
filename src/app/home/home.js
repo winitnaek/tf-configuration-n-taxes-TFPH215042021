@@ -34,7 +34,8 @@ import ModalGrid from "../components/JqxGridModal";
 import Welcome from "./Welcome";
 import AuditLogViewer from "../auditlogs/AuditLogViewer";
 import "./home.css";
-import AddressOverrides from './AddressOverrides'
+
+
 
 // import Companies from './Companies';
 // import BatchTest from './BatchTest';
@@ -184,9 +185,6 @@ class TFHome extends Component {
               <Switch>
                 <Route path="/welcome">
                   <Welcome />
-                </Route>
-                <Route path="/addressOverrides">
-                  <AddressOverrides />
                 </Route>
                 <Route path="/auditLogViewer">
                   <AuditLogViewer />
