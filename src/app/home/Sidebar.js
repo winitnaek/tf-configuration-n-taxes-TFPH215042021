@@ -1,7 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {star, goldStar, link, linkStyle, CardStyle, Style, rowStyle, linkColStyle, buttonColStyle, favoriteLinkStyle, selectStyle, favoriteListStyle} from '../../css/sidebar-css'
+import {
+  star,
+  goldStar,
+  goldStar2,
+  link,
+  linkStyle,
+  CardStyle,
+  Style,
+  rowStyle,
+  linkColStyle,
+  buttonColStyle,
+  favoriteLinkStyle,
+  selectStyle,
+  favoriteListStyle
+} from "../../css/sidebar-css";
 import {
   getFavoriteLinks,
   saveFavoriteLinks
@@ -116,7 +130,7 @@ class Sidebar extends Component {
   }
   render() {
     const { handleLink } = this.props;
-    
+
     const toggle = () => {
       tooltipOpen = !tooltipOpen;
     };
@@ -125,17 +139,14 @@ class Sidebar extends Component {
       const { data } = props;
       let isFavorite = false;
       return (
-        <Row
-          key={data}
-          style={rowStyle}
-        >
+        <Row key={data} style={rowStyle}>
           <Col sm="10" style={{ padding: "0px" }}>
-            <div
-              className="mylink"
-              style={link}
-            >
+            <div className="mylink" style={link}>
               <span id={`jumpto-${data.value}`}>
-                <Link style={linkStyle} to={`/${data.link}`}> {data.label} </Link>
+                <Link style={linkStyle} to={`/${data.link}`}>
+                  {" "}
+                  {data.label}{" "}
+                </Link>
               </span>
 
               <UncontrolledTooltip
@@ -155,7 +166,6 @@ class Sidebar extends Component {
               })}
 
               {isFavorite ? (
-            
                 <i
                   className="fas fa-star"
                   style={goldStar}
@@ -189,32 +199,38 @@ class Sidebar extends Component {
       return (
         <Row key={item.label} className="selected">
           <Col sm="10" style={linkColStyle}>
-          <span id={`jumpto-${item.value}`}>
-            <Link style={linkStyle} to={`/${item.link}`}> {item.label} </Link>
+            <span id={`jumpto-${item.value}`}>
+              <Link style={linkStyle} to={`/${item.link}`}>
+                {" "}
+                {item.label}{" "}
+              </Link>
             </span>
             <UncontrolledTooltip
-                placement="top"
-                target={`jumpto-${item.value}`}
-              >
-                Jump to {item.label}
-              </UncontrolledTooltip>
+              placement="top"
+              target={`jumpto-${item.value}`}
+            >
+              Jump to {item.label}
+            </UncontrolledTooltip>
           </Col>
           <Col xs="2">
-
             <span id={`remove-${item.value}`}>
-            <button
-              style={buttonColStyle}
-              onClick={e => this.removeFavorite(item)}
-            >
-              x
-            </button>
+              <button
+                style={buttonColStyle}
+                onClick={e => this.removeFavorite(item)}
+              >
+                <i
+                  className="fas fa-star"
+                  style={goldStar2}
+                  onClick={e => this.removeFavorite(data)}
+                ></i>
+              </button>
             </span>
             <UncontrolledTooltip
-                placement="top"
-                target={`remove-${item.value}`}
-              >
-                Remove {item.label}
-              </UncontrolledTooltip>
+              placement="top"
+              target={`remove-${item.value}`}
+            >
+              Remove {item.label}
+            </UncontrolledTooltip>
           </Col>
         </Row>
       );
