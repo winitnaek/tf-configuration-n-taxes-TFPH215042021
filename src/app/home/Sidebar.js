@@ -31,6 +31,12 @@ import {
   UncontrolledTooltip,
   Container,
   Dropdown,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  NavLink,
+  NavItem,
   DropdownToggle,
   DropdownMenu,
   DropdownItem
@@ -45,6 +51,7 @@ class Sidebar extends Component {
     this.state = {
       selected: [],
       favorites: [],
+      collapsed: false,
       isOpen: true,
       searchLinksIsOpen: true,
       sidebar: {
@@ -91,6 +98,12 @@ class Sidebar extends Component {
           searchLinksIsOpen: true
         });
       }
+    };
+
+    this.toggleNavbar = () => {
+      this.setState({
+        collapsed: !this.state.collapsed
+      });
     };
 
     this.handleRender = link => {
@@ -270,17 +283,32 @@ class Sidebar extends Component {
     } else {
       newOptions = this.props.options;
     }
+ 
+    let sidebarWidth;
+    // if (this.state.collapsed){
+    //    sidebarWidth = "18%"
+    // } else {
+    //   sidebarWidth = "7%"
+    // }
 
     return (
       <div style={Style}>
+
+       
+
         <Col style={CardStyle}>
-          <Card style={CardStyle} body>
-{/* 
+          <Navbar color="faded" light>
+            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+          </Navbar>
+
+          <Collapse isOpen={!this.state.collapsed} navbar>
+            <Card style={CardStyle} body>
+              {/* 
          <Dropdown> 
 
 
          </Dropdown> */}
-            <Collapse isOpen={this.state.searchLinksIsOpen}>
+
               <Select
                 singleValue
                 isSearchable
@@ -291,19 +319,20 @@ class Sidebar extends Component {
                 style={selectStyle}
                 components={{ Option }}
               />
-            </Collapse>
-            <hr />
-            <p style={favoriteLinkStyle}> Favorite Links</p>
+              <hr />
+              <p style={favoriteLinkStyle}> Favorite Links</p>
 
-            {this.state.selected ? (
-              <Container style={favoriteListStyle}>
-                {displayFavorites.sort()}
-              </Container>
-            ) : (
-              <p> None</p>
-            )}
-          </Card>
-        </Col>
+              {this.state.selected ? (
+                <Container style={favoriteListStyle}>
+                  {displayFavorites.sort()}
+                </Container>
+              ) : (
+                <p> None</p>
+              )}
+            </Card>
+            </Collapse>
+          </Col>
+        
       </div>
     );
   }

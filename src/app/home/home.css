@@ -52,4 +52,9 @@
 
   #appContent {
     margin-top: 0;
+
+  }
+
+  .pageContainer {
+    margin-left: 200px;
   }

@@ -173,7 +173,7 @@ class TFHome extends Component {
     return (
       <Router>
         <div style={{ marginTop: 0 }}>
-          <Container id="pageContainer">
+          <Container id="pageContainer" >
             <Col>
               <Sidebar
                 handleLink={this.handleLink}
@@ -181,7 +181,7 @@ class TFHome extends Component {
                 favorites={this.props.data.sidebar.favorites}
               />
             </Col>
-            <Col>
+            <Col style={{marginLeft: "10px"}}>
               <Switch>
                 <Route path="/welcome">
                   <Welcome />

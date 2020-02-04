@@ -35,7 +35,7 @@ export const Style = {
   zIndex: 1,
   top: 60,
   left: 0,
-  backgroundColor: "#dbdad7",
+  backgroundColor: "F2F2F2",
   overflowX: "hidden",
   paddingTop: "20px"
 };
