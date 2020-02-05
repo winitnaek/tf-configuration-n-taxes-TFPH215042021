@@ -93,6 +93,7 @@ class TFHome extends Component {
 
   handleLink(link) {
     console.log(link);
+    window.location.pathname = `/${link}`
     return ReactDOM.render(
       <Provider store={store}>
         <div>
@@ -109,7 +110,9 @@ class TFHome extends Component {
         </div>
       </Provider>,
       document.querySelector("#" + "pageContainer")
+     
     );
+  
   }
 
   shouldComponentUpdate(nextProps, nextState) {
