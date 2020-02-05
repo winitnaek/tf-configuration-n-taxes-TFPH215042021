@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ReactDom from "react-dom";
 import { bindActionCreators } from "redux";
 import Home from "./home";
 import {
@@ -8,7 +7,6 @@ import {
   goldStar,
   goldStar2,
   link,
-  linkStyle,
   CardStyle,
   Style,
   rowStyle,
@@ -30,18 +28,10 @@ import {
   Col,
   UncontrolledTooltip,
   Container,
-  Dropdown,
-  Nav,
   Navbar,
-  NavbarBrand,
   NavbarToggler,
-  NavLink,
-  NavItem,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+ 
 } from "reactstrap";
-import { Link } from "react-router-dom";
 import "./sidebar.css";
 import Select, { components } from "react-select";
 
@@ -167,12 +157,9 @@ class Sidebar extends Component {
         <Row key={data} style={rowStyle}>
           <Col sm="10" style={{ padding: "0px" }}>
             <div className="mylink" style={link}>
-              <span id={`jumpto-${data.value}`}>
-                <Link style={linkStyle} to={`/${data.link}`}>
+              <span id={`jumpto-${data.value}`} onClick={e=> this.props.handleLink(data.link)}>
                   {data.label}
-                </Link>
               </span>
-
               <UncontrolledTooltip
                 placement="top"
                 target={`jumpto-${data.value}`}
@@ -224,9 +211,7 @@ class Sidebar extends Component {
         <Row key={item.label} className="selected">
           <Col sm="10" style={linkColStyle}>
             <span id={`jumpto-${item.value}`}>
-              <Link style={linkStyle} to={`/${item.link}`}>
                 {item.label}
-              </Link>
             </span>
             <UncontrolledTooltip
               placement="top"
@@ -275,40 +260,14 @@ class Sidebar extends Component {
 
     displayFavorites = displayFavorites.sort(compare);
 
-    console.log(this.props.options);
-    let newOptions;
-    if (this.props.options[0]) {
-      console.log(this.props.options[0]);
-      newOptions = this.props.options[0];
-    } else {
-      newOptions = this.props.options;
-    }
- 
-    let sidebarWidth;
-    // if (this.state.collapsed){
-    //    sidebarWidth = "18%"
-    // } else {
-    //   sidebarWidth = "7%"
-    // }
-
     return (
       <div style={Style}>
-
-       
-
         <Col style={CardStyle}>
           <Navbar color="faded" light>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           </Navbar>
-
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Card style={CardStyle} body>
-              {/* 
-         <Dropdown> 
-
-
-         </Dropdown> */}
-
               <Select
                 singleValue
                 isSearchable
@@ -321,7 +280,6 @@ class Sidebar extends Component {
               />
               <hr />
               <p style={favoriteLinkStyle}> Favorite Links</p>
-
               {this.state.selected ? (
                 <Container style={favoriteListStyle}>
                   {displayFavorites.sort()}

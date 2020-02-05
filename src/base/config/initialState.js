@@ -41,7 +41,7 @@ export default {
       id: 1,
       name: "All",
       areas: [
-        { value: "welcome", label: "Home", link: "Welcome" },
+        { value: "welcome", label: "Home", link: "<Welcome/>" },
         {
           value: "AddressOverrides",
           label: "Address Overrides",

@@ -2,40 +2,16 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { Provider } from "react-redux";
+import configureStore from "../../base/config/configureStore";
 import Sidebar from "./Sidebar";
-import DrawerToggleButton from "./DrawerToggleButton";
-import {
-  Row,
-  Col,
-  Container,
-  Button,
-  Card,
-  CardBody,
-  Modal,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledCollapse,
-  Collapse
-} from "reactstrap";
-import DisplayLinks from "../components/DisplayLinks";
-import Grid from "../components/JqxGridModal";
+import { Col, Container, Button } from "reactstrap";
 import { PortalWithState } from "react-portal";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
-
-import ModalGrid from "../components/JqxGridModal";
 import Welcome from "./Welcome";
 import AuditLogViewer from "../auditlogs/AuditLogViewer";
+import AddressOverrides from "./AddressOverrides";
 import "./home.css";
-
-
+let store = configureStore();
 
 // import Companies from './Companies';
 // import BatchTest from './BatchTest';
@@ -85,16 +61,8 @@ import UserDataQueriesPg from "../userdataqueries/UserDataQueriesPg";
 // import  WhatIfTest from './WhatIfTest';
 // import  Worksites from './Worksites';
 // import  DefineFavoriteLinks from './DefineFavoriteLinks';
-import Modules from './Modules';
+import Modules from "./Modules";
 
-let sidebar;
-
-const handleRender = () => {
-  ReactDOM.render(
-    <h1> This is a test </h1>,
-    document.getElementById("pageContainer")
-  );
-};
 
 class TFHome extends Component {
   constructor(props) {
@@ -124,32 +92,24 @@ class TFHome extends Component {
   }
 
   handleLink(link) {
-    return (
-
-      ReactDOM.render(
-        <h1>Test </h1> ,
-        document.querySelector("#" + "appContent")
-      // <Route>
-      //   <Redirect
-      //     to={{
-      //       pathname: `/${link}`
-      //     }}
-      //   />
-      // </Route>
-    )
-    )
-  }
-
-  handleToggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  }
-
-  handleModalOpen() {
-    this.setState({
-      isOpen: true
-    });
+    console.log(link);
+    return ReactDOM.render(
+      <Provider store={store}>
+        <div>
+          <Col>
+            <Sidebar handleLink={this.handleLink} />
+          </Col>
+          <Col>
+            {link === "Welcome" && <Welcome /> }
+            {link === "AddressOverrides" && <AddressOverrides /> }
+            {link === "AuditLogViewer" && <AuditLogViewer /> }
+        
+            {/* need to add all routing links here like the two above */}
+          </Col>
+        </div>
+      </Provider>,
+      document.querySelector("#" + "pageContainer")
+    );
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -168,35 +128,17 @@ class TFHome extends Component {
   }
 
   render() {
-    let isOpen = false;
-
     return (
-      <Router>
-        <div style={{ marginTop: 0 }}>
-          <Container id="pageContainer" >
-            <Col>
-              <Sidebar
-                handleLink={this.handleLink}
-                // options={this.props.data.sidebar.options}
-                favorites={this.props.data.sidebar.favorites}
-              />
-            </Col>
-            <Col style={{marginLeft: "10px"}}>
-              <Switch>
-                <Route path="/welcome">
-                  <Welcome />
-                </Route>
-                <Route path="/auditLogViewer">
-                  <AuditLogViewer />
-                </Route>
-                <Route path="/">
-                  <Modules />
-                </Route>
-              </Switch>
-            </Col>
-          </Container>
-        </div>
-      </Router>
+      <div style={{ marginTop: 0 }}>
+        <Container id="pageContainer">
+          <Col>
+            <Sidebar handleLink={this.handleLink} />
+          </Col>
+          <Col style={{ marginLeft: "10px" }}>
+            <Welcome />
+          </Col>
+        </Container>
+      </div>
     );
   }
 }
