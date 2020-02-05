@@ -25,7 +25,6 @@ export const linkStyle = {
 
 export const CardStyle = {
   height: "auto",
-  minHeight: "100%"
 };
 
 export const Style = {
@@ -51,4 +50,8 @@ export const selectStyle = {marginTop: "150px" };
 export const favoriteLinkStyle = { fontWeight: "bold" };
 
 export const favoriteListStyle = {textAlign: "left"  };
+
+export const sidebarToggle = {
+ 
+}
 

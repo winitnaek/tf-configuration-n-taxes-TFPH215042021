@@ -14,7 +14,8 @@ import {
   buttonColStyle,
   favoriteLinkStyle,
   selectStyle,
-  favoriteListStyle
+  favoriteListStyle,
+  sidebarToggle
 } from "../../css/sidebar-css";
 import {
   getFavoriteLinks,
@@ -29,8 +30,7 @@ import {
   UncontrolledTooltip,
   Container,
   Navbar,
-  NavbarToggler,
- 
+  NavbarToggler
 } from "reactstrap";
 import "./sidebar.css";
 import Select, { components } from "react-select";
@@ -140,11 +140,36 @@ class Sidebar extends Component {
     );
   }
 
+  openNav() {
+    
+    if (this.state.isOpen) {
+    document.getElementById("cardBody").style.display = "none";
+    } else {    
+      document.getElementById("cardBody").style.display = "flex";
+    }
+    this.setState({
+      isOpen: !this.state.isOpen,
+    })
+  }
+
+
+
   static getDerivedStateFromProps(nextProps, state) {
     console.log(nextProps);
   }
   render() {
     const { handleLink } = this.props;
+
+    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+
+
+    /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0 !important";
+      
+      document.getElementById("main").style.display = "none !important";
+      document.getElementById("mySidebar").style.display = "none !important";
+    }
 
     const toggle = () => {
       tooltipOpen = !tooltipOpen;
@@ -157,8 +182,11 @@ class Sidebar extends Component {
         <Row key={data} style={rowStyle}>
           <Col sm="10" style={{ padding: "0px" }}>
             <div className="mylink" style={link}>
-              <span id={`jumpto-${data.value}`} onClick={e=> this.props.handleLink(data.link)}>
-                  {data.label}
+              <span
+                id={`jumpto-${data.value}`}
+                onClick={e => this.props.handleLink(data.link)}
+              >
+                {data.label}
               </span>
               <UncontrolledTooltip
                 placement="top"
@@ -210,9 +238,7 @@ class Sidebar extends Component {
       return (
         <Row key={item.label} className="selected">
           <Col sm="10" style={linkColStyle}>
-            <span id={`jumpto-${item.value}`}>
-                {item.label}
-            </span>
+            <span id={`jumpto-${item.value}`}>{item.label}</span>
             <UncontrolledTooltip
               placement="top"
               target={`jumpto-${item.value}`}
@@ -262,12 +288,18 @@ class Sidebar extends Component {
 
     return (
       <div style={Style}>
-        <Col style={CardStyle}>
+        <Col style={{minHeight: "75px"}} >
           <Navbar color="faded" light>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+            <NavbarToggler
+            style={{marginLeft: "-15px", color: "black"}}
+              onClick={e => this.openNav() /*this.toggleNavbar */}
+              className="mr-2"
+            />
           </Navbar>
+        </Col>
+        <Col style={CardStyle} id="mySidebar" className="sidebar">
           <Collapse isOpen={!this.state.collapsed} navbar>
-            <Card style={CardStyle} body>
+            <Card body id="cardBody">
               <Select
                 singleValue
                 isSearchable
@@ -288,9 +320,8 @@ class Sidebar extends Component {
                 <p> None</p>
               )}
             </Card>
-            </Collapse>
-          </Col>
-        
+          </Collapse>
+        </Col>
       </div>
     );
   }
