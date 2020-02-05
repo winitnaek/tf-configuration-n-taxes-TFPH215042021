@@ -226,10 +226,12 @@ export default {
   },
   sidebar: {
     options: [
+
+      
       {
-        value: "reactStrapForm",
-        label: "React Strap Form Example",
-        link: "ReactStrapForm"
+        value: "modules",
+        label: "Module Selector",
+        link: "Modules"
       },
       { value: "welcome", label: "Home", link: "Welcome" },
       {

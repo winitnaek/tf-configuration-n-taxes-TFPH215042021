@@ -98,12 +98,7 @@ a:hover {
   }
   
 
-  .mr-2 {
-    top: 0;
-    position: fixed;
-    padding-top: 175px;
-    margin-left: -275px;
-  }
+  
    
   /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
   #main {

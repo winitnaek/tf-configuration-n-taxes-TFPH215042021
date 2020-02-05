@@ -92,8 +92,7 @@ class TFHome extends Component {
   }
 
   handleLink(link) {
-    console.log(link);
-    window.location.pathname = `/${link}`
+    console.log(link)
     return ReactDOM.render(
       <Provider store={store}>
         <div>
@@ -104,6 +103,7 @@ class TFHome extends Component {
             {link === "Welcome" && <Welcome /> }
             {link === "AddressOverrides" && <AddressOverrides /> }
             {link === "AuditLogViewer" && <AuditLogViewer /> }
+            {link === "Modules" && <Modules /> }
         
             {/* need to add all routing links here like the two above */}
           </Col>
