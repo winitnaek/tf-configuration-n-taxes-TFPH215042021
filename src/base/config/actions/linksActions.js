@@ -1,26 +1,29 @@
-// import { fetchLinks } from "./getLinksActions";
-import {FETCH_LINKS_ERROR, FETCH_LINKS_PENDING, FETCH_LINKS_SUCCESS} from "../../constants/LinksConstants";
+import { fetchProducts } from "./getLinks";
 
+
+
+export const FETCH_LINKS_PENDING = 'FETCH_LINKS_PENDING';
+export const FETCH_LINKS_SUCCESS = 'FETCH_LINKS_SUCCESS';
+export const FETCH_LINKS_ERROR = 'FETCH_LINKS_ERROR';
 
 export function fetchLinksPending() {
-    console.log('Setting to pending')
     return {
-      
         type: FETCH_LINKS_PENDING
     }
 }
 
-export function fetchProductsSuccess(payload) {
-    console.log(payload)
+export function fetchLinksSuccess(details) {
+    console.log(details)
     return {
         type: FETCH_LINKS_SUCCESS,
-        details: payload
+        data: details
     }
 }
 
-export function fetchProductsError(error) {
+export function fetchLinksError(error) {
     return {
         type: FETCH_LINKS_ERROR,
         error: error
     }
 }
+

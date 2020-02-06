@@ -62,7 +62,7 @@ import UserDataQueriesPg from "../userdataqueries/UserDataQueriesPg";
 // import  Worksites from './Worksites';
 // import  DefineFavoriteLinks from './DefineFavoriteLinks';
 import Modules from "./Modules";
-import {fetchDetails } from "../../base/config/actions/getDetails";
+import {fetchLinks } from "../../base/config/actions/getLinks";
 
 class TFHome extends Component {
   constructor(props) {
@@ -90,8 +90,8 @@ class TFHome extends Component {
       linksdata: this.props.data.linksdata
     });
     
-    const { fetchDetails} = this.props
-    fetchDetails()
+    const { fetchLinks} = this.props
+    fetchLinks()
 
   }
 
@@ -156,6 +156,6 @@ function mapStateToProps(state) {
   };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchDetails: fetchDetails}, dispatch);
+  return bindActionCreators({ fetchLinks: fetchLinks}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TFHome);

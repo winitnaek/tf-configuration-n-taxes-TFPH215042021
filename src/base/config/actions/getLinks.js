@@ -1,12 +1,12 @@
 
-import {fetchProductsPending, fetchProductsSuccess, fetchProductsError} from './detailActions';
+import {fetchLinksPending, fetchLinksSuccess, fetchLinksError} from './linksActions';
 
-const url = `http://localhost:8000/api/getDetails/`
+const url = `http://localhost:8000/api/getLinks/`
 
-export function fetchDetails() {
+export function fetchLinks() {
     console.log(`Made to to the getdetails action function`)
     return dispatch => {
-        dispatch(fetchProductsPending());
+        dispatch(fetchLinksPending());
         fetch(url)
         .then(res => res.json())
         .then(res => { 
@@ -14,14 +14,14 @@ export function fetchDetails() {
             if(res.error) {
                 throw(res.error);
             }
-            dispatch(fetchProductsSuccess(res))
+            dispatch(fetchLinksSuccess(res))
             return res.details;
         })
         .catch(error => {
             console.log(error)
-            dispatch(fetchProductsError(error));
+            dispatch(fetchLinksError(error));
         })
     }
 }
 
-export default fetchDetails;
+export default fetchLinks;

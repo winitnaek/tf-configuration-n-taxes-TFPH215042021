@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import data from "./payeeDetailsReducer";
 import favoriteLinks from "./favoriteLinksReducer";
 import moduleLinks from "./moduleLinksReducer";
-import links from "./detailsReducer";
+import links from "./linksReducer";
 
 const rootReducer = combineReducers({
   data,
