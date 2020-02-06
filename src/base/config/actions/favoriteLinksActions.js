@@ -1,5 +1,5 @@
-import {GET_FAVORITE_LINKS} from '../../constants/FavoriteLinksConstants';
-import {SAVE_FAVORITE_LINKS} from '../../constants/FavoriteLinksConstants';
+import {GET_FAVORITE_LINKS , SAVE_FAVORITE_LINKS} from '../../constants/LinksConstants';
+
 
 export const getFavoriteLinks = () => {
     return  {

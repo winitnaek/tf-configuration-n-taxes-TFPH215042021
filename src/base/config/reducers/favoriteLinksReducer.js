@@ -1,4 +1,4 @@
-import { getFavoriteLinks, saveFavoriteLinks } from '../actions/favoriteLinksActions';
+import * as types from '../actions/favoriteLinksActions';
 import initialState from '../initialState';
 
 
@@ -6,7 +6,7 @@ const favoriteLinks = (state = initialState.sidebar.favorites, action) => {
     console.log('Made it to the reducer')
     console.log(action)
     switch(action.type) {
-        case 'GET_FAVORITE_LINKS':
+        case types.GET_FAVORITE_LINKS:
             console.log('This action type was found')
             // To do..  Need to fetch real data from api then return it
             return [
@@ -15,7 +15,7 @@ const favoriteLinks = (state = initialState.sidebar.favorites, action) => {
                    // Need to implement react-thunk action call to get data from api
                 }
             ]
-        case 'saveFavoriteLinks'://'SAVE_FAVORITE_LINKS':
+        case types.SAVE_FAVORITE_LINKS:
             console.log('saving a new favorite')
             console.log(action.payload)
             return [

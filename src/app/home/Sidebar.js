@@ -125,7 +125,7 @@ class Sidebar extends Component {
     };
   }
   componentDidMount() {
-    console.log(this.props.modules);
+
 
     this.setState({
       selected: this.props.favorites,
