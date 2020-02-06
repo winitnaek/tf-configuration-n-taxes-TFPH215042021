@@ -8,7 +8,6 @@ export const getFavoriteLinks = () => {
 }
 
 export const saveFavoriteLinks = (payload) => {
-    console.log(payload)
     return  {
         type: SAVE_FAVORITE_LINKS,
         payload: payload

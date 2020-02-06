@@ -3,11 +3,9 @@ import initialState from '../initialState';
 
 
 const payeeDetails = (state = initialState, action) => {
-    console.log('Made it to the reducer')
-    console.log(action.type)
     switch(action.type) {
         case 'GET_PAYEE_DETAILS':
-            console.log('This action type was found')
+     
             // To do..  Need to fetch real data from api then return it
             return [
                 ...state,
@@ -32,7 +30,6 @@ const payeeDetails = (state = initialState, action) => {
                 ...state
             ]
         default:
-            console.log(`This action was not found`)
             return state
     }
 }

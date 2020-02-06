@@ -21,7 +21,9 @@ import {
   getFavoriteLinks,
   saveFavoriteLinks
 } from "../../base/config/actions/favoriteLinksActions";
-
+import {
+  setModuleLinks
+} from "../../base/config/actions/moduleLinksActions";
 import {
   Card,
   Collapse,
@@ -97,7 +99,7 @@ class Sidebar extends Component {
     };
 
     this.handleRender = link => {
-      console.log(link);
+   
     };
 
     this.toggle = () => {
@@ -108,14 +110,11 @@ class Sidebar extends Component {
     };
 
     this.removeFavorite = fav => {
-      console.log("Trying to remove favorite");
 
       let favArray = [];
 
       this.state.selected &&
         this.state.selected.map(item => {
-          console.log(item, fav);
-          console.log(item.value === fav.value, item.label === fav.label);
           if (item.value === fav.value) {
             favArray = this.state.selected.filter(el => el !== item);
             this.setState({ selected: favArray });
@@ -125,8 +124,6 @@ class Sidebar extends Component {
     };
   }
   componentDidMount() {
-
-
     this.setState({
       selected: this.props.favorites,
       options: this.props.options
@@ -155,7 +152,6 @@ class Sidebar extends Component {
 
 
   static getDerivedStateFromProps(nextProps, state) {
-    console.log(nextProps);
   }
   render() {
     const { handleLink } = this.props;
@@ -331,10 +327,12 @@ function mapStateToProps(state) {
   return {
     options: state.moduleLinks,
     modules: state.moduleLinks,
-    favorites: state.data.sidebar.favorites
+    favorites: state.data.sidebar.favorites,
+    links: state.links
+
   };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getFavoriteLinks, saveFavoriteLinks }, dispatch);
+  return bindActionCreators({ getFavoriteLinks, saveFavoriteLinks, setModuleLinks }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

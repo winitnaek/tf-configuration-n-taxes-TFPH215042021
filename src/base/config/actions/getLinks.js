@@ -4,13 +4,11 @@ import {fetchLinksPending, fetchLinksSuccess, fetchLinksError} from './linksActi
 const url = `http://localhost:8000/api/getLinks/`
 
 export function fetchLinks() {
-    console.log(`Made to to the getdetails action function`)
     return dispatch => {
         dispatch(fetchLinksPending());
         fetch(url)
         .then(res => res.json())
         .then(res => { 
-            console.log(res)
             if(res.error) {
                 throw(res.error);
             }
@@ -18,7 +16,6 @@ export function fetchLinks() {
             return res.details;
         })
         .catch(error => {
-            console.log(error)
             dispatch(fetchLinksError(error));
         })
     }

@@ -34,6 +34,14 @@ export default {
       { link: "", label: "Worksites" }
     ]
   },
+
+  links: {
+    pending: false,
+    data: {
+      links: []
+    }
+  },
+
   moduleLinks:{
 
   modules: [

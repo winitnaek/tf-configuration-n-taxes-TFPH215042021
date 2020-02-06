@@ -118,7 +118,8 @@ class Modules extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    modules: state.data.moduleLinks.modules
+    modules: state.data.moduleLinks.modules,
+    links: state.links
   };
 }
 function mapDispatchToProps(dispatch) {

@@ -3,11 +3,8 @@ import initialState from '../initialState';
 
 
 const favoriteLinks = (state = initialState.sidebar.favorites, action) => {
-    console.log('Made it to the reducer')
-    console.log(action)
     switch(action.type) {
         case types.GET_FAVORITE_LINKS:
-            console.log('This action type was found')
             // To do..  Need to fetch real data from api then return it
             return [
                 ...state,
@@ -16,14 +13,10 @@ const favoriteLinks = (state = initialState.sidebar.favorites, action) => {
                 }
             ]
         case types.SAVE_FAVORITE_LINKS:
-            console.log('saving a new favorite')
-            console.log(action.payload)
             return [
                 action.payload,
             ]
         default:
-            console.log(`This action was not found`)
-            console.log(state)
             return state
     }
 }

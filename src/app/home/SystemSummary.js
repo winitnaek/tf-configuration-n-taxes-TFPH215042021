@@ -12,7 +12,7 @@ import {
   ListGroup,
   ListGroupItem
 } from "reactstrap";
-import DisplayLinks from "../components/DisplayLinks";
+
 
 class SystemSummary extends Component {
   constructor(props) {

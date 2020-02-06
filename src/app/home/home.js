@@ -62,7 +62,8 @@ import UserDataQueriesPg from "../userdataqueries/UserDataQueriesPg";
 // import  Worksites from './Worksites';
 // import  DefineFavoriteLinks from './DefineFavoriteLinks';
 import Modules from "./Modules";
-import {fetchLinks } from "../../base/config/actions/getLinks";
+import { fetchLinks } from "../../base/config/actions/getLinks";
+import { setModuleLinks } from "../../base/config/actions/moduleLinksActions";
 
 class TFHome extends Component {
   constructor(props) {
@@ -85,18 +86,18 @@ class TFHome extends Component {
   }
 
   componentDidMount() {
+    const { links, options } = this.props;
+
     this.setState({
       payeeDetails: this.props.data.payeeDetails,
       linksdata: this.props.data.linksdata
     });
-    
-    const { fetchLinks} = this.props
-    fetchLinks()
 
+    const { fetchLinks } = this.props;
+    fetchLinks();
   }
 
   handleLink(link) {
-    console.log(link)
     return ReactDOM.render(
       <Provider store={store}>
         <div>
@@ -104,22 +105,34 @@ class TFHome extends Component {
             <Sidebar handleLink={this.handleLink} />
           </Col>
           <Col>
-            {link === "Welcome" && <Welcome /> }
-            {link === "AddressOverrides" && <AddressOverrides /> }
-            {link === "AuditLogViewer" && <AuditLogViewer /> }
-            {link === "Modules" && <Modules /> }
-        
+            {link === "Welcome" && <Welcome />}
+            {link === "AddressOverrides" && <AddressOverrides />}
+            {link === "AuditLogViewer" && <AuditLogViewer />}
+            {link === "Modules" && <Modules />}
+
             {/* need to add all routing links here like the two above */}
           </Col>
         </div>
       </Provider>,
       document.querySelector("#" + "pageContainer")
-     
     );
-  
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextProps);
+
+    if (nextProps.links !== this.props.links) {
+      if (
+        nextProps.links &&
+        nextProps.links.data &&
+        nextProps.links.data.links
+      ) {
+        const payload = nextProps.links.data.links;
+        const { setModuleLinks } = this.props;
+        setModuleLinks(payload);
+      }
+    }
+
     if (nextProps.data.linksdata !== this.state.linksdata) {
       this.setState({
         linksdata: nextProps.data.linksdata
@@ -152,10 +165,14 @@ class TFHome extends Component {
 function mapStateToProps(state) {
   return {
     data: state.data,
-    options: state.moduleLinks
+    options: state.moduleLinks,
+    links: state.links
   };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchLinks: fetchLinks}, dispatch);
+  return bindActionCreators(
+    { fetchLinks: fetchLinks, setModuleLinks },
+    dispatch
+  );
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TFHome);

@@ -2,7 +2,7 @@ import {FETCH_LINKS_PENDING, FETCH_LINKS_SUCCESS, FETCH_LINKS_ERROR} from '../ac
 
 const initialState = {
     pending: false,
-    details: [],
+    data: [],
     error: null
 }
 
@@ -14,7 +14,6 @@ export function linksReducer(state = initialState, action) {
                 pending: true
             }
         case FETCH_LINKS_SUCCESS:
-            console.log(action)
             return {
                
                 pending: false,
