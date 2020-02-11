@@ -14,6 +14,7 @@ export function linksReducer(state = initialState, action) {
                 pending: true
             }
         case FETCH_LINKS_SUCCESS:
+
             return {
                
                 pending: false,

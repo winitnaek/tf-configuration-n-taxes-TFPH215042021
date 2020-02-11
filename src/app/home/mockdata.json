@@ -1,32 +1,26 @@
 [
-    {
-        "authority": "BUCKINGHAM",
-        "taxtype": "WITHHOLDING TAX",
-        "amount": 54
-    },
-    {
-        "authority": "CRANBERRY",
-        "taxtype": "WITHHOLDING TAX",
-        "amount": 130.07
-    },
-    {
-        "authority": "HARBORCREEK",
-        "taxtype": "WITHHOLDING TAX",
-        "amount": 97.98
-    },
-    {
-        "authority": "JACKSON",
-        "taxtype": "WITHHOLDING TAX",
-        "amount": 53.20
-    },
-    {
-        "authority": "LIMERICK",
-        "taxtype": "WITHHOLDING TAX",
-        "amount": 116.04
-    },
-    {
-        "authority": "VENANGO",
-        "taxtype": "WITHHOLDING TAX",
-        "amount": 0.00
-    } 
+  {
+    "eventTime": "8:30:00",
+    "login": "true",
+    "dataSet": "test dataset",
+    "toolId": "test id",
+    "event": "test2",
+    "eventDescription": "test description"
+  },
+  {
+    "eventTime": "8:30:00",
+    "login": "true",
+    "dataSet": "test dataset",
+    "toolId": "test id",
+    "event": "test2",
+    "eventDescription": "test description"
+  },
+  {
+    "eventTime": "8:30:00",
+    "login": "true",
+    "dataSet": "test dataset",
+    "toolId": "test id",
+    "event": "test2",
+    "eventDescription": "test description"
+  }
 ]

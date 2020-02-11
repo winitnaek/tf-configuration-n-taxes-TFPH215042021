@@ -96,7 +96,7 @@ class JqxGridModal extends React.PureComponent {
             column,
             rowdata
           ) {
-            return `<>
+            return `<span>
             ${rowdata.authority}
             </span>`;
           }

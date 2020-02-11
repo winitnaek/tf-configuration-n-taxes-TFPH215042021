@@ -6,12 +6,18 @@ import { Provider } from "react-redux";
 import configureStore from "../../base/config/configureStore";
 import Sidebar from "./Sidebar";
 import { Col, Container, Button } from "reactstrap";
-import { PortalWithState } from "react-portal";
 import Welcome from "./Welcome";
-import AuditLogViewer from "../auditlogs/AuditLogViewer";
+// import AuditLogViewer from "../auditlogs/AuditLogViewer";
+import AuditLogViewer from './AuditLogViewer'
 import AddressOverrides from "./AddressOverrides";
 import "./home.css";
 let store = configureStore();
+import CustomPayments from '../customize/payments/CustomPayments';
+import ReadOnlyType1 from '../customize/payments/Read_Only_type1';
+import ReadOnlyType2 from '../customize/payments/Read_Only_type2';
+
+
+
 
 // import Companies from './Companies';
 // import BatchTest from './BatchTest';
@@ -109,8 +115,7 @@ class TFHome extends Component {
             {link === "AddressOverrides" && <AddressOverrides />}
             {link === "AuditLogViewer" && <AuditLogViewer />}
             {link === "Modules" && <Modules />}
-
-            {/* need to add all routing links here like the two above */}
+            {/* need to add all routing links here like the ones above */}
           </Col>
         </div>
       </Provider>,
@@ -155,7 +160,12 @@ class TFHome extends Component {
             <Sidebar handleLink={this.handleLink} />
           </Col>
           <Col style={{ marginLeft: "10px" }}>
-            <Welcome />
+            {/* <Welcome /> */}
+            {/* <AuditLogViewer/> */}
+            <ReadOnlyType1/>
+            <ReadOnlyType2/>
+            {/* <CustomPayments/> */}
+            {/* <Test/> */}
           </Col>
         </Container>
       </div>

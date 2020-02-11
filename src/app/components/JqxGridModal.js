@@ -11,7 +11,7 @@ import JqxGrid from "../../deps/jqwidgets-react/react_jqxgrid";
 import { getPayeeDetails } from "../../base/config/actions/payeeActions";
 import { connect } from "react-redux";
 import Data from "../home/mockdata.json";
-import { Link, Redirect, withRouter } from "react-router-dom";
+
 
 const style = {
   fontWeight: "bold",
@@ -286,4 +286,4 @@ const mapStateToProps = state => {
   return {};
 };
 
-export default withRouter(connect(mapStateToProps, null)(JqxGridModal));
+export default connect(mapStateToProps, null)(JqxGridModal);
