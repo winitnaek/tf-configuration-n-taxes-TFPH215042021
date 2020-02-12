@@ -25,7 +25,7 @@ class ReusableGrid extends Component {
   render() {
     
     return (
-      <Container >
+      <Container style={{width: "99%"}}>
         <Row>
           <h1
             style={{
