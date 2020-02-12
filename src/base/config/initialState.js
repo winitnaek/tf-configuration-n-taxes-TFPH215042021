@@ -86,6 +86,11 @@ export default {
           label: "Custom Payments",
           link: "CustomPayments"
         },
+        {
+          value: "customPayments2",
+          label: "Custom Payments2",
+          link: "CustomPayments2"
+        },
         { value: "customTaxCodes", label: "Custom Tax Codes", link: "" },
         {
           value: "customTaxPaymentOverrides",
@@ -234,7 +239,16 @@ export default {
   },
   sidebar: {
     options: [
-
+      {
+        value: "readOnlyType1",
+        label: "Read Only Type1",
+        link: "ReadOnlyType1"
+      },
+      {
+        value: "readOnlyType2",
+        label: "Read Only Type2",
+        link: "ReadOnlyType2"
+      },
       
       {
         value: "modules",
@@ -277,6 +291,11 @@ export default {
         value: "customPayments",
         label: "Custom Payments",
         link: "CustomPayments"
+      },
+      {
+        value: "customPayments2",
+        label: "Custom Payments2",
+        link: "CustomPayments2"
       },
       { value: "customTaxCodes", label: "Custom Tax Codes", link: "" },
       {

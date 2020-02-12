@@ -9,9 +9,23 @@ const handleSelect = () => {
    console.log("Hello")
 }
 
-const ReusableGrid = props => {
+
+
+
+
+class ReusableGrid extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {}
+    this.onRowSelect = () => {
+      console.log('Row selected')
+    }
+  }
+  render() {
+    
     return (
-      <Container>
+      <Container >
         <Row>
           <h1
             style={{
@@ -20,21 +34,23 @@ const ReusableGrid = props => {
               fontSize: "1.5em",
             }}
           >
-            {props.data.pgdef.pgtitle}
+            {this.props.data.pgdef.pgtitle}
           </h1>
         </Row>
         <Row>
-          <p> {props.data.pgdef.addNewLabel} </p>
+          <p> {this.props.data.pgdef.addNewLabel} </p>
+         
+
         </Row>
         <Row style={{ marginTop: "50px" }}>
           <Grid
-           ref={props.ref}
+           ref={this.props.ref}
             width="100%"
-            source={props.source}
-            columns={props.columns}
+            source={this.props.source}
+            columns={this.props.columns}
             pageable={true}
             autoheight={true}
-            onRowClick={props.onRowClick}
+            onRowSelect={this.onRowSelect}
           />
         </Row>
         <Row style={{ marginTop: "50px" }}>
@@ -49,5 +65,6 @@ const ReusableGrid = props => {
       </Container>
     );
   }
+}
 
 export default ReusableGrid;

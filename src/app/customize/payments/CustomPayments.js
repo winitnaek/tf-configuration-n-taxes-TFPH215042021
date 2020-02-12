@@ -19,6 +19,7 @@ import { Provider } from "react-redux";
 import configureStore from "../../../base/config/configureStore";
 let store = configureStore();
 import Modal from "../../components/Modal";
+import './test.css';
 
 const dataSource = {
   datafields: DataSchema.griddef.dataFields,
@@ -27,43 +28,14 @@ const dataSource = {
   localdata: MockData
 };
 
+
+
+
 const formTitleStyle = {
   marginTop: "25px !important",
   fontWeight: "bold"
 };
 
-const CustomPaymentForm = props => {
-  <Form>
-    <FormGroup>
-      <Label for="exampleEmail">Email</Label>
-      <Input
-        type="email"
-        name="email"
-        id="exampleEmail"
-        placeholder="with a placeholder"
-      />
-    </FormGroup>
-    <FormGroup>
-      <Label for="examplePassword">Password</Label>
-      <Input
-        type="password"
-        name="password"
-        id="examplePassword"
-        placeholder="password placeholder"
-      />
-    </FormGroup>
-    <FormGroup>
-      <Label for="exampleSelect">Select</Label>
-      <Input type="select" name="select" id="exampleSelect">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </Input>
-    </FormGroup>
-  </Form>;
-};
 // const      //DataSchema.griddef.columns;
 
 const linkrenderer = function(row, value, text) {
@@ -84,11 +56,15 @@ const source = new window.jqx.dataAdapter(dataSource);
 class CustomPayments extends Component {
   constructor(props) {
     super(props);
+
+  
+
     this.state = {
       source: new window.jqx.dataAdapter(dataSource),
       code: "",
       type: "",
       name: "",
+      isOpen: true, 
       taxability: "",
       maxLimit: ""
     };
@@ -107,6 +83,13 @@ class CustomPayments extends Component {
         document.querySelector("#" + "pageContainer")
       );
     };
+
+    this.toggle = () => {
+      console.log('Made it to the toggle')
+      this.setState({ isOpen: !this.state.isOpen });
+    }
+
+
     this.submitForm = e => {
       e.preventDefault();
       console.log("You just tried to submit form");
@@ -123,26 +106,41 @@ class CustomPayments extends Component {
         [name]: value
       });
     };
+
+    this.onRowSelect = () => {
+      console.log('A row was just selected')
+    }
+
+    
   }
 
    onRowClick(e) {
      console.log(e)
+     console.log("whats up")
    }
 
 
-  onLinkClick(row) {
-    console.log(row);
-    this.editrow = row;
-    console.log()
+  onLinkClick(e) {
+    // this.editrow = row;
+    console.log("hello")
+    console.log(e)
     // const dataRecord = this.myGrid.current.getrowdata(this.editrow);
     // console.log(dataRecord)
+
+    this.setState({ isOpen: true  });
+
   }
 
-  cellsrender(ndex, datafield, value, defaultvalue, column, rowdata) {
-    return `<a href="#"><div style="text-align:center;" class="align-self-center align-middle"><button type="button" style="padding-top:0.1rem;" class="btn btn-link align-self-center" onClick={(function() {console.log("hello")})}>${value}</button></div></a>`;
-  }
+
+
+
 
   render() {
+    
+const AddNew = () => {
+  return <Button> Add New Custom Payment    </Button>
+}
+
     const columns = [
       {
         text: "Custom Payment Code",
@@ -159,9 +157,9 @@ class CustomPayments extends Component {
           column,
           rowdata
         ) {
-          return `<a href="#"><div style="text-align:center;" class="align-self-center align-middle"><button  type="button" style="padding-top:0.1rem;" class="btn btn-link align-self-center" >${rowdata}</button></div></a>`;
+          return `<a href="#"><div style="text-align:center;" class="align-self-center align-middle"><button  type="button" style="padding-top:0.1rem;" class="btn btn-link align-self-center" onClick={function test() {console.log("hello")}}>${value}</button></div></a>`;
         },
-        buttonclick: console.log("Hello"),
+        buttonclick: (e , rowdata) => console.log(rowdata),
 
         rendererInput: [
           {
@@ -178,11 +176,11 @@ class CustomPayments extends Component {
         rendererStaticInput: [{ name: "", value: "" }]
       },
       { 
-        buttonclick: (rowdata) => {
-        this.onLinkClick(rowdata)
+        buttonclick: e => {
+        this.onLinkClick(e)
       },
       columntype: 'button',
-    
+     
 
 
         text: "Custom Payment Name",
@@ -218,17 +216,18 @@ class CustomPayments extends Component {
 
     return (
       <div>
+
         <ReusableGrid
-        ref={this.myGrid}
+          ref={ e=> this.myGrid = e}
+          addNew={AddNew}
           data={DataSchema}
           source={source}
           columns={columns}
           exit={this.handleExit}
-          select={this.onLinkClick}
-          onRowClick={this.onRowClick}
+          onRowSelect={this.onRowSelect}
         />
 
-        <Modal>
+        <Modal open={this.state.isOpen} toggle={this.toggle}>
           <Form
             style={{ padding: "25px 125px" }}
             onSubmit={e => this.submitForm(e)}

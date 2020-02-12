@@ -43,7 +43,8 @@ class CustomPayments extends Component {
       type: "",
       name: "",
       taxability: "",
-      maxLimit: ""
+      maxLimit: "",
+      isOpen: true
     };
     this.handleExit = () => {
       ReactDOM.render(
@@ -75,11 +76,11 @@ class CustomPayments extends Component {
         [name]: value
       });
     };
+
+    this.toggle = () => {
+      this.setState({ isOpen: !this.state.isOpen });
+    };
   }
-
-
-
-
 
   render() {
     const columns = [
@@ -89,8 +90,7 @@ class CustomPayments extends Component {
         cellsalign: "center",
         width: "20%",
         align: "center",
-        sortable: true,
-
+        sortable: true
       },
       {
         text: "Custom Payment Name",
@@ -126,8 +126,7 @@ class CustomPayments extends Component {
     ];
 
     return (
-      <Modal >
-          <h3>  This is a Read Only type 2</h3>
+      <Modal toggle={this.toggle} open={this.state.isOpen}>
         <ReusableGrid
           data={DataSchema}
           source={source}

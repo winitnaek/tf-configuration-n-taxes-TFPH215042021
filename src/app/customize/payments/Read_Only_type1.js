@@ -115,15 +115,12 @@ class CustomPayments extends Component {
     ];
 
     return (
-        <div>
-            <h1>   Read Only Type 1 Example</h1>
         <ReusableGrid
           data={DataSchema}
           source={source}
           columns={columns}
           exit={this.handleExit}
         />
-        </div>
     );
   }
 }

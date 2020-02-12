@@ -2,7 +2,7 @@ import * as types from '../actions/moduleLinksActions';
 import initialState from '../initialState';
 
 
-const moduleLinks = (state = [] , action) => {
+const moduleLinks = (state = initialState.sidebar.options , action) => {
     console.log('made it to the module links action handler')
     console.log(action)
     switch(action.type) {

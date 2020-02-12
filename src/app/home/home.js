@@ -104,6 +104,7 @@ class TFHome extends Component {
   }
 
   handleLink(link) {
+    console.log(link)
     return ReactDOM.render(
       <Provider store={store}>
         <div>
@@ -115,6 +116,10 @@ class TFHome extends Component {
             {link === "AddressOverrides" && <AddressOverrides />}
             {link === "AuditLogViewer" && <AuditLogViewer />}
             {link === "Modules" && <Modules />}
+            {link === "ReadOnlyType1" && <ReadOnlyType1/>}
+            {link === "ReadOnlyType2" && <ReadOnlyType2/>}
+            {/* {link === "Modules" && <CustomPayments2 />} */}
+
             {/* need to add all routing links here like the ones above */}
           </Col>
         </div>
@@ -160,10 +165,10 @@ class TFHome extends Component {
             <Sidebar handleLink={this.handleLink} />
           </Col>
           <Col style={{ marginLeft: "10px" }}>
-            {/* <Welcome /> */}
+            <Welcome />
             {/* <AuditLogViewer/> */}
-            <ReadOnlyType1/>
-            <ReadOnlyType2/>
+            {/* <ReadOnlyType1/>
+            <ReadOnlyType2/> */}
             {/* <CustomPayments/> */}
             {/* <Test/> */}
           </Col>

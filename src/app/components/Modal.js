@@ -13,16 +13,17 @@ class ModalExample extends Component {
     }
     
     render() { 
+        console.log(this.props)
         return ( 
             <div>
-      <Button color="danger" onClick={this.toggle}> Open/Close Read Only Modal Type 2</Button>
-      <Modal isOpen={this.state.isOpen} toggle={this.toggle} size="lg" style={{width: "1400px"}}>
-        <ModalHeader toggle={this.toggle}>{this.props.title} </ModalHeader>
+      <Button color="primary" onClick={e=> this.props.toggle()}> <div> Open/Close </div> Read Only Modal Type 2</Button>
+      <Modal isOpen={this.props.open} toggle={e=> this.props.toggle()} size="lg" style={{width: "1400px"}}>
+        <ModalHeader toggle={e=> this.props.toggle()}>{this.props.title} </ModalHeader>
         <ModalBody>
             {this.props.children}
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+          <Button color="secondary" onClick={e=> this.props.toggle()}>Cancel</Button>
         </ModalFooter>
       </Modal>
     </div>
