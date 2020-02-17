@@ -1,7 +1,7 @@
 {
     "id": "73b9a516-c0ca-43c0-b0ae-190e08d77bcc",
-    "name": "TaxFactory",
-    "desc": "TaxFactory",
+    "name": "TFTools",
+    "desc": "TF Tools",
     "badge": "tf",
     "bundleName": "tfBundle.js",
     "version": "1",
@@ -11,9 +11,9 @@
     "areas": [ {
         "id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8",
         "groupId":"Group1", 
-        "title": "TaxFactory",
+        "title": "TF Tools",
         "icon": "fas fa-file-alt fa-sm",
-        "tooltip": "TaxFactory",
+        "tooltip": "TF Tools",
         "renderName": "renderTFHome",
         "visible": true
     }]
