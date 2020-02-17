@@ -31,7 +31,7 @@ export const Style = {
   height: "100%",
   width: "18%",
   position: "fixed",
-  zIndex: 1,
+  zIndex: 500,
   top: 60,
   left: 0,
   backgroundColor: "F2F2F2",
@@ -43,7 +43,6 @@ export const rowStyle = { marginTop: "10px", zIndex: "200", width: "90%" };
 
 export const linkColStyle = { padding: "0px" };
 
-export const buttonColStyle = { border: "none", backgroundColor: "white" };
 
 export const selectStyle = {marginTop: "150px" };
 

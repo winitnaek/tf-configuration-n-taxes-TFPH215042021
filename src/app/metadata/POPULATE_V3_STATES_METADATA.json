@@ -1,0 +1,61 @@
+{
+	"pgdef": {
+		"pgid": "populateV3States",
+		"pgtitle": "Populate V3 States",
+		"pgsubtitle":"",
+		"flowtype": "flowtype1",
+		"hasAddNew": true,
+		"addNewLabel": "",
+		"actiondel": false,
+		"helpAvailable":true,
+		"helpLblTxt":"Click here for more info!",
+		"helpLink":"/populateV3States",
+		"parentConfig":""
+	},
+	"griddef": {
+		"gridtype": "ro",
+		"filtergrid": false,
+		"datatype": "json",
+		"contenttype": "application/json",
+		"noResultsFoundTxt": "No Data Found",
+        "recordDelete":"false",
+    
+		"columns": [
+			{
+				"text": "State",
+				"datafield": "state",
+				"cellsalign": "center",
+				"width": "30%",
+				"align": "center",
+				"sortable": true,
+				"rendererInput":"",
+				"rendererStaticInput":""
+            },
+            {
+                "text": "State Name",
+                "datafield": "stateName",
+                "cellsalign": "center",
+                "align": "center"
+              },
+            {
+                "text": "Record Count",
+                "datafield": "recordCount",
+                "cellsalign": "center",
+                "align": "center"
+              },
+            {
+                "text": "Bulletin",
+                "datafield": "bulletin",
+                "cellsalign": "center",
+                "align": "center"
+              }
+		],
+		"dataFields":[
+		  {"name": "state","type": "string"},
+		  {"name": "stateName","type": "string"},
+		  {"name": "recordCount","type": "string"},
+          {"name": "bulletin","type": "string"}	
+        ]
+	},
+	"cruddef": ""
+}

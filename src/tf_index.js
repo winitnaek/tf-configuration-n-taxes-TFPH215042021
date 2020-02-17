@@ -10,7 +10,6 @@ import { makeNavs, makeSearch } from "./base/template/navGenerator";
 import TFHome from "./app/home/home.js";
 let store = configureStore();
 export default store;
-import "bootstrap/dist/css/bootstrap.css";
 import Welcome from './app/home/Welcome';
 
 

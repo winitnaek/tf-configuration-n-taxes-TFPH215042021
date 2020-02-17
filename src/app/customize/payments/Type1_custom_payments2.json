@@ -1,12 +1,12 @@
 {
 	"pgdef": {
 		"pgid": "customPayments",
-		"pgtitle": "Custom Payments",
+		"pgtitle": "Employee Custom Code",
 		"pgsubtitle":"",
 		"flowtype": "flowtype1",
 		"hasAddNew": true,
-		"addNewLabel": "Click here to add new Custom Payment.",
-		"actiondel": "false"
+		"addNewLabel": "Click here to add new Employee Code.",
+		"actiondel": true
 	},
 	"griddef": {
 		"gridtype": "type1",

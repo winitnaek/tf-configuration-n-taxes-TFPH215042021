@@ -240,16 +240,33 @@ export default {
   sidebar: {
     options: [
       {
+        value: "allBsiPlans",
+        label: "All BSI PLans",
+        link: "AllBsiPlans"
+      },
+      {
+        value: "populateV3States",
+        label: "Populate V3 States",
+        link: "PopulateV3States"
+      },
+      {
         value: "readOnlyType1",
-        label: "Read Only Type1",
+        label: "Custom Payments",
         link: "ReadOnlyType1"
       },
       {
         value: "readOnlyType2",
-        label: "Read Only Type2",
-        link: "ReadOnlyType2"
+        label: "Employee Custom Code",
+        link: "ReadOnlyType1_1"
       },
-      
+      {
+        value: "gridWithLinks",
+        label: "Grid With Links",
+        link: "GridWithLinks"
+      },
+
+
+
       {
         value: "modules",
         label: "Module Selector",
@@ -297,7 +314,7 @@ export default {
         label: "Custom Payments2",
         link: "CustomPayments2"
       },
-      { value: "customTaxCodes", label: "Custom Tax Codes", link: "" },
+      { value: "customTaxCodes", label: "Custom Tax Codes", link: "CustomTaxCodes" },
       {
         value: "customTaxPaymentOverrides",
         label: "Custom Tax Payment Overrides",

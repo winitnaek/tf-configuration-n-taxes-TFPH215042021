@@ -1,0 +1,66 @@
+[
+  {
+    "customPaymentCode": "Test1",
+    "customPaymentName": "Tom",
+    "paymentType": "GA"
+  },
+  {
+    "customPaymentCode": "Test2",
+    "customPaymentName": "Peter",
+    "paymentType": "NY"
+  },
+  {
+    "customPaymentCode": "Test3",
+    "customPaymentName": "Vinit",
+    "paymentType": "TN"
+   
+  },
+  {
+    "customPaymentCode": "Test1",
+    "customPaymentName": "Tom",
+    "paymentType": "GA"
+  },
+  {
+    "customPaymentCode": "Test2",
+    "customPaymentName": "Peter",
+    "paymentType": "NY"
+  },
+  {
+    "customPaymentCode": "Test3",
+    "customPaymentName": "Vinit",
+    "paymentType": "TN"
+   
+  },
+  {
+    "customPaymentCode": "Test1",
+    "customPaymentName": "Tom",
+    "paymentType": "GA"
+  },
+  {
+    "customPaymentCode": "Test2",
+    "customPaymentName": "Peter",
+    "paymentType": "NY"
+  },
+  {
+    "customPaymentCode": "Test3",
+    "customPaymentName": "Vinit",
+    "paymentType": "TN"
+   
+  },
+  {
+    "customPaymentCode": "Test1",
+    "customPaymentName": "Tom",
+    "paymentType": "GA"
+  },
+  {
+    "customPaymentCode": "Test2",
+    "customPaymentName": "Peter",
+    "paymentType": "NY"
+  },
+  {
+    "customPaymentCode": "Test3",
+    "customPaymentName": "Vinit",
+    "paymentType": "TN"
+   
+  }
+]

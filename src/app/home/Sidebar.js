@@ -99,7 +99,11 @@ class Sidebar extends Component {
     };
 
     this.handleRender = link => {
-   
+      this.setState({
+        isOpen: !this.state.isOpen,
+        collapsed: !this.state.collapsed
+      })
+      this.props.handleLink(link)
     };
 
     this.toggle = () => {
@@ -167,9 +171,7 @@ class Sidebar extends Component {
       document.getElementById("mySidebar").style.display = "none !important";
     }
 
-    const toggle = () => {
-      tooltipOpen = !tooltipOpen;
-    };
+
 
     const Option = props => {
       const { data } = props;
@@ -180,7 +182,7 @@ class Sidebar extends Component {
             <div className="mylink" style={link}>
               <span
                 id={`jumpto-${data.value}`}
-                onClick={e => this.props.handleLink(data.link)}
+                onClick={e => this.handleRender(data.link)}
               >
                 {data.label}
               </span>

@@ -156,18 +156,9 @@ class CustomPayments extends Component {
     ];
 
     return (
-      <div>
-        <ReusableGrid
-          data={DataSchema}
-          theme="energyblue"
-          source={source}
-          columns={columns}
-          width="100%"
-          exit={this.handleExit}
-          info="info1"
-        />
-        {/* <hr />
-        <div style={{ margin: "0 auto", width: "70%" }}>
+    
+   
+          
           <ReusableGrid
             data={DataSchema2}
             source={source2}
@@ -175,8 +166,7 @@ class CustomPayments extends Component {
             exit={this.handleExit}
             info="info2"
           />
-        </div> */}
-      </div>
+    
     );
   }
 }

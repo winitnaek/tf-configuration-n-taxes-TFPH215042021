@@ -4,7 +4,7 @@ import Grid from "../../deps/jqwidgets-react/react_jqxgrid"; //"../../deps/jqwid
 import { Container, Col, Row, Button } from "reactstrap";
 import Select from "react-select";
 import mockData from "./mockdata.json";
-import "../../css/grid.css";
+// import "../../css/grid.css";
 
 const options = [
   { value: "chocolate", label: "Chocolate" },

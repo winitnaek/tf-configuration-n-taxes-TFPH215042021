@@ -10,11 +10,16 @@ import Welcome from "./Welcome";
 // import AuditLogViewer from "../auditlogs/AuditLogViewer";
 import AuditLogViewer from './AuditLogViewer'
 import AddressOverrides from "./AddressOverrides";
-import "./home.css";
+import   '../../css/home.css';
 let store = configureStore();
-import CustomPayments from '../customize/payments/CustomPayments';
+// import CustomPayments from '../customize/payments/CustomPayments';
 import ReadOnlyType1 from '../customize/payments/Read_Only_type1';
-import ReadOnlyType2 from '../customize/payments/Read_Only_type2';
+import ReadOnlyType1_1 from '../customize/payments/Read_Only_type1_1';
+import GridWithLinks from '../customize/payments/Type1_Grid_With_Links';
+import Styles from "../../css/cfapp.css"
+import AllBsiPlans from './AllBsiPlans';
+import PopulateV3States from './PopulateV3State';
+import CustomPayments from './CustomPayments';
 
 
 
@@ -112,25 +117,27 @@ class TFHome extends Component {
             <Sidebar handleLink={this.handleLink} />
           </Col>
           <Col>
+       
             {link === "Welcome" && <Welcome />}
             {link === "AddressOverrides" && <AddressOverrides />}
             {link === "AuditLogViewer" && <AuditLogViewer />}
             {link === "Modules" && <Modules />}
             {link === "ReadOnlyType1" && <ReadOnlyType1/>}
-            {link === "ReadOnlyType2" && <ReadOnlyType2/>}
-            {/* {link === "Modules" && <CustomPayments2 />} */}
+            {link === "ReadOnlyType1_1" && <ReadOnlyType1_1/>}
+            {link ===  "GridWithLinks" && <GridWithLinks/>}
+            {link ===  "AllBsiPlans" && <AllBsiPlans/>}
+            {link ===  "PopulateV3States" && <PopulateV3States/>}
+            {link === "CustomPayments" && <CustomPayments/>}
 
             {/* need to add all routing links here like the ones above */}
           </Col>
         </div>
       </Provider>,
-      document.querySelector("#" + "pageContainer")
+      document.querySelector("#" + "appContent")
     );
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps);
-
     if (nextProps.links !== this.props.links) {
       if (
         nextProps.links &&
@@ -160,19 +167,14 @@ class TFHome extends Component {
   render() {
     return (
       <div style={{ marginTop: 0 }}>
-        <Container id="pageContainer">
+         <Container> 
           <Col>
-            <Sidebar handleLink={this.handleLink} />
-          </Col>
-          <Col style={{ marginLeft: "10px" }}>
-            <Welcome />
-            {/* <AuditLogViewer/> */}
-            {/* <ReadOnlyType1/>
-            <ReadOnlyType2/> */}
-            {/* <CustomPayments/> */}
-            {/* <Test/> */}
-          </Col>
-        </Container>
+             <Sidebar handleLink={this.handleLink} />
+          </Col> 
+           <Col >
+              <Welcome/>
+          </Col> 
+         </Container> 
       </div>
     );
   }
