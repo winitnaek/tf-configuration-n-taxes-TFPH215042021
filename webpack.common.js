@@ -5,7 +5,6 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const IndexGeneratorPlugin = require('./build/indexGeneratorPlugin');
-const combineLoaders = require('webpack-combine-loaders');
 const APP_DIR = path.resolve(__dirname, 'src');
 
 module.exports = {
