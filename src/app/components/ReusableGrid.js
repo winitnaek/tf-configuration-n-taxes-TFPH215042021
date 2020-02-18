@@ -12,21 +12,33 @@ class ReusableGrid extends Component {
     super(props);
 
     this.state = {
-      
+      pgtitle: "",
+      addNewLabel: "",
+      hasAddNew: false,
+      actiondel: false,
     };
+  }
+
+
+  componentDidMount(){}
+
+
+
+  shouldComponentUpdate(nextProps, nextState) {
   
-
-
+      console.log(this.props);
+      console.log(nextProps);
+    
   }
   render() {
-    console.log(this.props.width);
+    console.log(this.props);
     let width;
     if (this.props.width) {
       width = this.props.width;
     }
 
     return (
-     <Fragment>
+      <Fragment>
         <Row>
           <h1
             style={{
@@ -35,19 +47,17 @@ class ReusableGrid extends Component {
             }}
           >
             {this.props.data.pgdef.pgtitle}
-            
           </h1>
-          <span style={{marginLeft: "10px"}}
-               >
-                <span id="help">
-                  <a href="" onClick="">
-                    <i className="fas fa-question-circle  fa-2x" />
-                  </a>
-                </span>
-                <UncontrolledTooltip placement="right" target="help">
-                  <span> Click Here for more  </span>
-                </UncontrolledTooltip>
-              </span>
+          <span style={{ marginLeft: "10px" }}>
+            <span id="help">
+              <a href="" onClick="">
+                <i className="fas fa-question-circle  fa-1.5x" />
+              </a>
+            </span>
+            <UncontrolledTooltip placement="right" target="help">
+              <span> Click Here for more </span>
+            </UncontrolledTooltip>
+          </span>
           {/* <span>
           <span  id="help" style={{ marginLeft: "25px" }}>
               <a href="#">
@@ -62,8 +72,7 @@ class ReusableGrid extends Component {
         <Row>
           <p> {this.props.data.pgdef.addNewLabel} </p>
         </Row>
-         
-       
+
         {/* <Row style={{ marginTop: "20px" }}>
         <Col sm="11">
          </Col>
@@ -96,15 +105,12 @@ class ReusableGrid extends Component {
             )}
        </Col>
         </Row> */}
-       
-        <Row style={{marginTop: "10px"}}>
 
-        <Col sm="11">
-         </Col>
-         <Col sm="1" style={{paddingRight: 0}}>
+        <Row style={{ marginTop: "10px" }}>
+          <Col sm="11"></Col>
+          <Col sm="1" style={{ paddingRight: 0 }}>
             {this.props.data.pgdef.hasAddNew && (
-               <span style={{marginLeft: "10px"}}
-               >
+              <span style={{ marginLeft: "10px" }}>
                 <span id="addNew">
                   <a href="" onClick="">
                     <i className="fas fa-calendar-plus  fa-2x" />
@@ -115,44 +121,44 @@ class ReusableGrid extends Component {
                 </UncontrolledTooltip>
               </span>
             )}
-          
-         
-            {this.props.data.pgdef.actiondel && (
-              <span style={{marginLeft: "5px"}}>
-                <span id="delAll">
+
+            {/* {this.props.data.pgdef.actiondel && ( */}
+            <span style={{ marginLeft: "5px" }}>
+              <span id="delAll">
+                {this.props.data.pgdef.actiondel ? (
                   <a href="" onClick="">
                     <i className="fas fa-calendar-minus fa-2x" />
                   </a>
-                </span>
+                ) : (
+                  <a onClick="" disabled>
+                    <i
+                      className="fas fa-calendar-minus fa-2x"
+                      style={{ color: "gainsboro" }}
+                    />
+                  </a>
+                )}
+              </span>
+              {this.props.data.pgdef.actiondel && (
                 <UncontrolledTooltip placement="right" target="delAll">
                   <span> Delete All </span>
                 </UncontrolledTooltip>
-              </span>
-            )}
-       </Col>
-            <Grid
-              altrows={true}
-              ref={this.props.ref}
-              width="100%"
-              source={this.props.source}
-              columns={this.props.columns}
-              pageable={true}
-              autoheight={true}
-              onRowSelect={this.onRowSelect}
-              style={{ color: "black", marginTop: "10px" }}
-            />
+              )}
+            </span>
+            {/* )} */}
+          </Col>
+          <Grid
+            altrows={true}
+            width="100%"
+            source={this.props.source}
+            columns={this.props.columns}
+            pageable={true}
+            autoheight={true}
+            style={{ color: "black", marginTop: "10px" }}
+            selectionmode={"singlecell"}
+          />
         </Row>
-        <Row style={{ marginTop: "50px" }}>
-          {/* <Button
-            color="primary"
-            style={{ margin: "0 auto", padding: "5px", width: "75px" }}
-            onClick={e=> props.exit()}
-          >
-            Exit
-          </Button> */}
-        </Row>
-        </Fragment>
-    
+        <Row style={{ marginTop: "50px" }}></Row>
+      </Fragment>
     );
   }
 }

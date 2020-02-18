@@ -29,15 +29,16 @@ export const CardStyle = {
 
 export const Style = {
   height: "100%",
-  width: "18%",
+  width: "22%",
   position: "fixed",
-  zIndex: 500,
+  zIndex: "500",
   top: 60,
   left: 0,
   backgroundColor: "F2F2F2",
-  overflowX: "hidden",
-  paddingTop: "20px"
+  overflowX: "hidden"
 };
+
+export const buttonColStyle = { backgroundColor: "white", border: "none" }
 
 export const rowStyle = { marginTop: "10px", zIndex: "200", width: "90%" };
 

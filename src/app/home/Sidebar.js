@@ -14,8 +14,7 @@ import {
   buttonColStyle,
   favoriteLinkStyle,
   selectStyle,
-  favoriteListStyle,
-  sidebarToggle
+  favoriteListStyle
 } from "../../css/sidebar-css";
 import {
   getFavoriteLinks,
@@ -26,7 +25,6 @@ import {
 } from "../../base/config/actions/moduleLinksActions";
 import {
   Card,
-  Collapse,
   Row,
   Col,
   UncontrolledTooltip,
@@ -92,24 +90,19 @@ class Sidebar extends Component {
       }
     };
 
-    this.toggleNavbar = () => {
-      this.setState({
-        collapsed: !this.state.collapsed
-      });
-    };
-
     this.handleRender = link => {
       this.setState({
         isOpen: !this.state.isOpen,
-        collapsed: !this.state.collapsed
       })
+      this.openNav()
       this.props.handleLink(link)
     };
 
     this.toggle = () => {
+      console.log("hello")
       this.setState({
         isOpen: !this.state.isOpen,
-        searchLinksIsOpen: !this.state.searchLinksIsOpen
+        searchLinksIsOpen: !this.state.searchLinksIsOpen,
       });
     };
 
@@ -127,12 +120,14 @@ class Sidebar extends Component {
         });
     };
   }
+
   componentDidMount() {
     this.setState({
       selected: this.props.favorites,
       options: this.props.options
     });
   }
+
   _renderOption(option) {
     return (
       <div>
@@ -142,36 +137,32 @@ class Sidebar extends Component {
   }
 
   openNav() {
-    
     if (this.state.isOpen) {
-    document.getElementById("cardBody").style.display = "none";
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("fullSideBar").style.width = "";
+    document.getElementById("cardBody").style.padding="0";
+    document.getElementById("cardBody").style.paddingTop="10px";
+    document.getElementById("cardBody").style.width="70px"
+    document.getElementById("mainPageArea").style.margin="0"
+    document.getElementById("navToggler").style.marginLeft="-15px"
+
     } else {    
-      document.getElementById("cardBody").style.display = "flex";
+      document.getElementById("mySidebar").style.display = "";
+      document.getElementById("fullSideBar").style.width = "22%";
+      document.getElementById("cardBody").style.width="100%"
+      document.getElementById("cardBody").style.padding="15px";
+      document.getElementById("cardBody").style.paddingRight="0";
+      document.getElementById("mainPageArea").style.margin="0 auto";
+      document.getElementById("navToggler").style.marginLeft="10px"
     }
     this.setState({
       isOpen: !this.state.isOpen,
+      collapsed: false
     })
   }
 
-
-
-  static getDerivedStateFromProps(nextProps, state) {
-  }
   render() {
-    const { handleLink } = this.props;
-
-    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
-
-
-    /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-    function closeNav() {
-      document.getElementById("mySidebar").style.width = "0 !important";
-      
-      document.getElementById("main").style.display = "none !important";
-      document.getElementById("mySidebar").style.display = "none !important";
-    }
-
-
+   
 
     const Option = props => {
       const { data } = props;
@@ -285,19 +276,14 @@ class Sidebar extends Component {
     displayFavorites = displayFavorites.sort(compare);
 
     return (
-      <div style={Style}>
-        <Col style={{minHeight: "75px"}} >
-          <Navbar color="faded" light>
-            <NavbarToggler
-            style={{marginLeft: "-15px", color: "black"}}
-              onClick={e => this.openNav() /*this.toggleNavbar */}
-              className="mr-2"
-            />
-          </Navbar>
-        </Col>
-        <Col style={CardStyle} id="mySidebar" className="sidebar">
-          <Collapse isOpen={!this.state.collapsed} navbar>
-            <Card body id="cardBody">
+      <div id="fullSideBar" style={Style}>
+        
+        <Card body id="cardBody" style={{height: "100%", paddingTop: "15px", paddingRight: "0"}}>
+         <Row>
+        
+        <Col sm="8" style={CardStyle} id="mySidebar" className="sidebar">
+         
+            {/* <Collapse isOpen={!this.state.collapsed} > */}
               <Select
                 singleValue
                 isSearchable
@@ -317,9 +303,18 @@ class Sidebar extends Component {
               ) : (
                 <p> None</p>
               )}
-            </Card>
-          </Collapse>
         </Col>
+        <Col sm="2">
+        <Navbar color="faded" light style={{paddingTop: "0", marginRight: "10px"}}>
+            <NavbarToggler id="navToggler"
+            style={{color: "black", fontSize: "1rem"}}
+              onClick={e => this.openNav() /*this.toggleNavbar */}
+              className="mr-2"
+            />
+          </Navbar>
+        </Col>
+        </Row>
+        </Card>
       </div>
     );
   }

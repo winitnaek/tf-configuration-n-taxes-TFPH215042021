@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Col } from "reactstrap";
-import MetaData from "../metadata/CUSTOM_PAYMENTS_METADATA.js"
+import { Col, UncontrolledTooltip } from "reactstrap";
+import MetaData from "../metadata/CUSTOM_TAX_PAYMENT_METADATA.js"
 
 import ReusableGrid from "../components/ReusableGrid"
-import MockData from "../metadata/tempGridData/CUSTOM_PAYMENTS_MOCKDATA.json"
+import MockData from "../metadata/tempGridData/CUSTOM_TAX_PAYMENT_MOCKDATA.json"
 import Sidebar from "../home/Sidebar";
 import Welcome from "../home/Welcome";
 import { Provider } from "react-redux";
@@ -43,16 +43,31 @@ class CustomPayments extends Component {
     };
   }
 
+  componentDidMount(){
+  //   const editIcon = window.document.getElementsByClassName("edit-icon")
+ 
+    
+  //  if (editIcon !== undefined) {
+  //     window.document.getElementsByClassName("edit-icon").style.color="#4c7392"
+  // }
 
+
+
+
+
+
+}
 
   render() {
+    // const columns = MetaData.griddef.columns;
 
 
     const myStyle = {
       padding: "5px"
     }
 
-    const columns =  MetaData.griddef.columns;
+    const columns = MetaData.griddef.columns;
+
     return (
     
       <div>
@@ -62,7 +77,6 @@ class CustomPayments extends Component {
           columns={columns}
           width="100%"
           exit={this.handleExit}
-          info="info1"
         />
         </div>
     );

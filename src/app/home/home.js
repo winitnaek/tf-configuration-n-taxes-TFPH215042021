@@ -7,72 +7,26 @@ import configureStore from "../../base/config/configureStore";
 import Sidebar from "./Sidebar";
 import { Col, Container, Button } from "reactstrap";
 import Welcome from "./Welcome";
-// import AuditLogViewer from "../auditlogs/AuditLogViewer";
-import AuditLogViewer from './AuditLogViewer'
-import AddressOverrides from "./AddressOverrides";
-import   '../../css/home.css';
+import "../../css/home.css";
 let store = configureStore();
-// import CustomPayments from '../customize/payments/CustomPayments';
-import ReadOnlyType1 from '../customize/payments/Read_Only_type1';
-import ReadOnlyType1_1 from '../customize/payments/Read_Only_type1_1';
-import GridWithLinks from '../customize/payments/Type1_Grid_With_Links';
-import Styles from "../../css/cfapp.css"
+
+
+import CustomPayments from './CustomPayments';
 import AllBsiPlans from './AllBsiPlans';
 import PopulateV3States from './PopulateV3State';
-import CustomPayments from './CustomPayments';
+import CustomTaxPayments from './CustomTaxPayments';
 
 
 
-
-// import Companies from './Companies';
-// import BatchTest from './BatchTest';
-// import ConnectToDataSets from './ConnectToDataSets';
-// import CustomBackupRestore from './CustomBackup'
-// import CustomFormulas from './CustomFormulas';
-// import CustomGarnishmentFormulas from './CustomGarnishmentsFormulas';
-// import CustomGarnishments from './CustomGarnishments'
-// import CustomNexusData from './CustomNexusData';
-// import CustomPaymentExceptions from './CustomPaymentExceptions';
-//import  CustomPayments from './CustomPayments';
-// import  CustomTaxCodes from './CustomTaxCodes';
-// import  CustomTaxPaymentOverrides from './CustomeTaxPaymentOverrides';
-// import  CyclicBulletin from './CyclicBulletin';
-// import  DataSets from './DataSets';
-// import  DatabaseLoad from './DatabaseLoad';
-// import  DisposableOverrides from './DisposableOverrides';
-// import  EmployeeGroups from './EmployeeGroups';
-// import  GarnishmentFormulaOverrides from './GarnishmentFormulaOverrides';
-// import  GarnishmentGroups from './GarnishmentGroups';
-// import  GroupOverrides from './GroupOverrides';
-// import  LocatorBulletins from './LocatorBulletins';
-// import  LoginsAndPermissions from './LoginsAndPermissions';
-// import  MapPaymentCodes from './MapPaymentCodes';
-// import  MapTaxCodes from './MapTaxcodes';
-// import  MapTaxTypes from "./MapTaxTypes";
-// import  MappingTools from "./MappingTools";
-// import  MaritalStatusReport from "./MaritalStausReport"
-// import  OptionalRateOverrides from "./OptionalRateOverrides"
-// import  PAServicesTaxReport from "./PAServicesTaxRepor"
-// import  PaymentOverrides from './PaymentOverrides';
-// import  PensionWhatIfTest from './PensionWhatIfTest';
-// import  ReciprocalOverrides from './ReciprocalOverrides';
-// import  RegulatoryBulletins from './RegulatoryBulletins';
-// import  ReportingTools from './ReportingTools';
-// import  SystemTools from './SystemTools';
-// import  TaxEffectiveDateOverrides from './TaxEffectiveDateOverrides';
-// import  TaxHistory from './TaxHistory';
-// import  TaxLabilityReport from './TaxLiabilityReport';
-// import  TaxLocator from './TaxLocator';
-// import  USPensionQuickFormulas from './USPensionQuickFormulas';
-// import  USQuickFormula from './USQuickFormula';
-// import  USWageAttachmentQuickFormulas from './USWageAttachmentQuickFormulas';
-// import  Welcome from './Welcome';
-// import  UnemploymentOverrides from './UnemployementOverrides';
-import UserDataQueriesPg from "../userdataqueries/UserDataQueriesPg";
-// import  WhatIfTest from './WhatIfTest';
-// import  Worksites from './Worksites';
-// import  DefineFavoriteLinks from './DefineFavoriteLinks';
-import Modules from "./Modules";
+import ReusableGrid from "../components/ReusableGrid";
+import CustomPaymentMockData from "../metadata/tempGridData/CUSTOM_PAYMENTS_MOCKDATA.json";
+import CustomPaymentMetaData from "../metadata/CUSTOM_PAYMENTS_METADATA.js";
+import AllBsiPlansMockData from "../metadata/tempGridData/ALL_BSI_PLANS_MOCKDATA.json";
+import AllBsiPlansMetaData from "../metadata/ALL_BSI_PLANS_METADATA.json";
+import PopulateV3StatesMetaData from "../metadata/POPULATE_V3_STATES_METADATA.json";
+import PopulateV3StatesMockData from "../metadata/tempGridData/POPULATE_V3_STATES_MOCKDATA.json";
+import CustomTaxPaymentsMockData from "../metadata/tempGridData/CUSTOM_PAYMENTS_MOCKDATA.json";
+import CustomTaxPaymentsMetaData from "../metadata/CUSTOM_PAYMENTS_METADATA.js";
 import { fetchLinks } from "../../base/config/actions/getLinks";
 import { setModuleLinks } from "../../base/config/actions/moduleLinksActions";
 
@@ -94,6 +48,100 @@ class TFHome extends Component {
         sideDrawerOpen: !this.state.sideDrawerOpen
       });
     };
+
+    this.handleLink = link => {
+     
+      console.log(link);
+      let MockData;
+      let MetaData;
+
+      switch (link) {
+        case "CustomPayments":
+          this.setState({
+            MockData: CustomPaymentMockData,
+            MetaData: CustomPaymentMetaData
+          });
+          MockData = CustomPaymentMockData;
+          MetaData = CustomPaymentMetaData;
+          break;
+        case "AllBsiPlans":
+          this.setState({
+            MockData: AllBsiPlansMockData,
+            MetaData: AllBsiPlansMetaData
+          });
+          MockData = AllBsiPlansMockData;
+          MetaData = AllBsiPlansMetaData;
+          break;
+        case "PopulateV3States":
+          this.setState({
+            MockData: PopulateV3StatesMockData,
+            MetaData: PopulateV3StatesMetaData
+          });
+          MockData = PopulateV3StatesMockData;
+          MetaData = PopulateV3StatesMetaData;
+          break;
+        case "CustomTaxPayments":
+          this.setState({
+            MockData: CustomTaxPaymentsMockData,
+            MetaData: CustomTaxPaymentsMetaData
+          });
+          MockData = CustomTaxPaymentsMockData;
+          MetaData = CustomTaxPaymentsMetaData;
+          break;
+          return;
+        default:
+          break;
+      }
+
+      console.log(this.state.MetaData);
+      const dataSource = {
+        datafields: MetaData.griddef.dataFields,
+        aysnc: false,
+        datatype: "json",
+        localdata: MockData
+      };
+
+      const source = new window.jqx.dataAdapter(dataSource);
+
+      console.log(link);
+      return ReactDOM.render(
+        <Provider store={store}>
+          <div>
+            {/* <Col>
+              <Sidebar handleLink={this.handleLink} />
+            </Col>
+            <Col> */}
+              {/* <ReusableGrid
+                data={MetaData}
+                source={source}
+                columns={MetaData.griddef.columns}
+                width="100%"
+              /> */}
+
+              {link === "AllBsiPlans" && <AllBsiPlans />}
+              {link === "PopulateV3States" && <PopulateV3States />}
+              {link === "CustomPayments" && <CustomPayments />}
+              {link === "CustomTaxPayments" && <CustomTaxPayments />}
+
+              {/* {link === "Welcome" && <Welcome />}
+              {link === "AddressOverrides" && <AddressOverrides />}
+              {link === "AuditLogViewer" && <AuditLogViewer />}
+              {link === "Modules" && <Modules />}
+              {link === "ReadOnlyType1" && <ReadOnlyType1/>}
+              {link === "ReadOnlyType1_1" && <ReadOnlyType1_1/>}
+              {link ===  "GridWithLinks" && <GridWithLinks/>}
+              {link ===  "AllBsiPlans" && <AllBsiPlans/>}
+              {link ===  "PopulateV3States" && <PopulateV3States/>}
+              {link === "CustomPayments" && <CustomPayments/>}
+              {link === "CustomTaxPayments" && <CustomTaxPayments/>} */}
+
+              {/* need to add all routing links here like the ones above */}
+            {/* </Col> */}
+          </div>
+        </Provider>,
+        document.querySelector("#" + "mainPageArea")
+      );
+    };
   }
 
   componentDidMount() {
@@ -106,35 +154,6 @@ class TFHome extends Component {
 
     const { fetchLinks } = this.props;
     fetchLinks();
-  }
-
-  handleLink(link) {
-    console.log(link)
-    return ReactDOM.render(
-      <Provider store={store}>
-        <div>
-          <Col>
-            <Sidebar handleLink={this.handleLink} />
-          </Col>
-          <Col>
-       
-            {link === "Welcome" && <Welcome />}
-            {link === "AddressOverrides" && <AddressOverrides />}
-            {link === "AuditLogViewer" && <AuditLogViewer />}
-            {link === "Modules" && <Modules />}
-            {link === "ReadOnlyType1" && <ReadOnlyType1/>}
-            {link === "ReadOnlyType1_1" && <ReadOnlyType1_1/>}
-            {link ===  "GridWithLinks" && <GridWithLinks/>}
-            {link ===  "AllBsiPlans" && <AllBsiPlans/>}
-            {link ===  "PopulateV3States" && <PopulateV3States/>}
-            {link === "CustomPayments" && <CustomPayments/>}
-
-            {/* need to add all routing links here like the ones above */}
-          </Col>
-        </div>
-      </Provider>,
-      document.querySelector("#" + "appContent")
-    );
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -167,14 +186,14 @@ class TFHome extends Component {
   render() {
     return (
       <div style={{ marginTop: 0 }}>
-         <Container> 
+        <Container>
           <Col>
-             <Sidebar handleLink={this.handleLink} />
-          </Col> 
-           <Col >
-              <Welcome/>
-          </Col> 
-         </Container> 
+            <Sidebar handleLink={this.handleLink} />
+          </Col>
+          <Col id="mainPageArea" style={{marginBotton: "0", paddingBottom: "0"}}>
+            <Welcome />
+          </Col>
+        </Container>
       </div>
     );
   }
