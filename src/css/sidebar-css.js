@@ -29,7 +29,6 @@ export const CardStyle = {
 
 export const Style = {
   height: "100%",
-  width: "22%",
   position: "fixed",
   zIndex: "500",
   top: 60,

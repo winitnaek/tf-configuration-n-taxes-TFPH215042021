@@ -1,4 +1,4 @@
-import * as types from '../actions/favoriteLinksActions';
+import * as types from '../../../app/home/actions/favoriteLinksActions';
 import initialState from '../initialState';
 
 

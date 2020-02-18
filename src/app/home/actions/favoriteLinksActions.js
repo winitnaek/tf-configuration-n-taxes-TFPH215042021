@@ -4,7 +4,7 @@ import {
   FETCH_FAVORTIE_LINKS_ERROR,
   FETCH_FAVORITE_LINKS_SUCCESS,
   FETCH_FAVORITE_LINKS_PENDING
-} from "../../constants/LinksConstants";
+} from "../../../base/constants/LinksConstants";
 
 export function fetchFavoriteLinksPending() {
   return {

@@ -1,4 +1,4 @@
-import {FETCH_LINKS_PENDING, FETCH_LINKS_SUCCESS, FETCH_LINKS_ERROR} from '../actions/linksActions';
+import {FETCH_LINKS_PENDING, FETCH_LINKS_SUCCESS, FETCH_LINKS_ERROR} from '../../../app/home/actions/linksActions';
 
 const initialState = {
     pending: false,

@@ -31,11 +31,12 @@ button {
     background-color: #1e7e34;
 }
 
-.myTest {
-    color: red;
+
+#navId {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    Z-index: 500;
 }
 
-.jqx-button-test {
-    color: red;
-}
 

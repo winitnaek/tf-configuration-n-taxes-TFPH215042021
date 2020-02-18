@@ -1,4 +1,4 @@
-import {GET_MODULE_LINKS ,SET_MODULE_LINKS} from '../../constants/ModuleLinksConstants';
+import {GET_MODULE_LINKS ,SET_MODULE_LINKS} from '../../../base/constants/ModuleLinksConstants';
 
 export const getModuleLinks = () => {
     return  {

@@ -7,7 +7,7 @@ import configureStore from "../../base/config/configureStore";
 import Sidebar from "./Sidebar";
 import { Col, Container, Button } from "reactstrap";
 import Welcome from "./Welcome";
-import "../../css/home.css";
+
 let store = configureStore();
 
 
@@ -27,8 +27,8 @@ import PopulateV3StatesMetaData from "../metadata/POPULATE_V3_STATES_METADATA.js
 import PopulateV3StatesMockData from "../metadata/tempGridData/POPULATE_V3_STATES_MOCKDATA.json";
 import CustomTaxPaymentsMockData from "../metadata/tempGridData/CUSTOM_PAYMENTS_MOCKDATA.json";
 import CustomTaxPaymentsMetaData from "../metadata/CUSTOM_PAYMENTS_METADATA.js";
-import { fetchLinks } from "../../base/config/actions/getLinks";
-import { setModuleLinks } from "../../base/config/actions/moduleLinksActions";
+import { fetchLinks } from "./actions/getLinks";
+import { setModuleLinks } from "./actions/moduleLinksActions";
 
 class TFHome extends Component {
   constructor(props) {
@@ -152,6 +152,17 @@ class TFHome extends Component {
       linksdata: this.props.data.linksdata
     });
 
+    window.document.getElementById("navId").style.position="fixed";
+    window.document.getElementById("navId").style.width="100%";
+    window.document.getElementById("navId").style.top="0";
+    window.document.getElementById("navId").style.zIndex="500";
+
+
+
+
+
+
+
     const { fetchLinks } = this.props;
     fetchLinks();
   }
@@ -190,7 +201,7 @@ class TFHome extends Component {
           <Col>
             <Sidebar handleLink={this.handleLink} />
           </Col>
-          <Col id="mainPageArea" style={{marginBotton: "0", paddingBottom: "0"}}>
+          <Col id="mainPageArea" style={{marginBotton: "0", paddingBottom: "0", paddingTop: "50px"}}>
             <Welcome />
           </Col>
         </Container>

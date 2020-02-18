@@ -1,4 +1,4 @@
-import * as types from '../actions/moduleLinksActions';
+import * as types from '../../../app/home/actions/moduleLinksActions';
 import initialState from '../initialState';
 
 

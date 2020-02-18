@@ -1,4 +1,4 @@
-import { getPayeeDetails } from '../actions/payeeActions';
+import { getPayeeDetails } from '../../../app/home/actions/payeeActions';
 import initialState from '../initialState';
 
 

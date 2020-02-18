@@ -19,10 +19,10 @@ import {
 import {
   getFavoriteLinks,
   saveFavoriteLinks
-} from "../../base/config/actions/favoriteLinksActions";
+} from "./actions/favoriteLinksActions";
 import {
   setModuleLinks
-} from "../../base/config/actions/moduleLinksActions";
+} from "./actions/moduleLinksActions";
 import {
   Card,
   Row,
@@ -32,7 +32,7 @@ import {
   Navbar,
   NavbarToggler
 } from "reactstrap";
-import "./sidebar.css";
+
 import Select, { components } from "react-select";
 
 class Sidebar extends Component {
@@ -148,7 +148,7 @@ class Sidebar extends Component {
 
     } else {    
       document.getElementById("mySidebar").style.display = "";
-      document.getElementById("fullSideBar").style.width = "22%";
+      document.getElementById("fullSideBar").style.width = "";
       document.getElementById("cardBody").style.width="100%"
       document.getElementById("cardBody").style.padding="15px";
       document.getElementById("cardBody").style.paddingRight="0";

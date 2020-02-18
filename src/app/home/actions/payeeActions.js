@@ -1,4 +1,4 @@
-import {GET_PAYEE_DETAILS} from '../../constants/PayeeDetailsConstants';
+import {GET_PAYEE_DETAILS} from '../../../base/constants/PayeeDetailsConstants';
 
 export const getPayeeDetails = () => {
     return  {
