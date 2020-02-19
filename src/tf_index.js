@@ -64,22 +64,22 @@ function renderTFApplication(elem, renderName) {
       600
     );
   }else if(renderName && renderName.type=="comp"){
-    renderComponent(elem,renderName.id);
+    renderComponent(elem,renderName.id,renderName.value);
   }else if(renderName && renderName.type=="page"){
-    renderPage(elem,renderName.id);
+    renderPage(elem,renderName.id,renderName.value);
   }
 }
 /**
  * renderComponent
  * @param {*} elem
  */
-function renderComponent(elem,pageid){
+function renderComponent(elem,pageid,pid){
   ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
  // $("div").remove("#"+elem);
   //$('<div id="'+ elem +'" class="col"></div>').insertAfter($("#" + "pageContainerSib"));
   ReactDOM.render(
     <Provider store={store}>
-      <TestReusable pageid={pageid} metadata={compMetaData}/>
+      <TestReusable pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions}/>
     </Provider>,
     document.querySelector("#" + elem)
   );
@@ -93,10 +93,20 @@ function compMetaData(pageid){
   return metadataMap.metadata;
 }
 /**
+ * compPermissions
+ * @param {*} pid 
+ */
+function compPermissions(pid) {
+  let perms = getAllRights();
+  if (perms.hasOwnProperty(pid)) {
+    return TFUtils.setPerms(perms[pid]);
+  }
+}
+/**
  * renderPage
  * @param {*} elem
  */
-function renderPage(elem, pageid) {
+function renderPage(elem, pageid,pid) {
   if (pageid == "userDataQueries") {
     ReactDOM.render(
       <Provider store={store}>
@@ -159,8 +169,7 @@ function setAppUserIDAndDataset(dataset, userid) {
     APP_DATASET = dataset;
     APP_USERID = userid;
 }
-var CP_RIGHTS,CT_RIGHTS,UQ_RIGHTS;
-
+var CP_RIGHTS,CT_RIGHTS,UQ_RIGHTS,ALL_RIGHTS;
 function setCPRights(perm){
   CP_RIGHTS=TFUtils.setPerms(perm);
 }
@@ -179,6 +188,12 @@ function setUQRights(perm){
 function hasUQRights(){
     return UQ_RIGHTS;
 }
+function setAlRights(perm){
+  ALL_RIGHTS=perm;
+}
+function getAllRights(){
+  return ALL_RIGHTS;
+}
 function setModulePermissions(apps){
   apps.forEach(function(app) {
       if(app.id=="73b9a516-c0ca-43c0-b0ae-190e08d77bcc"){
@@ -187,6 +202,7 @@ function setModulePermissions(apps){
                   setCPRights(app.permissions.CP);
                   setCTRights(app.permissions.CT);
                   setUQRights(app.permissions.UQ);
+                  setAlRights(app.permissions);
               }
           });
       }
