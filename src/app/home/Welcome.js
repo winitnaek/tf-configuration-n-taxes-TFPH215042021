@@ -5,6 +5,10 @@ import { Row, Col, Container, Button, Modal } from "reactstrap";
 import SystemSummary from "./SystemSummary";
 import PayrollAndEmployeeTestMessages from "./PayrollAndEmployeeTestMessages";
 
+const Style = {
+  margin: "0 auto"
+}
+
 class Welcome extends Component {
   constructor(props) {
     super(props);
@@ -28,19 +32,19 @@ class Welcome extends Component {
     return (
       <Container style={{ marginTop: "-50px" }}>
         <Col>
-          <Row>
-            <p sytle={{ fontSize: "24px" }}>
+          <Row >
+            <p  sytle={Style}>
               <strong> Welcome! </strong>
             </p>
           </Row>
 
-          <Row style={{ marginTop: "25px" }}>
+          {/* <Row style={{ marginTop: "25px" }}>
             <SystemSummary />
           </Row>
 
           <Row>
             <PayrollAndEmployeeTestMessages />
-          </Row>
+          </Row> */}
         </Col>
       </Container>
     );

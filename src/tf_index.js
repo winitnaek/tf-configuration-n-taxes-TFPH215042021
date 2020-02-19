@@ -13,7 +13,7 @@ export default store;
 import Welcome from './app/home/Welcome';
 import TFUtils from './base/utils/tfUtils';
 import {setModuleAreas} from './app/home/moduleLinksActions';
-import TestReusable from "./app/components/TestReusable";
+import ReusableGrid from "./app/components/ReusableGrid";
 import UserDataQueries from "./app/components/UserDataQueries";
 import {metadatamap} from './base/constants/TFTools';
 //Temporary set user in session:======Comment this when deployed with MAC======
@@ -79,7 +79,7 @@ function renderComponent(elem,pageid,pid){
   //$('<div id="'+ elem +'" class="col"></div>').insertAfter($("#" + "pageContainerSib"));
   ReactDOM.render(
     <Provider store={store}>
-      <TestReusable pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions}/>
+      <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions}/>
     </Provider>,
     document.querySelector("#" + elem)
   );

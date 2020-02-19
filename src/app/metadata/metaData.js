@@ -132,14 +132,47 @@ export const customPayments = {
                 "text": "EE Max",
                 "datafield": "eeMax",
                 "cellsalign": "right",
-                "align": "center"
+				"align": "center",
+				"width": "10%",
 			  },
 			  {
                 "text": "AggStatus",
                 "datafield": "aggStatus",
                 "cellsalign": "center",
                 "align": "center"
-			  }  
+			  },
+			  {
+				"text": "Edit",
+				"datafield": "edit",
+				"align": "center",
+				"width": "10%",
+				"cellsrenderer": function(
+				  ndex,
+				  datafield,
+				  value,
+				  defaultvalue,
+				  column,
+				  rowdata
+				) {
+				  return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
+				},
+			  },
+			  {
+				"text": "Delete",
+				"datafield": "delete",
+				"align": "center",
+				"width": "10%",
+				"cellsrenderer": function(
+				  ndex,
+				  datafield,
+				  value,
+				  defaultvalue,
+				  column,
+				  rowdata
+				) {
+				  return ` <div id='delete-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-calendar-minus  fa-1x" color="primary"/> </div>`;
+				},
+			  },  
 		],
 		"dataFields":[
 		  {"name": "customPaymentCode","type": "string"},
@@ -147,7 +180,9 @@ export const customPayments = {
 		  {"name": "paymentType","type": "string"},
 		  {"name": "taxability","type": "string"},
 		  {"name": "eeMax","type": "string"},
-		  {"name": "aggStatus","type": "string"}
+		  {"name": "aggStatus","type": "string"},
+		  {"name": "edit", "type": "string"},
+		  {"name": "delete", "type": "string"}
 		]
 	},
 	"cruddef": {
@@ -186,64 +221,66 @@ export const customTaxCodes = {
     
 		"columns": [
 			{
-				"text": "Custom Payment Code",
-				"datafield": "customPaymentCode",
+				"text": "Custom Tax Code",
+				"datafield": "customTaxCode",
 				"cellsalign": "center",
 				"width": "30%",
 				"align": "center",
 				"sortable": true,
 				"rendererInput": [
 					{
-						"payName": "test",
-						"payCode": "PAYME",
-						"editMode": "2",
-						"payType": "E",
-						"taxability": "Taxable",
-						"eeMax": "0.00",
-						"erMax": "-",
-						"aggStatus": "N/A"
+						"customTaxCode": "test",
+						"customPaymentName": "PAYME",
 					}
 				],
 				"rendererStaticInput": [{"name": "","value": ""}]
 			},
 			{
-                "text": "Custom Payment Name",
-                "datafield": "customPaymentName",
+                "text": "Custom Tax Name",
+                "datafield": "customTaxName",
                 "cellsalign": "center",
                 "align": "center"
 			  },
 			  {
-                "text": "Payment Type",
-                "datafield": "paymentType",
-                "cellsalign": "center",
-                "align": "center"
+				"text": "Edit",
+				"datafield": "edit",
+				"align": "center",
+				"width": "10%",
+				"cellsrenderer": function(
+				  ndex,
+				  datafield,
+				  value,
+				  defaultvalue,
+				  column,
+				  rowdata
+				) {
+				  return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
+				},
 			  },
 			  {
-                "text": "Taxability",
-                "datafield": "taxability",
-                "cellsalign": "center",
-                "align": "center"
+				"text": "Delete",
+				"datafield": "delete",
+				"align": "center",
+				"width": "10%",
+				"cellsrenderer": function(
+				  ndex,
+				  datafield,
+				  value,
+				  defaultvalue,
+				  column,
+				  rowdata
+				) {
+				  return ` <div id='delete-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-calendar-minus  fa-1x" color="primary"/> </div>`;
+				},
 			  },
-			  {
-                "text": "EE Max",
-                "datafield": "eeMax",
-                "cellsalign": "right",
-                "align": "center"
-			  },
-			  {
-                "text": "AggStatus",
-                "datafield": "aggStatus",
-                "cellsalign": "center",
-                "align": "center"
-			  }  
+			  
+             
 		],
 		"dataFields":[
-		  {"name": "customPaymentCode","type": "string"},
-		  {"name": "customPaymentName","type": "string"},
-		  {"name": "paymentType","type": "string"},
-		  {"name": "taxability","type": "string"},
-		  {"name": "eeMax","type": "string"},
-		  {"name": "aggStatus","type": "string"}
+		  {"name": "customTaxCode","type": "string"},
+		  {"name": "customTaxName","type": "string"},
+		  {"name": "edit", "type": "string"},
+		  {"name": "delete", "type": "string"}
 		]
 	},
 	"cruddef": {
