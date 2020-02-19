@@ -32,7 +32,13 @@ class TestReusable extends React.Component {
       helpLabel: metadata.pgdef.helpLblTxt,
     };
   }
+   
+  componentDidMount(){
+    // Make Api call here to get database on pgid
+  }
+
   render() {
+    // This all will be refactored into componentdidmount to make api call to get data
     let mockData;
     switch (this.state.pgdef.pgid) {
       case "allBSIPlans":
@@ -131,7 +137,7 @@ class TestReusable extends React.Component {
             pageable={true}
             autoheight={true}
             style={{ color: "black", marginTop: "10px" }}
-            selectionmode={"singlecell"}
+            // selectionmode={"singlecell"}
           />
         </Row>
       </Fragment>
