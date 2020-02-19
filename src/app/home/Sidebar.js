@@ -19,15 +19,8 @@ import {
 import {
   getFavoriteLinks,
   saveFavoriteLinks
-<<<<<<< HEAD
-} from "./actions/favoriteLinksActions";
-import {
-  setModuleLinks
-} from "./actions/moduleLinksActions";
-=======
 } from "./favoriteLinksActions";
 import { setModuleLinks } from "./moduleLinksActions";
->>>>>>> TF_UI_PRE_SEC
 import {
   Card,
   Row,
@@ -95,14 +88,6 @@ class Sidebar extends Component {
       }
     };
 
-<<<<<<< HEAD
-    this.handleRender = link => {
-      this.setState({
-        isOpen: !this.state.isOpen,
-      })
-      this.openNav()
-      this.props.handleLink(link)
-=======
     this.toggleNavbar = () => {
       this.setState({
         collapsed: !this.state.collapsed
@@ -115,7 +100,6 @@ class Sidebar extends Component {
         collapsed: !this.state.collapsed
       });
       this.props.handleLink(data);
->>>>>>> TF_UI_PRE_SEC
     };
 
     this.toggle = () => {
@@ -158,13 +142,12 @@ class Sidebar extends Component {
 
   openNav() {
     if (this.state.isOpen) {
-<<<<<<< HEAD
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("fullSideBar").style.width = "";
     document.getElementById("cardBody").style.padding="0";
     document.getElementById("cardBody").style.paddingTop="10px";
     document.getElementById("cardBody").style.width="70px"
-    document.getElementById("mainPageArea").style.margin="0"
+    // document.getElementById("mainPageArea").style.margin="0"
     document.getElementById("navToggler").style.marginLeft="-15px"
 
     } else {    
@@ -173,7 +156,7 @@ class Sidebar extends Component {
       document.getElementById("cardBody").style.width="100%"
       document.getElementById("cardBody").style.padding="15px";
       document.getElementById("cardBody").style.paddingRight="0";
-      document.getElementById("mainPageArea").style.margin="0 auto";
+      // document.getElementById("mainPageArea").style.margin="0 auto";
       document.getElementById("navToggler").style.marginLeft="10px"
     }
     this.setState({
@@ -185,30 +168,6 @@ class Sidebar extends Component {
   render() {
    
 
-=======
-      document.getElementById("cardBody").style.display = "none";
-    } else {
-      document.getElementById("cardBody").style.display = "flex";
-    }
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-
-  static getDerivedStateFromProps(nextProps, state) {}
-  render() {
-    const { handleLink } = this.props;
-
-    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
-
-    /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-    function closeNav() {
-      document.getElementById("mySidebar").style.width = "0 !important";
-
-      document.getElementById("main").style.display = "none !important";
-      document.getElementById("mySidebar").style.display = "none !important";
-    }
->>>>>>> TF_UI_PRE_SEC
     const Option = props => {
       const { data } = props;
       let isFavorite = false;
@@ -348,7 +307,7 @@ class Sidebar extends Component {
                 <i
                   className="fas fa-star"
                   style={goldStar2}
-                  onClick={e => this.removeFavorite(data)}
+                  onClick={e => this.removeFavorite(item)}
                 ></i>
               </button>
             </span>
@@ -380,7 +339,6 @@ class Sidebar extends Component {
     displayFavorites = displayFavorites.sort(compare);
 
     return (
-<<<<<<< HEAD
       <div id="fullSideBar" style={Style}>
         
         <Card body id="cardBody" style={{height: "100%", paddingTop: "15px", paddingRight: "0"}}>
@@ -389,21 +347,6 @@ class Sidebar extends Component {
         <Col sm="8" style={CardStyle} id="mySidebar" className="sidebar">
          
             {/* <Collapse isOpen={!this.state.collapsed} > */}
-=======
-      <div style={Style}>
-        <Col style={{ minHeight: "75px" }}>
-          <Navbar color="faded" light>
-            <NavbarToggler
-              style={{ marginLeft: "-15px", color: "black" }}
-              onClick={e => this.openNav() /*this.toggleNavbar */}
-              className="mr-2"
-            />
-          </Navbar>
-        </Col>
-        <Col style={CardStyle} id="mySidebar" className="sidebar">
-          <Collapse isOpen={!this.state.collapsed} navbar>
-            <Card body id="cardBody">
->>>>>>> TF_UI_PRE_SEC
               <Select
                 singleValue
                 isSearchable

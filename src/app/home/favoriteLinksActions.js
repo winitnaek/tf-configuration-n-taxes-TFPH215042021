@@ -4,11 +4,7 @@ import {
   FETCH_FAVORTIE_LINKS_ERROR,
   FETCH_FAVORITE_LINKS_SUCCESS,
   FETCH_FAVORITE_LINKS_PENDING
-<<<<<<< HEAD:src/app/home/actions/favoriteLinksActions.js
-} from "../../../base/constants/LinksConstants";
-=======
 } from "../../base/constants/LinksConstants";
->>>>>>> TF_UI_PRE_SEC:src/app/home/favoriteLinksActions.js
 
 export function fetchFavoriteLinksPending() {
   return {

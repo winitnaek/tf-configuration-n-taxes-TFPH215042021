@@ -1,14 +1,8 @@
 import React, { Component, Fragment } from "react";
 import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
-import { Container, Col, Row, Button, UncontrolledTooltip } from "reactstrap";
-<<<<<<< HEAD
+import { Col, Row, UncontrolledTooltip } from "reactstrap";
 
-=======
->>>>>>> TF_UI_PRE_SEC
 
-const handleSelect = () => {
-  console.log("Hello");
-};
 
 class ReusableGrid extends Component {
   constructor(props) {
