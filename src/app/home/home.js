@@ -4,90 +4,23 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Provider } from "react-redux";
 import configureStore from "../../base/config/configureStore";
-import Sidebar from "./Sidebar";
 import { Col, Container, Button } from "reactstrap";
 import Welcome from "./Welcome";
-// import AuditLogViewer from "../auditlogs/AuditLogViewer";
-import AuditLogViewer from './AuditLogViewer'
-import AddressOverrides from "./AddressOverrides";
 import   '../../css/home.css';
 let store = configureStore();
-// import CustomPayments from '../customize/payments/CustomPayments';
-import ReadOnlyType1 from '../customize/payments/Read_Only_type1';
-import ReadOnlyType1_1 from '../customize/payments/Read_Only_type1_1';
-import GridWithLinks from '../customize/payments/Type1_Grid_With_Links';
-import Styles from "../../css/cfapp.css"
 import AllBsiPlans from './AllBsiPlans';
 import PopulateV3States from './PopulateV3State';
 import CustomPayments from './CustomPayments';
-
-
-
-
-// import Companies from './Companies';
-// import BatchTest from './BatchTest';
-// import ConnectToDataSets from './ConnectToDataSets';
-// import CustomBackupRestore from './CustomBackup'
-// import CustomFormulas from './CustomFormulas';
-// import CustomGarnishmentFormulas from './CustomGarnishmentsFormulas';
-// import CustomGarnishments from './CustomGarnishments'
-// import CustomNexusData from './CustomNexusData';
-// import CustomPaymentExceptions from './CustomPaymentExceptions';
-//import  CustomPayments from './CustomPayments';
-// import  CustomTaxCodes from './CustomTaxCodes';
-// import  CustomTaxPaymentOverrides from './CustomeTaxPaymentOverrides';
-// import  CyclicBulletin from './CyclicBulletin';
-// import  DataSets from './DataSets';
-// import  DatabaseLoad from './DatabaseLoad';
-// import  DisposableOverrides from './DisposableOverrides';
-// import  EmployeeGroups from './EmployeeGroups';
-// import  GarnishmentFormulaOverrides from './GarnishmentFormulaOverrides';
-// import  GarnishmentGroups from './GarnishmentGroups';
-// import  GroupOverrides from './GroupOverrides';
-// import  LocatorBulletins from './LocatorBulletins';
-// import  LoginsAndPermissions from './LoginsAndPermissions';
-// import  MapPaymentCodes from './MapPaymentCodes';
-// import  MapTaxCodes from './MapTaxcodes';
-// import  MapTaxTypes from "./MapTaxTypes";
-// import  MappingTools from "./MappingTools";
-// import  MaritalStatusReport from "./MaritalStausReport"
-// import  OptionalRateOverrides from "./OptionalRateOverrides"
-// import  PAServicesTaxReport from "./PAServicesTaxRepor"
-// import  PaymentOverrides from './PaymentOverrides';
-// import  PensionWhatIfTest from './PensionWhatIfTest';
-// import  ReciprocalOverrides from './ReciprocalOverrides';
-// import  RegulatoryBulletins from './RegulatoryBulletins';
-// import  ReportingTools from './ReportingTools';
-// import  SystemTools from './SystemTools';
-// import  TaxEffectiveDateOverrides from './TaxEffectiveDateOverrides';
-// import  TaxHistory from './TaxHistory';
-// import  TaxLabilityReport from './TaxLiabilityReport';
-// import  TaxLocator from './TaxLocator';
-// import  USPensionQuickFormulas from './USPensionQuickFormulas';
-// import  USQuickFormula from './USQuickFormula';
-// import  USWageAttachmentQuickFormulas from './USWageAttachmentQuickFormulas';
-// import  Welcome from './Welcome';
-// import  UnemploymentOverrides from './UnemployementOverrides';
-import UserDataQueriesPg from "../userdataqueries/UserDataQueriesPg";
-// import  WhatIfTest from './WhatIfTest';
-// import  Worksites from './Worksites';
-// import  DefineFavoriteLinks from './DefineFavoriteLinks';
-import Modules from "./Modules";
-import { fetchLinks } from "../../base/config/actions/getLinks";
-import { setModuleLinks } from "../../base/config/actions/moduleLinksActions";
-
+import { fetchLinks } from "./getLinks";
+import { setModuleLinks } from "./moduleLinksActions";
+import Sidebar from './Sidebar';
 class TFHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      payeeDetails: null,
       isOpen: false,
       dropdownOpen: true,
-      sideDrawerOpen: true,
-      linksdata: {
-        title: "",
-        links: []
-      }
+      sideDrawerOpen: true
     };
     this.drawerToggleClickHandler = () => {
       this.setState({
@@ -97,44 +30,12 @@ class TFHome extends Component {
   }
 
   componentDidMount() {
-    const { links, options } = this.props;
-
-    this.setState({
-      payeeDetails: this.props.data.payeeDetails,
-      linksdata: this.props.data.linksdata
-    });
-
-    const { fetchLinks } = this.props;
-    fetchLinks();
+    
   }
 
-  handleLink(link) {
-    console.log(link)
-    return ReactDOM.render(
-      <Provider store={store}>
-        <div>
-          <Col>
-            <Sidebar handleLink={this.handleLink} />
-          </Col>
-          <Col>
-       
-            {link === "Welcome" && <Welcome />}
-            {link === "AddressOverrides" && <AddressOverrides />}
-            {link === "AuditLogViewer" && <AuditLogViewer />}
-            {link === "Modules" && <Modules />}
-            {link === "ReadOnlyType1" && <ReadOnlyType1/>}
-            {link === "ReadOnlyType1_1" && <ReadOnlyType1_1/>}
-            {link ===  "GridWithLinks" && <GridWithLinks/>}
-            {link ===  "AllBsiPlans" && <AllBsiPlans/>}
-            {link ===  "PopulateV3States" && <PopulateV3States/>}
-            {link === "CustomPayments" && <CustomPayments/>}
-
-            {/* need to add all routing links here like the ones above */}
-          </Col>
-        </div>
-      </Provider>,
-      document.querySelector("#" + "appContent")
-    );
+  handleLink(data) {
+    console.log(data)
+    renderTFApplication("pageContainer", data);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -150,12 +51,6 @@ class TFHome extends Component {
       }
     }
 
-    if (nextProps.data.linksdata !== this.state.linksdata) {
-      this.setState({
-        linksdata: nextProps.data.linksdata
-      });
-    }
-
     if (nextState.isOpen !== this.state.isOpen) {
       this.setState({ isOpen: true });
     }
@@ -167,13 +62,13 @@ class TFHome extends Component {
   render() {
     return (
       <div style={{ marginTop: 0 }}>
-         <Container> 
-          <Col>
+          <Container>
+          <div class="col" id="pageContainerSib">
              <Sidebar handleLink={this.handleLink} />
-          </Col> 
-           <Col >
+          </div> 
+          <div class="col" id="pageContainer">
               <Welcome/>
-          </Col> 
+          </div>
          </Container> 
       </div>
     );
@@ -181,15 +76,12 @@ class TFHome extends Component {
 }
 function mapStateToProps(state) {
   return {
-    data: state.data,
-    options: state.moduleLinks,
-    links: state.links
-  };
+    options: state.moduleAreas.areas
+  }
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchLinks: fetchLinks, setModuleLinks },
-    dispatch
+    { fetchLinks: fetchLinks, setModuleLinks },dispatch
   );
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TFHome);

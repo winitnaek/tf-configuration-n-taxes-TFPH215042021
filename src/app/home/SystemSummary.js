@@ -46,28 +46,6 @@ class SystemSummary extends Component {
             <p>
               <strong> System Summary </strong>
             </p>
-          <hr />
-          <ul>
-            <li>
-              There are {taxCodes ? taxCodes.length : 0}
-              <a href=""> Tax Codes</a> mapped for the current Dataset
-            </li>
-            <li>
-              There are {unmappedAuthorites ? unmappedAuthorites.length : 0 }
-              &nbsp; unmapped authorites
-            </li>
-            <li>
-              The Following Overides are definded which may affect tax
-              calculations
-              <ul>
-              {overrides.map(item => (
-               <li> <a href={item.link}> {item.label} </a></li>   
-              )
-
-              )}
-              </ul>
-            </li>
-          </ul>
         </Col>
       </Container>
     );
@@ -75,9 +53,7 @@ class SystemSummary extends Component {
 }
 function mapStateToProps(state) {
   return {
-    taxCodes: state.data.taxCodes,
-    unmappedAuthorites: state.data.unmappedAuthorites,
-    overrides: state.data.overrides
+
   };
 }
 function mapDispatchToProps(dispatch) {

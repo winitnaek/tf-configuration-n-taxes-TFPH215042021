@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Row, Col, Container, Button, Modal } from "reactstrap";
 import SystemSummary from "./SystemSummary";
-import PayrollAndEmployeeTestMessages from "../userdataqueries/PayrollAndEmployeeTestMessages";
+import PayrollAndEmployeeTestMessages from "./PayrollAndEmployeeTestMessages";
 
 class Welcome extends Component {
   constructor(props) {
@@ -56,10 +56,7 @@ class Welcome extends Component {
 
 function mapStateToProps(state) {
   return {
-    taxCodes: state.data.taxCodes,
-    unmappedAuthorites: state.data.unmappedAuthorites,
-    overrides: state.data.overrides,
-    testMessages: state.data.testMessages
+    
   };
 }
 function mapDispatchToProps(dispatch) {

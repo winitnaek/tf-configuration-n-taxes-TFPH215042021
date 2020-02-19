@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { default as thunk } from "redux-thunk";
 import logger from 'redux-logger';
-import rootReducer from './reducers/appReducer'
+import rootReducer from './appReducer'
 import initialState from './initialState';
 
 
