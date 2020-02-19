@@ -34,7 +34,8 @@ export const Style = {
   top: 60,
   left: 0,
   backgroundColor: "F2F2F2",
-  overflowX: "hidden"
+  overflowX: "hidden",
+  minWidth: "350px"
 };
 
 export const buttonColStyle = { backgroundColor: "white", border: "none" }

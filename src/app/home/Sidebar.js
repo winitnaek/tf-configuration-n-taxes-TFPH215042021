@@ -16,10 +16,7 @@ import {
   selectStyle,
   favoriteListStyle
 } from "../../css/sidebar-css";
-import {
-  getFavoriteLinks,
-  saveFavoriteLinks
-} from "./favoriteLinksActions";
+import { getFavoriteLinks, saveFavoriteLinks } from "./favoriteLinksActions";
 import { setModuleLinks } from "./moduleLinksActions";
 import {
   Card,
@@ -38,7 +35,15 @@ class Sidebar extends Component {
     super(props);
     this.state = {
       selected: [],
-      favorites: [],
+      favorites:[
+        {value: "UQ",
+        label: "All BSI Plans",
+        desc: "All BSI Plans",
+        id: "allBSIPlans",
+        type: "comp",
+        link: false,
+      }
+      ],
       collapsed: false,
       isOpen: true,
       searchLinksIsOpen: true,
@@ -77,11 +82,12 @@ class Sidebar extends Component {
     };
 
     this.setFavorite = fav => {
-      if (!this.state.selected.includes(fav)) {
-        this.props.saveFavoriteLinks([...this.state.selected, fav]);
+      console.log(fav)
+      if (!this.state.favorites.includes(fav)) {
+        // this.props.saveFavoriteLinks([...this.state.selected, fav]);
 
         this.setState({
-          selected: [...this.state.selected, fav],
+          favorites: [...this.state.favorites, fav],
           isOpen: false,
           searchLinksIsOpen: true
         });
@@ -103,21 +109,23 @@ class Sidebar extends Component {
     };
 
     this.toggle = () => {
-      console.log("hello")
+      console.log("hello");
       this.setState({
         isOpen: !this.state.isOpen,
-        searchLinksIsOpen: !this.state.searchLinksIsOpen,
+        searchLinksIsOpen: !this.state.searchLinksIsOpen
       });
     };
 
     this.removeFavorite = fav => {
       let favArray = [];
-
-      this.state.selected &&
-        this.state.selected.map(item => {
+      console.log("I have been clicked");
+      console.log(fav)
+        this.state.favorites.map(item => {
+          console.log(item.value, fav.value)
           if (item.value === fav.value) {
-            favArray = this.state.selected.filter(el => el !== item);
-            this.setState({ selected: favArray });
+            console.log('match found')
+            favArray = this.state.favorites.filter(el => el !== item);
+            this.setState({ favorites: favArray});
             this.props.saveFavoriteLinks(favArray);
           }
         });
@@ -127,8 +135,7 @@ class Sidebar extends Component {
   componentDidMount() {
     this.setState({
       selected: this.props.favorites,
-      options: this.props.options,
-      favorites:this.props.favorites
+      options: this.props.options
     });
   }
 
@@ -142,32 +149,30 @@ class Sidebar extends Component {
 
   openNav() {
     if (this.state.isOpen) {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("fullSideBar").style.width = "";
-    document.getElementById("cardBody").style.padding="0";
-    document.getElementById("cardBody").style.paddingTop="10px";
-    document.getElementById("cardBody").style.width="70px"
-    // document.getElementById("mainPageArea").style.margin="0"
-    document.getElementById("navToggler").style.marginLeft="-15px"
-
-    } else {    
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("fullSideBar").style.width = "";
+      document.getElementById("cardBody").style.padding = "0";
+      document.getElementById("cardBody").style.paddingRight = "10px";
+      document.getElementById("cardBody").style.paddingTop = "10px";
+      document.getElementById("cardBody").style.width = "70px";
+      // document.getElementById("mainPageArea").style.margin="0"
+      document.getElementById("navToggler").style.marginLeft = "10px";
+    } else {
       document.getElementById("mySidebar").style.display = "";
       document.getElementById("fullSideBar").style.width = "";
-      document.getElementById("cardBody").style.width="100%"
-      document.getElementById("cardBody").style.padding="15px";
-      document.getElementById("cardBody").style.paddingRight="0";
+      document.getElementById("cardBody").style.width = "100%";
+      document.getElementById("cardBody").style.padding = "15px";
+      document.getElementById("cardBody").style.paddingRight = "0";
       // document.getElementById("mainPageArea").style.margin="0 auto";
-      document.getElementById("navToggler").style.marginLeft="10px"
+      // document.getElementById("navToggler").style.marginLeft = "10px";
     }
     this.setState({
       isOpen: !this.state.isOpen,
       collapsed: false
-    })
+    });
   }
 
   render() {
-   
-
     const Option = props => {
       const { data } = props;
       let isFavorite = false;
@@ -227,6 +232,7 @@ class Sidebar extends Component {
     };
     const Option1 = props => {
       const { data } = props;
+      console.log(data)
       let isFavorite = false;
       return (
         <Row key={data} style={rowStyle}>
@@ -283,14 +289,18 @@ class Sidebar extends Component {
       );
     };
 
-    const { selected, options } = this.state;
-    let displayFavorites = this.props.options.sort().map(item => {
+    const { selected, options, favorites } = this.state;
+
+    let displayFavorites =  favorites.sort().map(item => {
       return (
         <Row key={item.label} className="selected">
-          <Col sm="10" style={linkColStyle}>
-            <span id={`jumpto-${item.value}`}
+          <Col sm="6" style={linkColStyle}>
+            <span
+              id={`jumpto-${item.value}`}
               onClick={e => this.handleRender(item)}
-            >{item.label}</span>
+            >
+              {item.label}
+            </span>
             <UncontrolledTooltip
               placement="top"
               target={`jumpto-${item.value}`}
@@ -338,15 +348,19 @@ class Sidebar extends Component {
 
     displayFavorites = displayFavorites.sort(compare);
 
+   
+    console.log(this.state.favorites)
     return (
+    
       <div id="fullSideBar" style={Style}>
-        
-        <Card body id="cardBody" style={{height: "100%", paddingTop: "15px", paddingRight: "0"}}>
-         <Row>
-        
-        <Col sm="8" style={CardStyle} id="mySidebar" className="sidebar">
-         
-            {/* <Collapse isOpen={!this.state.collapsed} > */}
+        <Card
+          body
+          id="cardBody"
+          style={{ height: "100%", paddingTop: "15px", paddingRight: "0" }}
+        >
+          <Row>
+            <Col sm="8" style={CardStyle} id="mySidebar" className="sidebar">
+              {/* <Collapse isOpen={!this.state.collapsed} > */}
               <Select
                 singleValue
                 isSearchable
@@ -366,17 +380,22 @@ class Sidebar extends Component {
               ) : (
                 <p> None</p>
               )}
-        </Col>
-        <Col sm="2">
-        <Navbar color="faded" light style={{paddingTop: "0", marginRight: "10px"}}>
-            <NavbarToggler id="navToggler"
-            style={{color: "black", fontSize: "1rem"}}
-              onClick={e => this.openNav() /*this.toggleNavbar */}
-              className="mr-2"
-            />
-          </Navbar>
-        </Col>
-        </Row>
+            </Col>
+            <Col xs="2" style={{marginRight: "10px"}}>
+              <Navbar
+                color="faded"
+                light
+                style={{ paddingTop: "0", marginRight: "25px", paddingLeft: "0" }}
+              >
+                <NavbarToggler
+                  id="navToggler"
+                  style={{ color: "black", fontSize: "1rem" }}
+                  onClick={e => this.openNav() /*this.toggleNavbar */}
+                  className="mr-2"
+                />
+              </Navbar>
+            </Col>
+          </Row>
         </Card>
       </div>
     );
@@ -386,7 +405,7 @@ class Sidebar extends Component {
 function mapStateToProps(state) {
   return {
     options: state.moduleAreas.areas
-  }
+  };
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
