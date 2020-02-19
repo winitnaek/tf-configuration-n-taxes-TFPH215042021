@@ -11,8 +11,11 @@ import TFHome from "./app/home/home.js";
 let store = configureStore();
 export default store;
 import Welcome from './app/home/Welcome';
-
-
+import TFUtils from './base/utils/tfUtils';
+import {setModuleAreas} from './app/home/moduleLinksActions';
+import TestReusable from "./app/components/TestReusable";
+import UserDataQueries from "./app/components/UserDataQueries";
+import {metadatamap} from './base/constants/TFTools';
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
   var userProfile ='{\r\n   \"userId\":\"001907\",\r\n   \"firstName\":\"Isreal\",\r\n   \"lastName\":\"Fullerton\",\r\n   \"dataset\":\"EPI_VINIT\",\r\n   \"securitytokn\":\"fhfh484jer843je848rj393jf\",\r\n   \"branding\":\"base64ImageData\",\r\n   \"userTheme\":\"Default\",\r\n   \"roles\":[\r\n      \"ER\"\r\n   ],\r\n   \"applications\":[\r\n      {\r\n         \"id\":\"73b9a516-c0ca-43c0-b0ae-190e08d77bcc\",\r\n         \"name\":\"TFTools\",\r\n         \"accessIds\":[\r\n            {\r\n               \"id\":\"162ebe14-8d87-44e1-a786-c9365c9d5cd8\",\r\n               \"visible\":true\r\n            }\r\n         ],\r\n         \"permissions\":{\r\n            \"CT\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"CP\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"UQ\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   ],\r\n   \"themeList\":[\r\n      {\r\n         \"id\":\"Default\",\r\n         \"name\":\"Default\"\r\n      },\r\n      {\r\n         \"id\":\"HighContrast\",\r\n         \"name\":\"High Contrast\"\r\n      },\r\n      {\r\n         \"id\":\"WhiteOnBlack\",\r\n         \"name\":\"White On Black\"\r\n      },\r\n      {\r\n         \"id\":\"BlackOnWhite\",\r\n         \"name\":\"Black On White\"\r\n      }\r\n   ]\r\n}';
@@ -26,7 +29,11 @@ let usrobj = JSON.parse(sessionStorage.getItem("up"));
 //console.log('setUserProfile usrobj');
 //console.log(usrobj);
 var dataset = usrobj.dataset;
-var empId = usrobj.userId;
+var userId = usrobj.userId;
+setModulePermissions(usrobj.applications);
+let moduleAreas = TFUtils.buildModuleAreaLinks(usrobj.applications);
+console.log('moduleAreas');
+console.log(moduleAreas);
 /**
  * renderW2AdmApplication TEST
  * master branch
@@ -35,27 +42,69 @@ var empId = usrobj.userId;
  */
 function renderTFApplication(elem, renderName) {
   setAppAnchor(elem);
-  setAppDataset(dataset);
+  setAppUserIDAndDataset(dataset, userId);
+  console.log("elem");
   console.log(elem);
+  console.log("renderName");
   console.log(renderName);
-  // if(renderName===rname.RN_TF_HOME){
+  console.log("moduleAreas");
+  console.log(moduleAreas);
+  if (renderName === rname.RN_TF_HOME) {
+    ReactDOM.render(
+      <Provider store={store}>
+        <Progress />
+      </Provider>,
+      document.querySelector("#" + elem)
+    );
+    store.dispatch(setModuleAreas(moduleAreas));
+    setTimeout(
+      function() {
+        renderTFHome(elem);
+      }.bind(this),
+      600
+    );
+  }else if(renderName && renderName.type=="comp"){
+    renderComponent(elem,renderName.id);
+  }else if(renderName && renderName.type=="page"){
+    renderPage(elem,renderName.id);
+  }
+}
+/**
+ * renderComponent
+ * @param {*} elem
+ */
+function renderComponent(elem,pageid){
+  ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
+ // $("div").remove("#"+elem);
+  //$('<div id="'+ elem +'" class="col"></div>').insertAfter($("#" + "pageContainerSib"));
   ReactDOM.render(
     <Provider store={store}>
-      <Progress />
+      <TestReusable pageid={pageid} metadata={compMetaData}/>
     </Provider>,
     document.querySelector("#" + elem)
   );
-  //store.dispatch(getTransmitters(dataset)).then((result) => {
-  setTimeout(
-    function() {
-      renderTFHome(elem);
-    }.bind(this),
-    600
-  );
-  //}).catch((error) => {
-  //   throw new SubmissionError({_error:  error });
-  //});
-  // }
+}
+/**
+ * compMetaData
+ * @param {*} pageid 
+ */
+function compMetaData(pageid){
+  let metadataMap = metadatamap.find(metadatam => { if (pageid == metadatam.id) return metadatam});
+  return metadataMap.metadata;
+}
+/**
+ * renderPage
+ * @param {*} elem
+ */
+function renderPage(elem, pageid) {
+  if (pageid == "userDataQueries") {
+    ReactDOM.render(
+      <Provider store={store}>
+        <UserDataQueries />
+      </Provider>,
+      document.querySelector("#" + elem)
+    );
+  }
 }
 /**
  * renderTFHome
@@ -99,12 +148,49 @@ function setAppAnchor(elem) {
 function appAnchor() {
   return APP_ANCHOR;
 }
-var APP_DATASET;
-function setAppDataset(dataset) {
-  APP_DATASET = dataset;
+var APP_DATASET, APP_USERID;
+function appDataset(){
+   return APP_DATASET;
 }
-function appDataset() {
-  return APP_DATASET;
+function appUserId() {
+    return APP_USERID;
+}
+function setAppUserIDAndDataset(dataset, userid) {
+    APP_DATASET = dataset;
+    APP_USERID = userid;
+}
+var CP_RIGHTS,CT_RIGHTS,UQ_RIGHTS;
+
+function setCPRights(perm){
+  CP_RIGHTS=TFUtils.setPerms(perm);
+}
+function hasCPRights(){
+    return CP_RIGHTS;
+}
+function setCTRights(perm){
+  CT_RIGHTS=TFUtils.setPerms(perm);
+}
+function hasCTRights(){
+    return CT_RIGHTS;
+}
+function setUQRights(perm){
+  UQ_RIGHTS=TFUtils.setPerms(perm);
+}
+function hasUQRights(){
+    return UQ_RIGHTS;
+}
+function setModulePermissions(apps){
+  apps.forEach(function(app) {
+      if(app.id=="73b9a516-c0ca-43c0-b0ae-190e08d77bcc"){
+          app.accessIds.forEach(function(access) {
+              if(access.id=="162ebe14-8d87-44e1-a786-c9365c9d5cd8" && access.visible==true){
+                  setCPRights(app.permissions.CP);
+                  setCTRights(app.permissions.CT);
+                  setUQRights(app.permissions.UQ);
+              }
+          });
+      }
+  });
 }
 function onloadPdfData(id) {
   var w2data = {
@@ -227,8 +313,20 @@ window.renderTFApplication = renderTFApplication;
 module.exports = appDataset;
 window.appDataset = appDataset;
 
+module.exports = appUserId;
+window.appUserId = appUserId;
+
 module.exports = appAnchor;
 window.appAnchor = appAnchor;
+
+module.exports = hasCPRights;
+window.hasCPRights = hasCPRights;
+
+module.exports = hasCTRights;
+window.hasCTRights = hasCTRights;
+
+module.exports = hasUQRights;
+window.hasUQRights = hasUQRights;
 
 module.exports = onloadPdfData;
 window.onloadPdfData = onloadPdfData;

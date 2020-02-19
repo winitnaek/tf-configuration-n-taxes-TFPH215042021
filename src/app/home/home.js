@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Provider } from "react-redux";
 import configureStore from "../../base/config/configureStore";
-import Sidebar from "./Sidebar";
 import { Col, Container, Button } from "reactstrap";
 import Welcome from "./Welcome";
+<<<<<<< HEAD
 
 let store = configureStore();
 
@@ -30,18 +30,23 @@ import CustomTaxPaymentsMetaData from "../metadata/CUSTOM_PAYMENTS_METADATA.js";
 import { fetchLinks } from "./actions/getLinks";
 import { setModuleLinks } from "./actions/moduleLinksActions";
 
+=======
+import   '../../css/home.css';
+let store = configureStore();
+import AllBsiPlans from './AllBsiPlans';
+import PopulateV3States from './PopulateV3State';
+import CustomPayments from './CustomPayments';
+import { fetchLinks } from "./getLinks";
+import { setModuleLinks } from "./moduleLinksActions";
+import Sidebar from './Sidebar';
+>>>>>>> TF_UI_PRE_SEC
 class TFHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      payeeDetails: null,
       isOpen: false,
       dropdownOpen: true,
-      sideDrawerOpen: true,
-      linksdata: {
-        title: "",
-        links: []
-      }
+      sideDrawerOpen: true
     };
     this.drawerToggleClickHandler = () => {
       this.setState({
@@ -145,6 +150,7 @@ class TFHome extends Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     const { links, options } = this.props;
 
     this.setState({
@@ -167,6 +173,16 @@ class TFHome extends Component {
     fetchLinks();
   }
 
+=======
+    
+  }
+
+  handleLink(data) {
+    console.log(data)
+    renderTFApplication("pageContainer", data);
+  }
+
+>>>>>>> TF_UI_PRE_SEC
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.links !== this.props.links) {
       if (
@@ -180,12 +196,6 @@ class TFHome extends Component {
       }
     }
 
-    if (nextProps.data.linksdata !== this.state.linksdata) {
-      this.setState({
-        linksdata: nextProps.data.linksdata
-      });
-    }
-
     if (nextState.isOpen !== this.state.isOpen) {
       this.setState({ isOpen: true });
     }
@@ -197,6 +207,7 @@ class TFHome extends Component {
   render() {
     return (
       <div style={{ marginTop: 0 }}>
+<<<<<<< HEAD
         <Container>
           <Col>
             <Sidebar handleLink={this.handleLink} />
@@ -205,21 +216,28 @@ class TFHome extends Component {
             <Welcome />
           </Col>
         </Container>
+=======
+          <Container>
+          <div class="col" id="pageContainerSib">
+             <Sidebar handleLink={this.handleLink} />
+          </div> 
+          <div class="col" id="pageContainer">
+              <Welcome/>
+          </div>
+         </Container> 
+>>>>>>> TF_UI_PRE_SEC
       </div>
     );
   }
 }
 function mapStateToProps(state) {
   return {
-    data: state.data,
-    options: state.moduleLinks,
-    links: state.links
-  };
+    options: state.moduleAreas.areas
+  }
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchLinks: fetchLinks, setModuleLinks },
-    dispatch
+    { fetchLinks: fetchLinks, setModuleLinks },dispatch
   );
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TFHome);

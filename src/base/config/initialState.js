@@ -1,10 +1,8 @@
 export default {
-  outputgeninprogress: {},
-  printinprogress: {},
-  w2data: {
-    loadeew2: false,
-    eew2id: ""
+  moduleAreas: {
+    areas: []
   },
+<<<<<<< HEAD
   compdata: {
     loadcomp: false,
     compid: ""
@@ -417,124 +415,17 @@ export default {
     favorites: [
       { value: "employeeGroups", label: "Employee Groups", link: "" },
       { value: "usQuickFormulas", label: "U.S. QuickFormulas", link: "" }
+=======
+  favoriteAreas: {
+    favorites: [
+      {
+        value: "CT",
+        label: "Custom Tax Codes",
+        desc: "Custom Tax Codes",
+        id: "customTaxCodes",
+        type: "comp"
+      }
+>>>>>>> TF_UI_PRE_SEC
     ]
-  },
-  taxCodes: [
-    {
-      authority: "FEDERAL",
-      title: "STATE",
-      countyId: "",
-      bsiCode: "00010000",
-      taxCode: "BSI1234",
-      preferred: "N"
-    },
-    {
-      authority: "ALABAMA",
-      title: "STATE",
-      countyId: "",
-      bsiCode: "00020000",
-      taxCode: "BSI1235",
-      preferred: "N"
-    },
-    {
-      authority: "ALASKA",
-      title: "STATE",
-      countyId: "",
-      bsiCode: "00040000",
-      taxCode: "BSI1236",
-      preferred: "N"
-    },
-    {
-      authority: "ARIZONA",
-      title: "STATE",
-      countyId: "",
-      bsiCode: "00050000",
-      taxCode: "BSI1237",
-      preferred: "N"
-    },
-    {
-      authority: "ARKANSAS",
-      title: "STATE",
-      countyId: "",
-      bsiCode: "0006000",
-      taxCode: "BSI1238",
-      preferred: "N"
-    },
-    {
-      authority: "CALFORNIA",
-      title: "STATE",
-      countyId: "",
-      bsiCode: "0007000",
-      taxCode: "BSI1239",
-      preferred: "N"
-    },
-    {
-      authority: "COLORADO",
-      title: "STATE",
-      countyId: "",
-      bsiCode: "0008000",
-      taxCode: "BSI1210",
-      preferred: "N"
-    },
-    {
-      authority: "CONNECTICUT",
-      title: "STATE",
-      countyId: "",
-      bsiCode: "0009000",
-      taxCode: "BSI1211",
-      preferred: "N"
-    },
-    {
-      authority: "DELEWARE",
-      title: "STATE",
-      countyId: "",
-      bsiCode: "0010000",
-      taxCode: "BSI1212",
-      preferred: "N"
-    },
-    {
-      authority: "DISTRICT OF COLUMBIA",
-      title: "STATE",
-      countyId: "",
-      bsiCode: "0011000",
-      taxCode: "BSI1213",
-      preferred: "N"
-    }
-  ],
-  overrides: [
-    { value: "addressOverrides", label: "Address Overrides", link: "" },
-    {
-      value: "unemploymentOverrides",
-      label: "Unemployment Overrides",
-      link: ""
-    },
-    {
-      value: "optionalRateOverrides",
-      label: "Optional Rate Overrides",
-      link: ""
-    },
-    { value: "groupOverrides", label: "Group Overrides", link: "" },
-    { value: "reciprocalOverrides", label: "Reciprocal Overridess", link: "" },
-    { value: "paymentOverrides", label: "Payment Overrides", link: "" },
-    {
-      value: "customTaxPaymentOverrides",
-      label: "Custom Tax Payment Overrides",
-      link: ""
-    },
-    { value: "customNexusData", label: "Custom Nexus Data", link: "" },
-    {
-      value: "customPaymentExceptions",
-      label: "Custom Payment Exceptions",
-      link: ""
-    }
-  ],
-  testMessages: [
-    {
-      runName: "This is a test message",
-      runDate: "01/15/2020",
-      runTime: "01:15:00",
-      product: ""
-    }
-  ],
-  unmappedAuthorites: []
+  }
 };

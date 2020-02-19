@@ -1,8 +1,13 @@
+<<<<<<< HEAD:src/base/config/reducers/favoriteLinksReducer.js
 import * as types from '../../../app/home/actions/favoriteLinksActions';
 import initialState from '../initialState';
+=======
+import * as types from './favoriteLinksActions';
+import initialState from '../../base/config/initialState';
+>>>>>>> TF_UI_PRE_SEC:src/app/home/favoriteLinksReducer.js
 
 
-const favoriteLinks = (state = initialState.sidebar.favorites, action) => {
+const favoriteLinks = (state = initialState.favoriteAreas, action) => {
     switch(action.type) {
         case types.GET_FAVORITE_LINKS:
             // To do..  Need to fetch real data from api then return it

@@ -1,5 +1,5 @@
-import * as types from '../../constants/ActionTypes';
-import initialState from '../initialState';
+import * as types from '../constants/ActionTypes';
+import initialState from './initialState';
 
 export default function confReducer(state = initialState.appconf,action) {
   switch(action.type) {

@@ -19,10 +19,15 @@ import {
 import {
   getFavoriteLinks,
   saveFavoriteLinks
+<<<<<<< HEAD
 } from "./actions/favoriteLinksActions";
 import {
   setModuleLinks
 } from "./actions/moduleLinksActions";
+=======
+} from "./favoriteLinksActions";
+import { setModuleLinks } from "./moduleLinksActions";
+>>>>>>> TF_UI_PRE_SEC
 import {
   Card,
   Row,
@@ -90,12 +95,27 @@ class Sidebar extends Component {
       }
     };
 
+<<<<<<< HEAD
     this.handleRender = link => {
       this.setState({
         isOpen: !this.state.isOpen,
       })
       this.openNav()
       this.props.handleLink(link)
+=======
+    this.toggleNavbar = () => {
+      this.setState({
+        collapsed: !this.state.collapsed
+      });
+    };
+
+    this.handleRender = data => {
+      this.setState({
+        isOpen: !this.state.isOpen,
+        collapsed: !this.state.collapsed
+      });
+      this.props.handleLink(data);
+>>>>>>> TF_UI_PRE_SEC
     };
 
     this.toggle = () => {
@@ -107,7 +127,6 @@ class Sidebar extends Component {
     };
 
     this.removeFavorite = fav => {
-
       let favArray = [];
 
       this.state.selected &&
@@ -124,7 +143,8 @@ class Sidebar extends Component {
   componentDidMount() {
     this.setState({
       selected: this.props.favorites,
-      options: this.props.options
+      options: this.props.options,
+      favorites:this.props.favorites
     });
   }
 
@@ -138,6 +158,7 @@ class Sidebar extends Component {
 
   openNav() {
     if (this.state.isOpen) {
+<<<<<<< HEAD
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("fullSideBar").style.width = "";
     document.getElementById("cardBody").style.padding="0";
@@ -164,7 +185,88 @@ class Sidebar extends Component {
   render() {
    
 
+=======
+      document.getElementById("cardBody").style.display = "none";
+    } else {
+      document.getElementById("cardBody").style.display = "flex";
+    }
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+  static getDerivedStateFromProps(nextProps, state) {}
+  render() {
+    const { handleLink } = this.props;
+
+    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+
+    /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0 !important";
+
+      document.getElementById("main").style.display = "none !important";
+      document.getElementById("mySidebar").style.display = "none !important";
+    }
+>>>>>>> TF_UI_PRE_SEC
     const Option = props => {
+      const { data } = props;
+      let isFavorite = false;
+      return (
+        <Row key={data} style={rowStyle}>
+          <Col sm="10" style={{ padding: "0px" }}>
+            <div className="mylink" style={link}>
+              <span
+                id={`jumpto-${data.value}`}
+                onClick={e => this.handleRender(data)}
+              >
+                {data.label}
+              </span>
+              <UncontrolledTooltip
+                placement="top"
+                target={`jumpto-${data.value}`}
+              >
+                Jump to {data.label}
+              </UncontrolledTooltip>
+            </div>
+          </Col>
+          <Col sm="2">
+            <span id={`markas-${data.value}`}>
+              {this.props.options.map(item => {
+                if (item.value === data.value) {
+                  isFavorite = true;
+                }
+              })}
+
+              {isFavorite ? (
+                <i
+                  className="fas fa-star"
+                  style={goldStar}
+                  onClick={e => this.removeFavorite(data)}
+                ></i>
+              ) : (
+                <i
+                  class="far fa-star"
+                  style={star}
+                  onClick={e => this.setFavorite(data)}
+                ></i>
+              )}
+            </span>
+            <UncontrolledTooltip
+              placement="bottom"
+              target={`markas-${data.value}`}
+            >
+              {isFavorite ? (
+                <span> Remove {data.label} from favorites </span>
+              ) : (
+                <span> Add {data.label} to favorites </span>
+              )}
+            </UncontrolledTooltip>
+          </Col>
+        </Row>
+      );
+    };
+    const Option1 = props => {
       const { data } = props;
       let isFavorite = false;
       return (
@@ -223,11 +325,13 @@ class Sidebar extends Component {
     };
 
     const { selected, options } = this.state;
-    let displayFavorites = this.state.selected.sort().map(item => {
+    let displayFavorites = this.props.options.sort().map(item => {
       return (
         <Row key={item.label} className="selected">
           <Col sm="10" style={linkColStyle}>
-            <span id={`jumpto-${item.value}`}>{item.label}</span>
+            <span id={`jumpto-${item.value}`}
+              onClick={e => this.handleRender(item)}
+            >{item.label}</span>
             <UncontrolledTooltip
               placement="top"
               target={`jumpto-${item.value}`}
@@ -276,6 +380,7 @@ class Sidebar extends Component {
     displayFavorites = displayFavorites.sort(compare);
 
     return (
+<<<<<<< HEAD
       <div id="fullSideBar" style={Style}>
         
         <Card body id="cardBody" style={{height: "100%", paddingTop: "15px", paddingRight: "0"}}>
@@ -284,6 +389,21 @@ class Sidebar extends Component {
         <Col sm="8" style={CardStyle} id="mySidebar" className="sidebar">
          
             {/* <Collapse isOpen={!this.state.collapsed} > */}
+=======
+      <div style={Style}>
+        <Col style={{ minHeight: "75px" }}>
+          <Navbar color="faded" light>
+            <NavbarToggler
+              style={{ marginLeft: "-15px", color: "black" }}
+              onClick={e => this.openNav() /*this.toggleNavbar */}
+              className="mr-2"
+            />
+          </Navbar>
+        </Col>
+        <Col style={CardStyle} id="mySidebar" className="sidebar">
+          <Collapse isOpen={!this.state.collapsed} navbar>
+            <Card body id="cardBody">
+>>>>>>> TF_UI_PRE_SEC
               <Select
                 singleValue
                 isSearchable
@@ -296,7 +416,7 @@ class Sidebar extends Component {
               />
               <hr />
               <p style={favoriteLinkStyle}> Favorite Links</p>
-              {this.state.selected ? (
+              {this.props.options ? (
                 <Container style={favoriteListStyle}>
                   {displayFavorites.sort()}
                 </Container>
@@ -322,14 +442,13 @@ class Sidebar extends Component {
 
 function mapStateToProps(state) {
   return {
-    options: state.moduleLinks,
-    modules: state.moduleLinks,
-    favorites: state.data.sidebar.favorites,
-    links: state.links
-
-  };
+    options: state.moduleAreas.areas
+  }
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getFavoriteLinks, saveFavoriteLinks, setModuleLinks }, dispatch);
+  return bindActionCreators(
+    { getFavoriteLinks, saveFavoriteLinks, setModuleLinks },
+    dispatch
+  );
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

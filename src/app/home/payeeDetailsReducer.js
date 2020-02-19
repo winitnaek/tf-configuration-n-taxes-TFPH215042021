@@ -1,5 +1,10 @@
+<<<<<<< HEAD:src/base/config/reducers/payeeDetailsReducer.js
 import { getPayeeDetails } from '../../../app/home/actions/payeeActions';
 import initialState from '../initialState';
+=======
+import { getPayeeDetails } from './payeeActions';
+import initialState from '../../base/config/initialState';
+>>>>>>> TF_UI_PRE_SEC:src/app/home/payeeDetailsReducer.js
 
 
 const payeeDetails = (state = initialState, action) => {

@@ -55,7 +55,7 @@ class PayrollAndEmployeeTestMessages extends Component {
 }
 function mapStateToProps(state) {
   return {
-    messages: state.data.testMessages
+    messages: []
   };
 }
 function mapDispatchToProps(dispatch) {
