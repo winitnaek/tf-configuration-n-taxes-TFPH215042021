@@ -116,19 +116,7 @@ function renderPage(elem, pageid,pid) {
       document.querySelector("#" + elem)
     );
   }
-  if (pageid == "helpPage") {
-    ReactDOM.render(
-      <Provider store={store}>
-        <HelpPage />
-      </Provider>,
-      document.querySelector("#" + elem)
-    );
-  }
 }
-
-
-
-
 
 /**
  * renderTFHome

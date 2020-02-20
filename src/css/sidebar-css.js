@@ -41,7 +41,6 @@ export const Style = {
 export const buttonColStyle = { backgroundColor: "white", border: "none" }
 
 
-
 export const rowStyle = { marginTop: "10px", zIndex: "200", width: "90%" };
 
 export const linkColStyle = { padding: "0px" };

@@ -17,14 +17,13 @@ import PopulateV3StatesMockData from "../../../uitests/tempGridData/POPULATE_V3_
 import RenderHelpPage from '../../tf_index';
 
 
-const cellsrenderer = () => {
-  console.log("attempting to render edit");
-  return (
-     ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`
-  )
+// const cellsrenderer = () => {
+//   console.log("attempting to render edit");
+//   return (
+//      ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`
+//   )
 
-};
-
+// };
 
 class ReusableGrid extends React.Component {
   constructor(props) {
@@ -55,19 +54,8 @@ class ReusableGrid extends React.Component {
       isOpen: false
     };
     this.OpenHelp = () => {
-      const data = { "value": 'HP', "label": 'Help Page', "desc":'Help Page', "id":'helpPage', type:'page',link:false}
-      renderTFApplication("pageContainer", data);
-      
+      window.open("https://www.w3schools.com")
     };
-
-    this.closeModal = () => {
-      console.log("Close button clicked");
-      this.setState({
-        isOpen: false
-      });
-    };
-
-
  
   }
 
@@ -104,8 +92,6 @@ class ReusableGrid extends React.Component {
       }
 
     const source = new window.jqx.dataAdapter(dataSource);
-
-    console.log(this.state.columns);
 
     return (
       <Fragment>
