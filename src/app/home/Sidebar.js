@@ -82,6 +82,7 @@ class Sidebar extends Component {
         this.setState({
           options: [],
           favorites: [...this.state.favorites, fav],
+          selected: [...this.state.selected, fav],
           isOpen: false,
           searchLinksIsOpen: true
         });
@@ -166,7 +167,84 @@ class Sidebar extends Component {
   }
 
   render() {
+
     const Option = props => {
+      const { data } = props;
+      let isFavorite = false;
+      return (
+        <Row key={data} style={rowStyle}>
+          <Col sm="10" style={{ padding: "0px" }}>
+            <div className="mylink" style={link}>
+              <span
+                id={`jumpto-${data.value}`}
+                onClick={e => this.handleRender(data)}
+              >
+                {data.label}
+              </span>
+              <UncontrolledTooltip
+                placement="top"
+                target={`jumpto-${data.value}`}
+              >
+                Jump to {data.label}
+              </UncontrolledTooltip>
+            </div>
+          </Col>
+          <Col sm="2">
+            <span id={`markas-${data.value}`}>
+              {this.state.selected.map(item => {
+                if (item.id === data.id) {
+                  isFavorite = true;
+                }
+              })}
+  
+              {isFavorite ? (
+                <i
+                  className="fas fa-star"
+                  style={goldStar}
+                  onClick={e => this.removeFavorite(data)}
+                ></i>
+              ) : (
+                <i
+                  class="far fa-star"
+                  style={star}
+                  onClick={e => this.setFavorite(data)}
+                ></i>
+              )}
+            </span>
+            <UncontrolledTooltip
+              placement="bottom"
+              target={`markas-${data.value}`}
+            >
+              {isFavorite ? (
+                <span> Remove {data.label} from favorites </span>
+              ) : (
+                <span> Add {data.label} to favorites </span>
+              )}
+            </UncontrolledTooltip>
+          </Col>
+        </Row>
+      );
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const Option3 = props => {
       const { data } = props;
       let isFavorite = false;
       return (
