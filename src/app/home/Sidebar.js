@@ -36,6 +36,7 @@ class Sidebar extends Component {
     this.state = {
       selected: [],
       favorites:[],
+      options: [],
       collapsed: false,
       isOpen: true,
       searchLinksIsOpen: true,
@@ -77,8 +78,11 @@ class Sidebar extends Component {
       console.log(fav)
       if (!this.state.favorites.includes(fav)) {
         // this.props.saveFavoriteLinks([...this.state.selected, fav]);
+         
+
 
         this.setState({
+          options: [],
           favorites: [...this.state.favorites, fav],
           isOpen: false,
           searchLinksIsOpen: true
@@ -247,7 +251,9 @@ class Sidebar extends Component {
             </div>
           </Col>
           <Col sm="2">
-            <span id={`markas-${data.value}`} onClick={console.log(data.id)}>
+            <span id={`markas-${data.value}`} onClick={ e=> console.log(data.id)}>
+              {console.log(this.state.favorites)}
+              {console.log(this.props.options)}
               {this.state.favorites.map(item => {
                 console.log(item.id, data.id)
                 if (item.id === data.id) {
@@ -307,7 +313,7 @@ class Sidebar extends Component {
               Jump to {item.label}
             </UncontrolledTooltip>
           </Col>
-          <Col xs="2">
+          <Col sm="2">
             <span id={`remove-${item.value}`}>
               <button
                 style={buttonColStyle}
