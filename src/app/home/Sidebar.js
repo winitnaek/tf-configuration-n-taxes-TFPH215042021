@@ -35,7 +35,7 @@ class Sidebar extends Component {
     super(props);
     this.state = {
       selected: [],
-      favorites:[],
+      favorites: [],
       options: [],
       collapsed: false,
       isOpen: true,
@@ -58,28 +58,26 @@ class Sidebar extends Component {
       }
     };
 
-    this.displayLinks = () => {
-      const { options } = this.state;
+    // this.displayLinks = () => {
+    //   const { options } = this.state;
 
-      options.map(item => {
-        return <p> item.label</p>;
-      });
-    };
+    //   options.map(item => {
+    //     return <p> item.label</p>;
+    //   });
+    // };
 
-    this.displaySelected = () => {
-      const { selected } = this.state;
+    // this.displaySelected = () => {
+    //   const { selected } = this.state;
 
-      selected.map(item => {
-        return <li key={item.label}> {item.label} </li>;
-      });
-    };
+    //   selected.map(item => {
+    //     return <li key={item.label}> {item.label} </li>;
+    //   });
+    // };
 
     this.setFavorite = fav => {
-      console.log(fav)
+      console.log(fav);
       if (!this.state.favorites.includes(fav)) {
         // this.props.saveFavoriteLinks([...this.state.selected, fav]);
-         
-
 
         this.setState({
           options: [],
@@ -115,23 +113,20 @@ class Sidebar extends Component {
     this.removeFavorite = fav => {
       let favArray = [];
       console.log("I have been clicked");
-      console.log(fav)
-        this.state.favorites.map(item => {
-          console.log(item.value, fav.value)
-          if (item.value === fav.value) {
-            console.log('match found')
-            favArray = this.state.favorites.filter(el => el !== item);
-            this.setState({ favorites: favArray});
-            this.props.saveFavoriteLinks(favArray);
-          }
-        });
+      console.log(fav);
+      this.state.favorites.map(item => {
+        console.log(item.value, fav.value);
+        if (item.value === fav.value) {
+          console.log("match found");
+          favArray = this.state.favorites.filter(el => el !== item);
+          this.setState({ favorites: favArray });
+          this.props.saveFavoriteLinks(favArray);
+        }
+      });
     };
   }
 
   componentDidMount() {
-
-
-
     this.setState({
       options: this.props.options
     });
@@ -171,7 +166,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    const Option1 = props => {
+    const Option = props => {
       const { data } = props;
       let isFavorite = false;
       return (
@@ -212,7 +207,6 @@ class Sidebar extends Component {
                   style={star}
                   onClick={e => this.setFavorite(data)}
                 ></i>
-              
               )}
             </span>
             <UncontrolledTooltip
@@ -229,7 +223,8 @@ class Sidebar extends Component {
         </Row>
       );
     };
-    const Option= props => {
+    
+    const Option1 = props => {
       const { data } = props;
       let isFavorite = false;
       return (
@@ -251,17 +246,22 @@ class Sidebar extends Component {
             </div>
           </Col>
           <Col sm="2">
-            <span id={`markas-${data.value}`} onClick={ e=> console.log(data.id)}>
+            <span
+              id={`markas-${data.value}`}
+              onClick={e => console.log(data.id)}
+            >
               {console.log(this.state.favorites)}
               {console.log(this.props.options)}
               {this.state.favorites.map(item => {
-                console.log(item.id, data.id)
+                console.log(item.id, data.id);
                 if (item.id === data.id) {
                   isFavorite = true;
                 }
               })}
-
-              {isFavorite ? (
+              <span onClick={e => this.setFavorite(data)}>
+                <i class="far fa-star" style={star}></i>
+              </span>
+              {/* {isFavorite ? (
                 <span   onClick={ e => this.removeFavorite(data)}>
                 <i
                   className="fas fa-star"
@@ -277,7 +277,7 @@ class Sidebar extends Component {
                  
                 ></i>
                 </span>
-              )}
+              )} */}
             </span>
             <UncontrolledTooltip
               placement="bottom"
@@ -296,7 +296,7 @@ class Sidebar extends Component {
 
     const { selected, options, favorites } = this.state;
 
-    let displayFavorites =  favorites.sort().map(item => {
+    let displayFavorites = favorites.sort().map(item => {
       return (
         <Row key={item.label} className="selected">
           <Col sm="10" style={linkColStyle}>
@@ -315,10 +315,7 @@ class Sidebar extends Component {
           </Col>
           <Col sm="2">
             <span id={`remove-${item.value}`}>
-              <button
-                style={buttonColStyle}
-                onClick={e => this.removeFavorite(item)}
-              >
+              <button style={buttonColStyle}>
                 <i
                   className="fas fa-star"
                   style={goldStar2}
@@ -353,10 +350,7 @@ class Sidebar extends Component {
 
     displayFavorites = displayFavorites.sort(compare);
 
-   
- 
     return (
-    
       <div id="fullSideBar" style={Style}>
         <Card
           body
@@ -386,11 +380,15 @@ class Sidebar extends Component {
                 <p> None</p>
               )}
             </Col>
-            <Col xs="2" style={{marginRight: "10px"}}>
+            <Col xs="2" style={{ marginRight: "10px" }}>
               <Navbar
                 color="faded"
                 light
-                style={{ paddingTop: "0", marginRight: "25px", paddingLeft: "0" }}
+                style={{
+                  paddingTop: "0",
+                  marginRight: "25px",
+                  paddingLeft: "0"
+                }}
               >
                 <NavbarToggler
                   id="navToggler"
