@@ -35,10 +35,12 @@ export const Style = {
   left: 0,
   backgroundColor: "F2F2F2",
   overflowX: "hidden",
-  minWidth: "350px"
+  minWidth: "375px"
 };
 
 export const buttonColStyle = { backgroundColor: "white", border: "none" }
+
+
 
 export const rowStyle = { marginTop: "10px", zIndex: "200", width: "90%" };
 
