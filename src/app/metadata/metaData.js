@@ -1,3 +1,6 @@
+import {editCellsRenderer, deleteCellsRenderer} from './cellsrenderer'
+
+
 export const allBSIPlans =  {
 	"pgdef": {
 		"pgid": "allBSIPlans",
@@ -73,7 +76,7 @@ export const customPayments = {
 		"pgsubtitle":"",
 		"flowtype": "flowtype1",
 		"hasAddNew": true,
-		"addNewLabel": "Click here to add new Custom Payment. Or click on existing Custom Payment to edit.",
+		"addNewLabel": "Click here to add new Custom Payment.",
 		"actiondel": false,
 		"helpAvailable":true,
 		"helpLblTxt":"Click here for more info!",
@@ -86,7 +89,8 @@ export const customPayments = {
 		"datatype": "json",
 		"contenttype": "application/json",
 		"noResultsFoundTxt": "No Data Found",
-        "recordDelete":"false",
+		"recordEdit": true,
+        "recordDelete": true,
     
 		"columns": [
 			{
@@ -146,32 +150,14 @@ export const customPayments = {
 				"datafield": "edit",
 				"align": "center",
 				"width": "10%",
-				"cellsrenderer": function(
-				  ndex,
-				  datafield,
-				  value,
-				  defaultvalue,
-				  column,
-				  rowdata
-				) {
-				  return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
-				},
+				"cellsrenderer": editCellsRenderer
 			  },
 			  {
 				"text": "Delete",
 				"datafield": "delete",
 				"align": "center",
 				"width": "10%",
-				"cellsrenderer": function(
-				  ndex,
-				  datafield,
-				  value,
-				  defaultvalue,
-				  column,
-				  rowdata
-				) {
-				  return ` <div id='delete-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-calendar-minus  fa-1x" color="primary"/> </div>`;
-				},
+				"cellsrenderer": deleteCellsRenderer
 			  },  
 		],
 		"dataFields":[
@@ -204,7 +190,7 @@ export const customTaxCodes = {
 		"pgsubtitle":"",
 		"flowtype": "flowtype1",
 		"hasAddNew": true,
-		"addNewLabel": "Click here to add new Custom Payment. Or click on existing Custom Payment to edit.",
+		"addNewLabel": "Click here to add new Custom Tax Code.",
 		"actiondel": false,
 		"helpAvailable":true,
 		"helpLblTxt":"Click here for more info!",
@@ -246,32 +232,14 @@ export const customTaxCodes = {
 				"datafield": "edit",
 				"align": "center",
 				"width": "10%",
-				"cellsrenderer": function(
-				  ndex,
-				  datafield,
-				  value,
-				  defaultvalue,
-				  column,
-				  rowdata
-				) {
-				  return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
-				},
+				"cellsrenderer": editCellsRenderer
 			  },
 			  {
 				"text": "Delete",
 				"datafield": "delete",
 				"align": "center",
 				"width": "10%",
-				"cellsrenderer": function(
-				  ndex,
-				  datafield,
-				  value,
-				  defaultvalue,
-				  column,
-				  rowdata
-				) {
-				  return ` <div id='delete-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-calendar-minus  fa-1x" color="primary"/> </div>`;
-				},
+				"cellsrenderer": deleteCellsRenderer
 			  },
 			  
              
@@ -356,3 +324,4 @@ export const  populateV3States = {
 	},
 	"cruddef": ""
 }
+
