@@ -15,6 +15,7 @@ import TFUtils from './base/utils/tfUtils';
 import {setModuleAreas} from './app/home/moduleLinksActions';
 import ReusableGrid from "./app/components/ReusableGrid";
 import UserDataQueries from "./app/components/UserDataQueries";
+import HelpPage from './app/home/HelpPage';
 import {metadatamap} from './base/constants/TFTools';
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
@@ -115,7 +116,20 @@ function renderPage(elem, pageid,pid) {
       document.querySelector("#" + elem)
     );
   }
+  if (pageid == "helpPage") {
+    ReactDOM.render(
+      <Provider store={store}>
+        <HelpPage />
+      </Provider>,
+      document.querySelector("#" + elem)
+    );
+  }
 }
+
+
+
+
+
 /**
  * renderTFHome
  * @param {*} elem

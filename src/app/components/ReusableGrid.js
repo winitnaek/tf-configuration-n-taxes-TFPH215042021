@@ -14,6 +14,7 @@ import CustomPaymentsMockData from "../../../uitests/tempGridData/CUSTOM_PAYMENT
 import CustomTaxPaymentMockData from "../../../uitests/tempGridData/CUSTOM_TAX_PAYMENT_MOCKDATA.json";
 import AllBsiPlansMockData from "../../../uitests/tempGridData/ALL_BSI_PLANS_MOCKDATA.json";
 import PopulateV3StatesMockData from "../../../uitests/tempGridData/POPULATE_V3_STATES_MOCKDATA.json";
+import RenderHelpPage from '../../tf_index';
 
 
 const cellsrenderer = () => {
@@ -46,16 +47,17 @@ class ReusableGrid extends React.Component {
       dataFields: metadata.griddef.dataFields,
       title: metadata.pgdef.pgtitle,
       addNewLabel: metadata.pgdef.addNewLabel,
-      recordEdit: true, // metadata.griddef.recordEdit,
+      recordEdit:  metadata.griddef.recordEdit,
       recordDelete: metadata.griddef.recordDelete,
       hasAddNew: metadata.pgdef.hasAddNew,
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
       isOpen: false
     };
-    this.OpenModal = () => {
-      console.log("Attempting to open Modal");
-      this.setState({ isOpen: true });
+    this.OpenHelp = () => {
+      const data = { "value": 'HP', "label": 'Help Page', "desc":'Help Page', "id":'helpPage', type:'page',link:false}
+      renderTFApplication("pageContainer", data);
+      
     };
 
     this.closeModal = () => {
@@ -65,82 +67,13 @@ class ReusableGrid extends React.Component {
       });
     };
 
-    this.renderEdit = () => {
-      console.log("attempting to render edit");
-      return ( "Edit"
-        //  ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`
-      )
 
-    };
+ 
   }
 
   componentDidMount() {
     // Make Api call here to get database on pgid
-
-    const recordEdit = this.state.recordEdit;
-
-    // this.setState({
-    //   columns: [
-    //     ...this.state.columns,
-    //     {
-    //       text: "Edit",
-    //       datafield: "edit",
-    //       align: "center",
-    //       width: "10%",
-    //       cellsrenderer: function(
-    //         ndex,
-    //         datafield,
-    //         value,
-    //         defaultvalue,
-    //         column,
-    //         rowdata
-    //       ) {
-    //         return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
-    //       },
-    //     }
-    //   ],
-
-    //  dataSource: {
-    //     datafields: this.state.dataFields,
-    //     aysnc: false,
-    //     datatype: "json",
-    //     localdata: mockData
-    //   }, 
-    
-
-
-
-    // });
-
-
-
-    // if (this.state.recordEdit) {
-    //   console.log("yes")
-    //   this.setState({
-    //     recordEdit: [...this.state.recordEdit,
-    //       {
-    //         text: "Edit",
-    //         datafield: "edit",
-    //         align: "center",
-    //         width: "10%",
-    //         cellsrender: function(
-    //           ndex,
-    //           datafield,
-    //           value,
-    //           defaultvalue,
-    //           column,
-    //           rowdata
-    //         ) {
-    //           return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
-    //         }
-    //       }
-    //     ],
-    //      dataFields: [...this.state.dataFields,   {"name": "edit", "type": "string"} ]
-    //   });
-
-    // }
-
-    // console.log(this.state.columns);
+  
   }
 
   render() {
@@ -162,8 +95,6 @@ class ReusableGrid extends React.Component {
       default:
         break;
     }
-
-  
 
        const dataSource = {
         datafields: this.state.dataFields,
@@ -190,11 +121,9 @@ class ReusableGrid extends React.Component {
           <span style={{ marginLeft: "10px" }}>
             <span id="help">
               <span>
-                {" "}
-                {/* add onclick to open modal for help */}
                 <i
                   className="fas fa-question-circle  fa-1.5x"
-                  onClick={this.OpenModal}
+                  onClick={this.OpenHelp}
                 />
               </span>
             </span>
@@ -203,7 +132,6 @@ class ReusableGrid extends React.Component {
             </UncontrolledTooltip>
           </span>
         </Row>
-        <Row>{/* <p> {this.state.addNewLabel} </p> */}</Row>
         <Row style={{ marginTop: "10px" }}>
           <Col sm="11"></Col>
           <Col sm="1" style={{ paddingRight: 0 }}>
@@ -219,7 +147,6 @@ class ReusableGrid extends React.Component {
                 </UncontrolledTooltip>
               </span>
             )}
-
             <span style={{ marginLeft: "5px" }}>
               <span id="delAll">
                 {this.state.actiondel ? (
@@ -241,7 +168,6 @@ class ReusableGrid extends React.Component {
                 </UncontrolledTooltip>
               )}
             </span>
-            {/* )} */}
           </Col>
           <Grid
             altrows={true}
@@ -251,29 +177,8 @@ class ReusableGrid extends React.Component {
             pageable={true}
             autoheight={true}
             style={{ color: "black", marginTop: "10px" }}
-            // selectionmode={"singlecell"}
           />
         </Row>
-        <Modal isOpen={this.state.isOpen} toggle={this.closeModal}>
-          <ModalHeader toggle={this.closeModal}>
-            {" "}
-            {this.state.title} Help{" "}
-          </ModalHeader>
-          <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.closeModal}>
-              Close
-            </Button>
-          </ModalFooter>
-        </Modal>
       </Fragment>
     );
   }

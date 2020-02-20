@@ -27,10 +27,7 @@ import {
   Navbar,
   NavbarToggler
 } from "reactstrap";
-
 import Select, { components } from "react-select";
-
-
 
 
 class Sidebar extends Component {
@@ -61,27 +58,9 @@ class Sidebar extends Component {
       }
     };
 
-    // this.displayLinks = () => {
-    //   const { options } = this.state;
-
-    //   options.map(item => {
-    //     return <p> item.label</p>;
-    //   });
-    // };
-
-    // this.displaySelected = () => {
-    //   const { selected } = this.state;
-
-    //   selected.map(item => {
-    //     return <li key={item.label}> {item.label} </li>;
-    //   });
-    // };
-
     this.setFavorite = fav => {
       console.log(fav);
       if (!this.state.favorites.includes(fav)) {
-        // this.props.saveFavoriteLinks([...this.state.selected, fav]);
-
         this.setState({
           options: [],
           favorites: [...this.state.favorites, fav],
@@ -99,6 +78,7 @@ class Sidebar extends Component {
     };
 
     this.handleRender = data => {
+    console.log(data)
       this.setState({
         isOpen: !this.state.isOpen,
         collapsed: !this.state.collapsed
@@ -170,120 +150,6 @@ class Sidebar extends Component {
   }
 
   render() {
-
-    const Option4 = props => {
-      const { data } = props;
-      console.log(data)
-      let isFavorite = false;
-      return (
-        <Row key={data.label} className="selected">
-          <Col sm="10" style={linkColStyle}>
-            <span
-              id={`jumpto-${data.id}`}
-              onClick={e => this.handleRender(data)}
-            >
-              {data.label}
-            </span>
-            <UncontrolledTooltip
-              placement="top"
-              target={`jumpto-${data.value}`}
-            >
-              Jump to {item.label}
-            </UncontrolledTooltip>
-          </Col>
-          <Col sm="2">
-            <span id={`remove-${item.value}`}>
-              <button style={buttonColStyle}>
-                <i
-                  className="fas fa-star"
-                  style={goldStar2}
-                  onClick={e => this.removeFavorite(item)}
-                ></i>
-              </button>
-            </span>
-            <UncontrolledTooltip
-              placement="top"
-              target={`remove-${item.value}`}
-            >
-              Remove {item.label}
-            </UncontrolledTooltip>
-          </Col>
-        </Row>
-
-
-
-
-        // <Row key={data} style={rowStyle}>
-        //   <Col sm="10" style={{ padding: "0px" }}>
-        //     <div className="mylink" style={link}>
-        //       <span
-        //         id={`jumpto-${data.value}`}
-        //         onClick={e => this.handleRender(data.link)}
-        //       >
-        //         {data.label}
-        //       </span>
-        //       <UncontrolledTooltip
-        //         placement="top"
-        //         target={`jumpto-${data.value}`}
-        //       >
-        //         Jump to {data.label}
-        //       </UncontrolledTooltip>
-        //     </div>
-        //   </Col>
-        //   <Col sm="2">
-        //     <span id={`markas-${data.value}`}>
-        //       {this.state.selected.map(item => {
-        //         if (item.value === data.value) {
-        //           isFavorite = true;
-        //         }
-        //       })}
-
-        //       {isFavorite ? (
-        //         <i
-        //           className="fas fa-star"
-        //           style={goldStar}
-        //           onClick={e => this.removeFavorite(data)}
-        //         ></i>
-        //       ) : (
-        //         <i
-        //           class="far fa-star"
-        //           style={star}
-        //           onClick={e => this.setFavorite(data)}
-        //         ></i>
-        //       )}
-        //     </span>
-        //     <UncontrolledTooltip
-        //       placement="bottom"
-        //       target={`markas-${data.value}`}
-        //     >
-        //       {isFavorite ? (
-        //         <span> Remove {data.label} from favorites </span>
-        //       ) : (
-        //         <span> Add {data.label} to favorites </span>
-        //       )}
-        //     </UncontrolledTooltip>
-        //   </Col>
-        // </Row>
-      );
-    };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const Option = props => {
       const { data } = props;
       let isFavorite = false;
@@ -318,7 +184,6 @@ class Sidebar extends Component {
                 <i
                   className="fas fa-star"
                   style={goldStar}
-                  // onClick={e => this.removeFavorite(data)}
                 ></i>
                 </button>
               ) : (
@@ -326,7 +191,6 @@ class Sidebar extends Component {
                 <i
                   class="far fa-star"
                   style={star}
-                  // onClick={e => this.setFavorite(data)}
                 ></i>
                 </button>
               )}
@@ -345,76 +209,7 @@ class Sidebar extends Component {
         </Row>
       );
     };
-    
-    const Option1 = props => {
-      const { data } = props;
-      let isFavorite = false;
-      return (
-        <Row key={data} style={rowStyle}>
-          <Col sm="10" style={{ padding: "0px" }}>
-            <div className="mylink" style={link}>
-              <span
-                id={`jumpto-${data.value}`}
-                onClick={e => this.handleRender(data)}
-              >
-                {data.label}
-              </span>
-              <UncontrolledTooltip
-                placement="top"
-                target={`jumpto-${data.value}`}
-              >
-                Jump to {data.label}
-              </UncontrolledTooltip>
-            </div>
-          </Col>
-          <Col sm="2">
-            <span
-              id={`markas-${data.value}`}
-              onClick={e => console.log(data.id)}
-            >
-              {console.log(this.state.favorites)}
-              {console.log(this.props.options)}
-              {this.state.favorites.map(item => {
-                console.log(item.id, data.id);
-                if (item.id === data.id) {
-                  isFavorite = true;
-                }
-              })}
-              <span onClick={e => this.setFavorite(data)}>
-                <i class="far fa-star" style={star}></i>
-              </span>
-              {/* {isFavorite ? (
-                <span   onClick={ e => this.removeFavorite(data)}>
-                <i
-                  className="fas fa-star"
-                  style={goldStar}
-                
-                ></i>
-                </span>
-              ) : (
-                <span  onClick={ e => this.setFavorite(data)}>
-                <i
-                  class="far fa-star"
-                  style={star}
-                 
-                ></i>
-                </span>
-              )} */}
-            </span>
-            <UncontrolledTooltip
-              placement="bottom"
-              target={`markas-${data.value}`}
-            >
-              {isFavorite ? (
-                <span> Remove {data.label} from favorites </span>
-              ) : (
-                <span> Add {data.label} to favorites </span>
-              )}
-            </UncontrolledTooltip>
-          </Col>
-        </Row>
-      );
-    };
+   
 
     const { selected, options, favorites } = this.state;
 
@@ -481,7 +276,6 @@ class Sidebar extends Component {
         >
           <Row>
             <Col sm="9" style={CardStyle} id="mySidebar" className="sidebar">
-              {/* <Collapse isOpen={!this.state.collapsed} > */}
               <Select
                 singleValue
                 isSearchable
@@ -515,7 +309,7 @@ class Sidebar extends Component {
                 <NavbarToggler
                   id="navToggler"
                   style={{ color: "black", fontSize: "1rem" }}
-                  onClick={e => this.openNav() /*this.toggleNavbar */}
+                  onClick={e => this.openNav() }
                   className="mr-2"
                 />
               </Navbar>
