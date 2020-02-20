@@ -35,15 +35,7 @@ class Sidebar extends Component {
     super(props);
     this.state = {
       selected: [],
-      favorites:[
-        {value: "UQ",
-        label: "All BSI Plans",
-        desc: "All BSI Plans",
-        id: "allBSIPlans",
-        type: "comp",
-        link: false,
-      }
-      ],
+      favorites:[],
       collapsed: false,
       isOpen: true,
       searchLinksIsOpen: true,
@@ -133,8 +125,10 @@ class Sidebar extends Component {
   }
 
   componentDidMount() {
+
+
+
     this.setState({
-      selected: this.props.favorites,
       options: this.props.options
     });
   }
@@ -173,7 +167,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    const Option = props => {
+    const Option1 = props => {
       const { data } = props;
       let isFavorite = false;
       return (
@@ -196,8 +190,8 @@ class Sidebar extends Component {
           </Col>
           <Col sm="2">
             <span id={`markas-${data.value}`}>
-              {this.props.options.map(item => {
-                if (item.value === data.value) {
+              {this.state.favorites.map(item => {
+                if (item.id === data.id) {
                   isFavorite = true;
                 }
               })}
@@ -214,6 +208,7 @@ class Sidebar extends Component {
                   style={star}
                   onClick={e => this.setFavorite(data)}
                 ></i>
+              
               )}
             </span>
             <UncontrolledTooltip
@@ -230,9 +225,8 @@ class Sidebar extends Component {
         </Row>
       );
     };
-    const Option1 = props => {
+    const Option= props => {
       const { data } = props;
-      console.log(data)
       let isFavorite = false;
       return (
         <Row key={data} style={rowStyle}>
@@ -240,7 +234,7 @@ class Sidebar extends Component {
             <div className="mylink" style={link}>
               <span
                 id={`jumpto-${data.value}`}
-                onClick={e => this.handleRender(data.link)}
+                onClick={e => this.handleRender(data)}
               >
                 {data.label}
               </span>
@@ -253,25 +247,30 @@ class Sidebar extends Component {
             </div>
           </Col>
           <Col sm="2">
-            <span id={`markas-${data.value}`}>
-              {this.state.selected.map(item => {
-                if (item.value === data.value) {
+            <span id={`markas-${data.value}`} onClick={console.log(data.id)}>
+              {this.state.favorites.map(item => {
+                console.log(item.id, data.id)
+                if (item.id === data.id) {
                   isFavorite = true;
                 }
               })}
 
               {isFavorite ? (
+                <span   onClick={ e => this.removeFavorite(data)}>
                 <i
                   className="fas fa-star"
                   style={goldStar}
-                  onClick={e => this.removeFavorite(data)}
+                
                 ></i>
+                </span>
               ) : (
+                <span  onClick={ e => this.setFavorite(data)}>
                 <i
                   class="far fa-star"
                   style={star}
-                  onClick={e => this.setFavorite(data)}
+                 
                 ></i>
+                </span>
               )}
             </span>
             <UncontrolledTooltip
@@ -294,7 +293,7 @@ class Sidebar extends Component {
     let displayFavorites =  favorites.sort().map(item => {
       return (
         <Row key={item.label} className="selected">
-          <Col sm="6" style={linkColStyle}>
+          <Col sm="10" style={linkColStyle}>
             <span
               id={`jumpto-${item.value}`}
               onClick={e => this.handleRender(item)}
@@ -349,7 +348,7 @@ class Sidebar extends Component {
     displayFavorites = displayFavorites.sort(compare);
 
    
-    console.log(this.state.favorites)
+ 
     return (
     
       <div id="fullSideBar" style={Style}>
