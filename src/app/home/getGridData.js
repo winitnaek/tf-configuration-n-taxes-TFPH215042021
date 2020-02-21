@@ -1,7 +1,7 @@
 
 import {fetchGridDataPending, fetchGridDataSuccess, fetchGridDataError} from './gridDataActions';
 
-const url =  " '../../../../uitests/tempGridData/CUSTOM_PAYMENTS_MOCKDTA.json'"          //`http://localhost:8000/api/getGridData/`
+const url =  `http://localhost:8000/api/getGridData/`
 
 export function fetchGridData() {
     return dispatch => {

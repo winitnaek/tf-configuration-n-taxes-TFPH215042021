@@ -8,7 +8,7 @@ import { Col, Container, Button } from "reactstrap";
 import Welcome from "./Welcome";
 let store = configureStore();
 import { fetchLinks } from "./getLinks";
-import { fetchGridData } from "./getGridData";
+
 
 import { setModuleLinks } from "./moduleLinksActions";
 import Sidebar from './Sidebar';
@@ -18,7 +18,8 @@ class TFHome extends Component {
     this.state = {
       isOpen: false,
       dropdownOpen: true,
-      sideDrawerOpen: true
+      sideDrawerOpen: true,
+      getGridData: this.props.fetchGridData
     };
     this.drawerToggleClickHandler = () => {
       this.setState({
@@ -27,15 +28,8 @@ class TFHome extends Component {
     };
   }
 
-  componentDidMount() {
-    
-  }
 
   handleLink(data) {
-    console.log(data)
-    // need to change to below action call to pass the grid data needed
-    this.props.fetchGridData()
-
     renderTFApplication("pageContainer", data);
   }
 
@@ -77,12 +71,13 @@ class TFHome extends Component {
 }
 function mapStateToProps(state) {
   return {
-    options: state.moduleAreas.areas
+    options: state.moduleAreas.areas,
+    data: state.gridData.data
   }
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchLinks: fetchLinks, setModuleLinks, fetchGridData: fetchGridData},dispatch
+    { fetchLinks: fetchLinks, setModuleLinks},dispatch
   );
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TFHome);

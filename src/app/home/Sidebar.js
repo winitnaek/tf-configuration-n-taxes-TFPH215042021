@@ -59,7 +59,6 @@ class Sidebar extends Component {
     };
 
     this.setFavorite = fav => {
-      console.log(fav);
       if (!this.state.favorites.includes(fav)) {
         this.setState({
           options: [],
@@ -78,7 +77,6 @@ class Sidebar extends Component {
     };
 
     this.handleRender = data => {
-    console.log(data)
       this.setState({
         isOpen: !this.state.isOpen,
         collapsed: !this.state.collapsed
@@ -87,7 +85,6 @@ class Sidebar extends Component {
     };
 
     this.toggle = () => {
-      console.log("hello");
       this.setState({
         isOpen: !this.state.isOpen,
         searchLinksIsOpen: !this.state.searchLinksIsOpen
@@ -96,12 +93,8 @@ class Sidebar extends Component {
 
     this.removeFavorite = fav => {
       let favArray = [];
-      console.log("I have been clicked");
-      console.log(fav);
       this.state.favorites.map(item => {
-        console.log(item.value, fav.value);
         if (item.value === fav.value) {
-          console.log("match found");
           favArray = this.state.favorites.filter(el => el !== item);
           this.setState({ favorites: favArray });
           this.props.saveFavoriteLinks(favArray);
@@ -328,7 +321,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { getFavoriteLinks, saveFavoriteLinks, setModuleLinks },
+    { getFavoriteLinks, saveFavoriteLinks, setModuleLinks},
     dispatch
   );
 }

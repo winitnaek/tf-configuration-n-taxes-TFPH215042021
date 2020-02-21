@@ -1,4 +1,8 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
+
+
+
 import {
   Col,
   Row,
@@ -14,16 +18,9 @@ import CustomPaymentsMockData from "../../../uitests/tempGridData/CUSTOM_PAYMENT
 import CustomTaxPaymentMockData from "../../../uitests/tempGridData/CUSTOM_TAX_PAYMENT_MOCKDATA.json";
 import AllBsiPlansMockData from "../../../uitests/tempGridData/ALL_BSI_PLANS_MOCKDATA.json";
 import PopulateV3StatesMockData from "../../../uitests/tempGridData/POPULATE_V3_STATES_MOCKDATA.json";
-import RenderHelpPage from '../../tf_index';
+import RenderHelpPage from "../../tf_index";
 
 
-// const cellsrenderer = () => {
-//   console.log("attempting to render edit");
-//   return (
-//      ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log('hello')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`
-//   )
-
-// };
 
 class ReusableGrid extends React.Component {
   constructor(props) {
@@ -46,52 +43,51 @@ class ReusableGrid extends React.Component {
       dataFields: metadata.griddef.dataFields,
       title: metadata.pgdef.pgtitle,
       addNewLabel: metadata.pgdef.addNewLabel,
-      recordEdit:  metadata.griddef.recordEdit,
+      recordEdit: metadata.griddef.recordEdit,
       recordDelete: metadata.griddef.recordDelete,
       hasAddNew: metadata.pgdef.hasAddNew,
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
-      isOpen: false
+      isOpen: false,
+      mockData: [],
+      dataSource: {}
     };
     this.OpenHelp = () => {
-      window.open("https://www.w3schools.com")
+      window.open("https://www.w3schools.com");
     };
- 
   }
 
-  componentDidMount() {
-    // Make Api call here to get database on pgid
-  
-  }
 
   render() {
-    // This all will be refactored into componentdidmount to make api call to get data
-    let mockData;
-    switch (this.state.pgdef.pgid) {
-      case "allBSIPlans":
-        mockData = AllBsiPlansMockData;
-        break;
-      case "customPayments":
-        mockData = CustomPaymentsMockData;
-        break;
-      case "customTaxCodes":
-        mockData = CustomTaxPaymentMockData;
-        break;
-      case "populateV3States":
-        mockData = PopulateV3StatesMockData;
-        break;
-      default:
-        break;
-    }
+   
+    let GridDataUrl =  `http://localhost:8000/api/getGridData/${this.state.pgdef.pgid}`  
+    // switch (this.state.pgdef.pgid) {
+    //   case "allBSIPlans":
+    //     mockData = AllBsiPlansMockData;
+    //     break;
+    //   case "customPayments":
+    //     GridDataUrl = `http://localhost:8000/api/getGridData/${this.state.pgdef.pgid}`   
+    //     break;
+    //   case "customTaxCodes":
+    //     mockData = CustomTaxPaymentMockData;
+    //     break;
+    //   case "populateV3States":
+    //     mockData = PopulateV3StatesMockData;
+    //     break;
+    //   default:
+    //     break;
+    // }
 
-       const dataSource = {
-        datafields: this.state.dataFields,
-        aysnc: false,
-        datatype: "json",
-        localdata: mockData
-      }
+    const dataSource = {
+      datafields: this.state.dataFields,
+      aysnc: false,
+      datatype: "json",
+      url: GridDataUrl    
+      
+    };
+    //localdata: this.props.mockData //mockData
 
-    const source = new window.jqx.dataAdapter(dataSource);
+     const source = new window.jqx.dataAdapter(dataSource);
 
     return (
       <Fragment>
