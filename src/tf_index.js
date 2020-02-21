@@ -133,7 +133,6 @@ function renderNewPage(page){
 
 
 function renderTFHome(elem) {
-  console.log(elem);
   ReactDOM.render(
     <Provider store={store}>
       <TFHome />

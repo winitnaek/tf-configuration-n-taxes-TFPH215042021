@@ -14,11 +14,7 @@ import {
   Button
 } from "reactstrap";
 import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
-import CustomPaymentsMockData from "../../../uitests/tempGridData/CUSTOM_PAYMENTS_MOCKDATA.json";
-import CustomTaxPaymentMockData from "../../../uitests/tempGridData/CUSTOM_TAX_PAYMENT_MOCKDATA.json";
-import AllBsiPlansMockData from "../../../uitests/tempGridData/ALL_BSI_PLANS_MOCKDATA.json";
-import PopulateV3StatesMockData from "../../../uitests/tempGridData/POPULATE_V3_STATES_MOCKDATA.json";
-import RenderHelpPage from "../../tf_index";
+
 
 
 
@@ -35,7 +31,7 @@ class ReusableGrid extends React.Component {
     console.log("permissions>>>>");
 
     this.state = {
-      value: "",
+      value: "", 
       pgdef: metadata.pgdef,
       griddef: metadata.griddef,
       cruddef: metadata.cruddef,
