@@ -1,8 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 
-
-
 import {
   Col,
   Row,
@@ -15,9 +13,6 @@ import {
 } from "reactstrap";
 import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
 
-
-
-
 class ReusableGrid extends React.Component {
   constructor(props) {
     super(props);
@@ -27,11 +22,12 @@ class ReusableGrid extends React.Component {
     console.log("metadata>>>>");
     console.log("permissions>>>>");
     let permissions = this.props.permissions(this.props.pid);
+
     console.log(permissions);
     console.log("permissions>>>>");
 
     this.state = {
-      value: "", 
+      value: "",
       pgdef: metadata.pgdef,
       griddef: metadata.griddef,
       cruddef: metadata.cruddef,
@@ -48,27 +44,30 @@ class ReusableGrid extends React.Component {
       mockData: [],
       dataSource: {}
     };
+
     this.OpenHelp = () => {
       window.open("https://www.w3schools.com");
     };
   }
 
+  componentDidMount() {
+    console.log(this.state.columns);
+  }
 
   render() {
-   
     let gridDataUrl;
     switch (this.state.pgdef.pgid) {
       case "allBSIPlans":
-        gridDataUrl = "./tempGridData/ALL_BSI_PLANS_MOCKDATA.json"
+        gridDataUrl = "./tempGridData/ALL_BSI_PLANS_MOCKDATA.json";
         break;
       case "customPayments":
-        gridDataUrl = "./tempGridData/CUSTOM_PAYMENTS_MOCKDATA.json"   
+        gridDataUrl = "./tempGridData/CUSTOM_PAYMENTS_MOCKDATA.json";
         break;
       case "customTaxCodes":
-        gridDataUrl =  "./tempGridData/CUSTOM_TAX_PAYMENT_MOCKDATA.json"  
+        gridDataUrl = "./tempGridData/CUSTOM_TAX_PAYMENT_MOCKDATA.json";
         break;
       case "populateV3States":
-        gridDataUrl =  "./tempGridData/POPULATE_V3_STATES_MOCKDATA.json"  
+        gridDataUrl = "./tempGridData/POPULATE_V3_STATES_MOCKDATA.json";
         break;
       default:
         break;
@@ -78,10 +77,26 @@ class ReusableGrid extends React.Component {
       datafields: this.state.dataFields,
       aysnc: false,
       datatype: "json",
-      url:  gridDataUrl
+      url: gridDataUrl
     };
- 
-     const source = new window.jqx.dataAdapter(dataSource);
+
+    const source = new window.jqx.dataAdapter(dataSource);
+
+    // Check to see if permissions allow for edit & delete.  If no, then remove column
+    let permissions = this.props.permissions(this.props.pid);
+    const { columns } = this.state;
+    let newColumns = columns
+    if (!permissions.AUDIT) {
+       newColumns = newColumns.filter(item => {
+        return item.text !== "Edit";
+      });
+    }
+
+    if (!permissions.DELETE) {
+       newColumns = newColumns.filter(item => {
+        return item.text !== "Delete";
+      });
+    }
 
     return (
       <Fragment>
@@ -146,13 +161,13 @@ class ReusableGrid extends React.Component {
             </span>
           </Col>
           <Grid
+          width="100%"
             altrows={true}
-            width="100%"
             source={source}
-            columns={this.state.columns}
+            columns={newColumns}
             pageable={true}
             autoheight={true}
-            style={{ color: "black", marginTop: "10px" }}
+            style={{ color: "black", marginTop: "10px"}}
           />
         </Row>
       </Fragment>
