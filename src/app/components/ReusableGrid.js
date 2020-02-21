@@ -60,33 +60,31 @@ class ReusableGrid extends React.Component {
 
   render() {
    
-    let GridDataUrl =  `http://localhost:8000/api/getGridData/${this.state.pgdef.pgid}`  
-    // switch (this.state.pgdef.pgid) {
-    //   case "allBSIPlans":
-    //     mockData = AllBsiPlansMockData;
-    //     break;
-    //   case "customPayments":
-    //     GridDataUrl = `http://localhost:8000/api/getGridData/${this.state.pgdef.pgid}`   
-    //     break;
-    //   case "customTaxCodes":
-    //     mockData = CustomTaxPaymentMockData;
-    //     break;
-    //   case "populateV3States":
-    //     mockData = PopulateV3StatesMockData;
-    //     break;
-    //   default:
-    //     break;
-    // }
+    let gridDataUrl;
+    switch (this.state.pgdef.pgid) {
+      case "allBSIPlans":
+        gridDataUrl = "./tempGridData/ALL_BSI_PLANS_MOCKDATA.json"
+        break;
+      case "customPayments":
+        gridDataUrl = "./tempGridData/CUSTOM_PAYMENTS_MOCKDATA.json"   
+        break;
+      case "customTaxCodes":
+        gridDataUrl =  "./tempGridData/CUSTOM_TAX_PAYMENT_MOCKDATA.json"  
+        break;
+      case "populateV3States":
+        gridDataUrl =  "./tempGridData/POPULATE_V3_STATES_MOCKDATA.json"  
+        break;
+      default:
+        break;
+    }
 
     const dataSource = {
       datafields: this.state.dataFields,
       aysnc: false,
       datatype: "json",
-      url: GridDataUrl    
-      
+      url:  gridDataUrl
     };
-    //localdata: this.props.mockData //mockData
-
+ 
      const source = new window.jqx.dataAdapter(dataSource);
 
     return (
