@@ -1,5 +1,5 @@
-import React from "react";
-import { Col, Row, Button } from "reactstrap";
+import React, { Fragment } from "react";
+import { Col, Row, Button,UncontrolledTooltip, } from "reactstrap";
 import {tftools} from '../../base/constants/TFTools';
 const allBSIPlans = "allBSIPlans";
 const populateV3States = "populateV3States";
@@ -9,7 +9,13 @@ class UserDataQueries extends React.Component {
     console.log("metadata>>>>");
     console.log(this.props.metadata);
     this.state = {
-      value: ""
+      value: "",
+      helpLabel: 'Click here for more info',
+      title:'User Data Queries',
+      isOpen: false
+    };
+    this.OpenHelp = () => {
+      window.open("https://www.w3schools.com")
     };
   }
   renderMe(pgid) {
@@ -18,6 +24,30 @@ class UserDataQueries extends React.Component {
   }
   render() {
     return (
+      <Fragment>
+      <Row>
+          <h1
+            style={{
+              fontWeight: "bold",
+              fontSize: "1.5em"
+            }}
+          >
+            {this.state.title}
+          </h1>
+          <span style={{ marginLeft: "10px" }}>
+            <span id="help">
+              <span>
+                <i
+                  className="fas fa-question-circle  fa-1.5x"
+                  onClick={this.OpenHelp}
+                />
+              </span>
+            </span>
+            <UncontrolledTooltip placement="right" target="help">
+              <span> {this.state.helpLabel} </span>
+            </UncontrolledTooltip>
+          </span>
+        </Row>
       <Row>
         <Col>
           <h3>
@@ -34,6 +64,7 @@ class UserDataQueries extends React.Component {
           </h3>
         </Col>
       </Row>
+      </Fragment>
     );
   }
 }
