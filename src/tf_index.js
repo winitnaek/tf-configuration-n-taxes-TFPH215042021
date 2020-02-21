@@ -120,7 +120,6 @@ function renderPage(elem, pageid,pid) {
 
 /**
  * renderTFHome
- * @param {*} elem
  */
 
 function renderNewPage(page){
