@@ -8,6 +8,8 @@ import { Col, Container, Button } from "reactstrap";
 import Welcome from "./Welcome";
 let store = configureStore();
 import { fetchLinks } from "./getLinks";
+import { fetchGridData } from "./getGridData";
+
 import { setModuleLinks } from "./moduleLinksActions";
 import Sidebar from './Sidebar';
 class TFHome extends Component {
@@ -31,6 +33,9 @@ class TFHome extends Component {
 
   handleLink(data) {
     console.log(data)
+    // need to change to below action call to pass the grid data needed
+    this.props.fetchGridData()
+
     renderTFApplication("pageContainer", data);
   }
 
@@ -77,7 +82,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchLinks: fetchLinks, setModuleLinks },dispatch
+    { fetchLinks: fetchLinks, setModuleLinks, fetchGridData: fetchGridData},dispatch
   );
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TFHome);
