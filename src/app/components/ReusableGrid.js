@@ -84,7 +84,7 @@ class ReusableGrid extends React.Component {
     let permissions = this.props.permissions(this.props.pid);
     const { columns } = this.state;
     let newColumns = columns
-    if (!permissions.AUDIT) {
+    if (!permissions.SAVE) {
        newColumns = newColumns.filter(item => {
         return item.text !== "Edit";
       });
