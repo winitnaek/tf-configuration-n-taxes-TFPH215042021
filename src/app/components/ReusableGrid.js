@@ -179,7 +179,7 @@ class ReusableGrid extends React.Component {
           />
         </Row>
         <Modal isOpen={this.state.isOpen}>
-
+                <CustomPaymentsForm/>
              Test   
         </Modal>
       </Fragment>

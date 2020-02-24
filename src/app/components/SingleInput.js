@@ -9,7 +9,7 @@ const SingleInput = (props) => (
 			name={props.name}
 			type={props.inputType}
 			value={props.value}
-			onChange={props.handleOnChange}
+			onChange={props.onChange}
 			onBlur={props.blurFunc}
 			onFocus={props.focusFunc}
 			placeholder={props.placeholder}

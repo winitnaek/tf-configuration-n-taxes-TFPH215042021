@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Select from './Select';
 import Input from './SingleInput';
 import { Form, FormGroup, Button,
@@ -6,7 +6,10 @@ import { Form, FormGroup, Button,
     
 
     class CustomPaymentsForm extends Component {
-        state = {
+        constructor(props) {
+            super(props);
+    
+        this.state = {
             customePaymentCode: "",
             customPaymentName: "",
             paymentType: "",
@@ -14,13 +17,13 @@ import { Form, FormGroup, Button,
             eeMax: "",
             aggStatus: "",
           }
+        }
 
-
-          handleChange = () => {
+          handleChange ()  {
 
           }
 
-          handleSubmit = () => {
+          handleSubmit ()  {
 
 
 
@@ -34,9 +37,9 @@ import { Form, FormGroup, Button,
 				<Form onSubmit={this.handleFormSubmit}>
                     <Input
                     inputType={'text'}
-                    title={'Title for SingleInput field:'}
+                    title={'Code *'}
                     name={'textInput'}
-                    changeFunc={this.handleTextInputChange}
+                    onChange={this.handleTextInputChange}
                     value={this.state.textInput}
                     placeholder={''}
                      valid={this.state.textInputValid}
@@ -46,8 +49,6 @@ import { Form, FormGroup, Button,
 
                     </Form>
                     </Container>
-
-
 
               );
         }
