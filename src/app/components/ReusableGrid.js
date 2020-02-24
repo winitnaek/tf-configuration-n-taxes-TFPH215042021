@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
+import CustomPaymentsForm from "./CustomPaymentsForm"
 
 import {
   Col,
@@ -60,12 +61,18 @@ class ReusableGrid extends React.Component {
 
 
   componentDidMount() {
-    console.log(this.state.columns);
+
     
   }
 
   handleClick  (e)  {
     console.log(e.target)
+  }
+
+  handleNewForm (e) {
+    e.preventDefault()
+    console.log("Opening new form");
+    this.setState({ isOpen: true  });
   }
 
   render() {
@@ -143,7 +150,7 @@ class ReusableGrid extends React.Component {
             {this.state.hasAddNew && (
               <span style={{ marginLeft: "10px" }}>
                 <span id="addNew">
-                  <a href="" onClick="">
+                  <a href="" onClick={e=> this.handleNewForm(e)}>
                     <i className="fas fa-calendar-plus  fa-2x" />
                   </a>
                 </span>
@@ -187,6 +194,10 @@ class ReusableGrid extends React.Component {
             style={{ color: "black", marginTop: "10px"}}
           />
         </Row>
+        <Modal isOpen={this.state.isOpen}>
+
+             Test   
+        </Modal>
       </Fragment>
     );
   }
