@@ -29,6 +29,7 @@ class ReusableGrid extends React.Component {
 
     console.log(permissions);
     console.log("permissions>>>>");
+    let gridDataUrl = this.props.dataurl(this.props.pageid);
 
     this.state = {
       value: "",
@@ -44,6 +45,7 @@ class ReusableGrid extends React.Component {
       hasAddNew: metadata.pgdef.hasAddNew,
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
+      gridDataUrl:gridDataUrl,
       isOpen: false,
       mockData: [],
       dataSource: {}
@@ -69,29 +71,11 @@ class ReusableGrid extends React.Component {
   }
 
   render() {
-    let gridDataUrl;
-    switch (this.state.pgdef.pgid) {
-      case "allBSIPlans":
-        gridDataUrl = "./tempGridData/ALL_BSI_PLANS_MOCKDATA.json";
-        break;
-      case "customPayments":
-        gridDataUrl = "./tempGridData/CUSTOM_PAYMENTS_MOCKDATA.json";
-        break;
-      case "customTaxCodes":
-        gridDataUrl = "./tempGridData/CUSTOM_TAX_PAYMENT_MOCKDATA.json";
-        break;
-      case "populateV3States":
-        gridDataUrl = "./tempGridData/POPULATE_V3_STATES_MOCKDATA.json";
-        break;
-      default:
-        break;
-    }
-
-     const dataSource = {
+    const dataSource = {
       datafields: this.state.dataFields,
       aysnc: false,
       datatype: "json",
-      url: gridDataUrl
+      url: this.state.gridDataUrl
     };
 
     const source = new window.jqx.dataAdapter(dataSource);
