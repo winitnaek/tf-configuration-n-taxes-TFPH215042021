@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import CustomPaymentsForm from "./CustomPaymentsForm";
+import CustomTaxCodesForm from "./CustomTaxCodesForm";
 
 import {
   Col,
@@ -13,6 +14,7 @@ import {
   Button
 } from "reactstrap";
 import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
+import { customTaxCodes } from "../metadata/metaData";
 
 let GridFunctions;
 
@@ -34,6 +36,7 @@ class ReusableGrid extends React.Component {
     this.state = {
       value: "",
       pgdef: metadata.pgdef,
+      pgid: metadata.pgdef.pgid,
       griddef: metadata.griddef,
       cruddef: metadata.cruddef,
       columns: metadata.griddef.columns,
@@ -67,6 +70,10 @@ class ReusableGrid extends React.Component {
     console.log(e.target);
   }
 
+  toggle() {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
   handleNewForm(e) {
     e.preventDefault();
     console.log("Opening new form");
@@ -79,6 +86,22 @@ class ReusableGrid extends React.Component {
 
 exportToCsv(){
   this.refs.reusableGrid.exportdata('csv', 'reusableGrid');
+}
+
+renderForm(){
+  console.log(this.state.pgid)
+  const {pgid } = this.state;
+
+  switch(pgid) {
+    case 'customPayments':
+      return   <CustomPaymentsForm />
+      break;
+    case 'customTaxCodes':
+      return <CustomTaxCodesForm />
+
+
+  }
+
 }
 
   renderToolbar() {}
@@ -206,18 +229,18 @@ exportToCsv(){
 
         <Modal
           isOpen={this.state.isOpen}
-          toggle={e => this.props.toggle()}
+          toggle={e => this.toggle()}
           size="lg"
           style={{ width: "1400px" }}
         >
-          <ModalHeader toggle={e => this.props.toggle()}>
+          <ModalHeader toggle={e => this.toggle()}>
             {this.props.title}{" "}
           </ModalHeader>
           <ModalBody>
-            <CustomPaymentsForm />
+             {this.renderForm()}
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={e => this.props.toggle()}>
+            <Button color="secondary" onClick={e => this.toggle()}>
               Cancel
             </Button>
           </ModalFooter>
