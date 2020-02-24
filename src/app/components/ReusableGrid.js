@@ -18,6 +18,7 @@ import { customTaxCodes } from "../metadata/metaData";
 
 let GridFunctions;
 
+
 class ReusableGrid extends React.Component {
   constructor(props) {
     super(props);
@@ -48,37 +49,37 @@ class ReusableGrid extends React.Component {
       hasAddNew: metadata.pgdef.hasAddNew,
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
-      gridDataUrl: gridDataUrl,
+      gridDataUrl:gridDataUrl,
       isOpen: false,
       mockData: [],
-      dataSource: {},
-      rendertoolbar: toolbar => {
-        toolbar.append($("<span style='margin: 5px;'>Tool Bar</span>"));
-      }
+      dataSource: {}
     };
+
+    this.handleNewForm = (e) => {
+      e.preventDefault();
+      console.log("Opening new form");
+      this.setState({ isOpen: true });
+    }
 
     this.OpenHelp = () => {
       window.open("https://www.w3schools.com");
     };
 
-    this.handleClick = this.handleClick.bind(this);
+
+    // this.handleClick = this.handleClick.bind(this);
+ 
   }
 
-  componentDidMount() {}
 
-  handleClick(e) {
-    console.log(e.target);
+  componentDidMount() {
+    console.log(this.state.columns);
+    
   }
 
   toggle() {
     this.setState({ isOpen: !this.state.isOpen });
   }
 
-  handleNewForm(e) {
-    e.preventDefault();
-    console.log("Opening new form");
-    this.setState({ isOpen: true });
-  }
 
   exportToExcel(){
     this.refs.reusableGrid.exportdata('xls', 'reusableGrid');
@@ -127,7 +128,7 @@ renderForm(){
     }
 
     if (!permissions.DELETE) {
-      newColumns = newColumns.filter(item => {
+       newColumns = newColumns.filter(item => {
         return item.text !== "Delete";
       });
     }
@@ -161,9 +162,9 @@ renderForm(){
           <Col sm="11"></Col>
           <Col sm="1" style={{ paddingRight: 0 }}>
             {this.state.hasAddNew && (
-              <span style={{ marginLeft: "10px" }}>
+              <span style={(this.state.hasAddNew && this.state.actiondel) ==true ? { paddingLeft: 10 }: { paddingLeft: 46 }}>
                 <span id="addNew">
-                  <a href="" onClick={e => this.handleNewForm(e)}>
+                  <a href="" onClick={this.handleNewForm}>
                     <i className="fas fa-calendar-plus  fa-2x" />
                   </a>
                 </span>
@@ -172,43 +173,28 @@ renderForm(){
                 </UncontrolledTooltip>
               </span>
             )}
-            <span style={{ marginLeft: "5px" }}>
+            {this.state.actiondel ? (
+            <span  style={(this.state.hasAddNew && this.state.actiondel) ==true ? { paddingLeft: 5 }: { paddingLeft: 46 }}>
               <span id="delAll">
-                {this.state.actiondel ? (
                   <a href="" onClick="">
                     <i className="fas fa-calendar-minus fa-2x" />
                   </a>
-                ) : (
-                  <a onClick="" disabled>
-                    <i
-                      className="fas fa-calendar-minus fa-2x"
-                      style={{ color: "gainsboro" }}
-                    />
-                  </a>
-                )}
-              </span>
-              {this.state.actiondel && (
-                <UncontrolledTooltip placement="right" target="delAll">
-                  <span> Delete All </span>
-                </UncontrolledTooltip>
-              )}
+               </span>
+              <UncontrolledTooltip placement="right" target="delAll">
+                <span> Delete All </span>
+              </UncontrolledTooltip>
             </span>
+            ):null}
           </Col>
           <Grid
-            ref="reusableGrid"
             id="myGrid"
             width="100%"
-            onClick={e => this.handleClick(e)}
-            onRowclick={this.handleClick}
             altrows={true}
             source={source}
             columns={newColumns}
             pageable={true}
             autoheight={true}
             style={{ color: "black", marginTop: "10px" }}
-            clipboard={true}
-            showtoolbar={true}
-            rendertoolbar={this.state.renderToolbar}
           />
         </Row>
 
@@ -250,3 +236,5 @@ renderForm(){
   }
 }
 export default ReusableGrid;
+
+
