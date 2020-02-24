@@ -76,8 +76,6 @@ function renderTFApplication(elem, renderName) {
  */
 function renderComponent(elem,pageid,pid){
   ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
- // $("div").remove("#"+elem);
-  //$('<div id="'+ elem +'" class="col"></div>').insertAfter($("#" + "pageContainerSib"));
   ReactDOM.render(
     <Provider store={store}>
       <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} dataurl={dataURL}/>
@@ -85,6 +83,22 @@ function renderComponent(elem,pageid,pid){
     document.querySelector("#" + elem)
   );
 }
+
+/**
+ * renderPage
+ * @param {*} elem
+ */
+function renderPage(elem, pageid,pid) {
+  if (pageid == "userDataQueries") {
+    ReactDOM.render(
+      <Provider store={store}>
+        <UserDataQueries />
+      </Provider>,
+      document.querySelector("#" + elem)
+    );
+  }
+}
+
 /**
  * compMetaData
  * @param {*} pageid 
@@ -126,20 +140,7 @@ function dataURL(pageid){
   }
   return gridDataUrl;
 }
-/**
- * renderPage
- * @param {*} elem
- */
-function renderPage(elem, pageid,pid) {
-  if (pageid == "userDataQueries") {
-    ReactDOM.render(
-      <Provider store={store}>
-        <UserDataQueries />
-      </Provider>,
-      document.querySelector("#" + elem)
-    );
-  }
-}
+
 
 /**
  * renderTFHome

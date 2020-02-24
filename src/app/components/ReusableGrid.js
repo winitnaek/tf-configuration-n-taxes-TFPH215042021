@@ -96,9 +96,15 @@ exportToCsv(){
     // Check to see if permissions allow for edit & delete.  If no, then remove column
     let permissions = this.props.permissions(this.props.pid);
     const { columns } = this.state;
+<<<<<<< HEAD
     let newColumns = columns;
     if (!permissions.AUDIT) {
       newColumns = newColumns.filter(item => {
+=======
+    let newColumns = columns
+    if (!permissions.SAVE) {
+       newColumns = newColumns.filter(item => {
+>>>>>>> 0d3ac3920c891f4b06badf5c7743958db43c2519
         return item.text !== "Edit";
       });
     }
