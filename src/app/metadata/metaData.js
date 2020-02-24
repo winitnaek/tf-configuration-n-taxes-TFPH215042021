@@ -21,8 +21,8 @@ export const allBSIPlans =  {
 		"datatype": "json",
 		"contenttype": "application/json",
 		"noResultsFoundTxt": "No Data Found",
-        "recordDelete":"false",
-    
+        "recordEdit": false,
+        "recordDelete": false,
 		"columns": [
 			{
 				"text": "Type",
@@ -90,9 +90,8 @@ export const customPayments = {
 		"contenttype": "application/json",
 		"noResultsFoundTxt": "No Data Found",
 		"recordEdit": true,
-        "recordDelete": true,
-    
-		"columns": [
+        "recordDelete": false,
+    	"columns": [
 			{
 				"text": "Custom Payment Code",
 				"datafield": "customPaymentCode",
@@ -203,8 +202,8 @@ export const customTaxCodes = {
 		"datatype": "json",
 		"contenttype": "application/json",
 		"noResultsFoundTxt": "No Data Found",
-        "recordDelete":"false",
-    
+        "recordEdit": true,
+        "recordDelete": true,
 		"columns": [
 			{
 				"text": "Custom Tax Code",
@@ -283,9 +282,9 @@ export const  populateV3States = {
 		"datatype": "json",
 		"contenttype": "application/json",
 		"noResultsFoundTxt": "No Data Found",
-        "recordDelete":"false",
-    
-		"columns": [
+		"recordEdit": false,
+        "recordDelete": false,
+    	"columns": [
 			{
 				"text": "State",
 				"datafield": "state",
