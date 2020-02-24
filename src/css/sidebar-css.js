@@ -1,22 +1,26 @@
 export const star = {
   marginLeft: "25px",
-  fontSize: "22px"
+  fontSize: "22px",
+  cursor:'pointer'
 };
 
 export const goldStar = {
   marginLeft: "25px",
   fontSize: "22px",
-  color: "gold"
+  color: "gold",
+  cursor:'pointer'
 };
 export const goldStar2 = {
  fontSize: "22px",
-  color: "gold"
+  color: "gold",
+  cursor:'pointer'
 };
 
 export const link = {
   textDecoration: "none",
   width: "90%",
-  marginLeft: "40px"
+  marginLeft: "40px",
+  cursor:'pointer'
 };
 
 export const linkStyle = {
@@ -43,7 +47,7 @@ export const buttonColStyle = { backgroundColor: "white", border: "none" }
 
 export const rowStyle = { marginTop: "10px", zIndex: "200", width: "90%" };
 
-export const linkColStyle = { padding: "0px" };
+export const linkColStyle = { padding: "0px",cursor:'pointer' };
 
 
 export const selectStyle = {marginTop: "150px" };
