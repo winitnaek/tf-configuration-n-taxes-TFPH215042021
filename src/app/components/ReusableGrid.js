@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
+import CustomPaymentsForm from "./CustomPaymentsForm";
 
 import {
   Col,
@@ -14,7 +15,6 @@ import {
 import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
 
 let GridFunctions;
-
 
 class ReusableGrid extends React.Component {
   constructor(props) {
@@ -45,30 +45,43 @@ class ReusableGrid extends React.Component {
       hasAddNew: metadata.pgdef.hasAddNew,
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
-      gridDataUrl:gridDataUrl,
+      gridDataUrl: gridDataUrl,
       isOpen: false,
       mockData: [],
-      dataSource: {}
+      dataSource: {},
+      rendertoolbar: toolbar => {
+        toolbar.append($("<span style='margin: 5px;'>Tool Bar</span>"));
+      }
     };
 
     this.OpenHelp = () => {
       window.open("https://www.w3schools.com");
     };
 
-
     this.handleClick = this.handleClick.bind(this);
- 
   }
 
+  componentDidMount() {}
 
-  componentDidMount() {
-    console.log(this.state.columns);
-    
+  handleClick(e) {
+    console.log(e.target);
   }
 
-  handleClick  (e)  {
-    console.log(e.target)
+  handleNewForm(e) {
+    e.preventDefault();
+    console.log("Opening new form");
+    this.setState({ isOpen: true });
   }
+
+  exportToExcel(){
+    this.refs.reusableGrid.exportdata('xls', 'reusableGrid');
+}
+
+exportToCsv(){
+  this.refs.reusableGrid.exportdata('csv', 'reusableGrid');
+}
+
+  renderToolbar() {}
 
   render() {
     const dataSource = {
@@ -91,7 +104,7 @@ class ReusableGrid extends React.Component {
     }
 
     if (!permissions.DELETE) {
-       newColumns = newColumns.filter(item => {
+      newColumns = newColumns.filter(item => {
         return item.text !== "Delete";
       });
     }
@@ -127,7 +140,7 @@ class ReusableGrid extends React.Component {
             {this.state.hasAddNew && (
               <span style={{ marginLeft: "10px" }}>
                 <span id="addNew">
-                  <a href="" onClick="">
+                  <a href="" onClick={e => this.handleNewForm(e)}>
                     <i className="fas fa-calendar-plus  fa-2x" />
                   </a>
                 </span>
@@ -159,22 +172,58 @@ class ReusableGrid extends React.Component {
             </span>
           </Col>
           <Grid
+            ref="reusableGrid"
             id="myGrid"
             width="100%"
-            onClick={ e=> this.handleClick(e)}
+            onClick={e => this.handleClick(e)}
             onRowclick={this.handleClick}
             altrows={true}
             source={source}
             columns={newColumns}
             pageable={true}
             autoheight={true}
-            style={{ color: "black", marginTop: "10px"}}
+            style={{ color: "black", marginTop: "10px" }}
+            clipboard={true}
+            showtoolbar={true}
+            rendertoolbar={this.state.renderToolbar}
           />
         </Row>
+
+        <Row style={{ marginTop: "10px" }}>
+          <a href="#" id="exportToExcel" onClick={() => this.exportToExcel()}>
+            <i class="fas fa-table fa-lg fa-2x"></i>
+          </a>
+          <UncontrolledTooltip placement="right" target="exportToExcel">
+            <span> Export to Excel </span>
+          </UncontrolledTooltip>
+          <a href="#" id="exportToCsv" onClick={() => this.exportToCsv()} style={{ marginLeft: "10px" }}>
+            <i class="fas fa-pen-square fa-lg fa-2x"></i>
+          </a>
+          <UncontrolledTooltip placement="right" target="exportToCsv">
+            <span> Export to CSV </span>
+          </UncontrolledTooltip>
+        </Row>
+
+        <Modal
+          isOpen={this.state.isOpen}
+          toggle={e => this.props.toggle()}
+          size="lg"
+          style={{ width: "1400px" }}
+        >
+          <ModalHeader toggle={e => this.props.toggle()}>
+            {this.props.title}{" "}
+          </ModalHeader>
+          <ModalBody>
+            <CustomPaymentsForm />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={e => this.props.toggle()}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
       </Fragment>
     );
   }
 }
 export default ReusableGrid;
-
-
