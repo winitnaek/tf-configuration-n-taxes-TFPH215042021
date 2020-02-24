@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, FormGroup, Col } from 'reactstrap';
+import { Input, FormGroup, Col , Label} from 'reactstrap';
 
 function Select(props) {
 	let defaultSet = false;
@@ -10,11 +10,12 @@ function Select(props) {
 	return (
 		<FormGroup>
 			<Col {...props.colWidth}>
+            <Label for="exampleText">{props.title}</Label>
 				<Input
 					type="select"
 					name={props.name}
 					value={props.selectedOption}
-					onChange={props.controlFunc}
+					onChange={props.handleChange}
 					required={props.required ? true : false} >
 					{!defaultSet &&
 					<option value="" disabled>{props.placeholder}</option>}
