@@ -13,9 +13,13 @@ import {
 } from "reactstrap";
 import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
 
+let GridFunctions;
+
+
 class ReusableGrid extends React.Component {
   constructor(props) {
     super(props);
+
     console.log("metadata>>>>");
     let metadata = this.props.metadata(this.props.pageid);
     console.log(metadata);
@@ -48,10 +52,20 @@ class ReusableGrid extends React.Component {
     this.OpenHelp = () => {
       window.open("https://www.w3schools.com");
     };
+
+
+    this.handleClick = this.handleClick.bind(this);
+ 
   }
+
 
   componentDidMount() {
     console.log(this.state.columns);
+    
+  }
+
+  handleClick  (e)  {
+    console.log(e.target)
   }
 
   render() {
@@ -73,7 +87,7 @@ class ReusableGrid extends React.Component {
         break;
     }
 
-    const dataSource = {
+     const dataSource = {
       datafields: this.state.dataFields,
       aysnc: false,
       datatype: "json",
@@ -161,7 +175,10 @@ class ReusableGrid extends React.Component {
             </span>
           </Col>
           <Grid
-          width="100%"
+            id="myGrid"
+            width="100%"
+            onClick={ e=> this.handleClick(e)}
+            onRowclick={this.handleClick}
             altrows={true}
             source={source}
             columns={newColumns}
@@ -175,3 +192,5 @@ class ReusableGrid extends React.Component {
   }
 }
 export default ReusableGrid;
+
+
