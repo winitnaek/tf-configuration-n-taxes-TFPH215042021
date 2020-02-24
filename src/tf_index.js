@@ -80,7 +80,7 @@ function renderComponent(elem,pageid,pid){
   //$('<div id="'+ elem +'" class="col"></div>').insertAfter($("#" + "pageContainerSib"));
   ReactDOM.render(
     <Provider store={store}>
-      <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions}/>
+      <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} dataurl={dataURL}/>
     </Provider>,
     document.querySelector("#" + elem)
   );
@@ -102,6 +102,29 @@ function compPermissions(pid) {
   if (perms.hasOwnProperty(pid)) {
     return TFUtils.setPerms(perms[pid]);
   }
+}
+/**
+ * dataURL
+ */
+function dataURL(pageid){
+  let gridDataUrl;
+  switch (pageid) {
+    case "allBSIPlans":
+      gridDataUrl = "./ALL_BSI_PLANS_MOCKDATA.json";
+      break;
+    case "customPayments":
+      gridDataUrl = "./CUSTOM_PAYMENTS_MOCKDATA.json";
+      break;
+    case "customTaxCodes":
+      gridDataUrl = "./CUSTOM_TAX_PAYMENT_MOCKDATA.json";
+      break;
+    case "populateV3States":
+      gridDataUrl = "./POPULATE_V3_STATES_MOCKDATA.json";
+      break;
+    default:
+      break;
+  }
+  return gridDataUrl;
 }
 /**
  * renderPage
