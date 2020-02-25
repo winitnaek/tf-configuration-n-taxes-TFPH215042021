@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import CustomPaymentsForm from "./CustomPaymentsForm";
 import CustomTaxCodesForm from "./CustomTaxCodesForm";
+import {myRowIndex} from '../metadata/cellsrenderer';
 
 import {
   Col,
@@ -66,13 +67,15 @@ class ReusableGrid extends React.Component {
     };
 
 
+
+
     // this.handleClick = this.handleClick.bind(this);
  
   }
 
 
   componentDidMount() {
-    console.log(this.state.columns);
+    // console.log(this.state.columns);
     
   }
 
@@ -82,27 +85,36 @@ class ReusableGrid extends React.Component {
 
 
   exportToExcel(){
+    
     this.refs.reusableGrid.exportdata('xls', 'reusableGrid');
+    console.log(this.refs.reusableGrid)
 }
 
 exportToCsv(){
   this.refs.reusableGrid.exportdata('csv', 'reusableGrid');
 }
 
+
+
 renderForm(){
   console.log(this.state.pgid)
   const {pgid } = this.state;
-
   switch(pgid) {
     case 'customPayments':
       return   <CustomPaymentsForm />
       break;
     case 'customTaxCodes':
       return <CustomTaxCodesForm />
-
-
   }
+}
 
+handleRowData(index) {
+  console.log(`The row index is ${index}`)
+}
+
+handleRowClick(e) {
+  this.refs.reusableGrid.getRowData(0)
+  console.log(e)
 }
 
   renderToolbar() {}
@@ -133,6 +145,9 @@ renderForm(){
       });
     }
 
+console.log(myRowIndex)
+ 
+
     return (
       <Fragment>
         <Row>
@@ -146,12 +161,11 @@ renderForm(){
           </h1>
           <span style={{ marginLeft: "10px" }}>
             <span id="help">
-              <span>
                 <i
-                  className="fas fa-question-circle  fa-1.5x"
+                  className="fas fa-question-circle  fa-lg"
                   onClick={this.OpenHelp}
+                  style={{paddingTop: "10px"}}
                 />
-              </span>
             </span>
             <UncontrolledTooltip placement="right" target="help">
               <span> {this.state.helpLabel} </span>
@@ -187,6 +201,7 @@ renderForm(){
             ):null}
           </Col>
           <Grid
+            ref="reusableGrid"
             id="myGrid"
             width="100%"
             altrows={true}

@@ -1,5 +1,4 @@
 import ReusableGrid from '../components/ReusableGrid'
-
  export function editCellsRenderer(
 	ndex,
 	datafield,
@@ -21,6 +20,7 @@ import ReusableGrid from '../components/ReusableGrid'
 	column,
 	rowdata
   ) {
-	  console.log(ReusableGrid.openHelp)
+	
 	return ` <div id='delete-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={console.log(${ndex})}> <i class="fas fa-calendar-minus  fa-1x" color="primary"/> </div>`;
   }
+

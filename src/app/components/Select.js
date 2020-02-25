@@ -6,6 +6,8 @@ function Select(props) {
 	if (props.selectedOption !== "") {
 		defaultSet = true;
 	}
+	
+	console.log(props)
 
 	return (
 		<FormGroup>
@@ -14,8 +16,8 @@ function Select(props) {
 				<Input
 					type="select"
 					name={props.name}
-					value={props.selectedOption}
-					onChange={props.handleChange}
+					value={props.value}
+					onChange={props.onChange}
 					required={props.required ? true : false} >
 					{!defaultSet &&
 					<option value="" disabled>{props.placeholder}</option>}
