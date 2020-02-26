@@ -174,7 +174,8 @@ class ReusableGrid extends React.Component {
           <h1
             style={{
               fontWeight: "bold",
-              fontSize: "1.5em"
+              fontSize: "1.5em",
+              color: '#4c7392'
             }}
           >
             {this.state.title}
@@ -184,7 +185,7 @@ class ReusableGrid extends React.Component {
               <i
                 className="fas fa-question-circle  fa-lg"
                 onClick={this.OpenHelp}
-                style={{ paddingTop: "10px" }}
+                style={{ paddingTop: "7px",  color: '#4c7392' }}
               />
             </span>
             <UncontrolledTooltip placement="right" target="help">
@@ -256,7 +257,7 @@ class ReusableGrid extends React.Component {
             href="#"
             id="exportToCsv"
             onClick={() => this.exportToCsv()}
-            style={{ marginLeft: "10px" }}
+            style={{ marginLeft: "20px" }}
           >
             <i class="fas fa-pen-square fa-lg fa-2x"></i>
           </a>
