@@ -34,6 +34,7 @@ class CustomPaymentsForm extends Component {
     this.handleSubmit = () => {
       const payload = this.state;
       console.log(payload);
+      this.props.close()
     };
   }
 

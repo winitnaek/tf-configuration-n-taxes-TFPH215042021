@@ -2,28 +2,29 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import CustomPaymentsForm from "./CustomPaymentsForm";
 import CustomTaxCodesForm from "./CustomTaxCodesForm";
-import {myRowIndex} from '../metadata/cellsrenderer';
+import { myRowIndex } from "../metadata/cellsrenderer";
+import { getRowIndex } from "../metadata/cellsrenderer";
+import Modal from "./Modal";
 
 import {
   Col,
   Row,
   UncontrolledTooltip,
-  Modal,
+  Button,
   ModalBody,
-  ModalFooter,
-  ModalHeader,
-  Button
+  ModalFooter
 } from "reactstrap";
 import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
 import { customTaxCodes } from "../metadata/metaData";
 
 let GridFunctions;
 
-
 class ReusableGrid extends React.Component {
   constructor(props) {
     super(props);
-
+    const handleEditClick = () => {
+      console.log(`This is the index `);
+    };
     console.log("metadata>>>>");
     let metadata = this.props.metadata(this.props.pageid);
     console.log(metadata);
@@ -50,72 +51,66 @@ class ReusableGrid extends React.Component {
       hasAddNew: metadata.pgdef.hasAddNew,
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
-      gridDataUrl:gridDataUrl,
+      gridDataUrl: gridDataUrl,
       isOpen: false,
       mockData: [],
       dataSource: {}
     };
 
-    this.handleNewForm = (e) => {
+    this.handleNewForm = e => {
       e.preventDefault();
       console.log("Opening new form");
       this.setState({ isOpen: true });
-    }
+      console.log(getRowIndex());
+      console.log(this.refs.reusableGrid.getrowdata(0));
+    };
 
     this.OpenHelp = () => {
       window.open("https://www.w3schools.com");
     };
 
-
-
+    this.toggle = () => {
+      this.setState({ isOpen: !this.state.isOpen });
+    };
 
     // this.handleClick = this.handleClick.bind(this);
- 
   }
-
 
   componentDidMount() {
     // console.log(this.state.columns);
-    
   }
 
-  toggle() {
-    this.setState({ isOpen: !this.state.isOpen });
+  exportToExcel() {
+    this.refs.reusableGrid.exportdata("xls", "reusableGrid");
+    console.log(this.refs.reusableGrid);
   }
 
-
-  exportToExcel(){
-    
-    this.refs.reusableGrid.exportdata('xls', 'reusableGrid');
-    console.log(this.refs.reusableGrid)
-}
-
-exportToCsv(){
-  this.refs.reusableGrid.exportdata('csv', 'reusableGrid');
-}
-
-
-
-renderForm(){
-  console.log(this.state.pgid)
-  const {pgid } = this.state;
-  switch(pgid) {
-    case 'customPayments':
-      return   <CustomPaymentsForm />
-      break;
-    case 'customTaxCodes':
-      return <CustomTaxCodesForm />
+  exportToCsv() {
+    this.refs.reusableGrid.exportdata("csv", "reusableGrid");
   }
-}
 
-handleRowData(index) {
-  console.log(`The row index is ${index}`)
-}
+  renderForm() {
+    const toggle = this.toggle;
+    this.state.code;
+    console.log(this.state.pgid);
+    const { pgid } = this.state;
+    switch (pgid) {
+      case "customPayments":
+        return <CustomPaymentsForm close={toggle} change={this.handleChange} />;
+        break;
+      case "customTaxCodes":
+        return <CustomTaxCodesForm close={toggle} change={this.handleChange} />;
+    }
+  }
 
-handleRowClick(e) {
-  this.refs.reusableGrid.getRowData(0)
-  console.log(e)
-}
+  handleRowData(index) {
+    console.log(`The row index is ${index}`);
+  }
+
+  handleRowClick(e) {
+    this.refs.reusableGrid.getRowData(0);
+    console.log(e);
+  }
 
   renderToolbar() {}
 
@@ -127,26 +122,53 @@ handleRowClick(e) {
       url: this.state.gridDataUrl
     };
 
+    const handleEditClick = () => {
+      console.log("clicked");
+    };
+
+    const editCellsRenderer = ndex => {
+      const pgid = this.state.pgid;
+      return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick('[${ndex},${pgid}]')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
+    };
+
+    const deleteCellsRenderer = ndex => {
+      return ` <div id='delete-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={''}> <i class="fas fa-calendar-minus  fa-1x" color="primary"/> </div>`;
+    };
+
     const source = new window.jqx.dataAdapter(dataSource);
+    const editColumn = {
+      text: "Edit",
+      datafield: "edit",
+      align: "center",
+      width: "10%",
+      cellsrenderer: editCellsRenderer
+    };
+
+    const deleteColumn = {
+      text: "Delete",
+      datafield: "delete",
+      align: "center",
+      width: "10%",
+      cellsrenderer: deleteCellsRenderer
+    };
 
     // Check to see if permissions allow for edit & delete.  If no, then remove column
     let permissions = this.props.permissions(this.props.pid);
     const { columns } = this.state;
-    let newColumns = columns
+    console.log(columns);
+    let newColumns = columns;
+    newColumns = [...newColumns, editColumn, deleteColumn];
     if (!permissions.SAVE) {
-       newColumns = newColumns.filter(item => {
+      newColumns = newColumns.filter(item => {
         return item.text !== "Edit";
       });
     }
 
     if (!permissions.DELETE) {
-       newColumns = newColumns.filter(item => {
+      newColumns = newColumns.filter(item => {
         return item.text !== "Delete";
       });
     }
-
-console.log(myRowIndex)
- 
 
     return (
       <Fragment>
@@ -161,11 +183,11 @@ console.log(myRowIndex)
           </h1>
           <span style={{ marginLeft: "10px" }}>
             <span id="help">
-                <i
-                  className="fas fa-question-circle  fa-lg"
-                  onClick={this.OpenHelp}
-                  style={{paddingTop: "10px"}}
-                />
+              <i
+                className="fas fa-question-circle  fa-lg"
+                onClick={this.OpenHelp}
+                style={{ paddingTop: "10px" }}
+              />
             </span>
             <UncontrolledTooltip placement="right" target="help">
               <span> {this.state.helpLabel} </span>
@@ -176,7 +198,13 @@ console.log(myRowIndex)
           <Col sm="11"></Col>
           <Col sm="1" style={{ paddingRight: 0 }}>
             {this.state.hasAddNew && (
-              <span style={(this.state.hasAddNew && this.state.actiondel) ==true ? { paddingLeft: 10 }: { paddingLeft: 46 }}>
+              <span
+                style={
+                  (this.state.hasAddNew && this.state.actiondel) == true
+                    ? { paddingLeft: 10 }
+                    : { paddingLeft: 46 }
+                }
+              >
                 <span id="addNew">
                   <a href="" onClick={this.handleNewForm}>
                     <i className="fas fa-calendar-plus  fa-2x" />
@@ -188,17 +216,23 @@ console.log(myRowIndex)
               </span>
             )}
             {this.state.actiondel ? (
-            <span  style={(this.state.hasAddNew && this.state.actiondel) ==true ? { paddingLeft: 5 }: { paddingLeft: 46 }}>
-              <span id="delAll">
+              <span
+                style={
+                  (this.state.hasAddNew && this.state.actiondel) == true
+                    ? { paddingLeft: 5 }
+                    : { paddingLeft: 46 }
+                }
+              >
+                <span id="delAll">
                   <a href="" onClick="">
                     <i className="fas fa-calendar-minus fa-2x" />
                   </a>
-               </span>
-              <UncontrolledTooltip placement="right" target="delAll">
-                <span> Delete All </span>
-              </UncontrolledTooltip>
-            </span>
-            ):null}
+                </span>
+                <UncontrolledTooltip placement="right" target="delAll">
+                  <span> Delete All </span>
+                </UncontrolledTooltip>
+              </span>
+            ) : null}
           </Col>
           <Grid
             ref="reusableGrid"
@@ -220,7 +254,12 @@ console.log(myRowIndex)
           <UncontrolledTooltip placement="right" target="exportToExcel">
             <span> Export to Excel </span>
           </UncontrolledTooltip>
-          <a href="#" id="exportToCsv" onClick={() => this.exportToCsv()} style={{ marginLeft: "10px" }}>
+          <a
+            href="#"
+            id="exportToCsv"
+            onClick={() => this.exportToCsv()}
+            style={{ marginLeft: "10px" }}
+          >
             <i class="fas fa-pen-square fa-lg fa-2x"></i>
           </a>
           <UncontrolledTooltip placement="right" target="exportToCsv">
@@ -229,27 +268,14 @@ console.log(myRowIndex)
         </Row>
 
         <Modal
-          isOpen={this.state.isOpen}
-          toggle={e => this.toggle()}
-          size="lg"
-          style={{ width: "1400px" }}
+          open={this.state.isOpen}
+          close={this.toggle}
+          title={this.state.title}
         >
-          <ModalHeader toggle={e => this.toggle()}>
-            {this.props.title}{" "}
-          </ModalHeader>
-          <ModalBody>
-             {this.renderForm()}
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={e => this.toggle()}>
-              Cancel
-            </Button>
-          </ModalFooter>
+          {this.renderForm()}
         </Modal>
       </Fragment>
     );
   }
 }
 export default ReusableGrid;
-
-

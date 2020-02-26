@@ -142,6 +142,12 @@ function dataURL(pageid){
 }
 
 
+function editClick(index) {
+  console.log(index)
+//    This index is an array that contains the page id and row index that was clicked
+
+}
+
 /**
  * renderTFHome
  */
@@ -349,6 +355,10 @@ const unMountNMountContainerNode = () => {
 
 module.exports = renderTFApplication;
 window.renderTFApplication = renderTFApplication;
+
+module.exports = editClick;
+window.editClick = editClick
+
 
 module.exports = appDataset;
 window.appDataset = appDataset;
