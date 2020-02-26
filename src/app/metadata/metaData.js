@@ -211,23 +211,7 @@ export const customTaxCodes = {
                 "datafield": "customTaxName",
                 "cellsalign": "center",
                 "align": "center"
-			  },
-			  {
-				"text": "Edit",
-				"datafield": "edit",
-				"align": "center",
-				"width": "10%",
-				"cellsrenderer": editCellsRenderer
-			  },
-			  {
-				"text": "Delete",
-				"datafield": "delete",
-				"align": "center",
-				"width": "10%",
-				"cellsrenderer": deleteCellsRenderer
-			  },
-			  
-             
+			  }     
 		],
 		"dataFields":[
 		  {"name": "customTaxCode","type": "string"},
