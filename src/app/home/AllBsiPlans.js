@@ -66,6 +66,7 @@ class AllBsiPlans extends Component {
           width="100%"
           exit={this.handleExit}
           info="info1"
+          type="readOnly"
         />
         
     );

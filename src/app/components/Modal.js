@@ -17,9 +17,8 @@ class reusableModal extends Component {
       >
         <ModalHeader
           toggle={e => this.props.close()}
-          style={{ fontWeight: "bold" }}
         >
-          {this.props.title}
+         <span> {this.props.title} </span>
         </ModalHeader>
         {this.props.children}
       </Modal>

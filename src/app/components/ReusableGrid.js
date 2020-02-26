@@ -155,6 +155,10 @@ class ReusableGrid extends React.Component {
     let permissions = this.props.permissions(this.props.pid);
     const { columns } = this.state;
     let newColumns = columns;
+
+    console.log(this.state.recordEdit)
+
+    if(this.state.recordEdit) {
     newColumns = [...newColumns, editColumn, deleteColumn];
     if (!permissions.SAVE) {
       newColumns = newColumns.filter(item => {
@@ -167,7 +171,7 @@ class ReusableGrid extends React.Component {
         return item.text !== "Delete";
       });
     }
-
+    }
     return (
       <Fragment>
         <Row>
@@ -193,6 +197,7 @@ class ReusableGrid extends React.Component {
             </UncontrolledTooltip>
           </span>
         </Row>
+        { this.props.readOnly ? (
         <Row style={{ marginTop: "10px" }}>
           <Col sm="11"></Col>
           <Col sm="1" style={{ paddingRight: 0 }}>
@@ -233,6 +238,10 @@ class ReusableGrid extends React.Component {
               </span>
             ) : null}
           </Col>
+          </Row>
+          ): null }
+        
+        <Row>
           <Grid
             ref="reusableGrid"
             id="myGrid"
