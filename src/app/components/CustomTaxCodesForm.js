@@ -8,7 +8,8 @@ import {
   Container,
   Col,
   Row,
-  Alert
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 
 class CustomPaymentsForm extends Component {
@@ -19,6 +20,13 @@ class CustomPaymentsForm extends Component {
       customTaxCode: "",
       customTaxName: ""
     };
+
+    this.resetForm = () => {
+      this.setState({ 
+        customTaxCode: "",
+        customTaxName: "",
+          });
+    }
 
     this.handleChange = event => {
       const target = event.target;
@@ -39,12 +47,10 @@ class CustomPaymentsForm extends Component {
   }
 
   render() {
-    console.log(this.state.customTaxCode);
+
     return (
       <Container>
-        <h3 style={{ textAlign: "center", fontWeight: "bold" }}>
-          Custom Tax Codes
-        </h3>
+        <ModalBody>
         <Form
           onSubmit={this.handleSubmit}
           style={{ marginTop: "25px" }}
@@ -96,12 +102,26 @@ class CustomPaymentsForm extends Component {
             </FormGroup>
           </Row>
         </Form>
-        <div style={{ width: "10%", margin: "0 auto" }}>
-          <Button onClick={this.handleSubmit} color="primary">
-            {" "}
-            Submit{" "}
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="secondary"
+            className="btn btn-primary"
+            onClick={this.props.close}
+          >
+            Cancel
           </Button>
-        </div>
+          <Button
+            color="secondary"
+            className="btn btn-primary mr-auto"
+            onClick={this.resetForm}
+          >
+            Reset
+          </Button>
+          <Button onClick={this.handleSubmit} color="success">
+            Submit
+          </Button>
+        </ModalFooter>
       </Container>
     );
   }

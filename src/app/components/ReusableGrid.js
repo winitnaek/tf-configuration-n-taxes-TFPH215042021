@@ -92,7 +92,6 @@ class ReusableGrid extends React.Component {
   renderForm() {
     const toggle = this.toggle;
     this.state.code;
-    console.log(this.state.pgid);
     const { pgid } = this.state;
     switch (pgid) {
       case "customPayments":
@@ -155,7 +154,6 @@ class ReusableGrid extends React.Component {
     // Check to see if permissions allow for edit & delete.  If no, then remove column
     let permissions = this.props.permissions(this.props.pid);
     const { columns } = this.state;
-    console.log(columns);
     let newColumns = columns;
     newColumns = [...newColumns, editColumn, deleteColumn];
     if (!permissions.SAVE) {
