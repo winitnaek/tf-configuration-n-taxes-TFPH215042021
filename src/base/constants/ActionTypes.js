@@ -1,1 +1,2 @@
 export const SET_MODULE_AREAS = 'SET_MODULE_AREAS';
+export const SET_EDIT_DATA = 'SET_EDIT_DATA';

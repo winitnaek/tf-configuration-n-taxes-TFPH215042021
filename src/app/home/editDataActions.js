@@ -1,4 +1,4 @@
-import  {SET_EDIT_DATA} from '../../base/constants/AppConstants';
+import  {SET_EDIT_DATA} from '../../base/constants/ActionTypes';
 
 export const setEditData = (data) => {
     return  {

@@ -7,7 +7,7 @@ import { myRowIndex } from "../metadata/cellsrenderer";
 import { getRowIndex } from "../metadata/cellsrenderer";
 import { setEditData } from "../home/editDataActions";
 import Modal from "./Modal";
-
+import {pagetitle,helpicon} from '../../base/constants/AppConstants';
 import {
   Col,
   Row,
@@ -77,9 +77,8 @@ class ReusableGrid extends React.Component {
       this.props.setEditData(payload)
 
     };
-
     this.OpenHelp = () => {
-      window.open("https://www.w3schools.com");
+      window.open('/help/'+this.state.pgid,'_blank');
     };
 
     this.toggle = () => {
@@ -188,21 +187,13 @@ class ReusableGrid extends React.Component {
     return (
       <Fragment>
         <Row>
-          <h1
-            style={{
-              fontWeight: "bold",
-              fontSize: "1.5em",
-              color: "#4c7392"
-            }}
-          >
-            {this.state.title}
-          </h1>
+          <h1 style={pagetitle}>{this.state.title}</h1>
           <span style={{ marginLeft: "10px" }}>
             <span id="help">
               <i
                 className="fas fa-question-circle  fa-lg"
                 onClick={this.OpenHelp}
-                style={{ paddingTop: "7px", color: "#4c7392" }}
+                style={helpicon}
               />
             </span>
             <UncontrolledTooltip placement="right" target="help">
@@ -210,48 +201,48 @@ class ReusableGrid extends React.Component {
             </UncontrolledTooltip>
           </span>
         </Row>
-
-        <Row style={{ marginTop: "10px" }}>
-          <Col sm="11"></Col>
-          <Col sm="1" style={{ paddingRight: 0 }}>
-            {this.state.hasAddNew && (
-              <span
-                style={
-                  (this.state.hasAddNew && this.state.actiondel) == true
-                    ? { paddingLeft: 10 }
-                    : { paddingLeft: 46 }
-                }
-              >
-                <span id="addNew">
-                  <a href="" onClick={this.handleNewForm}>
-                    <i className="fas fa-calendar-plus  fa-2x" />
-                  </a>
+          <Row style={{ marginTop: "10px" }}>
+            <Col sm="11"></Col>
+            <Col sm="1" style={{ paddingRight: 0 }}>
+              {this.state.hasAddNew && (
+                <span
+                  style={
+                    (this.state.hasAddNew && this.state.actiondel) == true
+                      ? { paddingLeft: 10 }
+                      : { paddingLeft: 46 }
+                  }
+                >
+                  <span id="addNew">
+                    <a href="" onClick={this.handleNewForm}>
+                      <i className="fas fa-calendar-plus  fa-2x" />
+                    </a>
+                  </span>
+                  <UncontrolledTooltip placement="right" target="addNew">
+                    <span> {this.state.addNewLabel}</span>
+                  </UncontrolledTooltip>
                 </span>
-                <UncontrolledTooltip placement="right" target="addNew">
-                  <span> {this.state.addNewLabel}</span>
-                </UncontrolledTooltip>
-              </span>
-            )}
-            {this.state.actiondel ? (
-              <span
-                style={
-                  (this.state.hasAddNew && this.state.actiondel) == true
-                    ? { paddingLeft: 5 }
-                    : { paddingLeft: 46 }
-                }
-              >
-                <span id="delAll">
-                  <a href="" onClick="">
-                    <i className="fas fa-calendar-minus fa-2x" />
-                  </a>
+              )}
+              {this.state.actiondel ? (
+                <span
+                  style={
+                    (this.state.hasAddNew && this.state.actiondel) == true
+                      ? { paddingLeft: 5 }
+                      : { paddingLeft: 46 }
+                  }
+                >
+                  <span id="delAll">
+                    <a href="" onClick="">
+                      <i className="fas fa-calendar-minus fa-2x" />
+                    </a>
+                  </span>
+                  <UncontrolledTooltip placement="right" target="delAll">
+                    <span> Delete All </span>
+                  </UncontrolledTooltip>
                 </span>
-                <UncontrolledTooltip placement="right" target="delAll">
-                  <span> Delete All </span>
-                </UncontrolledTooltip>
-              </span>
-            ) : null}
-          </Col>
-        </Row>
+              ) : null}
+            </Col>
+          </Row>
+      
 
         <Row>
           <Grid
