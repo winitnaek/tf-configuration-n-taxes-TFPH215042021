@@ -77,7 +77,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchLinks: fetchLinks, setModuleLinks},dispatch
+    { fetchLinks: fetchLinks, setModuleLinks, },dispatch
   );
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TFHome);

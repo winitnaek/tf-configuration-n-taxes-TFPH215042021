@@ -7,7 +7,7 @@ export const allBSIPlans =  {
 		"pgtitle": "All BSI Plans",
 		"pgsubtitle":"",
 		"flowtype": "flowtype1",
-		"hasAddNew": true,
+		"hasAddNew": false,
 		"addNewLabel": "",
 		"actiondel": false,
 		"helpAvailable":true,
@@ -152,8 +152,7 @@ export const customPayments = {
 		  {"name": "taxability","type": "string"},
 		  {"name": "eeMax","type": "string"},
 		  {"name": "aggStatus","type": "string"},
-		  {"name": "edit", "type": "string"},
-		  {"name": "delete", "type": "string"}
+		  {"name": "edit", "type": "string"}
 		]
 	},
 	"cruddef": {
@@ -195,7 +194,7 @@ export const customTaxCodes = {
 				"text": "Custom Tax Code",
 				"datafield": "customTaxCode",
 				"cellsalign": "center",
-				"width": "30%",
+				"width": "47.5%",
 				"align": "center",
 				"sortable": true,
 				"rendererInput": [
@@ -207,7 +206,8 @@ export const customTaxCodes = {
 				"rendererStaticInput": [{"name": "","value": ""}]
 			},
 			{
-                "text": "Custom Tax Name",
+				"text": "Custom Tax Name",
+				"width": "47.5%",
                 "datafield": "customTaxName",
                 "cellsalign": "center",
                 "align": "center"
@@ -216,8 +216,7 @@ export const customTaxCodes = {
 		"dataFields":[
 		  {"name": "customTaxCode","type": "string"},
 		  {"name": "customTaxName","type": "string"},
-		  {"name": "edit", "type": "string"},
-		  {"name": "delete", "type": "string"}
+		  {"name": "edit", "type": "string"}
 		]
 	},
 	"cruddef": {
@@ -238,7 +237,7 @@ export const  populateV3States = {
 		"pgtitle": "Populate V3 States",
 		"pgsubtitle":"",
 		"flowtype": "flowtype1",
-		"hasAddNew": true,
+		"hasAddNew": false,
 		"addNewLabel": "",
 		"actiondel": false,
 		"helpAvailable":true,

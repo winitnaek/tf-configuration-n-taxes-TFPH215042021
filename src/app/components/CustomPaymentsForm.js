@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Select from "./Select";
 import Input from "./SingleInput";
 import {
@@ -72,29 +73,38 @@ class CustomPaymentsForm extends Component {
       console.log(payload);
       this.props.close();
     };
+
+    this.handleDelete = () => {
+      // Add handler to remove this record
+      console.log('deleting record')
+      this.props.close()
+    }
+
   }
 
   componentDidMount() {
-    if (this.props.rowData) {
+    if (this.props.data) {
+      console.log(this.props.data.taxability)
       const {
         customPaymentCode,
         customPaymentName,
         paymentType,
         taxability,
         eeMax
-      } = this.props.rowData;
+      } = this.props.data;
 
       this.setState({
-        customPaymentCode,
-        customPaymentName,
-        paymentType, 
-        taxability,
-        eeMax
+        customPaymentCode: this.props.data.customPaymentCode,
+        customPaymentName: this.props.data.customPaymentName,
+        paymentType: this.props.data.paymentType,
+        taxability: this.props.data.taxability,
+        eeMax: this.props.data.eeMax
       });
     }
   }
 
   render() {
+    console.log(this.state);
     return (
       <Container>
         <ModalBody>
@@ -165,7 +175,7 @@ class CustomPaymentsForm extends Component {
 
         <ModalFooter>
           <Button
-            color="secondary"
+            color="primary"
             className="btn btn-primary"
             onClick={this.props.close}
           >
@@ -178,6 +188,8 @@ class CustomPaymentsForm extends Component {
           >
             Reset
           </Button>
+
+          {this.props.permissions.DELETE && <Button onClick={this.handleDelete} color="danger"> Delete </Button>}
           <Button onClick={this.handleSubmit} color="success">
             Submit
           </Button>
@@ -187,4 +199,10 @@ class CustomPaymentsForm extends Component {
   }
 }
 
-export default CustomPaymentsForm;
+function mapStateToProps(state) {
+  return {
+    data: state.formData.data
+  };
+}
+
+export default connect(mapStateToProps, null)(CustomPaymentsForm);

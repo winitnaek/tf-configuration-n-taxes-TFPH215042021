@@ -1,4 +1,5 @@
-import { SET_EDIT_DATA } from "./editDataActions";
+
+import  {SET_FORM_DATA, CLOSE_FORM} from '../../../base/constants/ActionTypes'//       base/constants/ActionTypes';
 import StateManager from "react-select";
 
 const initialState = {
@@ -8,18 +9,17 @@ const initialState = {
         taxability: "Non-Taxable",
         eeMax: "",
         aggStatus: "",},
-  isOpen: false
       };
 
-function editDataReducer(state = initialState, action) {
+function formReducer(state = initialState, action) {
   console.log(action.type);
   console.log(action.data)
   switch (action.type) {
-    case 'SET_EDIT_DATA':
+    case SET_FORM_DATA:
       return {data: action.data, isOpen: true}
       break;
-    case 'CLEAR_DATA':
-      return state;
+    case CLOSE_FORM:
+      return initialState;
       break;
     default:
       return state;
@@ -27,4 +27,4 @@ function editDataReducer(state = initialState, action) {
   }
 }
 
-export default editDataReducer;
+export default formReducer;

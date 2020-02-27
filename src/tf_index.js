@@ -12,7 +12,7 @@ let store = configureStore();
 export default store;
 import Welcome from './app/home/Welcome';
 import TFUtils from './base/utils/tfUtils';
-import { setEditData} from './app/home/editDataActions';
+import { setFormData} from './app/home/actions/formActions';
 import {setModuleAreas} from './app/home/moduleLinksActions';
 import ReusableGrid from "./app/components/ReusableGrid";
 import UserDataQueries from "./app/components/UserDataQueries";
@@ -150,7 +150,7 @@ function editClick(index) {
  let dataRecord = $('#' + _id).jqxGrid('getrowdata', index); 
 
 console.log(dataRecord)
-store.dispatch(setEditData(dataRecord))
+store.dispatch(setFormData(dataRecord))
 }
 
 /**

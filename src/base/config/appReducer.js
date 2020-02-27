@@ -1,15 +1,12 @@
 import { combineReducers } from "redux";
-import data from "../../app/home/payeeDetailsReducer";
-import favoriteLinks from "../../app/home/favoriteLinksReducer";
-import gridData from '../../app/home/gridDataReducer';
-import editData from '../../app/home/editDataReducer';
-import moduleAreaReducer from "../../app/home/moduleLinksReducer";
-import links from "../../app/home/linksReducer";
+import gridData from '../../app/home/actions/gridDataReducer';
+import formData from '../../app/home/actions/formReducer';
+import moduleAreaReducer from "../../app/home/actions/moduleLinksReducer";
 
 
 const rootReducer = combineReducers({
   moduleAreas:moduleAreaReducer,
   gridData,
-  editData
+  formData
 });
 export default rootReducer;

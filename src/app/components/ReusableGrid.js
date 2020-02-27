@@ -1,13 +1,10 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import CustomPaymentsForm from "./CustomPaymentsForm";
-import CustomTaxCodesForm from "./CustomTaxCodesForm";
-import { myRowIndex } from "../metadata/cellsrenderer";
-import { getRowIndex } from "../metadata/cellsrenderer";
-import { setEditData } from "../home/editDataActions";
+import { closeForm, setFormData} from "../home/actions/formActions";
 import Modal from "./Modal";
 import {pagetitle,helpicon} from '../../base/constants/AppConstants';
+import RenderForm from '../../base/utils/RenderForm';
 import {
   Col,
   Row,
@@ -54,7 +51,6 @@ class ReusableGrid extends React.Component {
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
       gridDataUrl: gridDataUrl,
-      isOpen: false,
       mockData: [],
       dataSource: {}
     };
@@ -63,26 +59,22 @@ class ReusableGrid extends React.Component {
       e.preventDefault();
       console.log("Opening new form");
       this.setState({ isOpen: true });
-      
-
       const payload = {
-      
         customPaymentCode: " ",
         customPaymentName: " ",
         paymentType: "Custom Earnings",
         taxability: "Non-Taxable",
         eeMax: ""
       };
-
-      this.props.setEditData(payload)
-
+      this.props.setFormData(payload)
     };
+
     this.OpenHelp = () => {
       this.props.help(this.state.pgid);
     };
 
     this.toggle = () => {
-      this.setState({ isOpen: !this.state.isOpen });
+      this.props.closeForm()
     };
 
     // this.handleClick = this.handleClick.bind(this);
@@ -101,29 +93,18 @@ class ReusableGrid extends React.Component {
     this.refs.reusableGrid.exportdata("csv", "reusableGrid");
   }
 
-  renderForm() {
+  handleForm() {
+    let permissions = this.props.permissions(this.props.pid)
     const toggle = this.toggle;
-    this.state.code;
+    const change = this.handleChange;
     const { pgid } = this.state;
-    switch (pgid) {
-      case "customPayments":
-        return <CustomPaymentsForm close={toggle} change={this.handleChange} />;
-        break;
-      case "customTaxCodes":
-        return <CustomTaxCodesForm close={toggle} change={this.handleChange} />;
-    }
+    const form = RenderForm(toggle, change, pgid, permissions)
+    return form;
   }
 
   handleRowData(index) {
     console.log(`The row index is ${index}`);
   }
-
-  handleRowClick(e) {
-    this.refs.reusableGrid.getRowData(0);
-    console.log(e);
-  }
-
-  renderToolbar() {}
 
   render() {
     const dataSource = {
@@ -133,34 +114,20 @@ class ReusableGrid extends React.Component {
       url: this.state.gridDataUrl
     };
 
-    const handleEditClick = () => {
-      console.log("clicked");
-    };
 
     const editCellsRenderer = ndex => {
       const pgid = this.state.pgid;
       return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick(${ndex})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
     };
 
-    const deleteCellsRenderer = ndex => {
-      return ` <div id='delete-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={''}> <i class="fas fa-calendar-minus  fa-1x" color="primary"/> </div>`;
-    };
 
     const source = new window.jqx.dataAdapter(dataSource);
     const editColumn = {
       text: "Edit",
       datafield: "edit",
       align: "center",
-      width: "10%",
+      width: "5%",
       cellsrenderer: editCellsRenderer
-    };
-
-    const deleteColumn = {
-      text: "Delete",
-      datafield: "delete",
-      align: "center",
-      width: "10%",
-      cellsrenderer: deleteCellsRenderer
     };
 
     // Check to see if permissions allow for edit & delete.  If no, then remove column
@@ -168,10 +135,8 @@ class ReusableGrid extends React.Component {
     const { columns } = this.state;
     let newColumns = columns;
 
-    console.log(this.state.recordEdit);
-
     if (this.state.recordEdit) {
-      newColumns = [...newColumns, editColumn, deleteColumn];
+      newColumns = [...newColumns, editColumn];
       if (!permissions.SAVE) {
         newColumns = newColumns.filter(item => {
           return item.text !== "Edit";
@@ -283,7 +248,7 @@ class ReusableGrid extends React.Component {
           close={this.toggle}
           title={this.state.title}
         >
-          {this.renderForm()}
+          {this.handleForm()}
         </Modal>
       </Fragment>
     );
@@ -291,13 +256,13 @@ class ReusableGrid extends React.Component {
 }
 function mapStateToProps(state) {
   return {
-    data: state.editData.data,
-    isOpen: state.editData.isOpen
+    data: state.formData.data,
+    isOpen: state.formData.isOpen
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setEditData: setEditData }, dispatch);
+  return bindActionCreators({ closeForm, setFormData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReusableGrid);

@@ -1,5 +1,5 @@
-import * as types from "../../base/constants/ActionTypes";
-import initialState from "../../base/config/initialState";
+import * as types from "../../../base/constants/ActionTypes";
+import initialState from "../../../base/config/initialState";
 
 export default function moduleLinksReducer(state = initialState.moduleAreas,action) {
   switch (action.type) {
