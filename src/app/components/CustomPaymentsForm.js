@@ -42,14 +42,14 @@ class CustomPaymentsForm extends Component {
     };
 
     this.resetForm = () => {
-      this.setState({ 
+      this.setState({
         customPaymentCode: "",
         customPaymentName: "",
         paymentType: "Custom Earnings",
         taxability: "Non-Taxable",
-        eeMax: "",
-          });
-    }
+        eeMax: ""
+      });
+    };
 
     this.handleSubmit = () => {
       // handle validation first then
@@ -72,6 +72,26 @@ class CustomPaymentsForm extends Component {
       console.log(payload);
       this.props.close();
     };
+  }
+
+  componentDidMount() {
+    if (this.props.rowData) {
+      const {
+        customPaymentCode,
+        customPaymentName,
+        paymentType,
+        taxability,
+        eeMax
+      } = this.props.rowData;
+
+      this.setState({
+        customPaymentCode,
+        customPaymentName,
+        paymentType, 
+        taxability,
+        eeMax
+      });
+    }
   }
 
   render() {

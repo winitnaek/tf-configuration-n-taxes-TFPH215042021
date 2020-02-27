@@ -14,6 +14,8 @@ export const NON_PDF_ANCHOR_ID = "nonpdf-anchor";
 
 export const DFLT_PAGE_SIZE = 20;
 
+export const SET_EDIT_DATA = 'SET_EDIT_DATA';
+
 export const divStyleFirst = {
     display: 'block',
     paddingBottom: '8px',

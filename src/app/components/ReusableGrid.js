@@ -1,9 +1,11 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import CustomPaymentsForm from "./CustomPaymentsForm";
 import CustomTaxCodesForm from "./CustomTaxCodesForm";
 import { myRowIndex } from "../metadata/cellsrenderer";
 import { getRowIndex } from "../metadata/cellsrenderer";
+import { setEditData } from "../home/editDataActions";
 import Modal from "./Modal";
 
 import {
@@ -61,8 +63,19 @@ class ReusableGrid extends React.Component {
       e.preventDefault();
       console.log("Opening new form");
       this.setState({ isOpen: true });
-      console.log(getRowIndex());
-      console.log(this.refs.reusableGrid.getrowdata(0));
+      
+
+      const payload = {
+      
+        customPaymentCode: " ",
+        customPaymentName: " ",
+        paymentType: "Custom Earnings",
+        taxability: "Non-Taxable",
+        eeMax: ""
+      };
+
+      this.props.setEditData(payload)
+
     };
 
     this.OpenHelp = () => {
@@ -127,7 +140,7 @@ class ReusableGrid extends React.Component {
 
     const editCellsRenderer = ndex => {
       const pgid = this.state.pgid;
-      return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick('[${ndex},${pgid}]')}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
+      return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick(${ndex})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
     };
 
     const deleteCellsRenderer = ndex => {
@@ -156,21 +169,21 @@ class ReusableGrid extends React.Component {
     const { columns } = this.state;
     let newColumns = columns;
 
-    console.log(this.state.recordEdit)
+    console.log(this.state.recordEdit);
 
-    if(this.state.recordEdit) {
-    newColumns = [...newColumns, editColumn, deleteColumn];
-    if (!permissions.SAVE) {
-      newColumns = newColumns.filter(item => {
-        return item.text !== "Edit";
-      });
-    }
+    if (this.state.recordEdit) {
+      newColumns = [...newColumns, editColumn, deleteColumn];
+      if (!permissions.SAVE) {
+        newColumns = newColumns.filter(item => {
+          return item.text !== "Edit";
+        });
+      }
 
-    if (!permissions.DELETE) {
-      newColumns = newColumns.filter(item => {
-        return item.text !== "Delete";
-      });
-    }
+      if (!permissions.DELETE) {
+        newColumns = newColumns.filter(item => {
+          return item.text !== "Delete";
+        });
+      }
     }
     return (
       <Fragment>
@@ -179,7 +192,7 @@ class ReusableGrid extends React.Component {
             style={{
               fontWeight: "bold",
               fontSize: "1.5em",
-              color: '#4c7392'
+              color: "#4c7392"
             }}
           >
             {this.state.title}
@@ -189,7 +202,7 @@ class ReusableGrid extends React.Component {
               <i
                 className="fas fa-question-circle  fa-lg"
                 onClick={this.OpenHelp}
-                style={{ paddingTop: "7px",  color: '#4c7392' }}
+                style={{ paddingTop: "7px", color: "#4c7392" }}
               />
             </span>
             <UncontrolledTooltip placement="right" target="help">
@@ -197,7 +210,7 @@ class ReusableGrid extends React.Component {
             </UncontrolledTooltip>
           </span>
         </Row>
-        { this.props.readOnly ? (
+
         <Row style={{ marginTop: "10px" }}>
           <Col sm="11"></Col>
           <Col sm="1" style={{ paddingRight: 0 }}>
@@ -238,9 +251,8 @@ class ReusableGrid extends React.Component {
               </span>
             ) : null}
           </Col>
-          </Row>
-          ): null }
-        
+        </Row>
+
         <Row>
           <Grid
             ref="reusableGrid"
@@ -276,7 +288,7 @@ class ReusableGrid extends React.Component {
         </Row>
 
         <Modal
-          open={this.state.isOpen}
+          open={this.props.isOpen}
           close={this.toggle}
           title={this.state.title}
         >
@@ -286,4 +298,15 @@ class ReusableGrid extends React.Component {
     );
   }
 }
-export default ReusableGrid;
+function mapStateToProps(state) {
+  return {
+    data: state.editData.data,
+    isOpen: state.editData.isOpen
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setEditData: setEditData }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReusableGrid);

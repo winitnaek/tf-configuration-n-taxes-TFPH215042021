@@ -12,6 +12,7 @@ let store = configureStore();
 export default store;
 import Welcome from './app/home/Welcome';
 import TFUtils from './base/utils/tfUtils';
+import { setEditData} from './app/home/editDataActions';
 import {setModuleAreas} from './app/home/moduleLinksActions';
 import ReusableGrid from "./app/components/ReusableGrid";
 import UserDataQueries from "./app/components/UserDataQueries";
@@ -144,8 +145,12 @@ function dataURL(pageid){
 
 function editClick(index) {
   console.log(index)
-//    This index is an array that contains the page id and row index that was clicked
+   let _id = document.querySelector("div[role='grid']").id;
+ console.log(_id);
+ let dataRecord = $('#' + _id).jqxGrid('getrowdata', index); 
 
+console.log(dataRecord)
+store.dispatch(setEditData(dataRecord))
 }
 
 /**

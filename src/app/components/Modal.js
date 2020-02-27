@@ -6,6 +6,12 @@ class reusableModal extends Component {
     super(props);
     this.state = {};
   }
+
+
+ 
+
+
+  
   render() {
     console.log(this.props);
     return (
