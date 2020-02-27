@@ -11,13 +11,13 @@ import TFHome from "./app/home/home.js";
 let store = configureStore();
 export default store;
 import Welcome from './app/home/Welcome';
-import TFUtils from './base/utils/tfUtils';
+import {buildModuleAreaLinks,openHelp,setPerms,compMetaData,compPermissions} from './base/utils/tfUtils';
 import { setFormData} from './app/home/actions/formActions';
-import {setModuleAreas} from './app/home/moduleLinksActions';
+import {setModuleAreas} from './app/home/actions/moduleLinksActions';
 import ReusableGrid from "./app/components/ReusableGrid";
 import UserDataQueries from "./app/components/UserDataQueries";
 import HelpPage from './app/home/HelpPage';
-import {metadatamap,UI_COMP,UI_PAGE} from './base/constants/TFTools';
+import {UI_COMP,UI_PAGE} from './base/constants/TFTools';
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
   var userProfile ='{\r\n   \"userId\":\"001907\",\r\n   \"firstName\":\"Isreal\",\r\n   \"lastName\":\"Fullerton\",\r\n   \"dataset\":\"EPI_VINIT\",\r\n   \"securitytokn\":\"fhfh484jer843je848rj393jf\",\r\n   \"branding\":\"base64ImageData\",\r\n   \"userTheme\":\"Default\",\r\n   \"roles\":[\r\n      \"ER\"\r\n   ],\r\n   \"applications\":[\r\n      {\r\n         \"id\":\"73b9a516-c0ca-43c0-b0ae-190e08d77bcc\",\r\n         \"name\":\"TFTools\",\r\n         \"accessIds\":[\r\n            {\r\n               \"id\":\"162ebe14-8d87-44e1-a786-c9365c9d5cd8\",\r\n               \"visible\":true\r\n            }\r\n         ],\r\n         \"permissions\":{\r\n            \"CT\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"CP\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"UQ\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   ],\r\n   \"themeList\":[\r\n      {\r\n         \"id\":\"Default\",\r\n         \"name\":\"Default\"\r\n      },\r\n      {\r\n         \"id\":\"HighContrast\",\r\n         \"name\":\"High Contrast\"\r\n      },\r\n      {\r\n         \"id\":\"WhiteOnBlack\",\r\n         \"name\":\"White On Black\"\r\n      },\r\n      {\r\n         \"id\":\"BlackOnWhite\",\r\n         \"name\":\"Black On White\"\r\n      }\r\n   ]\r\n}';
@@ -33,7 +33,7 @@ let usrobj = JSON.parse(sessionStorage.getItem("up"));
 var dataset = usrobj.dataset;
 var userId = usrobj.userId;
 setModulePermissions(usrobj.applications);
-let moduleAreas = TFUtils.buildModuleAreaLinks(usrobj.applications);
+let moduleAreas = buildModuleAreaLinks(usrobj.applications);
 console.log('moduleAreas');
 console.log(moduleAreas);
 /**
@@ -45,12 +45,6 @@ console.log(moduleAreas);
 function renderTFApplication(elem, renderName) {
   setAppAnchor(elem);
   setAppUserIDAndDataset(dataset, userId);
-  console.log("elem");
-  console.log(elem);
-  console.log("renderName");
-  console.log(renderName);
-  console.log("moduleAreas");
-  console.log(moduleAreas);
   if (renderName === rname.RN_TF_HOME) {
     ReactDOM.render(
       <Provider store={store}>
@@ -79,7 +73,7 @@ function renderComponent(elem,pageid,pid){
   ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
   ReactDOM.render(
     <Provider store={store}>
-      <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} dataurl={dataURL} help={TFUtils.openHelp}/>
+      <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} dataurl={dataURL} help={openHelp}/>
     </Provider>,
     document.querySelector("#" + elem)
   );
@@ -93,29 +87,10 @@ function renderPage(elem, pageid,pid) {
   if (pageid == "userDataQueries") {
     ReactDOM.render(
       <Provider store={store}>
-        <UserDataQueries help={TFUtils.openHelp}/>
+        <UserDataQueries help={openHelp}/>
       </Provider>,
       document.querySelector("#" + elem)
     );
-  }
-}
-
-/**
- * compMetaData
- * @param {*} pageid 
- */
-function compMetaData(pageid){
-  let metadataMap = metadatamap.find(metadatam => { if (pageid == metadatam.id) return metadatam});
-  return metadataMap.metadata;
-}
-/**
- * compPermissions
- * @param {*} pid 
- */
-function compPermissions(pid) {
-  let perms = getAllRights();
-  if (perms.hasOwnProperty(pid)) {
-    return TFUtils.setPerms(perms[pid]);
   }
 }
 /**
@@ -152,34 +127,14 @@ function editClick(index) {
 console.log(dataRecord)
 store.dispatch(setFormData(dataRecord))
 }
-
 /**
  * renderTFHome
+ * @param {*} elem 
  */
-
-function renderNewPage(page){
-  ReactDOM.render(
-    <Provider store={store}>
-      <Welcome />
-    </Provider>,
-    document.querySelector("#" + elem)
-  );
-}
-
-
-function renderTFHome(elem) {
+ function renderTFHome(elem) {
   ReactDOM.render(
     <Provider store={store}>
       <TFHome />
-    </Provider>,
-    document.querySelector("#" + elem)
-  );
-}
-
-function renderWelcome(elem) {
-  ReactDOM.render(
-    <Provider store={store}>
-      <Welcome />
     </Provider>,
     document.querySelector("#" + elem)
   );
@@ -206,19 +161,19 @@ function setAppUserIDAndDataset(dataset, userid) {
 }
 var CP_RIGHTS,CT_RIGHTS,UQ_RIGHTS,ALL_RIGHTS;
 function setCPRights(perm){
-  CP_RIGHTS=TFUtils.setPerms(perm);
+  CP_RIGHTS= setPerms(perm);
 }
 function hasCPRights(){
     return CP_RIGHTS;
 }
 function setCTRights(perm){
-  CT_RIGHTS=TFUtils.setPerms(perm);
+  CT_RIGHTS=setPerms(perm);
 }
 function hasCTRights(){
     return CT_RIGHTS;
 }
 function setUQRights(perm){
-  UQ_RIGHTS=TFUtils.setPerms(perm);
+  UQ_RIGHTS=setPerms(perm);
 }
 function hasUQRights(){
     return UQ_RIGHTS;
@@ -382,6 +337,9 @@ window.hasCTRights = hasCTRights;
 
 module.exports = hasUQRights;
 window.hasUQRights = hasUQRights;
+
+module.exports = getAllRights;
+window.getAllRights = getAllRights;
 
 module.exports = onloadPdfData;
 window.onloadPdfData = onloadPdfData;

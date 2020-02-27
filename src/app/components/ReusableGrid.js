@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { closeForm, setFormData} from "../home/actions/formActions";
 import Modal from "./Modal";
 import {pagetitle,helpicon} from '../../base/constants/AppConstants';
-import RenderForm from '../../base/utils/RenderForm';
+import renderForm from '../../base/utils/renderForm';
 import {
   Col,
   Row,
@@ -98,7 +98,7 @@ class ReusableGrid extends React.Component {
     const toggle = this.toggle;
     const change = this.handleChange;
     const { pgid } = this.state;
-    const form = RenderForm(toggle, change, pgid, permissions)
+    const form = renderForm(toggle, change, pgid, permissions)
     return form;
   }
 

@@ -17,7 +17,7 @@ import {
   favoriteListStyle
 } from "../../css/sidebar-css";
 import { getFavoriteLinks, saveFavoriteLinks } from "./favoriteLinksActions";
-import { setModuleLinks } from "./moduleLinksActions";
+import { setModuleLinks } from "./actions/moduleLinksActions";
 import {
   Card,
   Row,

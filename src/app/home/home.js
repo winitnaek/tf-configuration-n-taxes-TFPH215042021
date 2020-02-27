@@ -10,7 +10,7 @@ let store = configureStore();
 import { fetchLinks } from "./getLinks";
 
 
-import { setModuleLinks } from "./moduleLinksActions";
+import { setModuleLinks } from "./actions/moduleLinksActions";
 import Sidebar from './Sidebar';
 class TFHome extends Component {
   constructor(props) {

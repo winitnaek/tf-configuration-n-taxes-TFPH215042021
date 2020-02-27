@@ -1,15 +1,6 @@
-import {GET_MODULE_LINKS ,SET_MODULE_LINKS} from '../../../base/constants/ModuleLinksConstants';
-
-export const getModuleLinks = () => {
-    return  {
-        type: GET_MODULE_LINKS,
-    }   
-}
-
-export const setModuleLinks = (payload) => {
-    console.log(payload)
-    return  {
-        type: SET_MODULE_LINKS,
-        payload: payload
-    }   
+import * as types from "../../../base/constants/ActionTypes";
+export function setModuleAreas(moduleAreas) {
+    return {
+        type: types.SET_MODULE_AREAS,moduleAreas
+    };
 }
