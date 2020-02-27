@@ -3,7 +3,7 @@ import { Col, Row, Button,UncontrolledTooltip, } from "reactstrap";
 import {tftools} from '../../base/constants/TFTools';
 const allBSIPlans = "allBSIPlans";
 const populateV3States = "populateV3States";
-
+import {pagetitle,helpicon} from '../../base/constants/AppConstants';
 const TitleStyle = {
   margin: "0 auto",
   paddingBottom: "50px"
@@ -38,21 +38,15 @@ class UserDataQueries extends React.Component {
   render() {
     return (
       <Fragment>
-      <Row>
-          <h1
-            style={{
-              fontWeight: "bold",
-              fontSize: "1.5em"
-            }}
-          >
-            {this.state.title}
-          </h1>
+        <Row>
+          <h1 style={pagetitle}>{this.state.title}</h1>
           <span style={{ marginLeft: "10px" }}>
             <span id="help">
               <span>
                 <i
-                  className="fas fa-question-circle  fa-1.5x"
+                  className="fas fa-question-circle  fa-lg"
                   onClick={this.OpenHelp}
+                  style={helpicon}
                 />
               </span>
             </span>
@@ -61,22 +55,25 @@ class UserDataQueries extends React.Component {
             </UncontrolledTooltip>
           </span>
         </Row>
-      <Row>
-        <Col>
-          <h3>
-            <Button color="link" onClick={() => this.renderMe(allBSIPlans)}>
-              All BSI Plan
-            </Button>
-          </h3>
-        </Col>
-        <Col>
-          <h3>
-            <Button color="link" onClick={() => this.renderMe(populateV3States)}>
-              V3 Polulated States
-            </Button>
-          </h3>
-        </Col>
-      </Row>
+        <Row>
+          <Col>
+            <h3>
+              <Button color="link" onClick={() => this.renderMe(allBSIPlans)}>
+                All BSI Plan
+              </Button>
+            </h3>
+          </Col>
+          <Col>
+            <h3>
+              <Button
+                color="link"
+                onClick={() => this.renderMe(populateV3States)}
+              >
+                V3 Polulated States
+              </Button>
+            </h3>
+          </Col>
+        </Row>
       </Fragment>
     );
   }
