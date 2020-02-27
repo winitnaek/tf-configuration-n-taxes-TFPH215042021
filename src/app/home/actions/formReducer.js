@@ -2,14 +2,7 @@
 import  {SET_FORM_DATA, CLOSE_FORM} from '../../../base/constants/ActionTypes'//       base/constants/ActionTypes';
 import StateManager from "react-select";
 
-const initialState = {
-  data: {customPaymentCode: " ",
-        customPaymentName: " ",
-        paymentType: "Custom Earnings",
-        taxability: "Non-Taxable",
-        eeMax: "",
-        aggStatus: "",},
-      };
+const initialState = {  data: {},  isOpen: false, };
 
 function formReducer(state = initialState, action) {
   console.log(action.type);

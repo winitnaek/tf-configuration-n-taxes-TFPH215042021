@@ -4,43 +4,55 @@
     "customTaxName": "Custom code 1"
   },
 {
-    "customTaxCode": "Code1",
-    "customTaxName": "Custom code 1"
+    "customTaxCode": "Code2",
+    "customTaxName": "Custom code 2"
   },
 {
-    "customTaxCode": "Code1",
-    "customTaxName": "Custom code 1"
+    "customTaxCode": "Code3",
+    "customTaxName": "Custom code 3"
   },
 {
-    "customTaxCode": "Code1",
-    "customTaxName": "Custom code 1"
+    "customTaxCode": "Code3",
+    "customTaxName": "Custom code 3"
   },
 {
-    "customTaxCode": "Code1",
-    "customTaxName": "Custom code 1"
+    "customTaxCode": "Code4",
+    "customTaxName": "Custom code 4"
   },
 {
-    "customTaxCode": "Code1",
-    "customTaxName": "Custom code 1"
+    "customTaxCode": "Code4",
+    "customTaxName": "Custom code 4"
   },
 {
-    "customTaxCode": "Code1",
-    "customTaxName": "Custom code 1"
+    "customTaxCode": "Code5",
+    "customTaxName": "Custom code 5"
   },
 {
-    "customTaxCode": "Code1",
-    "customTaxName": "Custom code 1"
+    "customTaxCode": "Code6",
+    "customTaxName": "Custom code 6"
   },
 {
-    "customTaxCode": "Code1",
-    "customTaxName": "Custom code 1"
+    "customTaxCode": "Code7",
+    "customTaxName": "Custom code 7"
   },
 {
-    "customTaxCode": "Code1",
-    "customTaxName": "Custom code 1"
+    "customTaxCode": "Code8",
+    "customTaxName": "Custom code 8"
   },
 {
-    "customTaxCode": "Code1",
-    "customTaxName": "Custom code 1"
+    "customTaxCode": "Code9",
+    "customTaxName": "Custom code 9"
+  },
+  {
+    "customTaxCode": "Code10",
+    "customTaxName": "Custom code 10"
+  },
+  {
+    "customTaxCode": "Code11",
+    "customTaxName": "Custom code 11"
+  },
+  {
+    "customTaxCode": "Code12",
+    "customTaxName": "Custom code 12"
   }
 ]

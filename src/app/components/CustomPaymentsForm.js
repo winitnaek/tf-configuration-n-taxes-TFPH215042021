@@ -85,13 +85,7 @@ class CustomPaymentsForm extends Component {
   componentDidMount() {
     if (this.props.data) {
       console.log(this.props.data.taxability)
-      const {
-        customPaymentCode,
-        customPaymentName,
-        paymentType,
-        taxability,
-        eeMax
-      } = this.props.data;
+   
 
       this.setState({
         customPaymentCode: this.props.data.customPaymentCode,

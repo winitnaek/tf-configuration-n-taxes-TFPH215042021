@@ -5,6 +5,7 @@ import { closeForm, setFormData} from "../home/actions/formActions";
 import Modal from "./Modal";
 import {pagetitle,helpicon} from '../../base/constants/AppConstants';
 import renderForm from '../../base/utils/renderForm';
+import getFormFields from '../../base/utils/getFormFields';
 import {
   Col,
   Row,
@@ -58,14 +59,7 @@ class ReusableGrid extends React.Component {
     this.handleNewForm = e => {
       e.preventDefault();
       console.log("Opening new form");
-      this.setState({ isOpen: true });
-      const payload = {
-        customPaymentCode: " ",
-        customPaymentName: " ",
-        paymentType: "Custom Earnings",
-        taxability: "Non-Taxable",
-        eeMax: ""
-      };
+      const payload = getFormFields(this.state.pgid)
       this.props.setFormData(payload)
     };
 
@@ -86,7 +80,7 @@ class ReusableGrid extends React.Component {
 
   exportToExcel() {
     this.refs.reusableGrid.exportdata("xls", "reusableGrid");
-    console.log(this.refs.reusableGrid);
+    console.log(this.refs.reusableGrid.clipboard());
   }
 
   exportToCsv() {
@@ -219,6 +213,7 @@ class ReusableGrid extends React.Component {
             columns={newColumns}
             pageable={true}
             autoheight={true}
+            selectionmode="multiplerows"
             style={{ color: "black", marginTop: "10px" }}
           />
         </Row>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Select from "./Select";
+import { connect } from "react-redux";
 import Input from "./SingleInput";
 import {
   Form,
@@ -9,10 +9,10 @@ import {
   Col,
   Row,
   ModalBody,
-  ModalFooter,
+  ModalFooter
 } from "reactstrap";
 
-class CustomPaymentsForm extends Component {
+class CustomTaxCodesForm extends Component {
   constructor(props) {
     super(props);
 
@@ -22,11 +22,11 @@ class CustomPaymentsForm extends Component {
     };
 
     this.resetForm = () => {
-      this.setState({ 
+      this.setState({
         customTaxCode: "",
-        customTaxName: "",
-          });
-    }
+        customTaxName: ""
+      });
+    };
 
     this.handleChange = event => {
       const target = event.target;
@@ -42,66 +42,57 @@ class CustomPaymentsForm extends Component {
     this.handleSubmit = () => {
       const payload = this.state;
       console.log(payload);
-      this.props.close()
+      this.props.close();
     };
   }
 
-  render() {
+  componentDidMount() {
+    if (this.props.data) {
+      const { customTaxCode, customTaxName } = this.props.data;
 
+      this.setState({
+        customTaxCode,
+        customTaxName
+      });
+    }
+  }
+
+  render() {
     return (
       <Container>
         <ModalBody>
-        <Form
-          onSubmit={this.handleSubmit}
-          style={{ marginTop: "25px" }}
-        >
-          <Row style={{margin: "0 auto", width: "26%"}}>
-            <p style={{ fontWeight: "bold",  }}> Enter Custom Tax Codes </p>
-          </Row>
+          <Form onSubmit={this.handleSubmit} style={{ marginTop: "25px" }}>
+            <Row style={{ margin: "0 auto", width: "26%" }}>
+              <p style={{ fontWeight: "bold" }}> Enter Custom Tax Codes </p>
+            </Row>
 
-          <Row  style={{  width: "69%", margin: "10px auto" }}>
-            <FormGroup>
-              <Input
-                id="customTaxCode"
-                inputType={"text"}
-                title={"Custom Tax Code *"}
-                name={"customTaxCode"}
-                required={true}
-                onChange={this.handleChange}
-                value={this.state.customTaxCode}
-                placeholder={"Enter Custom Tax Code "}
-                feedback={"Text input is required!"}
-              />
-            </FormGroup>
-            <FormGroup>
-              {/* <Input
-                id="customTaxName"
-                inputType={"text"}
-                title={"Custom Tax Name *"}
-                name={"customTaxName"}
-                required={true}
-                onChange={this.handleChange}
-                value={this.state.customTaxName}
-                placeholder={"Enter Custom Tax Name "}
-                feedback={"Text input is required!"}
-                // type="text"
-                // name="customTaxName"
-                // value={this.state.customTaxName}
-                // onChange={this.handleChange}
-              /> */}
-
-              <Input
-                inputType={"text"}
-                title={"Custom Tax Name *"}
-                name={"customTaxName"}
-                onChange={this.handleChange}
-                value={this.state.customTaxName}
-                placeholder={"Enter Custom Tax Name"}
-                feedback={"Text input is required!"}
-              />
-            </FormGroup>
-          </Row>
-        </Form>
+            <Row style={{ width: "69%", margin: "10px auto" }}>
+              <FormGroup>
+                <Input
+                  id="customTaxCode"
+                  inputType={"text"}
+                  title={"Custom Tax Code *"}
+                  name={"customTaxCode"}
+                  required={true}
+                  onChange={this.handleChange}
+                  value={this.state.customTaxCode}
+                  placeholder={"Enter Custom Tax Code "}
+                  feedback={"Text input is required!"}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  inputType={"text"}
+                  title={"Custom Tax Name *"}
+                  name={"customTaxName"}
+                  onChange={this.handleChange}
+                  value={this.state.customTaxName}
+                  placeholder={"Enter Custom Tax Name"}
+                  feedback={"Text input is required!"}
+                />
+              </FormGroup>
+            </Row>
+          </Form>
         </ModalBody>
         <ModalFooter>
           <Button
@@ -118,6 +109,11 @@ class CustomPaymentsForm extends Component {
           >
             Reset
           </Button>
+          {this.props.permissions.DELETE && (
+            <Button onClick={this.handleDelete} color="danger">
+              Delete
+            </Button>
+          )}
           <Button onClick={this.handleSubmit} color="success">
             Submit
           </Button>
@@ -127,4 +123,10 @@ class CustomPaymentsForm extends Component {
   }
 }
 
-export default CustomPaymentsForm;
+function mapStateToProps(state) {
+  return {
+    data: state.formData.data
+  };
+}
+
+export default connect(mapStateToProps, null)(CustomTaxCodesForm);

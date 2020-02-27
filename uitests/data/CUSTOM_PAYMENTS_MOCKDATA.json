@@ -2,15 +2,15 @@
     {
       "customPaymentCode": "Code1",
       "customPaymentName": "Custom code 1",
-      "paymentType": "I",
-      "taxability": "Taxable",
+      "paymentType": "Custom Earnings",
+      "taxability": "Taxable/Exclude",
       "eeMax": "0.00",
       "aggStatus": "N/A"
     },
     {
       "customPaymentCode": "Cod 57",
       "customPaymentName": "Custom Code 2",
-      "paymentType": "II",
+      "paymentType": "Custom Benefit Plan",
       "taxability": "Non-Taxable",
       "eeMax": "8,500.00",
       "aggStatus": "Pending"
@@ -18,23 +18,23 @@
     {
       "customPaymentCode": "Code3",
       "customPaymentName": "Custom Code 3",
-      "paymentType": "III",
-      "taxability": "Taxable",
+      "paymentType": "Custom Benefit Plan",
+      "taxability": "Taxable/Exclude",
       "eeMax": "9,500.00",
       "aggStatus": "Completed"
     },
     {
       "customPaymentCode": "Code1",
       "customPaymentName": "Custom code 1",
-      "paymentType": "I",
-      "taxability": "Taxable",
+      "paymentType": "Custom Earnings",
+      "taxability": "Imputed",
       "eeMax": "0.00",
       "aggStatus": "N/A"
     },
     {
       "customPaymentCode": "Code57",
       "customPaymentName": "Custom Code 2",
-      "paymentType": "II",
+      "paymentType": "Custom Benefit Plan",
       "taxability": "Non-Taxable",
       "eeMax": "8,500.00",
       "aggStatus": "Pending"
@@ -42,23 +42,23 @@
     {
       "customPaymentCode": "Code3",
       "customPaymentName": "Custom Code 3",
-      "paymentType": "III",
-      "taxability": "Taxable",
+      "paymentType": "Custom Benefit Plan",
+      "taxability": "Limit-YTD",
       "eeMax": "9,500.00",
       "aggStatus": "Completed"
     },
     {
       "customPaymentCode": "Code1",
       "customPaymentName": "Custom code 1",
-      "paymentType": "I",
-      "taxability": "Taxable",
+      "paymentType": "Custom Earnings",
+      "taxability": "Taxable/Exclude",
       "eeMax": "0.00",
       "aggStatus": "N/A"
     },
     {
       "customPaymentCode": "Code2",
       "customPaymentName": "Custom Code 2",
-      "paymentType": "II",
+      "paymentType": "Custom Benefit Plan",
       "taxability": "Non-Taxable",
       "eeMax": "8,500.00",
       "aggStatus": "Pending"
@@ -66,23 +66,23 @@
     {
       "customPaymentCode": "Code3",
       "customPaymentName": "Custom Code 3",
-      "paymentType": "III",
-      "taxability": "Taxable",
+      "paymentType": "Custom Benefit Plan",
+      "taxability": "Taxable/Exclude",
       "eeMax": "9,500.00",
       "aggStatus": "Completed"
     },
     {
       "customPaymentCode": "Code1",
       "customPaymentName": "Custom code 1",
-      "paymentType": "I",
-      "taxability": "Taxable",
+      "paymentType": "Custom Earnings",
+      "taxability": "Taxable/Exclude",
       "eeMax": "0.00",
       "aggStatus": "N/A"
     },
     {
       "customPaymentCode": "Code2",
       "customPaymentName": "Custom Code 2",
-      "paymentType": "II",
+      "paymentType": "Custom Benefit Plan",
       "taxability": "Non-Taxable",
       "eeMax": "8,500.00",
       "aggStatus": "Pending"
@@ -90,8 +90,8 @@
     {
       "customPaymentCode": "Code3",
       "customPaymentName": "Custom Code 3",
-      "paymentType": "III",
-      "taxability": "Taxable",
+      "paymentType": "Custom Benefit Plan",
+      "taxability": "Taxable/Exclude",
       "eeMax": "9,500.00",
       "aggStatus": "Completed"
     }
