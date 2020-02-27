@@ -78,7 +78,7 @@ function renderComponent(elem,pageid,pid){
   ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
   ReactDOM.render(
     <Provider store={store}>
-      <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} dataurl={dataURL}/>
+      <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} dataurl={dataURL} help={TFUtils.openHelp}/>
     </Provider>,
     document.querySelector("#" + elem)
   );
@@ -92,7 +92,7 @@ function renderPage(elem, pageid,pid) {
   if (pageid == "userDataQueries") {
     ReactDOM.render(
       <Provider store={store}>
-        <UserDataQueries />
+        <UserDataQueries help={TFUtils.openHelp}/>
       </Provider>,
       document.querySelector("#" + elem)
     );

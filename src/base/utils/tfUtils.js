@@ -33,5 +33,8 @@ class tfUtils {
     };
     return appperm;
   }
+  static openHelp(pageid){
+    window.open('/help/'+pageid,'_blank');
+  }
 }
 export default tfUtils;

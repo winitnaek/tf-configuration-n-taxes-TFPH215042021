@@ -65,7 +65,7 @@ class ReusableGrid extends React.Component {
       console.log(this.refs.reusableGrid.getrowdata(0));
     };
     this.OpenHelp = () => {
-      window.open('/help/'+this.state.pgid,'_blank');
+      this.props.help(this.state.pgid);
     };
 
     this.toggle = () => {

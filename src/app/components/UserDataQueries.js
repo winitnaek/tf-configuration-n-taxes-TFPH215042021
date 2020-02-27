@@ -26,7 +26,7 @@ class UserDataQueries extends React.Component {
       isOpen: false
     };
     this.OpenHelp = () => {
-      window.open("https://www.w3schools.com")
+      this.props.help('userDataQueries');
     };
   }
   renderMe(pgid) {
