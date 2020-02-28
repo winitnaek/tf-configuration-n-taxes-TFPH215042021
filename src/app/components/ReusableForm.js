@@ -20,7 +20,7 @@ class ReusableForm extends Component {
     this.state = {};
   }
   render() {
-      console.log(this.props.showDelete)
+      console.log(this.props.delete)
     return (
       <Container>
         <ModalBody>
@@ -49,7 +49,7 @@ class ReusableForm extends Component {
           </Button>
 
           {this.props.showDelete && this.props.deletePermission && (
-            <Button onClick={this.props.delete} color="danger">
+            <Button onClick={e => this.props.delete()} color="danger">
               Delete
             </Button>
           )}

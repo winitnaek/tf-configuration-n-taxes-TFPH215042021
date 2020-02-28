@@ -70,6 +70,17 @@ class ReusableGrid extends React.Component {
       this.props.closeForm()
     };
 
+    this.deleteRow = () => {
+      const {index} = this.props.index
+      let _id = document.querySelector("div[role='grid']").id;
+      console.log(index)
+
+      const rowid = $('#' + _id).jqxGrid('getrowid', index);
+     $('#' + _id).jqxGrid('deleterow', rowid);
+    //   $('#' + _id).jqxGrid('refresh')
+      console.log('Deleting row from grid')
+     }
+
     // this.handleClick = this.handleClick.bind(this);
   }
 
@@ -86,6 +97,12 @@ class ReusableGrid extends React.Component {
     this.refs.reusableGrid.exportdata("csv", "reusableGrid");
   }
 
+  copyToClipboard() {
+    this.refs.reusableGrid.selectallrows();
+    //   trigger ctrl-C
+    // Flash message that data has been copied to clipboard
+  }
+
   handleForm() {
     let permissions = this.props.permissions(this.props.pid)
     const toggle = this.toggle;
@@ -96,9 +113,6 @@ class ReusableGrid extends React.Component {
     return form;
   }
 
-  deleteRow(index) {
-    this.refs.reusableGrid.deleteRow(index)
-  }
 
   handleRowData(index) {
     console.log(`The row index is ${index}`);
@@ -256,7 +270,8 @@ class ReusableGrid extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.formData.data,
-    isOpen: state.formData.isOpen
+    isOpen: state.formData.isOpen,
+    index: state.formData
   };
 }
 

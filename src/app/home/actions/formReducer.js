@@ -7,10 +7,10 @@ function formReducer(state = initialState.formData, action) {
   console.log(action.data)
   switch (action.type) {
     case SET_FORM_DATA:
-      return {data: action.data.formData, mode: action.data.mode, isOpen: true}
+      return {data: action.data.formData, mode: action.data.mode, isOpen: true, index: action.data.index}
       break;
     case CLOSE_FORM:
-      return initialState;
+      return initialState.formData;
       break;
     default:
       return state;

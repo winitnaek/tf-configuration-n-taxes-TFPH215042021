@@ -22,7 +22,7 @@ export default {
       },
     ],
 
-    formData: {  data: {},  isOpen: false, mode: "New" }
+    formData: {  data: {},  isOpen: false, mode: "New", index: null }
   
 };
 

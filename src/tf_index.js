@@ -124,7 +124,7 @@ function editClick(index) {
  let dataRecord = $('#' + _id).jqxGrid('getrowdata', index); 
 
 console.log(dataRecord)
-const data = {formData: dataRecord, mode: "Edit"}
+const data = {formData: dataRecord, mode: "Edit", index: index}
 store.dispatch(setFormData(data))
 }
 /**
