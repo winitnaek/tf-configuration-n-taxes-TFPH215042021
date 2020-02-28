@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import { subTitle, modal } from "../../base/constants/AppConstants";
 
 class reusableModal extends Component {
   constructor(props) {
@@ -7,25 +8,19 @@ class reusableModal extends Component {
     this.state = {};
   }
 
-
- 
-
-
-  
   render() {
-    console.log(this.props);
+    console.log(this.props.cruddef);
     return (
       <Modal
         isOpen={this.props.open}
         toggle={e => this.props.close()}
         size="lg"
-        style={{ width: "1400px", marginTop: "175px" }}
+        style={modal}
       >
-        <ModalHeader
-          toggle={e => this.props.close()}
-        >
-         <span> {this.props.title} </span>
+        <ModalHeader toggle={e => this.props.close()}>
+          <span> {this.props.title} </span>
         </ModalHeader>
+        <p style={subTitle}> {this.props.cruddef.subtitle} </p>
         {this.props.children}
       </Modal>
     );

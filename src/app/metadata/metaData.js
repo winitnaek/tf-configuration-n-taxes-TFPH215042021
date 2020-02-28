@@ -157,7 +157,7 @@ export const customPayments = {
 	},
 	"cruddef": {
 		"title":"Custom Payments",
-		"sbutitle":"Note: Required fields are marked with an asterisk (*)",
+		"subtitle":"Note: Required fields are marked with an asterisk (*)",
 		"hasSave":true,
 		"hasDelete":false,
 		"hasSaveAs":false,
@@ -221,7 +221,7 @@ export const customTaxCodes = {
 	},
 	"cruddef": {
 		"title":"Custom Payments",
-		"sbutitle":"Note: Required fields are marked with an asterisk (*)",
+		"subtitle":"Note: Required fields are marked with an asterisk (*)",
 		"hasSave":true,
 		"hasDelete":false,
 		"hasSaveAs":false,

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Select from "./Select";
 import Input from "./SingleInput";
+import {modalBody} from '../../base/constants/AppConstants';
 import {
   Form,
   FormGroup,
@@ -26,7 +27,7 @@ class ReusableForm extends Component {
         <ModalBody>
           <Form
             onSubmit={this.props.submit}
-            style={{ display: "flex", marginTop: "25px" }}
+            style={modalBody}
           >
             {this.props.children}
           </Form>

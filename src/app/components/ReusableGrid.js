@@ -105,6 +105,7 @@ class ReusableGrid extends React.Component {
 
   handleForm() {
     const cruddef = this.state.cruddef
+    console.log(this.state.cruddef)
     const permissions = this.props.permissions(this.props.pid)
     const close = this.toggle;
     const deleteRow = this.deleteRow;

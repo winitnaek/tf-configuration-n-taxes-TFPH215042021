@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReusableForm from "./ReusableForm";
 import Input from "./SingleInput";
+import { bold } from "../../base/constants/AppConstants";
 import {
   Col,
 } from "reactstrap";
@@ -80,7 +81,7 @@ class CustomTaxCodesForm extends Component {
       >
        <Col sm="2"/>
         <Col sm="8">
-        <p style={{ fontWeight: "bold" }}> Enter Custom Tax Codes </p>
+        <p style={bold}> Enter Custom Tax Codes </p>
             <Input
               id="customTaxCode"
               inputType={"text"}
