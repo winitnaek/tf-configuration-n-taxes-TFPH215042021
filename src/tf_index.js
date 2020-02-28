@@ -16,7 +16,6 @@ import { setFormData} from './app/home/actions/formActions';
 import {setModuleAreas} from './app/home/actions/moduleLinksActions';
 import ReusableGrid from "./app/components/ReusableGrid";
 import UserDataQueries from "./app/components/UserDataQueries";
-import HelpPage from './app/home/HelpPage';
 import {UI_COMP,UI_PAGE} from './base/constants/TFTools';
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {

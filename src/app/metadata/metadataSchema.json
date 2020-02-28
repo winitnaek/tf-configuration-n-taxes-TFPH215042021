@@ -1,0 +1,388 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/schema#",
+  "id": "http://jsonschema.net",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": ["pgdef", "griddef", "cruddef"],
+  "properties": {
+    "pgdef": {
+      "id": "http://jsonschema.net/pgdef",
+      "type": "object",
+      "title": "The Pgdef Schema",
+      "required": [
+        "pgid",
+        "pgtitle",
+        "pgsubtitle",
+        "flowtype",
+        "hasAddNew",
+        "addNewLabel",
+        "actiondel",
+        "helpAvailable",
+        "helpLblTxt",
+        "helpLink"
+      ],
+      "properties": {
+        "pgid": {
+          "id": "http://jsonschema.net/pgid",
+          "type": "string",
+          "title": "The Pgid Schema",
+          "default": "",
+          "examples": ["customPayments"],
+          "pattern": "^[a-zA-Z0-9]{4,50}$"
+        },
+        "pgtitle": {
+          "id": "http://jsonschema.net/pgtitle",
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 100
+        },
+        "pgsubtitle": {
+          "id": "http://jsonschema.net/pgsubtitle",
+          "type": "string",
+          "title": "The Pgsubtitle Schema",
+          "minLength": 10,
+          "maxLength": 200
+        },
+        "flowtype": {
+          "id": "http://jsonschema.net/flowtype",
+          "type": "string",
+          "title": "The Flowtype Schema",
+          "examples": ["flowtype1"],
+          "enum": ["flowtype1", "flowtype2"]
+        },
+        "hasAddNew": {
+          "id": "http://jsonschema.net/hasAddNew",
+          "type": "boolean",
+          "title": "The Hasaddnew Schema",
+          "default": false,
+          "examples": [true]
+        },
+        "addNewLabel": {
+          "id": "http://jsonschema.net/addNewLabel",
+          "type": "string",
+          "title": "The Addnewlabel Schema",
+          "examples": ["Click here to add new Custom Payment."]
+        },
+        "actiondel": {
+          "id": "http://jsonschema.net/actiondel",
+          "type": "boolean",
+          "title": "The Actiondel Schema",
+          "default": false,
+          "examples": [false]
+        },
+        "helpAvailable": {
+          "id": "http://jsonschema.net/helpAvailable",
+          "type": "boolean",
+          "title": "The Helpavailable Schema",
+          "default": false,
+          "examples": [true]
+        },
+        "helpLblTxt": {
+          "id": "http://jsonschema.net/helpLblTxt",
+          "type": "string",
+          "title": "The Helplbltxt Schema",
+          "examples": ["Click here for more info!"]
+        },
+        "helpLink": {
+          "id": "http://jsonschema.net/helpLink",
+          "type": "string",
+          "title": "The Helplink Schema",
+          "default": "",
+          "examples": ["/customPayments"]
+        },
+        "childConfig": {
+          "type": "object",
+          "properties": {
+            "parentpgid": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9]{4,50}$"
+            },
+            "parentTitle": {
+              "type": "string"
+            },
+            "childpgid": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9]{4,50}$"
+            },
+            "parentWithDataTitle": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "parentpgid",
+            "parentTitle",
+            "childpgid",
+            "parentWithDataTitle"
+          ]
+        }
+      }
+    },
+    "griddef": {
+      "id": "http://jsonschema.net/griddef",
+      "type": "object",
+      "title": "The Griddef Schema",
+      "required": [
+        "gridtype",
+        "filtergrid",
+        "datatype",
+        "contenttype",
+        "noResultsFoundTxt",
+        "recordEdit",
+        "recordDelete",
+        "columns",
+        "dataFields"
+      ],
+      "properties": {
+        "gridtype": {
+          "id": "http://jsonschema.net/gridtype",
+          "type": "string",
+          "title": "The Gridtype Schema",
+          "default": "",
+          "examples": ["type1"],
+          "enum": ["ro", "type1", "type2"]
+        },
+        "filtergrid": {
+          "id": "http://jsonschema.net/filtergrid",
+          "type": "boolean",
+          "title": "The Filtergrid Schema",
+          "default": false,
+          "examples": [false]
+        },
+        "datatype": {
+          "id": "http://jsonschema.net/datatype",
+          "type": "string",
+          "title": "The Datatype Schema",
+          "default": "",
+          "examples": ["json"],
+          "pattern": "^(.*)$"
+        },
+        "contenttype": {
+          "id": "http://jsonschema.net/contenttype",
+          "type": "string",
+          "title": "The Contenttype Schema",
+          "default": "",
+          "examples": ["application/json"],
+          "pattern": "^(.*)$"
+        },
+        "noResultsFoundTxt": {
+          "id": "http://jsonschema.net/noResultsFoundTxt",
+          "type": "string",
+          "title": "The Noresultsfoundtxt Schema",
+          "default": "",
+          "examples": ["No Data Found"],
+          "pattern": "^(.*)$"
+        },
+        "recordEdit": {
+          "id": "http://jsonschema.net/recordEdit",
+          "type": "boolean",
+          "title": "The Recordedit Schema",
+          "default": false,
+          "examples": [true]
+        },
+        "recordDelete": {
+          "id": "http://jsonschema.net/recordDelete",
+          "type": "boolean",
+          "title": "The Recorddelete Schema",
+          "default": false,
+          "examples": [false]
+        },
+        "columns": {
+          "id": "http://jsonschema.net/columns",
+          "type": "array",
+          "title": "The Columns Schema",
+          "items": {
+            "id": "http://jsonschema.net/columns/items",
+            "type": "object",
+            "title": "The Items Schema",
+            "required": [
+              "text",
+              "datafield",
+              "cellsalign",
+              "width",
+              "align",
+              "sortable",
+              "rendererInput",
+              "rendererStaticInput"
+            ],
+            "properties": {
+              "text": {
+                "id": "http://jsonschema.net/columns/items/properties/text",
+                "type": "string",
+                "title": "The Text Schema",
+                "default": "",
+                "examples": ["Custom Payment Code"],
+                "pattern": "^(.*)$"
+              },
+              "datafield": {
+                "id": "http://jsonschema.net/columns/items/properties/datafield",
+                "type": "string",
+                "title": "The Datafield Schema",
+                "default": "",
+                "examples": ["customPaymentCode"],
+                "pattern": "^(.*)$"
+              },
+              "cellsalign": {
+                "id": "http://jsonschema.net/columns/items/properties/cellsalign",
+                "type": "string",
+                "title": "The Cellsalign Schema",
+                "default": "",
+                "examples": ["center"],
+                "pattern": "^(.*)$"
+              },
+              "width": {
+                "id": "http://jsonschema.net/columns/items/properties/width",
+                "type": "string",
+                "title": "The Width Schema",
+                "default": "",
+                "examples": ["30%"],
+                "pattern": "^(.*)$"
+              },
+              "align": {
+                "id": "http://jsonschema.net/columns/items/properties/align",
+                "type": "string",
+                "title": "The Align Schema",
+                "default": "",
+                "examples": ["center"],
+                "pattern": "^(.*)$"
+              },
+              "sortable": {
+                "id": "http://jsonschema.net/columns/items/properties/sortable",
+                "type": "boolean",
+                "title": "The Sortable Schema",
+                "default": false,
+                "examples": [true]
+              },
+              "rendererInput": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "rendererStaticInput": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "dataFields": {
+          "id": "http://jsonschema.net/dataFields",
+          "type": "array",
+          "title": "The Datafields Schema",
+          "items": {
+            "id": "http://jsonschema.net/dataFields/items",
+            "type": "object",
+            "title": "The Items Schema",
+            "required": ["name", "type"],
+            "properties": {
+              "name": {
+                "id": "http://jsonschema.net/dataFields/items/properties/name",
+                "type": "string",
+                "title": "The Name Schema",
+                "default": "",
+                "examples": ["customPaymentCode"],
+                "pattern": "^(.*)$"
+              },
+              "type": {
+                "id": "http://jsonschema.net/dataFields/items/properties/type",
+                "type": "string",
+                "title": "The Type Schema",
+                "default": "",
+                "examples": ["string"],
+                "pattern": "^(.*)$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cruddef": {
+      "id": "http://jsonschema.net/cruddef",
+      "type": "object",
+      "title": "The Cruddef Schema",
+      "required": [
+        "title",
+        "sbutitle",
+        "hasSave",
+        "hasDelete",
+        "hasSaveAs",
+        "hasViewPDF",
+        "hasExit",
+        "hasRecentUsage"
+      ],
+      "properties": {
+        "title": {
+          "id": "http://jsonschema.net/title",
+          "type": "string",
+          "title": "The Title Schema",
+          "default": "",
+          "examples": ["Custom Payments"],
+          "pattern": "^(.*)$"
+        },
+        "sbutitle": {
+          "id": "http://jsonschema.net/sbutitle",
+          "type": "string",
+          "title": "The Sbutitle Schema",
+          "default": "",
+          "examples": ["Note: Required fields are marked"],
+          "pattern": "^(.*)$"
+        },
+        "hasSave": {
+          "id": "http://jsonschema.net/hasSave",
+          "type": "boolean",
+          "title": "The Hassave Schema",
+          "default": false,
+          "examples": [true]
+        },
+        "hasDelete": {
+          "id": "http://jsonschema.net/hasDelete",
+          "type": "boolean",
+          "title": "The Hasdelete Schema",
+          "default": false,
+          "examples": [false]
+        },
+        "hasSaveAs": {
+          "id": "http://jsonschema.net/hasSaveAs",
+          "type": "boolean",
+          "title": "The Hassaveas Schema",
+          "default": false,
+          "examples": [false]
+        },
+        "hasViewPDF": {
+          "id": "http://jsonschema.net/hasViewPDF",
+          "type": "boolean",
+          "title": "The Hasviewpdf Schema",
+          "default": false,
+          "examples": [false]
+        },
+        "hasExit": {
+          "id": "http://jsonschema.net/hasExit",
+          "type": "boolean",
+          "title": "The Hasexit Schema",
+          "default": false,
+          "examples": [true]
+        },
+        "hasRecentUsage": {
+          "id": "http://jsonschema.net/hasRecentUsage",
+          "type": "boolean",
+          "title": "The Hasrecentusage Schema",
+          "default": false,
+          "examples": [true]
+        }
+      }
+    }
+  }
+}
