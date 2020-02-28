@@ -25,3 +25,18 @@ export const modalBody = {
 }
 
 export const helpicon = { paddingTop: "7px", color: "#4c7392" };
+
+export const gridStyle = {
+  color: "black", marginTop: "10px" 
+}
+
+export const gridRowStyle = { marginTop: "10px" }
+export const gridLinkStyle = { marginLeft: "20px" }
+
+export const iconPaddingRight = {paddingRight: "0"}
+
+export const iconPaddingLeft = {paddingLeft: "0"}
+export const marginLeft10 = {marginLeft: "10px !important"}
+export const marginRight10 = {marginRight: "10px !important"}
+export const rowTop = {marginTop: "10px"}
+export const helpMargin = {marginLeft: "10px"}

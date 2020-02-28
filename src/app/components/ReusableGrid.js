@@ -1,10 +1,21 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { closeForm, setFormData} from "../home/actions/formActions";
+import { closeForm, setFormData } from "../home/actions/formActions";
 import Modal from "./Modal";
-import {pagetitle,helpicon} from '../../base/constants/AppConstants';
-import renderForm from '../../base/utils/renderForm';
+import {
+  pagetitle,
+  helpicon,
+  gridStyle,
+  gridRowStyle,
+  gridLinkStyle,
+  iconPaddingRight,
+  iconPaddingLeft,
+  marginRight10,
+  rowTop,
+  helpMargin,
+} from "../../base/constants/AppConstants";
+import renderForm from "../../base/utils/renderForm";
 import {
   Col,
   Row,
@@ -58,8 +69,8 @@ class ReusableGrid extends React.Component {
     this.handleNewForm = e => {
       e.preventDefault();
       console.log("Opening new form");
-      const payload = {data: {}, mode: "New"}
-      this.props.setFormData(payload)
+      const payload = { data: {}, mode: "New" };
+      this.props.setFormData(payload);
     };
 
     this.OpenHelp = () => {
@@ -67,19 +78,23 @@ class ReusableGrid extends React.Component {
     };
 
     this.toggle = () => {
-      this.props.closeForm()
+      this.props.closeForm();
     };
 
-    this.deleteRow = () => {
-      const {index} = this.props.index
-      let _id = document.querySelector("div[role='grid']").id;
-      console.log(index)
 
-      const rowid = $('#' + _id).jqxGrid('getrowid', index);
-     $('#' + _id).jqxGrid('deleterow', rowid);
-    //   $('#' + _id).jqxGrid('refresh')
-      console.log('Deleting row from grid')
-     }
+   
+
+
+    this.deleteRow = () => {
+      const { index } = this.props.index;
+      let _id = document.querySelector("div[role='grid']").id;
+      console.log(index);
+
+      const rowid = $("#" + _id).jqxGrid("getrowid", index);
+      $("#" + _id).jqxGrid("deleterow", rowid);
+      //   $('#' + _id).jqxGrid('refresh')
+      console.log("Deleting row from grid");
+    };
 
     // this.handleClick = this.handleClick.bind(this);
   }
@@ -97,24 +112,45 @@ class ReusableGrid extends React.Component {
     this.refs.reusableGrid.exportdata("csv", "reusableGrid");
   }
 
-  copyToClipboard() {
-    this.refs.reusableGrid.selectallrows();
+  copyToClipboard(event) {
+    event.preventDefault()
+    // this.refs.reusableGrid.selectallrows();
+    let _id = document.querySelector("div[role='grid']").id;
+     $("#" + _id).jqxGrid("selectallrows");
+     $("#" + _id).jqxGrid('focus')
     //   trigger ctrl-C
     // Flash message that data has been copied to clipboard
+
+    document.execCommand("copy")
+    console.log("All rows copied to clipboard");
+  }
+
+  selectAll (event) {
+    event.preventDefault()
+    // this.refs.reusableGrid.selectallrows
+    let _id = document.querySelector("div[role='grid']").id;
+    $("#" + _id).jqxGrid("selectallrows");
+    console.log('you just clicked select all')
+  }
+
+  unselectAll (event) {
+    event.preventDefault()
+    console.log('trying to unselect')
+    let _id = document.querySelector("div[role='grid']").id;
+    $("#" + _id).jqxGrid("clearselection")
   }
 
   handleForm() {
-    const cruddef = this.state.cruddef
-    console.log(this.state.cruddef)
-    const permissions = this.props.permissions(this.props.pid)
+    const cruddef = this.state.cruddef;
+    console.log(this.state.cruddef);
+    const permissions = this.props.permissions(this.props.pid);
     const close = this.toggle;
     const deleteRow = this.deleteRow;
     const change = this.handleChange;
     const { pgid } = this.state;
-    const form = renderForm(close, change, pgid, permissions, deleteRow)
+    const form = renderForm(close, change, pgid, permissions, deleteRow);
     return form;
   }
-
 
   handleRowData(index) {
     console.log(`The row index is ${index}`);
@@ -128,12 +164,10 @@ class ReusableGrid extends React.Component {
       url: this.state.gridDataUrl
     };
 
-
     const editCellsRenderer = ndex => {
       const pgid = this.state.pgid;
       return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick(${ndex})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
     };
-
 
     const source = new window.jqx.dataAdapter(dataSource);
     const editColumn = {
@@ -167,7 +201,7 @@ class ReusableGrid extends React.Component {
       <Fragment>
         <Row>
           <h1 style={pagetitle}>{this.state.title}</h1>
-          <span style={{ marginLeft: "10px" }}>
+          <span style={helpMargin}>
             <span id="help">
               <i
                 className="fas fa-question-circle  fa-lg"
@@ -180,48 +214,71 @@ class ReusableGrid extends React.Component {
             </UncontrolledTooltip>
           </span>
         </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col sm="11"></Col>
-            <Col sm="1" style={{ paddingRight: 0 }}>
-              {this.state.hasAddNew && (
-                <span
-                  style={
-                    (this.state.hasAddNew && this.state.actiondel) == true
-                      ? { paddingLeft: 10 }
-                      : { paddingLeft: 46 }
-                  }
-                >
-                  <span id="addNew">
-                    <a href="" onClick={this.handleNewForm}>
-                      <i className="fas fa-calendar-plus  fa-2x" />
-                    </a>
-                  </span>
-                  <UncontrolledTooltip placement="right" target="addNew">
-                    <span> {this.state.addNewLabel}</span>
-                  </UncontrolledTooltip>
+        <Row style={rowTop}>
+          <Col xs="1" style={iconPaddingLeft}>
+    
+            <span id="selectAll" style={{marginRight: "10px"}}>
+              <a href="" onClick={e => this.selectAll(e)}>
+                <i className="fas fa-check-square  fa-2x" />
+              </a>
+            </span>
+            <UncontrolledTooltip placement="right" target="selectAll">
+              <span> Select All </span>
+            </UncontrolledTooltip>
+        
+           
+            <span id="unselectAll">
+              <a href="" onClick={e => this.unselectAll(e)}  >
+                <span >
+                <i className="fas fa-redo-alt fa-2x" />
                 </span>
-              )}
-              {this.state.actiondel ? (
-                <span
-                  style={
-                    (this.state.hasAddNew && this.state.actiondel) == true
-                      ? { paddingLeft: 5 }
-                      : { paddingLeft: 46 }
-                  }
-                >
-                  <span id="delAll">
-                    <a href="" onClick="">
-                      <i className="fas fa-calendar-minus fa-2x" />
-                    </a>
-                  </span>
-                  <UncontrolledTooltip placement="right" target="delAll">
-                    <span> Delete All </span>
-                  </UncontrolledTooltip>
-                </span>
-              ) : null}
-            </Col>
-          </Row>
+              </a>
+            </span>
+            <UncontrolledTooltip placement="right" target="unselectAll">
+              <span> Unselect All </span>
+            </UncontrolledTooltip>
       
+          </Col>
+          <Col sm="10"></Col>
+          <Col sm="1" style={iconPaddingRight}>
+            {this.state.hasAddNew && (
+              <span
+                style={
+                  (this.state.hasAddNew && this.state.actiondel) == true
+                    ? { paddingLeft: 10 }
+                    : { paddingLeft: 46 }
+                }
+              >
+                <span id="addNew">
+                  <a href="" onClick={this.handleNewForm}>
+                    <i className="fas fa-calendar-plus  fa-2x" />
+                  </a>
+                </span>
+                <UncontrolledTooltip placement="right" target="addNew">
+                  <span> {this.state.addNewLabel}</span>
+                </UncontrolledTooltip>
+              </span>
+            )}
+            {this.state.actiondel ? (
+              <span
+                style={
+                  (this.state.hasAddNew && this.state.actiondel) == true
+                    ? { paddingLeft: 5 }
+                    : { paddingLeft: 46 }
+                }
+              >
+                <span id="delAll">
+                  <a href="" onClick="">
+                    <i className="fas fa-calendar-minus fa-2x" />
+                  </a>
+                </span>
+                <UncontrolledTooltip placement="right" target="delAll">
+                  <span> Delete All </span>
+                </UncontrolledTooltip>
+              </span>
+            ) : null}
+          </Col>
+        </Row>
 
         <Row>
           <Grid
@@ -234,11 +291,11 @@ class ReusableGrid extends React.Component {
             pageable={true}
             autoheight={true}
             selectionmode="multiplerows"
-            style={{ color: "black", marginTop: "10px" }}
+            style={gridStyle}
           />
         </Row>
 
-        <Row style={{ marginTop: "10px" }}>
+        <Row style={gridRowStyle}>
           <a href="#" id="exportToExcel" onClick={() => this.exportToExcel()}>
             <i class="fas fa-table fa-lg fa-2x"></i>
           </a>
@@ -249,12 +306,24 @@ class ReusableGrid extends React.Component {
             href="#"
             id="exportToCsv"
             onClick={() => this.exportToCsv()}
-            style={{ marginLeft: "20px" }}
+            style={gridLinkStyle}
           >
             <i class="fas fa-pen-square fa-lg fa-2x"></i>
           </a>
           <UncontrolledTooltip placement="right" target="exportToCsv">
             <span> Export to CSV </span>
+          </UncontrolledTooltip>
+
+          <a
+            href="#"
+            id="copyToClipboard"
+            onClick={e => this.copyToClipboard(e)}
+            style={gridLinkStyle}
+          >
+            <i class="far fa-copy fa-lg fa-2x"></i>
+          </a>
+          <UncontrolledTooltip placement="right" target="copyToClipboard">
+            <span> Copy to clipboard </span>
           </UncontrolledTooltip>
         </Row>
 
