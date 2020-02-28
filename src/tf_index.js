@@ -125,7 +125,8 @@ function editClick(index) {
  let dataRecord = $('#' + _id).jqxGrid('getrowdata', index); 
 
 console.log(dataRecord)
-store.dispatch(setFormData(dataRecord))
+const data = {formData: dataRecord, mode: "Edit"}
+store.dispatch(setFormData(data))
 }
 /**
  * renderTFHome

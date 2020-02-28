@@ -1,15 +1,13 @@
 
-import  {SET_FORM_DATA, CLOSE_FORM} from '../../../base/constants/ActionTypes'//       base/constants/ActionTypes';
-import StateManager from "react-select";
+import  {SET_FORM_DATA, CLOSE_FORM} from '../../../base/constants/ActionTypes'
+import initialState from "../../../base/config/initialState";
 
-const initialState = {  data: {},  isOpen: false, };
-
-function formReducer(state = initialState, action) {
+function formReducer(state = initialState.formData, action) {
   console.log(action.type);
   console.log(action.data)
   switch (action.type) {
     case SET_FORM_DATA:
-      return {data: action.data, isOpen: true}
+      return {data: action.data.formData, mode: action.data.mode, isOpen: true}
       break;
     case CLOSE_FORM:
       return initialState;

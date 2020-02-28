@@ -1,5 +1,5 @@
-import * as types from './favoriteLinksActions';
-import initialState from '../../base/config/initialState';
+import * as types from '../favoriteLinksActions';
+import initialState from '../../../base/config/initialState';
 
 
 const favoriteLinks = (state = initialState.favoriteAreas, action) => {

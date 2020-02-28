@@ -72,7 +72,7 @@ class TFHome extends Component {
 function mapStateToProps(state) {
   return {
     options: state.moduleAreas.areas,
-    data: state.gridData.data
+    // data: state.gridData.data
   }
 }
 function mapDispatchToProps(dispatch) {

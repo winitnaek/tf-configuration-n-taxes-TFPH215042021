@@ -5,7 +5,6 @@ import { closeForm, setFormData} from "../home/actions/formActions";
 import Modal from "./Modal";
 import {pagetitle,helpicon} from '../../base/constants/AppConstants';
 import renderForm from '../../base/utils/renderForm';
-import getFormFields from '../../base/utils/getFormFields';
 import {
   Col,
   Row,
@@ -59,7 +58,7 @@ class ReusableGrid extends React.Component {
     this.handleNewForm = e => {
       e.preventDefault();
       console.log("Opening new form");
-      const payload = getFormFields(this.state.pgid)
+      const payload = {data: {}, mode: "New"}
       this.props.setFormData(payload)
     };
 
@@ -90,10 +89,15 @@ class ReusableGrid extends React.Component {
   handleForm() {
     let permissions = this.props.permissions(this.props.pid)
     const toggle = this.toggle;
+    const deleteRow = this.deleteRow;
     const change = this.handleChange;
     const { pgid } = this.state;
-    const form = renderForm(toggle, change, pgid, permissions)
+    const form = renderForm(toggle, change, pgid, permissions, deleteRow)
     return form;
+  }
+
+  deleteRow(index) {
+    this.refs.reusableGrid.deleteRow(index)
   }
 
   handleRowData(index) {

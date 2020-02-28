@@ -105,7 +105,8 @@ class Sidebar extends Component {
 
   componentDidMount() {
     this.setState({
-      options: this.props.options
+      options: this.props.options,
+      favorites: this.props.favorites,
     });
   }
 
@@ -316,7 +317,8 @@ class Sidebar extends Component {
 
 function mapStateToProps(state) {
   return {
-    options: state.moduleAreas.areas
+    options: state.moduleAreas.areas,
+    favorites: state.favoriteLinks
   };
 }
 function mapDispatchToProps(dispatch) {

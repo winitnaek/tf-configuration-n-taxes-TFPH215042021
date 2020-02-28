@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
-import gridData from '../../app/home/actions/gridDataReducer';
 import formData from '../../app/home/actions/formReducer';
+import favoriteLinks from '../../app/home/actions/favoriteLinksReducer';
 import moduleAreaReducer from "../../app/home/actions/moduleLinksReducer";
 
 
 const rootReducer = combineReducers({
   moduleAreas:moduleAreaReducer,
-  gridData,
-  formData
+  formData,
+  favoriteLinks
 });
 export default rootReducer;

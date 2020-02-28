@@ -1,15 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import ReusableForm from "./ReusableForm";
 import Input from "./SingleInput";
 import {
-  Form,
-  FormGroup,
-  Button,
-  Container,
   Col,
-  Row,
-  ModalBody,
-  ModalFooter
 } from "reactstrap";
 
 class CustomTaxCodesForm extends Component {
@@ -44,88 +38,72 @@ class CustomTaxCodesForm extends Component {
       console.log(payload);
       this.props.close();
     };
+
+    this.handleDelete = () => {
+      console.log("deleting record");
+      this.props.deleteRow(0)   // need to pass index
+      this.props.close();
+    };
+
   }
 
   componentDidMount() {
     if (this.props.data) {
       const { customTaxCode, customTaxName } = this.props.data;
-
+      if (this.props.mode === "Edit") {
       this.setState({
         customTaxCode,
         customTaxName
       });
     }
   }
+}
 
   render() {
     return (
-      <Container>
-        <ModalBody>
-          <Form onSubmit={this.handleSubmit} style={{ marginTop: "25px" }}>
-            <Row style={{ margin: "0 auto", width: "26%" }}>
-              <p style={{ fontWeight: "bold" }}> Enter Custom Tax Codes </p>
-            </Row>
-
-            <Row style={{ width: "69%", margin: "10px auto" }}>
-              <FormGroup>
-                <Input
-                  id="customTaxCode"
-                  inputType={"text"}
-                  title={"Custom Tax Code *"}
-                  name={"customTaxCode"}
-                  required={true}
-                  onChange={this.handleChange}
-                  value={this.state.customTaxCode}
-                  placeholder={"Enter Custom Tax Code "}
-                  feedback={"Text input is required!"}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Input
-                  inputType={"text"}
-                  title={"Custom Tax Name *"}
-                  name={"customTaxName"}
-                  onChange={this.handleChange}
-                  value={this.state.customTaxName}
-                  placeholder={"Enter Custom Tax Name"}
-                  feedback={"Text input is required!"}
-                />
-              </FormGroup>
-            </Row>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            color="secondary"
-            className="btn btn-primary"
-            onClick={this.props.close}
-          >
-            Cancel
-          </Button>
-          <Button
-            color="secondary"
-            className="btn btn-primary mr-auto"
-            onClick={this.resetForm}
-          >
-            Reset
-          </Button>
-          {this.props.permissions.DELETE && (
-            <Button onClick={this.handleDelete} color="danger">
-              Delete
-            </Button>
-          )}
-          <Button onClick={this.handleSubmit} color="success">
-            Submit
-          </Button>
-        </ModalFooter>
-      </Container>
+      <ReusableForm
+        title="Enter Custom Payments"
+        submit={this.handleSubmit}
+        close={this.props.close}
+        delete={this.handleDelete}
+        reset={this.resetForm}
+        deletePermission={this.props.permissions.DELETE}
+      >
+       <Col sm="2"/>
+        <Col sm="8">
+        <p style={{ fontWeight: "bold" }}> Enter Custom Tax Codes </p>
+            <Input
+              id="customTaxCode"
+              inputType={"text"}
+              title={"Custom Tax Code *"}
+              name={"customTaxCode"}
+              required={true}
+              onChange={this.handleChange}
+              value={this.state.customTaxCode}
+              placeholder={"Enter Custom Tax Code "}
+              feedback={"Text input is required!"}
+              style={{width: "40% !important"}}
+            />
+            <Input
+              inputType={"text"}
+              title={"Custom Tax Name *"}
+              name={"customTaxName"}
+              onChange={this.handleChange}
+              value={this.state.customTaxName}
+              placeholder={"Enter Custom Tax Name"}
+              feedback={"Text input is required!"}
+            />
+        </Col>
+        <Col sm="2"/>
+      </ReusableForm>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    data: state.formData.data
+    data: state.formData.data,
+    mode: state.formData.mode
   };
 }
 
