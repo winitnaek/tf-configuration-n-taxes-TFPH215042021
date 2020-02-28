@@ -104,12 +104,13 @@ class ReusableGrid extends React.Component {
   }
 
   handleForm() {
-    let permissions = this.props.permissions(this.props.pid)
-    const toggle = this.toggle;
+    const cruddef = this.state.cruddef
+    const permissions = this.props.permissions(this.props.pid)
+    const close = this.toggle;
     const deleteRow = this.deleteRow;
     const change = this.handleChange;
     const { pgid } = this.state;
-    const form = renderForm(toggle, change, pgid, permissions, deleteRow)
+    const form = renderForm(close, change, pgid, permissions, deleteRow)
     return form;
   }
 
@@ -260,6 +261,7 @@ class ReusableGrid extends React.Component {
           open={this.props.isOpen}
           close={this.toggle}
           title={this.state.title}
+          cruddef={this.state.cruddef}
         >
           {this.handleForm()}
         </Modal>

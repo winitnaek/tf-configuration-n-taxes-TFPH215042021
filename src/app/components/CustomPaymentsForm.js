@@ -29,6 +29,9 @@ class CustomPaymentsForm extends Component {
         "Imputed"
       ]
     };
+    
+    const {formProps} = this.props
+  const {close, change,  permissions, deleteRow} = formProps;
 
     this.handleChange = event => {
       this.setState({
@@ -65,14 +68,14 @@ class CustomPaymentsForm extends Component {
       };
 
       console.log(payload);
-      this.props.close();
+      close();
     };
 
     this.handleDelete = () => {
       // Add handler to remove this record
       console.log("deleting record");
-      this.props.deleteRow(0)   // need to pass index
-      this.props.close();
+      deleteRow(0)   // need to pass index
+      close();
     };
   }
 
@@ -94,15 +97,19 @@ class CustomPaymentsForm extends Component {
   }
 
   render() {
+    console.log(this.props)
+    const {formProps} = this.props
+    const {permissions, close} = formProps;
+    const {handleDelete, handleSubmit, resetForm} = this
     return (
       <ReusableForm
         title="Enter Custom Payments"
-        submit={this.handleSubmit}
-        close={this.props.close}
-        delete={this.handleDelete}
-        reset={this.resetForm}
+        submit={handleSubmit}
+        close={close}
+        delete={handleDelete}
+        reset={resetForm}
         showDelete={this.state.showDelete}
-        deletePermission={this.props.permissions.DELETE}  
+        deletePermission={permissions.DELETE}  
       >
         <Col sm="6" style={{ marginRight: "0" }}>
           <p style={{ fontWeight: "bold" }}> Enter Custom Payments </p>

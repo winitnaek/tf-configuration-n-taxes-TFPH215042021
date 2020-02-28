@@ -15,6 +15,9 @@ class CustomTaxCodesForm extends Component {
       customTaxName: "",
       showDelete: false
     };
+  
+    const {formProps} = this.props
+    const {close, change,  deleteRow} = formProps;
 
     this.resetForm = () => {
       this.setState({
@@ -37,13 +40,13 @@ class CustomTaxCodesForm extends Component {
     this.handleSubmit = () => {
       const payload = this.state;
       console.log(payload);
-      this.props.close();
+      close();
     };
 
     this.handleDelete = () => {
       console.log("deleting record");
-      this.props.deleteRow(0)   // need to pass index
-      this.props.close();
+      deleteRow(0)   // need to pass index
+      close();
     };
 
   }
@@ -62,15 +65,18 @@ class CustomTaxCodesForm extends Component {
 }
 
   render() {
+    const {formProps} = this.props
+    const {permissions, close} = formProps;
+    const {handleDelete, handleSubmit, resetForm} = this
     return (
       <ReusableForm
         title="Enter Custom Payments"
-        submit={this.handleSubmit}
-        close={this.props.close}
-        delete={this.handleDelete}
+        submit={handleSubmit}
+        close={close}
+        delete={handleDelete}
         showDelete={this.state.showDelete}
-        reset={this.resetForm}
-        deletePermission={this.props.permissions.DELETE}
+        reset={resetForm}
+        deletePermission={permissions.DELETE}
       >
        <Col sm="2"/>
         <Col sm="8">
