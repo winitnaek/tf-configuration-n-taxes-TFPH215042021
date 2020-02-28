@@ -17,19 +17,18 @@ import {
 class ReusableForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
   render() {
+      console.log(this.props.showDelete)
     return (
       <Container>
         <ModalBody>
           <Form
             onSubmit={this.props.submit}
             style={{ display: "flex", marginTop: "25px" }}
-            >
-        
-                {this.props.children}
-        
+          >
+            {this.props.children}
           </Form>
         </ModalBody>
 
@@ -49,7 +48,11 @@ class ReusableForm extends Component {
             Reset
           </Button>
 
-          {this.props.deletePermission && <Button onClick={this.props.delete} color="danger"> Delete </Button>}
+          {this.props.showDelete && this.props.deletePermission && (
+            <Button onClick={this.props.delete} color="danger">
+              Delete
+            </Button>
+          )}
           <Button onClick={this.props.submit} color="success">
             Submit
           </Button>
@@ -58,7 +61,5 @@ class ReusableForm extends Component {
     );
   }
 }
-
-
 
 export default ReusableForm;

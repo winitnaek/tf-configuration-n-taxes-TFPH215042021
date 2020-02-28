@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Home from "./home";
+
 import {
   star,
   goldStar,
@@ -126,7 +126,6 @@ class Sidebar extends Component {
       document.getElementById("cardBody").style.paddingRight = "10px";
       document.getElementById("cardBody").style.paddingTop = "10px";
       document.getElementById("cardBody").style.width = "70px";
-      // document.getElementById("mainPageArea").style.margin="0"
       document.getElementById("navToggler").style.marginLeft = "10px";
     } else {
       document.getElementById("mySidebar").style.display = "";
@@ -134,8 +133,6 @@ class Sidebar extends Component {
       document.getElementById("cardBody").style.width = "100%";
       document.getElementById("cardBody").style.padding = "15px";
       document.getElementById("cardBody").style.paddingRight = "0";
-      // document.getElementById("mainPageArea").style.margin="0 auto";
-      // document.getElementById("navToggler").style.marginLeft = "10px";
     }
     this.setState({
       isOpen: !this.state.isOpen,

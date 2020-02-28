@@ -18,6 +18,7 @@ class CustomPaymentsForm extends Component {
       taxability: "Non-Taxable",
       eeMax: "",
       aggStatus: "",
+      showDelete: false,
       typeOptions: ["Custom Earnings", "Custom Benefit Plan"],
       taxabilityOptions: [
         "Non-Taxable",
@@ -85,7 +86,8 @@ class CustomPaymentsForm extends Component {
           customPaymentName: this.props.data.customPaymentName,
           paymentType: this.props.data.paymentType,
           taxability: this.props.data.taxability,
-          eeMax: this.props.data.eeMax
+          eeMax: this.props.data.eeMax,
+          showDelete: true,
         });
       }
     }
@@ -99,8 +101,8 @@ class CustomPaymentsForm extends Component {
         close={this.props.close}
         delete={this.handleDelete}
         reset={this.resetForm}
-        deletePermission={this.props.permissions.DELETE}
-        
+        showDelete={this.state.showDelete}
+        deletePermission={this.props.permissions.DELETE}  
       >
         <Col sm="6" style={{ marginRight: "0" }}>
           <p style={{ fontWeight: "bold" }}> Enter Custom Payments </p>

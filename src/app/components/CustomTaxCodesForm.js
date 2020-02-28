@@ -12,7 +12,8 @@ class CustomTaxCodesForm extends Component {
 
     this.state = {
       customTaxCode: "",
-      customTaxName: ""
+      customTaxName: "",
+      showDelete: false
     };
 
     this.resetForm = () => {
@@ -53,7 +54,8 @@ class CustomTaxCodesForm extends Component {
       if (this.props.mode === "Edit") {
       this.setState({
         customTaxCode,
-        customTaxName
+        customTaxName,
+        showDelete: true
       });
     }
   }
@@ -66,6 +68,7 @@ class CustomTaxCodesForm extends Component {
         submit={this.handleSubmit}
         close={this.props.close}
         delete={this.handleDelete}
+        showDelete={this.state.showDelete}
         reset={this.resetForm}
         deletePermission={this.props.permissions.DELETE}
       >
