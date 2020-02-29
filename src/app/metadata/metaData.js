@@ -94,10 +94,10 @@ export const customPayments = {
     	"columns": [
 			{
 				"text": "Custom Payment Code",
-				"datafield": "customPaymentCode",
-				"cellsalign": "center",
+				"datafield": "userCode",
+				"cellsalign": "left",
 				"width": "30%",
-				"align": "center",
+				"align": "left",
 				"sortable": true,
 				"rendererInput": [
 					{
@@ -115,43 +115,43 @@ export const customPayments = {
 			},
 			{
                 "text": "Custom Payment Name",
-                "datafield": "customPaymentName",
-                "cellsalign": "center",
-                "align": "center"
+                "datafield": "name",
+                "cellsalign": "left",
+                "align": "left"
 			  },
 			  {
                 "text": "Payment Type",
-                "datafield": "paymentType",
-                "cellsalign": "center",
-                "align": "center"
+                "datafield": "payType",
+                "cellsalign": "left",
+                "align": "left"
 			  },
 			  {
                 "text": "Taxability",
                 "datafield": "taxability",
-                "cellsalign": "center",
-                "align": "center"
+                "cellsalign": "left",
+                "align": "left"
 			  },
 			  {
                 "text": "EE Max",
-                "datafield": "eeMax",
-                "cellsalign": "right",
-				"align": "center",
+                "datafield": "eemax",
+                "cellsalign": "left",
+                "align": "left",
 				"width": "10%",
 			  },
 			  {
                 "text": "AggStatus",
-                "datafield": "aggStatus",
-                "cellsalign": "center",
-                "align": "center"
+                "datafield": "aggstatus",
+                "cellsalign": "left",
+                "align": "left"
 			  }
 		],
 		"dataFields":[
-		  {"name": "customPaymentCode","type": "string"},
-		  {"name": "customPaymentName","type": "string"},
-		  {"name": "paymentType","type": "string"},
+		  {"name": "userCode","type": "string"},
+		  {"name": "name","type": "string"},
+		  {"name": "payType","type": "string"},
 		  {"name": "taxability","type": "string"},
-		  {"name": "eeMax","type": "string"},
-		  {"name": "aggStatus","type": "string"},
+		  {"name": "eemax","type": "string"},
+		  {"name": "aggstatus","type": "string"},
 		  {"name": "edit", "type": "string"}
 		]
 	},

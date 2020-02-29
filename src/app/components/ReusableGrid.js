@@ -46,8 +46,11 @@ class ReusableGrid extends React.Component {
     console.log("permissions>>>>");
     let gridDataUrl = this.props.dataurl(this.props.pageid);
 
+
+
     let inputData ={
-      dataset: appDataset(),
+      pageId:metadata.pgdef.pgid,
+      dataset:appDataset(),
       userId:appUserId()
     }
 
@@ -170,10 +173,10 @@ class ReusableGrid extends React.Component {
     };*/
 
     let source = {
-      datafields: this.state.dataFields,
-      aysnc: false,
       datatype: "json",
+      datafields: this.state.dataFields,
       url: this.state.gridDataUrl,
+      type: "GET",
       contenttype: "application/json",
       data: this.state.inputData,
       filter: function() {
@@ -198,7 +201,36 @@ class ReusableGrid extends React.Component {
       return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick(${ndex})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
     };
 
-    const dataSource = new window.jqx.dataAdapter(source);
+   // const dataSource = new window.jqx.dataAdapter(source);
+       let dataSource = new $.jqx.dataAdapter(source, {
+    // remove the comment to debug
+    formatData: function(data) {
+        //alert(JSON.stringify(data));
+        var noOfFilters = data.filterscount;
+        var i;
+        for (i = 0; i < noOfFilters; i++) {
+            //if ("generatedDateTime" === data["filterdatafield" + i]) {
+             //   data["filtervalue" + i] = $.jqx.formatDate(new Date(data["filtervalue" + i]), 'yyyyMMdd');
+                // alert(data["filtervalue" + i]);
+            //}
+        }
+        try {
+            return JSON.stringify(data);
+        } catch (error) {
+            return data;
+        }
+    },
+    downloadComplete: function(data, status, xhr) {
+    console.log('downloadComplete source');
+    console.log(source);
+       if (!source.totalrecords) {
+            source.totalrecords = data.length;
+       }
+    },
+    loadError: function(xhr, status, error) {
+        throw new Error(error);
+    }
+});
     const editColumn = {
       text: "Edit",
       datafield: "edit",
