@@ -4,6 +4,7 @@ import {
   allBSIPlans,
   populateV3States
 } from "../../app/metadata/metaData";
+import {GET_CUSTOM_PAYMENTS_LIST,GET_CUSTOM_TAX_CODES} from '../constants/ServiceUrls';
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
 export const tftools = [
@@ -49,8 +50,14 @@ export const tftools = [
   }
 ];
 export const metadatamap = [
-  { id: "customPayments", metadata: customPayments },
-  { id: "customTaxCodes", metadata: customTaxCodes },
-  { id: "allBSIPlans", metadata: allBSIPlans },
-  { id: "populateV3States", metadata: populateV3States }
+  { id: "customPayments", metadata: customPayments, url:GET_CUSTOM_PAYMENTS_LIST,rendererInput: ['dataset','editMode']},
+  { id: "customTaxCodes", metadata: customTaxCodes, url:GET_CUSTOM_TAX_CODES,rendererInput: ['dataset','editMode']},
+  { id: "allBSIPlans", metadata: allBSIPlans,url:GET_CUSTOM_PAYMENTS_LIST,rendererInput: ['autocomplete','pat']},
+  { id: "populateV3States", metadata: populateV3States,url:GET_CUSTOM_PAYMENTS_LIST,rendererInput: ['dataset','userId']}
 ];
+function formURL(pageid,...params){
+  let metadataMap = metadatamap.find(metadatam => {
+    if (pageid == metadatam.id) return metadatam;
+  });
+  let url = URLUtils.buildURL(metadataMap.url);
+}

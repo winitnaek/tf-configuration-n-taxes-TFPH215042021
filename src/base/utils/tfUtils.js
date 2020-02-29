@@ -1,4 +1,5 @@
 import { metadatamap, tftools } from "../constants/TFTools";
+import URLUtils from '../utils/urlUtils';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -66,3 +67,39 @@ export function compPermissions(pid) {
     return setPerms(perms[pid]);
   }
 }
+/**
+ * compURL
+ * @param {*} pageid 
+ */
+export function compURL(pageid,...params) {
+  let metadataMap = metadatamap.find(metadatam => {
+    if (pageid == metadatam.id) return metadatam;
+  });
+  let url = URLUtils.buildURL(metadataMap.url);
+  console.log('buildGetRecsUrl >>>');
+  var arr = [];
+  arr.push('VINIT'); 
+  let dataset ='Vinit123'
+  console.log(format(url,dataset));
+  return url;
+};
+/**
+ * format
+ * @param {*} fmt 
+ * @param  {...any} args 
+ */
+export function format(fmt, ...args) {
+  if (!fmt.match(/^(?:(?:(?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{[0-9]+\}))+$/)) {
+      throw new Error('invalid format string.');
+  }
+  return fmt.replace(/((?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{([0-9]+)\})/g, (m, str, index) => {
+      if (str) {
+          return str.replace(/(?:{{)|(?:}})/g, m => m[0]);
+      } else {
+          if (index >= args.length) {
+              throw new Error('argument index is out of range in format');
+          }
+          return args[index];
+      }
+  });
+};
