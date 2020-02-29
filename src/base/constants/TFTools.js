@@ -55,9 +55,3 @@ export const metadatamap = [
   { id: "allBSIPlans", metadata: allBSIPlans,url:GET_CUSTOM_PAYMENTS_LIST,rendererInput: ['autocomplete','pat']},
   { id: "populateV3States", metadata: populateV3States,url:GET_CUSTOM_PAYMENTS_LIST,rendererInput: ['dataset','userId']}
 ];
-function formURL(pageid,...params){
-  let metadataMap = metadatamap.find(metadatam => {
-    if (pageid == metadatam.id) return metadatam;
-  });
-  let url = URLUtils.buildURL(metadataMap.url);
-}

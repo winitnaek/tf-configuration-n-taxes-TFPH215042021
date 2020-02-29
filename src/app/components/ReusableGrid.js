@@ -46,6 +46,11 @@ class ReusableGrid extends React.Component {
     console.log("permissions>>>>");
     let gridDataUrl = this.props.dataurl(this.props.pageid);
 
+    let inputData ={
+      dataset: appDataset(),
+      userId:appUserId()
+    }
+
     this.state = {
       value: "",
       pgdef: metadata.pgdef,
@@ -63,7 +68,7 @@ class ReusableGrid extends React.Component {
       helpLabel: metadata.pgdef.helpLblTxt,
       gridDataUrl: gridDataUrl,
       mockData: [],
-      dataSource: {}
+      inputData:inputData
     };
 
     this.handleNewForm = e => {
@@ -157,11 +162,35 @@ class ReusableGrid extends React.Component {
   }
 
   render() {
-    const dataSource = {
+    /*const dataSource = {
       datafields: this.state.dataFields,
       aysnc: false,
       datatype: "json",
       url: this.state.gridDataUrl
+    };*/
+
+    let source = {
+      datafields: this.state.dataFields,
+      aysnc: false,
+      datatype: "json",
+      url: this.state.gridDataUrl,
+      contenttype: "application/json",
+      data: this.state.inputData,
+      filter: function() {
+        // update the grid and send a request to the server.
+        let _id = document.querySelector("div[role='grid']").id;
+        $("#" + _id).jqxGrid("updatebounddata", "filter");
+      },
+      sort: function() {
+        // update the grid and send a request to the server.
+        let _id = document.querySelector("div[role='grid']").id;
+        $("#" + _id).jqxGrid("updatebounddata", "sort");
+      },
+      beforeprocessing: function(data) {
+        if (data != null) {
+          source.totalrecords = data.totalRowCount;
+        }
+      }
     };
 
     const editCellsRenderer = ndex => {
@@ -169,7 +198,7 @@ class ReusableGrid extends React.Component {
       return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick(${ndex})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
     };
 
-    const source = new window.jqx.dataAdapter(dataSource);
+    const dataSource = new window.jqx.dataAdapter(source);
     const editColumn = {
       text: "Edit",
       datafield: "edit",
@@ -286,12 +315,13 @@ class ReusableGrid extends React.Component {
             id="myGrid"
             width="100%"
             altrows={true}
-            source={source}
+            source={dataSource}
             columns={newColumns}
             pageable={true}
             autoheight={true}
             selectionmode="multiplerows"
             style={gridStyle}
+            virtualmode={false}
           />
         </Row>
 

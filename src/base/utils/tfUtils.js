@@ -71,7 +71,15 @@ export function compPermissions(pid) {
  * compURL
  * @param {*} pageid 
  */
-export function compURL(pageid,...params) {
+export function compURL(pageid) {
+  let metadataMap = metadatamap.find(metadatam => {
+    if (pageid == metadatam.id) return metadatam;
+  });
+  let url = URLUtils.buildURL(metadataMap.url);
+  //return url;
+  return dataURL(pageid);
+}
+/*export function compURL(pageid,...params) {
   let metadataMap = metadatamap.find(metadatam => {
     if (pageid == metadatam.id) return metadatam;
   });
@@ -82,7 +90,33 @@ export function compURL(pageid,...params) {
   let dataset ='Vinit123'
   console.log(format(url,dataset));
   return url;
-};
+};*/
+
+/**
+ * dataURL
+ */
+function dataURL(pageid){
+  let gridDataUrl;
+  switch (pageid) {
+    case "allBSIPlans":
+      gridDataUrl = "./ALL_BSI_PLANS_MOCKDATA.json";
+      break;
+    case "customPayments":
+      gridDataUrl = "./CUSTOM_PAYMENTS_MOCKDATA.json";
+      break;
+    case "customTaxCodes":
+      gridDataUrl = "./CUSTOM_TAX_PAYMENT_MOCKDATA.json";
+      break;
+    case "populateV3States":
+      gridDataUrl = "./POPULATE_V3_STATES_MOCKDATA.json";
+      break;
+    default:
+      break;
+  }
+  return gridDataUrl;
+}
+
+
 /**
  * format
  * @param {*} fmt 

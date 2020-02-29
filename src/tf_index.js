@@ -11,7 +11,7 @@ import TFHome from "./app/home/home.js";
 let store = configureStore();
 export default store;
 import Welcome from './app/home/Welcome';
-import {buildModuleAreaLinks,openHelp,setPerms,compMetaData,compPermissions} from './base/utils/tfUtils';
+import {buildModuleAreaLinks,openHelp,setPerms,compMetaData,compPermissions,compURL} from './base/utils/tfUtils';
 import { setFormData} from './app/home/actions/formActions';
 import {setModuleAreas} from './app/home/actions/moduleLinksActions';
 import ReusableGrid from "./app/components/ReusableGrid";
@@ -72,12 +72,11 @@ function renderComponent(elem,pageid,pid){
   ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
   ReactDOM.render(
     <Provider store={store}>
-      <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} dataurl={dataURL} help={openHelp}/>
+      <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} dataurl={compURL} help={openHelp}/>
     </Provider>,
     document.querySelector("#" + elem)
   );
 }
-
 /**
  * renderPage
  * @param {*} elem
@@ -92,30 +91,6 @@ function renderPage(elem, pageid,pid) {
     );
   }
 }
-/**
- * dataURL
- */
-function dataURL(pageid){
-  let gridDataUrl;
-  switch (pageid) {
-    case "allBSIPlans":
-      gridDataUrl = "./ALL_BSI_PLANS_MOCKDATA.json";
-      break;
-    case "customPayments":
-      gridDataUrl = "./CUSTOM_PAYMENTS_MOCKDATA.json";
-      break;
-    case "customTaxCodes":
-      gridDataUrl = "./CUSTOM_TAX_PAYMENT_MOCKDATA.json";
-      break;
-    case "populateV3States":
-      gridDataUrl = "./POPULATE_V3_STATES_MOCKDATA.json";
-      break;
-    default:
-      break;
-  }
-  return gridDataUrl;
-}
-
 
 function editClick(index) {
   console.log(index)
