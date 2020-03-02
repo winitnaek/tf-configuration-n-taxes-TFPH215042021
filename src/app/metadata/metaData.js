@@ -293,3 +293,127 @@ export const  populateV3States = {
 	"cruddef": ""
 }
 
+export const  experienceRates = {
+	"pgdef": {
+		"pgid": "experienceRates",
+		"pgtitle": "experienceRates",
+		"pgsubtitle":"",
+		"flowtype": "flowtype1",
+		"hasAddNew": false,
+		"addNewLabel": "",
+		"actiondel": false,
+		"helpAvailable":true,
+		"helpLblTxt":"Click here for more info!",
+		"helpLink":"/experienceRates",
+		"parentConfig":""
+	},
+	"griddef": {
+		"gridtype": "ro",
+		"filtergrid": false,
+		"datatype": "json",
+		"contenttype": "application/json",
+		"noResultsFoundTxt": "No Data Found",
+		"recordEdit": false,
+        "recordDelete": false,
+    	"columns": [
+			{
+				"text": "State",
+				"datafield": "state",
+				"cellsalign": "center",
+				"width": "30%",
+				"align": "center",
+				"sortable": true,
+				"rendererInput":"",
+				"rendererStaticInput":""
+            },
+            {
+                "text": "State Name",
+                "datafield": "stateName",
+                "cellsalign": "center",
+                "align": "center"
+              },
+            {
+                "text": "Record Count",
+                "datafield": "recordCount",
+                "cellsalign": "center",
+                "align": "center"
+              },
+            {
+                "text": "Bulletin",
+                "datafield": "bulletin",
+                "cellsalign": "center",
+                "align": "center"
+              }
+		],
+		"dataFields":[
+		  {"name": "state","type": "string"},
+		  {"name": "stateName","type": "string"},
+		  {"name": "recordCount","type": "string"},
+          {"name": "bulletin","type": "string"}	
+        ]
+	},
+	"cruddef": ""
+}
+export const  supplementalMethods = {
+	"pgdef": {
+		"pgid": "supplementalMethods",
+		"pgtitle": "supplementalMethods",
+		"pgsubtitle":"",
+		"flowtype": "flowtype1",
+		"hasAddNew": false,
+		"addNewLabel": "",
+		"actiondel": false,
+		"helpAvailable":true,
+		"helpLblTxt":"Click here for more info!",
+		"helpLink":"/supplementalMethods",
+		"parentConfig":""
+	},
+	"griddef": {
+		"gridtype": "ro",
+		"filtergrid": false,
+		"datatype": "json",
+		"contenttype": "application/json",
+		"noResultsFoundTxt": "No Data Found",
+		"recordEdit": false,
+        "recordDelete": false,
+    	"columns": [
+			{
+				"text": "State",
+				"datafield": "state",
+				"cellsalign": "center",
+				"width": "30%",
+				"align": "center",
+				"sortable": true,
+				"rendererInput":"",
+				"rendererStaticInput":""
+            },
+            {
+                "text": "State Name",
+                "datafield": "stateName",
+                "cellsalign": "center",
+                "align": "center"
+              },
+            {
+                "text": "Record Count",
+                "datafield": "recordCount",
+                "cellsalign": "center",
+                "align": "center"
+              },
+            {
+                "text": "Bulletin",
+                "datafield": "bulletin",
+                "cellsalign": "center",
+                "align": "center"
+              }
+		],
+		"dataFields":[
+		  {"name": "state","type": "string"},
+		  {"name": "stateName","type": "string"},
+		  {"name": "recordCount","type": "string"},
+          {"name": "bulletin","type": "string"}	
+        ]
+	},
+	"cruddef": ""
+}
+
+

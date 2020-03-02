@@ -2,7 +2,9 @@ import {
   customPayments,
   customTaxCodes,
   allBSIPlans,
-  populateV3States
+  populateV3States,
+  experienceRates,
+  supplementalMethods
 } from "../../app/metadata/metaData";
 import {
   GET_CUSTOM_PAYMENTS_LIST,
