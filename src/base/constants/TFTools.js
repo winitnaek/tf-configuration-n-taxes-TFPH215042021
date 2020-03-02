@@ -2,8 +2,18 @@ import {
   customPayments,
   customTaxCodes,
   allBSIPlans,
-  populateV3States
+  populateV3States,
+  experienceRates,
+  supplementalMethods
 } from "../../app/metadata/metaData";
+import {
+  GET_CUSTOM_PAYMENTS_LIST,
+  GET_CUSTOM_TAX_CODES,
+  GET_ALL_BSI_PLANS,
+  GET_ALL_POPULATED_V3_STATES,
+  GET_EXPERIENCE_RATES,
+  GET_SUPPLEMENTAL_INFO_FOR_TAX
+} from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
 export const tftools = [
@@ -46,11 +56,59 @@ export const tftools = [
     id: "populateV3States",
     type: UI_COMP,
     link: false
+  },
+  {
+    value: "UQ",
+    label: "Experience Rates",
+    desc: "Experience Rates",
+    id: "experienceRates",
+    type: UI_COMP,
+    link: false
+  },
+  {
+    value: "UQ",
+    label: "Supplemental Methods",
+    desc: "Supplemental Methods",
+    id: "supplementalMethods",
+    type: UI_COMP,
+    link: false
   }
 ];
 export const metadatamap = [
-  { id: "customPayments", metadata: customPayments },
-  { id: "customTaxCodes", metadata: customTaxCodes },
-  { id: "allBSIPlans", metadata: allBSIPlans },
-  { id: "populateV3States", metadata: populateV3States }
+  {
+    id: "customPayments",
+    metadata: customPayments,
+    url: GET_CUSTOM_PAYMENTS_LIST,
+    rendererInput: ["dataset", "editMode"]
+  },
+  {
+    id: "customTaxCodes",
+    metadata: customTaxCodes,
+    url: GET_CUSTOM_TAX_CODES,
+    rendererInput: ["dataset", "editMode"]
+  },
+  {
+    id: "allBSIPlans",
+    metadata: allBSIPlans,
+    url: GET_ALL_BSI_PLANS,
+    rendererInput: ["autocomplete", "pat"]
+  },
+  {
+    id: "populateV3States",
+    metadata: populateV3States,
+    url: GET_ALL_POPULATED_V3_STATES,
+    rendererInput: ["dataset", "userId"]
+  },
+  {
+    id: "experienceRates",
+    metadata: experienceRates,
+    url: GET_EXPERIENCE_RATES,
+    rendererInput: ["dataset", "userId"]
+  },
+  {
+    id: "experienceRates",
+    metadata: supplementalMethods,
+    url: GET_SUPPLEMENTAL_INFO_FOR_TAX,
+    rendererInput: ["dataset", "userId"]
+  }
 ];
