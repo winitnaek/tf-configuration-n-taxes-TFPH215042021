@@ -54,11 +54,12 @@ class CustomTaxCodesForm extends Component {
 
   componentDidMount() {
     if (this.props.data) {
-      const { customTaxCode, customTaxName } = this.props.data;
+      console.log(this.props.data)
+      const { taxCode, name } = this.props.data;
       if (this.props.mode === "Edit") {
       this.setState({
-        customTaxCode,
-        customTaxName,
+        customTaxCode: taxCode,
+        customTaxName: name,
         showDelete: true
       });
     }

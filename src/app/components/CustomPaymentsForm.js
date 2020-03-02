@@ -85,16 +85,16 @@ class CustomPaymentsForm extends Component {
 
       if (this.props.mode === "Edit") {
         this.setState({
-          customPaymentCode: this.props.data.customPaymentCode,
-          customPaymentName: this.props.data.customPaymentName,
-          paymentType: this.props.data.paymentType,
+          customPaymentCode: this.props.data.userCode,
+          customPaymentName: this.props.data.name,
+          paymentType: this.props.data.payType,
           taxability: this.props.data.taxability,
-          eeMax: this.props.data.eeMax,
+          eeMax: this.props.data.eemax,
           showDelete: true,
         });
       }
     }
-  }
+  } 
 
   render() {
     console.log(this.props)
