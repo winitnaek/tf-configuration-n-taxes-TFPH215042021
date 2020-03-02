@@ -32,9 +32,6 @@ let GridFunctions;
 class ReusableGrid extends React.Component {
   constructor(props) {
     super(props);
-    const handleEditClick = () => {
-      console.log(`This is the index `);
-    };
     console.log("metadata>>>>");
     let metadata = this.props.metadata(this.props.pageid);
     console.log(metadata);
@@ -83,7 +80,7 @@ class ReusableGrid extends React.Component {
 
     this.OpenHelp = () => {
       this.props.help(this.state.pgid);
-    };
+    }; 
 
     this.toggle = () => {
       this.props.closeForm();
@@ -400,7 +397,7 @@ class ReusableGrid extends React.Component {
 
         <Modal
           open={this.props.isOpen}
-          close={this.toggle}
+          close={this.props.closeForm}
           title={this.state.title}
           cruddef={this.state.cruddef}
         >

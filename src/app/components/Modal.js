@@ -13,7 +13,6 @@ class reusableModal extends Component {
     return (
       <Modal
         isOpen={this.props.open}
-        toggle={e => this.props.close()}
         size="lg"
         style={modal}
       >
