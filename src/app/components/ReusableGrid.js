@@ -116,10 +116,19 @@ class ReusableGrid extends React.Component {
     event.preventDefault()
     // this.refs.reusableGrid.selectallrows();
     let _id = document.querySelector("div[role='grid']").id;
-     $("#" + _id).jqxGrid("selectallrows");
-     $("#" + _id).jqxGrid('focus')
+    //let text = document.getElementById("pageContainer").children[2].innerText
+
+
+    let myId = document.querySelector("div[role='grid']")
+    const text = _id.innerText
+
+    console.log(text)
+
+
+   $("#" + _id).jqxGrid("selectallrows");
+    //  $("#" + _id).jqxGrid('focus')
     //   trigger ctrl-C
-    // Flash message that data has been copied to clipboard
+    // Flash message thSat data has been copied to clipboard
 
     document.execCommand("copy")
     console.log("All rows copied to clipboard");
@@ -286,6 +295,7 @@ class ReusableGrid extends React.Component {
             id="myGrid"
             width="100%"
             altrows={true}
+            clipboard={true}
             source={source}
             columns={newColumns}
             pageable={true}

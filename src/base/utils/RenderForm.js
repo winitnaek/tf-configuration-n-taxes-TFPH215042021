@@ -13,6 +13,10 @@ const renderForm = (close, change, pgid, permissions, deleteRow) => {
     case "customTaxCodes":
       form = <CustomTaxCodesForm formProps={formProps} />;
       break;
+    case "experianceRates":
+      form = "";
+      break;
+      
     // Add additoal cases for other forms here
     default:
       break;
