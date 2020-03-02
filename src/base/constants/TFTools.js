@@ -4,7 +4,14 @@ import {
   allBSIPlans,
   populateV3States
 } from "../../app/metadata/metaData";
-import {GET_CUSTOM_PAYMENTS_LIST,GET_CUSTOM_TAX_CODES} from '../constants/ServiceUrls';
+import {
+  GET_CUSTOM_PAYMENTS_LIST,
+  GET_CUSTOM_TAX_CODES,
+  GET_ALL_BSI_PLANS,
+  GET_ALL_POPULATED_V3_STATES,
+  GET_EXPERIENCE_RATES,
+  GET_SUPPLEMENTAL_INFO_FOR_TAX
+} from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
 export const tftools = [
@@ -66,10 +73,40 @@ export const tftools = [
   }
 ];
 export const metadatamap = [
-  { id: "customPayments", metadata: customPayments, url:GET_CUSTOM_PAYMENTS_LIST,rendererInput: ['dataset','editMode']},
-  { id: "customTaxCodes", metadata: customTaxCodes, url:GET_CUSTOM_TAX_CODES,rendererInput: ['dataset','editMode']},
-  { id: "allBSIPlans", metadata: allBSIPlans,url:GET_ALL_BSI_PLANS,rendererInput: ['autocomplete','pat']},
-  { id: "populateV3States", metadata: populateV3States,url:GET_ALL_POPULATED_V3_STATES,rendererInput: ['dataset','userId']},
-  { id: "experienceRates", metadata: experienceRates,url:GET_EXPERIENCE_RATES,rendererInput: ['dataset','userId']},
-  { id: "experienceRates", metadata: supplementalMethods,url:GET_SUPPLEMENTAL_INFO_FOR_TAX,rendererInput: ['dataset','userId']}
+  {
+    id: "customPayments",
+    metadata: customPayments,
+    url: GET_CUSTOM_PAYMENTS_LIST,
+    rendererInput: ["dataset", "editMode"]
+  },
+  {
+    id: "customTaxCodes",
+    metadata: customTaxCodes,
+    url: GET_CUSTOM_TAX_CODES,
+    rendererInput: ["dataset", "editMode"]
+  },
+  {
+    id: "allBSIPlans",
+    metadata: allBSIPlans,
+    url: GET_ALL_BSI_PLANS,
+    rendererInput: ["autocomplete", "pat"]
+  },
+  {
+    id: "populateV3States",
+    metadata: populateV3States,
+    url: GET_ALL_POPULATED_V3_STATES,
+    rendererInput: ["dataset", "userId"]
+  },
+  {
+    id: "experienceRates",
+    metadata: experienceRates,
+    url: GET_EXPERIENCE_RATES,
+    rendererInput: ["dataset", "userId"]
+  },
+  {
+    id: "experienceRates",
+    metadata: supplementalMethods,
+    url: GET_SUPPLEMENTAL_INFO_FOR_TAX,
+    rendererInput: ["dataset", "userId"]
+  }
 ];
