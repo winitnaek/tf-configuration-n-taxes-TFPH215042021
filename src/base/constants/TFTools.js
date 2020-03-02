@@ -60,7 +60,7 @@ export const tftools = [
     label: "Experience Rates",
     desc: "Experience Rates",
     id: "experienceRates",
-    type: UI_FILTER,
+    type: UI_COMP,
     link: false
   },
   {
@@ -68,7 +68,7 @@ export const tftools = [
     label: "Supplemental Methods",
     desc: "Supplemental Methods",
     id: "supplementalMethods",
-    type: UI_FILTER,
+    type: UI_COMP,
     link: false
   }
 ];
