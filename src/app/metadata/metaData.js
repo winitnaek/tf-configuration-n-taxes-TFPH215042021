@@ -26,7 +26,7 @@ export const allBSIPlans =  {
 		"columns": [
 			{
 				"text": "Type",
-				"datafield": "type",
+				"datafield": "payTypeLtr",
 				"cellsalign": "center",
 				"width": "30%",
 				"align": "center",
@@ -36,13 +36,13 @@ export const allBSIPlans =  {
             },
             {
                 "text": "Description",
-                "datafield": "description",
+                "datafield": "usercodeDesc",
                 "cellsalign": "center",
                 "align": "center"
               },
             {
                 "text": "Code",
-                "datafield": "code",
+                "datafield": "usercode",
                 "cellsalign": "center",
                 "align": "center"
               },
@@ -54,17 +54,29 @@ export const allBSIPlans =  {
               },
             {
                 "text": "Start Date",
-                "datafield": "startDate",
+                "datafield": "effective",
                 "cellsalign": "center",
                 "align": "center"
               }
 		],
 		"dataFields":[
-		  {"name": "type","type": "string"},
-		  {"name": "description","type": "string"},
-		  {"name": "code","type": "string"},
+		  {"name": "payment","type": "string"},
+		  {"name": "effective","type": "string"},
+		  {"name": "effectiveDbFmt","type": "string"},
+		  {"name": "payType","type": "string"},
+		  {"name": "payTypeLtr","type": "string"},
+		  {"name": "taxability","type": "string"},
+		  {"name": "rescind","type": "string"},
+		  {"name": "paymentName","type": "string"},
 		  {"name": "planClass","type": "string"},
-		  {"name": "startDate","type": "string"}
+		  {"name": "occurrance","type": "string"},
+		  {"name": "aggStatus","type": "string"},
+		  {"name": "aggRule1","type": "string"},
+		  {"name": "aggRule2","type": "string"},
+		  {"name": "eeMax","type": "string"},
+		  {"name": "erMax","type": "string"},
+		  {"name": "usercode","type": "string"},
+		  {"name": "usercodeDesc","type": "string"}
 		]
 	},
 	"cruddef": ""
