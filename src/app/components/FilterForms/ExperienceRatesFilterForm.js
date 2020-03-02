@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import {connect} from  "react-redux";
+import { bindActionCreators } from "redux";
 import ReusableForm from "../ReusableForm";
 import Input from "../SingleInput";
 import { Col, Row } from "reactstrap";
-
+import {setFilterFormData} from '../../home/actions/filterFormActions'
 import {subTitle} from '../../../base/constants/AppConstants'
 
 class ExperienceRatesFilterForm extends Component {
@@ -33,6 +35,9 @@ class ExperienceRatesFilterForm extends Component {
 
     this.handleView = () => {
       console.log(this.state)
+      this.props.setFilterFormData(this.state)
+      const renderName = {id: "experianceRates", value: "Experiance Rates"}
+    //  renderTFApplication("pageContainer", renderName);
     };
   }
   render() {
@@ -100,4 +105,18 @@ class ExperienceRatesFilterForm extends Component {
   }
 }
 
-export default ExperienceRatesFilterForm;
+
+
+function mapStateToProps(state) {
+  return {
+    data: state.formData.data,
+    isOpen: state.formData.isOpen,
+    index: state.formData
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({setFilterFormData }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExperienceRatesFilterForm);

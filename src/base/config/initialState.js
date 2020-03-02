@@ -22,7 +22,9 @@ export default {
       },
     ],
 
-    formData: {  data: {},  isOpen: false, mode: "New", index: null }
+    formData: {  data: {},  isOpen: false, mode: "New", index: null },
+
+    formFilterData: {}
   
 };
 

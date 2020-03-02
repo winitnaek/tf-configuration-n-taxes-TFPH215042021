@@ -21,7 +21,6 @@ class ReusableForm extends Component {
     this.state = {};
   }
   render() {
-      console.log(this.props.delete)
     return (
       <Container>
         <ModalBody>

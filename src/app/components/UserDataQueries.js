@@ -28,7 +28,7 @@ class UserDataQueries extends React.Component {
       helpLabel: "Click here for more info",
       title: "User Data Queries",
       pgid: "",
-      title: "",
+     formTitle: "",
       isOpen: false
     };
     this.OpenHelp = () => {
@@ -36,7 +36,7 @@ class UserDataQueries extends React.Component {
     };
 
     this.toggle = (id, title )=> {
-      this.setState({ isOpen: !this.state.isOpen, pgid: id, title: title });
+      this.setState({ isOpen: !this.state.isOpen, pgid: id, formTitle: title });
     };
 
     this.handleForm = () => {
@@ -120,7 +120,7 @@ class UserDataQueries extends React.Component {
         <Modal
           open={this.state.isOpen}
           close={this.toggle}
-          title={this.state.title}
+          title={this.state.formTitle}
           submit={this.renderView}
           cruddef={""}
         >
