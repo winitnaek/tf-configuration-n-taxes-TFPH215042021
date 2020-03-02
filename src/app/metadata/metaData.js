@@ -192,7 +192,7 @@ export const customTaxCodes = {
 		"columns": [
 			{
 				"text": "Custom Tax Code",
-				"datafield": "customTaxCode",
+				"datafield": "taxCode",
 				"cellsalign": "center",
 				"width": "47.5%",
 				"align": "center",
@@ -208,15 +208,17 @@ export const customTaxCodes = {
 			{
 				"text": "Custom Tax Name",
 				"width": "47.5%",
-                "datafield": "customTaxName",
+                "datafield": "name",
                 "cellsalign": "center",
                 "align": "center"
 			  }     
 		],
 		"dataFields":[
-		  {"name": "customTaxCode","type": "string"},
-		  {"name": "customTaxName","type": "string"},
-		  {"name": "edit", "type": "string"}
+		  {"name": "taxCode","type": "string"},
+		  {"name": "name","type": "string"},
+		  {"name": "bsiAuth", "type": "string"},
+		  {"name": "codeType", "type": "string"},
+		  {"name": "locReturn", "type": "string"}
 		]
 	},
 	"cruddef": {
