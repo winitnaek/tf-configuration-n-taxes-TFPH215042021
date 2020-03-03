@@ -49,47 +49,42 @@ class SupplementalMethodsFilterForm extends Component {
         submit={this.handleView}
         close={this.props.close}
         reset={this.resetForm}
-        >
+      >
         <Col sm="3" />
-          <Col sm="6">
-            <Input
-              inputType={"text"}
-              title={"Tax Code"}
-              name={"taxCode"}
-              onChange={this.handleChange}
-              value={this.state.taxCode}
-              placeholder={"Enter Tax Code Here"}
-            />
-            <Input
-              inputType={"text"}
-              title={"Tax Type"}
-              name={"taxType"}
-              onChange={this.handleChange}
-              value={this.state.taxType}
-              placeholder={"Enter Tax Type Here"}
-            />
-
-            <Input
-              inputType={"text"}
-              title={"Formula Number"}
-              name={"formulaNumber"}
-              onChange={this.handleChange}
-              value={this.state.formulaNumber}
-              placeholder={"Enter Formula Number Here"}
-            />
-
-            <Input
-              inputType={"date"}
-              title={"Start Date"}
-              name={"startDate"}
-              onChange={this.handleChange}
-              value={this.state.startDate}
-            />
-          </Col>
-          
-          <Col sm="3" />
-        
-     
+        <Col sm="6">
+          <Input
+            inputType={"text"}
+            title={"Tax Code"}
+            name={"taxCode"}
+            onChange={this.handleChange}
+            value={this.state.taxCode}
+            placeholder={"Enter Tax Code Here"}
+          />
+          <Input
+            inputType={"text"}
+            title={"Tax Type"}
+            name={"taxType"}
+            onChange={this.handleChange}
+            value={this.state.taxType}
+            placeholder={"Enter Tax Type Here"}
+          />
+          <Input
+            inputType={"text"}
+            title={"Formula Number"}
+            name={"formulaNumber"}
+            onChange={this.handleChange}
+            value={this.state.formulaNumber}
+            placeholder={"Enter Formula Number Here"}
+          />
+          <Input
+            inputType={"date"}
+            title={"Start Date"}
+            name={"startDate"}
+            onChange={this.handleChange}
+            value={this.state.startDate}
+          />
+        </Col>
+        <Col sm="3" />
       </ReusableForm>
     );
   }

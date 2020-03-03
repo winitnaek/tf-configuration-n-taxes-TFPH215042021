@@ -104,7 +104,7 @@ class UserDataQueries extends React.Component {
           <Col>
             <h3>
               <Button color="link" onClick={() => this.toggle(experienceRates, "Experience Rates")}>
-                Experian Rates
+                Experience Rates
               </Button>
             </h3>
           </Col>
