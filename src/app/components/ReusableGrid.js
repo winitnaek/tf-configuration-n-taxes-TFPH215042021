@@ -33,6 +33,7 @@ class ReusableGrid extends React.Component {
   constructor(props) {
     super(props);
     console.log("metadata>>>>");
+    console.log(this.props)
     let metadata = this.props.metadata(this.props.pageid);
     console.log(metadata);
     console.log("metadata>>>>");

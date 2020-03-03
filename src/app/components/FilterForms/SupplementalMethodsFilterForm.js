@@ -7,23 +7,23 @@ import { Col, Row } from "reactstrap";
 import { setFilterFormData } from "../../home/actions/filterFormActions";
 import { subTitle } from "../../../base/constants/AppConstants";
 
-class ExperienceRatesFilterForm extends Component {
+class SupplementalMethodsFilterForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       taxCode: "",
-      companyCode: "",
-      startDate: "",
-      riskClass: ""
+      taxType: "",
+      formulaNumber: "",
+      startDate: ""
     };
 
     this.resetForm = () => {
       this.setState({
         taxCode: "",
-        companyCode: "",
-        startDate: "",
-        riskClass: ""
+        taxType: "",
+        formulaNumber: "",
+        startDate: ""
       });
     };
 
@@ -36,23 +36,22 @@ class ExperienceRatesFilterForm extends Component {
     this.handleView = () => {
       console.log(this.state);
       this.props.setFilterFormData(this.state);
-      const pgid = "experienceRates"
-      this.props.renderGrid(pgid)
+      const pgid = "supplementalMethods";
+      this.props.renderGrid(pgid);
     };
   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <ReusableForm
-        title="Enter Custom Payments"
+        title="Supplemental Methods"
         filter={true}
         submit={this.handleView}
         close={this.props.close}
         reset={this.resetForm}
-      >
-        <Row>
-          <Col sm="1" />
-          <Col sm="5">
+        >
+        <Col sm="3" />
+          <Col sm="6">
             <Input
               inputType={"text"}
               title={"Tax Code"}
@@ -60,6 +59,23 @@ class ExperienceRatesFilterForm extends Component {
               onChange={this.handleChange}
               value={this.state.taxCode}
               placeholder={"Enter Tax Code Here"}
+            />
+            <Input
+              inputType={"text"}
+              title={"Tax Type"}
+              name={"taxType"}
+              onChange={this.handleChange}
+              value={this.state.taxType}
+              placeholder={"Enter Tax Type Here"}
+            />
+
+            <Input
+              inputType={"text"}
+              title={"Formula Number"}
+              name={"formulaNumber"}
+              onChange={this.handleChange}
+              value={this.state.formulaNumber}
+              placeholder={"Enter Formula Number Here"}
             />
 
             <Input
@@ -70,37 +86,10 @@ class ExperienceRatesFilterForm extends Component {
               value={this.state.startDate}
             />
           </Col>
-          <Col sm="5">
-            <Input
-              inputType={"text"}
-              title={"Company Code"}
-              name={"companyCode"}
-              onChange={this.handleChange}
-              value={this.state.companyCode}
-              placeholder={"Enter Company Code Here"}
-            />
-
-            <Input
-              inputType={"text"}
-              title={"Risk Class"}
-              name={"riskClass"}
-              onChange={this.handleChange}
-              value={this.state.riskClass}
-              placeholder={"Enter Risk Class Here"}
-            />
-          </Col>
-          <Col sm="1" />
-
-          <Col sm="12" style={subTitle}>
-            <p>
-              * No entry will imply ALL selection for company code and tax code.
-            </p>
-            <p>
-              ALL must be explicitly specified for risk class, since blank is a
-              valid value.
-            </p>
-          </Col>
-        </Row>
+          
+          <Col sm="3" />
+        
+     
       </ReusableForm>
     );
   }
@@ -121,4 +110,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ExperienceRatesFilterForm);
+)(SupplementalMethodsFilterForm);

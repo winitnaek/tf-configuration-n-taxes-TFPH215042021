@@ -112,7 +112,7 @@ class UserDataQueries extends React.Component {
             <h3>
               <Button
                 color="link"
-                onClick={() => this.toggle(supplementalMethods)}
+                onClick={() => this.toggle(supplementalMethods, "Supplemental Methods" )}
               >
                 Supplemental Methods
               </Button>

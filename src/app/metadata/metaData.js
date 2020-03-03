@@ -371,7 +371,7 @@ export const  experienceRates = {
 export const  supplementalMethods = {
 	"pgdef": {
 		"pgid": "supplementalMethods",
-		"pgtitle": "supplementalMethods",
+		"pgtitle": "Supplemental Methods",
 		"pgsubtitle":"",
 		"flowtype": "flowtype1",
 		"hasAddNew": false,

@@ -106,7 +106,7 @@ export const metadatamap = [
     rendererInput: ["dataset", "userId"]
   },
   {
-    id: "experienceRates",
+    id: "supplementalMethods",
     metadata: supplementalMethods,
     url: GET_SUPPLEMENTAL_INFO_FOR_TAX,
     rendererInput: ["dataset", "userId"]
