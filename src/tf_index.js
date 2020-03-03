@@ -42,6 +42,7 @@ console.log(moduleAreas);
  * @param {*} renderName
  */
 function renderTFApplication(elem, renderName) {
+  console.log(renderName)
   setAppAnchor(elem);
   setAppUserIDAndDataset(dataset, userId);
   if (renderName === rname.RN_TF_HOME) {
@@ -59,6 +60,7 @@ function renderTFApplication(elem, renderName) {
       600
     );
   }else if(renderName && renderName.type==UI_COMP){
+    console.log(renderName.id, renderName.value)
     renderComponent(elem,renderName.id,renderName.value);
   }else if(renderName && renderName.type==UI_PAGE){
     renderPage(elem,renderName.id,renderName.value);

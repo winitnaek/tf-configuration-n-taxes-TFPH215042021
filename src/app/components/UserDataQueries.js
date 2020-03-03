@@ -41,9 +41,11 @@ class UserDataQueries extends React.Component {
 
     this.handleForm = () => {
       console.log("attempting to render modal form");
+      console.log(pgid)
       const { pgid } = this.state;
       const close = this.toggle
-      const form = renderFilterForm(pgid, close);
+      const renderGrid = this.renderMe
+      const form = renderFilterForm(pgid, close, renderGrid);
       return form;
     };
 

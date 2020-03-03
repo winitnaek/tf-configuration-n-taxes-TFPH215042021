@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import {connect} from  "react-redux";
+import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ReusableForm from "../ReusableForm";
 import Input from "../SingleInput";
 import { Col, Row } from "reactstrap";
-import {setFilterFormData} from '../../home/actions/filterFormActions'
-import {subTitle} from '../../../base/constants/AppConstants'
+import { setFilterFormData } from "../../home/actions/filterFormActions";
+import { subTitle } from "../../../base/constants/AppConstants";
+import { UI_COMP } from "../../../base/constants/ServiceUrls";
 
 class ExperienceRatesFilterForm extends Component {
   constructor(props) {
@@ -34,13 +35,14 @@ class ExperienceRatesFilterForm extends Component {
     };
 
     this.handleView = () => {
-      console.log(this.state)
-      this.props.setFilterFormData(this.state)
-      const renderName = {id: "experianceRates", value: "Experiance Rates"}
-    //  renderTFApplication("pageContainer", renderName);
+      console.log(this.state);
+      this.props.setFilterFormData(this.state);
+      const pgid = "experienceRates"
+      this.props.renderGrid(pgid)
     };
   }
   render() {
+    console.log(this.props)
     return (
       <ReusableForm
         title="Enter Custom Payments"
@@ -50,7 +52,7 @@ class ExperienceRatesFilterForm extends Component {
         reset={this.resetForm}
       >
         <Row>
-        <Col sm="1"/>
+          <Col sm="1" />
           <Col sm="5">
             <Input
               inputType={"text"}
@@ -88,24 +90,22 @@ class ExperienceRatesFilterForm extends Component {
               placeholder={"Enter Risk Class Here"}
             />
           </Col>
-          <Col sm="1"/>
-         
-         <Col sm="12" style={subTitle}>
-          <p>
-            * No entry will imply ALL selection for company code and tax code.
-          </p>
-          <p>
-            ALL must be explicitly specified for risk class, since blank is a
-            valid value.
-          </p>
-        </Col> 
+          <Col sm="1" />
+
+          <Col sm="12" style={subTitle}>
+            <p>
+              * No entry will imply ALL selection for company code and tax code.
+            </p>
+            <p>
+              ALL must be explicitly specified for risk class, since blank is a
+              valid value.
+            </p>
+          </Col>
         </Row>
       </ReusableForm>
     );
   }
 }
-
-
 
 function mapStateToProps(state) {
   return {
@@ -116,7 +116,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({setFilterFormData }, dispatch);
+  return bindActionCreators({ setFilterFormData }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExperienceRatesFilterForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExperienceRatesFilterForm);

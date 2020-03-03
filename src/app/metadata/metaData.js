@@ -310,7 +310,7 @@ export const  populateV3States = {
 export const  experienceRates = {
 	"pgdef": {
 		"pgid": "experienceRates",
-		"pgtitle": "experienceRates",
+		"pgtitle": "Experience Rates",
 		"pgsubtitle":"",
 		"flowtype": "flowtype1",
 		"hasAddNew": false,
