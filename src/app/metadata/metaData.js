@@ -331,39 +331,90 @@ export const  experienceRates = {
         "recordDelete": false,
     	"columns": [
 			{
-				"text": "State",
-				"datafield": "state",
+				"text": "Company Code",
+				"datafield": "companyCode",
 				"cellsalign": "center",
-				"width": "30%",
 				"align": "center",
 				"sortable": true,
 				"rendererInput":"",
 				"rendererStaticInput":""
             },
             {
-                "text": "State Name",
-                "datafield": "stateName",
+                "text": "Tax Code",
+                "datafield": "taxCode",
+                "cellsalign": "center",
+				"align": "center",
+				"width": "10%"
+              },
+            {
+                "text": "Tax Type",
+                "datafield": "taxType",
                 "cellsalign": "center",
                 "align": "center"
               },
             {
-                "text": "Record Count",
-                "datafield": "recordCount",
+                "text": "Formula No.",
+                "datafield": "formulaNumber",
                 "cellsalign": "center",
                 "align": "center"
               },
             {
-                "text": "Bulletin",
-                "datafield": "bulletin",
+                "text": "Start Date",
+                "datafield": "startDate",
+                "cellsalign": "center",
+				"align": "center",
+				"width": "10%"
+              },
+            {
+                "text": "End Date",
+                "datafield": "endDate",
+                "cellsalign": "center",
+				"align": "center",
+				"width": "10%"
+              },
+            {
+                "text": "Account No.",
+                "datafield": "accountNumber",
+                "cellsalign": "center",
+                "align": "center"
+              },
+            {
+                "text": "Exp. Rate",
+                "datafield": "experienceRate",
+                "cellsalign": "center",
+                "align": "center"
+              },
+            {
+                "text": "Max. Wage",
+                "datafield": "maximumWage",
+                "cellsalign": "center",
+                "align": "center"
+              },
+            {
+                "text": "BSI Wage",
+                "datafield": "bsiWage",
+                "cellsalign": "center",
+                "align": "center"
+              },
+            {
+                "text": "Risk Class",
+                "datafield": "riskClass",
                 "cellsalign": "center",
                 "align": "center"
               }
 		],
 		"dataFields":[
-		  {"name": "state","type": "string"},
-		  {"name": "stateName","type": "string"},
-		  {"name": "recordCount","type": "string"},
-          {"name": "bulletin","type": "string"}	
+		  {"name": "companyCode","type": "string"},
+		  {"name": "taxCode","type": "string"},
+		  {"name": "taxType","type": "string"},
+		  {"name": "formulaNumber","type": "string"},
+		  {"name": "startDate","type": "string"},
+		  {"name": "endDate","type": "string"},
+		  {"name": "accountNumber","type": "string"},
+		  {"name": "experienceRate","type": "string"},
+		  {"name": "maximumWage","type": "string"},
+		  {"name": "bsiWage","type": "string"},
+		  {"name": "riskClass","type": "string"},
         ]
 	},
 	"cruddef": ""
@@ -392,39 +443,24 @@ export const  supplementalMethods = {
         "recordDelete": false,
     	"columns": [
 			{
-				"text": "State",
-				"datafield": "state",
-				"cellsalign": "center",
-				"width": "30%",
+				"text": "Attribute",
+				"datafield": "attribute",
+				"cellsalign": "left",
 				"align": "center",
 				"sortable": true,
 				"rendererInput":"",
 				"rendererStaticInput":""
             },
             {
-                "text": "State Name",
-                "datafield": "stateName",
-                "cellsalign": "center",
-                "align": "center"
-              },
-            {
-                "text": "Record Count",
-                "datafield": "recordCount",
-                "cellsalign": "center",
-                "align": "center"
-              },
-            {
-                "text": "Bulletin",
-                "datafield": "bulletin",
-                "cellsalign": "center",
+                "text": "Value",
+                "datafield": "value",
+                "cellsalign": "right",
                 "align": "center"
               }
 		],
 		"dataFields":[
-		  {"name": "state","type": "string"},
-		  {"name": "stateName","type": "string"},
-		  {"name": "recordCount","type": "string"},
-          {"name": "bulletin","type": "string"}	
+		  {"name": "attribute","type": "string"},
+		  {"name": "value","type": "string"}
         ]
 	},
 	"cruddef": ""

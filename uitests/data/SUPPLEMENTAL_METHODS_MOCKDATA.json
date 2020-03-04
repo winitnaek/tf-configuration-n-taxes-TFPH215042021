@@ -1,0 +1,17 @@
+[
+    {"attribute": "Authority Code", "value": "00390046"},
+    {"attribute": "Tax Type", "value": "001"},
+    {"attribute": "Formula Number", "value": "1"},
+    {"attribute": "Start Date", "value": "01/01/2007"},
+    {"attribute": "End Date", "value": "12/31/2020"},
+    {"attribute": "Regular Method Valid", "value": "0"},
+    {"attribute": "Flat-Rate Method Valid", "value": "0"},
+    {"attribute": "Seperate Aggregation Method Valid", "value": "0"},
+    {"attribute": "Rate Table Method Valid", "value": "0"},
+    {"attribute": "Cumulative Method Valid", "value": "0"},
+    {"attribute": "Aggregation Pay Period Method Valid", "value": "0"},
+    {"attribute": "Wage Associated Method Valid", "value": "0"},
+    {"attribute": "Concurrent Method Valid", "value": "0"},
+    {"attribute": "Regular No Exemptions Method Valid", "value": "1"},
+    {"attribute": "System Selected Supplemental Method Valid", "value": "8"}
+]

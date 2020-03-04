@@ -55,6 +55,9 @@ class UserDataQueries extends React.Component {
 
 
   }
+
+  
+
   renderMe(pgid) {
     let data = tftools.filter(tftool => {
       if (tftool.id == pgid) return tftool;
@@ -101,7 +104,7 @@ class UserDataQueries extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col> 
             <h3>
               <Button color="link" onClick={() => this.toggle(experienceRates, "Experience Rates")}>
                 Experience Rates

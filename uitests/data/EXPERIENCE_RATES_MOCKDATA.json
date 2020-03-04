@@ -1,0 +1,54 @@
+[
+    {
+        "companyCode":"TESTCOMP1" ,
+        "taxCode":"BSI00000000",
+        "taxType":"003" ,
+        "formulaNumber":"1",
+        "startDate": "01/16/2020",
+        "endDate":"12/31/9999" ,
+        "accountNumber":"N/A",
+        "experienceRate":"0.00000000" ,
+        "maximumWage":"0.00" ,
+        "bsiWage":"137700.00",
+        "riskClass": ""
+    },
+    {
+        "companyCode":"TESTCOMP1" ,
+        "taxCode":"BSI00280000",
+        "taxType":"010" ,
+        "formulaNumber":"1",
+        "startDate": "01/16/2020",
+        "endDate":"12/31/9999" ,
+        "accountNumber":"N/A",
+        "experienceRate":"0.00000000" ,
+        "maximumWage":"0.00" ,
+        "bsiWage":"14000.00",
+        "riskClass": ""
+    },
+    {
+        "companyCode":"TESTCOMP3" ,
+        "taxCode":"BSI00000000",
+        "taxType":"006" ,
+        "formulaNumber":"1",
+        "startDate": "01/01/2020",
+        "endDate":"12/31/9999" ,
+        "accountNumber":"N/A",
+        "experienceRate":"0.00000000" ,
+        "maximumWage":"0.00" ,
+        "bsiWage":"0.00",
+        "riskClass": ""
+    },
+    {
+        "companyCode":"TESTCOMP1" ,
+        "taxCode":"BSI00280000",
+        "taxType":"010" ,
+        "formulaNumber":"1",
+        "startDate": "01/16/2020",
+        "endDate":"12/31/9999" ,
+        "accountNumber":"N/A",
+        "experienceRate":"0.00000000" ,
+        "maximumWage":"0.00" ,
+        "bsiWage":"14000.00",
+        "riskClass": ""
+    }
+]

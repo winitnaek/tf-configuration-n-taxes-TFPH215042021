@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { closeForm, setFormData } from "../home/actions/formActions";
+import {copyToClipboard} from '../../base/utils/copyToClipBoard';
 import Modal from "./Modal";
 import {
   pagetitle,
@@ -25,7 +26,8 @@ import {
   ModalFooter
 } from "reactstrap";
 import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
-import { customTaxCodes } from "../metadata/metaData";
+
+
 
 let GridFunctions;
 
@@ -95,7 +97,8 @@ class ReusableGrid extends React.Component {
       const { index } = this.props.index;
       let _id = document.querySelector("div[role='grid']").id;
       console.log(index);
-
+     const gridData = this.refs.reusableGrid.getrowdatabyid(_id)
+     console.log(gridData)
       const rowid = $("#" + _id).jqxGrid("getrowid", index);
       $("#" + _id).jqxGrid("deleterow", rowid);
       //   $('#' + _id).jqxGrid('refresh')
@@ -118,26 +121,13 @@ class ReusableGrid extends React.Component {
     this.refs.reusableGrid.exportdata("csv", "reusableGrid");
   }
 
-  copyToClipboard(event) {
+  copyToClipboardHandler (event) {
     event.preventDefault()
-    // this.refs.reusableGrid.selectallrows();
-    let _id = document.querySelector("div[role='grid']").id;
-    //let text = document.getElementById("pageContainer").children[2].innerText
-
-
-    let myId = document.querySelector("div[role='grid']")
-    const text = _id.innerText
-
-    console.log(text)
-
-
-   $("#" + _id).jqxGrid("selectallrows");
-    //  $("#" + _id).jqxGrid('focus')
-    //   trigger ctrl-C
-    // Flash message thSat data has been copied to clipboard
-
-    document.execCommand("copy")
-    console.log("All rows copied to clipboard");
+   const numOfRows =  copyToClipboard()
+   console.log(numOfRows)
+   let _id = document.querySelector("div[role='grid']").id;
+   setTimeout( () =>  $("#" + _id).jqxGrid("clearselection"), 1000)
+    
   }
 
   selectAll (event) {
@@ -386,7 +376,7 @@ class ReusableGrid extends React.Component {
           <a
             href="#"
             id="copyToClipboard"
-            onClick={e => this.copyToClipboard(e)}
+            onClick={e => this.copyToClipboardHandler(e)}
             style={gridLinkStyle}
           >
             <i class="far fa-copy fa-lg fa-2x"></i>

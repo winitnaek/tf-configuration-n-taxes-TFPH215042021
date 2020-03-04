@@ -110,6 +110,11 @@ function dataURL(pageid){
     case "populateV3States":
       gridDataUrl = "./POPULATE_V3_STATES_MOCKDATA.json";
       break;
+    case "experienceRates":
+      gridDataUrl = "./EXPERIENCE_RATES_MOCKDATA.json";
+      break;
+    case "supplementalMethods":
+      gridDataUrl = "./SUPPLEMENTAL_METHODS_MOCKDATA.json"
     default:
       break;
   }
