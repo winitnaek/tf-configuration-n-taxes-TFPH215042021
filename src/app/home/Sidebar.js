@@ -14,7 +14,8 @@ import {
   buttonColStyle,
   favoriteLinkStyle,
   selectStyle,
-  favoriteListStyle
+  favoriteListStyle,
+  StyleOff
 } from "../../css/sidebar-css";
 import { getFavoriteLinks, saveFavoriteLinks } from "./favoriteLinksActions";
 import { setModuleLinks } from "./actions/moduleLinksActions";
@@ -122,6 +123,7 @@ class Sidebar extends Component {
     if (this.state.isOpen) {
       document.getElementById("mySidebar").style.display = "none";
       document.getElementById("fullSideBar").style.width = "";
+      document.getElementById("fullSideBar").style.zIndex = "0";
       document.getElementById("cardBody").style.padding = "0";
       document.getElementById("cardBody").style.paddingRight = "10px";
       document.getElementById("cardBody").style.paddingTop = "10px";
@@ -130,6 +132,7 @@ class Sidebar extends Component {
     } else {
       document.getElementById("mySidebar").style.display = "";
       document.getElementById("fullSideBar").style.width = "";
+      document.getElementById("fullSideBar").style.zIndex = "500";
       document.getElementById("cardBody").style.width = "100%";
       document.getElementById("cardBody").style.padding = "15px";
       document.getElementById("cardBody").style.paddingRight = "0";
@@ -259,7 +262,7 @@ class Sidebar extends Component {
     displayFavorites = displayFavorites.sort(compare);
 
     return (
-      <div id="fullSideBar" style={Style}>
+      <div id="fullSideBar" style={this.state.searchLinksIsOpen===true ? Style : StyleOff }>
         <Card
           body
           id="cardBody"
