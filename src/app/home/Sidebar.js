@@ -82,6 +82,10 @@ class Sidebar extends Component {
         isOpen: !this.state.isOpen,
         collapsed: !this.state.collapsed
       });
+    
+      this.openNav()
+
+
       this.props.handleLink(data);
     };
 

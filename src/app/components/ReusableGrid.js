@@ -273,7 +273,7 @@ class ReusableGrid extends React.Component {
           </span>
         </Row>
         <Row style={rowTop}>
-          <Col xs="1" style={iconPaddingLeft}>
+          <Col xs="2" style={iconPaddingLeft}>
     
             <span id="selectAll" style={{marginRight: "10px"}}>
               <a href="" onClick={e => this.selectAll(e)}>
@@ -297,7 +297,7 @@ class ReusableGrid extends React.Component {
             </UncontrolledTooltip>
       
           </Col>
-          <Col sm="10"></Col>
+          <Col sm="9"></Col>
           <Col sm="1" style={iconPaddingRight}>
             {this.state.hasAddNew && (
               <span
@@ -391,7 +391,7 @@ class ReusableGrid extends React.Component {
           close={this.props.closeForm}
           title={this.state.title}
           cruddef={this.state.cruddef}
-        >
+        > 
           {this.handleForm()}
         </Modal>
       </Fragment>
