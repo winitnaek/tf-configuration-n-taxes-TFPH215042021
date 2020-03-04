@@ -42,6 +42,16 @@ export const Style = {
   minWidth: "375px"
 };
 
+export const StyleOff = {
+  height: "100%",
+  position: "fixed",
+  top: 60,
+  left: 0,
+  backgroundColor: "F2F2F2",
+  overflowX: "hidden",
+  minWidth: "375px"
+};
+
 export const buttonColStyle = { backgroundColor: "white", border: "none" }
 
 
