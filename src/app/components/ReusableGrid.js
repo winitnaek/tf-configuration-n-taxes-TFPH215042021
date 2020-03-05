@@ -2,7 +2,8 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { closeForm, setFormData } from "../home/actions/formActions";
-import {copyToClipboard} from '../../base/utils/copyToClipBoard';
+import ClipboardToast from "../../app/components/ClipboardToast";
+import {copyToClipboard} from "../../base/utils/copyToClipboard";
 import Modal from "./Modal";
 import {
   pagetitle,
@@ -23,7 +24,8 @@ import {
   UncontrolledTooltip,
   Button,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  Alert
 } from "reactstrap";
 import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
 
@@ -71,7 +73,9 @@ class ReusableGrid extends React.Component {
       helpLabel: metadata.pgdef.helpLblTxt,
       gridDataUrl: gridDataUrl,
       mockData: [],
-      inputData:inputData
+      inputData:inputData,
+      showClipboard: false,
+      numOfRows: 0,
     };
 
     this.handleNewForm = e => {
@@ -121,12 +125,17 @@ class ReusableGrid extends React.Component {
     this.refs.reusableGrid.exportdata("csv", "reusableGrid");
   }
 
-  copyToClipboardHandler (event) {
-    event.preventDefault()
-   const numOfRows =  copyToClipboard()
-   console.log(numOfRows)
-   let _id = document.querySelector("div[role='grid']").id;
-   setTimeout( () =>  $("#" + _id).jqxGrid("clearselection"), 1000)
+  copyToClipboardHandler(event) {
+    event.preventDefault();
+    var numOfRows = copyToClipboard();
+    this.setState({
+      showClipboard: true, 
+      numOfRows: numOfRows
+    }, () => {
+      window.setTimeout(() => {
+          this.setState({showClipboard:false})
+      },2000)
+    });
     
   }
 
@@ -238,7 +247,7 @@ class ReusableGrid extends React.Component {
 
     // Check to see if permissions allow for edit & delete.  If no, then remove column
     let permissions = this.props.permissions(this.props.pid);
-    const { columns } = this.state;
+    const { columns, numOfRows, showClipboard } = this.state;
     let newColumns = columns;
 
     if (this.state.recordEdit) {
@@ -273,8 +282,7 @@ class ReusableGrid extends React.Component {
           </span>
         </Row>
         <Row style={rowTop}>
-          <Col xs="2" style={iconPaddingLeft}>
-    
+          <Col xs="1" style={iconPaddingLeft}>
             <span id="selectAll" style={{marginRight: "10px"}}>
               <a href="" onClick={e => this.selectAll(e)}>
                 <i className="fas fa-check-square  fa-2x" />
@@ -295,9 +303,12 @@ class ReusableGrid extends React.Component {
             <UncontrolledTooltip placement="right" target="unselectAll">
               <span> Unselect All </span>
             </UncontrolledTooltip>
-      
           </Col>
-          <Col sm="9"></Col>
+          <Col sm="10">
+            {showClipboard && (
+              <ClipboardToast numOfRows={this.state.numOfRows}/>
+            )}
+          </Col>
           <Col sm="1" style={iconPaddingRight}>
             {this.state.hasAddNew && (
               <span

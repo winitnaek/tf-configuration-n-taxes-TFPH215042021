@@ -1,25 +1,28 @@
+
 export function copyToClipboard() {
     let _id = document.querySelector("div[role='grid']").id;
     let value = [];
+    let numOfCols = 0;
     
+    let cols = $('#' + _id).jqxGrid('columns').records;
     let rows = $('#' + _id).jqxGrid('getrows');
-    let cols = $('#' + _id).jqxGrid('columns');
-    $("#" + _id).jqxGrid("selectallrows");
 
     var colData = "";
-    for (var x in cols.records) {
-        if(cols.records[x].datafield != "edit" && cols.records[x].datafield != "delete")
-         colData += cols.records[x].text + '\t';
-    }
-    value.push(colData + '\n');
-    for (var x in rows) {
-        var row = Object.values(rows[x]);
-        var rowData = "";
-
-        for( var i=0; i < row.length - 4; i++) {
-            rowData += row[i] + '\t';
+    for (var x in cols) {
+        if(cols[x].datafield != "edit" && cols[x].datafield != "delete"){
+            colData += cols[x].text + '  \t';
+            numOfCols ++;
         }
-        value.push(rowData + '\n');
+    }
+    value.push(colData + ' \n');
+    for (var x in rows) {
+        var rowData = "";
+        for(var i = 0; i < numOfCols; i++){
+            var datafield = cols[i].datafield;
+            var rowVal = rows[x];
+            rowData += rowVal[datafield] + '  \t';
+        }
+        value.push(rowData + ' \n');
     }
     var dummyInput = document.createElement('textarea');
     $('body').append(dummyInput);
@@ -28,7 +31,9 @@ export function copyToClipboard() {
     document.execCommand('copy');
     $(dummyInput).remove();
 
-   
-
-    return value.length;
+    var numOfRows = value.length - 1;
+    if(numOfRows >= 0)
+        return numOfRows;
+    else
+        return 0;
 }
