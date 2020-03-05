@@ -122,7 +122,7 @@ class UserDataQueries extends React.Component {
         <Modal
           open={this.state.isOpen}
           close={this.closeModal}
-          title={this.state.title}
+          title={this.state.formTitle}
           deleteRow={this.deleteRow}
           change={this.handleChange}
           renderGrid={this.renderMe}

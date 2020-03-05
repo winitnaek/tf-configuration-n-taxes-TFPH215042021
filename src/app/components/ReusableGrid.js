@@ -137,6 +137,7 @@ class ReusableGrid extends React.Component {
 
   selectAll(event) {
     event.preventDefault();
+    console.log('trying to select all')
     this.setState({ allSelected: true });
     let _id = document.querySelector("div[role='grid']").id;
     $("#" + _id).jqxGrid("selectallrows");
@@ -145,7 +146,7 @@ class ReusableGrid extends React.Component {
   unselectAll(event) {
     event.preventDefault();
     console.log("unselecting");
-    this.setState({ allselected: false });
+    this.setState({ allSelected: false });
     let _id = document.querySelector("div[role='grid']").id;
     $("#" + _id).jqxGrid("clearselection");
   }
@@ -293,7 +294,7 @@ class ReusableGrid extends React.Component {
         </Row>
         <Row style={rowTop}>
           <Col xs="1" style={iconPaddingLeft}>
-            {!this.state.allSelected && (
+            {this.state.allSelected && (
               <span>
                 <span id="selectAll" style={{ marginRight: "10px" }}>
                   <a href="" onClick={e => this.unselectAll(e)}>
@@ -306,7 +307,7 @@ class ReusableGrid extends React.Component {
               </span>
             )}
 
-            {this.state.allSelected && (
+            {!this.state.allSelected && (
               <span>
                 <span id="unselectAll" style={{ marginRight: "10px" }}>
                   <a href="" onClick={e => this.selectAll(e)}>
@@ -320,7 +321,7 @@ class ReusableGrid extends React.Component {
             )}
 
             <span id="unselectAll">
-              <a href="" onClick={e => this.unselectAll(e)}>
+              <a href="" onClick={e => this.selectAll(e)}>
                 <span>
                   <i className="fas fa-redo-alt fa-2x" />
                 </span>
