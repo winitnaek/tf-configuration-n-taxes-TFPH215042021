@@ -107,6 +107,32 @@ class ReusableGrid extends React.Component {
       renderTFApplication("pageContainer", data[0]);
       this.props.close();
     };
+
+    this.selectAll = (event) => {
+      event.preventDefault()
+      console.log('trying to select all')
+      this.setState({ allSelected: true });
+      let _id = document.querySelector("div[role='grid']").id;
+      $("#" + _id).jqxGrid("selectallrows");
+    }
+  
+    this.unselectAll=(event) => {
+      event.preventDefault()
+      console.log("unselecting");
+      this.setState({ allSelected: false });
+      let _id = document.querySelector("div[role='grid']").id;
+      $("#" + _id).jqxGrid("clearselection");
+    }
+  
+    this.toggleSelectAll=(event) => {
+      event.preventDefault()
+      console.log('Trying to toggle select all')
+ 
+
+      if (this.state.allSelected) {
+        this.unselectAll(event)
+      }
+    }
   }
 
   componentDidMount() {}
@@ -135,21 +161,30 @@ class ReusableGrid extends React.Component {
     );
   }
 
-  selectAll(event) {
-    event.preventDefault();
-    console.log('trying to select all')
-    this.setState({ allSelected: true });
-    let _id = document.querySelector("div[role='grid']").id;
-    $("#" + _id).jqxGrid("selectallrows");
-  }
+  // selectAll(event) {
+  //   event.preventDefault();
+  //   console.log('trying to select all')
+  //   this.setState({ allSelected: true });
+  //   let _id = document.querySelector("div[role='grid']").id;
+  //   $("#" + _id).jqxGrid("selectallrows");
+  // }
 
-  unselectAll(event) {
-    event.preventDefault();
-    console.log("unselecting");
-    this.setState({ allSelected: false });
-    let _id = document.querySelector("div[role='grid']").id;
-    $("#" + _id).jqxGrid("clearselection");
-  }
+  // unselectAll(event) {
+  //   event.preventDefault();
+  //   console.log("unselecting");
+  //   this.setState({ allSelected: false });
+  //   let _id = document.querySelector("div[role='grid']").id;
+  //   $("#" + _id).jqxGrid("clearselection");
+  // }
+
+  // toggleSelectAll(event) {
+  //   event.preventDefault();
+  //   if (this.state.allSelected) {
+  //     this.unselectAll()
+  //   } else {
+  //     this.selectAll()
+  //   }
+  // }
 
   // handleForm() {
   //   const cruddef = this.state.cruddef;
@@ -321,7 +356,7 @@ class ReusableGrid extends React.Component {
             )}
 
             <span id="unselectAll">
-              <a href="" onClick={e => this.selectAll(e)}>
+              <a href="" onClick={e => this.toggleSelectAll(e) }>    
                 <span>
                   <i className="fas fa-redo-alt fa-2x" />
                 </span>

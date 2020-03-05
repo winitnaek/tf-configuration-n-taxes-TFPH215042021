@@ -40,13 +40,24 @@ class CustomPaymentsForm extends Component {
     };
 
     this.resetForm = () => {
-      this.setState({
-        customPaymentCode: "",
-        customPaymentName: "",
-        paymentType: "Custom Earnings",
-        taxability: "Non-Taxable",
-        eeMax: ""
-      });
+      if (this.props.mode === "Edit") {
+        this.setState({
+          customPaymentCode: this.props.data.userCode,
+          customPaymentName: this.props.data.name,
+          paymentType: this.props.data.payType,
+          taxability: this.props.data.taxability,
+          eeMax: this.props.data.eemax,
+          showDelete: true
+        });
+      } else {
+        this.setState({
+          customPaymentCode: "",
+          customPaymentName: "",
+          paymentType: "Custom Earnings",
+          taxability: "Non-Taxable",
+          eeMax: ""
+        });
+      }
     };
 
     this.handleSubmit = () => {
