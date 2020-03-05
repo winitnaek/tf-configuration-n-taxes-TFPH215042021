@@ -117,12 +117,12 @@ class ReusableGrid extends React.Component {
   }
 
   exportToExcel() {
-    this.refs.reusableGrid.exportdata("xls", "reusableGrid");
+    this.refs.reusableGrid.exportdata("xls", this.state.pgid);
     console.log(this.refs.reusableGrid.clipboard());
   }
 
   exportToCsv() {
-    this.refs.reusableGrid.exportdata("csv", "reusableGrid");
+    this.refs.reusableGrid.exportdata("csv", this.state.pgid);
   }
 
   copyToClipboardHandler(event) {
