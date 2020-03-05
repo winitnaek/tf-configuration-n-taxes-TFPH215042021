@@ -6,8 +6,7 @@ const populateV3States = "populateV3States";
 const experienceRates = "experienceRates";
 const supplementalMethods = "supplementalMethods";
 import { pagetitle, helpicon } from "../../base/constants/AppConstants";
-import renderFilterForm from "../../base/utils/renderFilterForm";
-import Modal from './Modal';
+import Modal from "./FormModal";
 
 const TitleStyle = {
   margin: "0 auto",
@@ -28,35 +27,27 @@ class UserDataQueries extends React.Component {
       helpLabel: "Click here for more info",
       title: "User Data Queries",
       pgid: "",
-     formTitle: "",
-      isOpen: false
+      formTitle: "",
+      isOpen: false,
+      filter: false
     };
     this.OpenHelp = () => {
       this.props.help("userDataQueries");
     };
 
-    this.toggle = (id, title )=> {
-      this.setState({ isOpen: !this.state.isOpen, pgid: id, formTitle: title });
+    this.closeModal = () => {
+      this.setState({ isOpen: false });
     };
 
-    this.handleForm = () => {
-      console.log("attempting to render modal form");
-      console.log(pgid)
-      const { pgid } = this.state;
-      const close = this.toggle
-      const renderGrid = this.renderMe
-      const form = renderFilterForm(pgid, close, renderGrid);
-      return form;
+    this.toggle = (id, title) => {
+      this.setState({
+        isOpen: !this.state.isOpen,
+        pgid: id,
+        formTitle: title,
+        filter: true
+      });
     };
-
-    this.renderView = ()  =>{
-      console.log('View clicked')
-    }
-
-
-  }
-
-  
+   }
 
   renderMe(pgid) {
     let data = tftools.filter(tftool => {
@@ -104,9 +95,12 @@ class UserDataQueries extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col> 
+          <Col>
             <h3>
-              <Button color="link" onClick={() => this.toggle(experienceRates, "Experience Rates")}>
+              <Button
+                color="link"
+                onClick={() => this.toggle(experienceRates, "Experience Rates")}
+              >
                 Experience Rates
               </Button>
             </h3>
@@ -115,22 +109,26 @@ class UserDataQueries extends React.Component {
             <h3>
               <Button
                 color="link"
-                onClick={() => this.toggle(supplementalMethods, "Supplemental Methods" )}
+                onClick={() =>
+                  this.toggle(supplementalMethods, "Supplemental Methods")
+                }
               >
                 Supplemental Methods
               </Button>
             </h3>
           </Col>
         </Row>
+   
         <Modal
           open={this.state.isOpen}
-          close={this.toggle}
-          title={this.state.formTitle}
-          submit={this.renderView}
-          cruddef={""}
-        >
-          {this.handleForm()}
-        </Modal>
+          close={this.closeModal}
+          title={this.state.title}
+          deleteRow={this.deleteRow}
+          change={this.handleChange}
+          renderGrid={this.renderMe}
+          pgid={this.state.pgid}
+          filter={this.state.filter}
+        />
       </Fragment>
     );
   }

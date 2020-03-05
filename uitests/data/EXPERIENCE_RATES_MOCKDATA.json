@@ -10,7 +10,7 @@
         "experienceRate":"0.00000000" ,
         "maximumWage":"0.00" ,
         "bsiWage":"137700.00",
-        "riskClass": ""
+        "riskClass": "N/A"
     },
     {
         "companyCode":"TESTCOMP1" ,
@@ -23,7 +23,7 @@
         "experienceRate":"0.00000000" ,
         "maximumWage":"0.00" ,
         "bsiWage":"14000.00",
-        "riskClass": ""
+        "riskClass": "N/A"
     },
     {
         "companyCode":"TESTCOMP3" ,
@@ -36,7 +36,7 @@
         "experienceRate":"0.00000000" ,
         "maximumWage":"0.00" ,
         "bsiWage":"0.00",
-        "riskClass": ""
+        "riskClass": "N/A"
     },
     {
         "companyCode":"TESTCOMP1" ,
@@ -49,6 +49,6 @@
         "experienceRate":"0.00000000" ,
         "maximumWage":"0.00" ,
         "bsiWage":"14000.00",
-        "riskClass": ""
+        "riskClass":"N/A"
     }
 ]

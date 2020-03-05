@@ -25,6 +25,7 @@ export const modalBody = {
 }
 
 export const helpicon = { paddingTop: "7px", color: "#4c7392" };
+export const filtericon = { paddingTop: "7px", color: "#4c7392", marginLeft: "5px" };
 
 export const gridStyle = {
   color: "black", marginTop: "10px" 

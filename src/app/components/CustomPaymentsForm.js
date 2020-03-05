@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import ReusableForm from "./ReusableForm";
 import Select from "./Select";
 import Input from "./SingleInput";
-import {
-  Col 
-} from "reactstrap";
+import { updateGrid } from "../../base/utils/updateGrid";
+
+import { Col } from "reactstrap";
 
 class CustomPaymentsForm extends Component {
   constructor(props) {
@@ -29,9 +29,9 @@ class CustomPaymentsForm extends Component {
         "Imputed"
       ]
     };
-    
-    const {formProps} = this.props
-  const {close, change,  permissions, deleteRow} = formProps;
+
+    const { formProps } = this.props;
+    const { close, change, permissions, deleteRow } = formProps;
 
     this.handleChange = event => {
       this.setState({
@@ -50,7 +50,7 @@ class CustomPaymentsForm extends Component {
     };
 
     this.handleSubmit = () => {
-      // handle validation first then
+      let rowid = null;
       const {
         customPaymentCode,
         customPaymentName,
@@ -58,23 +58,27 @@ class CustomPaymentsForm extends Component {
         taxability,
         eeMax
       } = this.state;
-
       const payload = {
-        customPaymentCode,
-        customPaymentName,
-        paymentType,
+        userCode: customPaymentCode,
+        name: customPaymentName,
+        payType: paymentType,
         taxability,
-        eeMax
+        eemax: eeMax,
+        aggstatus: "N/A"
       };
-
-      console.log(payload);
+      const mode = this.props.mode;
+      if (mode === "Edit") {
+        rowid = this.props.rowIndex;
+      }
+      // Calls external updateGrid function located in ./base/utils
+      updateGrid(payload, rowid, mode);
       close();
     };
 
     this.handleDelete = () => {
       // Add handler to remove this record
       console.log("deleting record");
-      deleteRow(0)   // need to pass index
+      deleteRow(0); // need to pass index
       close();
     };
   }
@@ -90,17 +94,17 @@ class CustomPaymentsForm extends Component {
           paymentType: this.props.data.payType,
           taxability: this.props.data.taxability,
           eeMax: this.props.data.eemax,
-          showDelete: true,
+          showDelete: true
         });
       }
     }
-  } 
+  }
 
   render() {
-    console.log(this.props)
-    const {formProps} = this.props
-    const {permissions, close} = formProps;
-    const {handleDelete, handleSubmit, resetForm} = this
+    console.log(this.props);
+    const { formProps } = this.props;
+    const { permissions, close } = formProps;
+    const { handleDelete, handleSubmit, resetForm } = this;
     return (
       <ReusableForm
         title="Enter Custom Payments"
@@ -109,7 +113,7 @@ class CustomPaymentsForm extends Component {
         delete={handleDelete}
         reset={resetForm}
         showDelete={this.state.showDelete}
-        deletePermission={permissions.DELETE}  
+        deletePermission={permissions.DELETE}
       >
         <Col sm="6" style={{ marginRight: "0" }}>
           <p style={{ fontWeight: "bold" }}> Enter Custom Payments </p>
@@ -175,7 +179,8 @@ class CustomPaymentsForm extends Component {
 function mapStateToProps(state) {
   return {
     data: state.formData.data,
-    mode: state.formData.mode
+    mode: state.formData.mode,
+    rowIndex: state.formData.index
   };
 }
 

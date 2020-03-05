@@ -164,7 +164,7 @@ export const customPayments = {
 		  {"name": "taxability","type": "string"},
 		  {"name": "eemax","type": "string"},
 		  {"name": "aggstatus","type": "string"},
-		  {"name": "edit", "type": "string"}
+		//   {"name": "edit", "type": "string"}
 		]
 	},
 	"cruddef": {
@@ -323,7 +323,7 @@ export const  experienceRates = {
 	},
 	"griddef": {
 		"gridtype": "ro",
-		"filtergrid": false,
+		"filtergrid": true,
 		"datatype": "json",
 		"contenttype": "application/json",
 		"noResultsFoundTxt": "No Data Found",
@@ -435,7 +435,7 @@ export const  supplementalMethods = {
 	},
 	"griddef": {
 		"gridtype": "ro",
-		"filtergrid": false,
+		"filtergrid": true,
 		"datatype": "json",
 		"contenttype": "application/json",
 		"noResultsFoundTxt": "No Data Found",

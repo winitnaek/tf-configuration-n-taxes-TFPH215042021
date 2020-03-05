@@ -19,7 +19,7 @@ class reusableModal extends Component {
         <ModalHeader toggle={e => this.props.close()}>
           <span> {this.props.title} </span>
         </ModalHeader>
-        <p style={subTitle}> {this.props.cruddef.subtitle} </p>
+        <p style={subTitle}> { this.props.subtitle && this.props.cruddef.subtitle} </p>
         {this.props.children}
       </Modal>
     );

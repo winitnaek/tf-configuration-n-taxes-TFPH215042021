@@ -1,16 +1,9 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import Select from "./Select";
-import Input from "./SingleInput";
 import {modalBody} from '../../base/constants/AppConstants';
 import {
   Form,
-  FormGroup,
   Button,
   Container,
-  Col,
-  Row,
-  Alert,
   ModalBody,
   ModalFooter
 } from "reactstrap";
@@ -53,8 +46,6 @@ class ReusableForm extends Component {
               Delete
             </Button>
           )}
-
-          
           <Button onClick={this.props.submit} color="success">
            {this.props.filter ? ( "View") : ("Submit") }
           </Button>
