@@ -196,7 +196,8 @@ class ReusableGrid extends React.Component {
         $("#" + _id).jqxGrid("updatebounddata", "sort");
       },
       beforeprocessing: function(data) {
-        if (data != null) {
+        if (data != null) {    
+          if (data != null) { 
           source.totalrecords = data.totalRowCount;
         }
       }
