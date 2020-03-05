@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
 import { closeForm, setFormData } from "../home/actions/formActions";
 import { copyToClipboard } from "../../base/utils/copyToClipBoard";
+import ClipboardToast from "../components/ClipboardToast";
 import Modal from "./FormModal";
 import {
   pagetitle,
@@ -73,6 +74,8 @@ class ReusableGrid extends React.Component {
       mockData: [],
       inputData: inputData,
       allSelected: false,
+      showClipboard: false,
+      numOfRows: 0,
     };
 
     this.handleNewForm = e => {
@@ -118,22 +121,31 @@ class ReusableGrid extends React.Component {
 
   copyToClipboardHandler(event) {
     event.preventDefault();
-    const numOfRows = copyToClipboard();
-    console.log(numOfRows);
-    let _id = document.querySelector("div[role='grid']").id;
-    setTimeout(() => $("#" + _id).jqxGrid("clearselection"), 1000);
+    var numOfRows = copyToClipboard();
+    this.setState(
+      {
+        showClipboard: true,
+        numOfRows: numOfRows
+      },
+      () => {
+        window.setTimeout(() => {
+          this.setState({ showClipboard: false });
+        }, 2000);
+      }
+    );
   }
 
   selectAll(event) {
     event.preventDefault();
-    this.setState({ allSelected: true  });
+    this.setState({ allSelected: true });
     let _id = document.querySelector("div[role='grid']").id;
     $("#" + _id).jqxGrid("selectallrows");
   }
 
   unselectAll(event) {
     event.preventDefault();
-    this.setState({ allselected: false  });
+    console.log("unselecting");
+    this.setState({ allselected: false });
     let _id = document.querySelector("div[role='grid']").id;
     $("#" + _id).jqxGrid("clearselection");
   }
@@ -231,7 +243,7 @@ class ReusableGrid extends React.Component {
 
     // Check to see if permissions allow for edit & delete.  If no, then remove column
     let permissions = this.props.permissions(this.props.pid);
-    const { columns } = this.state;
+    const { columns , numOfRows, showClipboard} = this.state;
     let newColumns = columns;
 
     if (this.state.recordEdit) {
@@ -280,33 +292,32 @@ class ReusableGrid extends React.Component {
           )}
         </Row>
         <Row style={rowTop}>
-          <Col xs="2" style={iconPaddingLeft}>
-           
-          
-            <span>
-            <span id="selectAll" style={{ marginRight: "10px" }}>
-              <a href="" onClick={e => this.unselectAll(e)}>
-                <i className="fas fa-check-square  fa-2x" />
-              </a>
-            </span>
-            <UncontrolledTooltip placement="right" target="selectAll">
-              <span> Select All </span>
-            </UncontrolledTooltip>
-            </span>
-  
+          <Col xs="1" style={iconPaddingLeft}>
+            {!this.state.allSelected && (
+              <span>
+                <span id="selectAll" style={{ marginRight: "10px" }}>
+                  <a href="" onClick={e => this.unselectAll(e)}>
+                    <i className="fas fa-check-square  fa-2x" />
+                  </a>
+                </span>
+                <UncontrolledTooltip placement="right" target="selectAll">
+                  <span> Select All </span>
+                </UncontrolledTooltip>
+              </span>
+            )}
 
-
-            {/* <span>
-            <span id="unselectAll" style={{ marginRight: "10px" }}>
-              <a href="" onClick={e => this.selectAll(e)}>
-                <i className="far fa-square  fa-2x" />
-              </a>
-            </span>
-            <UncontrolledTooltip placement="right" target="unselectAll">
-              <span> Select All </span>
-            </UncontrolledTooltip>
-            </span> */}
-  
+            {this.state.allSelected && (
+              <span>
+                <span id="unselectAll" style={{ marginRight: "10px" }}>
+                  <a href="" onClick={e => this.selectAll(e)}>
+                    <i className="far fa-square  fa-2x" />
+                  </a>
+                </span>
+                <UncontrolledTooltip placement="right" target="unselectAll">
+                  <span> Select All </span>
+                </UncontrolledTooltip>
+              </span>
+            )}
 
             <span id="unselectAll">
               <a href="" onClick={e => this.unselectAll(e)}>
@@ -319,7 +330,11 @@ class ReusableGrid extends React.Component {
               <span> Unselect All </span>
             </UncontrolledTooltip>
           </Col>
-          <Col sm="9"></Col>
+          <Col sm="10">
+            {showClipboard && (
+              <ClipboardToast numOfRows={this.state.numOfRows} />
+            )}
+          </Col>
           <Col sm="1" style={iconPaddingRight}>
             {this.state.hasAddNew && (
               <span
