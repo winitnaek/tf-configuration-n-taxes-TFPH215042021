@@ -1,7 +1,7 @@
 import React from "react";
 // import CustomPaymentsForm from "../../app/components/CustomPaymentsForm";
-import ExperienceRatesFilterForm from "../../app/components/FilterForms/ExperienceRatesFilterForm";
-import SupplementalMethodsFilterForm from "../../app/components/FilterForms/SupplementalMethodsFilterForm"
+import ExperienceRatesFilterForm from "../../app/filterforms/ExperienceRatesFilterForm";
+import SupplementalMethodsFilterForm from "../../app/filterforms/SupplementalMethodsFilterForm" //components/FilterForms/SupplementalMethodsFilterForm"
 
 const renderForm = (pgid, close, renderGrid) => {
   let form;

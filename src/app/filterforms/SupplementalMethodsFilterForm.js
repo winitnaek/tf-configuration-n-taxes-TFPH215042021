@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import ReusableForm from "../ReusableForm";
-import Input from "../SingleInput";
+import ReusableForm from "../components/ReusableForm";
+import Input from "../components/SingleInput";
 import { Col, Row } from "reactstrap";
-import { setFilterFormData } from "../../home/actions/filterFormActions";
-import { subTitle } from "../../../base/constants/AppConstants";
+import { setFilterFormData } from "../home/actions/filterFormActions";
+import { subTitle } from "../../base/constants/AppConstants";
 
 class SupplementalMethodsFilterForm extends Component {
   constructor(props) {

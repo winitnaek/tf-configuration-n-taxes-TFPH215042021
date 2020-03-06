@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { modalBody } from "../../base/constants/AppConstants";
-import { customTaxCodesFormSchema } from "../formSchemas/customTaxCodesFormSchema";
+import { customTaxCodesFormSchema } from "../formschemas/customTaxCodesFormSchema";
 import {renderFields} from '../../base/utils/renderFields';
 
 import { Form, Button, Container, ModalBody, ModalFooter } from "reactstrap";
@@ -9,7 +9,10 @@ class ReusableForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values: []
+      values: [
+      {customTaxCode: ""},
+      {customeTaxName: ""},
+      ]
     };
 
     this.handleChange = event => {
@@ -42,14 +45,14 @@ class ReusableForm extends Component {
     let schema =[]
     if (customTaxCodesFormSchema) {
      schema = customTaxCodesFormSchema.map((field, index) => {
-      console.log(this.state.values)
+      console.log([Object.values(this.state.values[index])])
       return (        {
           name: field.name,
           id: field.id,
           placeholder: field.placeholder,
           type: field.type,
           label: field.label,
-          value: this.state.$[field.name],
+          value: '',
           onChange: this.onChange
         })
      });
