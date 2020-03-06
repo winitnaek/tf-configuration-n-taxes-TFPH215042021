@@ -24,7 +24,17 @@ export default {
 
     formData: {  data: {},  isOpen: false, mode: "New", index: null },
 
-    formFilterData: {}
+    formFilterData: {
+      pageId:"",
+      dataset:"",
+      userId:"",
+      companyCode:"",
+      taxCode:"",
+      startdate:"",
+      riskClass:"",
+      taxType:"",
+      formNumber:0
+    }
   
 };
 
