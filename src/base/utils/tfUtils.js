@@ -142,3 +142,25 @@ export function format(fmt, ...args) {
       }
   });
 };
+/**
+ * buildGridDataInput
+ * @param {*} pageid 
+ * @param {*} store 
+ */
+export function buildGridDataInput(pageid, store) {
+  let state = store.getState();
+  let filterData = state.formFilterData;
+  console.log(state);
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    companyCode: filterData.companyCode,
+    taxCode: filterData.taxCode,
+    startdate: filterData.startdate,
+    riskClass: filterData.riskClass,
+    taxType: filterData.taxType,
+    formNumber: filterData.formNumber
+  };
+  return input;
+}
