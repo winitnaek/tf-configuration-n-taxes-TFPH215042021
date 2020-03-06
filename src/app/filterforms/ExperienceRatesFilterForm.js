@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import ReusableForm from "../components/ReusableForm";
 import Input from "../components/SingleInput";
 import { Col, Row } from "reactstrap";
-import { setFilterFormData } from "../home/actions/filterFormActions";
+import { setFilterFormData } from "../actions/filterFormActions";
 import { subTitle } from "../../base/constants/AppConstants";
 
 class ExperienceRatesFilterForm extends Component {

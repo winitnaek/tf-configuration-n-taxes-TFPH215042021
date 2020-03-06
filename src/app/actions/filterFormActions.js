@@ -1,4 +1,4 @@
-import  {SET_FILTER_FORM_DATA} from '../../../base/constants/ActionTypes';
+import  {SET_FILTER_FORM_DATA} from '../../base/constants/ActionTypes';
 
 export const setFilterFormData = (data) => {
     return  {

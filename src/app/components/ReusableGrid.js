@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
-import { closeForm, setFormData } from "../home/actions/formActions";
+import { closeForm, setFormData } from "../actions/formActions";
 import { copyToClipboard } from "../../base/utils/copyToClipBoard";
 import ClipboardToast from "../components/ClipboardToast";
 import Modal from "./FormModal";

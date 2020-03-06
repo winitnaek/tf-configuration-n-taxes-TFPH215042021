@@ -45,7 +45,7 @@ class ReusableForm extends Component {
     let schema =[]
     if (customTaxCodesFormSchema) {
      schema = customTaxCodesFormSchema.map((field, index) => {
-      console.log([Object.values(this.state.values[index])])
+      console.log(Object.values(this.state.values[index])[0])
       return (        {
           name: field.name,
           id: field.id,

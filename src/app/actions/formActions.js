@@ -1,4 +1,4 @@
-import  {SET_FORM_DATA, CLOSE_FORM} from '../../../base/constants/ActionTypes';
+import  {SET_FORM_DATA, CLOSE_FORM} from '../../base/constants/ActionTypes';
 
 export const setFormData = (data) => {
     return  {

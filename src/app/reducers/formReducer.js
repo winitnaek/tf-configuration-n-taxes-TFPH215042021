@@ -1,6 +1,6 @@
 
-import  {SET_FORM_DATA, CLOSE_FORM} from '../../../base/constants/ActionTypes'
-import initialState from "../../../base/config/initialState";
+import  {SET_FORM_DATA, CLOSE_FORM} from '../../base/constants/ActionTypes'
+import initialState from "../../base/config/initialState";
 
 function formReducer(state = initialState.formData, action) {
   console.log(action.type);

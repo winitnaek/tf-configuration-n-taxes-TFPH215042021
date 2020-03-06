@@ -12,7 +12,7 @@ let store = configureStore();
 export default store;
 import Welcome from './app/home/Welcome';
 import {buildModuleAreaLinks,openHelp,setPerms,compMetaData,compPermissions,compURL} from './base/utils/tfUtils';
-import { setFormData} from './app/home/actions/formActions';
+import { setFormData} from './app/actions/formActions';
 import {setModuleAreas} from './app/home/actions/moduleLinksActions';
 import ReusableGrid from "./app/components/ReusableGrid";
 import UserDataQueries from "./app/components/UserDataQueries";

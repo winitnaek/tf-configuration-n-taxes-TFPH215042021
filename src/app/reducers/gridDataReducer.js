@@ -1,4 +1,4 @@
-import {FETCH_GRID_DATA_PENDING, FETCH_GRID_DATA_SUCCESS, FETCH_GRID_DATA_ERROR} from './gridDataActions';
+import {FETCH_GRID_DATA_PENDING, FETCH_GRID_DATA_SUCCESS, FETCH_GRID_DATA_ERROR} from '../actions/gridDataActions';
 
 const initialState = {
     pending: false,
