@@ -62,7 +62,7 @@ class TFHome extends Component {
              <Sidebar handleLink={this.handleLink} />
           </div> 
           <div class="col" id="pageContainer">
-              <Welcome/>
+              <Welcome/> 
           </div>
          </Container> 
       </div>

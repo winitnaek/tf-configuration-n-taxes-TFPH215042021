@@ -1,21 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReusableForm from "./ReusableForm";
-import { updateGrid } from "../../base/utils/updateGrid";
+import {updateGrid} from '../../base/utils/updateGrid';
 import Input from "./SingleInput";
 import { bold } from "../../base/constants/AppConstants";
 import { Col } from "reactstrap";
-import { formSchema } from "../../base/utils/testFormSchema";
-import { renderFields } from "../../base/utils/renderFields";
 
-class TestForm extends Component {
+class CustomTaxCodesForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       customTaxCode: "",
       customTaxName: "",
-      formSchema: [],
       showDelete: false
     };
 
@@ -40,52 +37,22 @@ class TestForm extends Component {
       });
     };
 
-    this.displayFormFields = () => {
-      const  formSchema  = [
-        {
-          name: "customTaxCode",
-          id: "customTaxCode",
-          placeholder: "Enter Custom Tax Code",
-          type: "text",
-          label: "Custom Tax Code",
-          value: this.state.customTaxCode,
-          onChange: this.handleChange
-        },
-        {
-          name: "customTaxName",
-          id: "customTaxName",
-          placeholder: "Enter Custom Tax Name",
-          type: "text",
-          label: "Custom Tax Name",
-          value: this.state.customTaxName,
-          onChange: this.handleChange
-        }
-      ]
-      const fields = renderFields(formSchema);
-      return fields;
-    };
-
-    this.setInitalValues = () => {
-      // formSchema.map(item => {
-      //   this.setState({ values: {...this.state.values, item: ""}  });
-      // })
-    };
-
     this.handleSubmit = () => {
-      let rowid = null;
+     
+      let rowid = null
 
       const payload = {
         taxCode: this.state.customTaxCode,
         name: this.state.customTaxName
       };
-      console.log(payload)
+     
       const mode = this.props.mode;
-      if (mode === "Edit") {
+      if(mode === 'Edit') {
         rowid = this.props.rowIndex;
       }
       // Calls external updateGrid function located in ./base/utils
-      updateGrid(payload, rowid, mode);
-
+      updateGrid(payload, rowid, mode)
+    
       close();
     };
 
@@ -107,38 +74,13 @@ class TestForm extends Component {
           showDelete: true
         });
       }
-      this.setState({
-        formSchema: [
-          {
-            name: "customTaxCode",
-            id: "customTaxCode",
-            placeholder: "Enter Custom Tax Code",
-            type: "text",
-            label: "Custom Tax Code",
-            value: this.state.customTaxCode,
-            onChange: this.handleChange
-          },
-          {
-            name: "customTaxName",
-            id: "customTaxName",
-            placeholder: "Enter Custom Tax Name",
-            type: "text",
-            label: "Custom Tax Name",
-            value: this.state.customTaxName,
-            onChange: this.handleChange
-          }
-        ]
-      });
     }
-
-    this.setInitalValues;
   }
 
   render() {
     const { formProps } = this.props;
     const { permissions, close } = formProps;
     const { handleDelete, handleSubmit, resetForm } = this;
-
     return (
       <ReusableForm
         title="Enter Custom Payments"
@@ -149,7 +91,32 @@ class TestForm extends Component {
         reset={resetForm}
         deletePermission={permissions.DELETE}
       >
-        {this.displayFormFields()}
+        <Col sm="2" />
+        <Col sm="8">
+          <p style={bold}> Enter Custom Tax Codes </p>
+          <Input
+            id="customTaxCode"
+            inputType={"text"}
+            title={"Custom Tax Code *"}
+            name={"customTaxCode"}
+            required={true}
+            onChange={this.handleChange}
+            value={this.state.customTaxCode}
+            placeholder={"Enter Custom Tax Code "}
+            feedback={"Text input is required!"}
+            style={{ width: "40% !important" }}
+          />
+          <Input
+            inputType={"text"}
+            title={"Custom Tax Name *"}
+            name={"customTaxName"}
+            onChange={this.handleChange}
+            value={this.state.customTaxName}
+            placeholder={"Enter Custom Tax Name"}
+            feedback={"Text input is required!"}
+          />
+        </Col>
+        <Col sm="2" />
       </ReusableForm>
     );
   }
@@ -163,4 +130,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(TestForm);
+export default connect(mapStateToProps, null)(CustomTaxCodesForm);

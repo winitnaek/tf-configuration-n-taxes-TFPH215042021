@@ -35,13 +35,26 @@ class ExperienceRatesFilterForm extends Component {
 
     this.handleView = () => {
       console.log(this.state);
-      this.props.setFilterFormData(this.state);
-      const pgid = "experienceRates"
-      this.props.renderGrid(pgid)
+
+      const payload = {
+        pageId: "experienceRates",
+        dataset: appDataset(),
+        userId: appUserId(),
+        companyCode: this.state.companyCode,
+        taxCode: this.state.taxCode,
+        startdate: this.state.startDate,
+        riskClass: this.state.riskClass,
+        taxType: this.state.taxType,
+        formNumber: 0
+      };
+
+      this.props.setFilterFormData(payload);
+      const pgid = "experienceRates";
+      this.props.renderGrid(pgid);
     };
   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <ReusableForm
         title="Enter Custom Payments"
