@@ -7,8 +7,6 @@ import configureStore from "../../base/config/configureStore";
 import { Col, Container, Button } from "reactstrap";
 import Welcome from "./Welcome";
 let store = configureStore();
-import { fetchLinks } from "./getLinks";
-
 
 import { setModuleLinks } from "./actions/moduleLinksActions";
 import Sidebar from './Sidebar';
@@ -77,7 +75,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchLinks: fetchLinks, setModuleLinks, },dispatch
+    { setModuleLinks, },dispatch
   );
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TFHome);
