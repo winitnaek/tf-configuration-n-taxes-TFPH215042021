@@ -25,9 +25,6 @@ export default {
     formData: {  data: {},  isOpen: false, mode: "New", index: null },
 
     formFilterData: {
-      pageId:"",
-      dataset:"",
-      userId:"",
       companyCode:"",
       taxCode:"",
       startdate:"",
