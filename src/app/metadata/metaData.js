@@ -280,28 +280,28 @@ export const  populateV3States = {
             },
             {
                 "text": "State Name",
-                "datafield": "stateName",
+                "datafield": "stName",
                 "cellsalign": "center",
                 "align": "center"
               },
             {
                 "text": "Record Count",
-                "datafield": "recordCount",
+                "datafield": "count",
                 "cellsalign": "center",
                 "align": "center"
               },
             {
                 "text": "Bulletin",
-                "datafield": "bulletin",
+                "datafield": "bulltn",
                 "cellsalign": "center",
                 "align": "center"
               }
 		],
 		"dataFields":[
 		  {"name": "state","type": "string"},
-		  {"name": "stateName","type": "string"},
-		  {"name": "recordCount","type": "string"},
-          {"name": "bulletin","type": "string"}	
+		  {"name": "stName","type": "string"},
+		  {"name": "count","type": "string"},
+          {"name": "bulltn","type": "string"}	
         ]
 	},
 	"cruddef": ""
