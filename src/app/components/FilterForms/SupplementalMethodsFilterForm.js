@@ -35,8 +35,20 @@ class SupplementalMethodsFilterForm extends Component {
 
     this.handleView = () => {
       console.log(this.state);
-      this.props.setFilterFormData(this.state);
       const pgid = "supplementalMethods";
+      const payload = {
+        pageId: pgid,
+        dataset: appDataset(),
+        userId: appUserId(),
+        companyCode: '',
+        taxCode: this.state.taxCode,
+        startdate: this.state.startDate,
+        formulaNo: this.state.formulaNumber,
+        riskClass: '',
+        taxType: this.state.taxType,
+        formNumber: 0
+      };
+      this.props.setFilterFormData(payload);
       this.props.renderGrid(pgid);
     };
   }
