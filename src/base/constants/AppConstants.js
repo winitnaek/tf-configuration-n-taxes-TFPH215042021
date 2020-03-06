@@ -21,7 +21,7 @@ export const modal = {
 
 
 export const modalBody = {
-  display: "flex", marginTop: "10px"
+  display: "flex", margin: "0 auto", width: "70%", flexWrap: "wrap"
 }
 
 export const helpicon = { paddingTop: "7px", color: "#4c7392" };
