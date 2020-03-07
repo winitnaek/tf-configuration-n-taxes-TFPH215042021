@@ -68,9 +68,9 @@ function renderTFApplication(elem, renderName) {
  */
 function renderComponent(elem,pageid,pid){
   ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
+  showPrgress(elem);
   let gridInput = buildGridDataInput(pageid,store);
   griddataAPI.getGridData(pageid,gridInput).then(response => response).then((griddata) => {
-    console.log('getGridData : '+griddata);
     ReactDOM.render(
       <Provider store={store}>
         <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} griddata={griddata} help={openHelp}/>
