@@ -46,12 +46,12 @@ class ReusableGrid extends React.Component {
 
     console.log(permissions);
     console.log("permissions>>>>");
-    let gridDataUrl = this.props.dataurl(this.props.pageid);
-
-    let inputData = {
-      pageId: metadata.pgdef.pgid,
-      dataset: appDataset(),
-      userId: appUserId()
+    //let gridDataUrl = this.props.dataurl(this.props.pageid);
+    let data = this.props.griddata;
+    let source = {
+      datatype: "json",
+      datafields: metadata.griddef.dataFields,
+      localdata: data
     };
 
     this.state = {
@@ -69,13 +69,12 @@ class ReusableGrid extends React.Component {
       hasAddNew: metadata.pgdef.hasAddNew,
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
-      gridDataUrl: gridDataUrl,
       filter: metadata.griddef.filtergrid,
       mockData: [],
-      inputData: inputData,
       allSelected: false,
       showClipboard: false,
       numOfRows: 0,
+      source:source
     };
 
     this.handleNewForm = e => {
@@ -210,65 +209,13 @@ class ReusableGrid extends React.Component {
   }
 
   render() {
-    let source = {
-      datatype: "json",
-      datafields: this.state.dataFields,
-      url: this.state.gridDataUrl,
-      type: "GET",
-      contenttype: "application/json",
-      data: this.state.inputData,
-      filter: function() {
-        // update the grid and send a request to the server.
-        let _id = document.querySelector("div[role='grid']").id;
-        $("#" + _id).jqxGrid("updatebounddata", "filter");
-      },
-      sort: function() {
-        // update the grid and send a request to the server.
-        let _id = document.querySelector("div[role='grid']").id;
-        $("#" + _id).jqxGrid("updatebounddata", "sort");
-      },
-      beforeprocessing: function(data) {
-        if (data != null) {
-          source.totalrecords = data.totalRowCount;
-        }
-      }
-    };
-
     const editCellsRenderer = ndex => {
       const pgid = this.state.pgid;
       return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick(${ndex})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
     };
 
-    // const dataSource = new window.jqx.dataAdapter(source);
-    let dataSource = new $.jqx.dataAdapter(source, {
-      // remove the comment to debug
-      formatData: function(data) {
-        //alert(JSON.stringify(data));
-        var noOfFilters = data.filterscount;
-        var i;
-        for (i = 0; i < noOfFilters; i++) {
-          //if ("generatedDateTime" === data["filterdatafield" + i]) {
-          //   data["filtervalue" + i] = $.jqx.formatDate(new Date(data["filtervalue" + i]), 'yyyyMMdd');
-          // alert(data["filtervalue" + i]);
-          //}
-        }
-        try {
-          return JSON.stringify(data);
-        } catch (error) {
-          return data;
-        }
-      },
-      downloadComplete: function(data, status, xhr) {
-        console.log("downloadComplete source");
-        console.log(source);
-        if (!source.totalrecords) {
-          source.totalrecords = data.length;
-        }
-      },
-      loadError: function(xhr, status, error) {
-        throw new Error(error);
-      }
-    });
+    let dataAdapter = new $.jqx.dataAdapter(this.state.source);
+
     const editColumn = {
       text: "Edit",
       datafield: "edit",
@@ -417,7 +364,7 @@ class ReusableGrid extends React.Component {
             id="myGrid"
             width="100%"
             altrows={true}
-            source={dataSource}
+            source={dataAdapter}
             columns={newColumns}
             pageable={true}
             autoheight={true}

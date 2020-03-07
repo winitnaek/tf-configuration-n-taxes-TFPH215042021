@@ -11,15 +11,16 @@ import TFHome from "./app/home/home.js";
 let store = configureStore();
 export default store;
 import Welcome from './app/home/Welcome';
-import {buildModuleAreaLinks,openHelp,setPerms,compMetaData,compPermissions,compURL} from './base/utils/tfUtils';
+import {buildModuleAreaLinks,openHelp,setPerms,compMetaData,compPermissions,compURL,buildGridDataInput} from './base/utils/tfUtils';
 import { setFormData} from './app/actions/formActions';
 import {setModuleAreas} from './app/home/actions/moduleLinksActions';
 import ReusableGrid from "./app/components/ReusableGrid";
 import UserDataQueries from "./app/components/UserDataQueries";
 import {UI_COMP,UI_PAGE} from './base/constants/TFTools';
+import griddataAPI from './app/actions/griddataAPI';
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
-  var userProfile ='{\r\n   \"userId\":\"001907\",\r\n   \"firstName\":\"Isreal\",\r\n   \"lastName\":\"Fullerton\",\r\n   \"dataset\":\"EPI_VINIT\",\r\n   \"securitytokn\":\"fhfh484jer843je848rj393jf\",\r\n   \"branding\":\"base64ImageData\",\r\n   \"userTheme\":\"Default\",\r\n   \"roles\":[\r\n      \"ER\"\r\n   ],\r\n   \"applications\":[\r\n      {\r\n         \"id\":\"73b9a516-c0ca-43c0-b0ae-190e08d77bcc\",\r\n         \"name\":\"TFTools\",\r\n         \"accessIds\":[\r\n            {\r\n               \"id\":\"162ebe14-8d87-44e1-a786-c9365c9d5cd8\",\r\n               \"visible\":true\r\n            }\r\n         ],\r\n         \"permissions\":{\r\n            \"CT\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"CP\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"UQ\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   ],\r\n   \"themeList\":[\r\n      {\r\n         \"id\":\"Default\",\r\n         \"name\":\"Default\"\r\n      },\r\n      {\r\n         \"id\":\"HighContrast\",\r\n         \"name\":\"High Contrast\"\r\n      },\r\n      {\r\n         \"id\":\"WhiteOnBlack\",\r\n         \"name\":\"White On Black\"\r\n      },\r\n      {\r\n         \"id\":\"BlackOnWhite\",\r\n         \"name\":\"Black On White\"\r\n      }\r\n   ]\r\n}';
+  var userProfile ='{\r\n   \"userId\":\"TF11\",\r\n   \"firstName\":\"Isreal\",\r\n   \"lastName\":\"Fullerton\",\r\n   \"dataset\":\"VINIT\",\r\n   \"securitytokn\":\"fhfh484jer843je848rj393jf\",\r\n   \"branding\":\"base64ImageData\",\r\n   \"userTheme\":\"Default\",\r\n   \"roles\":[\r\n      \"ER\"\r\n   ],\r\n   \"applications\":[\r\n      {\r\n         \"id\":\"73b9a516-c0ca-43c0-b0ae-190e08d77bcc\",\r\n         \"name\":\"TFTools\",\r\n         \"accessIds\":[\r\n            {\r\n               \"id\":\"162ebe14-8d87-44e1-a786-c9365c9d5cd8\",\r\n               \"visible\":true\r\n            }\r\n         ],\r\n         \"permissions\":{\r\n            \"CT\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"CP\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"UQ\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   ],\r\n   \"themeList\":[\r\n      {\r\n         \"id\":\"Default\",\r\n         \"name\":\"Default\"\r\n      },\r\n      {\r\n         \"id\":\"HighContrast\",\r\n         \"name\":\"High Contrast\"\r\n      },\r\n      {\r\n         \"id\":\"WhiteOnBlack\",\r\n         \"name\":\"White On Black\"\r\n      },\r\n      {\r\n         \"id\":\"BlackOnWhite\",\r\n         \"name\":\"Black On White\"\r\n      }\r\n   ]\r\n}';
   var userdata = JSON.parse(userProfile);
   console.log("setUserProfile userdata");
   console.log(userdata);
@@ -46,12 +47,7 @@ function renderTFApplication(elem, renderName) {
   setAppAnchor(elem);
   setAppUserIDAndDataset(dataset, userId);
   if (renderName === rname.RN_TF_HOME) {
-    ReactDOM.render(
-      <Provider store={store}>
-        <Progress />
-      </Provider>,
-      document.querySelector("#" + elem)
-    );
+    showPrgress(elem);
     store.dispatch(setModuleAreas(moduleAreas));
     setTimeout(
       function() {
@@ -72,12 +68,16 @@ function renderTFApplication(elem, renderName) {
  */
 function renderComponent(elem,pageid,pid){
   ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
-  ReactDOM.render(
-    <Provider store={store}>
-      <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} dataurl={compURL} help={openHelp}/>
-    </Provider>,
-    document.querySelector("#" + elem)
-  );
+  let gridInput = buildGridDataInput(pageid,store);
+  griddataAPI.getGridData(pageid,gridInput).then(response => response).then((griddata) => {
+    console.log('getGridData : '+griddata);
+    ReactDOM.render(
+      <Provider store={store}>
+        <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} griddata={griddata} help={openHelp}/>
+      </Provider>,
+      document.querySelector("#" + elem)
+    );
+  });
 }
 /**
  * renderPage
@@ -92,6 +92,18 @@ function renderPage(elem, pageid,pid) {
       document.querySelector("#" + elem)
     );
   }
+}
+/**
+ * showPrgress
+ * @param {*} elem 
+ */
+function showPrgress(elem) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Progress />
+    </Provider>,
+    document.querySelector("#" + elem)
+  );
 }
 
 function editClick(index) {
