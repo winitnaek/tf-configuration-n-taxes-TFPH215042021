@@ -354,39 +354,39 @@ export const  experienceRates = {
               },
             {
                 "text": "Formula No.",
-                "datafield": "formulaNumber",
+                "datafield": "formula",
                 "cellsalign": "center",
                 "align": "center"
               },
             {
                 "text": "Start Date",
-                "datafield": "startDate",
+                "datafield": "startDateDspl",
                 "cellsalign": "center",
 				"align": "center",
 				"width": "10%"
               },
             {
                 "text": "End Date",
-                "datafield": "endDate",
+                "datafield": "rescindDateDspl",
                 "cellsalign": "center",
 				"align": "center",
 				"width": "10%"
               },
             {
                 "text": "Account No.",
-                "datafield": "accountNumber",
+                "datafield": "acctNumber",
                 "cellsalign": "center",
                 "align": "center"
               },
             {
                 "text": "Exp. Rate",
-                "datafield": "experienceRate",
+                "datafield": "exprateDspl",
                 "cellsalign": "center",
                 "align": "center"
               },
             {
                 "text": "Max. Wage",
-                "datafield": "maximumWage",
+                "datafield": "maxwageDspl",
                 "cellsalign": "center",
                 "align": "center"
               },
@@ -407,12 +407,12 @@ export const  experienceRates = {
 		  {"name": "companyCode","type": "string"},
 		  {"name": "taxCode","type": "string"},
 		  {"name": "taxType","type": "string"},
-		  {"name": "formulaNumber","type": "string"},
-		  {"name": "startDate","type": "string"},
-		  {"name": "endDate","type": "string"},
-		  {"name": "accountNumber","type": "string"},
-		  {"name": "experienceRate","type": "string"},
-		  {"name": "maximumWage","type": "string"},
+		  {"name": "formula","type": "string"},
+		  {"name": "startDateDspl","type": "string"},
+		  {"name": "rescindDateDspl","type": "string"},
+		  {"name": "acctNumber","type": "string"},
+		  {"name": "exprateDspl","type": "string"},
+		  {"name": "maxwageDspl","type": "string"},
 		  {"name": "bsiWage","type": "string"},
 		  {"name": "riskClass","type": "string"},
         ]
