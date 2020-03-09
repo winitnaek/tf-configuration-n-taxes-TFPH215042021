@@ -12,10 +12,10 @@ class SupplementalMethodsFilterForm extends Component {
     super(props);
 
     this.state = {
-      taxCode: "",
-      taxType: "",
-      formulaNumber: "",
-      startDate: ""
+      taxCode: this.props.formFilterData.taxCode, 
+      taxType: this.props.formFilterData.taxType,
+      formulaNumber: this.props.formFilterData.formulaNo,
+      startDate: this.props.formFilterData.startdate
     };
 
     this.resetForm = () => {
@@ -105,6 +105,7 @@ class SupplementalMethodsFilterForm extends Component {
 function mapStateToProps(state) {
   return {
     data: state.formData.data,
+    formFilterData: state.formFilterData,
     isOpen: state.formData.isOpen,
     index: state.formData
   };
