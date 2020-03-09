@@ -34,7 +34,7 @@ class SupplementalMethodsFilterForm extends Component {
     };
 
     this.handleView = () => {
-      console.log(this.state);
+      this.props.close()
       const pgid = "supplementalMethods";
       const payload = {
         pageId: pgid,

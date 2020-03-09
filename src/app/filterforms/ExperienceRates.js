@@ -35,7 +35,7 @@ class ExperienceRatesFilterForm extends Component {
 
     this.handleView = () => {
       console.log(this.state);
-
+      this.props.close()
       const payload = {
         pageId: "experienceRates",
         dataset: appDataset(),
