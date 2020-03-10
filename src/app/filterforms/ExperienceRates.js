@@ -12,10 +12,10 @@ class ExperienceRatesFilterForm extends Component {
     super(props);
 
     this.state = {
-      taxCode: "",
-      companyCode: "",
-      startDate: "",
-      riskClass: ""
+      taxCode: this.props.formFilterData.taxCode,
+      companyCode: this.props.formFilterData.companyCode,
+      startDate: this.props.formFilterData.startdate,
+      riskClass: this.props.formFilterData.riskClass
     };
 
     this.resetForm = () => {
@@ -35,7 +35,7 @@ class ExperienceRatesFilterForm extends Component {
 
     this.handleView = () => {
       console.log(this.state);
-
+      this.props.close()
       const payload = {
         pageId: "experienceRates",
         dataset: appDataset(),
@@ -122,6 +122,7 @@ class ExperienceRatesFilterForm extends Component {
 function mapStateToProps(state) {
   return {
     data: state.formData.data,
+    formFilterData: state.formFilterData,
     isOpen: state.formData.isOpen,
     index: state.formData
   };
