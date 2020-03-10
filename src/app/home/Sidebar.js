@@ -30,7 +30,6 @@ import {
 } from "reactstrap";
 import Select, { components } from "react-select";
 
-
 class Sidebar extends Component {
   constructor(props) {
     super(props);
@@ -82,9 +81,8 @@ class Sidebar extends Component {
         isOpen: !this.state.isOpen,
         collapsed: !this.state.collapsed
       });
-    
-      this.openNav()
 
+      this.openNav();
 
       this.props.handleLink(data);
     };
@@ -106,12 +104,58 @@ class Sidebar extends Component {
         }
       });
     };
+
+    this.openNav = () => {
+      if (this.state.isOpen) {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("fullSideBar").style.width = "";
+        document.getElementById("fullSideBar").style.zIndex = "0";
+        document.getElementById("cardBody").style.padding = "0";
+        document.getElementById("cardBody").style.paddingRight = "10px";
+        document.getElementById("cardBody").style.paddingTop = "10px";
+        document.getElementById("cardBody").style.width = "70px";
+        document.getElementById("navToggler").style.marginLeft = "10px";
+      } else {
+        document.getElementById("mySidebar").style.display = "";
+        document.getElementById("fullSideBar").style.width = "";
+        document.getElementById("fullSideBar").style.zIndex = "500";
+        document.getElementById("cardBody").style.width = "100%";
+        document.getElementById("cardBody").style.padding = "15px";
+        document.getElementById("cardBody").style.paddingRight = "0";
+      }
+      this.setState({
+        isOpen: !this.state.isOpen,
+        collapsed: false
+      });
+    };
   }
 
   componentDidMount() {
     this.setState({
       options: this.props.options,
-      favorites: this.props.favorites,
+      favorites: this.props.favorites
+    });
+
+    // Set listener for clickaway
+    document.addEventListener("click", function(evt) {
+      var sidebar = document.getElementById("fullSideBar"),
+      targetElement = evt.target; // clicked element
+      let parent = targetElement.parentElement;
+      while (parent !== sidebar && parent !== null) {
+        parent ? (parent = parent.parentElement) : null;
+      }
+      if (!parent) {
+        console.log("trying to close menu");
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("fullSideBar").style.width = "";
+        document.getElementById("fullSideBar").style.zIndex = "0";
+        document.getElementById("cardBody").style.padding = "0";
+        document.getElementById("cardBody").style.paddingRight = "10px";
+        document.getElementById("cardBody").style.paddingTop = "10px";
+        document.getElementById("cardBody").style.width = "70px";
+        document.getElementById("navToggler").style.marginLeft = "10px";
+        setState({ isOpen: false });
+      }
     });
   }
 
@@ -121,30 +165,6 @@ class Sidebar extends Component {
         {option.label} <small>small</small>
       </div>
     );
-  }
-
-  openNav() {
-    if (this.state.isOpen) {
-      document.getElementById("mySidebar").style.display = "none";
-      document.getElementById("fullSideBar").style.width = "";
-      document.getElementById("fullSideBar").style.zIndex = "0";
-      document.getElementById("cardBody").style.padding = "0";
-      document.getElementById("cardBody").style.paddingRight = "10px";
-      document.getElementById("cardBody").style.paddingTop = "10px";
-      document.getElementById("cardBody").style.width = "70px";
-      document.getElementById("navToggler").style.marginLeft = "10px";
-    } else {
-      document.getElementById("mySidebar").style.display = "";
-      document.getElementById("fullSideBar").style.width = "";
-      document.getElementById("fullSideBar").style.zIndex = "500";
-      document.getElementById("cardBody").style.width = "100%";
-      document.getElementById("cardBody").style.padding = "15px";
-      document.getElementById("cardBody").style.paddingRight = "0";
-    }
-    this.setState({
-      isOpen: !this.state.isOpen,
-      collapsed: false
-    });
   }
 
   render() {
@@ -178,18 +198,18 @@ class Sidebar extends Component {
               })}
 
               {isFavorite ? (
-                    <button style={buttonColStyle} onClick={e => this.removeFavorite(data)}>
-                <i
-                  className="fas fa-star"
-                  style={goldStar}
-                ></i>
+                <button
+                  style={buttonColStyle}
+                  onClick={e => this.removeFavorite(data)}
+                >
+                  <i className="fas fa-star" style={goldStar}></i>
                 </button>
               ) : (
-                <button  style={buttonColStyle} onClick={ e => this.setFavorite(data)}>
-                <i
-                  class="far fa-star"
-                  style={star}
-                ></i>
+                <button
+                  style={buttonColStyle}
+                  onClick={e => this.setFavorite(data)}
+                >
+                  <i class="far fa-star" style={star}></i>
                 </button>
               )}
             </span>
@@ -207,7 +227,6 @@ class Sidebar extends Component {
         </Row>
       );
     };
-   
 
     const { selected, options, favorites } = this.state;
 
@@ -266,7 +285,10 @@ class Sidebar extends Component {
     displayFavorites = displayFavorites.sort(compare);
 
     return (
-      <div id="fullSideBar" style={this.state.searchLinksIsOpen===true ? Style : StyleOff }>
+      <div
+        id="fullSideBar"
+        style={this.state.searchLinksIsOpen === true ? Style : StyleOff}
+      >
         <Card
           body
           id="cardBody"
@@ -307,7 +329,7 @@ class Sidebar extends Component {
                 <NavbarToggler
                   id="navToggler"
                   style={{ color: "black", fontSize: "1rem" }}
-                  onClick={e => this.openNav() }
+                  onClick={e => this.openNav()}
                   className="mr-2"
                 />
               </Navbar>
@@ -327,7 +349,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { getFavoriteLinks, saveFavoriteLinks, setModuleLinks},
+    { getFavoriteLinks, saveFavoriteLinks, setModuleLinks },
     dispatch
   );
 }
