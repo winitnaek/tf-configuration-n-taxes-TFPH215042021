@@ -12,7 +12,8 @@ import {
   GET_ALL_BSI_PLANS,
   GET_ALL_POPULATED_V3_STATES,
   GET_EXPERIENCE_RATES,
-  GET_SUPPLEMENTAL_INFO_FOR_TAX
+  GET_SUPPLEMENTAL_INFO_FOR_TAX,
+  GET_RECENT_USAGE
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
@@ -110,5 +111,9 @@ export const metadatamap = [
     metadata: supplementalMethods,
     url: GET_SUPPLEMENTAL_INFO_FOR_TAX,
     rendererInput: ["dataset", "userId"]
-  }
+  },
+  {
+    id: "recentUsage",
+    url: GET_RECENT_USAGE,
+  },
 ];

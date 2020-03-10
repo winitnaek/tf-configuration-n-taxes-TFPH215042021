@@ -176,7 +176,7 @@ export const customPayments = {
 		"hasDelete":false,
 		"hasViewPDF":false,
 		"hasExit":true,
-		"hasRecentUsage":false
+		"hasRecentUsage":true
 	}
 };
 export const customTaxCodes = {
