@@ -480,56 +480,11 @@ export const customFormulas = {
 		"helpLink":"/customFormulas",
 		"parentConfig":"",
 		"childConfig": {
-			"parentpgid": "customFormulas",
 			"childpgid": "customFormulasChild",
-			"parentTitle": "Custom Formulas",
-			"parentWithDataTitle": "Click on the Custom Tax Name to manage the Formula."
 		},
 	},
-	"griddef": {
-		"gridtype": "type1",
-		"filtergrid": false,
-		"datatype": "json",
-		"contenttype": "application/json",
-		"noResultsFoundTxt": "No Data Found",
-        "recordEdit": true,
-        "recordDelete": true,
-		"columns": [
-			{
-				"text": "Custom Tax Code",
-				"datafield": "taxCode",
-				"cellsalign": "center",
-				"align": "center",
-				"width": "47.5%",
-				"sortable": true,
-					},
-			{
-				"text": "Custom Tax Name",
-                "datafield": "name",
-                "cellsalign": "center",
-				"align": "center",
-				"width": "47.5%",
-			  }     
-		],
-		"dataFields":[
-		  {"name": "taxCode","type": "string"},
-		  {"name": "name","type": "string"},
-		  {"name": "bsiAuth", "type": "string"},
-		  {"name": "codeType", "type": "string"},
-		  {"name": "locReturn", "type": "string"}
-		]
-	},
-	"cruddef": {
-		"title":"Custom Payments",
-		"subtitle":"Note: Required fields are marked with an asterisk (*)",
-		"hasSave":true,
-		"hasDelete":false,
-		"hasSaveAs":false,
-		"hasDelete":false,
-		"hasViewPDF":false,
-		"hasExit":true,
-		"hasRecentUsage":"false"
-	}
+	 "griddef": customTaxCodes.griddef,
+	
 }
 
 export const customFormulasChild = {

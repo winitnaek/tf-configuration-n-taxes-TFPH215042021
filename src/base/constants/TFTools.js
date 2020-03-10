@@ -47,14 +47,14 @@ export const tftools = [
     type: UI_COMP,
     link: true
   },
-  {
-    value: "CF",
-    label: "Custom Formulas ",
-    desc: "Custom Formulas",
-    id: "customFormulasChild",
-    type: UI_COMP,
+   {
+     value: "CF",
+     label: "Custom Formulas ",
+     desc: "Custom Formulas",
+     id: "customFormulasChild",
+     type: UI_COMP,
     link: true
-  },
+   },
   {
     value: "UQ",
     label: "User Queries",

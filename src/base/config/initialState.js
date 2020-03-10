@@ -27,6 +27,8 @@ export default {
         id: "customFormulas",
         type: "comp",
         link: true,
+        child: "customFormulas"
+
       },
     ],
 
