@@ -1,7 +1,7 @@
 import * as svcs from "../../base/constants/ServiceUrls";
 import AppError from "../../base/utils/AppError";
 import { ADMIN_ERROR_MSG } from "../../base/utils/AppErrorEvent";
-import {getUrl, reqInfo} from "../../base/utils/BuildUrl";
+import {getUrl, reqInfo} from "../../base/utils/tfUtils";
 
 class griddataAPI {
   static getGridData(pageid, getGridDataInput) {
