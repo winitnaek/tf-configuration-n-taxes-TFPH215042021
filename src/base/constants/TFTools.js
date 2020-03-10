@@ -4,7 +4,9 @@ import {
   allBSIPlans,
   populateV3States,
   experienceRates,
-  supplementalMethods
+  supplementalMethods,
+  customFormulas,
+  customFormulasChild
 } from "../../app/metadata/metaData";
 import {
   GET_CUSTOM_PAYMENTS_LIST,
@@ -13,7 +15,10 @@ import {
   GET_ALL_POPULATED_V3_STATES,
   GET_EXPERIENCE_RATES,
   GET_SUPPLEMENTAL_INFO_FOR_TAX,
-  GET_RECENT_USAGE
+  GET_RECENT_USAGE,
+  GET_CUSTOM_FORMULAS, 
+  GET_CUSTOM_FORMULAS_CHILD, 
+  
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
@@ -31,6 +36,22 @@ export const tftools = [
     label: "Custom Tax Codes",
     desc: "Custom Tax Codes",
     id: "customTaxCodes",
+    type: UI_COMP,
+    link: true
+  },
+  {
+    value: "CF",
+    label: "Custom Formulas",
+    desc: "Custom Formulas",
+    id: "customFormulas",
+    type: UI_COMP,
+    link: true
+  },
+  {
+    value: "CF",
+    label: "Custom Formulas ",
+    desc: "Custom Formulas",
+    id: "customFormulasChild",
     type: UI_COMP,
     link: true
   },
@@ -116,4 +137,17 @@ export const metadatamap = [
     id: "recentUsage",
     url: GET_RECENT_USAGE,
   },
+  {
+    id: "customFormulas",
+    metadata: customFormulas,
+    url: GET_CUSTOM_FORMULAS,
+    rendererInput: ["dataset", "userId"]
+  },  
+  {
+    id: "customFormulasChild",
+    metadata: customFormulasChild,
+    url: GET_CUSTOM_FORMULAS_CHILD,
+    rendererInput: ["dataset", "userId"]
+  },  
+
 ];
