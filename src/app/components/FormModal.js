@@ -30,8 +30,7 @@ class ModalForm extends Component {
         open={this.props.open}
         close={this.props.close}
         title={this.props.title}
-        cruddef={this.props.cruddef}
-       
+        cruddef={this.props.cruddef} 
       >
         {this.handleForm()}
       </Modal>

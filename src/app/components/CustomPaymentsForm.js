@@ -114,13 +114,14 @@ class CustomPaymentsForm extends Component {
   render() {
     console.log(this.props);
     const { formProps } = this.props;
-    const { permissions, close } = formProps;
+    const { permissions, close, pgid } = formProps;
     const { handleDelete, handleSubmit, resetForm } = this;
     return (
       <ReusableForm
         title="Enter Custom Payments"
         submit={handleSubmit}
         close={close}
+        pgid={pgid}
         delete={handleDelete}
         reset={resetForm}
         showDelete={this.state.showDelete}

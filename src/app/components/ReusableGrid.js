@@ -5,7 +5,8 @@ import { tftools } from "../../base/constants/TFTools";
 import { closeForm, setFormData } from "../actions/formActions";
 import { copyToClipboard } from "../../base/utils/copyToClipBoard";
 import ClipboardToast from "../components/ClipboardToast";
-import Modal from "./FormModal";
+
+import FormModal from "./FormModal";
 import {
   pagetitle,
   helpicon,
@@ -76,9 +77,9 @@ class ReusableGrid extends React.Component {
       numOfRows: 0,
       source:source
     };
-
-    this.handleNewForm = e => {
-      // All this does is trigger the modal to open
+	
+	this.handleNewForm = e => {
+	  // All this does is trigger the modal to open
       e.preventDefault();
       const payload = { data: {}, mode: "New" };
       this.props.setFormData(payload);
@@ -275,7 +276,7 @@ class ReusableGrid extends React.Component {
           )}
         </Row>
         <Row style={rowTop}>
-          <Col xs="1" style={iconPaddingLeft}>
+          <Col sm="2" style={iconPaddingLeft}>
             {this.state.allSelected && (
               <span>
                 <span id="selectAll" style={{ marginRight: "10px" }}>
@@ -313,7 +314,7 @@ class ReusableGrid extends React.Component {
               <span> Unselect All </span>
             </UncontrolledTooltip>
           </Col>
-          <Col sm="10">
+          <Col sm="9">
             {showClipboard && (
               <ClipboardToast numOfRows={this.state.numOfRows} />
             )}
@@ -406,7 +407,7 @@ class ReusableGrid extends React.Component {
           </UncontrolledTooltip>
         </Row>
 
-        <Modal
+        <FormModal
           open={this.props.isOpen}
           close={this.props.closeForm}
           title={this.state.title}
@@ -431,7 +432,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeForm, setFormData }, dispatch);
+  return bindActionCreators({ closeForm, setFormData}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReusableGrid);

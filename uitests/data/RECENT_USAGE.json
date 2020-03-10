@@ -1,0 +1,7 @@
+{
+    "properties": {
+        "customPayments": ["supplementalMethods", "customTaxCodes"],
+        "supplementalMethods": ["customTaxCodes", "customPayments"],
+        "customTaxCodes": ["supplementalMethods", "customPayments","customTaxCodes"] 
+    }
+}  

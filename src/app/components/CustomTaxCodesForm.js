@@ -20,7 +20,7 @@ class TestForm extends Component {
     };
 
     const { formProps } = this.props;
-    const { close, change, deleteRow } = formProps;
+    const { close, change, deleteRow, pgid } = formProps;
 
     this.resetForm = () => {
       this.setState({
@@ -136,7 +136,7 @@ class TestForm extends Component {
 
   render() {
     const { formProps } = this.props;
-    const { permissions, close } = formProps;
+    const { permissions, close, pgid } = formProps;
     const { handleDelete, handleSubmit, resetForm } = this;
 
     return (
@@ -144,6 +144,7 @@ class TestForm extends Component {
         title="Enter Custom Payments"
         submit={handleSubmit}
         close={close}
+        pgid={pgid}
         delete={handleDelete}
         showDelete={this.state.showDelete}
         reset={resetForm}

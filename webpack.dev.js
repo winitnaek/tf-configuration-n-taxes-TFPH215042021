@@ -10,6 +10,7 @@ if (process.env.NODE_ENV === 'development') {
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/ALL_BSI_PLANS_MOCKDATA.json', to: '../dist/ALL_BSI_PLANS_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/CUSTOM_PAYMENTS_MOCKDATA.json', to: '../dist/CUSTOM_PAYMENTS_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/CUSTOM_TAX_PAYMENT_MOCKDATA.json', to: '../dist/CUSTOM_TAX_PAYMENT_MOCKDATA.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/RECENT_USAGE.json', to: '../dist/RECENT_USAGE.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/POPULATE_V3_STATES_MOCKDATA.json', to: '../dist/POPULATE_V3_STATES_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/EXPERIENCE_RATES_MOCKDATA.json', to: '../dist/EXPERIENCE_RATES_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/SUPPLEMENTAL_METHODS_MOCKDATA.json', to: '../dist/SUPPLEMENTAL_METHODS_MOCKDATA.json' }]));

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import {modalBody} from '../../base/constants/AppConstants';
+import Usage from "./Usage";
+
 import {
   Form,
   Button,
@@ -14,6 +16,7 @@ class ReusableForm extends Component {
     this.state = {};
   }
   render() {
+    const {pgid} = this.props;
     return (
       <Container>
         <ModalBody>
@@ -23,6 +26,7 @@ class ReusableForm extends Component {
           >
             {this.props.children}
           </Form>
+		      <Usage pgid={pgid}/>
         </ModalBody>
 
         <ModalFooter>

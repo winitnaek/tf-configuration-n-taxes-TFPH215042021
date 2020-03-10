@@ -176,7 +176,7 @@ export const customPayments = {
 		"hasDelete":false,
 		"hasViewPDF":false,
 		"hasExit":true,
-		"hasRecentUsage":"false"
+		"hasRecentUsage":false
 	}
 };
 export const customTaxCodes = {
@@ -242,7 +242,7 @@ export const customTaxCodes = {
 		"hasDelete":false,
 		"hasViewPDF":false,
 		"hasExit":true,
-		"hasRecentUsage":"false"
+		"hasRecentUsage":true
 	}
 };
 export const  populateV3States = {
