@@ -64,6 +64,8 @@ const mockdatamap = [
   {id: "allBSIPlans",url: './ALL_BSI_PLANS_MOCKDATA.json'},
   {id: "populateV3States",url: './POPULATE_V3_STATES_MOCKDATA.json'},
   {id: "experienceRates",url: './EXPERIENCE_RATES_MOCKDATA.json'},
-  {id: "supplementalMethods",url: 'SUPPLEMENTAL_METHODS_MOCKDATA.json'}
+  {id: "supplementalMethods",url: 'SUPPLEMENTAL_METHODS_MOCKDATA.json'},
+  {id: "customFormulas", url: './CUSTOM_FORMULAS_MOCKDATA.json'},
+  {id: "customFormulasChild", url: './CUSTOM_FORMULAS_CHILD_MOCKDATA.json'}
 ];
 export default griddataAPI;

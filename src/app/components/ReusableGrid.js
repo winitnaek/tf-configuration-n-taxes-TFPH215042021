@@ -30,6 +30,7 @@ import {
   ModalFooter
 } from "reactstrap";
 import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
+const customFormulasChild = "customFormulasChild";
 
 let GridFunctions;
 
@@ -70,18 +71,23 @@ class ReusableGrid extends React.Component {
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
       filter: metadata.griddef.filtergrid,
+      childConfig: metadata.pgdef.childConfig,
+      parentConfig: metadata.pgdef.parentConfig,
       mockData: [],
       allSelected: false,
       showClipboard: false,
       numOfRows: 0,
-      source:source
+      source: source
     };
 
     this.handleNewForm = e => {
-      // All this does is trigger the modal to open
       e.preventDefault();
       const payload = { data: {}, mode: "New" };
-      this.props.setFormData(payload);
+      const { parentConfig } = this.state;
+      // Either Render Parent Grid or Toggle isOpen to Open Modal
+      parentConfig
+        ? handleChildGrid(parentConfig)
+        : this.props.setFormData(payload);
     };
 
     this.OpenHelp = () => {
@@ -107,31 +113,30 @@ class ReusableGrid extends React.Component {
       this.props.close();
     };
 
-    this.selectAll = (event) => {
-      event.preventDefault()
-      console.log('trying to select all')
+    this.selectAll = event => {
+      event.preventDefault();
+      console.log("trying to select all");
       this.setState({ allSelected: true });
       let _id = document.querySelector("div[role='grid']").id;
       $("#" + _id).jqxGrid("selectallrows");
-    }
-  
-    this.unselectAll=(event) => {
-      event.preventDefault()
+    };
+
+    this.unselectAll = event => {
+      event.preventDefault();
       console.log("unselecting");
       this.setState({ allSelected: false });
       let _id = document.querySelector("div[role='grid']").id;
       $("#" + _id).jqxGrid("clearselection");
-    }
-  
-    this.toggleSelectAll=(event) => {
-      event.preventDefault()
-      console.log('Trying to toggle select all')
- 
+    };
+
+    this.toggleSelectAll = event => {
+      event.preventDefault();
+      console.log("Trying to toggle select all");
 
       if (this.state.allSelected) {
-        this.unselectAll(event)
+        this.unselectAll(event);
       }
-    }
+    };
   }
 
   componentDidMount() {}
@@ -160,46 +165,6 @@ class ReusableGrid extends React.Component {
     );
   }
 
-  // selectAll(event) {
-  //   event.preventDefault();
-  //   console.log('trying to select all')
-  //   this.setState({ allSelected: true });
-  //   let _id = document.querySelector("div[role='grid']").id;
-  //   $("#" + _id).jqxGrid("selectallrows");
-  // }
-
-  // unselectAll(event) {
-  //   event.preventDefault();
-  //   console.log("unselecting");
-  //   this.setState({ allSelected: false });
-  //   let _id = document.querySelector("div[role='grid']").id;
-  //   $("#" + _id).jqxGrid("clearselection");
-  // }
-
-  // toggleSelectAll(event) {
-  //   event.preventDefault();
-  //   if (this.state.allSelected) {
-  //     this.unselectAll()
-  //   } else {
-  //     this.selectAll()
-  //   }
-  // }
-
-  // handleForm() {
-  //   const cruddef = this.state.cruddef;
-  //   const permissions = this.props.permissions(this.props.pid);
-  //   const close = this.toggle;
-  //   const deleteRow = this.deleteRow;
-  //   const change = this.handleChange;
-  //   const renderGrid = this.renderMe;
-  //   const { pgid } = this.state;
-  //   let form;
-  //   this.state.filter
-  //     ? (form = renderFilterForm(pgid, close, renderGrid))
-  //     : (form = renderForm(close, change, pgid, permissions, deleteRow));
-  //   return form;
-  // }
-
   renderMe(pgid) {
     let data = tftools.filter(tftool => {
       if (tftool.id == pgid) return tftool;
@@ -210,8 +175,17 @@ class ReusableGrid extends React.Component {
 
   render() {
     const editCellsRenderer = ndex => {
-      const pgid = this.state.pgid;
-      return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick(${ndex})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
+      const { childConfig } = this.state.pgid;
+      // this will render child grid else the form will render in a modal
+      if (this.state.pgdef.childConfig) {
+        const customFormulasChild = this.state.pgdef.childConfig.childpgid;
+        const pgid = "customFormulasChild"; // Fix this here
+        return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={handleChildGrid(${JSON.stringify(
+          customFormulasChild
+        )})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
+      } else {
+        return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick(${ndex})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
+      }
     };
 
     let dataAdapter = new $.jqx.dataAdapter(this.state.source);
@@ -226,7 +200,8 @@ class ReusableGrid extends React.Component {
 
     // Check to see if permissions allow for edit & delete.  If no, then remove column
     let permissions = this.props.permissions(this.props.pid);
-    const { columns , numOfRows, showClipboard} = this.state;
+    console.log(permissions);
+    const { columns, numOfRows, showClipboard } = this.state;
     let newColumns = columns;
 
     if (this.state.recordEdit) {
@@ -243,6 +218,8 @@ class ReusableGrid extends React.Component {
         });
       }
     }
+
+    console.log(this.state.pgdef.childConfig);
     return (
       <Fragment>
         <Row>
@@ -303,7 +280,7 @@ class ReusableGrid extends React.Component {
             )}
 
             <span id="unselectAll">
-              <a href="" onClick={e => this.toggleSelectAll(e) }>    
+              <a href="" onClick={e => this.toggleSelectAll(e)}>
                 <span>
                   <i className="fas fa-redo-alt fa-2x" />
                 </span>

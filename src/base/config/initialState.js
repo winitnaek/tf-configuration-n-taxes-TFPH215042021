@@ -20,6 +20,14 @@ export default {
         type: "comp",
         link: true,
       },
+      {
+        value: "CF",
+        label: "Custom Formulas",
+        desc: "Custom Formulas",
+        id: "customFormulas",
+        type: "comp",
+        link: true,
+      },
     ],
 
     formData: {  data: {},  isOpen: false, mode: "New", index: null },

@@ -114,7 +114,9 @@ function dataURL(pageid){
       gridDataUrl = "./EXPERIENCE_RATES_MOCKDATA.json";
       break;
     case "supplementalMethods":
-      gridDataUrl = "./SUPPLEMENTAL_METHODS_MOCKDATA.json"
+      gridDataUrl = "./SUPPLEMENTAL_METHODS_MOCKDATA.json";
+    case "customForumulas":
+      gridDataUrl = "./CUSTOM_FORMULAS_MOCKDATA.json";
     default:
       break;
   }
