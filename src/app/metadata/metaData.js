@@ -466,6 +466,27 @@ export const  supplementalMethods = {
 	"cruddef": ""
 }
 
+// export const customFormulas = {
+// 	"pgdef": {
+// 		"pgid": "customFormulas",
+// 		"pgtitle": "Custom Formulas",
+// 		"pgsubtitle":"",
+// 		"flowtype": "flowtype2",
+// 		"hasAddNew": true,
+// 		"addNewLabel": "Click here to add new Custom Tax Code.",
+// 		"actiondel": false,
+// 		"helpAvailable":true,
+// 		"helpLblTxt":"Click here for more info!",
+// 		"helpLink":"/customFormulas",
+// 		"parentConfig":"",
+// 		"childConfig": {
+// 			"childpgid": "customFormulasChild",
+// 		},
+// 	},
+// 	 "griddef": customTaxCodes.griddef,
+	
+// }
+
 export const customFormulas = {
 	"pgdef": {
 		"pgid": "customFormulas",
@@ -477,139 +498,125 @@ export const customFormulas = {
 		"actiondel": false,
 		"helpAvailable":true,
 		"helpLblTxt":"Click here for more info!",
-		"helpLink":"/customFormulas",
-		"parentConfig":"",
+		"helpLink":"/customTaxCodes",
 		"childConfig": {
-			"childpgid": "customFormulasChild",
+			pgdef: {
+			"pgid": "customFormulas",
+			"pgtitle": "Custom Formulas",
+			"pgsubtitle":"",
+			"flowtype": "flowtype2",
+			"hasAddNew": true,
+			"addNewLabel": "Click here to add new Custom Tax Code.",
+			"actiondel": false,
+			"helpAvailable":true,
+			"helpLblTxt":"Click here for more info!",
+			"helpLink":"/customTaxCodes",
+			"parentdef": customTaxCodes,
+			"childpgid": "customFormulas",
+			},
+			"griddef":  {
+				"gridtype": "type1",
+				"filtergrid": true,
+				"datatype": "json",
+				"contenttype": "application/json",
+				"noResultsFoundTxt": "No Data Found",
+				"recordEdit": true,
+				"recordDelete": true,
+				"columns": [
+					{
+						"text": "Custom Tax Code Name",
+						"datafield": "name",
+						"cellsalign": "center",
+						"align": "center",
+						"sortable": true, 
+						"width": "15%"
+					},
+					{
+						"text": "Method",
+						"datafield": "method",
+						"cellsalign": "center",
+						"align": "center",
+						"width": "8.8889%"
+					  },     
+					{
+						"text": "Tax Rate",
+						"datafield": "taxRate",
+						"cellsalign": "center",
+						"align": "center",
+						"width": "8.8889%"
+					  },     
+					{
+						"text": "Rounding",
+						"datafield": "rounding",
+						"cellsalign": "center",
+						"align": "center",
+						"width": "8.8889%"
+					  },     
+					{
+						"text": "Min Wage",
+						"datafield": "minWage",
+						"cellsalign": "center",
+						"align": "center",
+						"width": "8.8889%"
+					
+					  },     
+					{
+						"text": "Max Wage",
+						"datafield": "maxWage",
+						"cellsalign": "center",
+						"align": "center",
+						"width": "8.8889%"
+					
+					  },     
+					{
+						"text": "Max Tax",
+						"datafield": "maxTax",
+						"cellsalign": "center",
+						"align": "center",
+						"width": "8.8889%"
+						
+					  },     
+					{
+						"text": "Flat Amount",
+						"datafield": "flatAmount",
+						"cellsalign": "center",
+						"align": "center",
+						"width": "8.8889%"
+					
+					  },     
+					{
+						"text": "Start Date",
+						"datafield": "startDate",
+						"cellsalign": "center",
+						"align": "center",
+						"width": "8.8889%"
+						
+						
+					  },     
+					{
+						"text": "End Date",
+						"datafield": "endDate",
+						"cellsalign": "center",
+						"align": "center",
+						"width": "8.8889%"
+					  }     
+				],
+				"dataFields": [
+					{"name": "name","type": "string"},
+					{"name": "method","type": "string"},
+					{"name": "taxRate", "type": "string"},
+					{"name": "rounding", "type": "string"},
+					{"name": "minWage", "type": "string"},
+					{"name": "maxWage", "type": "string"},
+					{"name": "maxTax", "type": "string"},
+					{"name": "flatAmount", "type": "string"},
+					{"name": "startDate", "type": "string"},
+					{"name": "endDate", "type": "string"},
+				  ],
+			"parentTitle": "Custom Formulas",
+			"parentWithDataTitle": "Click on the Custom Tax Name to manage the Formula."
 		},
 	},
-	 "griddef": customTaxCodes.griddef,
-	
-}
-
-export const customFormulasChild = {
-	"pgdef": {
-		"pgid": "customFormulasChild",
-		"pgtitle": "Custom Formulas",
-		"pgsubtitle":"",
-		"flowtype": "flowtype2",
-		"hasAddNew": true,
-		"addNewLabel": "Click here to add new Custom Tax Code.",
-		"actiondel": false,
-		"helpAvailable":true,
-		"helpLblTxt":"Click here for more info!",
-		"helpLink":"/customTaxCodes",
-		"parentConfig":"customFormulas"
-	},
-	"griddef": {
-		"gridtype": "type1",
-		"filtergrid": true,
-		"datatype": "json",
-		"contenttype": "application/json",
-		"noResultsFoundTxt": "No Data Found",
-        "recordEdit": true,
-        "recordDelete": true,
-		"columns": [
-			{
-				"text": "Custom Tax Code Name",
-				"datafield": "name",
-				"cellsalign": "center",
-				"align": "center",
-				"sortable": true, 
-				"width": "15%"
-			},
-			{
-				"text": "Method",
-                "datafield": "method",
-                "cellsalign": "center",
-				"align": "center",
-				"width": "8.8889%"
-			  },     
-			{
-				"text": "Tax Rate",
-                "datafield": "taxRate",
-                "cellsalign": "center",
-				"align": "center",
-				"width": "8.8889%"
-			  },     
-			{
-				"text": "Rounding",
-                "datafield": "rounding",
-                "cellsalign": "center",
-				"align": "center",
-				"width": "8.8889%"
-			  },     
-			{
-				"text": "Min Wage",
-                "datafield": "minWage",
-                "cellsalign": "center",
-				"align": "center",
-				"width": "8.8889%"
-			
-			  },     
-			{
-				"text": "Max Wage",
-                "datafield": "maxWage",
-                "cellsalign": "center",
-				"align": "center",
-				"width": "8.8889%"
-			
-			  },     
-			{
-				"text": "Max Tax",
-                "datafield": "maxTax",
-                "cellsalign": "center",
-				"align": "center",
-				"width": "8.8889%"
-				
-			  },     
-			{
-				"text": "Flat Amount",
-                "datafield": "flatAmount",
-                "cellsalign": "center",
-				"align": "center",
-				"width": "8.8889%"
-			
-			  },     
-			{
-				"text": "Start Date",
-                "datafield": "startDate",
-                "cellsalign": "center",
-				"align": "center",
-				"width": "8.8889%"
-				
-				
-			  },     
-			{
-				"text": "End Date",
-                "datafield": "endDate",
-                "cellsalign": "center",
-				"align": "center",
-				"width": "8.8889%"
-			  }     
-		],
-		"dataFields":[
-		  {"name": "name","type": "string"},
-		  {"name": "method","type": "string"},
-		  {"name": "taxRate", "type": "string"},
-		  {"name": "rounding", "type": "string"},
-		  {"name": "minWage", "type": "string"},
-		  {"name": "maxWage", "type": "string"},
-		  {"name": "maxTax", "type": "string"},
-		  {"name": "flatAmount", "type": "string"},
-		  {"name": "startDate", "type": "string"},
-		  {"name": "endDate", "type": "string"},
-		]
-	},
-	"cruddef": {
-		"title":"Formulas",
-		"subtitle":"Note: Required fields are marked with an asterisk (*)",
-		"hasSave":true,
-		"hasDelete":false,
-		"hasSaveAs":false,
-		"hasDelete":false,
-		"hasViewPDF":false,
-		"hasExit":true,
-		"hasRecentUsage":"false"
-	}
+},
+	"griddef": customTaxCodes.griddef
 }

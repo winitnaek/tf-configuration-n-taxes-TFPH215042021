@@ -45,16 +45,20 @@ export const tftools = [
     desc: "Custom Formulas",
     id: "customFormulas",
     type: UI_COMP,
+    mode: "parent",
+    parentDataId: "customTaxCodes",
+    child: "customFormulas",
     link: true
   },
-   {
-     value: "CF",
-     label: "Custom Formulas ",
-     desc: "Custom Formulas",
-     id: "customFormulasChild",
-     type: UI_COMP,
-    link: true
-   },
+
+  //  {
+  //    value: "CF",
+  //    label: "Custom Formulas ",
+  //    desc: "Custom Formulas",
+  //    id: "customFormulasChild",
+  //    type: UI_COMP,
+  //   link: true
+  //  },
   {
     value: "UQ",
     label: "User Queries",
