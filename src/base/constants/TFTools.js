@@ -17,7 +17,8 @@ import {
   GET_SUPPLEMENTAL_INFO_FOR_TAX,
   GET_RECENT_USAGE,
   GET_CUSTOM_FORMULAS, 
-  GET_CUSTOM_FORMULAS_CHILD, 
+  GET_CUSTOM_FORMULAS_CHILD,
+  GET_ALL_TAXCODES_AUTOCOMPLETE 
   
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
@@ -150,4 +151,12 @@ export const metadatamap = [
     rendererInput: ["dataset", "userId"]
   },  
 
+];
+
+export const asyncselfldsmap = [
+  {
+    id: "taxCoodeSelect",
+    url: GET_ALL_TAXCODES_AUTOCOMPLETE,
+    param:[{dataset:"","pattern":""}]
+  }
 ];

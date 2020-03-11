@@ -179,72 +179,83 @@ export const customPayments = {
 		"hasRecentUsage":true
 	}
 };
-export const customTaxCodes = {
-	"pgdef": {
-		"pgid": "customTaxCodes",
-		"pgtitle": "Custom Tax Codes",
-		"pgsubtitle":"",
-		"flowtype": "flowtype1",
-		"hasAddNew": true,
-		"addNewLabel": "Click here to add new Custom Tax Code.",
-		"actiondel": false,
-		"helpAvailable":true,
-		"helpLblTxt":"Click here for more info!",
-		"helpLink":"/customTaxCodes",
-		"parentConfig":""
+export const customTaxCodes ={
+	"pgdef":{
+	   "pgid":"customTaxCodes",
+	   "pgtitle":"Custom Tax Codes",
+	   "pgsubtitle":"",
+	   "flowtype":"flowtype1",
+	   "hasAddNew":true,
+	   "addNewLabel":"Click here to add new Custom Tax Code.",
+	   "actiondel":false,
+	   "helpAvailable":true,
+	   "helpLblTxt":"Click here for more info!",
+	   "helpLink":"/customTaxCodes",
+	   "parentConfig":""
 	},
-	"griddef": {
-		"gridtype": "type1",
-		"filtergrid": false,
-		"datatype": "json",
-		"contenttype": "application/json",
-		"noResultsFoundTxt": "No Data Found",
-        "recordEdit": true,
-        "recordDelete": true,
-		"columns": [
-			{
-				"text": "Custom Tax Code",
-				"datafield": "taxCode",
-				"cellsalign": "center",
-				"width": "47.5%",
-				"align": "center",
-				"sortable": true,
-				"rendererInput": [
-					{
-						"customTaxCode": "test",
-						"customPaymentName": "PAYME",
-					}
-				],
-				"rendererStaticInput": [{"name": "","value": ""}]
-			},
-			{
-				"text": "Custom Tax Name",
-				"width": "47.5%",
-                "datafield": "name",
-                "cellsalign": "center",
-                "align": "center"
-			  }     
-		],
-		"dataFields":[
-		  {"name": "taxCode","type": "string"},
-		  {"name": "name","type": "string"},
-		  {"name": "bsiAuth", "type": "string"},
-		  {"name": "codeType", "type": "string"},
-		  {"name": "locReturn", "type": "string"}
-		]
+	"griddef":{
+	   "gridtype":"type1",
+	   "filtergrid":false,
+	   "datatype":"json",
+	   "contenttype":"application/json",
+	   "noResultsFoundTxt":"No Data Found",
+	   "recordEdit":true,
+	   "recordDelete":true,
+	   "columns":[
+		  {
+			 "text":"Custom Tax Code",
+			 "datafield":"taxCode",
+			 "cellsalign":"center",
+			 "width":"47.5%",
+			 "align":"center",
+			 "sortable":true,
+			 "rendererInput":"",
+			 "rendererStaticInput":""
+		  },
+		  {
+			 "text":"Custom Tax Name",
+			 "width":"47.5%",
+			 "datafield":"name",
+			 "cellsalign":"center",
+			 "align":"center"
+		  }
+	   ],
+	   "dataFields":[
+		  {
+			 "name":"taxCode",
+			 "type":"string"
+		  },
+		  {
+			 "name":"name",
+			 "type":"string"
+		  },
+		  {
+			 "name":"bsiAuth",
+			 "type":"string"
+		  },
+		  {
+			 "name":"codeType",
+			 "type":"string"
+		  },
+		  {
+			 "name":"locReturn",
+			 "type":"string"
+		  }
+	   ]
 	},
-	"cruddef": {
-		"title":"Custom Payments",
-		"subtitle":"Note: Required fields are marked with an asterisk (*)",
-		"hasSave":true,
-		"hasDelete":false,
-		"hasSaveAs":false,
-		"hasDelete":false,
-		"hasViewPDF":false,
-		"hasExit":true,
-		"hasRecentUsage":true
+	"cruddef":{
+	   "title":"Custom Payments",
+	   "subtitle":"Note: Required fields are marked with an asterisk (*)",
+	   "hasSave":true,
+	   "hasDelete":false,
+	   "hasSaveAs":false,
+	   "hasViewPDF":false,
+	   "hasExit":true,
+	   "hasRecentUsage":true,
+	   "formflds":[{"id":"customTaxCode","isEditable":"true"},{"id":"customTaxName","isEditable":"true"}],
+	   "fltrflds":""
 	}
-};
+ };
 export const  populateV3States = {
 	"pgdef": {
 		"pgid": "populateV3States",
