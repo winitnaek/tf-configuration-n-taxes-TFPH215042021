@@ -9,7 +9,6 @@ class reusableModal extends Component {
   }
 
   render() {
-    console.log(this.props.cruddef);
     return (
       <Modal
         isOpen={this.props.open}

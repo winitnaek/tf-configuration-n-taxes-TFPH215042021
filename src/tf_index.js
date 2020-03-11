@@ -44,9 +44,13 @@ console.log(moduleAreas);
  * @param {*} elem
  * @param {*} renderName
  */
-function renderTFApplication(elem, renderName) {
+function renderTFApplication(elem, renderName, child) {
   console.log(renderName)
   console.log(renderName.type)
+  let parentDataId;
+  if (!child && renderName.parentDataId) { 
+   parentDataId = renderName.parentDataId;
+  }
   setAppAnchor(elem);
   setAppUserIDAndDataset(dataset, userId);
   if (renderName === rname.RN_TF_HOME) {
@@ -59,8 +63,8 @@ function renderTFApplication(elem, renderName) {
       600
     );
   }else if(renderName && renderName.type==UI_COMP){
-    console.log(renderName.id, renderName.value)
-    renderComponent(elem,renderName.id,renderName.value);
+    console.log(renderName.id, renderName.value, renderName)
+    renderComponent(elem,renderName.id,renderName.value, child, parentDataId);
   }else if(renderName && renderName.type==UI_PAGE){
     renderPage(elem,renderName.id,renderName.value);
   }
@@ -69,14 +73,23 @@ function renderTFApplication(elem, renderName) {
  * renderComponent
  * @param {*} elem
  */
-function renderComponent(elem,pageid,pid){
+function renderComponent(elem,pageid,pid, child, parentDataId){
   ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
   showPrgress(elem);
   let gridInput = buildGridDataInput(pageid,store);
-  griddataAPI.getGridData(pageid,gridInput).then(response => response).then((griddata) => {
+  let dataid;
+  if (parentDataId) {
+    console.log('Setting parent dataid')
+    dataid = parentDataId
+  } else {
+    dataid = pageid
+  }
+
+  griddataAPI.getGridData(dataid,gridInput).then(response => response).then((griddata) => {
+    console.log(compMetaData)
     ReactDOM.render(
       <Provider store={store}>
-        <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} griddata={griddata} help={openHelp}/>
+        <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} griddata={griddata} help={openHelp} child={child}/>
       </Provider>,
       document.querySelector("#" + elem)
     );
@@ -123,13 +136,25 @@ const data = {formData: dataRecord, mode: "Edit", index: index}
 store.dispatch(setFormData(data))
 }
 
-function handleChildGrid(pgid) {
+function handleChildGrid(pgid, mode) {
   const pgData = tftools.filter(item => {
     if(item.id === pgid) {
       return item
     }
   })
-   renderTFApplication("pageContainer", pgData[0]);
+  // need to change mode to child
+  console.log(pgid)
+  console.log(pgData[0])
+  let child;
+  console.log(mode)
+  if(mode) {
+    child = false
+  } else {
+   child = true;
+  }
+
+  console.log(child)
+   renderTFApplication("pageContainer", pgData[0], child);
   console.log(pgData)
 }
 

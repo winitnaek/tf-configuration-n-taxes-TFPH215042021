@@ -41,6 +41,11 @@ class ReusableGrid extends React.Component {
     console.log("metadata>>>>");
     console.log(this.props);
     let metadata = this.props.metadata(this.props.pageid);
+    console.log("`this is the metadata", metadata);
+    if (this.props.child) {
+      metadata = metadata.pgdef.childConfig;
+    }
+    console.log(this.props.pageid);
     console.log(metadata);
     console.log("metadata>>>>");
     console.log("permissions>>>>");
@@ -50,6 +55,7 @@ class ReusableGrid extends React.Component {
     console.log("permissions>>>>");
     //let gridDataUrl = this.props.dataurl(this.props.pageid);
     let data = this.props.griddata;
+    console.log(metadata.griddef);
     let source = {
       datatype: "json",
       datafields: metadata.griddef.dataFields,
@@ -75,6 +81,7 @@ class ReusableGrid extends React.Component {
       childConfig: metadata.pgdef.childConfig,
       parentConfig: metadata.pgdef.parentConfig,
       mockData: [],
+      child: this.props.child,
       allSelected: false,
       showClipboard: false,
       numOfRows: 0,
@@ -84,11 +91,13 @@ class ReusableGrid extends React.Component {
     this.handleNewForm = e => {
       e.preventDefault();
       const payload = { data: {}, mode: "New" };
-      const { parentConfig } = this.state;
+      const { child, pgid } = this.state;
+      const mode = true
       // Either Render Parent Grid or Toggle isOpen to Open Modal
-      parentConfig
-        ? handleChildGrid(parentConfig)
-        : this.props.setFormData(payload);
+      console.log(child)
+      child
+        ? handleChildGrid(pgid, mode)
+        : this.props.setFormData(payload, mode);
     };
 
     this.OpenHelp = () => {
@@ -111,6 +120,7 @@ class ReusableGrid extends React.Component {
         if (tftool.id == pgid) return tftool;
       });
       renderTFApplication("pageContainer", data[0]);
+      console.log("this is the render me function")
       this.props.close();
     };
 
@@ -166,33 +176,34 @@ class ReusableGrid extends React.Component {
     );
   }
 
-  renderMe(pgid) {
-    let data = tftools.filter(tftool => {
-      if (tftool.id == pgid) return tftool;
-    });
-    renderTFApplication("pageContainer", data[0]);
-    this.toggle;
-  }
+  // renderMe(pgid) {
+  //   let data = tftools.filter(tftool => {
+  //     if (tftool.id == pgid) return tftool;
+  //   });
+  //   console.log(data[0])
+  //   renderTFApplication("pageContainer", data[0]);
+  //   this.toggle;
+  // }
 
   render() {
     const editCellsRenderer = ndex => {
       const { childConfig } = this.state.pgid;
       // this will render child grid else the form will render in a modal
       if (this.state.pgdef.childConfig) {
-        const customFormulasChild = this.state.pgdef.childConfig.childpgid;
-        const pgid = "customFormulasChild"; // Fix this here
+        const { pgid } = this.state;
         return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={handleChildGrid(${JSON.stringify(
-          customFormulasChild
-        )})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
+          pgid
+        )})}> <i class="fas fa-search  fa-1x" color="primary"/> </div>`;
       } else {
         return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick(${ndex})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;
       }
     };
 
     let dataAdapter = new $.jqx.dataAdapter(this.state.source);
-
+    let text;
+    this.state.pgdef.childConfig ? (text="View"): (text="Edit")
     const editColumn = {
-      text: "Edit",
+      text: text,
       datafield: "edit",
       align: "center",
       width: "5%",
@@ -201,7 +212,6 @@ class ReusableGrid extends React.Component {
 
     // Check to see if permissions allow for edit & delete.  If no, then remove column
     let permissions = this.props.permissions(this.props.pid);
-    console.log(permissions);
     const { columns, numOfRows, showClipboard } = this.state;
     let newColumns = columns;
 
@@ -220,7 +230,6 @@ class ReusableGrid extends React.Component {
       }
     }
 
-    console.log(this.state.pgdef.childConfig);
     return (
       <Fragment>
         <Row>
@@ -409,7 +418,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeForm, setFormData}, dispatch);
+  return bindActionCreators({ closeForm, setFormData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReusableGrid);

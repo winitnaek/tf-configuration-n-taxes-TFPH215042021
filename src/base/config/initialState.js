@@ -27,6 +27,10 @@ export default {
         id: "customFormulas",
         type: "comp",
         link: true,
+        mode: "parent",
+        parentDataId: "customTaxCodes",
+        child: "customFormulas"
+
       },
     ],
 
