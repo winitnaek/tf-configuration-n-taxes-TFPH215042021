@@ -42,9 +42,7 @@ class ReusableGrid extends React.Component {
     console.log(this.props);
     let metadata = this.props.metadata(this.props.pageid);
     console.log("`this is the metadata", metadata);
-    if (this.props.child) {
-      metadata = metadata.pgdef.childConfig;
-    }
+ 
     console.log(this.props.pageid);
     console.log(metadata);
     console.log("metadata>>>>");
@@ -55,6 +53,7 @@ class ReusableGrid extends React.Component {
     console.log("permissions>>>>");
     //let gridDataUrl = this.props.dataurl(this.props.pageid);
     let data = this.props.griddata;
+    console.log(data)
     console.log(metadata.griddef);
     let source = {
       datatype: "json",
@@ -177,13 +176,14 @@ class ReusableGrid extends React.Component {
   }
 
   render() {
+
     const editCellsRenderer = ndex => {
       const { childConfig } = this.state.pgid;
       // this will render child grid else the form will render in a modal
       if (this.state.pgdef.childConfig) {
-        const { pgid } = this.state;
+        const { childConfig } = this.state.pgdef;
         return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={handleChildGrid(${JSON.stringify(
-          pgid
+          childConfig
         )})}> <i class="fas fa-search  fa-1x" color="primary"/> </div>`;
       } else {
         return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={editClick(${ndex})}> <i class="fas fa-pencil-alt  fa-1x" color="primary"/> </div>`;

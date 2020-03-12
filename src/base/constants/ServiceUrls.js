@@ -12,3 +12,5 @@ export const GET_CUSTOM_FORMULAS = '/TaxCodeService/getCustomFormulasList';
 // export const GET_CUSTOM_FORMULAS_CHILD = '/TaxCodeService/getCustomFormulasChildList';
 export const GET_COMPANIES = '/TaxCodeService/getCompaniesList';
 export const GET_WORKSITES = '/TaxCodeService/getWorksitesList';
+export const GET_CUSTOM_TAX_FORMULAS = '/TaxCodeService/getCustomTaxFormulasList';
+export const GET_ALL_TAXCODES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxCodesAutocomplete';

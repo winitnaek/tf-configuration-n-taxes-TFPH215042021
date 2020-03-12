@@ -6,9 +6,9 @@ import {
   experienceRates,
   supplementalMethods,
   customFormulas,
-  customFormulasChild,
+  customTaxFormulas,
   companies,
-  worksites
+  worksites,
 } from "../../app/metadata/metaData";
 import {
   GET_CUSTOM_PAYMENTS_LIST,
@@ -19,9 +19,10 @@ import {
   GET_SUPPLEMENTAL_INFO_FOR_TAX,
   GET_RECENT_USAGE,
   GET_CUSTOM_FORMULAS, 
-  GET_CUSTOM_FORMULAS_CHILD, 
+  GET_CUSTOM_TAX_FORMULAS, 
   GET_COMPANIES,
-  GET_WORKSITES
+  GET_WORKSITES,
+  GET_ALL_TAXCODES_AUTOCOMPLETE 
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
@@ -48,20 +49,16 @@ export const tftools = [
     desc: "Custom Formulas",
     id: "customFormulas",
     type: UI_COMP,
-    mode: "parent",
-    parentDataId: "customTaxCodes",
-    child: "customFormulas",
     link: true
   },
-
-  //  {
-  //    value: "CF",
-  //    label: "Custom Formulas ",
-  //    desc: "Custom Formulas",
-  //    id: "customFormulasChild",
-  //    type: UI_COMP,
-  //   link: true
-  //  },
+  {
+    value: "CF",
+    label: "Custom Formulas",
+    desc: "Custom Formulas",
+    id: "customTaxFormulas",
+    type: UI_COMP,
+    link: false
+  },
   {
     value: "UQ",
     label: "User Queries",
@@ -187,4 +184,19 @@ export const metadatamap = [
     url: GET_COMPANIES,
     rendererInput: ["dataset", "userId"]
   },
+  {
+    id: "customTaxFormulas",
+    metadata: customTaxFormulas,
+    url: GET_CUSTOM_TAX_FORMULAS,
+    rendererInput: ["dataset", "userId"]
+  },  
+
+];
+
+export const asyncselfldsmap = [
+  {
+    id: "taxCoodeSelect",
+    url: GET_ALL_TAXCODES_AUTOCOMPLETE,
+    param:[{dataset:"","pattern":""}]
+  }
 ];

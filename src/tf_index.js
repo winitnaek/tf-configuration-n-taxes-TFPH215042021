@@ -48,9 +48,7 @@ function renderTFApplication(elem, renderName, child) {
   console.log(renderName)
   console.log(renderName.type)
   let parentDataId;
-  if (!child && renderName.parentDataId) { 
-   parentDataId = renderName.parentDataId;
-  }
+
   setAppAnchor(elem);
   setAppUserIDAndDataset(dataset, userId);
   if (renderName === rname.RN_TF_HOME) {
@@ -64,7 +62,7 @@ function renderTFApplication(elem, renderName, child) {
     );
   }else if(renderName && renderName.type==UI_COMP){
     console.log(renderName.id, renderName.value, renderName)
-    renderComponent(elem,renderName.id,renderName.value, child, parentDataId);
+    renderComponent(elem,renderName.id,renderName.value, child);
   }else if(renderName && renderName.type==UI_PAGE){
     renderPage(elem,renderName.id,renderName.value);
   }
@@ -77,15 +75,10 @@ function renderComponent(elem,pageid,pid, child, parentDataId){
   ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
   showPrgress(elem);
   let gridInput = buildGridDataInput(pageid,store);
-  let dataid;
-  if (parentDataId) {
-    console.log('Setting parent dataid')
-    dataid = parentDataId
-  } else {
-    dataid = pageid
-  }
 
-  griddataAPI.getGridData(dataid,gridInput).then(response => response).then((griddata) => {
+
+
+  griddataAPI.getGridData(pageid,gridInput).then(response => response).then((griddata) => {
     console.log(compMetaData)
     ReactDOM.render(
       <Provider store={store}>
@@ -138,7 +131,7 @@ store.dispatch(setFormData(data))
 
 function handleChildGrid(pgid, mode) {
   const pgData = tftools.filter(item => {
-    console.log(item)
+   
     if(item.id === pgid) {
       return item
     }
