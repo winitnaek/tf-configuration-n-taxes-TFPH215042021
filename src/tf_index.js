@@ -138,13 +138,14 @@ store.dispatch(setFormData(data))
 
 function handleChildGrid(pgid, mode) {
   const pgData = tftools.filter(item => {
+    console.log(item)
     if(item.id === pgid) {
       return item
     }
   })
   // need to change mode to child
   console.log(pgid)
-  console.log(pgData[0])
+  console.log(pgData)
   let child;
   console.log(mode)
   if(mode) {
@@ -154,8 +155,9 @@ function handleChildGrid(pgid, mode) {
   }
 
   console.log(child)
-   renderTFApplication("pageContainer", pgData[0], child);
   console.log(pgData)
+   renderTFApplication("pageContainer", pgData[0], child);
+
 }
 
 /**
@@ -190,7 +192,7 @@ function setAppUserIDAndDataset(dataset, userid) {
     APP_DATASET = dataset;
     APP_USERID = userid;
 }
-var CP_RIGHTS,CT_RIGHTS,CF_RIGHTS,CFC_RIGHTS, UQ_RIGHTS,ALL_RIGHTS;
+var CP_RIGHTS,CT_RIGHTS,CF_RIGHTS,CFC_RIGHTS,WS_RIGHTS, UQ_RIGHTS,ALL_RIGHTS;
 function setCPRights(perm){
   CP_RIGHTS= setPerms(perm);
 }
@@ -215,9 +217,18 @@ function setCFCRights(perm){
 function hasCFCRights(){
     return CF_RIGHTS;
 }
+function setWSRights(perm){
+  WS_RIGHTS=setPerms(perm);
+}
+
+function hasWSRights(){
+  return WS_RIGHTS;
+}
 function setUQRights(perm){
   UQ_RIGHTS=setPerms(perm);
 }
+
+
 function hasUQRights(){
     return UQ_RIGHTS;
 }
@@ -236,6 +247,7 @@ function setModulePermissions(apps){
                   // setCTRights(app.permissions.CT);
                   // setCFRights(app.permissions.CF)
                   // setUQRights(app.permissions.UQ);
+                  setWSRights(app.permissions)
                   setAlRights(app.permissions); 
               }
           });

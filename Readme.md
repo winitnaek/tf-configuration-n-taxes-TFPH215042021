@@ -12,3 +12,10 @@ Screens to update
 	add to mockdatamap on /app/actions/griddataAPI.js  
 
     Need to set up user permissions in TFIndex 	  See setModulePermissions			
+
+
+
+1.	Setup metadata
+2.	Create Mock Data
+3.  Add to webpack.dev.js so that mockdata saves to dist folder
+4.	 

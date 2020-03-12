@@ -466,6 +466,78 @@ export const  supplementalMethods = {
 	"cruddef": ""
 }
 
+export const companies = {
+	"pgdef": {
+		"pgid": "companies",
+		"pgtitle": "Companies",
+		"pgsubtitle":"",
+		"flowtype": "flowtype1",
+		"hasAddNew": true,
+		"addNewLabel": "Click here to add new company.",
+		"actiondel": false,
+		"helpAvailable":true,
+		"helpLblTxt":"Click here for more info!",
+		"helpLink":"/companies",
+		"parentConfig":""
+	},
+	"griddef": {
+		"gridtype": "type1",
+		"filtergrid": false,
+		"datatype": "json",
+		"contenttype": "application/json",
+		"noResultsFoundTxt": "No Data Found",
+        "recordEdit": true,
+        "recordDelete": false,
+		"columns": [
+			{
+				"text": "Company",
+				"datafield": "company",
+				"cellsalign": "center",
+				"align": "center",
+				"sortable": true,
+			},
+			{
+				"text": "Company Name",
+                "datafield": "companyName",
+                "cellsalign": "center",
+                "align": "center"
+			  },    
+			{
+				"text": "FEIN",
+                "datafield": "fein",
+                "cellsalign": "center",
+                "align": "center"
+			  },    
+			{
+				"text": "Local Courtesy Withholding",
+                "datafield": "localCourtesyWithholding",
+                "cellsalign": "center",
+                "align": "center"
+			  },    
+		],
+		"dataFields":[
+		  {"name": "company","type": "string"},
+		  {"name": "companyName","type": "string"},
+		  {"name": "fein","type": "string"},
+		  {"name": "localCourtesyWithholding","type": "string"},
+		  {"name": "bsiAuth", "type": "string"},
+		  {"name": "codeType", "type": "string"},
+		  {"name": "locReturn", "type": "string"}
+		]
+	},
+	"cruddef": {
+		"title":"Custom Payments",
+		"subtitle":"Note: Required fields are marked with an asterisk (*)",
+		"hasSave":true,
+		"hasDelete":false,
+		"hasSaveAs":false,
+		"hasDelete":false,
+		"hasViewPDF":false,
+		"hasExit":true,
+		"hasRecentUsage":true
+	}
+};
+
 // export const customFormulas = {
 // 	"pgdef": {
 // 		"pgid": "customFormulas",
@@ -619,4 +691,114 @@ export const customFormulas = {
 	},
 },
 	"griddef": customTaxCodes.griddef
+}
+
+
+export const worksites = {
+	"pgdef": {
+		"pgid": "worksites",
+		"pgtitle": "Work Sites",
+		"pgsubtitle":"",
+		"flowtype": "flowtype2",
+		"hasAddNew": true,
+		"addNewLabel": "Click on the magnifying glass to view the locations.",
+		"actiondel": false,
+		"helpAvailable":true,
+		"helpLblTxt":"Click here for more info!",
+		"helpLink":"/companies",
+		"childConfig": {
+			pgdef: {
+			"pgid": "worksites",
+			"pgtitle": "Custom Formulas",
+			"pgsubtitle":"",
+			"flowtype": "flowtype2",
+			"hasAddNew": true,
+			"addNewLabel": "Manage Worksites for: ",
+			"actiondel": false,
+			"helpAvailable":true,
+			"helpLblTxt":"Click here for more info!",
+			"helpLink":"/worksites",
+			"parentdef": companies,
+			"childpgid": "worksites",
+			},
+			"griddef":  {
+				"gridtype": "type1",
+				"filtergrid": true,
+				"datatype": "json",
+				"contenttype": "application/json",
+				"noResultsFoundTxt": "No Data Found",
+				"recordEdit": true,
+				"recordDelete": true,
+				"columns": [
+					{
+						"text": "Worksite",
+						"datafield": "worksite",
+						"cellsalign": "center",
+						"align": "center",
+						"sortable": true, 
+						"width": "15%"
+					
+					},
+					{
+						"text": "Street",
+						"datafield": "street",
+						"cellsalign": "center",
+						"align": "center",
+						"width": "20%"
+					
+					  },     
+					{
+						"text": "Street 2",
+						"datafield": "street2",
+						"cellsalign": "center",
+						"align": "center",
+					
+					  },     
+					{
+						"text": "City",
+						"datafield": "city",
+						"cellsalign": "center",
+						"align": "center",
+					
+					  },     
+					{
+						"text": "County",
+						"datafield": "county",
+						"cellsalign": "center",
+						"align": "center",
+						
+					
+					  },     
+					{
+						"text": "State",
+						"datafield": "state",
+						"cellsalign": "center",
+						"align": "center",
+					
+					
+					  },     
+					{
+						"text": "Zip",
+						"datafield": "zip",
+						"cellsalign": "center",
+						"align": "center",
+						
+					  }     
+				
+				],
+				"dataFields": [
+					{"name": "worksite","type": "string"},
+					{"name": "street","type": "string"},
+					{"name": "street2", "type": "string"},
+					{"name": "city", "type": "string"},
+					{"name": "county", "type": "string"},
+					{"name": "state", "type": "string"},
+					{"name": "zip", "type": "string"}
+				  ],
+			"parentTitle": "Work Sites",
+			"parentWithDataTitle": "Click on the Company to manage the worksites."
+		},
+	},
+},
+	"griddef": companies.griddef
 }

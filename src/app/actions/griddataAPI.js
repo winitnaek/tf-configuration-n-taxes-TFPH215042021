@@ -23,7 +23,9 @@ class griddataAPI {
       });
   }
   static getUrl(pageid) {
+    console.log(pageid)
     let metadataMap = metadatamap.find(metadatam => {
+      console.log(pageid, metadatam.id)
       if (pageid == metadatam.id) return metadatam;
     });
     let url = URLUtils.buildURL(metadataMap.url);
@@ -65,6 +67,8 @@ const mockdatamap = [
   {id: "populateV3States",url: './POPULATE_V3_STATES_MOCKDATA.json'},
   {id: "experienceRates",url: './EXPERIENCE_RATES_MOCKDATA.json'},
   {id: "supplementalMethods",url: 'SUPPLEMENTAL_METHODS_MOCKDATA.json'},
-  {id: "customFormulas", url: './CUSTOM_FORMULAS_MOCKDATA.json'}
+  {id: "customFormulas", url: './CUSTOM_FORMULAS_MOCKDATA.json'},
+  {id: "companies", url: './COMPANIES_MOCKDATA.json'},
+  {id: "worksites", url: './WORKSITES_MOCKDATA.json'},
 ];
 export default griddataAPI;

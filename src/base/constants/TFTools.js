@@ -6,7 +6,9 @@ import {
   experienceRates,
   supplementalMethods,
   customFormulas,
-  customFormulasChild
+  customFormulasChild,
+  companies,
+  worksites
 } from "../../app/metadata/metaData";
 import {
   GET_CUSTOM_PAYMENTS_LIST,
@@ -18,7 +20,8 @@ import {
   GET_RECENT_USAGE,
   GET_CUSTOM_FORMULAS, 
   GET_CUSTOM_FORMULAS_CHILD, 
-  
+  GET_COMPANIES,
+  GET_WORKSITES
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
@@ -98,6 +101,25 @@ export const tftools = [
     id: "supplementalMethods",
     type: UI_COMP,
     link: false
+  },
+  {
+    value: "CO",
+    label: "Companies",
+    desc: "Companies",
+    id: "companies",
+    type: UI_COMP,
+    link: false
+  },
+  {
+    value: "WS",
+    label: "Worksites",
+    desc: "Worksites",
+    id: "worksites",
+    type: UI_COMP,
+    mode: "parent",
+    parentDataId: "companies",
+    child: "worksites",
+    link: false
   }
 ];
 export const metadatamap = [
@@ -148,10 +170,21 @@ export const metadatamap = [
     rendererInput: ["dataset", "userId"]
   },  
   {
-    id: "customFormulasChild",
-    metadata: customFormulasChild,
-    url: GET_CUSTOM_FORMULAS_CHILD,
+    id: "worksites",
+    metadata: worksites,
+    url: GET_WORKSITES,
     rendererInput: ["dataset", "userId"]
   },  
-
+  // {
+  //   id: "customFormulasChild",
+  //   metadata: customFormulasChild,
+  //   url: GET_CUSTOM_FORMULAS_CHILD,
+  //   rendererInput: ["dataset", "userId"]
+  // },  
+  {
+    id: "companies",
+    metadata: companies,
+    url: GET_COMPANIES,
+    rendererInput: ["dataset", "userId"]
+  },
 ];

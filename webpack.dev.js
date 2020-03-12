@@ -16,6 +16,8 @@ if (process.env.NODE_ENV === 'development') {
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/SUPPLEMENTAL_METHODS_MOCKDATA.json', to: '../dist/SUPPLEMENTAL_METHODS_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/CUSTOM_FORMULAS_MOCKDATA.json', to: '../dist/CUSTOM_FORMULAS_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/CUSTOM_FORMULAS_CHILD_MOCKDATA.json', to: '../dist/CUSTOM_FORMULAS_CHILD_MOCKDATA.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/COMPANIES_MOCKDATA.json', to: '../dist/COMPANIES_MOCKDATA.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/WORKSITES_MOCKDATA.json', to: '../dist/WORKSITES_MOCKDATA.json' }]));
 }
 module.exports = merge(baseConfig, {
   devtool: 'source-map',

@@ -176,15 +176,6 @@ class ReusableGrid extends React.Component {
     );
   }
 
-  // renderMe(pgid) {
-  //   let data = tftools.filter(tftool => {
-  //     if (tftool.id == pgid) return tftool;
-  //   });
-  //   console.log(data[0])
-  //   renderTFApplication("pageContainer", data[0]);
-  //   this.toggle;
-  // }
-
   render() {
     const editCellsRenderer = ndex => {
       const { childConfig } = this.state.pgid;
@@ -217,6 +208,13 @@ class ReusableGrid extends React.Component {
 
     if (this.state.recordEdit) {
       newColumns = [...newColumns, editColumn];
+      console.log(permissions)
+
+      // this is temporary code to override permissions
+      if(!permissions){
+        permissions = {VIEW: true, SAVE: true, DELETE: true, RUN: true, AUDIT: false}
+      }
+
       if (!permissions.SAVE) {
         newColumns = newColumns.filter(item => {
           return item.text !== "Edit";

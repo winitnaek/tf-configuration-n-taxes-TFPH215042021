@@ -1,3 +1,6 @@
+export const UI_PAGE = "page";
+export const UI_COMP = "comp";
+
 export default {
   moduleAreas: {
     areas: []
@@ -32,6 +35,25 @@ export default {
         child: "customFormulas"
 
       },
+      {
+        value: "CO",
+        label: "Companies",
+        desc: "Companies",
+        id: "companies",
+        type: "comp",
+        link: false
+      },
+      {
+        value: "WS",
+        label: "Worksites",
+        desc: "Worksites",
+        id: "worksites",
+        type: "comp",
+        mode: "parent",
+        parentDataId: "companies",
+        child: "worksites",
+        link: false
+      }
     ],
 
     formData: {  data: {},  isOpen: false, mode: "New", index: null },
