@@ -95,7 +95,7 @@ class ReusableGrid extends React.Component {
     
       parentConfig
         ? handleChildGrid(pgid)
-        : this.props.setFormData(payload, mode);
+        : this.props.setFormData(payload);
     };
 
     this.OpenHelp = () => {
