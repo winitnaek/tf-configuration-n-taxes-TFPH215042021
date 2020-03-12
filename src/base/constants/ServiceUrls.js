@@ -11,3 +11,4 @@ export const GET_RECENT_USAGE="/PaymentsService/getRecentUsage";
 export const GET_CUSTOM_FORMULAS = '/TaxCodeService/getCustomFormulasList';
 export const GET_CUSTOM_FORMULAS_CHILD = '/TaxCodeService/getCustomFormulasChildList';
 export const GET_ALL_TAXCODES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxCodesAutocomplete';
+export const GET_ALL_TAXTYPES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxTypeAutocomplete';

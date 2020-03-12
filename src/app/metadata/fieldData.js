@@ -28,17 +28,45 @@ export const fielddatamap = [
     validatefor: "" //["email", "url"]
   },
   {
-    id: "taxCoodeSelect",
-    name: "customTaxCode",
+    id: "taxCodeAutoCompl",
+    name: "taxCodeAutoCompl",
     placeholder: "Select Tax Code",
     type: "select",
     label: "Tax Code",
-    initialvalue: "Select Tax Code",
+    initialvalue: "",
     required: true,
     errmsg: "Tax Code is required",
     options: "",
     autocomplete: true,
     isasync: true,
     multiselect: false
+  },
+  {
+    id: "taxCodeAutoCompl",
+    name: "taxCodeAutoCompl",
+    placeholder: "Select Tax Code",
+    type: "select",
+    label: "Tax Type",
+    initialvalue: "",
+    required: true,
+    errmsg: "Tax Code is required",
+    options: "",
+    autocomplete: true,
+    isasync: true,
+    multiselect: false
+  },
+  {
+    id: "formulaNumber",
+    name: "formulaNumber",
+    placeholder: "",
+    type: "text",
+    label: "Formula Number",
+    initialvalue: "",
+    required: true,
+    errmsg: "Invalid Formula Number. Defaulting to 0.",
+    minlength: 0,
+    maxlength: 3,
+    datatype: ["N"],
+    validatefor: "" //["email", "url"]
   }
 ];
