@@ -22,10 +22,10 @@ import {
   GET_CUSTOM_TAX_FORMULAS, 
   GET_COMPANIES,
   GET_WORKSITES,
-  GET_CUSTOM_FORMULAS_CHILD,
   GET_ALL_TAXCODES_AUTOCOMPLETE,
-  GET_ALL_TAXTYPES_AUTOCOMPLETE
-  
+  GET_ALL_TAXTYPES_AUTOCOMPLETE,
+  GET_ALL_COMPCODE_AUTOCOMPLETE,
+  GET_ALL_RISKCLASS_AUTOCOMPLETE
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
@@ -195,7 +195,6 @@ export const metadatamap = [
   },  
 
 ];
-
 export const asyncselfldsmap = [
   {
     id: "taxCodeAutoCompl",
@@ -205,6 +204,16 @@ export const asyncselfldsmap = [
   {
     id: "taxTypeAutoCompl",
     url: GET_ALL_TAXTYPES_AUTOCOMPLETE,
+    param:[{"pattern":""}]
+  },
+  {
+    id: "companyCodeAutoCompl",
+    url: GET_ALL_COMPCODE_AUTOCOMPLETE,
+    param:[{"pattern":""}]
+  },
+  {
+    id: "riskClassAutoCompl",
+    url: GET_ALL_RISKCLASS_AUTOCOMPLETE,
     param:[{"pattern":""}]
   }
 ];

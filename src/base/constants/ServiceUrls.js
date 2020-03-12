@@ -16,3 +16,5 @@ export const GET_CUSTOM_TAX_FORMULAS = '/TaxCodeService/getCustomTaxFormulasList
 export const GET_CUSTOM_FORMULAS_CHILD = '/TaxCodeService/getCustomFormulasChildList';
 export const GET_ALL_TAXCODES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxCodesAutocomplete';
 export const GET_ALL_TAXTYPES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxTypeAutocomplete';
+export const GET_ALL_COMPCODE_AUTOCOMPLETE = '/TaxCodeService/getCompanyCodeAutoCompl';
+export const GET_ALL_RISKCLASS_AUTOCOMPLETE = '/TaxCodeService/getRiskClassAutoCompl';

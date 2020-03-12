@@ -321,7 +321,7 @@ export const experienceRates = {
   },
   griddef: {
     gridtype: "ro",
-    filtergrid: false,
+    filtergrid: true,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -451,7 +451,7 @@ export const supplementalMethods = {
   },
   griddef: {
     gridtype: "ro",
-    filtergrid: false,
+    filtergrid: true,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
