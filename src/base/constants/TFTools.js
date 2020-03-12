@@ -6,7 +6,7 @@ import {
   experienceRates,
   supplementalMethods,
   customFormulas,
-  customFormulasChild
+  customTaxFormulas
 } from "../../app/metadata/metaData";
 import {
   GET_CUSTOM_PAYMENTS_LIST,
@@ -46,20 +46,16 @@ export const tftools = [
     desc: "Custom Formulas",
     id: "customFormulas",
     type: UI_COMP,
-    mode: "parent",
-    parentDataId: "customTaxCodes",
-    child: "customFormulas",
     link: true
   },
-
-  //  {
-  //    value: "CF",
-  //    label: "Custom Formulas ",
-  //    desc: "Custom Formulas",
-  //    id: "customFormulasChild",
-  //    type: UI_COMP,
-  //   link: true
-  //  },
+  {
+    value: "CF",
+    label: "Custom Formulas",
+    desc: "Custom Formulas",
+    id: "customTaxFormulas",
+    type: UI_COMP,
+    link: false
+  },
   {
     value: "UQ",
     label: "User Queries",
@@ -149,8 +145,8 @@ export const metadatamap = [
     rendererInput: ["dataset", "userId"]
   },  
   {
-    id: "customFormulasChild",
-    metadata: customFormulasChild,
+    id: "customTaxFormulas",
+    metadata: customTaxFormulas,
     url: GET_CUSTOM_FORMULAS_CHILD,
     rendererInput: ["dataset", "userId"]
   },  
