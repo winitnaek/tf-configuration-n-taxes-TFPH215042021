@@ -10,19 +10,28 @@ import { makeNavs, makeSearch } from "./base/template/navGenerator";
 import TFHome from "./app/home/home.js";
 let store = configureStore();
 export default store;
-import Welcome from './app/home/Welcome';
-import {buildModuleAreaLinks,openHelp,setPerms,compMetaData,compPermissions,compURL,buildGridDataInput} from './base/utils/tfUtils';
-import { setFormData} from './app/actions/formActions';
-import {setModuleAreas} from './app/home/actions/moduleLinksActions';
+import Welcome from "./app/home/Welcome";
+import {
+  buildModuleAreaLinks,
+  openHelp,
+  setPerms,
+  compMetaData,
+  compPermissions,
+  compURL,
+  buildGridDataInput
+} from "./base/utils/tfUtils";
+import { setFormData } from "./app/actions/formActions";
+import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
 import ReusableGrid from "./app/components/ReusableGrid";
 import UserDataQueries from "./app/components/UserDataQueries";
-import {UI_COMP,UI_PAGE, tftools} from './base/constants/TFTools';
-import griddataAPI from './app/actions/griddataAPI';
+import { UI_COMP, UI_PAGE, tftools } from "./base/constants/TFTools";
+import griddataAPI from "./app/actions/griddataAPI";
 import moduleLinksReducer from "./app/home/actions/moduleLinksReducer";
-const customFormulasChild = 'customFormulasChild'
+const customFormulasChild = "customFormulasChild";
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
-  var userProfile ='{\r\n   \"userId\":\"TF11\",\r\n   \"firstName\":\"Isreal\",\r\n   \"lastName\":\"Fullerton\",\r\n   \"dataset\":\"VINIT\",\r\n   \"securitytokn\":\"fhfh484jer843je848rj393jf\",\r\n   \"branding\":\"base64ImageData\",\r\n   \"userTheme\":\"Default\",\r\n   \"roles\":[\r\n      \"ER\"\r\n   ],\r\n   \"applications\":[\r\n      {\r\n         \"id\":\"73b9a516-c0ca-43c0-b0ae-190e08d77bcc\",\r\n         \"name\":\"TFTools\",\r\n         \"accessIds\":[\r\n            {\r\n               \"id\":\"162ebe14-8d87-44e1-a786-c9365c9d5cd8\",\r\n               \"visible\":true\r\n            }\r\n         ],\r\n         \"permissions\":{\r\n            \"CF\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"CT\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"CP\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            \"UQ\":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   ],\r\n   \"themeList\":[\r\n      {\r\n         \"id\":\"Default\",\r\n         \"name\":\"Default\"\r\n      },\r\n      {\r\n         \"id\":\"HighContrast\",\r\n         \"name\":\"High Contrast\"\r\n      },\r\n      {\r\n         \"id\":\"WhiteOnBlack\",\r\n         \"name\":\"White On Black\"\r\n      },\r\n      {\r\n         \"id\":\"BlackOnWhite\",\r\n         \"name\":\"Black On White\"\r\n      }\r\n   ]\r\n}';
+  var userProfile =
+    '{\r\n   "userId":"TF11",\r\n   "firstName":"Isreal",\r\n   "lastName":"Fullerton",\r\n   "dataset":"VINIT",\r\n   "securitytokn":"fhfh484jer843je848rj393jf",\r\n   "branding":"base64ImageData",\r\n   "userTheme":"Default",\r\n   "roles":[\r\n      "ER"\r\n   ],\r\n   "applications":[\r\n      {\r\n         "id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc",\r\n         "name":"TFTools",\r\n         "accessIds":[\r\n            {\r\n               "id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8",\r\n               "visible":true\r\n            }\r\n         ],\r\n         "permissions":{\r\n            "CF":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "CT":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "CP":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "UQ":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   ],\r\n   "themeList":[\r\n      {\r\n         "id":"Default",\r\n         "name":"Default"\r\n      },\r\n      {\r\n         "id":"HighContrast",\r\n         "name":"High Contrast"\r\n      },\r\n      {\r\n         "id":"WhiteOnBlack",\r\n         "name":"White On Black"\r\n      },\r\n      {\r\n         "id":"BlackOnWhite",\r\n         "name":"Black On White"\r\n      }\r\n   ]\r\n}';
   var userdata = JSON.parse(userProfile);
   console.log("setUserProfile userdata");
   console.log(userdata);
@@ -36,7 +45,7 @@ var dataset = usrobj.dataset;
 var userId = usrobj.userId;
 setModulePermissions(usrobj.applications);
 let moduleAreas = buildModuleAreaLinks(usrobj.applications);
-console.log('moduleAreas');
+console.log("moduleAreas");
 console.log(moduleAreas);
 /**
  * renderW2AdmApplication TEST
@@ -45,8 +54,8 @@ console.log(moduleAreas);
  * @param {*} renderName
  */
 function renderTFApplication(elem, renderName, child) {
-  console.log(renderName)
-  console.log(renderName.type)
+  console.log(renderName);
+  console.log(renderName.type);
   let parentDataId;
 
   setAppAnchor(elem);
@@ -60,46 +69,52 @@ function renderTFApplication(elem, renderName, child) {
       }.bind(this),
       600
     );
-  }else if(renderName && renderName.type==UI_COMP){
-    console.log(renderName.id, renderName.value, renderName)
-    renderComponent(elem,renderName.id,renderName.value, child);
-  }else if(renderName && renderName.type==UI_PAGE){
-    renderPage(elem,renderName.id,renderName.value);
+  } else if (renderName && renderName.type == UI_COMP) {
+    console.log(renderName.id, renderName.value, renderName);
+    renderComponent(elem, renderName.id, renderName.value, child);
+  } else if (renderName && renderName.type == UI_PAGE) {
+    renderPage(elem, renderName.id, renderName.value);
   }
 }
 /**
  * renderComponent
  * @param {*} elem
  */
-function renderComponent(elem,pageid,pid, child, parentDataId){
-  ReactDOM.unmountComponentAtNode(document.querySelector('#' + elem));
+function renderComponent(elem, pageid, pid) {
+  ReactDOM.unmountComponentAtNode(document.querySelector("#" + elem));
   showPrgress(elem);
-  let gridInput = buildGridDataInput(pageid,store);
+  let gridInput = buildGridDataInput(pageid, store);
 
-
-
-  griddataAPI.getGridData(pageid,gridInput).then(response => response).then((griddata) => {
-    console.log(compMetaData)
-    ReactDOM.render(
-      <Provider store={store}>
-        <ReusableGrid pageid={pageid} metadata={compMetaData} pid={pid} permissions={compPermissions} griddata={griddata} help={openHelp} child={child}/>
-      </Provider>,
-      document.querySelector("#" + elem)
-    );
-  });
+  griddataAPI
+    .getGridData(pageid, gridInput)
+    .then(response => response)
+    .then(griddata => {
+      console.log(compMetaData);
+      ReactDOM.render(
+        <Provider store={store}>
+          <ReusableGrid
+            pageid={pageid}
+            metadata={compMetaData}
+            pid={pid}
+            permissions={compPermissions}
+            griddata={griddata}
+            help={openHelp}
+          />
+        </Provider>,
+        document.querySelector("#" + elem)
+      );
+    });
 }
-
-
 
 /**
  * renderPage
  * @param {*} elem
  */
-function renderPage(elem, pageid,pid) {
+function renderPage(elem, pageid, pid) {
   if (pageid == "userDataQueries") {
     ReactDOM.render(
       <Provider store={store}>
-        <UserDataQueries help={openHelp}/>
+        <UserDataQueries help={openHelp} />
       </Provider>,
       document.querySelector("#" + elem)
     );
@@ -107,7 +122,7 @@ function renderPage(elem, pageid,pid) {
 }
 /**
  * showPrgress
- * @param {*} elem 
+ * @param {*} elem
  */
 function showPrgress(elem) {
   ReactDOM.render(
@@ -119,45 +134,26 @@ function showPrgress(elem) {
 }
 
 function editClick(index, pgid) {
-  console.log(pgid)
-   let _id = document.querySelector("div[role='grid']").id;
- console.log(_id);
- let dataRecord = $('#' + _id).jqxGrid('getrowdata', index); 
-
-console.log(dataRecord)
-const data = {formData: dataRecord, mode: "Edit", index: index}
-store.dispatch(setFormData(data))
+  let _id = document.querySelector("div[role='grid']").id;
+  let dataRecord = $("#" + _id).jqxGrid("getrowdata", index);
+  const data = { formData: dataRecord, mode: "Edit", index: index };
+  store.dispatch(setFormData(data));
 }
 
-function handleChildGrid(pgid, mode) {
+function handleChildGrid(pgid) {
   const pgData = tftools.filter(item => {
-   
-    if(item.id === pgid) {
-      return item
+    if (item.id === pgid) {
+      return item;
     }
-  })
-  // need to change mode to child
-  console.log(pgid)
-  console.log(pgData)
-  let child;
-  console.log(mode)
-  if(mode) {
-    child = false
-  } else {
-   child = true;
-  }
-
-  console.log(child)
-  console.log(pgData)
-   renderTFApplication("pageContainer", pgData[0], child);
-
+  });
+  renderTFApplication("pageContainer", pgData[0]);
 }
 
 /**
  * renderTFHome
- * @param {*} elem 
+ * @param {*} elem
  */
- function renderTFHome(elem) {
+function renderTFHome(elem) {
   ReactDOM.render(
     <Provider store={store}>
       <TFHome />
@@ -175,76 +171,84 @@ function appAnchor() {
   return APP_ANCHOR;
 }
 var APP_DATASET, APP_USERID;
-function appDataset(){
-   return APP_DATASET;
+function appDataset() {
+  return APP_DATASET;
 }
 function appUserId() {
-    return APP_USERID;
+  return APP_USERID;
 }
 function setAppUserIDAndDataset(dataset, userid) {
-    APP_DATASET = dataset;
-    APP_USERID = userid;
+  APP_DATASET = dataset;
+  APP_USERID = userid;
 }
-var CP_RIGHTS,CT_RIGHTS,CF_RIGHTS,CFC_RIGHTS,WS_RIGHTS, UQ_RIGHTS,ALL_RIGHTS;
-function setCPRights(perm){
-  CP_RIGHTS= setPerms(perm);
+var CP_RIGHTS,
+  CT_RIGHTS,
+  CF_RIGHTS,
+  CFC_RIGHTS,
+  WS_RIGHTS,
+  UQ_RIGHTS,
+  ALL_RIGHTS;
+function setCPRights(perm) {
+  CP_RIGHTS = setPerms(perm);
 }
-function hasCPRights(){
-    return CP_RIGHTS;
+function hasCPRights() {
+  return CP_RIGHTS;
 }
-function setCTRights(perm){
-  CT_RIGHTS=setPerms(perm);
+function setCTRights(perm) {
+  CT_RIGHTS = setPerms(perm);
 }
-function hasCTRights(){
-    return CT_RIGHTS;
+function hasCTRights() {
+  return CT_RIGHTS;
 }
-function setCFRights(perm){
-  CF_RIGHTS=setPerms(perm);
+function setCFRights(perm) {
+  CF_RIGHTS = setPerms(perm);
 }
-function hasCFRights(){
-    return CF_RIGHTS;
+function hasCFRights() {
+  return CF_RIGHTS;
 }
-function setCFCRights(perm){
-  CF_RIGHTS=setPerms(perm);
+function setCFCRights(perm) {
+  CF_RIGHTS = setPerms(perm);
 }
-function hasCFCRights(){
-    return CF_RIGHTS;
+function hasCFCRights() {
+  return CF_RIGHTS;
 }
-function setWSRights(perm){
-  WS_RIGHTS=setPerms(perm);
+function setWSRights(perm) {
+  WS_RIGHTS = setPerms(perm);
 }
 
-function hasWSRights(){
+function hasWSRights() {
   return WS_RIGHTS;
 }
-function setUQRights(perm){
-  UQ_RIGHTS=setPerms(perm);
+function setUQRights(perm) {
+  UQ_RIGHTS = setPerms(perm);
 }
 
-
-function hasUQRights(){
-    return UQ_RIGHTS;
+function hasUQRights() {
+  return UQ_RIGHTS;
 }
-function setAlRights(perm){
-  ALL_RIGHTS=perm;
+function setAlRights(perm) {
+  ALL_RIGHTS = perm;
 }
-function getAllRights(){
+function getAllRights() {
   return ALL_RIGHTS;
 }
-function setModulePermissions(apps){
+function setModulePermissions(apps) {
   apps.forEach(function(app) {
-      if(app.id=="73b9a516-c0ca-43c0-b0ae-190e08d77bcc"){
-          app.accessIds.forEach(function(access) {
-              if(access.id=="162ebe14-8d87-44e1-a786-c9365c9d5cd8" && access.visible==true){
-                  // setCPRights(app.permissions.CP);
-                  // setCTRights(app.permissions.CT);
-                  // setCFRights(app.permissions.CF)
-                  // setUQRights(app.permissions.UQ);
-                  setWSRights(app.permissions)
-                  setAlRights(app.permissions); 
-              }
-          });
-      }
+    if (app.id == "73b9a516-c0ca-43c0-b0ae-190e08d77bcc") {
+      app.accessIds.forEach(function(access) {
+        if (
+          access.id == "162ebe14-8d87-44e1-a786-c9365c9d5cd8" &&
+          access.visible == true
+        ) {
+          // setCPRights(app.permissions.CP);
+          // setCTRights(app.permissions.CT);
+          // setCFRights(app.permissions.CF)
+          // setUQRights(app.permissions.UQ);
+          setWSRights(app.permissions);
+          setAlRights(app.permissions);
+        }
+      });
+    }
   });
 }
 function onloadPdfData(id) {
@@ -371,7 +375,6 @@ window.editClick = editClick;
 module.exports = handleChildGrid;
 window.handleChildGrid = handleChildGrid;
 
-
 module.exports = appDataset;
 window.appDataset = appDataset;
 
@@ -389,8 +392,6 @@ window.hasCTRights = hasCTRights;
 
 module.exports = hasCFRights;
 window.hasCFRights = hasCFRights;
-
-
 
 module.exports = hasUQRights;
 window.hasUQRights = hasUQRights;

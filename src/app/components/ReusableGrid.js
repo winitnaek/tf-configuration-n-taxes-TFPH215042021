@@ -90,12 +90,11 @@ class ReusableGrid extends React.Component {
     this.handleNewForm = e => {
       e.preventDefault();
       const payload = { data: {}, mode: "New" };
-      const { child, pgid } = this.state;
-      const mode = true
+      const { parentConfig, pgid } = this.state;
       // Either Render Parent Grid or Toggle isOpen to Open Modal
-      console.log(child)
-      child
-        ? handleChildGrid(pgid, mode)
+    
+      parentConfig
+        ? handleChildGrid(pgid)
         : this.props.setFormData(payload, mode);
     };
 
@@ -228,6 +227,9 @@ class ReusableGrid extends React.Component {
       }
     }
 
+if (this.state.parentConfig) {
+ 
+}
     return (
       <Fragment>
         <Row>
@@ -254,7 +256,11 @@ class ReusableGrid extends React.Component {
                 />
               </span>
               <UncontrolledTooltip placement="right" target="filter">
-                <span> Modify Selection Criteria</span>
+                <span>
+                  {this.state.parentConfig ? (
+                      <span> Return tp prior screen </span>
+                  ): ( <span> Modify Selection Criteria </span> )}
+                  </span>
               </UncontrolledTooltip>
             </span>
           )}
