@@ -22,7 +22,10 @@ import {
   GET_CUSTOM_TAX_FORMULAS, 
   GET_COMPANIES,
   GET_WORKSITES,
-  GET_ALL_TAXCODES_AUTOCOMPLETE 
+  GET_CUSTOM_FORMULAS_CHILD,
+  GET_ALL_TAXCODES_AUTOCOMPLETE,
+  GET_ALL_TAXTYPES_AUTOCOMPLETE
+  
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
@@ -195,8 +198,13 @@ export const metadatamap = [
 
 export const asyncselfldsmap = [
   {
-    id: "taxCoodeSelect",
+    id: "taxCodeAutoCompl",
     url: GET_ALL_TAXCODES_AUTOCOMPLETE,
     param:[{dataset:"","pattern":""}]
+  },
+  {
+    id: "taxTypeAutoCompl",
+    url: GET_ALL_TAXTYPES_AUTOCOMPLETE,
+    param:[{"pattern":""}]
   }
 ];
