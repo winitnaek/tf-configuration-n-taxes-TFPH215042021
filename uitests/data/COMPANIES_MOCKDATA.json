@@ -1,12 +1,13 @@
 [
-    {"company":"Test 1",
+    {"companyCode":"Test 1",
     "companyName": "Test Company 1",
      "fein": "58-1561244",
     "localCourtesyWithholding": "N/A"
     },
-    {"company":"Test 2",
+    {"companyCode":"Test 2",
     "companyName": "Test Company 2",
-     "fein": "58-123456",
+     "fein": "58-1234567",
     "localCourtesyWithholding": "N/A"
     }
 ]
+

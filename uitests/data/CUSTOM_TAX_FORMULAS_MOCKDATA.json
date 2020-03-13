@@ -1,6 +1,6 @@
 [
-    {"name": "Test123", 
-    "method": "Tax Rate Only",
+    {"taxCode": "Test123", 
+    "cmName": "00 Tax Rate Only",
     "taxRate": "0.00000000",
     "rounding":"Cents",
      "minWage": "0.00",
@@ -8,6 +8,7 @@
     "maxTax": "0.00",
      "flatAmount":"0.00" ,
     "startDate": "03/09/2020", 
-    "endDate": "12/31/9999"
+    "rescind": "12/31/9999"
 }
 ]
+

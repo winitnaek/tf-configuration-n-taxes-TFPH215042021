@@ -554,7 +554,7 @@ export const customTaxFormulas = {
     columns: [
       {
         text: "Custom Tax Code Name",
-        datafield: "name",
+        datafield: "taxCode",
         cellsalign: "center",
         align: "center",
         sortable: true,
@@ -562,7 +562,7 @@ export const customTaxFormulas = {
       },
       {
         text: "Method",
-        datafield: "method",
+        datafield: "cmName",
         cellsalign: "center",
         align: "center",
         width: "8.8889%"
@@ -618,15 +618,15 @@ export const customTaxFormulas = {
       },
       {
         text: "End Date",
-        datafield: "endDate",
+        datafield: "rescind",
         cellsalign: "center",
         align: "center",
         width: "8.8889%"
       }
     ],
     dataFields: [
-      { name: "name", type: "string" },
-      { name: "method", type: "string" },
+      { name: "taxCode", type: "string" },
+      { name: "cmName", type: "string" },
       { name: "taxRate", type: "string" },
       { name: "rounding", type: "string" },
       { name: "minWage", type: "string" },
@@ -634,7 +634,7 @@ export const customTaxFormulas = {
       { name: "maxTax", type: "string" },
       { name: "flatAmount", type: "string" },
       { name: "startDate", type: "string" },
-      { name: "endDate", type: "string" }
+      { name: "rescind", type: "string" }
     ]
   },
   formdef: {
@@ -661,4 +661,119 @@ export const customTaxFormulas = {
     ],
     fltrflds: ""
   }
+};
+
+export const companies = {
+  pgdef: {
+    pgid: "companies",
+    pgtitle: "Companies",
+    pgsubtitle: "",
+    flowtype: "flowtype1",
+    hasAddNew: true,
+    addNewLabel: "Click here to add new Company.",
+    actiondel: false,
+    helpAvailable: true,
+    helpLblTxt: "Click here for more info!",
+    helpLink: "/companies",
+    parentConfig: "",
+    childConfig: ""
+  },
+  griddef: {
+    gridtype: "type1",
+    filtergrid: false,
+    datatype: "json",
+    contenttype: "application/json",
+    noResultsFoundTxt: "No Data Found",
+    recordEdit: true,
+    recordDelete: true,
+    columns: [
+      {
+        text: "Company Code",
+        datafield: "companyCode",
+        cellsalign: "center",
+        align: "center",
+        sortable: true,
+        rendererInput: "",
+        rendererStaticInput: ""
+      },
+      {
+        text: "Company Name",
+        datafield: "companyName",
+        cellsalign: "center",
+        align: "center",
+        sortable: true,
+        rendererInput: "",
+        rendererStaticInput: ""
+      },
+      {
+        text: "FEIN",
+        datafield: "fein",
+        cellsalign: "center",
+        align: "center",
+        width: "20%"
+      },
+      {
+        text: "Local Courtesy Withholding",
+        datafield: "localCourtesyWithholding",
+        cellsalign: "center",
+        align: "center"
+      }
+    ],
+    dataFields: [
+      { name: "companyCode", type: "string" },
+      { name: "companyName", type: "string" },
+      { name: "fein", type: "string" },
+      { name: "localCourtesyWithholding", type: "string" },
+    ]
+  },
+  formdef: {
+    title: "Companies",
+    subtitle: "Note: Required fields are marked with an asterisk (*)",
+    hasSave: true,
+    hasDelete: false,
+    hasSaveAs: false,
+    hasViewPDF: false,
+    hasExit: true,
+    hasView: false,
+    hasRecentUsage: true,
+    formflds: [
+      { id: "companyCode", isEditable: true },
+      { id: "companyCode", isEditable: true },
+      { id: "fein", isEditable: true },
+      { id: "localCourtesyWithholding", isEditable: true },
+    ],
+    fltrflds: ""
+  }
+};
+
+
+
+
+export const worksites = {
+  pgdef: {
+    pgid: "customFormulas" ,
+    pgtitle: "Custom Formulas",
+    pgsubtitle: "",
+    flowtype: "flowtype2",
+    hasAddNew: true,
+    addNewLabel: "Click here to add new Custom Tax Code.",
+    actiondel: false,
+    helpAvailable: true,
+    helpLblTxt: "Click here for more info!",
+    helpLink: "/customFormulas",
+    parentConfig: "",
+    childConfig: "customTaxFormulas"
+  },
+  griddef: {
+    gridtype: "type2",
+    filtergrid: false,
+    datatype: "json",
+    contenttype: "application/json",
+    noResultsFoundTxt: "No Data Found",
+    recordEdit: true,
+    recordDelete: false,
+    columns: customTaxCodes.griddef.columns,
+    dataFields: customTaxCodes.griddef.dataFields
+  },
+  formdef: ""
 };

@@ -31,14 +31,14 @@ export default {
         type: "comp",
         link: true,
       },
-      // {
-      //   value: "CO",
-      //   label: "Companies",
-      //   desc: "Companies",
-      //   id: "companies",
-      //   type: "comp",
-      //   link: false
-      // },
+      {
+        value: "CO",
+        label: "Companies",
+        desc: "Companies",
+        id: "companies",
+        type: "comp",
+        link: false
+      },
       // {
       //   value: "WS",
       //   label: "Worksites",
