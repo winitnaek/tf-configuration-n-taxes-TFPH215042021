@@ -153,10 +153,10 @@ class Sidebar extends Component {
         document.getElementById("cardBody").style.paddingRight = "10px";
         document.getElementById("cardBody").style.paddingTop = "10px";
         document.getElementById("cardBody").style.width = "70px";
-        document.getElementById("navToggler").stle.marginLeft = "10px";
+        document.getElementById("navToggler").style.marginLeft = "10px";
         this.setState({ isOpen: false });
       }
-    });
+    }.bind(this));
   }
 
   _renderOption(option) {
