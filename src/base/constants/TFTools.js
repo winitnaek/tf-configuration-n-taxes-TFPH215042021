@@ -175,12 +175,6 @@ export const metadatamap = [
     url: GET_WORKSITES,
     rendererInput: ["dataset", "userId"]
   },  
-  // {
-  //   id: "customFormulasChild",
-  //   metadata: customFormulasChild,
-  //   url: GET_CUSTOM_FORMULAS_CHILD,
-  //   rendererInput: ["dataset", "userId"]
-  // },  
   {
     id: "companies",
     metadata: companies,
