@@ -54,7 +54,7 @@ class ReusableGrid extends React.Component {
     //let gridDataUrl = this.props.dataurl(this.props.pageid);
     let data = this.props.griddata;
     console.log(data)
-    console.log(metadata.griddef);
+    console.log(metadata);
     let source = {
       datatype: "json",
       datafields: metadata.griddef.dataFields,
@@ -92,9 +92,8 @@ class ReusableGrid extends React.Component {
       const payload = { data: {}, mode: "New" };
       const { parentConfig, pgid } = this.state;
       // Either Render Parent Grid or Toggle isOpen to Open Modal
-    
       parentConfig
-        ? handleChildGrid(pgid)
+        ? handleChildGrid(parentConfig.pgdef.pgid)
         : this.props.setFormData(payload);
     }; 
 

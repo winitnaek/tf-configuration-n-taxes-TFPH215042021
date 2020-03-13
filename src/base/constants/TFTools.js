@@ -9,6 +9,7 @@ import {
   customTaxFormulas,
   companies,
   worksites,
+  worksiteCompaines,
 } from "../../app/metadata/metaData";
 import {
   GET_CUSTOM_PAYMENTS_LIST,
@@ -22,6 +23,7 @@ import {
   GET_CUSTOM_TAX_FORMULAS, 
   GET_COMPANIES,
   GET_WORKSITES,
+  GET_WORKSITECOMPAINES,
   GET_ALL_TAXCODES_AUTOCOMPLETE,
   GET_ALL_TAXTYPES_AUTOCOMPLETE,
   GET_ALL_COMPCODE_AUTOCOMPLETE,
@@ -116,11 +118,16 @@ export const tftools = [
     desc: "Worksites",
     id: "worksites",
     type: UI_COMP,
-    mode: "parent",
-    parentDataId: "companies",
-    child: "worksites",
     link: false
-  }
+  },
+  {
+    value: "WC",
+    label: "Worksites",
+    desc: "Worksites",
+    id: "worksiteCompanies",
+    type: UI_COMP,
+    link: false
+  },
 ];
 export const metadatamap = [
   {
@@ -175,6 +182,12 @@ export const metadatamap = [
     url: GET_WORKSITES,
     rendererInput: ["dataset", "userId"]
   },  
+  {
+    id: "worksiteCompanies",
+    metadata: worksiteCompaines,
+    url: GET_WORKSITECOMPAINES,
+    rendererInput: ["dataset", "userId"]
+  }, 
   // {
   //   id: "customFormulasChild",
   //   metadata: customFormulasChild,

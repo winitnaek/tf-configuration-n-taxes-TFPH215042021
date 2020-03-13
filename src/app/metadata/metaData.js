@@ -751,8 +751,8 @@ export const companies = {
 
 export const worksites = {
   pgdef: {
-    pgid: "customFormulas" ,
-    pgtitle: "Custom Formulas",
+    pgid: "worksites" ,
+    pgtitle: "Worksites",
     pgsubtitle: "",
     flowtype: "flowtype2",
     hasAddNew: true,
@@ -760,9 +760,9 @@ export const worksites = {
     actiondel: false,
     helpAvailable: true,
     helpLblTxt: "Click here for more info!",
-    helpLink: "/customFormulas",
+    helpLink: "/worksites",
     parentConfig: "",
-    childConfig: "customTaxFormulas"
+    childConfig: "worksiteCompanies"
   },
   griddef: {
     gridtype: "type2",
@@ -772,8 +772,112 @@ export const worksites = {
     noResultsFoundTxt: "No Data Found",
     recordEdit: true,
     recordDelete: false,
-    columns: customTaxCodes.griddef.columns,
-    dataFields: customTaxCodes.griddef.dataFields
+    columns: companies.griddef.columns,
+    dataFields: companies.griddef.dataFields
   },
   formdef: ""
+};
+
+export const worksiteCompaines =  {
+  pgdef: {
+    pgid: "worksiteCompanies",
+    pgtitle: "Worksites",
+    pgsubtitle: "",
+    flowtype: "flowtype2",
+    hasAddNew: true,
+    addNewLabel: "Click here to add new Company.",
+    actiondel: false,
+    helpAvailable: true,
+    helpLblTxt: "Click here for more info!",
+    helpLink: "/companies",
+    parentConfig: worksites,
+    childConfig: ""
+  },
+  griddef: {
+    gridtype: "type2",
+    filtergrid: true,
+    datatype: "json",
+    contenttype: "application/json",
+    noResultsFoundTxt: "No Data Found",
+    recordEdit: true,
+    recordDelete: true,
+    columns: [
+      {
+        text: "Worksite",
+        datafield: "location",
+        cellsalign: "center",
+        align: "center",
+        sortable: true,
+        rendererInput: "",
+        rendererStaticInput: ""
+      },
+      {
+        text: "Street",
+        datafield: "street1",
+        cellsalign: "center",
+        align: "center",
+        sortable: true,
+        rendererInput: "",
+        rendererStaticInput: ""
+      },
+      {
+        text: "Street2",
+        datafield: "street2",
+        cellsalign: "center",
+        align: "center",
+        width: "20%"
+      },
+      {
+        text: "City",
+        datafield: "city",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "County",
+        datafield: "county",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "State",
+        datafield: "state",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "Zip",
+        datafield: "zip",
+        cellsalign: "center",
+        align: "center"
+      },
+    ],
+    dataFields: [
+      { name: "location", type: "string" },
+      { name: "street1", type: "string" },
+      { name: "city", type: "string" },
+      { name: "county", type: "string" },
+      { name: "state", type: "string" },
+      { name: "zip", type: "string" },
+     
+    ]
+  },
+  formdef: {
+    title: "Companies",
+    subtitle: "Note: Required fields are marked with an asterisk (*)",
+    hasSave: true,
+    hasDelete: false,
+    hasSaveAs: false,
+    hasViewPDF: false,
+    hasExit: true,
+    hasView: false,
+    hasRecentUsage: true,
+    formflds: [
+      { id: "companyCode", isEditable: true },
+      { id: "companyCode", isEditable: true },
+      { id: "fein", isEditable: true },
+      { id: "localCourtesyWithholding", isEditable: true },
+    ],
+    fltrflds: ""
+  }
 };

@@ -7,6 +7,7 @@ const MOCK = true;
 class griddataAPI {
   static getGridData(pageid, getGridDataInput) {
     let url = griddataAPI.getUrl(pageid);
+    console.log(pageid, url)
     let tt = JSON.stringify(getGridDataInput);
     return fetch(url, reqInfo(tt))
       .then(response => {
@@ -70,6 +71,8 @@ const mockdatamap = [
   {id: "customFormulas", url: './CUSTOM_TAX_PAYMENT_MOCKDATA.json'},
   {id: "customTaxFormulas", url: './CUSTOM_TAX_FORMULAS_MOCKDATA.json'},
   {id: "companies", url: './COMPANIES_MOCKDATA.json'},
-  {id: "worksites", url: './WORKSITES_MOCKDATA.json'},
+  {id: "worksites", url: './COMPANIES_MOCKDATA.json'},
+  {id: "worksiteCompanies", url: './WORKSITES_MOCKDATA.json'},
+
 ];
 export default griddataAPI;

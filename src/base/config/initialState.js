@@ -39,17 +39,22 @@ export default {
         type: "comp",
         link: false
       },
-      // {
-      //   value: "WS",
-      //   label: "Worksites",
-      //   desc: "Worksites",
-      //   id: "worksites",
-      //   type: "comp",
-      //   mode: "parent",
-      //   parentDataId: "companies",
-      //   child: "worksites",
-      //   link: false
-      // }
+      {
+        value: "WS",
+        label: "Worksites",
+        desc: "Worksites",
+        id: "worksites",
+        type: "comp",
+        link: false
+      },
+      {
+        value: "WC",
+        label: "Worksites",
+        desc: "Worksites",
+        id: "worksiteCompanies",
+        type: "comp",
+        link: false
+      }
     ],
 
     formData: {  data: {},  isOpen: false, mode: "New", index: null },
