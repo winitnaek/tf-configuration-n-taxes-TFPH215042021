@@ -46,14 +46,6 @@ export default {
         id: "worksites",
         type: "comp",
         link: false
-      },
-      {
-        value: "WC",
-        label: "Worksites",
-        desc: "Worksites",
-        id: "worksiteCompanies",
-        type: "comp",
-        link: false
       }
     ],
 
