@@ -23,7 +23,7 @@ import {
   GET_CUSTOM_TAX_FORMULAS, 
   GET_COMPANIES,
   GET_WORKSITES,
-  GET_WORKSITECOMPAINES,
+  GET_WORKSITES_LOCATIONS,
   GET_ALL_TAXCODES_AUTOCOMPLETE,
   GET_ALL_TAXTYPES_AUTOCOMPLETE,
   GET_ALL_COMPCODE_AUTOCOMPLETE,
@@ -185,7 +185,7 @@ export const metadatamap = [
   {
     id: "worksiteCompanies",
     metadata: worksiteCompaines,
-    url: GET_WORKSITECOMPAINES,
+    url: GET_WORKSITES_LOCATIONS,
     rendererInput: ["dataset", "userId"]
   }, 
   // {
