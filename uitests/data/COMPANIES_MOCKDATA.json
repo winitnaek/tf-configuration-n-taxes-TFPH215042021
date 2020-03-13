@@ -1,13 +1,17 @@
 [
-    {"company":"Test 1",
-    "companyName": "Test Company 1",
-     "fein": "58-1561244",
-    "courtesy": "N/A"
+    {
+      "dataset": "VINIT",
+      "company": "TESTCOMP1",
+      "companyName": "Test Company 1",
+      "fein": "123456789",
+      "courtesy": true
     },
-    {"company":"Test 2",
-    "companyName": "Test Company 2",
-     "fein": "58-1234567",
-    "courtesy": "N/A"
+    {
+      "dataset": "VINIT",
+      "company": "TETS",
+      "companyName": "test",
+      "fein": "243434343",
+      "courtesy": true
     }
-]
+  ]
 

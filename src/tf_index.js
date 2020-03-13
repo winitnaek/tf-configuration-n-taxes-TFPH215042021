@@ -25,7 +25,7 @@ import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
 import ReusableGrid from "./app/components/ReusableGrid";
 import UserDataQueries from "./app/components/UserDataQueries";
 import { UI_COMP, UI_PAGE, tftools } from "./base/constants/TFTools";
-import griddataAPI from "./app/actions/griddataAPI";
+import griddataAPI from "./app/api/griddataAPI";
 import moduleLinksReducer from "./app/home/actions/moduleLinksReducer";
 const customFormulasChild = "customFormulasChild";
 //Temporary set user in session:======Comment this when deployed with MAC======
