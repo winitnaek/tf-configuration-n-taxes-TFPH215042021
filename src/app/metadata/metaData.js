@@ -689,7 +689,7 @@ export const companies = {
     columns: [
       {
         text: "Company Code",
-        datafield: "companyCode",
+        datafield: "company",
         cellsalign: "center",
         align: "center",
         sortable: true,
@@ -714,16 +714,16 @@ export const companies = {
       },
       {
         text: "Local Courtesy Withholding",
-        datafield: "localCourtesyWithholding",
+        datafield: "courtesy",
         cellsalign: "center",
         align: "center"
       }
     ],
     dataFields: [
-      { name: "companyCode", type: "string" },
+      { name: "company", type: "string" },
       { name: "companyName", type: "string" },
       { name: "fein", type: "string" },
-      { name: "localCourtesyWithholding", type: "string" },
+      { name: "courtesy", type: "string" },
     ]
   },
   formdef: {
