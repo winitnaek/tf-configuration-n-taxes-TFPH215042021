@@ -158,18 +158,17 @@ export const customPayments = {
     title: "Custom Payments",
     subtitle: "Note: Required fields are marked with an asterisk (*)",
     hasSave: true,
-    hasDelete: false,
+    hasDelete: true,
     hasSaveAs: false,
     hasViewPDF: false,
     hasView: false,
-    hasExit: true,
     hasRecentUsage: true,
     formflds: [
-      { id: "customPayCode", isEditable: true },
-      { id: "customPayType", isEditable: true },
-      { id: "customPayName", isEditable: true },
-      { id: "e_Taxability", isEditable: true },
-      { id: "e_MaxLimit", isEditable: false }
+      { id: "customPayCode", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "customPayType", "order":2, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "customPayName", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "e_Taxability", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "e_MaxLimit", "order":5, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false  }
     ],
     fltrflds: ""
   }
@@ -235,8 +234,8 @@ export const customTaxCodes = {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "customTaxCode", isEditable: true },
-      { id: "customTaxName", isEditable: true }
+      { id: "customTaxCode", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "customTaxName", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false }
     ],
     fltrflds: ""
   }
@@ -427,10 +426,10 @@ export const experienceRates = {
     hasRecentUsage: false,
     formflds: "",
     fltrflds: [
-      { id: "taxCodeAutoCompl", isEditable: true },
-      { id: "companyCodeAutoCompl", isEditable: true },
-      { id: "startDate", isEditable: true },
-      { id: "riskClassAutoCompl", isEditable: true }
+      { id: "taxCodeAutoCompl", "order":1, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "companyCodeAutoCompl", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "startDate", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "riskClassAutoCompl", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false }
     ]
   }
 };
@@ -491,10 +490,10 @@ export const supplementalMethods = {
     hasRecentUsage: false,
     formflds: "",
     fltrflds: [
-      { id: "taxCodeAutoCompl", isEditable: true },
-      { id: "taxTypeAutoCompl", isEditable: true },
-      { id: "formulaText", isEditable: true },
-      { id: "startDate", isEditable: true }
+      { id: "taxCodeAutoCompl", "order":1, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false},
+      { id: "taxTypeAutoCompl", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "formulaText", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false},
+      { id: "startDate", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false}
     ]
   }
 };
@@ -648,16 +647,16 @@ export const customTaxFormulas = {
     hasExit: true,
     hasRecentUsage: false,
     formflds: [
-      { id: "customTaxCode", isEditable: false },
-      { id: "startDate", isEditable: false },
-      { id: "endDate", isEditable: true },
-      { id: "calcMethods", isEditable: true },
-      { id: "taxRate", isEditable: true },
-      { id: "roundingMethods", isEditable: true },
-      { id: "minWage", isEditable: true },
-      { id: "maxWage", isEditable: true },
-      { id: "maxTax", isEditable: true },
-      { id: "flatAmount", isEditable: true }
+      { id: "customTaxCode", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":true },
+      { id: "startDate", "order":2, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "endDate", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "calcMethods","order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "taxRate", "order":5, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "roundingMethods", "order":6, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "minWage", "order":7, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "maxWage", "order":8, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false},
+      { id: "maxTax", "order":9, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "flatAmount", "order":10, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false }
     ],
     fltrflds: ""
   }
@@ -737,10 +736,10 @@ export const companies = {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "companyCode", isEditable: true },
-      { id: "companyCode", isEditable: true },
-      { id: "fein", isEditable: true },
-      { id: "localCourtesyWithholding", isEditable: true },
+      { id: "companyCode", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "companyCode", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "fein", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "localCourtesyWithholding", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
     ],
     fltrflds: ""
   }
@@ -886,20 +885,22 @@ export const worksiteCompaines =  {
     ]
   },
   formdef: {
-    title: "Companies",
-    subtitle: "Note: Required fields are marked with an asterisk (*)",
+    title: "Worksite",
+    subtitle: "Manage Worksites for: TESTCOMP1 (Test Company 1)",
+    note:"Note: Required fields are marked with an asterisk (*)",
     hasSave: true,
     hasDelete: false,
     hasSaveAs: false,
     hasViewPDF: false,
-    hasExit: true,
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "companyCode", isEditable: true },
-      { id: "companyCode", isEditable: true },
-      { id: "fein", isEditable: true },
-      { id: "localCourtesyWithholding", isEditable: true },
+      { id: "worksiteLocation", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "worksiteStreet1", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false},
+      { id: "worksiteCity", "order":3, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "worksiteCounty", "order":4, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "worksiteState", "order":5, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "worksiteZip", "order":6, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false},
     ],
     fltrflds: ""
   }
