@@ -6,7 +6,6 @@ export default {
     areas: []
   },
   favoriteAreas: [
-   
       {
         value: "CT",
         label: "Custom Tax Codes",

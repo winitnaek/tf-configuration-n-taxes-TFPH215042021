@@ -772,11 +772,34 @@ export const worksites = {
     noResultsFoundTxt: "No Data Found",
     recordEdit: true,
     recordDelete: false,
-    columns: companies.griddef.columns,
+    columns: [
+     {
+      text: "Company Code",
+      datafield: "company",
+      cellsalign: "center",
+      align: "center",
+      sortable: true,
+      width: "47.5%",
+      rendererInput: "",
+      rendererStaticInput: ""
+    },
+    {
+      text: "Company Name",
+      datafield: "companyName",
+      cellsalign: "center",
+      align: "center",
+      sortable: true,
+      width: "47.5%",
+      rendererInput: "",
+      rendererStaticInput: ""
+    },//companies.griddef.columns,
+  ],
     dataFields: companies.griddef.dataFields
   },
   formdef: ""
 };
+
+
 
 export const worksiteCompaines =  {
   pgdef: {
