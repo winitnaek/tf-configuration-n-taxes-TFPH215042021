@@ -230,7 +230,6 @@ export const customTaxCodes = {
     hasDelete: false,
     hasSaveAs: false,
     hasViewPDF: false,
-    hasExit: true,
     hasView: false,
     hasRecentUsage: true,
     formflds: [
@@ -422,7 +421,6 @@ export const experienceRates = {
     hasSaveAs: false,
     hasViewPDF: false,
     hasView: true,
-    hasExit: true,
     hasRecentUsage: false,
     formflds: "",
     fltrflds: [
@@ -486,7 +484,6 @@ export const supplementalMethods = {
     hasSaveAs: false,
     hasViewPDF: false,
     hasView: true,
-    hasExit: true,
     hasRecentUsage: false,
     formflds: "",
     fltrflds: [
@@ -644,7 +641,6 @@ export const customTaxFormulas = {
     hasSaveAs: false,
     hasViewPDF: false,
     hasView: false,
-    hasExit: true,
     hasRecentUsage: false,
     formflds: [
       { id: "customTaxCode", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":true },
@@ -732,7 +728,6 @@ export const companies = {
     hasDelete: false,
     hasSaveAs: false,
     hasViewPDF: false,
-    hasExit: true,
     hasView: false,
     hasRecentUsage: true,
     formflds: [
