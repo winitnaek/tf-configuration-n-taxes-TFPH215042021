@@ -73,6 +73,7 @@ class ReusableGrid extends React.Component {
       addNewLabel: metadata.pgdef.addNewLabel,
       recordEdit: metadata.griddef.recordEdit,
       recordDelete: metadata.griddef.recordDelete,
+      noResultsFoundTxt: metadata.griddef.noResultsFoundTxt || "",
       hasAddNew: metadata.pgdef.hasAddNew,
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
@@ -147,7 +148,15 @@ class ReusableGrid extends React.Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props.griddata)
+    if (!this.props.griddata) {
+      console.log('setting nodata message')
+      this.setState({ noResultsFoundTxt: metadata.griddef.noResultsFoundTxt  });
+    }
+
+
+  }
 
   exportToExcel() {
     this.refs.reusableGrid.exportdata("xls", this.state.pgid);
@@ -229,10 +238,15 @@ class ReusableGrid extends React.Component {
 if (this.state.parentConfig) {
  
 }
+const {noResultsFoundTxt} = this.state;
+const {griddata} = this.props
+console.log(noResultsFoundTxt)
+console.log(this.props.griddata[0])
     return (
       <Fragment>
         <Row>
           <h1 style={pagetitle}>{this.state.title}</h1>
+    
           <span style={helpMargin}>
             <span id="help">
               <i
@@ -263,6 +277,9 @@ if (this.state.parentConfig) {
               </UncontrolledTooltip>
             </span>
           )}
+        </Row>
+        <Row>
+        <p> {!griddata[0] && noResultsFoundTxt}</p> 
         </Row>
         <Row style={rowTop}>
           <Col sm="2" style={iconPaddingLeft}>

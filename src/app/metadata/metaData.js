@@ -821,7 +821,7 @@ export const worksiteCompaines =  {
     filtergrid: true,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "There are no Locations defined for this company",
     recordEdit: true,
     recordDelete: true,
     columns: [
