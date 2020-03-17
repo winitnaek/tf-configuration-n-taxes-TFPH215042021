@@ -80,8 +80,13 @@ class TestForm extends Component {
 
     this.resetForm = () => {
       this.setState({
-        customTaxCode: "",
-        customTaxName: ""
+        location: "",
+        street1: "",
+        street2: "",
+        city: "",
+        county: "",
+        state: "",
+        zip: "",
       });
     };
 
@@ -89,8 +94,6 @@ class TestForm extends Component {
       const target = event.target;
       const value = target.value;
       const name = target.name;
-      console.log(name);
-      console.log(value);
       this.setState({
         [name]: value
       });
@@ -148,8 +151,9 @@ class TestForm extends Component {
           name: "state",
           id: "state",
           placeholder: "Enter State" ,
-          type: "text",
+          type: "select",
           label: "State",
+          options: this.state.stateOptions,
           value: this.state.state,
           onChange: this.handleChange
         },
@@ -201,12 +205,16 @@ class TestForm extends Component {
   componentDidMount() {
     if (this.props.data) {
       console.log(this.props.data);
-      const { taxCode, name } = this.props.data;
+      const { location, street1, street2, city, county, state, zip } = this.props.data;
       if (this.props.mode === "Edit") {
         this.setState({
-          customTaxCode: taxCode,
-          customTaxName: name,
-          showDelete: true
+          location,
+          street1,
+          street2,
+          city,
+          county,
+          state,
+          zip,
         });
       }
       this.setState({
@@ -252,46 +260,6 @@ console.log(`YOu are in the worksiteform`)
         reset={resetForm}
         // deletePermission={permissions.DELETE}
       >
-        {/* <Col sm="6" style={{ marginRight: "0" }}>
-          <p style={{ fontWeight: "bold" }}> Enter Custom Payments </p>
-          <Input
-            inputType={"text"}
-            title={"Code *"}
-            name={"customPaymentCode"}
-            required={true}
-            onChange={this.handleChange}
-            value={this.state.customPaymentCode}
-            placeholder={"Enter Custom Code Here"}
-            feedback={"Text input is required!"}
-          />
-
-     
-          <Input
-            inputType={"text"}
-            title={"Custom Payment Name *"}
-            name={"customPaymentName"}
-            required={true}
-            onChange={this.handleChange}
-            value={this.state.customPaymentName}
-            placeholder={"Enter Custom Payment Name"}
-            feedback={"Text input is required!"}
-          />
-        </Col>
-
-        <Col sm="6" style={{ marginRight: "0" }}>
-          <p style={{ fontWeight: "bold" }}> Custom Earning Details</p>
-          
-          <Input
-            inputType={"text"}
-            title={"Maximum Limit"}
-            name={"eeMax"}
-            onChange={this.handleChange}
-            value={this.state.eeMax}
-            placeholder="Enter Maximum Limit Here"
-            feedback={"Text input is required!"}
-            required={true}
-          />
-        </Col> */}
         {this.displayFormFields()}
       </ReusableForm>
     );

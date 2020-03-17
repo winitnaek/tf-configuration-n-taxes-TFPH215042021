@@ -1,12 +1,14 @@
 import React from "react";
 import Input from '../../app/components/SingleInput';
+import Select from '../../app/components/Select';
 
 export const renderFields = (schema) => {
 
   console.log(schema)
 
     const fields = schema.map(field => {
-      console.log(field)
+      switch(field.type) {
+        case"text": 
         return <Input
                     name={field.name}
                     id={field.name}
@@ -18,6 +20,24 @@ export const renderFields = (schema) => {
                     // onBlur={props.blurFunc}
                     // onFocus={props.focusFunc}
                     />
+          break;
+          case "select":
+            console.log(field.value)
+          return  <Select
+            name={field.name}
+            id={field.name}
+            placeholder={field.value}
+            default={field.value}
+            title={field.label}
+            value={field.value}
+            options={field.options}
+            onChange={field.onChange}
+          />
+          break;
+          default:
+            break;
+      }
+
     })
     return fields;
   

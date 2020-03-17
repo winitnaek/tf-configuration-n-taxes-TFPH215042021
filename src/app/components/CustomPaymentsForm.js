@@ -139,7 +139,7 @@ class CustomPaymentsForm extends Component {
             placeholder={"Enter Custom Code Here"}
             feedback={"Text input is required!"}
           />
-
+ 
           <Select
             name={"paymentType"}
             id="paymentType"

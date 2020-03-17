@@ -10,50 +10,15 @@ export const fielddatamap = [
     errmsg: "Custom Tax Code is required",
     minlength: 1,
     maxlength: 25,
-    datatype: ["AN"], //["N","S","AN","ARR","B","D"],
-    validatefor: "" //["email", "url"]
-  },
-  {
-    id: "customTaxName",
-    name: "customTaxName",
-    placeholder: "Enter Custom Tax Name",
-    type: "text",
-    label: "Custom Tax Name",
-    initialvalue: "",
-    required: true,
-    errmsg: "Custom Tax Name is required",
-    minlength: 1,
-    maxlength: 25,
-    datatype: ["AN"],
-    validatefor: "" //["email", "url"]
-  },
-  {
-    id: "taxCodeAutoCompl",
-    name: "taxCodeAutoCompl",
-    placeholder: "Select Tax Code",
-    type: "select",
-    label: "Tax Code",
-    initialvalue: "",
-    required: true,
-    errmsg: "Tax Code may not be blank.",
-    options: "",
-    autocomplete: true,
-    isasync: true,
-    multiselect: false
-  },
-  {
-    id: "taxTypeAutocomplete",
-    name: "taxTypeAutocomplete",
-    placeholder: "Select Tax Type",
-    type: "select",
-    label: "Tax Type",
-    initialvalue: "",
-    required: true,
-    errmsg: "Tax Type may not be blank.",
-    options: "",
-    autocomplete: true,
-    isasync: true,
-    multiselect: false
+    validationtype: "string",
+    validationsubtype: [
+      { type: "min", params: [1, "min 1 characters"] },
+      { type: "max", params: [25, "max 10 characters"] },
+      { type: "matches", params: ["/(hi|bye)/", "Invalid Pattern"] }
+    ],
+    constraint: [
+      { type: "uppercase", message: "Tax Code needs to be in uppercase." }
+    ]
   },
   {
     id: "formulaNumber",
@@ -66,49 +31,15 @@ export const fielddatamap = [
     errmsg: "Invalid Formula Number. Defaulting to 0.",
     minlength: 0,
     maxlength: 3,
-    datatype: ["N"],
-    validatefor: "" //["email", "url"]
-  },
-  {
-    id: "startDate",
-    name: "startDate",
-    placeholder: "",
-    type: "text",
-    label: "Start Date",
-    initialvalue: "",
-    required: true,
-    errmsg: "Start Date value is invalid.",
-    minlength: 0,
-    maxlength: 3,
-    datatype: ["D"],
-    validatefor: "" //["email", "url"]
-  },
-  {
-    id: "companyCodeAutoCompl",
-    name: "companyCodeAutoCompl",
-    placeholder: "",
-    type: "select",
-    label: "Company Code",
-    initialvalue: "",
-    required: true,
-    errmsg: "",
-    options: "",
-    autocomplete: true,
-    isasync: true,
-    multiselect: false
-  },
-  {
-    id: "riskClassAutoCompl",
-    name: "riskClassAutoCompl",
-    placeholder: "",
-    type: "select",
-    label: "Risk Class",
-    initialvalue: "",
-    required: false,
-    errmsg: "",
-    options: "",
-    autocomplete: true,
-    isasync: true,
-    multiselect: false
+    validationtype: "number",
+    validationsubtype: [
+      { type: "min", params: [0, "Formula can not be < than 0"] },
+      { type: "max", params: [100, "Formula can not be > than 100"] },
+      { type: "matches", params: ["/(hi|bye)/", "Invalid Pattern"] }
+    ],
+    constraint: [
+      { type: "positive", message: "Invalid Formula No." },
+      { type: "integer", message: "Invalid Formula No.snip" }
+    ]
   }
 ];
