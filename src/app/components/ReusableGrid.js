@@ -91,17 +91,16 @@ class ReusableGrid extends React.Component {
 
     this.handleFilter = e => {
       e.preventDefault();
-      const payload = { data: {}, mode: "New" };
-      const { parentConfig, pgid } = this.state;
       // Either Render Parent Grid or Toggle isOpen to Open Modal
-      parentConfig
+      const {parentConfig} = this.state;
+       parentConfig
         ? handleChildGrid(parentConfig.pgdef.pgid)
-        : this.props.setFormData(payload);
+        : this.handleNewForm(e).bind(this)
     }; 
 
     this.handleNewForm = e => {
       e.preventDefault();
-      const payload = { data: {}, mode: "New" };
+      const payload = { data:{} , mode: "New" };
       this.props.setFormData(payload)
     }
 
