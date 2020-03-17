@@ -80,6 +80,7 @@ class ReusableGrid extends React.Component {
       filter: metadata.griddef.filtergrid,
       childConfig: metadata.pgdef.childConfig,
       parentConfig: metadata.pgdef.parentConfig,
+      funnel: metadata.griddef.funnel,
       mockData: [],
       child: this.props.child,
       allSelected: false,
@@ -182,6 +183,10 @@ class ReusableGrid extends React.Component {
     );
   }
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log(nextProps, this.props)
+  // }
+
   render() {
 
     const editCellsRenderer = ndex => {
@@ -215,7 +220,6 @@ class ReusableGrid extends React.Component {
 
     if (this.state.recordEdit) {
       newColumns = [...newColumns, editColumn];
-      console.log(permissions)
 
       // this is temporary code to override permissions
       if(!permissions){
@@ -242,6 +246,7 @@ const {noResultsFoundTxt} = this.state;
 const {griddata} = this.props
 console.log(noResultsFoundTxt)
 console.log(this.props.griddata[0])
+console.log(this.state.pgid)
     return (
       <Fragment>
         <Row>
@@ -259,7 +264,7 @@ console.log(this.props.griddata[0])
               <span> {this.state.helpLabel} </span>
             </UncontrolledTooltip>
           </span>
-          {this.state.filter && (
+          {this.state.funnel && (
             <span>
               <span id="filter">
                 <i

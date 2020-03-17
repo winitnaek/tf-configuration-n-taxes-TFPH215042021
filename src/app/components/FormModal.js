@@ -17,14 +17,15 @@ class ModalForm extends Component {
     const renderGrid = this.props.renderGrid;
     const pgid = this.props.pgid;
     let form;
-    this.props.filter
-      ? (form = renderFilterForm(pgid, close, renderGrid))
-      : (form = renderForm(close, change, pgid, permissions, deleteRow));
+    form = renderForm(close, change, pgid, permissions, deleteRow)
+    // this.props.filter
+    //   ? (form = renderFilterForm(pgid, close, renderGrid))
+    //   : (form = renderForm(close, change, pgid, permissions, deleteRow));
     return form;
   }
 
   render() {
-      console.log(this.props)
+   
     return (
       <Modal
         open={this.props.open}

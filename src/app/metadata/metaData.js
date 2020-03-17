@@ -15,6 +15,7 @@ export const allBSIPlans = {
   },
   griddef: {
     gridtype: "ro",
+    funnel: false,
     filtergrid: false,
     datatype: "json",
     contenttype: "application/json",
@@ -96,6 +97,7 @@ export const customPayments = {
   },
   griddef: {
     gridtype: "type1",
+    funnel: false,
     filtergrid: false,
     datatype: "json",
     contenttype: "application/json",
@@ -191,6 +193,7 @@ export const customTaxCodes = {
   },
   griddef: {
     gridtype: "type1",
+    funnel: false,
     filtergrid: false,
     datatype: "json",
     contenttype: "application/json",
@@ -258,6 +261,7 @@ export const populateV3States = {
   },
   griddef: {
     gridtype: "ro",
+    funnel: false,
     filtergrid: false,
     datatype: "json",
     contenttype: "application/json",
@@ -321,6 +325,7 @@ export const experienceRates = {
   },
   griddef: {
     gridtype: "ro",
+    funnel: true,
     filtergrid: true,
     datatype: "json",
     contenttype: "application/json",
@@ -451,6 +456,7 @@ export const supplementalMethods = {
   },
   griddef: {
     gridtype: "ro",
+    funnel: true,
     filtergrid: true,
     datatype: "json",
     contenttype: "application/json",
@@ -516,6 +522,7 @@ export const customFormulas = {
   },
   griddef: {
     gridtype: "type2",
+    funnel: false,
     filtergrid: false,
     datatype: "json",
     contenttype: "application/json",
@@ -545,7 +552,8 @@ export const customTaxFormulas = {
   },
   griddef: {
     gridtype: "type1",
-    filtergrid: true,
+    funnel: true,
+    filtergrid: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -818,7 +826,8 @@ export const worksiteCompaines =  {
   },
   griddef: {
     gridtype: "type2",
-    filtergrid: true,
+    funnel: true,
+    filtergrid: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "There are no Locations defined for this company",
@@ -878,6 +887,7 @@ export const worksiteCompaines =  {
     dataFields: [
       { name: "location", type: "string" },
       { name: "street1", type: "string" },
+      { name: "street2", type: "string" },
       { name: "city", type: "string" },
       { name: "county", type: "string" },
       { name: "state", type: "string" },
@@ -896,10 +906,13 @@ export const worksiteCompaines =  {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "companyCode", isEditable: true },
-      { id: "companyCode", isEditable: true },
-      { id: "fein", isEditable: true },
-      { id: "localCourtesyWithholding", isEditable: true },
+      { id: "location", isEditable: true },
+      { id: "street1", isEditable: true },
+      { id: "street2", isEditable: true },
+      { id: "city", isEditable: true },
+      { id: "county", isEditable: true },
+      { id: "state", isEditable: true },
+      { id: "zip", isEditable: true },
     ],
     fltrflds: ""
   }
