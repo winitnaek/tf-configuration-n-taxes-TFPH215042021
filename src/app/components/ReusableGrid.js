@@ -77,10 +77,10 @@ class ReusableGrid extends React.Component {
       hasAddNew: metadata.pgdef.hasAddNew,
       actiondel: metadata.pgdef.actiondel,
       helpLabel: metadata.pgdef.helpLblTxt,
-      filter: metadata.griddef.filtergrid,
+      isfilterform: metadata.griddef.isfilterform,
       childConfig: metadata.pgdef.childConfig,
       parentConfig: metadata.pgdef.parentConfig,
-      funnel: metadata.griddef.funnel,
+      isfilter: metadata.griddef.isfilter,
       mockData: [],
       child: this.props.child,
       allSelected: false,
@@ -89,7 +89,7 @@ class ReusableGrid extends React.Component {
       source: source
     };
 
-    this.handleNewForm = e => {
+    this.handleFilter = e => {
       e.preventDefault();
       const payload = { data: {}, mode: "New" };
       const { parentConfig, pgid } = this.state;
@@ -98,6 +98,12 @@ class ReusableGrid extends React.Component {
         ? handleChildGrid(parentConfig.pgdef.pgid)
         : this.props.setFormData(payload);
     }; 
+
+    this.handleNewForm = e => {
+      e.preventDefault();
+      const payload = { data: {}, mode: "New" };
+      this.props.setFormData(payload)
+    }
 
     this.OpenHelp = () => {
       this.props.help(this.state.pgid);
@@ -111,7 +117,7 @@ class ReusableGrid extends React.Component {
       const { index } = this.props.index;
       let _id = document.querySelector("div[role='grid']").id;
       const rowid = $("#" + _id).jqxGrid("getrowid", index);
-      $("#" + _id).jqxGrid("deleterow", rowid);
+      $("#" + _id).jqxGrid("deleterow", rowid); 
     };
 
     this.renderMe = pgid => {
@@ -247,6 +253,7 @@ const {griddata} = this.props
 console.log(noResultsFoundTxt)
 console.log(this.props.griddata[0])
 console.log(this.state.pgid)
+console.log(this.state.isfilterform)
     return (
       <Fragment>
         <Row>
@@ -264,19 +271,20 @@ console.log(this.state.pgid)
               <span> {this.state.helpLabel} </span>
             </UncontrolledTooltip>
           </span>
-          {this.state.funnel && (
+          
+          {this.state.isfilter && (
             <span>
               <span id="filter">
                 <i
                   class="fas fa-filter fa-lg"
                   style={filtericon}
-                  onClick={this.handleNewForm}
+                  onClick={this.handleFilter}
                 />
               </span>
               <UncontrolledTooltip placement="right" target="filter">
                 <span>
                   {this.state.parentConfig ? (
-                      <span> Return tp prior screen </span>
+                      <span> Return to prior screen </span>
                   ): ( <span> Modify Selection Criteria </span> )}
                   </span>
               </UncontrolledTooltip>
@@ -428,7 +436,7 @@ console.log(this.state.pgid)
           change={this.handleChange}
           renderGrid={this.renderMe}
           pgid={this.state.pgid}
-          filter={this.state.filter}
+          isfilterform={this.state.isfilterform}
         />
       </Fragment>
     );

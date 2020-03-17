@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect } from "react-redux"; 
 import ReusableForm from "./ReusableForm";
 import { updateGrid } from "../../base/utils/updateGrid";
 import Input from "./SingleInput";
@@ -31,7 +31,7 @@ class TestForm extends Component {
         'Connecticut',
         'Delaware',
         'Florida',
-        'Georgia',
+        'GA',
         'Hawaii',
         'Idaho',
         'Illinois',
@@ -102,6 +102,45 @@ class TestForm extends Component {
 
     this.displayFormFields = () => {
       const  formSchema  = [
+        // {
+        //   name: "userCode",
+        //   placeholder: "Enter User Code",
+        //   type: "text",
+        //   label: "Code *"
+        // },
+        // {
+        //   name: "payType",
+        //   default: "Custom Earnings",
+        //   type: "select",
+        //   label: "Type",
+        //   options: ["Custom Earnings", "Custom Benefit Plan"]
+        // },
+        // {
+        //   name: "name",
+        //   placeholder: "Enter Payment Name",
+        //   type: "text",
+        //   label: "Custom Payment Name *"
+        // },
+        // {
+        //   name: "taxability",
+        //   default: "Non-Taxable",
+        //   type: "select",
+        //   label: "Taxability *",
+        //   options: [
+        //     "Non-Taxable",
+        //     "Limit-YTD",
+        //     "Limit-QTD",
+        //     "Limit-MTD",
+        //     "Taxable/Exclude",
+        //     "Imputed"
+        //   ]
+        // },
+        // {
+        //   name: "eemax",
+        //   placeholder: "Enter Maximum Limit",
+        //   type: "text",
+        //   label: "Maximum Limit"
+        // }
         {
           name: "location",
           id: "location",
@@ -220,26 +259,7 @@ class TestForm extends Component {
         });
       }
       this.setState({
-        formSchema: [
-          {
-            name: "customTaxCode",
-            id: "customTaxCode",
-            placeholder: "Enter Custom Tax Code",
-            type: "text",
-            label: "Custom Tax Code",
-            value: this.state.customTaxCode,
-            onChange: this.handleChange
-          },
-          {
-            name: "customTaxName",
-            id: "customTaxName",
-            placeholder: "Enter Custom Tax Name",
-            type: "text",
-            label: "Custom Tax Name",
-            value: this.state.customTaxName,
-            onChange: this.handleChange
-          }
-        ]
+        
       });
     }
 
