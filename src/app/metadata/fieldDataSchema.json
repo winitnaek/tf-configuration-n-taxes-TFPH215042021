@@ -1,0 +1,239 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "id": "http://jsonschema.net",
+  "type": "object",
+  "title": "The Root Schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "required": [
+    "id",
+    "name",
+    "placeholder",
+    "type",
+    "label",
+    "initialvalue",
+    "errmsg",
+    "minlength",
+    "maxlength",
+    "validation"
+  ],
+  "properties": {
+    "id": {
+      "id": "http://jsonschema.net/id",
+      "type": "string",
+      "title": "The Id Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["customTaxCode"],
+      "pattern": "^[a-zA-Z0-9]{4,50}$"
+    },
+    "name": {
+      "id": "http://jsonschema.net/name",
+      "type": "string",
+      "title": "The Name Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["customTaxCode"]
+    },
+    "placeholder": {
+      "id": "http://jsonschema.net/placeholder",
+      "type": "string",
+      "title": "The Placeholder Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["Enter Custom Tax Code"]
+    },
+    "type": {
+      "id": "http://jsonschema.net/type",
+      "type": "string",
+      "title": "The Type Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["text"]
+    },
+    "label": {
+      "id": "http://jsonschema.net/label",
+      "type": "string",
+      "title": "The Label Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["Custom Tax Code"]
+    },
+    "initialvalue": {
+      "id": "http://jsonschema.net/initialvalue",
+      "type": "string",
+      "title": "The Initialvalue Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [""]
+    },
+    "errmsg": {
+      "id": "http://jsonschema.net/errmsg",
+      "type": "string",
+      "title": "The Errmsg Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": ["Custom Tax Code is required"]
+    },
+    "minlength": {
+      "id": "http://jsonschema.net/minlength",
+      "type": "integer",
+      "title": "The Minlength Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [1]
+    },
+    "maxlength": {
+      "id": "http://jsonschema.net/maxlength",
+      "type": "integer",
+      "title": "The Maxlength Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [25]
+    },
+    "validation": {
+      "id": "http://jsonschema.net/validation",
+      "type": "object",
+      "title": "The Validation Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "required": true,
+          "constraint": [
+            {
+              "message": "Tax Code needs to be in uppercase.",
+              "type": "uppercase"
+            }
+          ],
+          "subtype": [
+            {
+              "params": [1.0, "min 1 characters"],
+              "type": "min"
+            },
+            {
+              "type": "max",
+              "params": [25.0, "max 10 characters"]
+            },
+            {
+              "params": ["/(hi|bye)/", "Invalid Pattern"],
+              "type": "matches"
+            }
+          ],
+          "type": "string"
+        }
+      ],
+      "required": ["required", "type", "subtype", "constraint"],
+      "properties": {
+        "required": {
+          "id": "http://jsonschema.net/validation/properties/required",
+          "type": "boolean",
+          "title": "The Required Schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [true]
+        },
+        "type": {
+          "id": "http://jsonschema.net/validation/properties/type",
+          "type": "string",
+          "title": "The Type Schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": ["string"]
+        },
+        "subtype": {
+          "id": "http://jsonschema.net/validation/properties/subtype",
+          "type": "array",
+          "title": "The Subtype Schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "items": {
+            "id": "http://jsonschema.net/validation/properties/subtype/items",
+            "type": "object",
+            "title": "The Items Schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "params": [1.0, "min 1 characters"],
+                "type": "min"
+              },
+              {
+                "type": "max",
+                "params": [25.0, "max 10 characters"]
+              },
+              {
+                "type": "matches",
+                "params": ["/(hi|bye)/", "Invalid Pattern"]
+              }
+            ],
+            "required": ["type", "params"],
+            "properties": {
+              "type": {
+                "id": "http://jsonschema.net/validation/properties/subtype/items/properties/type",
+                "type": "string",
+                "title": "The Type Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": ["min"]
+              },
+              "params": {
+                "id": "http://jsonschema.net/validation/properties/subtype/items/properties/params",
+                "type": "array",
+                "title": "The Params Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": [],
+                "items": {
+                  "id": "http://jsonschema.net/validation/properties/subtype/items/properties/params/items",
+                  "type": "integer",
+                  "title": "The Items Schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": 0,
+                  "examples": [1, "min 1 characters"]
+                }
+              }
+            }
+          }
+        },
+        "constraint": {
+          "id": "http://jsonschema.net/validation/properties/constraint",
+          "type": "array",
+          "title": "The Constraint Schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "items": {
+            "id": "http://jsonschema.net/validation/properties/constraint/items",
+            "type": "object",
+            "title": "The Items Schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "message": "Tax Code needs to be in uppercase.",
+                "type": "uppercase"
+              }
+            ],
+            "required": ["type", "message"],
+            "properties": {
+              "type": {
+                "id": "http://jsonschema.net/validation/properties/constraint/items/properties/type",
+                "type": "string",
+                "title": "The Type Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": ["uppercase"]
+              },
+              "message": {
+                "id": "http://jsonschema.net/validation/properties/constraint/items/properties/message",
+                "type": "string",
+                "title": "The Message Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": ["Tax Code needs to be in uppercase."]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
