@@ -37,26 +37,23 @@ class Usage extends Component {
         <Col>
         {recentUsage && (
             <div>
-            <Button color="link" onClick={this.toggle} style={{marginTop: 8, paddingLeft: 0}}>Recent Usage</Button>
+            <Button color="link" onClick={this.toggle} style={{marginTop: 8, paddingLeft: 0}}>Collapsible UI</Button>
             <Collapse isOpen={isOpen}>
                     <div>
-                        <strong>Usage:</strong> 
-                        <div>
-                            <span>This company is being used in the following contexts: </span>
-                            <ul>
-                                {recentUsage.map((item,key) => {
-                                    for (let x in tftools) {
-                                        if (tftools[x].id == item) {
-                                            return (  
-                                                <li>
-                                                    <a href="#" onClick={() => this.handleLink(tftools[x])}>{tftools[x].label}</a>
-                                                </li>
-                                            )
-                                        }
-                                    } 
-                                })}
-                            </ul>
-                        </div>
+                        <span>This company is being used in the following contexts: </span>
+                        <ul>
+                            {recentUsage.map((item,key) => {
+                                for (let x in tftools) {
+                                    if (tftools[x].id == item) {
+                                        return (  
+                                            <li>
+                                                <a href="#" onClick={() => this.handleLink(tftools[x])}>{tftools[x].label}</a>
+                                            </li>
+                                        )
+                                    }
+                                } 
+                            })}
+                        </ul>
                     </div>
             </Collapse>
             </div>
