@@ -91,11 +91,12 @@ class TestForm extends Component {
     };
 
     this.handleChange = event => {
-      const target = event.target;
-      const value = target.value;
-      const name = target.name;
+      const {target} = event;
+      const {value} = target;
+      const {name} = target;
+      console.log(name, value)
       this.setState({
-        [name]: value
+        [name]: value 
       });
     };
 
@@ -207,6 +208,7 @@ class TestForm extends Component {
       console.log(this.props.data);
       const { location, street1, street2, city, county, state, zip } = this.props.data;
       if (this.props.mode === "Edit") {
+        console.log(state)
         this.setState({
           location,
           street1,
