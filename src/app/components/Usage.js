@@ -1,14 +1,28 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
 import { bindActionCreators } from "redux";
-import {Col} from "reactstrap";
+import {Col, Collapse, Button} from "reactstrap";
 import {closeForm} from "../actions/formActions";
 import { tftools } from "../../base/constants/TFTools";
 import {getRecentUsage} from "../actions/usageActions";
 
 class Usage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen:false
+        }
+        this.toggle = this.toggle.bind(this);
+      }
+
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        })
+    }
+
     componentDidMount() {
-        this.props.getRecentUsage(this.props.pgid)
+            this.props.getRecentUsage(this.props.pgid)
     }
 
     handleLink(data) {
@@ -18,11 +32,13 @@ class Usage extends Component {
 
     render() {
         const {recentUsage} = this.props;
+        const {isOpen} = this.state;
         return (
         <Col>
-            {recentUsage && (
-                <div>
-                    <strong>Usage:</strong> 
+        {recentUsage && (
+            <div>
+            <Button color="link" onClick={this.toggle} style={{marginTop: 8, paddingLeft: 0}}>Collapsible UI</Button>
+            <Collapse isOpen={isOpen}>
                     <div>
                         <span>This company is being used in the following contexts: </span>
                         <ul>
@@ -39,8 +55,9 @@ class Usage extends Component {
                             })}
                         </ul>
                     </div>
-                </div>
-            )}
+            </Collapse>
+            </div>
+        )}
         </Col>
         )
     }
