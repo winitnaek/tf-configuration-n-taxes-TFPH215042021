@@ -29,7 +29,7 @@ class UserDataQueries extends React.Component {
       pgid: "",
       formTitle: "",
       isOpen: false,
-      filter: false
+      isfilterform: false
     };
     this.OpenHelp = () => {
       this.props.help("userDataQueries");
@@ -44,7 +44,7 @@ class UserDataQueries extends React.Component {
         isOpen: !this.state.isOpen,
         pgid: id,
         formTitle: title,
-        filter: true
+        isfilterform: true
       });
     };
    }
@@ -127,7 +127,7 @@ class UserDataQueries extends React.Component {
           change={this.handleChange}
           renderGrid={this.renderMe}
           pgid={this.state.pgid}
-          filter={this.state.filter}
+          isfilterform={this.state.isfilterform}
         />
       </Fragment>
     );

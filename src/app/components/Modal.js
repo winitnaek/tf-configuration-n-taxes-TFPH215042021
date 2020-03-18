@@ -9,6 +9,7 @@ class reusableModal extends Component {
   }
 
   render() {
+    console.log(this.props.children)
     return (
       <Modal
         isOpen={this.props.open}

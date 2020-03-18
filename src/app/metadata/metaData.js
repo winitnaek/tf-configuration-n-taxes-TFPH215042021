@@ -15,7 +15,8 @@ export const allBSIPlans = {
   },
   griddef: {
     gridtype: "ro",
-    filtergrid: false,
+    isfilter: false,
+    isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -96,7 +97,8 @@ export const customPayments = {
   },
   griddef: {
     gridtype: "type1",
-    filtergrid: false,
+    isfilter: false,
+    isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -190,7 +192,8 @@ export const customTaxCodes = {
   },
   griddef: {
     gridtype: "type1",
-    filtergrid: false,
+    isfilter: false,
+    isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -256,7 +259,8 @@ export const populateV3States = {
   },
   griddef: {
     gridtype: "ro",
-    filtergrid: false,
+    isfilter: false,
+    isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -319,7 +323,8 @@ export const experienceRates = {
   },
   griddef: {
     gridtype: "ro",
-    filtergrid: true,
+    isfilter: true,
+    isfilterform: true,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -448,7 +453,8 @@ export const supplementalMethods = {
   },
   griddef: {
     gridtype: "ro",
-    filtergrid: true,
+    isfilter: true,
+    isfilterform: true,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -512,7 +518,8 @@ export const customFormulas = {
   },
   griddef: {
     gridtype: "type2",
-    filtergrid: false,
+    isfilter: false,
+    isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -541,7 +548,8 @@ export const customTaxFormulas = {
   },
   griddef: {
     gridtype: "type1",
-    filtergrid: true,
+    isfilter: true,
+    isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -675,7 +683,8 @@ export const companies = {
   },
   griddef: {
     gridtype: "type1",
-    filtergrid: false,
+    isfilter: true,
+    isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -760,7 +769,7 @@ export const worksites = {
   },
   griddef: {
     gridtype: "type2",
-    filtergrid: false,
+    isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "No Data Found",
@@ -812,7 +821,8 @@ export const worksiteCompaines =  {
   },
   griddef: {
     gridtype: "type2",
-    filtergrid: true,
+    isfilter: true,
+    isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
     noResultsFoundTxt: "There are no Locations defined for this company",
@@ -872,6 +882,7 @@ export const worksiteCompaines =  {
     dataFields: [
       { name: "location", type: "string" },
       { name: "street1", type: "string" },
+      { name: "street2", type: "string" },
       { name: "city", type: "string" },
       { name: "county", type: "string" },
       { name: "state", type: "string" },

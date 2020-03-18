@@ -16,6 +16,7 @@ function Select(props) {
           name={props.name}
           value={props.value}
           onChange={props.onChange}
+          options={props.options}
           required={props.required ? true : false}
         >
           {!defaultSet && (

@@ -134,6 +134,7 @@ function showPrgress(elem) {
 }
 
 function editClick(index, pgid) {
+  console.log('you clicked edit')
   let _id = document.querySelector("div[role='grid']").id;
   let dataRecord = $("#" + _id).jqxGrid("getrowdata", index);
   const data = { formData: dataRecord, mode: "Edit", index: index };

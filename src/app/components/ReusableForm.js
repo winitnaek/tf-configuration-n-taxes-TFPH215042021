@@ -17,6 +17,7 @@ class ReusableForm extends Component {
   }
   render() {
     const {pgid} = this.props;
+    console.log(pgid)
     return (
       <Container>
         <ModalBody>
