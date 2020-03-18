@@ -37,7 +37,10 @@ class Usage extends Component {
         <Col>
         {recentUsage && (
             <div>
-            <Button color="link" onClick={this.toggle} style={{marginTop: 8, paddingLeft: 0}}>Collapsible UI</Button>
+            <Button color="link" onClick={this.toggle} style={{marginTop: 8, paddingLeft: 0}}>Usage 
+                {!isOpen && <i class="fas fa-caret-right" style = {{marginTop:8, paddingLeft:4}}/>}
+                {isOpen && <i class="fas fa-caret-down" style = {{marginTop:8, paddingLeft:4}} />}
+            </Button>
             <Collapse isOpen={isOpen}>
                     <div>
                         <span>This company is being used in the following contexts: </span>
