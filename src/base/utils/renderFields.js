@@ -1,6 +1,7 @@
 import React from "react";
 import Input from '../../app/components/SingleInput';
 import Select from '../../app/components/Select';
+import DatePicker from '../../app/components/DatePicker';
 
 export const renderFields = (schema) => {
 
@@ -13,12 +14,10 @@ export const renderFields = (schema) => {
                     name={field.name}
                     id={field.name}
                     placeholder={field.placeholder}
-                    type={field.inputType}
+                    type={field.type}
                     value={field.value}
                     title={field.label}
-                    onChange={field.onChange}
-                    options={field.options}
-                  
+                    onChange={field.onChange} 
                     />
           break;
           case "select":
@@ -29,7 +28,7 @@ export const renderFields = (schema) => {
                   name={field.name}
                   id={field.name}
                   placeholder={field.placeholder}
-                  type={field.inputType}
+                  type={field.type}
                   value={field.value}
                   title={field.label}
                   onChange={field.onChange}
@@ -39,10 +38,22 @@ export const renderFields = (schema) => {
               );
               break;
           default:
-            break;
+           return ( <Input
+            name={field.name}
+            id={field.name}
+            placeholder={field.placeholder}
+            type={field.type}
+            value={field.value}
+            title={field.label}
+            onChange={field.onChange}
+            options={field.options}
+          
+            />
+           )
       }
 
     })
+    console.log(fields)
     return fields;
   
   }

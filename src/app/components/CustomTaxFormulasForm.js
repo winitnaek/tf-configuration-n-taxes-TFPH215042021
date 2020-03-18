@@ -2,77 +2,23 @@ import React, { Component } from "react";
 import { connect } from "react-redux"; 
 import ReusableForm from "./ReusableForm";
 import { updateGrid } from "../../base/utils/updateGrid";
-import Input from "./SingleInput";
-import Select from "./Select";
-import { bold } from "../../base/constants/AppConstants";
-import { Col } from "reactstrap";
-import { formSchema } from "../../base/utils/testFormSchema";
 import { renderFields } from "../../base/utils/renderFields";
 
-class TestForm extends Component {
+class CustomTaxFormulasForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      location: "",
-      street1: "",
-      street2: "",
-      city: "",
-      county: "",
-      state: "",
-      zip: "",
-      stateOptions: [
-        'Alabama',
-        'Alaska',
-        'Arizona',
-        'Arkansas',
-        'California',
-        'Colorado',
-        'Connecticut',
-        'Delaware',
-        'Florida',
-        'GA',
-        'Hawaii',
-        'Idaho',
-        'Illinois',
-        'Indiana',
-        'Iowa',
-        'Kansas',
-        'Kentucky',
-        'Louisiana',
-        'Maine',
-        'Maryland',
-        'Massachusetts',
-        'Michigan',
-        'Minnesota',
-        'Mississippi',
-        'Missouri',
-        'Montana',
-        'Nebraska',
-        'Nevada',
-        'New Hampshire',
-        'New Jersey',
-        'New Mexico',
-        'New York',
-        'North Carolina',
-        'North Dakota',
-        'Ohio',
-        'Oklahoma',
-        'Oregon',
-        'Pennsylvania',
-        'Rhode Island',
-        'South Carolina',
-        'South Dakota',
-        'Tennessee',
-        'Texas',
-        'Utah',
-        'Vermont',
-        'Virginia',
-        'Washington',
-        'West Virginia',
-        'Wisconsin',
-        'Wyoming'
-      ]
+        taxCode:"",
+        cmName:"",
+        taxRate:"",
+        rounding:"",
+        minWage:"",
+        maxWage:"",
+        maxTax:"",
+        flatAmount:"",
+        startDate:"",
+        rescind:"",
     };
 
     const { formProps } = this.props;
@@ -80,13 +26,16 @@ class TestForm extends Component {
 
     this.resetForm = () => {
       this.setState({
-        location: "",
-        street1: "",
-        street2: "",
-        city: "",
-        county: "",
-        state: "",
-        zip: "",
+        taxCode:"",
+        cmName:"",
+        taxRate:"",
+        rounding:"",
+        minWage:"",
+        maxWage:"",
+        maxTax:"",
+        flatAmount:"",
+        startDate:"",
+        rescind:"",
       });
     };
 
@@ -103,68 +52,94 @@ class TestForm extends Component {
     this.displayFormFields = () => {
       const  formSchema  = [
         {
-          name: "location",
-          id: "location",
-          placeholder: "Enter Worksite" ,
+          name: "taxCode",
+          id: "taxCode",
+          placeholder: "Enter Tax Code" ,
           type: "text",
-          label: "Worksite",
-          value: this.state.location,
+          label: "Custom Tax Code Name",
+          value: this.state.taxCode,
           onChange: this.handleChange
         },
         {
-          name: "street1",
-          id: "street1",
-          placeholder: "Enter Street" ,
+          name: "cmName",
+          id: "cmName",
+          placeholder: "Enter Method" ,
           type: "text",
-          label: "Street1",
-          value: this.state.street1,
-          onChange: this.handleChange
-        },
-        {
-          name: "street2",
-          id: "street2",
-          placeholder: "Enter Street2" ,
-          type: "text",
-          label: "Street2",
-          value: this.state.street2,
+          label: "Method",
+          value: this.state.cmName,
           onChange: this.handleChange
         },
        
         {
-          name: "city",
-          id: "city",
-          placeholder: "Enter City" ,
+          name: "taxRate",
+          id: "taxRate",
+          placeholder: "Enter Tax Rate" ,
           type: "text",
-          label: "City",
-          value: this.state.city,
+          label: "Tax Rate",
+          value: this.state.taxRate,
           onChange: this.handleChange
         },
         {
-          name: "county",
-          id: "county",
-          placeholder: "Enter County" ,
+          name: "rounding",
+          id: "rounding",
+          placeholder: "Enter Rounding Value" ,
           type: "text",
-          label: "County",
-          value: this.state.county,
+          label: "Rounding",
+          value: this.state.rounding,
           onChange: this.handleChange
         },
         {
-          name: "state",
-          id: "state",
-          placeholder: "Enter State" ,
-          type: "select",
-          label: "State",
-          options: this.state.stateOptions,
-          value: this.state.state,
+          name: "minWage",
+          id: "minWage",
+          placeholder: "Enter Min Wage" ,
+          type: "text",
+          label: "Min Wage",
+          value: this.state.minWage,
           onChange: this.handleChange
         },
         {
-          name: "zip",
-          id: "zip",
-          placeholder: "Enter Zip" ,
+          name: "maxWage",
+          id: "maxWage",
+          placeholder: "Enter Max Wage" ,
           type: "text",
-          label: "Zip",
-          value: this.state.zip,
+          label: "Max Wage",
+          value: this.state.maxWage,
+          onChange: this.handleChange
+        },
+        {
+          name: "maxTax",
+          id: "maxTax",
+          placeholder: "Enter Max Tax" ,
+          type: "text",
+          label: "Max Tax",
+          value: this.state.maxTax,
+          onChange: this.handleChange
+        },
+        {
+          name: "flatAmount",
+          id: "flatAmount",
+          placeholder: "Enter Flat Amount" ,
+          type: "text",
+          label: "Flat Amount",
+          value: this.state.flatAmount,
+          onChange: this.handleChange
+        },
+        {
+          name: "startDate",
+          id: "stateDate",
+          placeholder: "Enter Start Date" ,
+          type: "date",
+          label: "Start Date",
+          value: this.state.startDate,
+          onChange: this.handleChange
+        },
+        {
+          name: "rescind",
+          id: "rescind",
+          placeholder: "Enter End Date" ,
+          type: "date", 
+          label: "End Date",
+          value: this.state.rescind,
           onChange: this.handleChange
         }
       ]
@@ -206,16 +181,28 @@ class TestForm extends Component {
   componentDidMount() {
     if (this.props.data) {
       console.log(this.props.data);
-      const { location, street1, street2, city, county, state, zip } = this.props.data;
+      const {   taxCode,
+        cmName,
+        taxRate,
+        rounding,
+        minWage,
+        maxWage,
+        maxTax,
+        flatAmount,
+        startDate,
+        rescind, } = this.props.data;
       if (this.props.mode === "Edit") {
         this.setState({
-          location,
-          street1,
-          street2,
-          city,
-          county,
-          state,
-          zip,
+            taxCode,
+            cmName,
+            taxRate,
+            rounding,
+            minWage,
+            maxWage,
+            maxTax,
+            flatAmount,
+            startDate,
+            rescind,
         });
       }
       this.setState({
@@ -230,6 +217,7 @@ class TestForm extends Component {
     const { formProps } = this.props;
     const { permissions, close, pgid } = formProps;
     const { handleDelete, handleSubmit, resetForm } = this;
+console.log(`YOu are in the worksiteform`)
     return (
       <ReusableForm
         title="Enter Custom Payments"
@@ -255,4 +243,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(TestForm);
+export default connect(mapStateToProps, null)(CustomTaxFormulasForm);

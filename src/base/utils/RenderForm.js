@@ -2,6 +2,7 @@ import React from "react";
 import CustomPaymentsForm from "../../app/components/CustomPaymentsForm";
 import CustomTaxCodesForm from "../../app/components/CustomTaxCodesForm";
 import WorksiteCompaniesForm from "../../app/components/WorksiteCompaniesForm"
+import CustomTaxFormulasForm from '../../app/components/CustomTaxFormulasForm';
 
 const renderForm = (close, change, pgid, permissions, deleteRow) => {
   let form;
@@ -22,8 +23,10 @@ const renderForm = (close, change, pgid, permissions, deleteRow) => {
       form = <WorksiteCompaniesForm  formProps={formProps} />
       break;
     case "worksiteCompanies":
-      console.log('found it')
       form = <WorksiteCompaniesForm formProps={formProps} />
+      break;
+    case "customFormulas":
+      form = <CustomTaxFormulasForm formProps={formProps} />
       break;
     // Add additoal cases for other forms here
     default:
