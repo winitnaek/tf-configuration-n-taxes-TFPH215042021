@@ -38,8 +38,8 @@ class Usage extends Component {
         {recentUsage && (
             <div>
             <Button color="link" onClick={this.toggle} style={{marginTop: 8, paddingLeft: 0}}>Usage 
-                {!isOpen && <i class="fas fa-caret-down" style = {{marginTop:8, paddingLeft:4}}/>}
-                {isOpen && <i class="fas fa-caret-up" style = {{marginTop:8, paddingLeft:4}} />}
+                {!isOpen && <i class="fas fa-caret-right" style = {{marginTop:8, paddingLeft:4}}/>}
+                {isOpen && <i class="fas fa-caret-down" style = {{marginTop:8, paddingLeft:4}} />}
             </Button>
             <Collapse isOpen={isOpen}>
                     <div>
