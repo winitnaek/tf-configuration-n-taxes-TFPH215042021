@@ -2,7 +2,6 @@ import React from 'react';
 import { FormGroup, Label, Input, FormFeedback, Col } from 'reactstrap';
 
 const SingleInput = (props) => {
-   console.log(props)
 	return (
 	<FormGroup>
 		<Col {...props.colWidth}>

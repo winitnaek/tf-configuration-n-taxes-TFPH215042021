@@ -2,14 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux"; 
 import ReusableForm from "./ReusableForm";
 import { updateGrid } from "../../base/utils/updateGrid";
-import Input from "./SingleInput";
-import Select from "./Select";
-import { bold } from "../../base/constants/AppConstants";
-import { Col } from "reactstrap";
-import { formSchema } from "../../base/utils/testFormSchema";
 import { renderFields } from "../../base/utils/renderFields";
-
-class TestForm extends Component {
+import { closeForm, saveFormData } from "../actions/formActions"
+import { bindActionCreators } from "redux";
+class WorksiteCompaniesForm extends Component {
   constructor(props) {
     super(props);
 
@@ -181,9 +177,24 @@ class TestForm extends Component {
     this.handleSubmit = () => {
       let rowid = null;
 
+     const {
+      location,
+      street1,
+      street2,
+      city,
+      county,
+      state,
+      zip,
+     } = this.state
+
       const payload = {
-        taxCode: this.state.customTaxCode,
-        name: this.state.customTaxName
+        location,
+      street1,
+      street2,
+      city,
+      county,
+      state,
+      zip,
       };
       console.log(payload)
       const mode = this.props.mode;
@@ -191,9 +202,8 @@ class TestForm extends Component {
         rowid = this.props.rowIndex;
       }
       // Calls external updateGrid function located in ./base/utils
+      this.props.saveFormData(payload)
       updateGrid(payload, rowid, mode);
-
-      close();
     };
 
     this.handleDelete = () => {
@@ -255,4 +265,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(TestForm);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ closeForm, saveFormData }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorksiteCompaniesForm);

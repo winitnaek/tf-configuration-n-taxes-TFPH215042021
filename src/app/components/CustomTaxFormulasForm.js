@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import ReusableForm from "./ReusableForm";
 import { updateGrid } from "../../base/utils/updateGrid";
 import { renderFields } from "../../base/utils/renderFields";
+import { closeForm, saveFormData } from "../actions/formActions";
+import { bindActionCreators } from "redux";
+
 
 class CustomTaxFormulasForm extends Component {
   constructor(props) {
@@ -156,19 +159,16 @@ class CustomTaxFormulasForm extends Component {
     this.handleSubmit = () => {
       let rowid = null;
 
-      const payload = {
-        taxCode: this.state.customTaxCode,
-        name: this.state.customTaxName
-      };
+      const payload = this.state;
+      console.log('Trying to submit')
       console.log(payload)
       const mode = this.props.mode;
       if (mode === "Edit") {
         rowid = this.props.rowIndex;
       }
+      this.props.saveFormData(payload)
       // Calls external updateGrid function located in ./base/utils
       updateGrid(payload, rowid, mode);
-
-      close();
     };
 
     this.handleDelete = () => {
@@ -221,7 +221,7 @@ console.log(`YOu are in the worksiteform`)
     return (
       <ReusableForm
         title="Enter Custom Payments"
-        submit={handleSubmit}
+        submit={this.handleSubmit}
         close={close}
         pgid={pgid}
         delete={handleDelete}
@@ -242,5 +242,9 @@ function mapStateToProps(state) {
     rowIndex: state.formData.index
   };
 }
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ closeForm, saveFormData }, dispatch);
+  }
+  
 
-export default connect(mapStateToProps, null)(CustomTaxFormulasForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomTaxFormulasForm);

@@ -1,7 +1,6 @@
 import React from "react";
 import Input from '../../app/components/SingleInput';
 import Select from '../../app/components/Select';
-import DatePicker from '../../app/components/DatePicker';
 
 export const renderFields = (schema) => {
 
@@ -47,7 +46,6 @@ export const renderFields = (schema) => {
             title={field.label}
             onChange={field.onChange}
             options={field.options}
-          
             />
            )
       }
