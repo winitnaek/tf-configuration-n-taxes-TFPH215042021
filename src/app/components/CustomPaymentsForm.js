@@ -77,11 +77,13 @@ class CustomPaymentsForm extends Component {
         eemax: eeMax,
         aggstatus: "N/A"
       };
-      const mode = this.props.mode;
+      const {mode}  = this.props;
+      const {pgid, submit} = this.props.formProps
+  
       if (mode === "Edit") {
         rowid = this.props.rowIndex;
       }
-      // Calls external updateGrid function located in ./base/utils
+      submit(pgid, payload, mode, rowid)
       updateGrid(payload, rowid, mode);
       close();
     };
@@ -114,7 +116,7 @@ class CustomPaymentsForm extends Component {
   render() {
     console.log(this.props);
     const { formProps } = this.props;
-    const { permissions, close, pgid } = formProps;
+    const { permissions, close, pgid , submit} = formProps;
     const { handleDelete, handleSubmit, resetForm } = this;
     return (
       <ReusableForm

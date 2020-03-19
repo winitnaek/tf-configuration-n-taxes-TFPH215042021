@@ -162,11 +162,14 @@ class CustomTaxFormulasForm extends Component {
       const payload = this.state;
       console.log('Trying to submit')
       console.log(payload)
-      const mode = this.props.mode;
+      const {mode}  = this.props;
+      const {pgid, submit} = this.props.formProps
       if (mode === "Edit") {
         rowid = this.props.rowIndex;
       }
-      this.props.saveFormData(payload)
+      
+      submit(pgid, payload, mode, rowid)
+      // this.props.saveFormData(payload)
       // Calls external updateGrid function located in ./base/utils
       updateGrid(payload, rowid, mode);
     };
@@ -215,13 +218,13 @@ class CustomTaxFormulasForm extends Component {
 
   render() {
     const { formProps } = this.props;
-    const { permissions, close, pgid } = formProps;
-    const { handleDelete, handleSubmit, resetForm } = this;
+    const { permissions, close, pgid, submit } = formProps;
+    const { handleDelete, resetForm, handleSubmit } = this;
 console.log(`YOu are in the worksiteform`)
     return (
       <ReusableForm
         title="Enter Custom Payments"
-        submit={this.handleSubmit}
+        submit= {handleSubmit}
         close={close}
         pgid={pgid}
         delete={handleDelete}

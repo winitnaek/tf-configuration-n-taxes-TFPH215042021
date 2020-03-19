@@ -4,9 +4,9 @@ import CustomTaxCodesForm from "../../app/components/CustomTaxCodesForm";
 import WorksiteCompaniesForm from "../../app/components/WorksiteCompaniesForm"
 import CustomTaxFormulasForm from '../../app/components/CustomTaxFormulasForm';
 
-const renderForm = (close, change, pgid, permissions, deleteRow) => {
+const renderForm = (close, change, pgid, permissions, deleteRow, submit) => {
   let form;
-  const formProps = {close, change, permissions, deleteRow, pgid}
+  const formProps = {close, change, permissions, deleteRow, pgid, submit}
   console.log(pgid)
   switch (pgid) {
     case "customPayments":

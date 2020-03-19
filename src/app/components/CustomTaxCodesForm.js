@@ -10,7 +10,7 @@ import { renderFields } from "../../base/utils/renderFields";
 
 class TestForm extends Component {
   constructor(props) {
-    super(props);
+    super(props);   
 
     this.state = {
       customTaxCode: "",
@@ -79,13 +79,15 @@ class TestForm extends Component {
         name: this.state.customTaxName
       };
       console.log(payload)
-      const mode = this.props.mode;
+      const {mode}  = this.props;
+      const {pgid, submit} = this.props.formProps
+
       if (mode === "Edit") {
         rowid = this.props.rowIndex;
       }
-      // Calls external updateGrid function located in ./base/utils
+    
       updateGrid(payload, rowid, mode);
-
+      submit(pgid, payload, mode, rowid)
       close();
     };
 
