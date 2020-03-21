@@ -11,7 +11,7 @@ export const fielddatamap = [
       minlength: 1,
       maxlength: 25
     },
-    selectinfo: {},
+    fieldinfo: {},
     validation: {
       required: true,
       type: "string",
@@ -37,7 +37,7 @@ export const fielddatamap = [
       minlength: 1,
       maxlength: 3
     },
-    selectinfo: {},
+    fieldinfo: {},
     validation: {
       required: true,
       type: "number",
@@ -60,7 +60,7 @@ export const fielddatamap = [
     initialvalue: "",
     errmsg: "Tax Code is required",
     fieldlength: {},
-    selectinfo: {
+    fieldinfo: {
       typeahead: true,
       isasync: true,
       options: [],
@@ -79,7 +79,7 @@ export const fielddatamap = [
     initialvalue: "",
     errmsg: "Tax Type is required",
     fieldlength: {},
-    selectinfo: {
+    fieldinfo: {
       typeahead: false,
       isasync: false,
       options: [
@@ -102,7 +102,7 @@ export const fielddatamap = [
     initialvalue: "",
     errmsg: "Company Code is required",
     fieldlength: {},
-    selectinfo: {
+    fieldinfo: {
       typeahead: false,
       isasync: true,
       options: [],
@@ -121,7 +121,7 @@ export const fielddatamap = [
     initialvalue: "",
     errmsg: "Risk Class is required",
     fieldlength: {},
-    selectinfo: {
+    fieldinfo: {
       typeahead: false,
       isasync: false,
       options: [
@@ -143,8 +143,12 @@ export const fielddatamap = [
     label: "Local Courtesy Withholding",
     initialvalue: flase,
     errmsg: "Local Courtesy Withholding is required",
-    fieldlength: {},
-    selectinfo: {},
+    fieldlength: {
+      options: [
+        { value: "checkVal", label: "CheckLabel" }
+      ]
+    },
+    fieldinfo: {},
     validation: {
       required: true
     }
@@ -158,7 +162,7 @@ export const fielddatamap = [
     initialvalue: flase,
     errmsg: "Select at least one theme.",
     fieldlength: {},
-    selectinfo: {
+    fieldinfo: {
       typeahead: false,
       isasync: false,
       options: [
@@ -181,7 +185,11 @@ export const fielddatamap = [
     initialvalue: flase,
     errmsg: "Select Dataset for restore",
     fieldlength: {},
-    selectinfo: {},
+    fieldinfo: {
+      options: [
+        { value: "radioVal", label: "radioLabel" }
+      ]
+    },
     validation: {
       required: true,
       type: "boolean"
@@ -196,7 +204,7 @@ export const fielddatamap = [
     initialvalue: flase,
     errmsg: "Select At lest one Dataset to restore",
     fieldlength: {},
-    selectinfo: {
+    fieldinfo: {
       typeahead: false,
       isasync: false,
       options: [
@@ -220,7 +228,7 @@ export const fielddatamap = [
     initialvalue: flase,
     errmsg: "Select At lest one Dataset to restore",
     fieldlength: {},
-    selectinfo: {
+    fieldinfo: {
       typeahead: false,
       isasync: false,
       options: [
@@ -244,7 +252,7 @@ export const fielddatamap = [
     initialvalue: "12/31/9999",
     errmsg: "Select At lest one Dataset to restore",
     fieldlength: {},
-    selectinfo: {},
+    fieldinfo: {},
     validation: {
       required: true,
       type: "date",
