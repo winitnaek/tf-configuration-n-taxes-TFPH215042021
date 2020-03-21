@@ -3,46 +3,262 @@ export const fielddatamap = [
     id: "customTaxCode",
     name: "customTaxCode",
     placeholder: "Enter Custom Tax Code",
-    type: "text",
+    fieldtype: "text",
     label: "Custom Tax Code",
     initialvalue: "",
     errmsg: "Custom Tax Code is required",
-    minlength: 1,
-    maxlength: 25,
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    selectinfo: {},
     validation: {
       required: true,
       type: "string",
       subtype: [
-        { type: "min", params: [1, "min 1 characters"] },
-        { type: "max", params: [25, "max 10 characters"] },
-        { type: "matches", params: ["/(hi|bye)/", "Invalid Pattern"] }
+        { type: "uppercase", message: "Tax Code needs to be in uppercase." }
       ],
       constraint: [
-        { type: "uppercase", message: "Tax Code needs to be in uppercase." }
+        { type: "min", input: 1, message: "min 1 characters" },
+        { type: "max", input: 25, message: "max 10 characters" },
+        { type: "matches", input: "/(hi|bye)/", message: "Invalid Pattern" }
       ]
     }
   },
   {
     id: "formulaNumber",
     name: "formulaNumber",
-    placeholder: "",
-    type: "text",
+    placeholder: "Enter Formula Number",
+    fieldtype: "text",
     label: "Formula Number",
     initialvalue: "",
-    errmsg: "Invalid Formula Number. Defaulting to 0.",
-    minlength: 0,
-    maxlength: 3,
+    errmsg: "Formula Number is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 3
+    },
+    selectinfo: {},
     validation: {
       required: true,
       type: "number",
       subtype: [
-        { type: "min", params: [0, "Formula can not be < than 0"] },
-        { type: "max", params: [100, "Formula can not be > than 100"] },
-        { type: "matches", params: ["/(hi|bye)/", "Invalid Pattern"] }
-      ],
-      constraint: [
         { type: "positive", message: "Invalid Formula No." },
         { type: "integer", message: "Invalid Formula No.snip" }
+      ],
+      constraint: [
+        { type: "min", input: 0, message: "Formula can not be < 0" },
+        { type: "max", input: 100, message: "Formula can not be > 100" }
+      ]
+    }
+  },
+  {
+    id: "taxCodeAutoCompl",
+    name: "taxCodeAutoCompl",
+    placeholder: "Select Tax Code",
+    fieldtype: "select",
+    label: "Tax Code",
+    initialvalue: "",
+    errmsg: "Tax Code is required",
+    fieldlength: {},
+    selectinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: true
+    }
+  },
+  {
+    id: "taxTypeAutocomplete",
+    name: "taxTypeAutocomplete",
+    placeholder: "Select Tax Type",
+    fieldtype: "select",
+    label: "Tax Type",
+    initialvalue: "",
+    errmsg: "Tax Type is required",
+    fieldlength: {},
+    selectinfo: {
+      typeahead: false,
+      isasync: false,
+      options: [
+        { value: "TaxType1", label: "Withholding" },
+        { value: "TaxType2", label: "Income Tax" },
+        { value: "TaxType3", label: "Payroll Tax" }
+      ],
+      multiselect: false
+    },
+    validation: {
+      required: true
+    }
+  },
+  {
+    id: "companyCodeAutoCompl",
+    name: "companyCodeAutoCompl",
+    placeholder: "Select Company",
+    fieldtype: "select",
+    label: "Company Code",
+    initialvalue: "",
+    errmsg: "Company Code is required",
+    fieldlength: {},
+    selectinfo: {
+      typeahead: false,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: true
+    }
+  },
+  {
+    id: "riskClassAutoCompl",
+    name: "riskClassAutoCompl",
+    placeholder: "Select Risk Class",
+    fieldtype: "select",
+    label: "Risk Class",
+    initialvalue: "",
+    errmsg: "Risk Class is required",
+    fieldlength: {},
+    selectinfo: {
+      typeahead: false,
+      isasync: false,
+      options: [
+        { value: "Risk1", label: "Risk Class 1" },
+        { value: "Risk1", label: "Risk Class 2" },
+        { value: "Risk1", label: "Risk Class 3" }
+      ],
+      multiselect: false
+    },
+    validation: {
+      required: true
+    }
+  },
+  {
+    id: "localCourtesyWithholding",
+    name: "localCourtesyWithholding",
+    placeholder: "",
+    fieldtype: "check",
+    label: "Local Courtesy Withholding",
+    initialvalue: flase,
+    errmsg: "Local Courtesy Withholding is required",
+    fieldlength: {},
+    selectinfo: {},
+    validation: {
+      required: true
+    }
+  },
+  {
+    id: "themeChoices",
+    name: "themeChoices",
+    placeholder: "",
+    fieldtype: "checklist",
+    label: "",
+    initialvalue: flase,
+    errmsg: "Select at least one theme.",
+    fieldlength: {},
+    selectinfo: {
+      typeahead: false,
+      isasync: false,
+      options: [
+        { value: "theme1", label: "White On Black" },
+        { value: "theme2", label: "Black On White" },
+        { value: "theme3", label: "High Constrast" }
+      ],
+      multiselect: false
+    },
+    validation: {
+      required: true
+    }
+  },
+  {
+    id: "selectDataset",
+    name: "selectDataset",
+    placeholder: "",
+    fieldtype: "radio",
+    label: "Restore Dataset",
+    initialvalue: flase,
+    errmsg: "Select Dataset for restore",
+    fieldlength: {},
+    selectinfo: {},
+    validation: {
+      required: true,
+      type: "boolean"
+    }
+  },
+  {
+    id: "selectDatasetOptions",
+    name: "selectDatasetOptions",
+    placeholder: "",
+    fieldtype: "radiolist",
+    label: "Restore Dataset",
+    initialvalue: flase,
+    errmsg: "Select At lest one Dataset to restore",
+    fieldlength: {},
+    selectinfo: {
+      typeahead: false,
+      isasync: false,
+      options: [
+        { value: "Pay1", label: "Online" },
+        { value: "Pay2", label: "Wire Transfer" },
+        { value: "Pay3", label: "Bank Check" }
+      ],
+      multiselect: false
+    },
+    validation: {
+      required: true,
+      type: "string"
+    }
+  },
+  {
+    id: "selectDatasetOptionsNo",
+    name: "selectDatasetOptionsNo",
+    placeholder: "",
+    fieldtype: "radiolist",
+    label: "Restore Dataset",
+    initialvalue: flase,
+    errmsg: "Select At lest one Dataset to restore",
+    fieldlength: {},
+    selectinfo: {
+      typeahead: false,
+      isasync: false,
+      options: [
+        { value: 1, label: "Online" },
+        { value: 2, label: "Wire Transfer" },
+        { value: 3, label: "Bank Check" }
+      ],
+      multiselect: false
+    },
+    validation: {
+      required: true,
+      type: "number"
+    }
+  },
+  {
+    id: "endDate",
+    name: "endDate",
+    placeholder: "",
+    fieldtype: "date",
+    label: "Restore Dataset",
+    initialvalue: "12/31/9999",
+    errmsg: "Select At lest one Dataset to restore",
+    fieldlength: {},
+    selectinfo: {},
+    validation: {
+      required: true,
+      type: "date",
+      constraint: [
+        {
+          type: "min",
+          input: new Date(),
+          message: "Can not be less than today"
+        },
+        {
+          type: "max",
+          input: "12/31/9999",
+          message: "Can not be greater than 12/31/9999"
+        }
       ]
     }
   }
