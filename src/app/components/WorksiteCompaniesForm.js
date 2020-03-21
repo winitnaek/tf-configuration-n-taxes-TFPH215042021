@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-import { connect } from "react-redux"; 
+import { connect } from "react-redux";
 import ReusableForm from "./ReusableForm";
 import { updateGrid } from "../../base/utils/updateGrid";
-import Input from "./SingleInput";
-import Select from "./Select";
-import { bold } from "../../base/constants/AppConstants";
-import { Col } from "reactstrap";
-import { formSchema } from "../../base/utils/testFormSchema";
 import { renderFields } from "../../base/utils/renderFields";
-
-class TestForm extends Component {
+import { closeForm, saveFormData } from "../actions/formActions";
+import { bindActionCreators } from "redux";
+class WorksiteCompaniesForm extends Component {
   constructor(props) {
     super(props);
 
@@ -22,56 +18,56 @@ class TestForm extends Component {
       state: "",
       zip: "",
       stateOptions: [
-        'Alabama',
-        'Alaska',
-        'Arizona',
-        'Arkansas',
-        'California',
-        'Colorado',
-        'Connecticut',
-        'Delaware',
-        'Florida',
-        'GA',
-        'Hawaii',
-        'Idaho',
-        'Illinois',
-        'Indiana',
-        'Iowa',
-        'Kansas',
-        'Kentucky',
-        'Louisiana',
-        'Maine',
-        'Maryland',
-        'Massachusetts',
-        'Michigan',
-        'Minnesota',
-        'Mississippi',
-        'Missouri',
-        'Montana',
-        'Nebraska',
-        'Nevada',
-        'New Hampshire',
-        'New Jersey',
-        'New Mexico',
-        'New York',
-        'North Carolina',
-        'North Dakota',
-        'Ohio',
-        'Oklahoma',
-        'Oregon',
-        'Pennsylvania',
-        'Rhode Island',
-        'South Carolina',
-        'South Dakota',
-        'Tennessee',
-        'Texas',
-        'Utah',
-        'Vermont',
-        'Virginia',
-        'Washington',
-        'West Virginia',
-        'Wisconsin',
-        'Wyoming'
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "Florida",
+        "GA",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming"
       ]
     };
 
@@ -86,65 +82,26 @@ class TestForm extends Component {
         city: "",
         county: "",
         state: "",
-        zip: "",
+        zip: ""
       });
     };
 
     this.handleChange = event => {
-      const {target} = event;
-      const {value} = target;
-      const {name} = target;
-      console.log(name, value)
+      const { target } = event;
+      const { value } = target;
+      const { name } = target;
+      console.log(name, value);
       this.setState({
-        [name]: value 
+        [name]: value
       });
     };
 
     this.displayFormFields = () => {
-      const  formSchema  = [
-        // {
-        //   name: "userCode",
-        //   placeholder: "Enter User Code",
-        //   type: "text",
-        //   label: "Code *"
-        // },
-        // {
-        //   name: "payType",
-        //   default: "Custom Earnings",
-        //   type: "select",
-        //   label: "Type",
-        //   options: ["Custom Earnings", "Custom Benefit Plan"]
-        // },
-        // {
-        //   name: "name",
-        //   placeholder: "Enter Payment Name",
-        //   type: "text",
-        //   label: "Custom Payment Name *"
-        // },
-        // {
-        //   name: "taxability",
-        //   default: "Non-Taxable",
-        //   type: "select",
-        //   label: "Taxability *",
-        //   options: [
-        //     "Non-Taxable",
-        //     "Limit-YTD",
-        //     "Limit-QTD",
-        //     "Limit-MTD",
-        //     "Taxable/Exclude",
-        //     "Imputed"
-        //   ]
-        // },
-        // {
-        //   name: "eemax",
-        //   placeholder: "Enter Maximum Limit",
-        //   type: "text",
-        //   label: "Maximum Limit"
-        // }
+      const formSchema = [
         {
           name: "location",
           id: "location",
-          placeholder: "Enter Worksite" ,
+          placeholder: "Enter Worksite",
           type: "text",
           label: "Worksite",
           value: this.state.location,
@@ -153,7 +110,7 @@ class TestForm extends Component {
         {
           name: "street1",
           id: "street1",
-          placeholder: "Enter Street" ,
+          placeholder: "Enter Street",
           type: "text",
           label: "Street1",
           value: this.state.street1,
@@ -162,17 +119,17 @@ class TestForm extends Component {
         {
           name: "street2",
           id: "street2",
-          placeholder: "Enter Street2" ,
+          placeholder: "Enter Street2",
           type: "text",
           label: "Street2",
           value: this.state.street2,
           onChange: this.handleChange
         },
-       
+
         {
           name: "city",
           id: "city",
-          placeholder: "Enter City" ,
+          placeholder: "Enter City",
           type: "text",
           label: "City",
           value: this.state.city,
@@ -181,7 +138,7 @@ class TestForm extends Component {
         {
           name: "county",
           id: "county",
-          placeholder: "Enter County" ,
+          placeholder: "Enter County",
           type: "text",
           label: "County",
           value: this.state.county,
@@ -190,7 +147,7 @@ class TestForm extends Component {
         {
           name: "state",
           id: "state",
-          placeholder: "Enter State" ,
+          placeholder: "Enter State",
           type: "select",
           label: "State",
           options: this.state.stateOptions,
@@ -200,13 +157,13 @@ class TestForm extends Component {
         {
           name: "zip",
           id: "zip",
-          placeholder: "Enter Zip" ,
+          placeholder: "Enter Zip",
           type: "text",
           label: "Zip",
           value: this.state.zip,
           onChange: this.handleChange
         }
-      ]
+      ];
       const fields = renderFields(formSchema);
       return fields;
     };
@@ -219,20 +176,36 @@ class TestForm extends Component {
 
     this.handleSubmit = () => {
       let rowid = null;
+ 
+      const {
+        location,
+        street1,
+        street2,
+        city,
+        county,
+        state,
+        zip
+      } = this.state;
 
       const payload = {
-        taxCode: this.state.customTaxCode,
-        name: this.state.customTaxName
+        location,
+        street1,
+        street2,
+        city,
+        county,
+        state,
+        zip
       };
-      console.log(payload)
-      const mode = this.props.mode;
+      console.log(payload);
+      const {mode}  = this.props;
+      const {pgid, submit} = this.props.formProps
       if (mode === "Edit") {
         rowid = this.props.rowIndex;
       }
       // Calls external updateGrid function located in ./base/utils
+      // this.props.saveFormData(payload);
+      submit(pgid, payload, mode, rowid)
       updateGrid(payload, rowid, mode);
-
-      close();
     };
 
     this.handleDelete = () => {
@@ -245,9 +218,16 @@ class TestForm extends Component {
   componentDidMount() {
     if (this.props.data) {
       console.log(this.props.data);
-      const { location, street1, street2, city, county, state, zip } = this.props.data;
+      const {
+        location,
+        street1,
+        street2,
+        city,
+        county,
+        state,
+        zip
+      } = this.props.data;
       if (this.props.mode === "Edit") {
-        console.log(state)
         this.setState({
           location,
           street1,
@@ -255,22 +235,17 @@ class TestForm extends Component {
           city,
           county,
           state,
-          zip,
+          zip
         });
       }
-      this.setState({
-        
-      });
+      this.setState({});
     }
-
-    this.setInitalValues;
   }
 
   render() {
     const { formProps } = this.props;
-    const { permissions, close, pgid } = formProps;
+    const { permissions, close, pgid, submit } = formProps;
     const { handleDelete, handleSubmit, resetForm } = this;
-console.log(`YOu are in the worksiteform`)
     return (
       <ReusableForm
         title="Enter Custom Payments"
@@ -296,4 +271,11 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(TestForm);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ closeForm, saveFormData }, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WorksiteCompaniesForm);

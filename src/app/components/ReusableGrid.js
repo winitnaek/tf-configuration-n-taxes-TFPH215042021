@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
 import { closeForm, setFormData } from "../actions/formActions";
+import {saveFormData} from '../actions/saveFormData';
+import {deleteGridData} from '../actions/deleteGridData';
 import { copyToClipboard } from "../../base/utils/copyToClipBoard";
 import ClipboardToast from "../components/ClipboardToast";
 
@@ -104,6 +106,14 @@ class ReusableGrid extends React.Component {
       this.props.setFormData(payload)
     }
 
+    this.handleSubmit = (pgid, payload, mode, rowid) => {
+       console.log('Made it back to reusable grid submit handler') 
+       // need to uncomment below when hooking up to api
+      // this.props.saveFormData(pgid, payload, mode)
+      this.props.closeForm()
+    }
+
+
     this.OpenHelp = () => {
       this.props.help(this.state.pgid);
     };
@@ -117,6 +127,8 @@ class ReusableGrid extends React.Component {
       let _id = document.querySelector("div[role='grid']").id;
       const rowid = $("#" + _id).jqxGrid("getrowid", index);
       $("#" + _id).jqxGrid("deleterow", rowid); 
+       // need to uncomment below when hooking up to api
+      // this.props.deleteGridData(pgid, rowid)
     };
 
     this.renderMe = pgid => {
@@ -436,6 +448,7 @@ console.log(this.state.isfilterform)
           renderGrid={this.renderMe}
           pgid={this.state.pgid}
           isfilterform={this.state.isfilterform}
+          submit={this.handleSubmit}
         />
       </Fragment>
     );
@@ -450,7 +463,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeForm, setFormData }, dispatch);
+  return bindActionCreators({ closeForm, setFormData, saveFormData, deleteGridData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReusableGrid);

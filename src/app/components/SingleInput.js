@@ -1,13 +1,14 @@
 import React from 'react';
 import { FormGroup, Label, Input, FormFeedback, Col } from 'reactstrap';
 
-const SingleInput = (props) => (
+const SingleInput = (props) => {
+	return (
 	<FormGroup>
 		<Col {...props.colWidth}>
-		<Label  for="exampleText">{props.title}</Label>
+		<Label  for="">{props.title}</Label>
 		<Input
 			name={props.name}
-			type={props.inputType}
+			type={props.type}
 			value={props.value}
 			onChange={props.onChange}
 			onBlur={props.blurFunc}
@@ -19,6 +20,6 @@ const SingleInput = (props) => (
 			<FormFeedback>{props.feedback}</FormFeedback>
 		</Col>
 	</FormGroup>
-);
+	)};
 
 export default SingleInput;

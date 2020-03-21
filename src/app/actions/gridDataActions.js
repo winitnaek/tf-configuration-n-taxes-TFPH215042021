@@ -12,11 +12,27 @@ export function fetchGridDataPending() {
     }
 }
 
-export function fetchGridDataSuccess(details) {
-    console.log(details)
+export function fetchGridDataSuccess(data) {
+    
     return {
         type: FETCH_GRID_DATA_SUCCESS,
-        data: details
+        data: data
+    }
+}
+
+export function fetchSaveFormDataSuccess(data) {
+    
+    return {
+        type: FETCH_GRID_DATA_SUCCESS,
+        data: data
+    }
+}
+
+
+export function fetchDeleteGridDataSuccess(details) {
+    return {
+        type: FETCH_GRID_DATA_SUCCESS,
+        data: {}
     }
 }
 

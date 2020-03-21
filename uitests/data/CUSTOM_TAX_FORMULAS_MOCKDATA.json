@@ -7,8 +7,8 @@
     "maxWage": "0.00",
     "maxTax": "0.00",
      "flatAmount":"0.00" ,
-    "startDate": "03/09/2020", 
-    "rescind": "12/31/9999"
+    "startDate": "2020-03-05", 
+    "rescind": "9999-01-01"
 }
 ]
 
