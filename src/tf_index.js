@@ -85,8 +85,10 @@ function renderComponent(elem, pageid, pid) {
   showPrgress(elem);
   let gridInput = buildGridDataInput(pageid, store);
 
-  griddataAPI
-    .getGridData(pageid, gridInput)
+  console.log(gridInput)
+
+  griddataAPI  
+    .getGridData(pageid, gridInput) 
     .then(response => response)
     .then(griddata => {
       console.log(compMetaData);

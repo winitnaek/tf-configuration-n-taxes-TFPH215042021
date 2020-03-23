@@ -67,7 +67,7 @@ class ExperienceRatesFilterForm extends Component {
           <Col sm="1" />
           <Col sm="5">
             <Input
-              inputType={"text"}
+              type={"text"}
               title={"Tax Code"}
               name={"taxCode"}
               onChange={this.handleChange}
@@ -76,7 +76,7 @@ class ExperienceRatesFilterForm extends Component {
             />
 
             <Input
-              inputType={"date"}
+              type={"date"}
               title={"Start Date"}
               name={"startDate"}
               onChange={this.handleChange}
@@ -85,7 +85,7 @@ class ExperienceRatesFilterForm extends Component {
           </Col>
           <Col sm="5">
             <Input
-              inputType={"text"}
+              type={"text"}
               title={"Company Code"}
               name={"companyCode"}
               onChange={this.handleChange}
@@ -94,7 +94,7 @@ class ExperienceRatesFilterForm extends Component {
             />
 
             <Input
-              inputType={"text"}
+              type={"text"}
               title={"Risk Class"}
               name={"riskClass"}
               onChange={this.handleChange}

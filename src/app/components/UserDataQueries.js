@@ -53,6 +53,7 @@ class UserDataQueries extends React.Component {
     let data = tftools.filter(tftool => {
       if (tftool.id == pgid) return tftool;
     });
+    console.log(data[0])
     renderTFApplication("pageContainer", data[0]);
   }
   render() {
