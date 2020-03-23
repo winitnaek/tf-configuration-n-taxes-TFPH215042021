@@ -49,6 +49,15 @@ export default {
       riskClass:"",
       taxType:"",
       formNumber:0
+    },
+    formDeleteData: {
+      companyCode:"",
+      taxCode:""
+    },
+    formSaveData: {
+      companyCode:"",
+      taxCode:"",
+      formdata:{}
     }
   
 };

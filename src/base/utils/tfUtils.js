@@ -1,4 +1,4 @@
-import { metadatamap, tftools } from "../constants/TFTools";
+import { metadatamap, tftools, deletedatamap, savedatamap } from "../constants/TFTools";
 import URLUtils from '../utils/urlUtils';
 const MOCK = true;
 /**
@@ -170,6 +170,28 @@ export function buildGridDataInput(pageid, store) {
   };
   return input;
 }
+export function buildDeleteInput(pageid, store) {
+  let state = store.getState();
+  let filterData = state.formDeleteData;
+  console.log(state);
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId()
+  };
+  return input;
+}
+export function buildSaveInput(pageid, store) {
+  let state = store.getState();
+  let filterData = state.formSaveData;
+  console.log(state);
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId()
+  };
+  return input;
+}
 export const reqInfo = data => {
     let info = {};
     if (MOCK) {
@@ -204,10 +226,47 @@ export function getUrl(id) {
       });
       url = metadataMap.url;
     }
-    console.log("Seperate ", url);
+    console.log("View URL %s for page %s", url,id);
     return url;
   }
 
+  export function deleteUrl(id) {
+    let deldataMap = deletedatamap.find(metadatam => {
+      if (id == metadatam.id) return metadatam;
+    });
+    let url = URLUtils.buildURL(deldataMap.url);
+    if (MOCK) {
+      let deldataMap = mockdelmap.find(metadatam => {
+        if (id == metadatam.id) return metadatam;
+      });
+      url = deldataMap.url;
+    }
+    console.log("Delete URL %s for page %s", url,id);
+    return url;
+  }
+
+  export function saveUrl(id) {
+    let saveDataMap = deletedatamap.find(metadatam => {
+      if (id == metadatam.id) return metadatam;
+    });
+    let url = URLUtils.buildURL(saveDataMap.url);
+    if (MOCK) {
+      let saveDataMap = mocksavmap.find(metadatam => {
+        if (id == metadatam.id) return metadatam;
+      });
+      url = saveDataMap.url;
+    }
+    console.log("Save URL %s for page %s", url,id);
+    return url;
+  }
+  const mockdelmap = [
+    {id: "customPayments",url: './CUSTOM_PAYMENTS_MOCKDATA.json'},
+    {id: "customTaxCodes",url: './CUSTOM_TAX_PAYMENT_MOCKDATA.json'}
+  ];
+  const mocksavmap = [
+    {id: "customPayments",url: './CUSTOM_PAYMENTS_MOCKDATA.json'},
+    {id: "customTaxCodes",url: './CUSTOM_TAX_PAYMENT_MOCKDATA.json'}
+  ];
   const mockdatamap = [
     {id: "customPayments",url: './CUSTOM_PAYMENTS_MOCKDATA.json'},
     {id: "customTaxCodes",url: './CUSTOM_TAX_PAYMENT_MOCKDATA.json'},
