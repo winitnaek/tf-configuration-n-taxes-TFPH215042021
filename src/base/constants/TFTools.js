@@ -27,7 +27,11 @@ import {
   GET_ALL_TAXCODES_AUTOCOMPLETE,
   GET_ALL_TAXTYPES_AUTOCOMPLETE,
   GET_ALL_COMPCODE_AUTOCOMPLETE,
-  GET_ALL_RISKCLASS_AUTOCOMPLETE
+  GET_ALL_RISKCLASS_AUTOCOMPLETE,
+  DELTE_CUSTOM_PAYMENT,
+  DELETE_CUSTOM_TAX_CODES,
+  SAVE_CUSTOM_PAYMENT,
+  SAVE_CUSTOM_TAX_CODE
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
@@ -207,6 +211,30 @@ export const metadatamap = [
     rendererInput: ["dataset", "userId"]
   },  
 
+];
+export const deletedatamap = [
+  {
+    id: "customPayments",
+    url: DELTE_CUSTOM_PAYMENT,
+    rendererInput: ["dataset", "editMode"]
+  },
+  {
+    id: "customTaxCodes",
+    url: DELETE_CUSTOM_TAX_CODES,
+    rendererInput: ["dataset", "editMode"]
+  }
+];
+export const savedatamap = [
+  {
+    id: "customPayments",
+    url: SAVE_CUSTOM_PAYMENT,
+    rendererInput: ["dataset", "editMode"]
+  },
+  {
+    id: "customTaxCodes",
+    url: SAVE_CUSTOM_TAX_CODE,
+    rendererInput: ["dataset", "editMode"]
+  }
 ];
 export const asyncselfldsmap = [
   {

@@ -17,3 +17,7 @@ export const GET_ALL_TAXCODES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxCodesAuto
 export const GET_ALL_TAXTYPES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxTypeAutocomplete';
 export const GET_ALL_COMPCODE_AUTOCOMPLETE = '/TaxCodeService/getCompanyCodeAutoCompl';
 export const GET_ALL_RISKCLASS_AUTOCOMPLETE = '/TaxCodeService/getRiskClassAutoCompl';
+export const DELTE_CUSTOM_PAYMENT='/PaymentsService/deleteCustomPayment';
+export const DELETE_CUSTOM_TAX_CODES='/PaymentsService/deleteCustomTaxCode';
+export const SAVE_CUSTOM_PAYMENT='/PaymentsService/saveCustomPayment';
+export const SAVE_CUSTOM_TAX_CODES='/PaymentsService/saveCustomTaxCode';
