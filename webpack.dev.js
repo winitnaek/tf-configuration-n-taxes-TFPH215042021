@@ -17,6 +17,10 @@ if (process.env.NODE_ENV === 'development') {
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/CUSTOM_TAX_FORMULAS_MOCKDATA.json', to: '../dist/CUSTOM_TAX_FORMULAS_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/COMPANIES_MOCKDATA.json', to: '../dist/COMPANIES_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/WORKSITES_MOCKDATA.json', to: '../dist/WORKSITES_MOCKDATA.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/DELETE_CUSTOM_PAYMENT.json', to: '../dist/DELETE_CUSTOM_PAYMENT.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/DELETE_CUSTOM_TAX_CODE.json', to: '../dist/DELETE_CUSTOM_TAX_CODE.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/SAVE_CUSTOM_PAYMENTS.json', to: '../dist/SAVE_CUSTOM_PAYMENTS.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/SAVE_CUSTOM_TAX_CODE.json', to: '../dist/SAVE_CUSTOM_TAX_CODE.json' }]));
 }
 module.exports = merge(baseConfig, {
   devtool: 'source-map',

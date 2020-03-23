@@ -260,12 +260,12 @@ export function getUrl(id) {
     return url;
   }
   const mockdelmap = [
-    {id: "customPayments",url: './CUSTOM_PAYMENTS_MOCKDATA.json'},
-    {id: "customTaxCodes",url: './CUSTOM_TAX_PAYMENT_MOCKDATA.json'}
+    {id: "customPayments",url: './DELETE_CUSTOM_PAYMENT.json'},
+    {id: "customTaxCodes",url: './DELETE_CUSTOM_TAX_CODE.json'}
   ];
   const mocksavmap = [
-    {id: "customPayments",url: './CUSTOM_PAYMENTS_MOCKDATA.json'},
-    {id: "customTaxCodes",url: './CUSTOM_TAX_PAYMENT_MOCKDATA.json'}
+    {id: "customPayments",url: './SAVE_CUSTOM_PAYMENTS.json'},
+    {id: "customTaxCodes",url: './SAVE_CUSTOM_TAX_CODE.json'}
   ];
   const mockdatamap = [
     {id: "customPayments",url: './CUSTOM_PAYMENTS_MOCKDATA.json'},
