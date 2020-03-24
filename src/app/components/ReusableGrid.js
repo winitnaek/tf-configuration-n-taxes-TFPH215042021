@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
 import { closeForm, setFormData } from "../actions/formActions";
-import {saveFormData} from '../actions/saveFormData';
-import {deleteGridData} from '../actions/deleteGridData';
+import savegriddataAPI  from '../api/savegriddataAPI';
+import deletegriddataAPI from '../api/deletegriddataAPI';
 import { copyToClipboard } from "../../base/utils/copyToClipBoard";
 import ClipboardToast from "../components/ClipboardToast";
 
@@ -107,9 +107,7 @@ class ReusableGrid extends React.Component {
     }
 
     this.handleSubmit = (pgid, payload, mode, rowid) => {
-       console.log('Made it back to reusable grid submit handler') 
-       // need to uncomment below when hooking up to api
-      // this.props.saveFormData(pgid, payload, mode)
+      savegriddataAPI.saveGridData(pgid, payload, mode)
       this.props.closeForm()
     }
 
@@ -129,6 +127,8 @@ class ReusableGrid extends React.Component {
       $("#" + _id).jqxGrid("deleterow", rowid); 
        // need to uncomment below when hooking up to api
       // this.props.deleteGridData(pgid, rowid)
+      const {pgid} = this.state;
+      deletegriddataAPI.deleteGridData(pgid, rowid)
     };
 
     this.renderMe = pgid => {
@@ -463,7 +463,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeForm, setFormData, saveFormData, deleteGridData }, dispatch);
+  return bindActionCreators({ closeForm, setFormData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReusableGrid);
