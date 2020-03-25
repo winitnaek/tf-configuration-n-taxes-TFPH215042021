@@ -1,0 +1,531 @@
+{
+    "customPayments": [
+        {
+            "id": "userCode",
+            "placeholder": "Enter Custom Payment Code",
+            "fieldtype": "text",
+            "label": "Code *",
+            "value": "",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",      
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                },
+                {
+                    "type": "min",
+                    "params": [5, "min 5 characters"]
+                },
+                {
+                    "type": "max",
+                    "params": [10, "max 10 characters"]
+                }
+            ]
+        },
+        {
+            "id": "payType",
+            "placeholder": "Select a type",
+            "fieldtype": "select",
+            "label": "Type*",
+            "value": "",
+            "fieldlength":{},
+            "fieldinfo":{
+                "options": [
+                    "Custom Earnings", 
+                    "Custom Benefit Plan"
+                ]
+            },
+            "validationType": "string",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+        },
+        {
+            "id": "name",
+            "placeholder": "Enter Custom Payment Name",
+            "fieldtype": "text",
+            "label": "Custom Payment",
+            "value": "Payment",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                },
+                {
+                    "type": "min",
+                    "params": [5, "min 5 characters"]
+                },
+                {
+                    "type": "max",
+                    "params": [10, "max 10 characters"]
+                }
+            ]
+        },
+        {
+            "id": "taxability",
+            "placeholder": "Select a type",
+            "fieldtype": "select",
+            "label": "Taxability*",
+            "value": "",
+            "fieldlength":{},
+            "fieldinfo":{
+                "options": [
+                    "Non-Taxable", 
+                    "Limit-YTD",
+                    "Limit-QTD",
+                    "Limit-MTD",
+                    "Taxable/Exclude",
+                    "Imputed"
+                ]
+            },
+            "validationType": "string",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]   
+        },
+        {
+            "id": "eemax",
+            "placeholder": "Enter Maximum Limit Here",
+            "fieldtype": "text",
+            "label": "Maximum Limit",
+            "value": "",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "number",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                },
+                {
+                    "type": "typeError",
+                    "params": ["Must be a number"]
+                }
+            ]
+        },
+        {
+            "id": "aggstatus",
+            "placeholder": "Enter Aggregate Status",
+            "fieldtype": "text",
+            "label": "Aggregate Status",
+            "value": "",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+        }
+    ],
+    "customTaxCodes":[
+        {
+            "id": "taxCode",
+            "placeholder": "Enter Custom Tax Code",
+            "fieldtype": "text",
+            "label": "Code *",
+            "value": "",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",      
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                },
+                {
+                    "type": "min",
+                    "params": [5, "min 5 characters"]
+                },
+                {
+                    "type": "max",
+                    "params": [10, "max 10 characters"]
+                }
+            ]
+        },
+        {
+            "id": "name",
+            "placeholder": "Enter Custom Tax Name",
+            "fieldtype": "text",
+            "label": "Code *",
+            "value": "",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",      
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                },
+                {
+                    "type": "min",
+                    "params": [5, "min 5 characters"]
+                },
+                {
+                    "type": "max",
+                    "params": [10, "max 10 characters"]
+                }
+            ]
+        }
+    ],
+    "customFormulas":[
+            {
+              "name": "taxCode",
+              "id": "taxCode",
+              "placeholder": "Enter Tax Code" ,
+              "fieldtype": "text",
+              "fieldlength":{},
+              "fieldinfo":{},
+              "validationType": "string",
+              "label": "Custom Tax Code Name",
+              "value": "",
+              "validations": [
+                    {
+                        "type": "required",
+                        "params": ["field is required"]
+                    }
+                ]
+            },
+            {
+                "name": "cmName",
+                "id": "cmName",
+                "placeholder": "Enter Method" ,
+                "fieldtype": "text",
+                "fieldlength":{},
+                "fieldinfo":{},
+                "validationType": "string",
+                "label": "Method",
+                "value": "",
+                "validations": [
+                    {
+                        "type": "required",
+                        "params": ["field is required"]
+                    }
+                ]
+              },
+            {
+              "name": "taxRate",
+              "id": "taxRate",
+              "placeholder": "Enter Tax Rate" ,
+              "fieldtype": "text",
+              "fieldlength":{},
+              "fieldinfo":{},
+              "validationType": "string",
+              "label": "Tax Rate",
+              "value": "",
+                "validations": [
+                    {
+                        "type": "required",
+                        "params": ["field is required"]
+                    }
+                ]
+            },
+            {
+              "name": "rounding",
+              "id": "rounding",
+              "placeholder": "Enter Rounding Value" ,
+              "fieldtype": "text",
+              "fieldlength":{},
+              "fieldinfo":{},
+              "validationType": "string",
+              "label": "Rounding",
+              "value": "",
+              "validations": [
+                  {
+                      "type": "required",
+                      "params": ["field is required"]
+                  }
+              ]
+            },
+            {
+              "name": "minWage",
+              "id": "minWage",
+              "placeholder": "Enter Min Wage",
+              "fieldtype": "text",
+              "fieldlength":{},
+              "fieldinfo":{},
+              "validationType": "string",
+              "label": "Min Wage",
+              "value": "",
+              "validations": [
+                  {
+                      "type": "required",
+                      "params": ["field is required"]
+                  }
+              ]
+            },
+            {
+              "name": "maxWage",
+              "id": "maxWage",
+              "placeholder": "Enter Max Wage" ,
+              "fieldtype": "text",
+              "fieldlength":{},
+              "fieldinfo":{},
+              "validationType": "string",
+              "label": "Max Wage",
+              "value": "",
+              "validations": [
+                  {
+                      "type": "required",
+                      "params": ["field is required"]
+                  }
+              ]
+            },
+            {
+              "name": "maxTax",
+              "id": "maxTax",
+              "placeholder": "Enter Max Tax" ,
+              "fieldtype": "text",
+              "fieldlength":{},
+              "fieldinfo":{},
+              "validationType": "string",
+              "label": "Max Tax",
+              "value": "",
+              "validations": [
+                  {
+                      "type": "required",
+                      "params": ["field is required"]
+                  }
+              ]
+            },
+            {
+              "name": "flatAmount",
+              "id": "flatAmount",
+              "placeholder": "Enter Flat Amount" ,
+              "fieldtype": "text",
+              "fieldlength":{},
+              "fieldinfo":{},
+              "validationType": "string",
+              "label": "Flat Amount",
+              "value": "",
+              "validations": [
+                  {
+                      "type": "required",
+                      "params": ["field is required"]
+                  }
+              ]
+            },
+            {
+              "name": "startDate",
+              "id": "stateDate",
+              "placeholder": "Enter Start Date" ,
+              "fieldtype": "text",
+              "fieldlength":{},
+              "fieldinfo":{},
+              "validationType": "string",
+              "label": "Start Date",
+              "value": "",
+              "validations": [
+                  {
+                      "type": "required",
+                      "params": ["field is required"]
+                  }
+              ]
+            },
+            {
+              "name": "rescind",
+              "id": "rescind",
+              "placeholder": "Enter End Date",
+              "fieldtype": "text",
+              "fieldlength":{},
+              "fieldinfo":{},
+              "validationType": "string",
+              "label": "End Date",
+              "value": "",
+              "validations": [
+                  {
+                      "type": "required",
+                      "params": ["field is required"]
+                  }
+              ]
+            }
+    ],
+    "worksites" : [
+        {
+            "name": "location",
+            "id": "location",
+            "placeholder": "Enter Worksite" ,
+            "fieldtype": "text",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "label": "Custom Tax Code Name",
+            "value": "",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+          },
+          {
+              "name": "street1",
+              "id": "street1",
+              "placeholder": "Enter Street" ,
+              "fieldtype": "text",
+              "fieldlength":{},
+              "fieldinfo":{},
+              "validationType": "string",
+              "label": "Method",
+              "value": "",
+              "validations": [
+                  {
+                      "type": "required",
+                      "params": ["field is required"]
+                  }
+              ]
+            },
+          {
+            "name": "street2",
+            "id": "street2",
+            "placeholder": "Enter Street2" ,
+            "fieldtype": "text",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "label": "Tax Rate",
+            "value": "",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+          },
+          {
+            "name": "city",
+            "id": "city",
+            "placeholder": "Enter city" ,
+            "fieldtype": "text",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "label": "Rounding",
+            "value": "",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+          },
+          {
+            "name": "county",
+            "id": "county",
+            "placeholder": "Enter county",
+            "fieldtype": "text",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "label": "Min Wage",
+            "value": "",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+          },
+          {
+            "name": "state",
+            "id": "state",
+            "placeholder": "Enter state" ,
+            "fieldtype": "select",
+            "fieldlength":{},
+              "fieldinfo":{
+                    "options": [
+                        "Alabama",
+                        "Alaska",
+                        "Arizona",
+                        "Arkansas",
+                        "California",
+                        "Colorado",
+                        "Connecticut",
+                        "Delaware",
+                        "Florida",
+                        "GA",
+                        "Hawaii",
+                        "Idaho",
+                        "Illinois",
+                        "Indiana",
+                        "Iowa",
+                        "Kansas",
+                        "Kentucky",
+                        "Louisiana",
+                        "Maine",
+                        "Maryland",
+                        "Massachusetts",
+                        "Michigan",
+                        "Minnesota",
+                        "Mississippi",
+                        "Missouri",
+                        "Montana",
+                        "Nebraska",
+                        "Nevada",
+                        "New Hampshire",
+                        "New Jersey",
+                        "New Mexico",
+                        "New York",
+                        "North Carolina",
+                        "North Dakota",
+                        "Ohio",
+                        "Oklahoma",
+                        "Oregon",
+                        "Pennsylvania",
+                        "Rhode Island",
+                        "South Carolina",
+                        "South Dakota",
+                        "Tennessee",
+                        "Texas",
+                        "Utah",
+                        "Vermont",
+                        "Virginia",
+                        "Washington",
+                        "West Virginia",
+                        "Wisconsin",
+                        "Wyoming"
+                    ]
+             },
+            "validationType": "string",
+            "label": "Max Wage",
+            "value": "",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+          },
+          {
+            "name": "zip",
+            "id": "zip",
+            "placeholder": "Enter zip" ,
+            "fieldtype": "text",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "label": "Max Tax",
+            "value": "",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+          }
+    ]
+}
+  

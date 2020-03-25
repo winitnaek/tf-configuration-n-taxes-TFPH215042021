@@ -26,7 +26,7 @@
     ]
   },
   "dependencies": {
-    "formik": "^2.1.4",
+    "formik": "^1.5.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dates": "^21.8.0",
@@ -34,7 +34,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "yup": "^0.28.2"
+    "yup": "^0.28.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

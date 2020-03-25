@@ -51,7 +51,7 @@ class ReusableForm extends Component {
               Delete
             </Button>
           )}
-          <Button onClick={e=> this.props.submit()} color="success">
+          <Button type="submit" color="success">
            {this.props.filter ? ( "View") : ("Submit") }
           </Button>
         </ModalFooter>
