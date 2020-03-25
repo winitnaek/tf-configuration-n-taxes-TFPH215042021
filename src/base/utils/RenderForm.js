@@ -1,5 +1,5 @@
 import React from "react";
-import CustomForm from "../../app/poc/CustomForm";
+import CustomForm from "../../app/components/CustomForm";
 import WorksiteCompaniesForm from "../../app/components/WorksiteCompaniesForm";
 //import CustomTaxFormulasForm from "../../app/components/CustomTaxFormulasForm";
 

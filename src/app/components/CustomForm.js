@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import { Formik } from "formik";
 import { connect } from "react-redux";
 import {Col, Button, Form, Row} from "reactstrap";
-import ReusableForm from "../components/ReusableForm";
+import ReusableForm from "./ReusableForm";
 import { updateGrid } from "../../base/utils/updateGrid";
 
-import CustomInput from "./components/customInput";
-import CustomSelect from "./components/customSelect";
-import CustomRadio from "./components/customRadio";
-import CustomCheckbox from "./components/customCheckbox";
+import CustomInput from "./reusable/customInput";
+import CustomSelect from "./reusable/customSelect";
+import CustomRadio from "./reusable/customRadio";
+import CustomCheckbox from "./reusable/customCheckbox";
 
 import Data  from "../../../uitests/data/Form_Data.json";  
 
-import { createYupSchema } from "./yupSchemaCreator";
+import { createYupSchema } from "../../base/utils/yupSchemaCreator";
 import * as yup from "yup";
 
 class CustomForm extends Component {
