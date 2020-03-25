@@ -353,7 +353,7 @@
               ]
             }
     ],
-    "worksites" : [
+    "worksiteCompanies" : [
         {
             "name": "location",
             "id": "location",

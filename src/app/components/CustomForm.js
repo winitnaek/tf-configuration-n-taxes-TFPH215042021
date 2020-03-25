@@ -70,7 +70,7 @@ class CustomForm extends Component {
                 }
             }
             return "";
-          })
+          }) 
   };
 
   render() {
