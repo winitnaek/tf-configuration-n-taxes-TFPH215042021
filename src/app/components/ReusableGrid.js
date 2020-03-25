@@ -107,10 +107,11 @@ class ReusableGrid extends React.Component {
     }
 
     this.handleSubmit = (pgid, payload, mode, rowid) => {
+      console.log('made it to the submit handler')
       savegriddataAPI.saveGridData(pgid, payload, mode)
       this.props.closeForm()
     }
-
+s
 
     this.OpenHelp = () => {
       this.props.help(this.state.pgid);

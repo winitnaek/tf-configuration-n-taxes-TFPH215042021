@@ -34,6 +34,7 @@ class ExperienceRatesFilterForm extends Component {
     };
 
     this.handleView = () => {
+      console.log('trying to run handleview')
       console.log(this.state);
       this.props.close()
       const payload = {
