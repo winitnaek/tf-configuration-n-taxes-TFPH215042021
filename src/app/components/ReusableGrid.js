@@ -129,8 +129,7 @@ class ReusableGrid extends React.Component {
       this.props.closeForm();
     };
 
-    this.deleteRow = () => {
-      const { index } = this.props.index;
+    this.deleteRow = (index) => {
       let _id = document.querySelector("div[role='grid']").id;
       const rowid = $("#" + _id).jqxGrid("getrowid", index);
       $("#" + _id).jqxGrid("deleterow", rowid); 

@@ -121,9 +121,28 @@ class CustomForm extends Component {
     this.handleDelete = () => {
       // Add handler to remove this record
       console.log("deleting record");
-      deleteRow(0); // need to pass index
+    const {rowIndex} = this.props.rowIndex
+    deleteRow(rowIndex); 
       close();
     };
+
+    this.handleSubmit = (props) => {
+      console.log('You just entered handlesubmit')
+      console.log(this.props)
+  
+      const {filter, formProps} = this.props;
+      const {pgid} = formProps
+      if (filter) {
+        this.props.formProps.renderGrid(pgid, props.values);
+        // check to see if the below is still needed
+        //this.props.setFilterFormData(props.values);
+      }
+      
+     
+
+     props.handleSubmit()
+    
+  }
     
     if(this.props.mode == "Edit"){
       initialValues = this.props.data;
@@ -146,7 +165,7 @@ class CustomForm extends Component {
           initialValues={initialValues}
           validationSchema={validateSchema}
           onSubmit={(values, actions) => {
-            console.log('summiting')
+            console.log('submitting')
             // if(this.props.filter) {
             //   console.log('this is a filter form submit')
             //   this.handleView(values)
@@ -160,6 +179,7 @@ class CustomForm extends Component {
                     rowid = this.props.rowIndex;
                   }
                   updateGrid(values, rowid, mode);
+                  saveGridDataAPI.saveGridData(pgid, values, mode)
                   close();
                   actions.resetForm({});
               } catch (error) {
@@ -179,7 +199,7 @@ class CustomForm extends Component {
           }}
         >
           {props => (
-            <Form onSubmit={props.handleSubmit}>
+            <Form onSubmit={ e=> this.handleSubmit(props)}>
               <ReusableForm
                 title="Enter Custom Payments"
                 close={close}
