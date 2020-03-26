@@ -8,6 +8,7 @@ import {
 
 export function getRecentUsage(pgid) {
     return async (dispatch, getState) => {
+      console.log(dispatch)
       try {
         dispatch({type: USAGE});
         const data = await GeneralApi.getApiData('recentUsage');
