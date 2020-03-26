@@ -196,7 +196,7 @@
               }
         }
     ],
-    "customFormulas":[
+    "customTaxFormulas":[
             {
               "name": "taxCode",
               "id": "taxCode",
@@ -930,7 +930,107 @@
                 }
             ]
         }
-    ]
+    ],
+    "worksites":[
+      {
+          "id": "companyCode",
+          "placeholder": "Enter Company Code",
+          "fieldtype": "text",
+          "label": "Code *",
+          "value": "",
+          "errmsg": "Company Code is required",
+          "fieldlength": {
+              "minlength": 1,
+              "maxlength": 25
+            },
+            "fieldinfo": {},
+            "validation": {
+              "required": true,
+              "type": "string",
+              "subtype": [
+                { "type": "uppercase", "message": "Tax Code needs to be in uppercase." }
+              ],
+              "constraint": [
+                { "type": "min", "input": 5, "message": "min 5 characters" },
+                { "type": "max", "input": 25, "message": "max 25 characters" }
+              ]
+            }
+      },
+      {
+          "id": "companyName",
+          "placeholder": "Enter Company Name",
+          "fieldtype": "text",
+          "label": "Name *",
+          "value": "",
+          "errmsg": "Company Code is required",
+          "fieldlength": {
+              "minlength": 1,
+              "maxlength": 25
+            },
+            "fieldinfo": {},
+            "validation": {
+              "required": true,
+              "type": "string",
+              "subtype": [
+                { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+              ],
+              "constraint": [
+                { "type": "min", "input": 5, "message": "min 5 characters" },
+                { "type": "max", "input": 25, "message": "max 25 characters" }
+              ]
+            }
+      }
+  ],
+  "customFormulas":[
+    {
+        "id": "customTaxCode",
+        "placeholder": "Enter Tax Code",
+        "fieldtype": "text",
+        "label": "Code *",
+        "value": "",
+        "errmsg": "TaxCode is required",
+        "fieldlength": {
+            "minlength": 1,
+            "maxlength": 25
+          },
+          "fieldinfo": {},
+          "validation": {
+            "required": true,
+            "type": "string",
+            "subtype": [
+              { "type": "uppercase", "message": "Tax Code needs to be in uppercase." }
+            ],
+            "constraint": [
+              { "type": "min", "input": 5, "message": "min 5 characters" },
+              { "type": "max", "input": 25, "message": "max 25 characters" }
+            ]
+          }
+    },
+    {
+        "id": "customTaxName",
+        "placeholder": "Enter Tax Name",
+        "fieldtype": "text",
+        "label": "Name *",
+        "value": "",
+        "errmsg": "Tax Code is required",
+        "fieldlength": {
+            "minlength": 1,
+            "maxlength": 25
+          },
+          "fieldinfo": {},
+          "validation": {
+            "required": true,
+            "type": "string",
+            "subtype": [
+              { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+            ],
+            "constraint": [
+              { "type": "min", "input": 5, "message": "min 5 characters" },
+              { "type": "max", "input": 25, "message": "max 25 characters" }
+            ]
+          }
+    }
+]
 }
     
   

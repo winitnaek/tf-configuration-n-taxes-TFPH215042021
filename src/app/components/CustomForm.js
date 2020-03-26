@@ -119,6 +119,7 @@ class CustomForm extends Component {
     const { close, change, permissions, deleteRow, pgid } = formProps;
     const { handleDelete, handleSubmit, resetForm } = this;
     
+    console.log("Pgidadfadsf ", pgid);
     const formData = Data[pgid];
     // const formData = fielddatamap.filter(obj => obj.id == "customTaxCode"); 
     let initialValues = {};
