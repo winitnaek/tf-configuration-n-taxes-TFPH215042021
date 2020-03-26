@@ -526,6 +526,80 @@
                 }
             ]
           }
+    ],
+    "experienceRates": [
+        {
+            "name": "taxCode",
+            "id": "taxCode",
+            "placeholder": "Enter Tax Code" ,
+            "fieldtype": "text",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "label": "Tax Code",
+            "value": "",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+              ]
+        },
+        {
+            "name": "startDate",
+            "id": "startDate",
+            "placeholder": "" ,
+            "fieldtype": "date",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "label": "Start Date",
+            "value": "",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+        },
+        {
+            "name": "companyCode",
+            "id": "companyCode",
+            "placeholder": "Enter Company Code" ,
+            "fieldtype": "text",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "label": "Company Code",
+            "value": "",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+        },
+        {
+            "name": "riskClass",
+            "id": "riskClass",
+            "placeholder": "Enter Risk Class" ,
+            "fieldtype": "text",
+            "fieldlength":{},
+            "fieldinfo":{},
+            "validationType": "string",
+            "label": "Risk Class",
+            "value": "",
+            "validations": [
+                {
+                    "type": "required",
+                    "params": ["field is required"]
+                }
+            ]
+        }
     ]
 }
+    
   
+
+
+

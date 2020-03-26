@@ -7,6 +7,7 @@ import savegriddataAPI  from '../api/savegriddataAPI';
 import deletegriddataAPI from '../api/deletegriddataAPI';
 import { copyToClipboard } from "../../base/utils/copyToClipBoard";
 import ClipboardToast from "../components/ClipboardToast";
+import { setFilterFormData } from "../actions/filterFormActions";
 
 import FormModal from "./FormModal";
 import {
@@ -110,8 +111,15 @@ class ReusableGrid extends React.Component {
       console.log('made it to the submit handler')
       savegriddataAPI.saveGridData(pgid, payload, mode)
       this.props.closeForm()
+    } 
+
+    this.handleFilterFormView = (pgid, payload) => {
+      console.log('You made it back to the reusable grid')
+      // this.props.closeForm()
+      // this.props.setFilterFormData(payload);
+      // this.renderMe(pgid)
     }
-s
+
 
     this.OpenHelp = () => {
       this.props.help(this.state.pgid);
@@ -450,6 +458,7 @@ console.log(this.state.isfilterform)
           pgid={this.state.pgid}
           isfilterform={this.state.isfilterform}
           submit={this.handleSubmit}
+          myview={"Test"}
         />
       </Fragment>
     );
@@ -464,7 +473,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeForm, setFormData }, dispatch);
+  return bindActionCreators({ closeForm, setFormData, setFilterFormData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReusableGrid);

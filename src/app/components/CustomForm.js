@@ -4,12 +4,15 @@ import { connect } from "react-redux";
 import {Col, Button, Form, Row} from "reactstrap";
 import ReusableForm from "./ReusableForm";
 import { updateGrid } from "../../base/utils/updateGrid";
-
+import { tftools } from "../../base/constants/TFTools";
 import CustomInput from "./reusable/customInput";
 import CustomSelect from "./reusable/customSelect";
 import CustomRadio from "./reusable/customRadio";
 import CustomCheckbox from "./reusable/customCheckbox";
-
+import { setFilterFormData } from "../actions/filterFormActions";
+import gridDataApi from '../api/griddataAPI';
+import saveGridDataApi from '../api/savegriddataAPI';
+import deleteGridDataApi from '../api/deletegriddataAPI';
 import Data  from "../../../uitests/data/Form_Data.json";  
 
 import { createYupSchema } from "../../base/utils/yupSchemaCreator";
@@ -21,6 +24,18 @@ class CustomForm extends Component {
     super(props);
     this.state={
       showDelete: false,
+    }
+    this.handleView = () => {
+      //need to get values to pass
+      const { formProps } = this.props;
+    const { pgid } = formProps;
+      console.log('this is the handle view')
+      // this.props.setFilterFormData(values);
+       let data = tftools.filter(tftool => {
+        if (tftool.id == pgid) return tftool;
+       });
+     renderTFApplication("pageContainer", data[0]);
+       console.log("this is the render me function")
     }
   } 
 
@@ -99,6 +114,9 @@ class CustomForm extends Component {
     const yepSchema = formData.reduce(createYupSchema, {});
     //console.log("yup Schema ", yepSchema);
     const validateSchema = yup.object().shape(yepSchema);
+    
+
+   console.log(this.props)
 
     return (
       <div className="form">
@@ -106,6 +124,11 @@ class CustomForm extends Component {
           initialValues={initialValues}
           validationSchema={validateSchema}
           onSubmit={(values, actions) => {
+            console.log('summiting')
+            if(this.props.filter) {
+              console.log('this is a filter form submit')
+              this.handleView(values)
+            } else {
               try {
                   let rowid = null;
                   console.log("Submitted Values ", values)
@@ -121,6 +144,7 @@ class CustomForm extends Component {
                   action.setSubmitting(false);
                   action.setErrors({submit: error.message});
               }
+            }
           }}
           onReset={() => {
             formData.forEach(item => {
@@ -142,6 +166,9 @@ class CustomForm extends Component {
                 reset={props.handleReset}
                 showDelete={this.state.showDelete}
                 deletePermission={permissions ? permissions.DELETE : false}
+                handleView={this.props.handleView}
+                filter={this.props.filter}
+                view={this.handleView}
               >
                   <Col>
                      {this.renderFormElements(props, formData)}
@@ -161,6 +188,7 @@ function mapStateToProps(state) {
     mode: state.formData.mode,
     rowIndex: state.formData.index
   };
+
 }
 
 export default connect(mapStateToProps, null)(CustomForm);

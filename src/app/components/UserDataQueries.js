@@ -6,7 +6,7 @@ const populateV3States = "populateV3States";
 const experienceRates = "experienceRates";
 const supplementalMethods = "supplementalMethods";
 import { pagetitle, helpicon } from "../../base/constants/AppConstants";
-import Modal from "./FormModal";
+import FormModal from "./FormModal";
 
 const TitleStyle = {
   margin: "0 auto",
@@ -50,6 +50,7 @@ class UserDataQueries extends React.Component {
    }
 
   renderMe(pgid) {
+    console.log(pgid)
     let data = tftools.filter(tftool => {
       if (tftool.id == pgid) return tftool;
     });
@@ -120,7 +121,7 @@ class UserDataQueries extends React.Component {
           </Col>
         </Row>
    
-        <Modal
+        <FormModal
           open={this.state.isOpen}
           close={this.closeModal}
           title={this.state.formTitle}

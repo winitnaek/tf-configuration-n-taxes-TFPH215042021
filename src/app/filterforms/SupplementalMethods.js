@@ -49,7 +49,7 @@ class SupplementalMethodsFilterForm extends Component {
         formNumber: 0
       };
       this.props.setFilterFormData(payload);
-      this.props.renderGrid(pgid);
+      this.props.renderGrid(pgid, payload);
     };
   }
   render() {

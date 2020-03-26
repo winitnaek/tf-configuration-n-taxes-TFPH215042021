@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {modalBody} from '../../base/constants/AppConstants';
 import Usage from "./Usage";
 
+
 import {
   Form,
   Button,
@@ -14,6 +15,8 @@ class ReusableForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+ 
   }
   render() {
     const {pgid} = this.props;
@@ -51,9 +54,14 @@ class ReusableForm extends Component {
               Delete
             </Button>
           )}
-          <Button type="submit" color="success">
-           {this.props.filter ? ( "View") : ("Submit") }
-          </Button>
+
+{this.props.filter ? (
+ <Button type="" color="success" onClick={ e => this.props.view()}> View </Button>
+) : (
+  <Button type="submit" color="success"> Submit </Button>
+)
+  }
+
         </ModalFooter>
       </Container>
     );

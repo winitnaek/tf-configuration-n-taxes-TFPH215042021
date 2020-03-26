@@ -10,7 +10,6 @@ import { subTitle } from "../../base/constants/AppConstants";
 class ExperienceRatesFilterForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       taxCode: this.props.formFilterData.taxCode,
       companyCode: this.props.formFilterData.companyCode,
@@ -56,11 +55,12 @@ class ExperienceRatesFilterForm extends Component {
   }
   render() {
     console.log(this.props);
+    console.log("You are on the experience rates component")
     return (
-      <ReusableForm
+      <ReusableForm  const formProps = {close, change, permissions, deleteRow, pgid}
         title="Enter Custom Payments"
         filter={true}
-        submit={this.handleView}
+        handleView={this.handleView}
         close={this.props.close}
         reset={this.resetForm}
       >
