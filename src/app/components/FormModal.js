@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Modal from "./Modal";
 import renderForm from "../../base/utils/renderForm";
 import renderFilterForm from "../../base/utils/renderFilterForm";
+import CustomForm from './CustomForm';
 
 class ModalForm extends Component {
   constructor(props) {
@@ -19,16 +20,22 @@ class ModalForm extends Component {
      renderGrid,
      pgid,
      submit,
-     view
-
+     view,
+     isfilterform
    } = this.props
 
-    let form;
+   let filter;
+
+   if (isfilterform) {
+     filter=true;
+   }
     
+    const formProps = {close, change, pgid, permissions, deleteRow, submit, renderGrid, filter}
+    const form = <CustomForm formProps={formProps} filter={filter} />;
     
-    this.props.isfilterform
-      ? (form = renderFilterForm(close, change, pgid, deleteRow, view,  renderGrid))
-      : (form = renderForm(close, change, pgid, permissions, deleteRow, submit ));
+    // this.props.isfilterform
+    //   ? (form = renderFilterForm(close, change, pgid, deleteRow, view,  renderGrid))
+    //   : (form = renderForm(close, change, pgid, permissions, deleteRow, submit ));
     return form;
   }
 

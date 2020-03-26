@@ -20,6 +20,7 @@ class ReusableForm extends Component {
   }
   render() {
     const {pgid} = this.props;
+    console.log(this.props)
     console.log(pgid)
     return (
       <Container>
@@ -55,12 +56,12 @@ class ReusableForm extends Component {
             </Button>
           )}
 
-{this.props.filter ? (
- <Button type="" color="success" onClick={ e => this.props.view()}> View </Button>
-) : (
+ {this.props.filter ? (
+ <Button type="submit" color="success" > View </Button>
+) : ( 
   <Button type="submit" color="success"> Submit </Button>
 )
-  }
+}
 
         </ModalFooter>
       </Container>

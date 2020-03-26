@@ -147,10 +147,10 @@ class CustomForm extends Component {
           validationSchema={validateSchema}
           onSubmit={(values, actions) => {
             console.log('summiting')
-            if(this.props.filter) {
-              console.log('this is a filter form submit')
-              this.handleView(values)
-            } else {
+            // if(this.props.filter) {
+            //   console.log('this is a filter form submit')
+            //   this.handleView(values)
+            // } else {
               try {
                   let rowid = null;
                   console.log("Submitted Values ", values)
@@ -166,7 +166,7 @@ class CustomForm extends Component {
                   action.setSubmitting(false);
                   action.setErrors({submit: error.message});
               }
-            }
+            // }
           }}
           onReset={() => {
             formData.forEach(item => {
