@@ -16,8 +16,12 @@ import gridDataApi from '../api/griddataAPI';
 import saveGridDataApi from '../api/savegriddataAPI';
 import deleteGridDataApi from '../api/deletegriddataAPI';
 import Data  from "../../../uitests/data/Form_Data.json";  
+// import {fielddatamap} from "../metadata/fieldData";  
 
-import { createYupSchema } from "../../base/utils/yupSchemaCreator";
+
+// import { createYupSchema } from "../../base/utils/yupSchemaCreator";
+import { createYupSchema } from "../../base/utils/yupSchemaCreatorNew";
+
 import * as yup from "yup";
 
 class CustomForm extends Component {
@@ -64,6 +68,7 @@ class CustomForm extends Component {
     return formData.map((item, index) => {
             const fieldMap = {
               text: CustomInput,
+              date: CustomInput,
               select: CustomSelect,
               checkbox: CustomCheckbox,
               radio: CustomRadio
@@ -71,8 +76,10 @@ class CustomForm extends Component {
             const Component = fieldMap[item.fieldtype];
             let error = props.errors.hasOwnProperty(item.id) && props.errors[item.id];
             if(item.fieldtype) {
+              console.log(item.fieldtype)
                 switch(item.fieldtype){
                   case     "text":
+                  case     "date":
                   case   "select":
                   case    "radio":
                     return (
@@ -114,8 +121,10 @@ class CustomForm extends Component {
     const { formProps } = this.props;
     const { close, change, permissions, deleteRow, pgid } = formProps;
     const { handleDelete, handleSubmit, resetForm } = this;
-    const formData = Data[pgid]; 
-
+    
+    console.log("Pgidadfadsf ", pgid);
+    const formData = Data[pgid];
+    // const formData = fielddatamap.filter(obj => obj.id == "customTaxCode"); 
     let initialValues = {};
 
     this.handleDelete = () => {

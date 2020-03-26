@@ -16,12 +16,12 @@ export const fielddatamap = [
       required: true,
       type: "string",
       subtype: [
-        { type: "uppercase", message: "Tax Code needs to be in uppercase." }
+        { type: "lowercase", message: "Tax Code needs to be in uppercase." }
       ],
       constraint: [
-        { type: "min", input: 1, message: "min 1 characters" },
-        { type: "max", input: 25, message: "max 10 characters" },
-        { type: "matches", input: "/(hi|bye)/", message: "Invalid Pattern" }
+        { type: "min", input: 5, message: "min 5 characters" },
+        { type: "max", input: 25, message: "max 25 characters" },
+        // { type: "matches", input: "[a-zA-Z- ]+", message: "Invalid Pattern" }
       ]
     }
   },
@@ -141,7 +141,7 @@ export const fielddatamap = [
     placeholder: "",
     fieldtype: "check",
     label: "Local Courtesy Withholding",
-    initialvalue: flase,
+    initialvalue: false,
     errmsg: "Local Courtesy Withholding is required",
     fieldlength: {
       options: [
@@ -159,7 +159,7 @@ export const fielddatamap = [
     placeholder: "",
     fieldtype: "checklist",
     label: "",
-    initialvalue: flase,
+    initialvalue: false,
     errmsg: "Select at least one theme.",
     fieldlength: {},
     fieldinfo: {
@@ -182,7 +182,7 @@ export const fielddatamap = [
     placeholder: "",
     fieldtype: "radio",
     label: "Restore Dataset",
-    initialvalue: flase,
+    initialvalue: false,
     errmsg: "Select Dataset for restore",
     fieldlength: {},
     fieldinfo: {
@@ -201,7 +201,7 @@ export const fielddatamap = [
     placeholder: "",
     fieldtype: "radiolist",
     label: "Restore Dataset",
-    initialvalue: flase,
+    initialvalue: false,
     errmsg: "Select At lest one Dataset to restore",
     fieldlength: {},
     fieldinfo: {
@@ -225,7 +225,7 @@ export const fielddatamap = [
     placeholder: "",
     fieldtype: "radiolist",
     label: "Restore Dataset",
-    initialvalue: flase,
+    initialvalue: false,
     errmsg: "Select At lest one Dataset to restore",
     fieldlength: {},
     fieldinfo: {

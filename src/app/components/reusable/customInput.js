@@ -11,7 +11,7 @@ class CustomInput extends Component {
         <Col>
           <Label>{this.props.label}</Label>
           <Input
-            type="text"
+            type={this.props.type}
             name={this.props.name}
             placeholder={this.props.placeholder}
             value={this.props.value}

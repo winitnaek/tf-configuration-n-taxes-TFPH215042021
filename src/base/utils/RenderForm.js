@@ -14,6 +14,7 @@ const renderForm = (close, change, pgid, permissions, deleteRow) => {
     case "worksites":
     case "worksiteCompanies":
     case "customFormulas":
+    case "customTaxFormulas":
       form = <CustomForm formProps={formProps} />;
       break;
     default:

@@ -6,23 +6,23 @@
             "fieldtype": "text",
             "label": "Code *",
             "value": "",
-            "fieldlength":{},
-            "fieldinfo":{},
-            "validationType": "string",      
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                },
-                {
-                    "type": "min",
-                    "params": [5, "min 5 characters"]
-                },
-                {
-                    "type": "max",
-                    "params": [10, "max 10 characters"]
-                }
-            ]
+            "errmsg": "Custom Tax Code is required",
+            "fieldlength": {
+                "minlength": 1,
+                "maxlength": 25
+              },
+              "fieldinfo": {},
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "uppercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
         },
         {
             "id": "payType",
@@ -30,20 +30,21 @@
             "fieldtype": "select",
             "label": "Type*",
             "value": "",
-            "fieldlength":{},
+            "errmsg": "PayType is required",
+            "fieldlength": {
+                "minlength": 1,
+                "maxlength": 25
+            },
             "fieldinfo":{
                 "options": [
                     "Custom Earnings", 
                     "Custom Benefit Plan"
                 ]
             },
-            "validationType": "string",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                }
-            ]
+            "validation": {
+                "required": true,
+                "type": "string"
+            }
         },
         {
             "id": "name",
@@ -51,23 +52,23 @@
             "fieldtype": "text",
             "label": "Custom Payment",
             "value": "Payment",
-            "fieldlength":{},
-            "fieldinfo":{},
-            "validationType": "string",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                },
-                {
-                    "type": "min",
-                    "params": [5, "min 5 characters"]
-                },
-                {
-                    "type": "max",
-                    "params": [10, "max 10 characters"]
-                }
-            ]
+            "errmsg": "Custom Payment Name is required",
+            "fieldlength": {
+                "minlength": 1,
+                "maxlength": 25
+              },
+              "fieldinfo": {},
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "uppercase", "message": "Payment Name needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+            }
         },
         {
             "id": "taxability",
@@ -75,7 +76,11 @@
             "fieldtype": "select",
             "label": "Taxability*",
             "value": "",
-            "fieldlength":{},
+            "errmsg": "PayType is required",
+            "fieldlength": {
+                "minlength": 1,
+                "maxlength": 25
+            },
             "fieldinfo":{
                 "options": [
                     "Non-Taxable", 
@@ -86,13 +91,10 @@
                     "Imputed"
                 ]
             },
-            "validationType": "string",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                }
-            ]   
+            "validation": {
+                "required": true,
+                "type": "string"
+            }
         },
         {
             "id": "eemax",
@@ -100,19 +102,24 @@
             "fieldtype": "text",
             "label": "Maximum Limit",
             "value": "",
-            "fieldlength":{},
-            "fieldinfo":{},
-            "validationType": "number",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                },
-                {
-                    "type": "typeError",
-                    "params": ["Must be a number"]
-                }
-            ]
+            "errmsg": "Custom Payment Name is required",
+            "fieldlength": {
+                "minlength": 1,
+                "maxlength": 25
+              },
+              "fieldinfo": {},
+              "validation": {
+                "required": true,
+                "type": "number",
+                "subtype": [
+                    { "type": "positive", "message": "Maximum Limit Cannot be negative" },
+                    { "type": "integer", "message": "Maximum Limit Cannot be integer" },
+                    { "type": "typeError", "message": "Must be a number"}
+                ],
+                "constraint": [
+                  { "type": "min", "input": 0, "message": "Maximum Limit can not be < 0" },
+                  { "type": "max", "input": 100, "message": "Maximum Limit can not be > 100" }                ]
+            }
         },
         {
             "id": "aggstatus",
@@ -120,15 +127,23 @@
             "fieldtype": "text",
             "label": "Aggregate Status",
             "value": "",
-            "fieldlength":{},
-            "fieldinfo":{},
-            "validationType": "string",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                }
-            ]
+            "errmsg": "Custom Payment Name is required",
+            "fieldlength": {
+                "minlength": 1,
+                "maxlength": 25
+              },
+              "fieldinfo": {},
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "uppercase", "message": "AggregateStatus needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
         }
     ],
     "customTaxCodes":[
@@ -138,23 +153,23 @@
             "fieldtype": "text",
             "label": "Code *",
             "value": "",
-            "fieldlength":{},
-            "fieldinfo":{},
-            "validationType": "string",      
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                },
-                {
-                    "type": "min",
-                    "params": [5, "min 5 characters"]
-                },
-                {
-                    "type": "max",
-                    "params": [10, "max 10 characters"]
-                }
-            ]
+            "errmsg": "Custom Tax Code is required",
+            "fieldlength": {
+                "minlength": 1,
+                "maxlength": 25
+              },
+              "fieldinfo": {},
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "uppercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
         },
         {
             "id": "name",
@@ -162,26 +177,26 @@
             "fieldtype": "text",
             "label": "Code *",
             "value": "",
-            "fieldlength":{},
-            "fieldinfo":{},
-            "validationType": "string",      
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                },
-                {
-                    "type": "min",
-                    "params": [5, "min 5 characters"]
-                },
-                {
-                    "type": "max",
-                    "params": [10, "max 10 characters"]
-                }
-            ]
+            "errmsg": "Custom Tax Name is required",
+            "fieldlength": {
+                "minlength": 1,
+                "maxlength": 25
+              },
+              "fieldinfo": {},
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
         }
     ],
-    "customFormulas":[
+    "customTaxFormulas":[
             {
               "name": "taxCode",
               "id": "taxCode",
@@ -192,12 +207,17 @@
               "validationType": "string",
               "label": "Custom Tax Code Name",
               "value": "",
-              "validations": [
-                    {
-                        "type": "required",
-                        "params": ["field is required"]
-                    }
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
                 ]
+              }
             },
             {
                 "name": "cmName",
@@ -209,12 +229,17 @@
                 "validationType": "string",
                 "label": "Method",
                 "value": "",
-                "validations": [
-                    {
-                        "type": "required",
-                        "params": ["field is required"]
-                    }
-                ]
+                "validation": {
+                    "required": true,
+                    "type": "string",
+                    "subtype": [
+                      { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                    ],
+                    "constraint": [
+                      { "type": "min", "input": 5, "message": "min 5 characters" },
+                      { "type": "max", "input": 25, "message": "max 25 characters" }
+                    ]
+                  }
               },
             {
               "name": "taxRate",
@@ -226,12 +251,17 @@
               "validationType": "string",
               "label": "Tax Rate",
               "value": "",
-                "validations": [
-                    {
-                        "type": "required",
-                        "params": ["field is required"]
-                    }
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
                 ]
+              }
             },
             {
               "name": "rounding",
@@ -243,12 +273,17 @@
               "validationType": "string",
               "label": "Rounding",
               "value": "",
-              "validations": [
-                  {
-                      "type": "required",
-                      "params": ["field is required"]
-                  }
-              ]
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
             },
             {
               "name": "minWage",
@@ -260,12 +295,17 @@
               "validationType": "string",
               "label": "Min Wage",
               "value": "",
-              "validations": [
-                  {
-                      "type": "required",
-                      "params": ["field is required"]
-                  }
-              ]
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
             },
             {
               "name": "maxWage",
@@ -277,12 +317,17 @@
               "validationType": "string",
               "label": "Max Wage",
               "value": "",
-              "validations": [
-                  {
-                      "type": "required",
-                      "params": ["field is required"]
-                  }
-              ]
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
             },
             {
               "name": "maxTax",
@@ -294,12 +339,17 @@
               "validationType": "string",
               "label": "Max Tax",
               "value": "",
-              "validations": [
-                  {
-                      "type": "required",
-                      "params": ["field is required"]
-                  }
-              ]
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
             },
             {
               "name": "flatAmount",
@@ -311,46 +361,61 @@
               "validationType": "string",
               "label": "Flat Amount",
               "value": "",
-              "validations": [
-                  {
-                      "type": "required",
-                      "params": ["field is required"]
-                  }
-              ]
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
             },
             {
               "name": "startDate",
               "id": "stateDate",
               "placeholder": "Enter Start Date" ,
-              "fieldtype": "text",
+              "fieldtype": "date",
               "fieldlength":{},
               "fieldinfo":{},
               "validationType": "string",
               "label": "Start Date",
               "value": "",
-              "validations": [
-                  {
-                      "type": "required",
-                      "params": ["field is required"]
-                  }
-              ]
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
             },
             {
               "name": "rescind",
               "id": "rescind",
               "placeholder": "Enter End Date",
-              "fieldtype": "text",
+              "fieldtype": "date",
               "fieldlength":{},
               "fieldinfo":{},
               "validationType": "string",
               "label": "End Date",
               "value": "",
-              "validations": [
-                  {
-                      "type": "required",
-                      "params": ["field is required"]
-                  }
-              ]
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
             }
     ],
     "worksiteCompanies" : [
@@ -362,14 +427,19 @@
             "fieldlength":{},
             "fieldinfo":{},
             "validationType": "string",
-            "label": "Custom Tax Code Name",
+            "label": "Location*",
             "value": "",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                }
-            ]
+            "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
           },
           {
               "name": "street1",
@@ -379,14 +449,19 @@
               "fieldlength":{},
               "fieldinfo":{},
               "validationType": "string",
-              "label": "Method",
+              "label": "Street1*",
               "value": "",
-              "validations": [
-                  {
-                      "type": "required",
-                      "params": ["field is required"]
-                  }
-              ]
+              "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
             },
           {
             "name": "street2",
@@ -396,14 +471,19 @@
             "fieldlength":{},
             "fieldinfo":{},
             "validationType": "string",
-            "label": "Tax Rate",
+            "label": "Street2",
             "value": "",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                }
-            ]
+            "validation": {
+                "required": false,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
           },
           {
             "name": "city",
@@ -413,31 +493,280 @@
             "fieldlength":{},
             "fieldinfo":{},
             "validationType": "string",
-            "label": "Rounding",
+            "label": "City*",
             "value": "",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                }
-            ]
+            "validation": {
+                "required": true,
+                "type": "string",
+                "subtype": [
+                  { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+                ],
+                "constraint": [
+                  { "type": "min", "input": 5, "message": "min 5 characters" },
+                  { "type": "max", "input": 25, "message": "max 25 characters" }
+                ]
+              }
           },
           {
-            "name": "county",
-            "id": "county",
-            "placeholder": "Enter county",
-            "fieldtype": "text",
+            "name": "country",
+            "id": "country",
+            "placeholder": "Select Country" ,
+            "fieldtype": "select",
             "fieldlength":{},
-            "fieldinfo":{},
+              "fieldinfo":{
+                    "options": [
+                            "Afghanistan",
+                            "land Islands", 
+                            "Albania",
+                            "Algeria", 
+                            "American Samoa",
+                            "AndorrA", 
+                            "Angola", 
+                            "Anguilla",
+                            "Antarctica",
+                            "Antigua and Barbuda",
+                            "Argentina",
+                            "Armenia", 
+                            "Aruba",
+                            "Australia",
+                            "Austria",
+                            "Azerbaijan", 
+                            "Bahamas", 
+                            "Bahrain",
+                            "Bangladesh", 
+                            "Barbados",               
+                            "Belarus",            
+                            "Belgium",              
+                            "Belize",                                   
+                            "Benin",                                        
+                            "Bermuda",                                                  
+                            "Bhutan", 
+                            "Bolivia", 
+                            "Bosnia and Herzegovina", 
+                            "Botswana", 
+                            "Bouvet Island",
+                            "Brazil", 
+                            "British Indian Ocean Territory",
+                            "Brunei Darussalam",
+                            "Bulgaria", 
+                            "Burkina Faso", 
+                            "Burundi",
+                            "Cambodia",
+                            "Cameroon",
+                            "Canada", 
+                            "Cape Verde",
+                            "Cayman Islands",
+                            "Central African Republic", 
+                            "Chad", 
+                            "Chile",
+                            "China", 
+                            "Christmas Island",
+                            "Cocos (Keeling) Islands", 
+                            "Colombia",
+                            "Comoros", 
+                            "Congo", 
+                            "Congo, The Democratic Republic of the", 
+                            "Cook Islands", 
+                            "Costa Rica", 
+                            "Cote D\"Ivoire", 
+                            "Croatia",
+                            "Cuba", 
+                            "Cyprus",
+                            "Czech Republic", 
+                            "Denmark", 
+                            "Djibouti",
+                            "Dominica", 
+                            "Dominican Republic", 
+                            "Ecuador",
+                            "Egypt",
+                            "El Salvador", 
+                            "Equatorial Guinea", 
+                            "Eritrea",
+                            "Estonia", 
+                            "Ethiopia", 
+                            "Falkland Islands (Malvinas)", 
+                            "Faroe Islands", 
+                            "Fiji", 
+                            "Finland", 
+                            "France",
+                            "French Guiana", 
+                            "French Polynesia",
+                            "French Southern Territories", 
+                            "Gabon", 
+                            "Gambia", 
+                            "Georgia",
+                            "Germany", 
+                            "Ghana", 
+                            "Gibraltar",
+                            "Greece", 
+                            "Greenland",
+                            "Grenada", 
+                            "Guadeloupe", 
+                            "Guam",
+                            "Guatemala",
+                            "Guernsey", 
+                            "Guinea", 
+                            "Guinea-Bissau", 
+                            "Guyana",  
+                            "Haiti",
+                            "Heard Island and Mcdonald Islands", 
+                            "Holy See (Vatican City State)", 
+                            "Honduras",
+                            "Hong Kong",
+                            "Hungary", 
+                            "Iceland", 
+                            "India", 
+                            "Indonesia", 
+                            "Iran, Islamic Republic Of", 
+                            "Iraq", 
+                            "Ireland",
+                            "Isle of Man", 
+                            "Israel", 
+                            "Italy", 
+                            "Jamaica", 
+                            "Japan", 
+                            "Jersey",
+                            "Jordan",
+                            "Kazakhstan",
+                            "Kenya", 
+                            "Kiribati",
+                            "Korea, Democratic People\"S Republic of",
+                            "Korea, Republic of", 
+                            "Kuwait", 
+                            "Kyrgyzstan", 
+                            "Lao People\"S Democratic Republic", 
+                            "Latvia",
+                            "Lebanon",
+                            "Liberia", 
+                            "Libyan Arab Jamahiriya", 
+                            "Liechtenstein",
+                            "Lithuania",
+                            "Luxembourg",
+                            "Macao", 
+                            "Macedonia, The Former Yugoslav Republic of",
+                            "Madagascar", 
+                            "Malawi",
+                            "Malaysia",
+                            "Maldives", 
+                            "Mali", 
+                            "Malta", 
+                            "Marshall Islands", 
+                            "Martinique", 
+                            "Mauritania",
+                            "Mauritius",
+                            "Mayotte",
+                            "Mexico",
+                            "Micronesia, Federated States of",
+                            "Moldova, Republic of",
+                            "Monaco",
+                            "Mongolia", 
+                            "Montenegro", 
+                            "Montserrat",
+                            "Morocco",
+                            "Mozambique", 
+                            "Myanmar",
+                            "Namibia", 
+                            "Nauru", 
+                            "Nepal", 
+                            "Netherlands", 
+                            "Netherlands Antilles", 
+                            "New Caledonia",
+                            "New Zealand", 
+                            "Nicaragua", 
+                            "Niger", 
+                            "Nigeria",
+                            "Niue", 
+                            "Norfolk Island", 
+                            "Northern Mariana Islands",
+                            "Norway", 
+                            "Oman",
+                            "Pakistan",
+                            "Palau",
+                            "Palestinian Territory, Occupied",
+                            "Panama",
+                            "Papua New Guinea", 
+                            "Paraguay", 
+                            "Peru", 
+                            "Philippines", 
+                            "Pitcairn", 
+                            "Poland", 
+                            "Portugal",  
+                            "Puerto Rico",
+                            "Qatar",
+                            "Reunion", 
+                            "Romania", 
+                            "Russian Federation", 
+                            "RWANDA", 
+                            "Saint Helena", 
+                            "Saint Kitts and Nevis",
+                            "Saint Lucia", 
+                            "Saint Pierre and Miquelon", 
+                            "Saint Vincent and the Grenadines",
+                            "Samoa", 
+                            "San Marino", 
+                            "Sao Tome and Principe", 
+                            "Saudi Arabia", 
+                            "Senegal", 
+                            "Serbia",
+                            "Seychelles", 
+                            "Sierra Leone", 
+                            "Singapore", 
+                            "Slovakia",
+                            "Slovenia", 
+                            "Solomon Islands",
+                            "Somalia", 
+                            "South Africa",
+                            "South Georgia and the South Sandwich Islands",
+                            "Spain",
+                            "Sri Lanka",
+                            "Sudan", 
+                            "Suriname",
+                            "Svalbard and Jan Mayen",
+                            "Swaziland", 
+                            "Sweden",
+                            "Switzerland", 
+                            "Syrian Arab Republic", 
+                            "Taiwan, Province of China", 
+                            "Tajikistan", 
+                            "Tanzania, United Republic of",
+                            "Thailand", 
+                            "Timor-Leste", 
+                            "Togo", 
+                            "Tokelau", 
+                            "Tonga",
+                            "Trinidad and Tobago",
+                            "Tunisia",
+                            "Turkey", 
+                            "Turkmenistan", 
+                            "Turks and Caicos Islands", 
+                            "Tuvalu", 
+                            "Uganda", 
+                            "Ukraine",
+                            "United Arab Emirates", 
+                            "United Kingdom", 
+                            "United States", 
+                            "United States Minor Outlying Islands", 
+                            "Uruguay", 
+                            "Uzbekistan",
+                            "Vanuatu", 
+                            "Venezuela", 
+                            "Viet Nam",
+                            "Virgin Islands, British", 
+                            "Virgin Islands", 
+                            "Wallis and Futuna", 
+                            "Western Sahara",
+                            "Yemen", 
+                            "Zambia", 
+                            "Zimbabwe"
+                    ]
+             },
             "validationType": "string",
-            "label": "Min Wage",
+            "label": "Country",
             "value": "",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                }
-            ]
+            "validation": {
+                "required": true,
+                "type": "string"
+              }
           },
           {
             "name": "state",
@@ -500,14 +829,12 @@
                     ]
              },
             "validationType": "string",
-            "label": "Max Wage",
+            "label": "State",
             "value": "",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                }
-            ]
+            "validation": {
+                "required": true,
+                "type": "string"
+              }
           },
           {
             "name": "zip",
@@ -519,12 +846,19 @@
             "validationType": "string",
             "label": "Max Tax",
             "value": "",
-            "validations": [
-                {
-                    "type": "required",
-                    "params": ["field is required"]
-                }
-            ]
+            "validation": {
+                "required": true,
+                "type": "number",
+                "subtype": [
+                    { "type": "positive", "message": "Zipcode cannot be negative" },
+                    { "type": "integer", "message": "Zipcode must be an integer" },
+                    { "type": "typeError", "message": "Must be a number"}
+                ],
+                "constraint": [
+                  { "type": "min", "input": 0, "message": "Invalid Zip Code" },
+                  { "type": "max", "input": 99999, "message": "Invalid Zip Code" }
+                ]
+              }
           }
     ],
     "experienceRates": [
@@ -596,7 +930,107 @@
                 }
             ]
         }
-    ]
+    ],
+    "worksites":[
+      {
+          "id": "companyCode",
+          "placeholder": "Enter Company Code",
+          "fieldtype": "text",
+          "label": "Code *",
+          "value": "",
+          "errmsg": "Company Code is required",
+          "fieldlength": {
+              "minlength": 1,
+              "maxlength": 25
+            },
+            "fieldinfo": {},
+            "validation": {
+              "required": true,
+              "type": "string",
+              "subtype": [
+                { "type": "uppercase", "message": "Tax Code needs to be in uppercase." }
+              ],
+              "constraint": [
+                { "type": "min", "input": 5, "message": "min 5 characters" },
+                { "type": "max", "input": 25, "message": "max 25 characters" }
+              ]
+            }
+      },
+      {
+          "id": "companyName",
+          "placeholder": "Enter Company Name",
+          "fieldtype": "text",
+          "label": "Name *",
+          "value": "",
+          "errmsg": "Company Code is required",
+          "fieldlength": {
+              "minlength": 1,
+              "maxlength": 25
+            },
+            "fieldinfo": {},
+            "validation": {
+              "required": true,
+              "type": "string",
+              "subtype": [
+                { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+              ],
+              "constraint": [
+                { "type": "min", "input": 5, "message": "min 5 characters" },
+                { "type": "max", "input": 25, "message": "max 25 characters" }
+              ]
+            }
+      }
+  ],
+  "customFormulas":[
+    {
+        "id": "customTaxCode",
+        "placeholder": "Enter Tax Code",
+        "fieldtype": "text",
+        "label": "Code *",
+        "value": "",
+        "errmsg": "TaxCode is required",
+        "fieldlength": {
+            "minlength": 1,
+            "maxlength": 25
+          },
+          "fieldinfo": {},
+          "validation": {
+            "required": true,
+            "type": "string",
+            "subtype": [
+              { "type": "uppercase", "message": "Tax Code needs to be in uppercase." }
+            ],
+            "constraint": [
+              { "type": "min", "input": 5, "message": "min 5 characters" },
+              { "type": "max", "input": 25, "message": "max 25 characters" }
+            ]
+          }
+    },
+    {
+        "id": "customTaxName",
+        "placeholder": "Enter Tax Name",
+        "fieldtype": "text",
+        "label": "Name *",
+        "value": "",
+        "errmsg": "Tax Code is required",
+        "fieldlength": {
+            "minlength": 1,
+            "maxlength": 25
+          },
+          "fieldinfo": {},
+          "validation": {
+            "required": true,
+            "type": "string",
+            "subtype": [
+              { "type": "lowercase", "message": "Tax Code needs to be in uppercase." }
+            ],
+            "constraint": [
+              { "type": "min", "input": 5, "message": "min 5 characters" },
+              { "type": "max", "input": 25, "message": "max 25 characters" }
+            ]
+          }
+    }
+]
 }
     
   

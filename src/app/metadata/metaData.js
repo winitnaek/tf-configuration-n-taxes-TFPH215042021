@@ -533,7 +533,7 @@ export const customFormulas = {
 
 export const customTaxFormulas = {
   pgdef: {
-    pgid: "customFormulas",
+    pgid: "customTaxFormulas",
     pgtitle: "Custom Formulas",
     pgsubtitle: "",
     flowtype: "flowtype2",
@@ -724,8 +724,8 @@ export const companies = {
       }
     ],
     dataFields: [
-      { name: "company", type: "string" },
       { name: "companyName", type: "string" },
+      { name: "companyCode", type: "string" },
       { name: "fein", type: "string" },
       { name: "courtesy", type: "string" },
     ]
@@ -740,7 +740,7 @@ export const companies = {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "companyCode", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "companyName", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
       { id: "companyCode", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
       { id: "fein", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
       { id: "localCourtesyWithholding", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
@@ -778,7 +778,7 @@ export const worksites = {
     columns: [
      {
       text: "Company Code",
-      datafield: "company",
+      datafield: "companyCode",
       cellsalign: "center",
       align: "center",
       sortable: true,
