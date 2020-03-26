@@ -5,6 +5,8 @@ import {Col, Button, Form, Row} from "reactstrap";
 import ReusableForm from "./ReusableForm";
 import { updateGrid } from "../../base/utils/updateGrid";
 import { tftools } from "../../base/constants/TFTools";
+import * as Metadata from "../metadata/metaData";
+
 import CustomInput from "./reusable/customInput";
 import CustomSelect from "./reusable/customSelect";
 import CustomRadio from "./reusable/customRadio";
@@ -39,6 +41,25 @@ class CustomForm extends Component {
     }
   } 
 
+  disabledHandler(id){
+      try{
+          let formflds = Metadata[this.props.formProps.pgid].formdef.formflds;
+          if(formflds) {
+            let row = formflds.filter(r => id == r.id)
+            if(row.length > 0){
+                if (row[0].isReadOnlyOnEdit == true && this.props.mode == "Edit"){
+                  return true;
+                }else if(row[0].isReadOnlyOnNew == true && this.props.mode != "Edit"){
+                  return true;
+                }
+            }
+        }
+        return false;
+      } catch (error) {
+        console.log("error", error);
+      }
+  };
+
   renderFormElements (props, formData) { 
     return formData.map((item, index) => {
             const fieldMap = {
@@ -63,6 +84,7 @@ class CustomForm extends Component {
                           name={item.id}
                           id={item.id}
                           placeholder={item.placeholder}
+                          disabled={this.disabledHandler(item.id)}
                           value={props.values[item.id]}
                           onChange={props.handleChange}
                           error={error}

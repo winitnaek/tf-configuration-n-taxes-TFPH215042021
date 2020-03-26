@@ -21,6 +21,7 @@ class CustomSelect extends Component {
             name={this.props.name}
             placeholder={this.props.placeholder}
             value={this.props.value}
+            disabled={this.props.disabled}
             onChange={this.props.onChange}
             invalid={this.props.error}
           >

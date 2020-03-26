@@ -17,6 +17,7 @@ class CustomInput extends Component {
             value={this.props.value}
             onChange={this.props.onChange}
             invalid={this.props.error}
+            disabled={this.props.disabled}
           />
           {renderError}
         </Col>

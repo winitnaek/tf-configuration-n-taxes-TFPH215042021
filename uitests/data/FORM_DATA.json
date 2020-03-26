@@ -133,7 +133,7 @@
     ],
     "customTaxCodes":[
         {
-            "id": "taxCode",
+            "id": "taxcode",
             "placeholder": "Enter Custom Tax Code",
             "fieldtype": "text",
             "label": "Code *",

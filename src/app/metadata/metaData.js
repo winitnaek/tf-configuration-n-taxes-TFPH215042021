@@ -166,11 +166,11 @@ export const customPayments = {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "customPayCode", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
-      { id: "customPayType", "order":2, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
-      { id: "customPayName", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
-      { id: "e_Taxability", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
-      { id: "e_MaxLimit", "order":5, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false  }
+      { id: "userCode", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "payType", "order":2, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "name", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "taxability", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "eemax", "order":5, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false  }
     ],
     fltrflds: ""
   }
@@ -236,8 +236,8 @@ export const customTaxCodes = {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "customTaxCode", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
-      { id: "customTaxName", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false }
+      { id: "taxcode", "order":1, "isReadOnlyOnEdit":true,"isReadOnlyOnNew":false },
+      { id: "name", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false }
     ],
     fltrflds: ""
   }
