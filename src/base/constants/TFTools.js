@@ -9,7 +9,7 @@ import {
   customTaxFormulas,
   companies,
   worksites,
-  worksiteCompaines,
+  worksiteCompanies,
 } from "../../app/metadata/metaData";
 import {
   GET_CUSTOM_PAYMENTS_LIST,
@@ -188,7 +188,7 @@ export const metadatamap = [
   },  
   {
     id: "worksiteCompanies",
-    metadata: worksiteCompaines,
+    metadata: worksiteCompanies,
     url: GET_WORKSITES_LOCATIONS,
     rendererInput: ["dataset", "userId"]
   }, 
