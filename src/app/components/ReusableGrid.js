@@ -24,8 +24,6 @@ import {
   rowTop,
   helpMargin
 } from "../../base/constants/AppConstants";
-import renderForm from "../../base/utils/renderForm";
-import renderFilterForm from "../../base/utils/renderFilterForm";
 import {
   Col,
   Row,
