@@ -15,8 +15,9 @@ import { setFilterFormData } from "../actions/filterFormActions";
 import gridDataApi from '../api/griddataAPI';
 import savegriddataApi from '../api/savegriddataAPI';
 import deleteGridDataApi from '../api/deletegriddataAPI';
-import Data  from "../../../uitests/data/Form_Data.json";  
 
+// import Data  from "../../../uitests/data/Form_Data.json";  
+import * as Data from "../metadata/fieldData";
 import { createYupSchema } from "../../base/utils/yupSchemaCreatorNew";
 
 import * as yup from "yup";

@@ -4,6 +4,7 @@
         "supplementalMethods": ["customTaxCodes", "customPayments"],
         "customTaxCodes": ["supplementalMethods", "customPayments","customTaxCodes"] ,
         "userDataQueries": ["supplementalMethods", "customTaxCodes"],
-        "experienceRates": ["supplementalMethods", "customTaxCodes"]
+        "experienceRates": ["supplementalMethods", "customTaxCodes"],
+        "worksiteCompanies": ["customTaxCodes", "supplementalMethods"]
     }
 }  
