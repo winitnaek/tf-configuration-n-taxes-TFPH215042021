@@ -802,9 +802,7 @@ export const worksites = {
   formdef: ""
 };
 
-
-
-export const worksiteCompaines =  {
+export const worksiteCompanies =  {
   pgdef: {
     pgid: "worksiteCompanies",
     pgtitle: "Worksites",
@@ -890,7 +888,7 @@ export const worksiteCompaines =  {
      
     ]
   },
-  formdef: {
+   formdef: {
     title: "Worksite",
     subtitle: "Manage Worksites for: TESTCOMP1 (Test Company 1)",
     note:"Note: Required fields are marked with an asterisk (*)",

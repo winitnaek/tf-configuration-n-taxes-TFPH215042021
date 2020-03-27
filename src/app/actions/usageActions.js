@@ -13,6 +13,7 @@ export function getRecentUsage(pgid) {
         dispatch({type: USAGE});
         const data = await GeneralApi.getApiData('recentUsage');
         const payload = data.properties[pgid];
+        console.log("recent usgae payload ", Metadata[pgid], "-----", pgid);
         if (Metadata[pgid].formdef.hasRecentUsage)
           dispatch({type: USAGE_SUCCESS, payload: payload})
         else 
