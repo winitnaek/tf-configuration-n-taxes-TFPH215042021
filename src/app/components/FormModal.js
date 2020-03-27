@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Modal from "./Modal";
-import renderForm from "../../base/utils/renderForm";
-import renderFilterForm from "../../base/utils/renderFilterForm";
 import CustomForm from './CustomForm';
 
 class ModalForm extends Component {
