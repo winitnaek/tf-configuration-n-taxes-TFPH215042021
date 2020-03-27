@@ -188,12 +188,11 @@ class CustomForm extends Component {
                   const mode = this.props.mode;
                   if (mode === "Edit") {
                     rowid = this.props.rowIndex;
-               
+                  }
                   updateGrid(values, rowid, mode);
                   savegriddataApi.saveGridData(pgid, values, mode)
                   close();
                   actions.resetForm({});
-                  }
               } catch (error) {
                   actions.setSubmitting(false);
                   actions.setErrors({submit: error.message});

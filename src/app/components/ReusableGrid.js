@@ -8,6 +8,7 @@ import deletegriddataAPI from '../api/deletegriddataAPI';
 import { copyToClipboard } from "../../base/utils/copyToClipBoard";
 import ClipboardToast from "../components/ClipboardToast";
 import { setFilterFormData } from "../actions/filterFormActions";
+import CustomForm from './CustomForm';
 
 import FormModal from "./FormModal";
 import {
@@ -121,6 +122,10 @@ class ReusableGrid extends React.Component {
       // this.renderMe(pgid)
     }
 
+    this.handleForm = () => {
+
+
+    }
 
     this.OpenHelp = () => {
       this.props.help(this.state.pgid);
@@ -474,6 +479,17 @@ console.log(this.state.isfilterform)
           submit={this.handleSubmit}
           myview={"Test"}
         />
+
+       {/* <Modal
+        open={this.props.open}
+        close={this.props.close}
+        title={this.props.title}
+        cruddef={this.props.cruddef} 
+      >
+        {this.handleForm()}
+      </Modal> */}
+
+
       </Fragment>
     );
   }
