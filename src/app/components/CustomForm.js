@@ -16,10 +16,7 @@ import gridDataApi from '../api/griddataAPI';
 import savegriddataApi from '../api/savegriddataAPI';
 import deleteGridDataApi from '../api/deletegriddataAPI';
 import Data  from "../../../uitests/data/Form_Data.json";  
-// import {fielddatamap} from "../metadata/fieldData";  
 
-
-// import { createYupSchema } from "../../base/utils/yupSchemaCreator";
 import { createYupSchema } from "../../base/utils/yupSchemaCreatorNew";
 
 import * as yup from "yup";
@@ -76,7 +73,7 @@ class CustomForm extends Component {
             const Component = fieldMap[item.fieldtype];
             let error = props.errors.hasOwnProperty(item.id) && props.errors[item.id];
             if(item.fieldtype) {
-              console.log(item.fieldtype)
+              // console.log(item.fieldtype)
                 switch(item.fieldtype){
                   case     "text":
                   case     "date":
@@ -124,15 +121,13 @@ class CustomForm extends Component {
     
     console.log("Pgidadfadsf ", pgid);
     const formData = Data[pgid];
-    // const formData = fielddatamap.filter(obj => obj.id == "customTaxCode"); 
     let initialValues = {};
 
     this.handleDelete = () => {
-      // Add handler to remove this record
       console.log("deleting record");
-    const {rowIndex} = this.props.rowIndex
-    deleteRow(rowIndex); 
-      close();
+      const {rowIndex} = this.props.rowIndex
+      deleteRow(rowIndex); 
+        close();
     };
 
     this.handleSubmit = (props, actions) => {
@@ -160,10 +155,6 @@ class CustomForm extends Component {
 
       props.handleSubmit()
       }
-      
-     
-
-    
     
   }
     

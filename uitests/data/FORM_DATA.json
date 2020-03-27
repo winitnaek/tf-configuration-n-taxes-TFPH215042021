@@ -148,7 +148,7 @@
     ],
     "customTaxCodes":[
         {
-            "id": "taxcode",
+            "id": "taxCode",
             "placeholder": "Enter Custom Tax Code",
             "fieldtype": "text",
             "label": "Code *",
@@ -931,6 +931,76 @@
             ]
         }
     ],
+    "supplementalMethods": [
+      {
+          "name": "taxCode",
+          "id": "taxCode",
+          "placeholder": "Enter Tax Code" ,
+          "fieldtype": "text",
+          "fieldlength":{},
+          "fieldinfo":{},
+          "validationType": "string",
+          "label": "Tax Code",
+          "value": "",
+          "validations": [
+              {
+                  "type": "required",
+                  "params": ["field is required"]
+              }
+            ]
+      },
+      {
+          "name": "taxType",
+          "id": "taxType",
+          "placeholder": "Enter Tax Type" ,
+          "fieldtype": "text",
+          "fieldlength":{},
+          "fieldinfo":{},
+          "validationType": "string",
+          "label": "TaxType",
+          "value": "",
+          "validations": [
+              {
+                  "type": "required",
+                  "params": ["field is required"]
+              }
+          ]
+      },
+      {
+          "name": "formulaNumber",
+          "id": "formulaNumber",
+          "placeholder": "Enter Formula Number" ,
+          "fieldtype": "text",
+          "fieldlength":{},
+          "fieldinfo":{},
+          "validationType": "string",
+          "label": "Formula Number",
+          "value": "",
+          "validations": [
+              {
+                  "type": "required",
+                  "params": ["field is required"]
+              }
+          ]
+      },
+      {
+          "name": "startDate",
+          "id": "startDate",
+          "placeholder": "Enter Start Date" ,
+          "fieldtype": "date",
+          "fieldlength":{},
+          "fieldinfo":{},
+          "validationType": "string",
+          "label": "Start Date",
+          "value": "",
+          "validations": [
+              {
+                  "type": "required",
+                  "params": ["field is required"]
+              }
+          ]
+      }
+  ],
     "worksites":[
       {
           "id": "companyCode",
