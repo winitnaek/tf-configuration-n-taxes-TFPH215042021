@@ -16,10 +16,7 @@ import gridDataApi from '../api/griddataAPI';
 import saveGridDataApi from '../api/savegriddataAPI';
 import deleteGridDataApi from '../api/deletegriddataAPI';
 import Data  from "../../../uitests/data/Form_Data.json";  
-// import {fielddatamap} from "../metadata/fieldData";  
 
-
-// import { createYupSchema } from "../../base/utils/yupSchemaCreator";
 import { createYupSchema } from "../../base/utils/yupSchemaCreatorNew";
 
 import * as yup from "yup";
@@ -76,7 +73,7 @@ class CustomForm extends Component {
             const Component = fieldMap[item.fieldtype];
             let error = props.errors.hasOwnProperty(item.id) && props.errors[item.id];
             if(item.fieldtype) {
-              console.log(item.fieldtype)
+              // console.log(item.fieldtype)
                 switch(item.fieldtype){
                   case     "text":
                   case     "date":
@@ -124,21 +121,16 @@ class CustomForm extends Component {
     
     console.log("Pgidadfadsf ", pgid);
     const formData = Data[pgid];
-    // const formData = fielddatamap.filter(obj => obj.id == "customTaxCode"); 
     let initialValues = {};
 
     this.handleDelete = () => {
-      // Add handler to remove this record
       console.log("deleting record");
-    const {rowIndex} = this.props.rowIndex
-    deleteRow(rowIndex); 
-      close();
+      const {rowIndex} = this.props.rowIndex
+      deleteRow(rowIndex); 
+        close();
     };
 
     this.handleSubmit = (props) => {
-      console.log('You just entered handlesubmit')
-      console.log(this.props)
-  
       const {filter, formProps} = this.props;
       const {pgid} = formProps
       if (filter) {
@@ -146,11 +138,7 @@ class CustomForm extends Component {
         // check to see if the below is still needed
         //this.props.setFilterFormData(props.values);
       }
-      
-     
-
      props.handleSubmit()
-    
   }
     
     if(this.props.mode == "Edit"){
@@ -192,8 +180,8 @@ class CustomForm extends Component {
                   close();
                   actions.resetForm({});
               } catch (error) {
-                  action.setSubmitting(false);
-                  action.setErrors({submit: error.message});
+                  actions.setSubmitting(false);
+                  actions.setErrors({submit: error.message});
               }
             // }
           }}
