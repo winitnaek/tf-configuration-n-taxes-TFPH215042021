@@ -9,6 +9,7 @@ import { copyToClipboard } from "../../base/utils/copyToClipBoard";
 import ClipboardToast from "../components/ClipboardToast";
 import { setFilterFormData } from "../actions/filterFormActions";
 import CustomForm from './CustomForm';
+import Modal from "./Modal";
 
 import FormModal from "./FormModal";
 import {
@@ -118,11 +119,6 @@ class ReusableGrid extends React.Component {
       // this.props.closeForm()
       // this.props.setFilterFormData(payload);
       // this.renderMe(pgid)
-    }
-
-    this.handleForm = () => {
-
-
     }
 
     this.OpenHelp = () => {
@@ -277,6 +273,19 @@ console.log(noResultsFoundTxt)
 console.log(this.props.griddata[0])
 console.log(this.state.pgid)
 console.log(this.state.isfilterform)
+
+
+const {isOpen} = this.props;
+const {title, cruddef, isfilterform, pgid} = this.state;
+const {deleteRow, handleChange, renderMe, handleSubmit} = this;
+let filter;
+   if (isfilterform) {
+     filter=true;
+   }
+
+const close = this.props.closeForm
+const formProps = {close, handleChange, pgid, permissions, deleteRow, handleSubmit, renderMe, filter}
+
     return (
       <Fragment>
         <Row>
@@ -463,7 +472,7 @@ console.log(this.state.isfilterform)
           </UncontrolledTooltip>
         </Row>
 
-        <FormModal
+        {/* <FormModal
           open={this.props.isOpen}
           close={this.props.closeForm}
           title={this.state.title}
@@ -475,17 +484,16 @@ console.log(this.state.isfilterform)
           pgid={this.state.pgid}
           isfilterform={this.state.isfilterform}
           submit={this.handleSubmit}
-          myview={"Test"}
-        />
+        /> */}
 
-       {/* <Modal
-        open={this.props.open}
-        close={this.props.close}
-        title={this.props.title}
-        cruddef={this.props.cruddef} 
+       <Modal
+        open={isOpen}
+        close={this.props.closeForm}
+        title={title}
+        cruddef={cruddef} 
       >
-        {this.handleForm()}
-      </Modal> */}
+      <CustomForm formProps={formProps} filter={filter} />
+      </Modal>
 
 
       </Fragment>
