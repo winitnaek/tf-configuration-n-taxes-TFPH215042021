@@ -4,6 +4,7 @@ import {saveUrl, reqInfo} from "../../base/utils/tfUtils";
 
 class savegriddataAPI {
   static saveGridData(pageid, data, mode) {
+    console.log('Made it to the savegriddata api')
     let url = saveUrl(pageid);
     let tt = JSON.stringify(data);
     return fetch(url, reqInfo(tt), mode)

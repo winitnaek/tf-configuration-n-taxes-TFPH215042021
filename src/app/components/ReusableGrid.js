@@ -71,6 +71,7 @@ class ReusableGrid extends React.Component {
       columns: metadata.griddef.columns,
       dataFields: metadata.griddef.dataFields,
       title: metadata.pgdef.pgtitle,
+      subtitle: metadata.pgdef.pgsubtitle,
       addNewLabel: metadata.pgdef.addNewLabel,
       recordEdit: metadata.griddef.recordEdit,
       recordDelete: metadata.griddef.recordDelete,
@@ -275,6 +276,7 @@ console.log(this.state.isfilterform)
       <Fragment>
         <Row>
           <h1 style={pagetitle}>{this.state.title}</h1>
+        
     
           <span style={helpMargin}>
             <span id="help">
@@ -289,25 +291,38 @@ console.log(this.state.isfilterform)
             </UncontrolledTooltip>
           </span>
           
+         
           {this.state.isfilter && (
             <span>
-              <span id="filter">
+            
+              {this.state.parentConfig ? (
+                  <span id="filter">
+                <i class="fas fa-arrow-up"
+                style={filtericon}
+                onClick={this.handleFilter}
+                /> 
+                 <UncontrolledTooltip placement="right" target="filter"> 
+                  Return to prior screen 
+                 </UncontrolledTooltip>
+                </span>
+              ): (
+                <span id="filter">
                 <i
                   class="fas fa-filter fa-lg"
                   style={filtericon}
                   onClick={this.handleFilter}
                 />
-              </span>
-              <UncontrolledTooltip placement="right" target="filter">
-                <span>
-                  {this.state.parentConfig ? (
-                      <span> Return to prior screen </span>
-                  ): ( <span> Modify Selection Criteria </span> )}
-                  </span>
-              </UncontrolledTooltip>
-            </span>
+                  <UncontrolledTooltip placement="right" target="filter"> 
+                  Modify Selection Criteria
+                 </UncontrolledTooltip>
+                 </span>
+              )}
+           
+           </span>
           )}
+         
         </Row>
+        <Row>    <p> {this.state.subtitle} </p> </Row>
         <Row>
         <p> {!griddata[0] && noResultsFoundTxt}</p> 
         </Row>
