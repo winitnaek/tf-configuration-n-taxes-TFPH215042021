@@ -13,7 +13,7 @@ import CustomRadio from "./reusable/customRadio";
 import CustomCheckbox from "./reusable/customCheckbox";
 import { setFilterFormData } from "../actions/filterFormActions";
 import gridDataApi from '../api/griddataAPI';
-import saveGridDataApi from '../api/savegriddataAPI';
+import savegriddataApi from '../api/savegriddataAPI';
 import deleteGridDataApi from '../api/deletegriddataAPI';
 import Data  from "../../../uitests/data/Form_Data.json";  
 // import {fielddatamap} from "../metadata/fieldData";  
@@ -135,9 +135,11 @@ class CustomForm extends Component {
       close();
     };
 
-    this.handleSubmit = (props) => {
+    this.handleSubmit = (props, actions) => {
       console.log('You just entered handlesubmit')
-      console.log(this.props)
+      console.log(props)
+      console.log(actions)
+      const {values} = props;
   
       const {filter, formProps} = this.props;
       const {pgid} = formProps
@@ -145,11 +147,23 @@ class CustomForm extends Component {
         this.props.formProps.renderGrid(pgid, props.values);
         // check to see if the below is still needed
         //this.props.setFilterFormData(props.values);
+      } else {
+          let rowid = null;
+          console.log("Submitted Values ", values)
+          // Here the key should be same as in schema
+          const mode = this.props.mode;
+          if (mode === "Edit") {
+            rowid = this.props.rowIndex;
+          }
+          updateGrid(values, rowid, mode);
+          savegriddataApi.saveGridData(pgid, values, mode)
+
+      props.handleSubmit()
       }
       
      
 
-     props.handleSubmit()
+    
     
   }
     
@@ -175,10 +189,6 @@ class CustomForm extends Component {
           validationSchema={validateSchema}
           onSubmit={(values, actions) => {
             console.log('submitting')
-            // if(this.props.filter) {
-            //   console.log('this is a filter form submit')
-            //   this.handleView(values)
-            // } else {
               try {
                   let rowid = null;
                   console.log("Submitted Values ", values)
@@ -187,13 +197,13 @@ class CustomForm extends Component {
                   if (mode === "Edit") {
                     rowid = this.props.rowIndex;
                   }
-                  updateGrid(values, rowid, mode);
-                  saveGridDataAPI.saveGridData(pgid, values, mode)
+                 // updateGrid(values, rowid, mode);
+               //   saveGridDataAPI.saveGridData(pgid, values, mode)
                   close();
                   actions.resetForm({});
               } catch (error) {
-                  action.setSubmitting(false);
-                  action.setErrors({submit: error.message});
+                  actions.setSubmitting(false);
+                  actions.setErrors({submit: error.message});
               }
             // }
           }}
@@ -207,8 +217,8 @@ class CustomForm extends Component {
             });
           }}
         >
-          {props => (
-            <Form onSubmit={ e=> this.handleSubmit(props)}>
+          {(props, actions) => (
+            <Form onSubmit={ e=> this.handleSubmit(props, actions)}>
               <ReusableForm
                 title="Enter Custom Payments"
                 close={close}
