@@ -66,6 +66,6 @@ class ReusableForm extends Component {
       </Container>
     );
   }
-}
+} 
 
 export default ReusableForm;
