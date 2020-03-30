@@ -21,3 +21,5 @@ export const DELTE_CUSTOM_PAYMENT='/PaymentsService/deleteCustomPayment';
 export const DELETE_CUSTOM_TAX_CODES='/PaymentsService/deleteCustomTaxCode';
 export const SAVE_CUSTOM_PAYMENT='/PaymentsService/saveCustomPayment';
 export const SAVE_CUSTOM_TAX_CODES='/PaymentsService/saveCustomTaxCode';
+export const SAVE_CUSTOM_FORMULAS = '/TaxCodeService/saveCustomTaxCode';
+export const SAVE_WORKSITES_LOCATIONS = '/CompanyService/saveWorksiteManagementLocationList';

@@ -246,7 +246,8 @@ export function getUrl(id) {
   }
 
   export function saveUrl(id) {
-    let saveDataMap = deletedatamap.find(metadatam => {
+    let saveDataMap = savedatamap.find(metadatam => {
+      console.log(id, metadatam.id)
       if (id == metadatam.id) return metadatam;
     });
     let url = URLUtils.buildURL(saveDataMap.url);
@@ -265,7 +266,14 @@ export function getUrl(id) {
   ];
   const mocksavmap = [
     {id: "customPayments",url: './SAVE_CUSTOM_PAYMENTS.json'},
-    {id: "customTaxCodes",url: './SAVE_CUSTOM_TAX_CODE.json'}
+    {id: "customTaxCodes",url: './SAVE_CUSTOM_TAX_CODE.json'},
+    {id: "experienceRates",url: './SAVE_EXPERIENCE_RATES_MOCKDATA.json'},
+    {id: "supplementalMethods",url: 'SAVE_SUPPLEMENTAL_METHODS_MOCKDATA.json'},
+    {id: "customFormulas", url: './SAVE_CUSTOM_TAX_PAYMENT_MOCKDATA.json'},
+    {id: "customTaxFormulas", url: './SAVE_CUSTOM_TAX_FORMULAS_MOCKDATA.json'},
+    {id: "companies", url: './SAVE_COMPANIES_MOCKDATA.json'},
+    {id: "worksites", url: './SAVE_COMPANIES_MOCKDATA.json'},
+    {id: "worksiteCompanies", url: './SAVE_WORKSITES_MOCKDATA.json'},
   ];
   const mockdatamap = [
     {id: "customPayments",url: './CUSTOM_PAYMENTS_MOCKDATA.json'},

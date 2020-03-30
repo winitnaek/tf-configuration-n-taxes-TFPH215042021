@@ -284,6 +284,7 @@ let filter;
    }
 
 const close = this.props.closeForm
+console.log(close)
 const formProps = {close, handleChange, pgid, permissions, deleteRow, handleSubmit, renderMe, filter}
 
     return (

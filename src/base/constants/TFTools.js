@@ -31,7 +31,9 @@ import {
   DELTE_CUSTOM_PAYMENT,
   DELETE_CUSTOM_TAX_CODES,
   SAVE_CUSTOM_PAYMENT,
-  SAVE_CUSTOM_TAX_CODE
+  SAVE_CUSTOM_TAX_CODE,
+  SAVE_CUSTOM_FORMULAS,
+  SAVE_WORKSITES_LOCATIONS
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
@@ -192,12 +194,6 @@ export const metadatamap = [
     url: GET_WORKSITES_LOCATIONS,
     rendererInput: ["dataset", "userId"]
   }, 
-  // {
-  //   id: "customFormulasChild",
-  //   metadata: customFormulasChild,
-  //   url: GET_CUSTOM_FORMULAS_CHILD,
-  //   rendererInput: ["dataset", "userId"]
-  // },  
   {
     id: "companies",
     metadata: companies,
@@ -234,6 +230,26 @@ export const savedatamap = [
     id: "customTaxCodes",
     url: SAVE_CUSTOM_TAX_CODE,
     rendererInput: ["dataset", "editMode"]
+  },
+ 
+  {
+    id: "customFormulas",
+    metadata: customFormulas,
+    url: SAVE_CUSTOM_FORMULAS,
+    rendererInput: ["dataset", "userId"]
+  },   
+  {
+    id: "worksiteCompanies",
+    metadata: worksiteCompanies,
+    url: SAVE_WORKSITES_LOCATIONS,
+    rendererInput: ["dataset", "userId"]
+  }, 
+  
+  {
+    id: "customTaxFormulas",
+    metadata: customTaxFormulas,
+    url: SAVE_CUSTOM_FORMULAS,
+    rendererInput: ["dataset", "userId"]
   }
 ];
 export const asyncselfldsmap = [
