@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
 import { Col, Row, Button, UncontrolledTooltip } from "reactstrap";
 import { tftools } from "../../base/constants/TFTools";
+import { connect } from "react-redux";
+import { closeForm, setFormData } from "../actions/formActions";
+import { bindActionCreators } from "redux";
 const allBSIPlans = "allBSIPlans";
 const populateV3States = "populateV3States";
 const experienceRates = "experienceRates";
@@ -51,12 +54,15 @@ class UserDataQueries extends React.Component {
     };
 
     this.toggle = (id, title) => {
+      const payload = { data:{} , mode: "New" };
+     this.props.setFormData(payload)
+
       this.setState({
-        isOpen: !this.state.isOpen,
         pgid: id,
         formTitle: title,
         isfilterform: true
       });
+
     };
   }
 
@@ -70,7 +76,7 @@ class UserDataQueries extends React.Component {
       filter = true;
     }
 
-    const close = this.props.closeForm; 
+    const close = this.props.closeForm;
     const formProps = {
       close,
       handleChange,
@@ -144,20 +150,9 @@ class UserDataQueries extends React.Component {
           </Col>
         </Row>
 
-        {/* <FormModal
-          open={this.state.isOpen}
-          close={this.closeModal}
-          title={this.state.formTitle}
-          deleteRow={this.deleteRow}
-          change={this.handleChange}
-          renderGrid={this.renderMe}
-          pgid={this.state.pgid}
-          isfilterform={this.state.isfilterform}
-        /> */}
-
         <Modal
-          open={this.state.isOpen}
-          close={this.closeModal}
+          open={this.props.isOpen}
+          close={this.props.closeForm}
           title={this.state.formTitle}
           cruddef={cruddef}
         >
@@ -171,4 +166,17 @@ class UserDataQueries extends React.Component {
     );
   }
 }
-export default UserDataQueries;
+
+function mapStateToProps(state) {
+  return {
+    isOpen: state.formData.isOpen,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ closeForm, setFormData }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserDataQueries);
+
+

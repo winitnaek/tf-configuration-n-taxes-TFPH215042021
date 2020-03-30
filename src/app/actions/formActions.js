@@ -8,7 +8,7 @@ export const setFormData = (data) => {
 }
 
 export const saveFormData = (data) => {
-    return  {
+    return  { 
         type: SAVE_FORM_DATA,
         data: data
     }   
