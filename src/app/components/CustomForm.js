@@ -141,7 +141,7 @@ class CustomForm extends Component {
                       updateGrid(values, rowid, mode);
                       savegriddataApi.saveGridData(pgid, values, mode);
                     }else{
-                        this.props.formProps.renderGrid(pgid, values);
+                        this.props.formProps.renderMe(pgid, values);
                     }
                     close();
                     actions.resetForm({});

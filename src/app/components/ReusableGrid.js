@@ -11,7 +11,6 @@ import { setFilterFormData } from "../actions/filterFormActions";
 import CustomForm from './CustomForm';
 import Modal from "./Modal";
 
-import FormModal from "./FormModal";
 import {
   pagetitle,
   helpicon,

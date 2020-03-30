@@ -6,7 +6,8 @@ const populateV3States = "populateV3States";
 const experienceRates = "experienceRates";
 const supplementalMethods = "supplementalMethods";
 import { pagetitle, helpicon } from "../../base/constants/AppConstants";
-import FormModal from "./FormModal";
+import CustomForm from './CustomForm';
+import Modal from "./Modal";
 
 const TitleStyle = {
   margin: "0 auto",
@@ -29,11 +30,21 @@ class UserDataQueries extends React.Component {
       pgid: "",
       formTitle: "",
       isOpen: false,
-      isfilterform: false
+      isfilterform: false,
+      permissions: " "
     };
     this.OpenHelp = () => {
       this.props.help("userDataQueries");
     };
+
+    this.renderMe = (pgid) => {
+      console.log(pgid);
+      let data = tftools.filter(tftool => {
+        if (tftool.id == pgid) return tftool;
+      });
+      console.log(data[0]);
+      renderTFApplication("pageContainer", data[0]);
+    }
 
     this.closeModal = () => {
       this.setState({ isOpen: false });
@@ -47,17 +58,29 @@ class UserDataQueries extends React.Component {
         isfilterform: true
       });
     };
-   }
-
-  renderMe(pgid) {
-    console.log(pgid)
-    let data = tftools.filter(tftool => {
-      if (tftool.id == pgid) return tftool;
-    });
-    console.log(data[0])
-    renderTFApplication("pageContainer", data[0]);
   }
+
+
+
   render() {
+    const { permissions, cruddef, isfilterform, pgid } = this.state;
+    const { deleteRow, handleChange, renderMe, handleSubmit } = this;
+    let filter;
+    if (isfilterform) {
+      filter = true;
+    }
+
+    const close = this.props.closeForm; 
+    const formProps = {
+      close,
+      handleChange,
+      pgid,
+      permissions,
+      deleteRow,
+      handleSubmit,
+      renderMe,
+      filter
+    };
     return (
       <Fragment>
         <Row>
@@ -120,8 +143,8 @@ class UserDataQueries extends React.Component {
             </h3>
           </Col>
         </Row>
-   
-        <FormModal
+
+        {/* <FormModal
           open={this.state.isOpen}
           close={this.closeModal}
           title={this.state.formTitle}
@@ -130,7 +153,20 @@ class UserDataQueries extends React.Component {
           renderGrid={this.renderMe}
           pgid={this.state.pgid}
           isfilterform={this.state.isfilterform}
-        />
+        /> */}
+
+        <Modal
+          open={this.state.isOpen}
+          close={this.closeModal}
+          title={this.state.formTitle}
+          cruddef={cruddef}
+        >
+          <CustomForm
+            formProps={formProps}
+            filter={filter}
+            isfilterform={this.state.isfilterform}
+          />
+        </Modal>
       </Fragment>
     );
   }
