@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Formik } from "formik";
+import { Formik, Form} from "formik";
 import { connect } from "react-redux";
-import { Col, Button, Form, Row } from "reactstrap";
-import ReusableForm from "./ReusableForm";
+import { Col, Button, Row } from "reactstrap";
 import { updateGrid } from "../../base/utils/updateGrid";
 import { tftools } from "../../base/constants/TFTools";
 import * as Metadata from "../metadata/metaData";
@@ -80,7 +79,6 @@ class CustomForm extends Component {
       const Component = fieldMap[item.fieldtype];
       let error = props.errors.hasOwnProperty(item.id) && props.errors[item.id];
       if (item.fieldtype) {
-        // console.log(item.fieldtype)
         switch (item.fieldtype) {
           case "text":
           case "date":
@@ -124,37 +122,34 @@ class CustomForm extends Component {
   render() {
     const { formProps } = this.props;
     const { close, change, permissions, deleteRow, pgid } = formProps;
-    const { handleDelete, handleSubmit, resetForm } = this;
-
-    console.log("Pgidadfadsf ", pgid);
     const formData = Data[pgid];
     let initialValues = {};
 
     this.displayForm = () => {
       return (
-        <div className="form">
           <Formik
             initialValues={initialValues}
             validationSchema={validateSchema}
             onSubmit={(values, actions) => {
-              console.log("submitting");
               try {
-                let rowid = null;
-                console.log("Submitted Values ", values);
-                // Here the key should be same as in schema
-                const mode = this.props.mode;
-                if (mode === "Edit") {
-                  rowid = this.props.rowIndex;
-                }
-                updateGrid(values, rowid, mode);
-                savegriddataApi.saveGridData(pgid, values, mode);
-                close();
-                actions.resetForm({});
+                    let rowid = null;
+                    const mode = this.props.mode;
+                    if (mode === "Edit") {
+                      rowid = this.props.rowIndex;
+                    }
+                    if(!this.props.filter){
+                      updateGrid(values, rowid, mode);
+                      savegriddataApi.saveGridData(pgid, values, mode);
+                    }else{
+                        this.props.formProps.renderGrid(pgid, values);
+                    }
+                    close();
+                    actions.resetForm({});
               } catch (error) {
-                actions.setSubmitting(false);
-                actions.setErrors({ submit: error.message });
+                    console.log("Form Error >>>>>>  ", error);
+                    actions.setSubmitting(false);
+                    actions.setErrors({ submit: error.message });
               }
-              // }
             }}
             onReset={() => {
               formData.forEach(item => {
@@ -166,69 +161,27 @@ class CustomForm extends Component {
               });
             }}
           >
-            {(props, actions) => (
-              <Form onSubmit={e => this.handleSubmit(props)}>
+            {(props) => (
+              <Form>
                 <Container>
                   <ModalBody>
                     <Form onSubmit={this.props.submit} style={modalBody}>
-                    <Col>{this.renderFormElements(props, formData)}</Col>
+                        <Col>{this.renderFormElements(props, formData)}</Col>
                     </Form>
                     <Usage pgid={pgid} />
                   </ModalBody>
-
                   <ModalFooter>
-                    <Button
-                      color="primary"
-                      className="btn btn-primary"
-                      onClick={this.props.close}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      color="secondary"
-                      className="btn btn-primary mr-auto"
-                      onClick={this.props.reset}
-                    >
-                      Reset
-                    </Button>
-
+                    <Button color="primary" className="btn btn-primary" onClick={close}> Cancel </Button>
+                    <Button color="secondary" className="btn btn-primary mr-auto" type="reset"> Reset </Button>
                     {this.props.showDelete && this.props.deletePermission && (
-                      <Button onClick={e => this.props.delete()} color="danger">
-                        Delete
-                      </Button>
+                      <Button onClick={e => this.props.delete()} color="danger"> Delete </Button>
                     )}
-
-                    {this.props.filter ? (
-                      <Button type="submit" color="success">
-                        {" "}
-                        View{" "}
-                      </Button>
-                    ) : (
-                      <Button type="submit" color="success">
-                        {" "}
-                        Submit{" "}
-                      </Button>
-                    )}
+                    <Button type="submit" color="success"> {this.props.filter ? " View " : " Submit "}</Button>
                   </ModalFooter>
                 </Container>
-                {/* <ReusableForm 
-                  title="Enter Custom Payments"
-                  close={close}
-                  pgid={pgid}
-                  delete={handleDelete}
-                  reset={props.handleReset}
-                  showDelete={this.state.showDelete}
-                  deletePermission={permissions ? permissions.DELETE : false}
-                  handleView={this.props.handleView}
-                  filter={this.props.filter}
-                  view={this.handleView}
-                > */}
-                {/* <Col>{this.renderFormElements(props, formData)}</Col> */}
-                {/* </ReusableForm> */}
               </Form>
             )}
           </Formik>
-        </div>
       );
     };
 
@@ -237,23 +190,6 @@ class CustomForm extends Component {
       const { rowIndex } = this.props.rowIndex;
       deleteRow(rowIndex);
       close();
-    };
-
-    this.handleSubmit = props => {
-      console.log("You just entered handlesubmit");
-      console.log(props);
-      const { values } = props;
-      console.log(values);
-
-      const { filter, formProps } = this.props;
-      const { pgid } = formProps;
-      if (filter) {
-        this.props.formProps.renderGrid(pgid, props.values);
-        // check to see if the below is still needed
-        //this.props.setFilterFormData(props.values);
-      } else {
-        props.handleSubmit();
-      }
     };
 
     if (this.props.mode == "Edit") {
@@ -265,10 +201,7 @@ class CustomForm extends Component {
     }
 
     const yepSchema = formData.reduce(createYupSchema, {});
-    //console.log("yup Schema ", yepSchema);
     const validateSchema = yup.object().shape(yepSchema);
-
-    console.log(this.props);
     return (
       this.displayForm()
     );
