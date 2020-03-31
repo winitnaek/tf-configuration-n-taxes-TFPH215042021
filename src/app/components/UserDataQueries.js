@@ -49,12 +49,8 @@ class UserDataQueries extends React.Component {
       renderTFApplication("pageContainer", data[0]);
     }
 
-    this.closeModal = () => {
-      this.setState({ isOpen: false });
-    };
-
     this.toggle = (id, title) => {
-      const payload = { data:{} , mode: "New" };
+     const payload = { data:{} , mode: "New" };
      this.props.setFormData(payload)
 
       this.setState({
