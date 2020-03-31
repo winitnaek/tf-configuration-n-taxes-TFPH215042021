@@ -23,6 +23,7 @@ import {
 import { setFormData } from "./app/actions/formActions";
 import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
 import ReusableGrid from "./app/components/ReusableGrid";
+import ReusablePage from './app/components/ReusablePage';
 import UserDataQueries from "./app/components/UserDataQueries";
 import { UI_COMP, UI_PAGE, tftools } from "./base/constants/TFTools";
 import griddataAPI from "./app/api/griddataAPI";
@@ -73,7 +74,7 @@ function renderTFApplication(elem, renderName, child) {
     console.log(renderName.id, renderName.value, renderName);
     renderComponent(elem, renderName.id, renderName.value, child);
   } else if (renderName && renderName.type == UI_PAGE) {
-    renderPage(elem, renderName.id, renderName.value);
+    renderNewPage(elem, renderName.id, renderName.value);
   }
 }
 /**
@@ -112,16 +113,28 @@ function renderComponent(elem, pageid, pid) {
  * renderPage
  * @param {*} elem
  */
-function renderPage(elem, pageid, pid) {
-  if (pageid == "userDataQueries") {
+function renderNewPage(elem, pageid, pid) {
+    const help = openHelp;
     ReactDOM.render(
       <Provider store={store}>
-        <UserDataQueries help={openHelp} />
+        <ReusablePage pageid help />          
       </Provider>,
       document.querySelector("#" + elem)
     );
-  }
 }
+
+// function renderPage(pageid, help) {
+//   // let form;
+//   // switch (pageid) {
+//   //   case (pageid === "userDataQueries"):
+//   //     form = <UserDataQueries help={help} />;
+//   //     break;
+//   //   default:
+//   //     break;
+//   // }
+//   return <UserDataQueries help={help} />    //form;
+// }
+
 /**
  * showPrgress
  * @param {*} elem
