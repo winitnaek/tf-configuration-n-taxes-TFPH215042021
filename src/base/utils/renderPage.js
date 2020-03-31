@@ -1,16 +1,18 @@
 import React from "react";
 import UserDataQueries from "../../app/components/UserDataQueries";
+import Home from "../../app/home/home";
 
 const renderPage = (pgid, help) => {
-    let form;
+  let page;
   switch (pgid) {
-    case pgid === "userDataQueries":
-      form = <UserDataQueries help={help} />;
+    case "userDataQueries":
+      page = <UserDataQueries help={help} />;
       break;
     default:
+      page = <Home />;
       break;
   }
-  return form;
+  return page; 
 };
 
 export default renderPage;

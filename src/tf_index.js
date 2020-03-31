@@ -24,7 +24,6 @@ import { setFormData } from "./app/actions/formActions";
 import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
 import ReusableGrid from "./app/components/ReusableGrid";
 import ReusablePage from './app/components/ReusablePage';
-import UserDataQueries from "./app/components/UserDataQueries";
 import { UI_COMP, UI_PAGE, tftools } from "./base/constants/TFTools";
 import griddataAPI from "./app/api/griddataAPI";
 import moduleLinksReducer from "./app/home/actions/moduleLinksReducer";
@@ -113,27 +112,15 @@ function renderComponent(elem, pageid, pid) {
  * renderPage
  * @param {*} elem
  */
-function renderNewPage(elem, pageid, pid) {
+function renderNewPage(elem, pgid, pid) {
     const help = openHelp;
     ReactDOM.render(
       <Provider store={store}>
-        <ReusablePage pageid help />          
+        <ReusablePage pgid={pgid} help={help} />          
       </Provider>,
       document.querySelector("#" + elem)
     );
 }
-
-// function renderPage(pageid, help) {
-//   // let form;
-//   // switch (pageid) {
-//   //   case (pageid === "userDataQueries"):
-//   //     form = <UserDataQueries help={help} />;
-//   //     break;
-//   //   default:
-//   //     break;
-//   // }
-//   return <UserDataQueries help={help} />    //form;
-// }
 
 /**
  * showPrgress
