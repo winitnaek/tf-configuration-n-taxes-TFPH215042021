@@ -11,7 +11,6 @@ import { setFilterFormData } from "../actions/filterFormActions";
 import CustomForm from './CustomForm';
 import Modal from "./Modal";
 
-import FormModal from "./FormModal";
 import {
   pagetitle,
   helpicon,
@@ -284,6 +283,7 @@ let filter;
    }
 
 const close = this.props.closeForm
+console.log(close)
 const formProps = {close, handleChange, pgid, permissions, deleteRow, handleSubmit, renderMe, filter}
 
     return (

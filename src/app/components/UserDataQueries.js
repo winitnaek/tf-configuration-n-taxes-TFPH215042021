@@ -1,12 +1,16 @@
 import React, { Fragment } from "react";
 import { Col, Row, Button, UncontrolledTooltip } from "reactstrap";
 import { tftools } from "../../base/constants/TFTools";
+import { connect } from "react-redux";
+import { closeForm, setFormData } from "../actions/formActions";
+import { bindActionCreators } from "redux";
 const allBSIPlans = "allBSIPlans";
 const populateV3States = "populateV3States";
 const experienceRates = "experienceRates";
 const supplementalMethods = "supplementalMethods";
 import { pagetitle, helpicon } from "../../base/constants/AppConstants";
-import FormModal from "./FormModal";
+import CustomForm from './CustomForm';
+import Modal from "./Modal";
 
 const TitleStyle = {
   margin: "0 auto",
@@ -29,35 +33,56 @@ class UserDataQueries extends React.Component {
       pgid: "",
       formTitle: "",
       isOpen: false,
-      isfilterform: false
+      isfilterform: false,
+      permissions: " "
     };
     this.OpenHelp = () => {
       this.props.help("userDataQueries");
     };
 
-    this.closeModal = () => {
-      this.setState({ isOpen: false });
-    };
+    this.renderMe = (pgid) => {
+      console.log(pgid);
+      let data = tftools.filter(tftool => {
+        if (tftool.id == pgid) return tftool;
+      });
+      console.log(data[0]);
+      renderTFApplication("pageContainer", data[0]);
+    }
 
     this.toggle = (id, title) => {
+     const payload = { data:{} , mode: "New" };
+     this.props.setFormData(payload)
+
       this.setState({
-        isOpen: !this.state.isOpen,
         pgid: id,
         formTitle: title,
         isfilterform: true
       });
-    };
-   }
 
-  renderMe(pgid) {
-    console.log(pgid)
-    let data = tftools.filter(tftool => {
-      if (tftool.id == pgid) return tftool;
-    });
-    console.log(data[0])
-    renderTFApplication("pageContainer", data[0]);
+    };
   }
+
+
+
   render() {
+    const { permissions, cruddef, isfilterform, pgid } = this.state;
+    const { deleteRow, handleChange, renderMe, handleSubmit } = this;
+    let filter;
+    if (isfilterform) {
+      filter = true;
+    }
+
+    const close = this.props.closeForm;
+    const formProps = {
+      close,
+      handleChange,
+      pgid,
+      permissions,
+      deleteRow,
+      handleSubmit,
+      renderMe,
+      filter
+    };
     return (
       <Fragment>
         <Row>
@@ -120,19 +145,34 @@ class UserDataQueries extends React.Component {
             </h3>
           </Col>
         </Row>
-   
-        <FormModal
-          open={this.state.isOpen}
-          close={this.closeModal}
+
+        <Modal
+          open={this.props.isOpen}
+          close={this.props.closeForm}
           title={this.state.formTitle}
-          deleteRow={this.deleteRow}
-          change={this.handleChange}
-          renderGrid={this.renderMe}
-          pgid={this.state.pgid}
-          isfilterform={this.state.isfilterform}
-        />
+          cruddef={cruddef}
+        >
+          <CustomForm
+            formProps={formProps}
+            filter={filter}
+            isfilterform={this.state.isfilterform}
+          />
+        </Modal>
       </Fragment>
     );
   }
 }
-export default UserDataQueries;
+
+function mapStateToProps(state) {
+  return {
+    isOpen: state.formData.isOpen,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ closeForm, setFormData }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserDataQueries);
+
+
