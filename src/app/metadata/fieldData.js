@@ -3,7 +3,7 @@ export const customPayments = [
       id: "userCode",
       placeholder: "Enter Custom Payment Code",
       fieldtype: "text",
-      label: "Code *",
+      label: "Code",
       value: "",
       errmsg: "Custom Tax Code is required",
       fieldlength: {
@@ -23,7 +23,7 @@ export const customPayments = [
         constraint: [
           {
             type: "min",
-            input: 5,
+            input: 1,
             message: "min 5 characters"
           },
           {
@@ -38,7 +38,7 @@ export const customPayments = [
       id: "payType",
       placeholder: "Select a type",
       fieldtype: "select",
-      label: "Type*",
+      label: "Type",
       value: "",
       errmsg: "PayType is required",
       fieldlength: {
@@ -52,7 +52,7 @@ export const customPayments = [
         ]
       },
       validation: {
-        required: true,
+        required: false,
         type: "string"
       }
     },
@@ -61,7 +61,7 @@ export const customPayments = [
       placeholder: "Enter Custom Payment Name",
       fieldtype: "text",
       label: "Custom Payment",
-      value: "Payment",
+      value: "",
       errmsg: "Custom Payment Name is required",
       fieldlength: {
         minlength: 1,
@@ -95,7 +95,7 @@ export const customPayments = [
       id: "taxability",
       placeholder: "Select a type",
       fieldtype: "select",
-      label: "Taxability*",
+      label: "Taxability",
       value: "",
       errmsg: "PayType is required",
       fieldlength: {
@@ -116,7 +116,7 @@ export const customPayments = [
         multiselect: false,  
       },
       validation: {
-        required: true,
+        required: false,
         type: "string"
       }
     },
@@ -133,16 +133,12 @@ export const customPayments = [
       },
       fieldinfo: {},
       validation: {
-        required: true,
+        required: false,
         type: "number",
         subtype: [
           {
             type: "positive",
             message: "Maximum Limit Cannot be negative"
-          },
-          {
-            type: "integer",
-            message: "Maximum Limit Cannot be integer"
           },
           {
             type: "typeError",
@@ -162,41 +158,6 @@ export const customPayments = [
           }
         ]
       }
-    },
-    {
-      id: "aggstatus",
-      placeholder: "Enter Aggregate Status",
-      fieldtype: "text",
-      label: "Aggregate Status",
-      value: "",
-      errmsg: "Custom Payment Name is required",
-      fieldlength: {
-        minlength: 1,
-        maxlength: 25
-      },
-      fieldinfo: {},
-      validation: {
-        required: true,
-        type: "string",
-        subtype: [
-          {
-            type: "uppercase",
-            message: "AggregateStatus needs to be in uppercase."
-          }
-        ],
-        constraint: [
-          {
-            type: "min",
-            input: 5,
-            message: "min 5 characters"
-          },
-          {
-            type: "max",
-            input: 25,
-            message: "max 25 characters"
-          }
-        ]
-      }
     }
   ];
 export const customTaxCodes = [
@@ -204,7 +165,7 @@ export const customTaxCodes = [
       id: "taxCode",
       placeholder: "Enter Custom Tax Code",
       fieldtype: "text",
-      label: "Code *",
+      label: "Custom Tax Code",
       value: "",
       errmsg: "Custom Tax Code is required",
       fieldlength: {
@@ -239,7 +200,7 @@ export const customTaxCodes = [
       id: "name",
       placeholder: "Enter Custom Tax Name",
       fieldtype: "text",
-      label: "Code *",
+      label: "Custom Tax Name",
       value: "",
       errmsg: "Custom Tax Name is required",
       fieldlength: {
@@ -275,259 +236,23 @@ export const customTaxCodes = [
     {
       name: "taxCode",
       id: "taxCode",
-      placeholder: "Enter Tax Code",
+      placeholder: "Enter Custom Tax Code",
       fieldtype: "text",
       fieldlength: {},
       fieldinfo: {},
       validationType: "string",
-      label: "Custom Tax Code Name",
+      label: "Custom Tax Code",
       value: "",
       validation: {
         required: true,
         type: "string",
         subtype: [
           {
-            type: "lowercase",
+            type: "uppercase",
             message: "Tax Code needs to be in uppercase."
           }
         ],
         constraint: [
-          {
-            type: "min",
-            input: 5,
-            message: "min 5 characters"
-          },
-          {
-            type: "max",
-            input: 25,
-            message: "max 25 characters"
-          }
-        ]
-      }
-    },
-    {
-      name: "cmName",
-      id: "cmName",
-      placeholder: "Enter Method",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Method",
-      value: "",
-      validation: {
-        required: true,
-        type: "string",
-        subtype: [
-          {
-            type: "lowercase",
-            message: "Tax Code needs to be in uppercase."
-          }
-        ],
-        constraint: [
-          {
-            type: "min",
-            input: 5,
-            message: "min 5 characters"
-          },
-          {
-            type: "max",
-            input: 25,
-            message: "max 25 characters"
-          }
-        ]
-      }
-    },
-    {
-      name: "taxRate",
-      id: "taxRate",
-      placeholder: "Enter Tax Rate",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Tax Rate",
-      value: "",
-      validation: {
-        required: true,
-        type: "string",
-        subtype: [
-          {
-            type: "lowercase",
-            message: "Tax Code needs to be in uppercase."
-          }
-        ],
-        constraint: [
-          {
-            type: "min",
-            input: 5,
-            message: "min 5 characters"
-          },
-          {
-            type: "max",
-            input: 25,
-            message: "max 25 characters"
-          }
-        ]
-      }
-    },
-    {
-      name: "rounding",
-      id: "rounding",
-      placeholder: "Enter Rounding Value",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Rounding",
-      value: "",
-      validation: {
-        required: true,
-        type: "string",
-        subtype: [
-          {
-            type: "lowercase",
-            message: "Tax Code needs to be in uppercase."
-          }
-        ],
-        constraint: [
-          {
-            type: "min",
-            input: 5,
-            message: "min 5 characters"
-          },
-          {
-            type: "max",
-            input: 25,
-            message: "max 25 characters"
-          }
-        ]
-      }
-    },
-    {
-      name: "minWage",
-      id: "minWage",
-      placeholder: "Enter Min Wage",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Min Wage",
-      value: "",
-      validation: {
-        required: true,
-        type: "string",
-        subtype: [
-          {
-            type: "lowercase",
-            message: "Tax Code needs to be in uppercase."
-          }
-        ],
-        constraint: [
-          {
-            type: "min",
-            input: 5,
-            message: "min 5 characters"
-          },
-          {
-            type: "max",
-            input: 25,
-            message: "max 25 characters"
-          }
-        ]
-      }
-    },
-    {
-      name: "maxWage",
-      id: "maxWage",
-      placeholder: "Enter Max Wage",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Max Wage",
-      value: "",
-      validation: {
-        required: true,
-        type: "string",
-        subtype: [
-          {
-            type: "lowercase",
-            message: "Tax Code needs to be in uppercase."
-          }
-        ],
-        constraint: [
-          {
-            type: "min",
-            input: 5,
-            message: "min 5 characters"
-          },
-          {
-            type: "max",
-            input: 25,
-            message: "max 25 characters"
-          }
-        ]
-      }
-    },
-    {
-      name: "maxTax",
-      id: "maxTax",
-      placeholder: "Enter Max Tax",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Max Tax",
-      value: "",
-      validation: {
-        required: true,
-        type: "string",
-        subtype: [
-          {
-            type: "lowercase",
-            message: "Tax Code needs to be in uppercase."
-          }
-        ],
-        constraint: [
-          {
-            type: "min",
-            input: 5,
-            message: "min 5 characters"
-          },
-          {
-            type: "max",
-            input: 25,
-            message: "max 25 characters"
-          }
-        ]
-      }
-    },
-    {
-      name: "flatAmount",
-      id: "flatAmount",
-      placeholder: "Enter Flat Amount",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Flat Amount",
-      value: "",
-      validation: {
-        required: true,
-        type: "string",
-        subtype: [
-          {
-            type: "lowercase",
-            message: "Tax Code needs to be in uppercase."
-          }
-        ],
-        constraint: [
-          {
-            type: "min",
-            input: 5,
-            message: "min 5 characters"
-          },
           {
             type: "max",
             input: 25,
@@ -601,6 +326,264 @@ export const customTaxCodes = [
           }
         ]
       }
+    },
+    {
+      name: "cmName",
+      id: "cmName",
+      placeholder: "Select Calculation Method",
+      fieldtype: "select",
+      fieldlength: {},
+      fieldinfo: {
+        options:[
+          "01 Tax Rate, Max Wage",
+          "00 Tax Rate Only</option",
+          "03 Tax Rate, Min Wage, Max Wage",
+          "04 Tax Rate, Max Tax",
+          "05 Tax Rate, Min Wage, Max Tax",
+          "06 Flat Amount Only",
+          "07 Flat Amount, Max Wage",
+          "08 Flat Amount, Min Wage",
+          "09 Flat Amount, Min Wage, Max Wage",
+          "10 Flat Amount, Max Tax",
+          "11 Flat Amount, Tax Rate",
+          "12 Tax Rate For Hours Worked",
+          "13 Tax Rate, Max Annualized Wage",
+          "14 Tax Rate, Min YTD Wage",
+          "15 Tax Rate, Min YTD Wage, Max YTD Wage, Max Tax",
+          "16 Flat Amt, Max YTD Wage",
+          "17 Flat Amt, Min YTD Wage",
+          "18 Flat Amt, Min YTD Wage, Max YTD Wage",
+          "19 Flat Amt, Min YTD Wage, Max Tax",
+          "20 Tax Rate, Min YTD Wage, Max Tax"
+        ]
+      },
+      validationType: "string",
+      label: "Calculation Method",
+      value: "",
+      validation: {
+        required: false,
+        type: "string",
+        subtype: [
+          {
+            type: "lowercase",
+            message: "Tax Code needs to be in uppercase."
+          }
+        ],
+        constraint: [
+          {
+            type: "min",
+            input: 5,
+            message: "min 5 characters"
+          },
+          {
+            type: "max",
+            input: 25,
+            message: "max 25 characters"
+          }
+        ]
+      }
+    },
+    {
+      name: "taxRate",
+      id: "taxRate",
+      placeholder: "Enter Tax Rate",
+      fieldtype: "text",
+      fieldlength: {},
+      fieldinfo: {},
+      validationType: "string",
+      label: "Tax Rate",
+      value: "",
+      validation: {
+        required: false,
+        type: "number",
+        subtype: [
+            {
+              type: "positive",
+              message: "Zipcode cannot be negative"
+            },
+            {
+              type: "typeError",
+              message: "Must be a number"
+            }
+        ],
+        constraint: [
+          {
+            type: "max",
+            input: 25,
+            message: "max 25 characters"
+          }
+        ]
+      }
+    },
+    {
+      name: "rounding",
+      id: "rounding",
+      placeholder: "Enter Rounding Value",
+      fieldtype: "select",
+      fieldlength: {},
+      fieldinfo: {
+          options: [
+            "Round To Cents",
+            "Round To Dollars",
+            "Either/Cents",
+            "Either/Dollars",
+            "Round Down To Dollars",
+            "Authority/Round Down To Dollars",
+        ]
+      },
+      validationType: "string",
+      label: "Rounding Methods",
+      value: "",
+      validation: {
+        required: false,
+        type: "string",
+        subtype: [
+          {
+            type: "lowercase",
+            message: "Tax Code needs to be in uppercase."
+          }
+        ],
+        constraint: [
+          {
+            type: "min",
+            input: 5,
+            message: "min 5 characters"
+          },
+          {
+            type: "max",
+            input: 25,
+            message: "max 25 characters"
+          }
+        ]
+      }
+    },
+    {
+      name: "minWage",
+      id: "minWage",
+      placeholder: "Enter Min Wage",
+      fieldtype: "text",
+      fieldlength: {},
+      fieldinfo: {},
+      validationType: "string",
+      label: "Minimum Wage",
+      value: "",
+      validation: {
+        required: false,
+        type: "number",
+        subtype: [
+          {
+            type: "positive",
+            message: "Minimum Wage cannot be negative"
+          },
+          {
+            type: "typeError",
+            message: "Must be a number"
+          }
+        ],
+        constraint: [
+          {
+            type: "max",
+            input: 25,
+            message: "max 25 characters"
+          }
+        ]
+      }
+    },
+    {
+      name: "maxWage",
+      id: "maxWage",
+      placeholder: "Enter Max Wage",
+      fieldtype: "text",
+      fieldlength: {},
+      fieldinfo: {},
+      validationType: "string",
+      label: "Maximum Wage",
+      value: "",
+      validation: {
+        required: false,
+        type: "number",
+        subtype: [
+          {
+            type: "positive",
+            message: "Maximum Wage cannot be negative"
+          },
+          {
+            type: "typeError",
+            message: "Must be a number"
+          }
+        ],
+        constraint: [
+          {
+            type: "max",
+            input: 25,
+            message: "max 25 characters"
+          }
+        ]
+      }
+    },
+    {
+      name: "maxTax",
+      id: "maxTax",
+      placeholder: "Enter Max Tax",
+      fieldtype: "text",
+      fieldlength: {},
+      fieldinfo: {},
+      validationType: "string",
+      label: "Max Tax",
+      value: "",
+      validation: {
+        required: false,
+        type: "number",
+        subtype: [
+          {
+            type: "positive",
+            message: "Maximum Tax cannot be negative"
+          },
+          {
+            type: "typeError",
+            message: "Must be a number"
+          }
+        ],
+        constraint: [
+          {
+            type: "max",
+            input: 25,
+            message: "max 25 characters"
+          }
+        ]
+      }
+    },
+    {
+      name: "flatAmount",
+      id: "flatAmount",
+      placeholder: "Enter Flat Amount",
+      fieldtype: "text",
+      fieldlength: {},
+      fieldinfo: {},
+      validationType: "string",
+      label: "Flat Amount",
+      value: "",
+      validation: {
+        required: false,
+        type: "number",
+        subtype: [
+          {
+            type: "positive",
+            message: "Zipcode cannot be negative"
+          },
+          {
+            type: "typeError",
+            message: "Must be a number"
+          }
+        ],
+        constraint: [
+          {
+            type: "max",
+            input: 25,
+            message: "max 25 characters"
+          }
+        ]
+      }
     }
   ];
 
@@ -613,7 +596,7 @@ export const worksiteCompanies = [
       fieldlength: {},
       fieldinfo: {},
       validationType: "string",
-      label: "Location*",
+      label: "Location",
       value: "",
       validation: {
         required: true,
@@ -646,7 +629,7 @@ export const worksiteCompanies = [
       fieldlength: {},
       fieldinfo: {},
       validationType: "string",
-      label: "Street1*",
+      label: "Street1",
       value: "",
       validation: {
         required: true,
@@ -712,7 +695,7 @@ export const worksiteCompanies = [
       fieldlength: {},
       fieldinfo: {},
       validationType: "string",
-      label: "City*",
+      label: "City",
       value: "",
       validation: {
         required: true,
@@ -1119,12 +1102,9 @@ export const experienceRates = [
       validationType: "string",
       label: "Tax Code",
       value: "",
-      validations: [
+      validation: [
         {
-          type: "required",
-          params: [
-            "field is required"
-          ]
+          required: false,
         }
       ]
     },
@@ -1138,12 +1118,9 @@ export const experienceRates = [
       validationType: "string",
       label: "Start Date",
       value: "",
-      validations: [
+      validation: [
         {
-          type: "required",
-          params: [
-            "field is required"
-          ]
+          required: false,
         }
       ]
     },
@@ -1157,12 +1134,9 @@ export const experienceRates = [
       validationType: "string",
       label: "Company Code",
       value: "",
-      validations: [
+      validation: [
         {
-          type: "required",
-          params: [
-            "field is required"
-          ]
+          required: false,
         }
       ]
     },
@@ -1176,12 +1150,9 @@ export const experienceRates = [
       validationType: "string",
       label: "Risk Class",
       value: "",
-      validations: [
+      validation: [
         {
-          type: "required",
-          params: [
-            "field is required"
-          ]
+          required: false,
         }
       ]
     }
@@ -1198,12 +1169,9 @@ export const supplementalMethods = [
       validationType: "string",
       label: "Tax Code",
       value: "",
-      validations: [
+      validation: [
         {
-          type: "required",
-          params: [
-            "field is required"
-          ]
+          required: false,
         }
       ]
     },
@@ -1217,12 +1185,9 @@ export const supplementalMethods = [
       validationType: "string",
       label: "TaxType",
       value: "",
-      validations: [
+      validation: [
         {
-          type: "required",
-          params: [
-            "field is required"
-          ]
+          required: false,
         }
       ]
     },
@@ -1236,12 +1201,9 @@ export const supplementalMethods = [
       validationType: "string",
       label: "Formula Number",
       value: "",
-      validations: [
+      validation: [
         {
-          type: "required",
-          params: [
-            "field is required"
-          ]
+          required: false,
         }
       ]
     },
@@ -1255,12 +1217,9 @@ export const supplementalMethods = [
       validationType: "string",
       label: "Start Date",
       value: "",
-      validations: [
+      validation: [
         {
-          type: "required",
-          params: [
-            "field is required"
-          ]
+          required: false,
         }
       ]
     }
@@ -1271,7 +1230,7 @@ export const worksites = [
       id: "companyCode",
       placeholder: "Enter Company Code",
       fieldtype: "text",
-      label: "Code *",
+      label: "Code ",
       value: "",
       errmsg: "Company Code is required",
       fieldlength: {
@@ -1306,7 +1265,7 @@ export const worksites = [
       id: "companyName",
       placeholder: "Enter Company Name",
       fieldtype: "text",
-      label: "Name *",
+      label: "Name ",
       value: "",
       errmsg: "Company Code is required",
       fieldlength: {
@@ -1343,7 +1302,7 @@ export const worksites = [
       id: "customTaxCode",
       placeholder: "Enter Tax Code",
       fieldtype: "text",
-      label: "Code *",
+      label: "Code ",
       value: "",
       errmsg: "TaxCode is required",
       fieldlength: {
@@ -1378,7 +1337,7 @@ export const worksites = [
       id: "customTaxName",
       placeholder: "Enter Tax Name",
       fieldtype: "text",
-      label: "Name *",
+      label: "Name ",
       value: "",
       errmsg: "Tax Code is required",
       fieldlength: {

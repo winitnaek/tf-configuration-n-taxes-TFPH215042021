@@ -41,7 +41,9 @@ class CustomSelect extends Component {
     return (
       <FormGroup>
         <Col>
-          <Label>{this.props.label}</Label>
+          <Label>{this.props.label}
+              {this.props.required && <Label style={{color:'red', fontSize: 20}}>{" *"}</Label> }
+          </Label>
           {(this.props.fieldinfo.typeahead) ? (
             <AsyncTypeahead
               id={this.props.id}

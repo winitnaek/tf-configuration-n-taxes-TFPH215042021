@@ -95,6 +95,7 @@ class CustomForm extends Component {
                 placeholder={item.placeholder}
                 disabled={this.disabledHandler(item.id)}
                 value={props.values[item.id]}
+                required={item.validation.required}
                 onChange={props.handleChange}
                 error={error}
               />
@@ -112,6 +113,7 @@ class CustomForm extends Component {
                 placeholder={item.placeholder}
                 disabled={this.disabledHandler(item.id)}
                 value={props.values[item.id]}
+                required={item.validation.required}
                 onChange={props.setFieldValue}
                 error={error}
               />

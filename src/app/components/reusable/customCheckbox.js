@@ -25,7 +25,9 @@ class CustomCheckbox extends Component {
     return (
       <Col>
           <FormGroup>
-            <Label>{this.props.label}</Label>
+            <Label>{this.props.label}
+                {this.props.required && <Label style={{color:'red', fontSize: 20}}>{" *"}</Label> }
+            </Label>
             {this.props.fieldinfo.options.map(opt => {
                     return (
                             <Col>
