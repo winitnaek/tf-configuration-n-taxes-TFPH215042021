@@ -1,14 +1,14 @@
 [
     {
       "dataset": "VINIT",
-      "company": "TESTCOMP1",
+      "companyCode": "TESTCOMP1",
       "companyName": "Test Company 1",
       "fein": "123456789",
       "courtesy": true
     },
     {
       "dataset": "VINIT",
-      "company": "TETS",
+      "companyCode": "TETS",
       "companyName": "test",
       "fein": "243434343",
       "courtesy": true
