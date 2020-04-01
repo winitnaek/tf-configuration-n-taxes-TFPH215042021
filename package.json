@@ -29,6 +29,7 @@
     "formik": "^1.5.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-bootstrap-typeahead": "^3.4.6",
     "react-dates": "^21.8.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",

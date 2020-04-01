@@ -60,7 +60,7 @@ export const customPayments = [
       id: "name",
       placeholder: "Enter Custom Payment Name",
       fieldtype: "text",
-      label: "Name *",
+      label: "Custom Payment",
       value: "Payment",
       errmsg: "Custom Payment Name is required",
       fieldlength: {
@@ -95,7 +95,7 @@ export const customPayments = [
       id: "taxability",
       placeholder: "Select a type",
       fieldtype: "select",
-      label: "Taxability",
+      label: "Taxability*",
       value: "",
       errmsg: "PayType is required",
       fieldlength: {
@@ -103,6 +103,8 @@ export const customPayments = [
         maxlength: 25
       },
       fieldinfo: {
+        typeahead: true,
+        isasync: true,
         options: [
           "Non-Taxable",
           "Limit-YTD",
@@ -110,7 +112,8 @@ export const customPayments = [
           "Limit-MTD",
           "Taxable/Exclude",
           "Imputed"
-        ]
+        ],
+        multiselect: false,  
       },
       validation: {
         required: true,
@@ -160,41 +163,41 @@ export const customPayments = [
         ]
       }
     },
-    // {
-    //   id: "aggstatus",
-    //   placeholder: "Enter Aggregate Status",
-    //   fieldtype: "text",
-    //   label: "Aggregate Status",
-    //   value: "",
-    //   errmsg: "Custom Payment Name is required",
-    //   fieldlength: {
-    //     minlength: 1,
-    //     maxlength: 25
-    //   },
-    //   fieldinfo: {},
-    //   validation: {
-    //     required: true,
-    //     type: "string",
-    //     subtype: [
-    //       {
-    //         type: "uppercase",
-    //         message: "AggregateStatus needs to be in uppercase."
-    //       }
-    //     ],
-    //     constraint: [
-    //       {
-    //         type: "min",
-    //         input: 5,
-    //         message: "min 5 characters"
-    //       },
-    //       {
-    //         type: "max",
-    //         input: 25,
-    //         message: "max 25 characters"
-    //       }
-    //     ]
-    //   }
-    // }
+    {
+      id: "aggstatus",
+      placeholder: "Enter Aggregate Status",
+      fieldtype: "text",
+      label: "Aggregate Status",
+      value: "",
+      errmsg: "Custom Payment Name is required",
+      fieldlength: {
+        minlength: 1,
+        maxlength: 25
+      },
+      fieldinfo: {},
+      validation: {
+        required: true,
+        type: "string",
+        subtype: [
+          {
+            type: "uppercase",
+            message: "AggregateStatus needs to be in uppercase."
+          }
+        ],
+        constraint: [
+          {
+            type: "min",
+            input: 5,
+            message: "min 5 characters"
+          },
+          {
+            type: "max",
+            input: 25,
+            message: "max 25 characters"
+          }
+        ]
+      }
+    }
   ];
 export const customTaxCodes = [
     {

@@ -10,6 +10,7 @@ import CustomInput from "./reusable/customInput";
 import CustomSelect from "./reusable/customSelect";
 import CustomRadio from "./reusable/customRadio";
 import CustomCheckbox from "./reusable/customCheckbox";
+
 import { setFilterFormData } from "../actions/filterFormActions";
 import gridDataApi from "../api/griddataAPI";
 import savegriddataApi from "../api/savegriddataAPI";
@@ -82,7 +83,6 @@ class CustomForm extends Component {
         switch (item.fieldtype) {
           case "text":
           case "date":
-          case "select":
           case "radio":
             return (
               <Component
@@ -100,14 +100,17 @@ class CustomForm extends Component {
               />
             );
           case "checkbox":
+          case "select":
             return (
               <Component
                 key={index}
                 type={item.fieldtype}
                 label={item.label}
-                id={item.id}
                 fieldinfo={item.fieldinfo}
+                name={item.id}
+                id={item.id}
                 placeholder={item.placeholder}
+                disabled={this.disabledHandler(item.id)}
                 value={props.values[item.id]}
                 onChange={props.setFieldValue}
                 error={error}
