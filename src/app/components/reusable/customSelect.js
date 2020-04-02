@@ -8,28 +8,22 @@ class CustomSelect extends Component {
     this.state = {
         isLoading: false,
         options: [],
-        value: this.props.value
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   handleInputChange(input, e) {
-    //console.log("value", input)
+    // this.props.onChange(this.props.id, input);
+  }
+
+  clearSelect(){
+    this.typeahead.getInstance().clear();
   }
 
   handleChange(selectedOptions) {
-    let values = [];
-    selectedOptions.map(option =>{
-      values.push(option.login)
-    })
-    this.props.onChange(this.props.id, values);
-  }
-
-  handleSelectChange(e) {
-    this.props.onChange(this.props.id, e.target.value);
-    this.setState({ value: e.target.value });
+    const value = (selectedOptions.length > 0) ? selectedOptions : '';
+    this.props.onChange(this.props.id, value);
   }
   
   render() {
@@ -48,10 +42,11 @@ class CustomSelect extends Component {
             <AsyncTypeahead
               id={this.props.id}
               isLoading={this.state.isLoading}
-              labelKey={option => `${option.login}`}
+              //labelKey={option => `${option.login}`}
+              defaultInputValue= {this.props.value}
+              ref={(typeahead) => this.typeahead = typeahead}
               placeholder={this.props.placeholder}
               onChange={this.handleChange}
-              onInputChange={this.handleInputChange}
               disabled={this.props.disabled}
               onSearch={(query) => {
                 if(this.props.fieldinfo.async){
@@ -75,9 +70,9 @@ class CustomSelect extends Component {
                 type="select"
                 name={this.props.name}
                 placeholder={this.props.placeholder}
-                value={this.state.value}
+                value={this.props.value}
                 disabled={this.props.disabled}
-                onChange={this.handleSelectChange}
+                onChange={this.props.onChange}
                 invalid={this.props.error}
               >
                 {!defaultSet && (

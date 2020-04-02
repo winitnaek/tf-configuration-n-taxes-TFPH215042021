@@ -80,10 +80,6 @@ class CustomForm extends Component {
       const Component = fieldMap[item.fieldtype];
       let error = props.errors.hasOwnProperty(item.id) && props.errors[item.id];
       if (item.fieldtype) {
-        switch (item.fieldtype) {
-          case "text":
-          case "date":
-          case "radio":
             return (
               <Component
                 key={index}
@@ -96,29 +92,10 @@ class CustomForm extends Component {
                 disabled={this.disabledHandler(item.id)}
                 value={props.values[item.id]}
                 required={item.validation.required}
-                onChange={props.handleChange}
+                onChange={item.fieldinfo.typeahead ? props.setFieldValue : props.handleChange}
                 error={error}
               />
             );
-          case "checkbox":
-          case "select":
-            return (
-              <Component
-                key={index}
-                type={item.fieldtype}
-                label={item.label}
-                fieldinfo={item.fieldinfo}
-                name={item.id}
-                id={item.id}
-                placeholder={item.placeholder}
-                disabled={this.disabledHandler(item.id)}
-                value={props.values[item.id]}
-                required={item.validation.required}
-                onChange={props.setFieldValue}
-                error={error}
-              />
-            );
-        }
       }
       return "";
     });
