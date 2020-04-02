@@ -114,6 +114,7 @@ class CustomForm extends Component {
                 value={props.values[item.id]}
                 onChange={props.setFieldValue}
                 error={error}
+                pgid={this.props.formProps.pgid}
               />
             );
         }
