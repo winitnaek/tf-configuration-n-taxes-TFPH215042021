@@ -727,6 +727,8 @@ export const worksiteCompanies = [
       fieldtype: "select",
       fieldlength: {},
       fieldinfo: {
+        typeahead: true,
+        isasync: false,
         options: [
           "Afghanistan",
           "land Islands",
@@ -988,6 +990,8 @@ export const worksiteCompanies = [
       fieldtype: "select",
       fieldlength: {},
       fieldinfo: {
+        typeahead: true,
+        isasync: false,
         options: [
           "Alabama",
           "Alaska",

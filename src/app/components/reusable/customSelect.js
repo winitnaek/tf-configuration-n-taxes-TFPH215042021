@@ -54,8 +54,8 @@ class CustomSelect extends Component {
               onInputChange={this.handleInputChange}
               disabled={this.props.disabled}
               onSearch={(query) => {
-                if(!this.props.fieldinfo.async){
-                    this.setState({isLoading: true});
+                if(this.props.fieldinfo.async){
+                  this.setState({isLoading: true});
                     fetch(`https://api.github.com/search/users?q=${query}`)
                     .then(resp => resp.json())
                     .then(json => this.setState({
