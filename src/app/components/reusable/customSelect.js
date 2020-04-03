@@ -87,7 +87,6 @@ class CustomSelect extends Component {
           )}
           {renderError}
         </Col>
-        <button onClick={() => this.typeahead.getInstance().clear()}>Clear</button>
       </FormGroup>
     );
   }
