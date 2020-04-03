@@ -116,7 +116,7 @@ export const customPayments = [
         multiselect: false,  
       },
       validation: {
-        required: false,
+        required: true,
         type: "string"
       }
     },

@@ -10,12 +10,8 @@ class CustomSelect extends Component {
         options: [],
     }
     this.handleChange = this.handleChange.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleInputChange(input, e) {
-    // this.props.onChange(this.props.id, input);
-  }
 
   clearSelect(){
     this.typeahead.getInstance().clear();
@@ -43,7 +39,7 @@ class CustomSelect extends Component {
               id={this.props.id}
               isLoading={this.state.isLoading}
               //labelKey={option => `${option.login}`}
-              defaultInputValue= {this.props.value}
+              defaultInputValue= {this.props.value || ''}
               ref={(typeahead) => this.typeahead = typeahead}
               placeholder={this.props.placeholder}
               onChange={this.handleChange}
@@ -91,6 +87,7 @@ class CustomSelect extends Component {
           )}
           {renderError}
         </Col>
+        <button onClick={() => this.typeahead.getInstance().clear()}>Clear</button>
       </FormGroup>
     );
   }
