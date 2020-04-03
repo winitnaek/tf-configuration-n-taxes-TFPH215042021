@@ -77,7 +77,6 @@ class CustomForm extends Component {
 
   renderFormElements(props, formData) {
     if(this.state.isReset) {
-      props.values.taxability = "";
       this.setState({
         isReset: false
       })
