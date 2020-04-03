@@ -20,10 +20,7 @@ class CustomSelect extends Component {
     if(this.typeahead) {
       console.log(this.typeahead.getInstance)
     }
- 
     this.typeahead && this.typeahead.getInstance().clear();
-
-
 
   }
 
