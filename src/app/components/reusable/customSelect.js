@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Input, FormFeedback, Col, FormGroup, Label} from "reactstrap";
 import {AsyncTypeahead} from "react-bootstrap-typeahead";
+// import AsyncSelect from 'react-select/async';
 import autocompleteselectAPI from '../../api/autocompleteselectAPI';
 
 class CustomSelect extends Component {
@@ -9,28 +10,26 @@ class CustomSelect extends Component {
     this.state = {
         isLoading: false,
         options: [],
-        value: this.props.value
     }
     this.handleChange = this.handleChange.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
-  handleInputChange(input, e) {
-    //console.log("value", input)
+
+  clearSelect(){
+    
+    if(this.typeahead) {
+      console.log(this.typeahead.getInstance)
+    }
+ 
+    this.typeahead && this.typeahead.getInstance().clear();
+
+
+
   }
 
   handleChange(selectedOptions) {
-    let values = [];
-    selectedOptions.map(option =>{
-      values.push(option.login)
-    })
-    this.props.onChange(this.props.id, values);
-  }
-
-  handleSelectChange(e) {
-    this.props.onChange(this.props.id, e.target.value);
-    this.setState({ value: e.target.value });
+    const value = (selectedOptions.length > 0) ? selectedOptions : '';
+    this.props.onChange(this.props.id, value);
   }
   
   render() {
@@ -38,32 +37,41 @@ class CustomSelect extends Component {
     const renderError = this.props.error ? (
       <div style={{color:'red', fontSize:12, paddingTop:4}}>{this.props.error}</div>
     ) : null;
+    
+    if (this.props.isReset) {
+      this.clearSelect()
+    }
+
 
     const {pgid, id} = this.props;
     return (
       <FormGroup>
         <Col>
-          <Label>{this.props.label}</Label>
+          <Label>{this.props.label}
+              {this.props.required && <Label style={{color:'red', fontSize: 20}}>{" *"}</Label> }
+          </Label>
           {(this.props.fieldinfo.typeahead) ? (
+           
             <AsyncTypeahead
               id={this.props.id}
               isLoading={this.state.isLoading}
-              labelKey={option => `${option.login}`}
-              placeholder={this.props.placeholder}
+              //labelKey={option => `${option.login}`}
+              defaultInputValue= {this.props.value || ''}
+              placeholder={"Type to search"}
+              ref={(typeahead) => this.typeahead = typeahead}
+              // placeholder={this.props.placeholder}
               onChange={this.handleChange}
-              onInputChange={this.handleInputChange}
+              value={this.props.value}
               disabled={this.props.disabled}
               onSearch={(query) => {
-                if(!this.props.fieldinfo.async){
-                    this.setState({isLoading: true});
-                    async function getAutoCompleteData(id, query) {
-                      const options = autocompleteselectAPI.getAutoCompleteData(id, query);
-                      await this.setState({
-                        isLoading: false,
-                        options: options,
-                      });
-                    }
-                    getAutoCompleteData(id, query);
+                if(this.props.fieldinfo.async){
+                  this.setState({isLoading: true});
+                    fetch(`https://api.github.com/search/users?q=${query}`)
+                    .then(resp => resp.json())
+                    .then(json => this.setState({
+                      isLoading: false,
+                      options: json.items,
+                    }));
                 }else {
                     this.setState({options: this.props.fieldinfo.options})
                 }
@@ -77,9 +85,9 @@ class CustomSelect extends Component {
                 type="select"
                 name={this.props.name}
                 placeholder={this.props.placeholder}
-                value={this.state.value}
+                value={this.props.value}
                 disabled={this.props.disabled}
-                onChange={this.handleSelectChange}
+                onChange={this.props.onChange}
                 invalid={this.props.error}
               >
                 {!defaultSet && (

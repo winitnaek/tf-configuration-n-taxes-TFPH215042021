@@ -30,20 +30,27 @@ class CustomForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showDelete: false
+      showDelete: false,
+      isReset: false,
     };
     this.handleView = () => {
       //need to get values to pass
       const { formProps } = this.props;
       const { pgid } = formProps;
-      console.log("this is the handle view");
+
       // this.props.setFilterFormData(values);
       let data = tftools.filter(tftool => {
         if (tftool.id == pgid) return tftool;
       });
       renderTFApplication("pageContainer", data[0]);
-      console.log("this is the render me function");
     };
+
+    this.handleReset = () => {
+      this.setState({
+        isReset: true
+      })
+    }
+
   }
 
   disabledHandler(id) {
@@ -69,8 +76,15 @@ class CustomForm extends Component {
   }
 
   renderFormElements(props, formData) {
+    if(this.state.isReset) {
+      props.values.taxability = "";
+      this.setState({
+        isReset: false
+      })
+    }
+
     return formData.map((item, index) => {
-      const fieldMap = {
+      const fieldMap = { 
         text: CustomInput,
         date: CustomInput,
         select: CustomSelect,
@@ -80,10 +94,6 @@ class CustomForm extends Component {
       const Component = fieldMap[item.fieldtype];
       let error = props.errors.hasOwnProperty(item.id) && props.errors[item.id];
       if (item.fieldtype) {
-        switch (item.fieldtype) {
-          case "text":
-          case "date":
-          case "radio":
             return (
               <Component
                 key={index}
@@ -95,29 +105,12 @@ class CustomForm extends Component {
                 placeholder={item.placeholder}
                 disabled={this.disabledHandler(item.id)}
                 value={props.values[item.id]}
-                onChange={props.handleChange}
+                required={item.validation.required}
+                onChange={item.fieldinfo.typeahead ? props.setFieldValue : props.handleChange}
                 error={error}
+                isReset={this.state.isReset}
               />
             );
-          case "checkbox":
-          case "select":
-            return (
-              <Component
-                key={index}
-                type={item.fieldtype}
-                label={item.label}
-                fieldinfo={item.fieldinfo}
-                name={item.id}
-                id={item.id}
-                placeholder={item.placeholder}
-                disabled={this.disabledHandler(item.id)}
-                value={props.values[item.id]}
-                onChange={props.setFieldValue}
-                error={error}
-                pgid={this.props.formProps.pgid}
-              />
-            );
-        }
       }
       return "";
     });
@@ -169,14 +162,14 @@ class CustomForm extends Component {
               <Form>
                 <Container>
                   <ModalBody>
-                    <Form onSubmit={this.props.submit} style={modalBody}>
+                    <Form onSubmit={this.props.submit} style={modalBody} id="myform">
                         <Col>{this.renderFormElements(props, formData)}</Col>
                     </Form>
                     <Usage pgid={pgid} />
                   </ModalBody>
                   <ModalFooter>
                     <Button color="primary" className="btn btn-primary" onClick={close}> Cancel </Button>
-                    <Button color="secondary" className="btn btn-primary mr-auto" type="reset"> Reset </Button>
+                    <Button onClick={ e=> this.handleReset() }color="secondary" className="btn btn-primary mr-auto" type="reset"> Reset </Button>
                     {this.props.showDelete && this.props.deletePermission && (
                       <Button onClick={e => this.props.delete()} color="danger"> Delete </Button>
                     )}
@@ -206,6 +199,7 @@ class CustomForm extends Component {
 
     const yepSchema = formData.reduce(createYupSchema, {});
     const validateSchema = yup.object().shape(yepSchema);
+
     return (
       this.displayForm()
     );

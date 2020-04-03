@@ -9,7 +9,9 @@ class CustomInput extends Component {
     return (
       <FormGroup>
         <Col>
-          <Label>{this.props.label}</Label>
+          <Label>{this.props.label}
+              {this.props.required && <Label style={{color:'red', fontSize: 20}}>{" *"}</Label> }
+          </Label>
           <Input
             type={this.props.type}
             name={this.props.name}
