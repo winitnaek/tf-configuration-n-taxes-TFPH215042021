@@ -1,4 +1,4 @@
-import { metadatamap, tftools, deletedatamap, savedatamap } from "../constants/TFTools";
+import { metadatamap, tftools, deletedatamap, savedatamap, asyncselfldsmap } from "../constants/TFTools";
 import URLUtils from '../utils/urlUtils';
 const MOCK = true;
 /**
@@ -260,6 +260,25 @@ export function getUrl(id) {
     console.log("Save URL %s for page %s", url,id);
     return url;
   }
+
+
+ export function autocompleteURL(id) {
+  let autoCompleteDataMap = asyncselfldsmap.find(metadatam => {
+    console.log(id, metadatam.id)
+    if (id == metadatam.id) return metadatam;
+  });
+  let url = URLUtils.buildURL(autoCompleteDataMap.url);
+  if (MOCK) {
+    autoCompleteDataMap = mockselectmap.find(metadatam => {
+      if (id == metadatam.id) return metadatam;
+    });
+    url = autoCompleteDataMap.url;
+  }
+  console.log("Save URL %s for page %s", url,id);
+  return url;
+ } 
+
+
   const mockdelmap = [
     {id: "customPayments",url: './DELETE_CUSTOM_PAYMENT.json'},
     {id: "customTaxCodes",url: './DELETE_CUSTOM_TAX_CODE.json'}
@@ -289,3 +308,23 @@ export function getUrl(id) {
     {id: "worksiteCompanies", url: './WORKSITES_MOCKDATA.json'},
     {id: "recentUsage",url: './RECENT_USAGE.json'},
   ];
+
+  const mockselectmap = [
+    {
+      id: "taxCodeAutoCompl",
+      url: './TAXCODE_AUTOCOMPLETE_MOCKDATA.JS',
+        },
+    {
+      id: "taxTypeAutoCompl",
+      url: './TAXTYPE_AUTOCOMPLETE_MOCKDATA.JS'
+    },
+    {
+      id: "companyCodeAutoCompl",
+      url: './COMPANYCODE_AUTOCOMPLETE_MOCKDATA.JS',
+    },
+    {
+      id: "riskClassAutoCompl",
+      url: './RISKCLASS_AUTOCOMPLETE_MOCKDATA.JS',
+    }
+
+  ]

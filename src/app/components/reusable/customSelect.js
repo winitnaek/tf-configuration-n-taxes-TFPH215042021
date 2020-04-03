@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import {Input, FormFeedback, Col, FormGroup, Label} from "reactstrap";
 import {AsyncTypeahead} from "react-bootstrap-typeahead";
+// import AsyncSelect from 'react-select/async';
+import autocompleteselectAPI from '../../api/autocompleteselectAPI';
 
 class CustomSelect extends Component {
   constructor(props) {
@@ -14,7 +16,15 @@ class CustomSelect extends Component {
 
 
   clearSelect(){
-    this.typeahead.getInstance().clear();
+    
+    if(this.typeahead) {
+      console.log(this.typeahead.getInstance)
+    }
+ 
+    this.typeahead && this.typeahead.getInstance().clear();
+
+
+
   }
 
   handleChange(selectedOptions) {
@@ -27,7 +37,13 @@ class CustomSelect extends Component {
     const renderError = this.props.error ? (
       <div style={{color:'red', fontSize:12, paddingTop:4}}>{this.props.error}</div>
     ) : null;
+    
+    if (this.props.isReset) {
+      this.clearSelect()
+    }
 
+
+    const {pgid, id} = this.props;
     return (
       <FormGroup>
         <Col>
@@ -35,14 +51,17 @@ class CustomSelect extends Component {
               {this.props.required && <Label style={{color:'red', fontSize: 20}}>{" *"}</Label> }
           </Label>
           {(this.props.fieldinfo.typeahead) ? (
+           
             <AsyncTypeahead
               id={this.props.id}
               isLoading={this.state.isLoading}
               //labelKey={option => `${option.login}`}
               defaultInputValue= {this.props.value || ''}
+              placeholder={"Type to search"}
               ref={(typeahead) => this.typeahead = typeahead}
-              placeholder={this.props.placeholder}
+              // placeholder={this.props.placeholder}
               onChange={this.handleChange}
+              value={this.props.value}
               disabled={this.props.disabled}
               onSearch={(query) => {
                 if(this.props.fieldinfo.async){
