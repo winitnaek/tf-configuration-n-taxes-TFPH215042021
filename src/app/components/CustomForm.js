@@ -22,7 +22,7 @@ import { Container, ModalBody, ModalFooter } from "reactstrap";
 
 //import Data  from "../../../uitests/data/Form_Data.json";
 import * as Data from "../metadata/fieldData";
-import { createYupSchema } from "../../base/utils/yupSchemaCreatorNew";
+import { createYupSchema } from "../../base/utils/yupSchemaCreator";
 
 import * as yup from "yup";
 

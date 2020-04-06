@@ -11,11 +11,26 @@ class CustomSelect extends Component {
         options: [],
     }
     this.handleChange = this.handleChange.bind(this);
+    this.onSearchHandler = this.onSearchHandler.bind(this);
   }
 
   handleChange(selectedOptions) {
     const value = (selectedOptions.length > 0) ? selectedOptions : '';
     this.props.onChange(this.props.id, value);
+  }
+
+  onSearchHandler(query){
+    if(this.props.fieldinfo.isasync){
+      this.setState({isLoading: true});
+        fetch(`https://api.github.com/search/users?q=${query}`)
+        .then(resp => resp.json())
+        .then(json => this.setState({
+          isLoading: false,
+          options: json.items,
+        }));
+    }else {
+        this.setState({options: this.props.fieldinfo.options})
+    }
   }
   
   render() {
@@ -46,19 +61,7 @@ class CustomSelect extends Component {
               onChange={this.handleChange}
               value={this.props.value}
               disabled={this.props.disabled}
-              onSearch={(query) => {
-                if(this.props.fieldinfo.async){
-                  this.setState({isLoading: true});
-                    fetch(`https://api.github.com/search/users?q=${query}`)
-                    .then(resp => resp.json())
-                    .then(json => this.setState({
-                      isLoading: false,
-                      options: json.items,
-                    }));
-                }else {
-                    this.setState({options: this.props.fieldinfo.options})
-                }
-              }}
+              onSearch={this.onSearchHandler}
               multiple={this.props.fieldinfo.multiselect}
               error={this.props.error}
               options={this.state.options}

@@ -1,16 +1,15 @@
 import AppError from "../../base/utils/AppError";
 import { ADMIN_ERROR_MSG } from "../../base/utils/AppErrorEvent";
-import {autoCompleteUrl, reqInfo} from "../../base/utils/tfUtils";
+import {autocompleteURL, reqInfo} from "../../base/utils/tfUtils";
 
 class autocompleteselectAPI {
-  static getAutoCompleteData(pgid, id, querry) {    
+  static getAutoCompleteData(pgid, query) {    
     console.log('Made it to the autocomplete api')
-    console.log(pageid)
-    let url =    autoCompleteUrl(id)      
-    let tt = JSON.stringify(data);
-    return fetch(url, reqInfo(tt), mode)
+    let url = autocompleteURL(pgid)      
+    return fetch(url, reqInfo(null))
       .then(response => {
         if (response.ok) {
+          console.log("Autocomplete data response ", response.json());
           return response.json();
         } else {
           var errorCode = response.status;

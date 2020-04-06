@@ -312,19 +312,23 @@ export function getUrl(id) {
   const mockselectmap = [
     {
       id: "taxCodeAutoCompl",
-      url: './TAXCODE_AUTOCOMPLETE_MOCKDATA.JS',
-        },
+      url: './TAXCODE_AUTOCOMPLETE_MOCKDATA.json',
+    },
     {
       id: "taxTypeAutoCompl",
-      url: './TAXTYPE_AUTOCOMPLETE_MOCKDATA.JS'
+      url: './TAXTYPE_AUTOCOMPLETE_MOCKDATA.json'
     },
     {
       id: "companyCodeAutoCompl",
-      url: './COMPANYCODE_AUTOCOMPLETE_MOCKDATA.JS',
+      url: './COMPANYCODE_AUTOCOMPLETE_MOCKDATA.json',
     },
     {
       id: "riskClassAutoCompl",
-      url: './RISKCLASS_AUTOCOMPLETE_MOCKDATA.JS',
+      url: './RISKCLASS_AUTOCOMPLETE_MOCKDATA.json',
+    },
+    {
+      id: "wrksiteAutoCompl",
+      url: './WORK_SITE_AUTOCOMPLETE_MOCKDATA.json',
     }
 
   ]
