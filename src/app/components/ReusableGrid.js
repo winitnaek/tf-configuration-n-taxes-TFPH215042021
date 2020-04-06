@@ -142,6 +142,7 @@ class ReusableGrid extends React.Component {
       let data = tftools.filter(tftool => {
         if (tftool.id == pgid) return tftool;
       });
+      console.log(data)
       renderTFApplication("pageContainer", data[0]);
       console.log("this is the render me function")
       this.props.close();

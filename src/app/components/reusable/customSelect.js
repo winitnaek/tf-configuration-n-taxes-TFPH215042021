@@ -61,6 +61,17 @@ class CustomSelect extends Component {
               value={this.props.value}
               disabled={this.props.disabled}
               onSearch={(query) => {
+                // if(!this.props.fieldinfo.async){
+                //   this.setState({isLoading: true});
+                //   async function getAutoCompleteData(id, query) {
+                //     const options = autocompleteselectAPI.getAutoCompleteData(id, query);
+                //     await this.setState({
+                //       isLoading: false,
+                //       options: options,
+                //     });
+                //   }
+                //   getAutoCompleteData(id, query);
+
                 if(this.props.fieldinfo.async){
                   this.setState({isLoading: true});
                     fetch(`https://api.github.com/search/users?q=${query}`)
