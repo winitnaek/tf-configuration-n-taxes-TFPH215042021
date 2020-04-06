@@ -25,11 +25,14 @@ export function copyToClipboard() {
         value.push(rowData + ' \n');
     }
     var dummyInput = document.createElement('textarea');
+    dummyInput.setAttribute("id", "tempTxtArea");
     $('body').append(dummyInput);
     dummyInput.textContent = value.join('');
     dummyInput.select();
     document.execCommand('copy');
-    $(dummyInput).remove();
+
+    var child = document.getElementById('tempTxtArea');
+    child.parentNode.removeChild(child);;
 
     var numOfRows = value.length - 1;
     if(numOfRows >= 0)
