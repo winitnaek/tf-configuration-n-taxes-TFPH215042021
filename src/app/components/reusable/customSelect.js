@@ -9,14 +9,19 @@ class CustomSelect extends Component {
     this.state = {
         isLoading: false,
         options: [],
+        defaultSelected: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
   }
 
   handleChange(selectedOptions) {
-    const value = (selectedOptions.length > 0) ? selectedOptions : '';
-    this.props.onChange(this.props.id, value);
+    const values = (selectedOptions.length > 0) ? selectedOptions : '';
+    this.props.onChange(this.props.id, values);
+  }
+  
+  componentDidMount(){
+    this.setState({defaultSelected:this.props.value})
   }
 
   onSearchHandler(query){
@@ -41,8 +46,10 @@ class CustomSelect extends Component {
     ) : null;
     
     if (this.props.isReset) {
-      this.typeahead && this.typeahead.getInstance().clear();
-      //this.typeahead && this.typeahead.getInstance()._updateSelected([this.props.value]);
+      if(this.state.defaultSelected)
+        this.typeahead && this.typeahead.getInstance()._updateSelected([this.state.defaultSelected]);
+      else
+        this.typeahead && this.typeahead.getInstance().clear(); 
     }
 
     return (
@@ -60,6 +67,7 @@ class CustomSelect extends Component {
               ref={(typeahead) => this.typeahead = typeahead}
               placeholder={this.props.placeholder}
               onChange={this.handleChange}
+              onInputChange={this.handleInputChange}
               value={this.props.value}
               disabled={this.props.disabled}
               onSearch={this.onSearchHandler}
