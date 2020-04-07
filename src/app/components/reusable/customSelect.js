@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import {Input, FormFeedback, Col, FormGroup, Label} from "reactstrap";
 import {AsyncTypeahead} from "react-bootstrap-typeahead";
-// import AsyncSelect from 'react-select/async';
-import autocompleteselectAPI from '../../api/autocompleteselectAPI';
+import autocompleteSelectAPI from '../../api/autocompleteselectAPI';
 
 class CustomSelect extends Component {
   constructor(props) {
@@ -10,23 +9,42 @@ class CustomSelect extends Component {
     this.state = {
         isLoading: false,
         options: [],
+        defaultSelected: ''
     }
     this.handleChange = this.handleChange.bind(this);
+    this.onSearchHandler = this.onSearchHandler.bind(this);
   }
 
 
-  clearSelect(){
+  // clearSelect(){
     
-    if(this.typeahead) {
-      console.log(this.typeahead.getInstance)
-    }
-    this.typeahead && this.typeahead.getInstance().clear();
-
-  }
+  //   if(this.typeahead) {
+  //     console.log(this.typeahead.getInstance)
+  //   }
+  //   this.typeahead && this.typeahead.getInstance().clear();
 
   handleChange(selectedOptions) {
-    const value = (selectedOptions.length > 0) ? selectedOptions : '';
-    this.props.onChange(this.props.id, value);
+    const values = (selectedOptions.length > 0) ? selectedOptions : '';
+    this.props.onChange(this.props.id, values);
+  }
+  
+  componentDidMount(){
+    this.setState({defaultSelected:this.props.value})
+  }
+
+  onSearchHandler(query){
+    if(this.props.fieldinfo.isasync){
+      this.setState({isLoading: true});
+      autocompleteSelectAPI.getAutoCompleteData(this.props.id, query)
+      .then((options) => {
+        this.setState({
+          isLoading: false,
+          options: options,
+        });
+      });
+    }else {
+        this.setState({options: this.props.fieldinfo.options})
+    }
   }
   
   render() {
@@ -36,11 +54,12 @@ class CustomSelect extends Component {
     ) : null;
     
     if (this.props.isReset) {
-      this.clearSelect()
+      if(this.state.defaultSelected)
+        this.typeahead && this.typeahead.getInstance()._updateSelected([this.state.defaultSelected]);
+      else
+        this.typeahead && this.typeahead.getInstance().clear(); 
     }
 
-
-    const {pgid, id} = this.props;
     return (
       <FormGroup>
         <Col>
@@ -48,42 +67,18 @@ class CustomSelect extends Component {
               {this.props.required && <Label style={{color:'red', fontSize: 20}}>{" *"}</Label> }
           </Label>
           {(this.props.fieldinfo.typeahead) ? (
-           
             <AsyncTypeahead
               id={this.props.id}
               isLoading={this.state.isLoading}
-              //labelKey={option => `${option.login}`}
+              labelKey={option => `${option}`}
               defaultInputValue= {this.props.value || ''}
-              placeholder={"Type to search"}
               ref={(typeahead) => this.typeahead = typeahead}
-              // placeholder={this.props.placeholder}
+              placeholder={this.props.placeholder}
               onChange={this.handleChange}
+              onInputChange={this.handleInputChange}
               value={this.props.value}
               disabled={this.props.disabled}
-              onSearch={(query) => {
-                // if(!this.props.fieldinfo.async){
-                //   this.setState({isLoading: true});
-                //   async function getAutoCompleteData(id, query) {
-                //     const options = autocompleteselectAPI.getAutoCompleteData(id, query);
-                //     await this.setState({
-                //       isLoading: false,
-                //       options: options,
-                //     });
-                //   }
-                //   getAutoCompleteData(id, query);
-
-                if(this.props.fieldinfo.async){
-                  this.setState({isLoading: true});
-                    fetch(`https://api.github.com/search/users?q=${query}`)
-                    .then(resp => resp.json())
-                    .then(json => this.setState({
-                      isLoading: false,
-                      options: json.items,
-                    }));
-                }else {
-                    this.setState({options: this.props.fieldinfo.options})
-                }
-              }}
+              onSearch={this.onSearchHandler}
               multiple={this.props.fieldinfo.multiselect}
               error={this.props.error}
               options={this.state.options}

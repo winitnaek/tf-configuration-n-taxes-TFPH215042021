@@ -3,12 +3,11 @@ import { ADMIN_ERROR_MSG } from "../../base/utils/AppErrorEvent";
 import {autoCompleteUrl, reqInfo} from "../../base/utils/tfUtils";
 
 class autocompleteselectAPI {
-  static getAutoCompleteData(pgid, id, query) {    
+  static getAutoCompleteData(pgid, query) {    
     console.log('Made it to the autocomplete api')
     console.log(pgid)
-    let url =    autoCompleteUrl(id)      
-    let tt = JSON.stringify(data);
-    return fetch(url, reqInfo(tt), mode)
+    let url = autoCompleteUrl(pgid)      
+    return fetch(url, reqInfo(null))
       .then(response => {
         if (response.ok) {
           return response.json(); 

@@ -92,7 +92,7 @@ export const customPayments = [
       }
     },
     {
-      id: "taxability",
+      id: "taxCodeAutoCompl",
       placeholder: "Select a type",
       fieldtype: "select",
       label: "Taxability",
@@ -105,14 +105,7 @@ export const customPayments = [
       fieldinfo: {
         typeahead: true,
         isasync: true,
-        options: [
-          "Non-Taxable",
-          "Limit-YTD",
-          "Limit-QTD",
-          "Limit-MTD",
-          "Taxable/Exclude",
-          "Imputed"
-        ],
+        options: [],
         multiselect: false,  
       },
       validation: {
