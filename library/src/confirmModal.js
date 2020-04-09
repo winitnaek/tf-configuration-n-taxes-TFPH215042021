@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-class UIConfirm extends React.Component {
+class ConfirmModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -38,4 +38,4 @@ class UIConfirm extends React.Component {
         );
     }
 }
-export default UIConfirm;
+export default ConfirmModal;

@@ -6,17 +6,17 @@ import { updateGrid } from "../../base/utils/updateGrid";
 import { tftools } from "../../base/constants/TFTools";
 import * as Metadata from "../metadata/metaData";
 
-import CustomInput from "./reusable/customInput";
-import CustomSelect from "./reusable/customSelect";
-import CustomRadio from "./reusable/customRadio";
-import CustomCheckbox from "./reusable/customCheckbox";
+import CustomInput from "./reusable/input";
+import CustomSelect from "./reusable/select";
+import CustomRadio from "./reusable/radio";
+import CustomCheckbox from "./reusable/checkbox";
 
 import { setFilterFormData } from "../actions/filterFormActions";
 import gridDataApi from "../api/griddataAPI";
 import savegriddataApi from "../api/savegriddataAPI";
 import deleteGridDataApi from "../api/deletegriddataAPI";
 import { modalBody } from "../../base/constants/AppConstants";
-import Usage from "./Usage";
+import Usage from "./usage";
 
 import { Container, ModalBody, ModalFooter } from "reactstrap";
 
