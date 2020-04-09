@@ -1,32 +1,17 @@
 import React, { Component } from "react";
 import { Formik, Form} from "formik";
-import { connect } from "react-redux";
 import { Col, Button, Row } from "reactstrap";
-import { updateGrid } from "../../base/utils/updateGrid";
-import { tftools } from "../../base/constants/TFTools";
-import * as Metadata from "../metadata/metaData";
-
-import CustomInput from "./reusable/input";
-import CustomSelect from "./reusable/select";
-import CustomRadio from "./reusable/radio";
-import CustomCheckbox from "./reusable/checkbox";
-
-import { setFilterFormData } from "../actions/filterFormActions";
-import gridDataApi from "../api/griddataAPI";
-import savegriddataApi from "../api/savegriddataAPI";
-import deleteGridDataApi from "../api/deletegriddataAPI";
-import { modalBody } from "../../base/constants/AppConstants";
+import { updateGrid } from "./utils/updateGrid.js";
+import Input from "./inputTypes/input";
+import Select from "./inputTypes/select";
+import Radio from "./inputTypes/radio";
+import Checkbox from "./inputTypes/checkbox";
 import Usage from "./usage";
-
 import { Container, ModalBody, ModalFooter } from "reactstrap";
-
-//import Data  from "../../../uitests/data/Form_Data.json";
-import * as Data from "../metadata/fieldData";
-import { createYupSchema } from "../../base/utils/yupSchemaCreator";
-
+import { createYupSchema } from "./utils/yupSchemaCreator";
 import * as yup from "yup";
 
-class CustomForm extends Component {
+class DynamicForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,7 +24,7 @@ class CustomForm extends Component {
       const { pgid } = formProps;
 
       // this.props.setFilterFormData(values);
-      let data = tftools.filter(tftool => {
+      let data = this.props.tftools.filter(tftool => {
         if (tftool.id == pgid) return tftool;
       });
       renderTFApplication("pageContainer", data[0]);
@@ -55,15 +40,15 @@ class CustomForm extends Component {
 
   disabledHandler(id) {
     try {
-      let formflds = Metadata[this.props.formProps.pgid].formdef.formflds;
+      let formflds = this.props.metadata[this.props.formProps.pgid].formdef.formflds;
       if (formflds) {
         let row = formflds.filter(r => id == r.id);
         if (row.length > 0) {
-          if (row[0].isReadOnlyOnEdit == true && this.props.mode == "Edit") {
+          if (row[0].isReadOnlyOnEdit == true && this.props.fieldData.mode == "Edit") {
             return true;
           } else if (
             row[0].isReadOnlyOnNew == true &&
-            this.props.mode != "Edit"
+            this.props.fieldData.mode != "Edit"
           ) {
             return true;
           }
@@ -84,11 +69,11 @@ class CustomForm extends Component {
 
     return formData.map((item, index) => {
       const fieldMap = { 
-        text: CustomInput,
-        date: CustomInput,
-        select: CustomSelect,
-        checkbox: CustomCheckbox,
-        radio: CustomRadio
+        text:Input,
+        date:Input,
+        select:Select,
+        checkbox:Checkbox,
+        radio:Radio
       };
       const Component = fieldMap[item.fieldtype];
       let error = props.errors.hasOwnProperty(item.id) && props.errors[item.id];
@@ -116,9 +101,9 @@ class CustomForm extends Component {
   }
 
   render() {
-    const { formProps } = this.props;
+    const { formProps, tftools, recentUsage, fieldData } = this.props;
     const { close, change, permissions, deleteRow, pgid } = formProps;
-    const formData = Data[pgid];
+    const formData = fieldData[pgid];
     let initialValues = {};
 
     this.displayForm = () => {
@@ -129,7 +114,7 @@ class CustomForm extends Component {
             onSubmit={(values, actions) => {
               try {
                     let rowid = null;
-                    const mode = this.props.mode;
+                    const mode = this.props.fieldData.mode;
                     if (mode === "Edit") {
                       rowid = this.props.rowIndex;
                     }
@@ -161,10 +146,10 @@ class CustomForm extends Component {
               <Form>
                 <Container>
                   <ModalBody>
-                    <Form onSubmit={this.props.submit} style={modalBody} id="myform">
+                    <Form onSubmit={this.props.submit} style={this.props.containerStyles} id="myform">
                         <Col>{this.renderFormElements(props, formData)}</Col>
                     </Form>
-                    <Usage pgid={pgid} />
+                    <Usage pgid={pgid} tftools={tftools} close={close} recentUsage={recentUsage} />
                   </ModalBody>
                   <ModalFooter>
                     <Button color="primary" className="btn btn-primary" onClick={close}> Cancel </Button>
@@ -188,8 +173,8 @@ class CustomForm extends Component {
       close();
     };
 
-    if (this.props.mode == "Edit") {
-      initialValues = this.props.data;
+    if (this.props.fieldData.mode == "Edit") {
+      initialValues = this.props.fieldData.data;
     } else {
       formData.forEach((item, index) => {
         initialValues[item.id] = item.value || "";
@@ -205,12 +190,4 @@ class CustomForm extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    data: state.formData.data,
-    mode: state.formData.mode,
-    rowIndex: state.formData.index
-  };
-}
-
-export default connect(mapStateToProps, null)(CustomForm);
+export default DynamicForm;
