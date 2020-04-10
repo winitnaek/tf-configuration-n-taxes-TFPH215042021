@@ -8,8 +8,12 @@ class reusableModal extends Component {
     this.state = {};
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextProps.open, this.props.open)
+  }
+
   render() {
-    console.log(this.props.children)
+    console.log(this.props)
     return (
       <Modal
         isOpen={this.props.open}

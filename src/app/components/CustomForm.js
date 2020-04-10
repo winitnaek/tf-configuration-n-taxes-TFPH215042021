@@ -10,20 +10,16 @@ import CustomInput from "./reusable/customInput";
 import CustomSelect from "./reusable/customSelect";
 import CustomRadio from "./reusable/customRadio";
 import CustomCheckbox from "./reusable/customCheckbox";
-
 import { setFilterFormData } from "../actions/filterFormActions";
 import gridDataApi from "../api/griddataAPI";
 import savegriddataApi from "../api/savegriddataAPI";
 import deleteGridDataApi from "../api/deletegriddataAPI";
 import { modalBody } from "../../base/constants/AppConstants";
 import Usage from "./Usage";
-
 import { Container, ModalBody, ModalFooter } from "reactstrap";
-
 //import Data  from "../../../uitests/data/Form_Data.json";
 import * as Data from "../metadata/fieldData";
 import { createYupSchema } from "../../base/utils/yupSchemaCreator";
-
 import * as yup from "yup";
 
 class CustomForm extends Component {

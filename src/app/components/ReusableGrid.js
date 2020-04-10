@@ -2,14 +2,16 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
-import { closeForm, setFormData } from "../actions/formActions";
+ import { closeForm, setFormData } from "../actions/formActions";
 import savegriddataAPI  from '../api/savegriddataAPI';
 import deletegriddataAPI from '../api/deletegriddataAPI';
 import { copyToClipboard } from "../../base/utils/copyToClipBoard";
 import ClipboardToast from "../components/ClipboardToast";
-import { setFilterFormData } from "../actions/filterFormActions";
+ import { setFilterFormData } from "../actions/filterFormActions";
 import CustomForm from './CustomForm';
-import Modal from "./Modal";
+// import Modal from "./Modal";
+import { Modal, ModalHeader } from "reactstrap";
+import { subTitle, modal } from "../../base/constants/AppConstants";
 
 import {
   pagetitle,
@@ -40,28 +42,21 @@ let GridFunctions;
 class ReusableGrid extends React.Component {
   constructor(props) {
     super(props);
-    console.log("metadata>>>>");
-    console.log(this.props);
-    let metadata = this.props.metadata(this.props.pageid);
-    console.log("`this is the metadata", metadata);
  
-    console.log(this.props.pageid);
-    console.log(metadata);
-    console.log("metadata>>>>");
-    console.log("permissions>>>>");
+    let metadata = this.props.metadata(this.props.pageid);
+
     let permissions = this.props.permissions(this.props.pid);
 
-    console.log(permissions);
-    console.log("permissions>>>>");
     //let gridDataUrl = this.props.dataurl(this.props.pageid);
     let data = this.props.griddata;
-    console.log(data)
-    console.log(metadata);
+   
     let source = {
       datatype: "json",
       datafields: metadata.griddef.dataFields,
       localdata: data
     };
+
+    const {setFormData, closeForm, setFilterFormData} = this.props.gridProps
 
     this.state = {
       value: "",
@@ -89,7 +84,10 @@ class ReusableGrid extends React.Component {
       allSelected: false,
       showClipboard: false,
       numOfRows: 0,
-      source: source
+      source: source,
+      isOpen: false,
+      setFormData: this.props.gridProps.setFormData,
+      closeForm: this.props.gridProps.closeForm,
     };
 
     this.handleFilter = e => {
@@ -102,19 +100,22 @@ class ReusableGrid extends React.Component {
     }; 
 
     this.handleNewForm = e => {
+      console.log('This is the add form function')
+      console.log(this.state.isOpen)
       e.preventDefault();
       const payload = { data:{} , mode: "New" };
-      this.props.setFormData(payload)
+      setFormData(payload)
+      this.setState({ isOpen: true  });
     }
 
     this.handleSubmit = (pgid, payload, mode, rowid) => {
-      console.log('made it to the submit handler')
+   
       savegriddataAPI.saveGridData(pgid, payload, mode)
-      this.props.closeForm()
+      this.props.gridProps.dispatch(this.props.gridProps.closeForm())
     } 
 
     this.handleFilterFormView = (pgid, payload) => {
-      console.log('You made it back to the reusable grid')
+ 
       // this.props.closeForm()
       // this.props.setFilterFormData(payload);
       // this.renderMe(pgid)
@@ -141,16 +142,15 @@ class ReusableGrid extends React.Component {
     this.renderMe = pgid => {
       let data = tftools.filter(tftool => {
         if (tftool.id == pgid) return tftool;
-      });
-      console.log(data)
+     
       renderTFApplication("pageContainer", data[0]);
-      console.log("this is the render me function")
+
       this.props.close();
-    };
+    });
+  }
 
     this.selectAll = event => {
-      event.preventDefault();
-      console.log("trying to select all");
+
       this.setState({ allSelected: true });
       let _id = document.querySelector("div[role='grid']").id;
       $("#" + _id).jqxGrid("selectallrows");
@@ -158,7 +158,7 @@ class ReusableGrid extends React.Component {
 
     this.unselectAll = event => {
       event.preventDefault();
-      console.log("unselecting");
+    
       this.setState({ allSelected: false });
       let _id = document.querySelector("div[role='grid']").id;
       $("#" + _id).jqxGrid("clearselection");
@@ -166,18 +166,16 @@ class ReusableGrid extends React.Component {
 
     this.toggleSelectAll = event => {
       event.preventDefault();
-      console.log("Trying to toggle select all");
-
-      if (this.state.allSelected) {
+        if (this.state.allSelected) {
         this.unselectAll(event);
       }
     };
   }
 
   componentDidMount() {
-    console.log(this.props.griddata)
+  
     if (!this.props.griddata) {
-      console.log('setting nodata message')
+  
       this.setState({ noResultsFoundTxt: metadata.griddef.noResultsFoundTxt  });
     }
 
@@ -208,9 +206,13 @@ class ReusableGrid extends React.Component {
     );
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log(nextProps, this.props)
-  // }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextProps, this.props)
+
+    // if (nextProps && nextProps.isOpen === true ) {
+    //   this.setState({ isOpen: true  });
+    // }
+  }
 
   render() {
 
@@ -269,10 +271,7 @@ if (this.state.parentConfig) {
 }
 const {noResultsFoundTxt} = this.state;
 const {griddata} = this.props
-console.log(noResultsFoundTxt)
-console.log(this.props.griddata[0])
-console.log(this.state.pgid)
-console.log(this.state.isfilterform)
+
 
 
 const {isOpen} = this.props;
@@ -284,9 +283,12 @@ let filter;
    }
 
 const close = this.props.closeForm
-console.log(close)
+
 const formProps = {close, handleChange, pgid, permissions, deleteRow, handleSubmit, renderMe, filter}
 
+const open = this.state.isOpen
+
+console.log(this.state.isOpen)
     return (
       <Fragment>
         <Row>
@@ -395,7 +397,7 @@ const formProps = {close, handleChange, pgid, permissions, deleteRow, handleSubm
                 }
               >
                 <span id="addNew">
-                  <a href="" onClick={this.handleNewForm}>
+                  <a href="" onClick={e => this.handleNewForm(e)}>
                     <i className="fas fa-calendar-plus  fa-2x" />
                   </a>
                 </span>
@@ -486,15 +488,29 @@ const formProps = {close, handleChange, pgid, permissions, deleteRow, handleSubm
           isfilterform={this.state.isfilterform}
           submit={this.handleSubmit}
         /> */}
-
-       <Modal
-        open={isOpen}
+    {console.log(this.state.isOpen)}
+       {/* <Modal
+        open={this.props.isOpen}
         close={this.props.closeForm}
         title={title}
         cruddef={cruddef} 
       >
       <CustomForm formProps={formProps} filter={filter} />
+      </Modal> */}
+
+
+<Modal
+        isOpen={this.state.isOpen}
+        size="lg"
+        style={modal}
+      >
+        <ModalHeader toggle={e => this.props.close()}>
+        <CustomForm formProps={formProps} filter={filter} />
+        </ModalHeader>
+        <p style={subTitle}> { this.props.subtitle && this.props.cruddef.subtitle} </p>
+        {this.props.children}
       </Modal>
+
 
 
       </Fragment>
