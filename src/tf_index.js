@@ -8,6 +8,9 @@ import * as manifest from "../build/_manifest";
 import * as c from "./base/constants/IndexConstants";
 import { makeNavs, makeSearch } from "./base/template/navGenerator";
 import TFHome from "./app/home/home.js";
+import { closeForm, setFormData } from "./app/actions/formActions";
+import { setFilterFormData } from "./app/actions/filterFormActions";
+
 let store = configureStore();
 export default store;
 import Welcome from "./app/home/Welcome";
@@ -20,7 +23,6 @@ import {
   compURL,
   buildGridDataInput
 } from "./base/utils/tfUtils";
-import { setFormData } from "./app/actions/formActions";
 import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
 import ReusableGrid from "./app/components/ReusableGrid";
 import ReusablePage from './app/components/ReusablePage';
@@ -85,6 +87,10 @@ function renderComponent(elem, pageid, pid) {
   showPrgress(elem);
   let gridInput = buildGridDataInput(pageid, store);
 
+const state = store.getState()
+const dispatch = store.dispatch
+const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData}
+
   console.log(gridInput)
 
   griddataAPI  
@@ -101,6 +107,7 @@ function renderComponent(elem, pageid, pid) {
             permissions={compPermissions}
             griddata={griddata}
             help={openHelp}
+            gridProps={gridProps}
           />
         </Provider>,
         document.querySelector("#" + elem)
@@ -135,22 +142,22 @@ function showPrgress(elem) {
   );
 }
 
-function editClick(index, pgid) {
-  console.log('you clicked edit')
-  let _id = document.querySelector("div[role='grid']").id;
-  let dataRecord = $("#" + _id).jqxGrid("getrowdata", index);
-  const data = { formData: dataRecord, mode: "Edit", index: index };
-  store.dispatch(setFormData(data));
-}
+// function editClick(index, pgid) {
+//   console.log('you clicked edit')
+//   let _id = document.querySelector("div[role='grid']").id;
+//   let dataRecord = $("#" + _id).jqxGrid("getrowdata", index);
+//   const data = { formData: dataRecord, mode: "Edit", index: index };
+//   store.dispatch(setFormData(data));
+// }
 
-function handleChildGrid(pgid) {
-  const pgData = tftools.filter(item => {
-    if (item.id === pgid) {
-      return item;
-    }
-  });
-  renderTFApplication("pageContainer", pgData[0]);
-}
+// function handleChildGrid(pgid) {
+//   const pgData = tftools.filter(item => {
+//     if (item.id === pgid) {
+//       return item;
+//     }
+//   });
+//   renderTFApplication("pageContainer", pgData[0]);
+// }
 
 /**
  * renderTFHome
@@ -372,11 +379,11 @@ const unMountNMountContainerNode = () => {
 module.exports = renderTFApplication;
 window.renderTFApplication = renderTFApplication;
 
-module.exports = editClick;
-window.editClick = editClick;
+// module.exports = editClick;
+// window.editClick = editClick;
 
-module.exports = handleChildGrid;
-window.handleChildGrid = handleChildGrid;
+// module.exports = handleChildGrid;
+// window.handleChildGrid = handleChildGrid;
 
 module.exports = appDataset;
 window.appDataset = appDataset;
