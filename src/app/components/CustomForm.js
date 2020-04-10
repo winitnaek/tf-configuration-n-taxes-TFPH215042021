@@ -10,7 +10,6 @@ import gridDataApi from "../api/griddataAPI";
 import savegriddataApi from "../api/savegriddataAPI";
 import deleteGridDataApi from "../api/deletegriddataAPI";
 
-import { modalBody } from "../../base/constants/AppConstants";
 import * as fieldData from "../metadata/fieldData";
 import DynamicForm from "../../../library/src/dynamicForm";
 
@@ -22,7 +21,6 @@ class CustomForm extends Component {
           formProps={this.props.formProps}
           tftools={tftools}
           metadata={metadata}
-          containerStyle={modalBody}
           fieldData={fieldData}
           recentUsage={getRecentUsage}
         />

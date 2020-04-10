@@ -39,8 +39,9 @@ class DynamicForm extends Component {
   }
 
   disabledHandler(id) {
+    const {metadata, formProps} = this.props;
     try {
-      let formflds = this.props.metadata[this.props.formProps.pgid].formdef.formflds;
+      let formflds = metadata[formProps.pgid].formdef.formflds;
       if (formflds) {
         let row = formflds.filter(r => id == r.id);
         if (row.length > 0) {
@@ -101,7 +102,7 @@ class DynamicForm extends Component {
   }
 
   render() {
-    const { formProps, tftools, recentUsage, fieldData } = this.props;
+    const { formProps, tftools, recentUsage, fieldData, metadata } = this.props;
     const { close, change, permissions, deleteRow, pgid } = formProps;
     const formData = fieldData[pgid];
     let initialValues = {};
@@ -146,10 +147,12 @@ class DynamicForm extends Component {
               <Form>
                 <Container>
                   <ModalBody>
-                    <Form onSubmit={this.props.submit} style={this.props.containerStyles} id="myform">
+                    <Form onSubmit={this.props.submit} style={{display: "flex", margin: "0 auto", width: "70%", flexWrap: "wrap"}} id="myform">
                         <Col>{this.renderFormElements(props, formData)}</Col>
                     </Form>
+                    {metadata[pgid].formdef.hasRecentUsage && (
                     <Usage pgid={pgid} tftools={tftools} close={close} recentUsage={recentUsage} />
+                    )}
                   </ModalBody>
                   <ModalFooter>
                     <Button color="primary" className="btn btn-primary" onClick={close}> Cancel </Button>
