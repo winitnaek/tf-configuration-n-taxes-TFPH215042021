@@ -45,11 +45,11 @@ class DynamicForm extends Component {
       if (formflds) {
         let row = formflds.filter(r => id == r.id);
         if (row.length > 0) {
-          if (row[0].isReadOnlyOnEdit == true && this.props.fieldData.mode == "Edit") {
+          if (row[0].isReadOnlyOnEdit == true && this.props.formData.mode == "Edit") {
             return true;
           } else if (
             row[0].isReadOnlyOnNew == true &&
-            this.props.fieldData.mode != "Edit"
+            this.props.formData.mode != "Edit"
           ) {
             return true;
           }
@@ -61,14 +61,14 @@ class DynamicForm extends Component {
     }
   }
 
-  renderFormElements(props, formData) {
+  renderFormElements(props, fieldInfo) {
     if(this.state.isReset) {
       this.setState({
         isReset: false
       })
     }
 
-    return formData.map((item, index) => {
+    return fieldInfo.map((item, index) => {
       const fieldMap = { 
         text:Input,
         date:Input,
@@ -103,8 +103,8 @@ class DynamicForm extends Component {
 
   render() {
     const { formProps, tftools, recentUsage, fieldData, metadata } = this.props;
-    const { close, change, permissions, deleteRow, pgid } = formProps;
-    const formData = fieldData[pgid];
+    const { close, change, permissions, deleteRow, pgid} = formProps;
+    const fieldInfo = fieldData[pgid];
     let initialValues = {};
 
     this.displayForm = () => {
@@ -134,7 +134,7 @@ class DynamicForm extends Component {
               }
             }}
             onReset={() => {
-              formData.forEach(item => {
+              fieldInfo.forEach(item => {
                 if (item.fieldtype != "select" && item.fieldinfo.options) {
                   item.fieldinfo.options.forEach(subItem => {
                     document.getElementById(subItem.id).checked = false;
@@ -148,7 +148,7 @@ class DynamicForm extends Component {
                 <Container>
                   <ModalBody>
                     <Form onSubmit={this.props.submit} style={{display: "flex", margin: "0 auto", width: "70%", flexWrap: "wrap"}} id="myform">
-                        <Col>{this.renderFormElements(props, formData)}</Col>
+                        <Col>{this.renderFormElements(props, fieldInfo)}</Col>
                     </Form>
                     {metadata[pgid].formdef.hasRecentUsage && (
                     <Usage pgid={pgid} tftools={tftools} close={close} recentUsage={recentUsage} />
@@ -176,15 +176,15 @@ class DynamicForm extends Component {
       close();
     };
 
-    if (this.props.fieldData.mode == "Edit") {
-      initialValues = this.props.fieldData.data;
+    if (this.props.formData.mode == "Edit") {
+      initialValues = this.props.formData.data;
     } else {
-      formData.forEach((item, index) => {
+      fieldInfo.forEach((item, index) => {
         initialValues[item.id] = item.value || "";
       });
     }
 
-    const yepSchema = formData.reduce(createYupSchema, {});
+    const yepSchema = fieldInfo.reduce(createYupSchema, {});
     const validateSchema = yup.object().shape(yepSchema);
 
     return (
