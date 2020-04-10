@@ -6,9 +6,10 @@ import { closeForm, setFormData } from "../actions/formActions";
 import savegriddataAPI  from '../api/savegriddataAPI';
 import deletegriddataAPI from '../api/deletegriddataAPI';
 import { copyToClipboard } from "../../base/utils/copyToClipBoard";
-import {ClipboardToast, Modal} from "../../../library/src/index";
+import ClipboardToast from "../components/ClipboardToast";
 import { setFilterFormData } from "../actions/filterFormActions";
 import CustomForm from './CustomForm';
+import Modal from "./Modal";
 
 import {
   pagetitle,

@@ -10,7 +10,7 @@ const experienceRates = "experienceRates";
 const supplementalMethods = "supplementalMethods";
 import { pagetitle, helpicon } from "../../base/constants/AppConstants";
 import CustomForm from './CustomForm';
-import Modal from "./Modal";
+import {Modal} from "../../../library/src/index";
 
 const TitleStyle = {
   margin: "0 auto",

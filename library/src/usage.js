@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux';
-import { bindActionCreators } from "redux";
 import {Col, Collapse, Button} from "reactstrap";
-// import {getRecentUsage} from "../actions/usageActions";
 
 class Usage extends Component {
     constructor(props) {
@@ -69,9 +66,4 @@ class Usage extends Component {
         )
     }
 }
-
-const mapDispatchToProps = dispatch => {
-//    return bindActionCreators({getRecentUsage}, dispatch);
-}
-
-export default connect(null, mapDispatchToProps)(Usage);
+export default Usage;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
-import { subTitle, modal } from "../../base/constants/AppConstants";
+import { subTitle, modal } from "../../src/base/constants/AppConstants";
 
 class reusableModal extends Component {
   constructor(props) {
