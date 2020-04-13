@@ -129,7 +129,7 @@ export const customPayments = {
       },
       {
         text: "Taxability",
-        datafield: "taxability",
+        datafield: "taxCodeAutoCompl",
         cellsalign: "left",
         align: "left"
       },
