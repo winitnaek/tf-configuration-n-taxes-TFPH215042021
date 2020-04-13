@@ -1,13 +1,9 @@
 import React, { Fragment } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
-import { closeForm, setFormData } from "../actions/formActions";
 import savegriddataAPI from "../api/savegriddataAPI";
 import deletegriddataAPI from "../api/deletegriddataAPI";
 import { copyToClipboard } from "../../base/utils/copyToClipBoard";
 import { ClipboardToast } from "../../../library/src/index";
-import { setFilterFormData } from "../actions/filterFormActions";
 import CustomForm from "./CustomForm";
 import { Modal, ModalHeader } from "reactstrap";
 import { subTitle, modal } from "../../../library/src/utils/AppConstants";
@@ -527,30 +523,6 @@ class ReusableGrid extends React.Component {
             <span> Copy to clipboard </span>
           </UncontrolledTooltip>
         </Row>
-
-        {/* <FormModal
-          open={this.props.isOpen}
-          close={this.props.closeForm}
-          title={this.state.title}
-          cruddef={this.state.cruddef}
-          permissions={this.props.permissions(this.props.pid)}
-          deleteRow={this.deleteRow}
-          change={this.handleChange}
-          renderGrid={this.renderMe}
-          pgid={this.state.pgid}
-          isfilterform={this.state.isfilterform}
-          submit={this.handleSubmit}
-        /> */}
-        {/* 
-       <Modal
-        open={isOpen}
-        close={this.props.closeForm}
-        title={title}
-        cruddef={cruddef} 
-      >
-      <CustomForm formProps={formProps} filter={filter} />
-      </Modal> */}
-
         <Modal isOpen={this.state.isOpen} size="lg" style={modal}>
           <ModalHeader toggle={e => this.toggle()}>
             <span> {this.props.title} </span>
@@ -565,19 +537,5 @@ class ReusableGrid extends React.Component {
     );
   }
 }
-function mapStateToProps(state) {
-  return {
-    data: state.formData.data,
-    isOpen: state.formData.isOpen,
-    index: state.formData
-  };
-}
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    { closeForm, setFormData, setFilterFormData },
-    dispatch
-  );
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ReusableGrid);
+export default ReusableGrid;
