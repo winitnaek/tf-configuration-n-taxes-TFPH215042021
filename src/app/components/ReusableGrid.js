@@ -329,8 +329,8 @@ class ReusableGrid extends React.Component {
     module.exports = this.editClick;
     window.editClick = this.editClick;
 
-    module.exports = handleChildGrid;
-    window.handleChildGrid = handleChildGrid;
+    module.exports = this.handleChildGrid;
+    window.handleChildGrid = this.handleChildGrid;
 
     return (
       <Fragment>

@@ -3,6 +3,7 @@ import { tftools } from "../../base/constants/TFTools";
 import * as metadata from "../metadata/metaData";
 import {connect} from 'react-redux';
 import {getRecentUsage} from "../actions/usageActions";
+import autocompleteSelectAPI from "../api/autocompleteselectAPI";
 import { bindActionCreators } from "redux";
 
 import { setFilterFormData } from "../actions/filterFormActions";
@@ -24,6 +25,7 @@ class CustomForm extends Component {
           metadata={metadata}
           fieldData={fieldData}
           recentUsage={getRecentUsage}
+          autoComplete={autocompleteSelectAPI}
         />
     )
   }
