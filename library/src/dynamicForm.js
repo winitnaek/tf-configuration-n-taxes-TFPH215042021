@@ -103,8 +103,8 @@ class DynamicForm extends Component {
   }
 
   render() {
-    const { formProps, tftools, recentUsage, fieldData, metadata, autoComplete } = this.props;
-    const { close, change, permissions, deleteRow, pgid} = formProps;
+    const { formProps, tftools, recentUsage, fieldData, metadata, autoComplete, saveGridData } = this.props;
+    const { close, change, permissions, deleteRow, pgid, filter} = formProps;
     const fieldInfo = fieldData[pgid];
     let initialValues = {};
 
@@ -116,13 +116,13 @@ class DynamicForm extends Component {
             onSubmit={(values, actions) => {
               try {
                     let rowid = null;
-                    const mode = this.props.fieldData.mode;
+                    const mode = this.props.formData.mode;
                     if (mode === "Edit") {
-                      rowid = this.props.rowIndex;
+                      rowid = this.props.formData.index;
                     }
-                    if(!this.props.filter){
+                    if(!filter){
                       updateGrid(values, rowid, mode);
-                      savegriddataApi.saveGridData(pgid, values, mode);
+                      saveGridData.saveGridData(pgid, values, mode);
                     }else{
                         this.props.formProps.renderMe(pgid, values);
                     }
@@ -172,7 +172,7 @@ class DynamicForm extends Component {
 
     this.handleDelete = () => {
       console.log("deleting record");
-      const { rowIndex } = this.props.rowIndex;
+      const { rowIndex } = this.props.formData.index;
       deleteRow(rowIndex);
       close();
     };
