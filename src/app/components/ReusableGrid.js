@@ -95,16 +95,26 @@ class ReusableGrid extends React.Component {
     };
 
     this.editClick = (index, pgid) => {
-      this.setState({ isOpen: true });
+      // this.setState({ isOpen: true });
       console.log("Edit click in tf_index");
       let _id = document.querySelector("div[role='grid']").id;
       let dataRecord = $("#" + _id).jqxGrid("getrowdata", index);
       const data = { formData: dataRecord, mode: "Edit", index: index };
       // store.dispatch(setFormData(data));
-      this.props.gridProps.dispatch(this.props.gridProps.setFormData(data));
+
+      const setIsOpen = () => {
+        this.setState({ isOpen: true  });
+      }
+
+      async function dispathAction(dispatch, setFormData, setIsOpen) {
+        dispatch(setFormData(data));
+        await setIsOpen()
+      }
+      const { dispatch, setFormData } = this.props.gridProps;
+      dispathAction(dispatch, setFormData, setIsOpen);
     };
 
-    this.handleChildGrid=(pgid) => {
+    this.handleChildGrid = pgid => {
       const pgData = tftools.filter(item => {
         if (item.id === pgid) {
           return item;
@@ -113,7 +123,7 @@ class ReusableGrid extends React.Component {
       // This below will need to be refactored to not call back to tf_index
       //renderTFApplication
       this.props.gridProps.renderGrid("pageContainer", pgData[0]);
-    }
+    };
 
     this.handleFilter = e => {
       e.preventDefault();
