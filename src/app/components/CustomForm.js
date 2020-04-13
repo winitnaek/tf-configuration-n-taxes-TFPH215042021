@@ -1,17 +1,17 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux';
+import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
 import * as metadata from "../metadata/metaData";
-import {connect} from 'react-redux';
-import {getRecentUsage} from "../actions/usageActions";
-import { bindActionCreators } from "redux";
-
-import { setFilterFormData } from "../actions/filterFormActions";
-import gridDataApi from "../api/griddataAPI";
-import savegriddataApi from "../api/savegriddataAPI";
-import deleteGridDataApi from "../api/deletegriddataAPI";
-
 import * as fieldData from "../metadata/fieldData";
 import {DynamicForm} from "../../../library/src/index";
+import {getRecentUsage} from "../actions/usageActions";
+import autocompleteSelectAPI from "../api/autocompleteselectAPI";
+
+import { setFilterFormData } from "../actions/filterFormActions";
+import gridDataAPI from "../api/griddataAPI";
+import savegriddataAPI from "../api/savegriddataAPI";
+import deleteGridDataAPI from "../api/deletegriddataAPI";
 
 class CustomForm extends Component {
   render() {
@@ -24,6 +24,8 @@ class CustomForm extends Component {
           metadata={metadata}
           fieldData={fieldData}
           recentUsage={getRecentUsage}
+          autoComplete={autocompleteSelectAPI}
+          saveGridData={savegriddataAPI}
         />
     )
   }

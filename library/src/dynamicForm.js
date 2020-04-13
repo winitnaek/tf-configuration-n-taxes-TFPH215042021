@@ -61,7 +61,7 @@ class DynamicForm extends Component {
     }
   }
 
-  renderFormElements(props, fieldInfo) {
+  renderFormElements(props, fieldInfo, autoComplete) {
     if(this.state.isReset) {
       this.setState({
         isReset: false
@@ -91,6 +91,7 @@ class DynamicForm extends Component {
                 disabled={this.disabledHandler(item.id)}
                 value={props.values[item.id]}
                 required={item.validation.required}
+                autoComplete={autoComplete}
                 onChange={item.fieldinfo.typeahead ? props.setFieldValue : props.handleChange}
                 error={error}
                 isReset={this.state.isReset}
@@ -102,8 +103,8 @@ class DynamicForm extends Component {
   }
 
   render() {
-    const { formProps, tftools, recentUsage, fieldData, metadata } = this.props;
-    const { close, change, permissions, deleteRow, pgid} = formProps;
+    const { formProps, tftools, recentUsage, fieldData, metadata, autoComplete, saveGridData } = this.props;
+    const { close, change, permissions, deleteRow, pgid, filter} = formProps;
     const fieldInfo = fieldData[pgid];
     let initialValues = {};
 
@@ -115,13 +116,13 @@ class DynamicForm extends Component {
             onSubmit={(values, actions) => {
               try {
                     let rowid = null;
-                    const mode = this.props.fieldData.mode;
+                    const mode = this.props.formData.mode;
                     if (mode === "Edit") {
-                      rowid = this.props.rowIndex;
+                      rowid = this.props.formData.index;
                     }
-                    if(!this.props.filter){
+                    if(!filter){
                       updateGrid(values, rowid, mode);
-                      savegriddataApi.saveGridData(pgid, values, mode);
+                      saveGridData.saveGridData(pgid, values, mode);
                     }else{
                         this.props.formProps.renderMe(pgid, values);
                     }
@@ -148,7 +149,7 @@ class DynamicForm extends Component {
                 <Container>
                   <ModalBody>
                     <Form onSubmit={this.props.submit} style={{display: "flex", margin: "0 auto", width: "70%", flexWrap: "wrap"}} id="myform">
-                        <Col>{this.renderFormElements(props, fieldInfo)}</Col>
+                        <Col>{this.renderFormElements(props, fieldInfo, autoComplete)}</Col>
                     </Form>
                     {metadata[pgid].formdef.hasRecentUsage && (
                     <Usage pgid={pgid} tftools={tftools} close={close} recentUsage={recentUsage} />
@@ -171,7 +172,7 @@ class DynamicForm extends Component {
 
     this.handleDelete = () => {
       console.log("deleting record");
-      const { rowIndex } = this.props.rowIndex;
+      const { rowIndex } = this.props.formData.index;
       deleteRow(rowIndex);
       close();
     };
