@@ -89,7 +89,9 @@ function renderComponent(elem, pageid, pid) {
 
 const state = store.getState()
 const dispatch = store.dispatch
-const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData}
+
+const renderGrid =  renderTFApplication
+const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData, renderGrid}
 
   console.log(gridInput)
 

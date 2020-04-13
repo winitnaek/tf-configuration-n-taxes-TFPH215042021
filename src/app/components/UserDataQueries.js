@@ -34,7 +34,8 @@ class UserDataQueries extends React.Component {
       formTitle: "",
       isOpen: false,
       isfilterform: false,
-      permissions: " "
+      permissions: " ",
+      isOpen: false,
     };
     this.OpenHelp = () => {
       this.props.help("userDataQueries");
@@ -54,12 +55,17 @@ class UserDataQueries extends React.Component {
      this.props.setFormData(payload)
 
       this.setState({
+        isOpen: true,
         pgid: id,
         formTitle: title,
         isfilterform: true
       });
 
     };
+
+    this.handleClose = () => {
+      this.setState({ isOpen: false  });
+    }
   }
 
 
@@ -72,7 +78,7 @@ class UserDataQueries extends React.Component {
       filter = true;
     }
 
-    const close = this.props.closeForm;
+    const close = this.handleClose;
     const formProps = {
       close,
       handleChange,
@@ -147,8 +153,8 @@ class UserDataQueries extends React.Component {
         </Row>
 
         <Modal
-          open={this.props.isOpen}
-          close={this.props.closeForm}
+          open={this.state.isOpen}
+          close={this.handleClose}
           title={this.state.formTitle}
           cruddef={cruddef}
         >

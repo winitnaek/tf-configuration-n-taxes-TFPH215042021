@@ -111,7 +111,8 @@ class ReusableGrid extends React.Component {
         }
       });
       // This below will need to be refactored to not call back to tf_index
-      renderTFApplication("pageContainer", pgData[0]);
+      //renderTFApplication
+      this.props.gridProps.renderGrid("pageContainer", pgData[0]);
     }
 
     this.handleFilter = e => {
@@ -119,7 +120,7 @@ class ReusableGrid extends React.Component {
       // Either Render Parent Grid or Toggle isOpen to Open Modal
       const { parentConfig } = this.state;
       parentConfig
-        ? handleChildGrid(parentConfig.pgdef.pgid)
+        ? this.handleChildGrid(parentConfig.pgdef.pgid)
         : this.handleNewForm(e).bind(this);
     };
 
