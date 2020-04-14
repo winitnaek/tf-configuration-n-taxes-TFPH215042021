@@ -35,20 +35,16 @@ if (!sessionStorage.getItem("up")) {
   var userProfile =
     '{\r\n   "userId":"TF11",\r\n   "firstName":"Isreal",\r\n   "lastName":"Fullerton",\r\n   "dataset":"VINIT",\r\n   "securitytokn":"fhfh484jer843je848rj393jf",\r\n   "branding":"base64ImageData",\r\n   "userTheme":"Default",\r\n   "roles":[\r\n      "ER"\r\n   ],\r\n   "applications":[\r\n      {\r\n         "id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc",\r\n         "name":"TFTools",\r\n         "accessIds":[\r\n            {\r\n               "id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8",\r\n               "visible":true\r\n            }\r\n         ],\r\n         "permissions":{\r\n            "CF":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "CT":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "CP":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "UQ":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   ],\r\n   "themeList":[\r\n      {\r\n         "id":"Default",\r\n         "name":"Default"\r\n      },\r\n      {\r\n         "id":"HighContrast",\r\n         "name":"High Contrast"\r\n      },\r\n      {\r\n         "id":"WhiteOnBlack",\r\n         "name":"White On Black"\r\n      },\r\n      {\r\n         "id":"BlackOnWhite",\r\n         "name":"Black On White"\r\n      }\r\n   ]\r\n}';
   var userdata = JSON.parse(userProfile);
-  console.log("setUserProfile userdata");
-  console.log(userdata);
   sessionStorage.setItem("up", userProfile);
 }
 //==============================================================================
 let usrobj = JSON.parse(sessionStorage.getItem("up"));
-//console.log('setUserProfile usrobj');
-//console.log(usrobj);
+
 var dataset = usrobj.dataset;
 var userId = usrobj.userId;
 setModulePermissions(usrobj.applications);
 let moduleAreas = buildModuleAreaLinks(usrobj.applications);
-console.log("moduleAreas");
-console.log(moduleAreas);
+
 /**
  * renderW2AdmApplication TEST
  * master branch
@@ -56,8 +52,6 @@ console.log(moduleAreas);
  * @param {*} renderName
  */
 function renderTFApplication(elem, renderName, child) {
-  console.log(renderName);
-  console.log(renderName.type);
   let parentDataId;
 
   setAppAnchor(elem);
@@ -72,7 +66,6 @@ function renderTFApplication(elem, renderName, child) {
       600
     );
   } else if (renderName && renderName.type == UI_COMP) {
-    console.log(renderName.id, renderName.value, renderName);
     renderComponent(elem, renderName.id, renderName.value, child);
   } else if (renderName && renderName.type == UI_PAGE) {
     renderNewPage(elem, renderName.id, renderName.value);
@@ -93,13 +86,10 @@ const dispatch = store.dispatch
 const renderGrid =  renderTFApplication
 const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData, renderGrid}
 
-  console.log(gridInput)
-
   griddataAPI  
     .getGridData(pageid, gridInput) 
     .then(response => response)
     .then(griddata => {
-      console.log(compMetaData);
       ReactDOM.render(
         <Provider store={store}>
           <CustomGrid
@@ -143,23 +133,6 @@ function showPrgress(elem) {
     document.querySelector("#" + elem)
   );
 }
-
-// function editClick(index, pgid) {
-//   console.log('you clicked edit')
-//   let _id = document.querySelector("div[role='grid']").id;
-//   let dataRecord = $("#" + _id).jqxGrid("getrowdata", index);
-//   const data = { formData: dataRecord, mode: "Edit", index: index };
-//   store.dispatch(setFormData(data));
-// }
-
-// function handleChildGrid(pgid) {
-//   const pgData = tftools.filter(item => {
-//     if (item.id === pgid) {
-//       return item;
-//     }
-//   });
-//   renderTFApplication("pageContainer", pgData[0]);
-// }
 
 /**
  * renderTFHome
@@ -326,7 +299,6 @@ const initIndexPage = templData => {
       rf: mnfst.renderFunction,
       anchorId: c.appContentId
     };
-    console.log(searchInput);
     makeSearch(searchInput);
   } else {
     //Hide Search Input

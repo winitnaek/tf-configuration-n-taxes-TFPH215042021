@@ -54,12 +54,9 @@ class ReusableGrid extends React.Component {
     };
 
     this.editClick = (index, pgid) => {
-      // this.setState({ isOpen: true });
       let _id = document.querySelector("div[role='grid']").id;
       let dataRecord = $("#" + _id).jqxGrid("getrowdata", index);
       const data = { formData: dataRecord, mode: "Edit", index: index };
-      // store.dispatch(setFormData(data));
-
       const setIsOpen = () => {
         this.setState({ isOpen: true  });
       }
@@ -78,26 +75,19 @@ class ReusableGrid extends React.Component {
         if (item.id === pgid) {
           return item;
         }
-      });
-      // This below will need to be refactored to not call back to tf_index
-      //renderTFApplication
+      })
       this.props.gridProps.renderGrid("pageContainer", pgData[0]);
     };
 
     this.handleFilter = e => {
       e.preventDefault();
-      // Either Render Parent Grid or Toggle isOpen to Open Modal
       const { parentConfig } = this.state;
       parentConfig
         ? this.handleChildGrid(parentConfig.pgdef.pgid)
         : this.handleNewForm(e).bind(this);
     };
 
-    // this.handleNewForm = e => {
-    //   e.preventDefault();
-    //   const payload = { data:{} , mode: "New" };
-    //   this.props.setFormData(payload)
-    // }
+ 
 
     this.handleNewForm = e => {
       e.preventDefault();
@@ -110,13 +100,11 @@ class ReusableGrid extends React.Component {
       const {saveGridData} = this.props;
       saveGridData.saveGridData(pgid, payload, mode);
       this.props.closeForm();
-    };
+    }; 
 
     this.handleFilterFormView = (pgid, payload) => {
       console.log("You made it back to the reusable grid");
-      // this.props.closeForm()
-      // this.props.setFilterFormData(payload);
-      // this.renderMe(pgid)
+
     };
 
     this.OpenHelp = () => {
@@ -131,8 +119,6 @@ class ReusableGrid extends React.Component {
       let _id = document.querySelector("div[role='grid']").id;
       const rowid = $("#" + _id).jqxGrid("getrowid", index);
       $("#" + _id).jqxGrid("deleterow", rowid);
-      // need to uncomment below when hooking up to api
-      // this.props.deleteGridData(pgid, rowid)
       const { pgid } = this.state;
       const {deleteGridData} = this.props;
       deleteGridData.deleteGridData(pgid, rowid);
@@ -199,13 +185,10 @@ class ReusableGrid extends React.Component {
     );
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log(nextProps, this.props)
-  // }
+  
   render() {
     const editCellsRenderer = ndex => {
       const { childConfig } = this.state.pgid;
-      // this will render child grid else the form will render in a modal
       if (this.state.pgdef.childConfig) {
         const { childConfig } = this.state.pgdef;
         return ` <div id='edit-${ndex}'style="text-align:center; margin-top: 10px; color: #4C7392" onClick={handleChildGrid(${JSON.stringify(
@@ -227,7 +210,7 @@ class ReusableGrid extends React.Component {
       cellsrenderer: editCellsRenderer
     };
 
-    // Check to see if permissions allow for edit & delete.  If no, then remove column
+    
     let permissions = this.props.permissions(this.props.pid);
     const { columns, numOfRows, showClipboard } = this.state;
     let newColumns = columns;
@@ -235,13 +218,12 @@ class ReusableGrid extends React.Component {
     if (this.state.recordEdit) {
       newColumns = [...newColumns, editColumn];
 
-      // this is temporary code to override permissions
       if (!permissions) {
         permissions = {
           VIEW: true,
-          SAVE: true,
-          DELETE: true,
-          RUN: true,
+          SAVE: false,
+          DELETE: false,
+          RUN: false,
           AUDIT: false
         };
       }
@@ -473,23 +455,23 @@ class ReusableGrid extends React.Component {
             <span> Copy to clipboard </span>
           </UncontrolledTooltip>
         </Row>
+
         <Modal isOpen={this.state.isOpen} size="lg" style={styles.modal}>
           <ModalHeader toggle={e => this.toggle()}>
             <span> {this.props.title} </span>
           </ModalHeader>
           <p style={styles.subTitle}>
-            {" "}
-            {this.props.subtitle && this.props.cruddef.subtitle}{" "}
+            {this.props.subtitle && this.props.cruddef.subtitle}
           </p>
           <DynamicForm 
-            formData={formData} //--
-            formProps={formProps} //--
-            fieldData={fieldData} // --
-            tftools={tftools}  // --
-            formMetaData={formMetaData} //--
-            recentUsage={recentUsage} // --
-            autoComplete={autoComplete} // --
-            saveGridData={saveGridData} //--
+            formData={formData} 
+            formProps={formProps} 
+            fieldData={fieldData} 
+            tftools={tftools}  
+            formMetaData={formMetaData} 
+            recentUsage={recentUsage} 
+            autoComplete={autoComplete} 
+            saveGridData={saveGridData} 
           />
         </Modal>
       </Fragment>

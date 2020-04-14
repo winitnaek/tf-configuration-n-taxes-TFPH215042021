@@ -16,6 +16,7 @@ import autocompleteSelectAPI from "../api/autocompleteselectAPI";
 class CustomGrid extends Component {
   render() {
     const {pageid, metadata, pid, permissions, griddata, help, gridProps, formData, getRecentUsage} = this.props;
+
     return(
         <ReusableGrid
             pageid={pageid}
