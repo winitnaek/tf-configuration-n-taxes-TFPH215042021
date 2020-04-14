@@ -7,10 +7,10 @@ import Progress from "./app/common/Progress";
 import * as manifest from "../build/_manifest";
 import * as c from "./base/constants/IndexConstants";
 import { makeNavs, makeSearch } from "./base/template/navGenerator";
-import { closeForm, setFormData } from "./app/actions/formActions"
+import TFHome from "./app/home/home.js";
+import { closeForm, setFormData } from "./app/actions/formActions";
 import { setFilterFormData } from "./app/actions/filterFormActions";
 
-import TFHome from "./app/home/home.js";
 let store = configureStore();
 export default store;
 import Welcome from "./app/home/Welcome";
@@ -24,7 +24,7 @@ import {
   buildGridDataInput
 } from "./base/utils/tfUtils";
 import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
-import ReusableGrid from "./app/components/ReusableGrid";
+import CustomGrid from "./app/components/CustomGrid";
 import ReusablePage from './app/components/ReusablePage';
 import { UI_COMP, UI_PAGE, tftools } from "./base/constants/TFTools";
 import griddataAPI from "./app/api/griddataAPI";
@@ -35,7 +35,7 @@ if (!sessionStorage.getItem("up")) {
   var userProfile =
     '{\r\n   "userId":"TF11",\r\n   "firstName":"Isreal",\r\n   "lastName":"Fullerton",\r\n   "dataset":"VINIT",\r\n   "securitytokn":"fhfh484jer843je848rj393jf",\r\n   "branding":"base64ImageData",\r\n   "userTheme":"Default",\r\n   "roles":[\r\n      "ER"\r\n   ],\r\n   "applications":[\r\n      {\r\n         "id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc",\r\n         "name":"TFTools",\r\n         "accessIds":[\r\n            {\r\n               "id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8",\r\n               "visible":true\r\n            }\r\n         ],\r\n         "permissions":{\r\n            "CF":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "CT":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "CP":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "UQ":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   ],\r\n   "themeList":[\r\n      {\r\n         "id":"Default",\r\n         "name":"Default"\r\n      },\r\n      {\r\n         "id":"HighContrast",\r\n         "name":"High Contrast"\r\n      },\r\n      {\r\n         "id":"WhiteOnBlack",\r\n         "name":"White On Black"\r\n      },\r\n      {\r\n         "id":"BlackOnWhite",\r\n         "name":"Black On White"\r\n      }\r\n   ]\r\n}';
   var userdata = JSON.parse(userProfile);
-    sessionStorage.setItem("up", userProfile);
+  sessionStorage.setItem("up", userProfile);
 }
 //==============================================================================
 let usrobj = JSON.parse(sessionStorage.getItem("up"));
@@ -52,9 +52,7 @@ let moduleAreas = buildModuleAreaLinks(usrobj.applications);
  * @param {*} renderName
  */
 function renderTFApplication(elem, renderName, child) {
- 
-
-
+  let parentDataId;
 
   setAppAnchor(elem);
   setAppUserIDAndDataset(dataset, userId);
@@ -68,7 +66,7 @@ function renderTFApplication(elem, renderName, child) {
       600
     );
   } else if (renderName && renderName.type == UI_COMP) {
-      renderComponent(elem, renderName.id, renderName.value, child);
+    renderComponent(elem, renderName.id, renderName.value, child);
   } else if (renderName && renderName.type == UI_PAGE) {
     renderNewPage(elem, renderName.id, renderName.value);
   }
@@ -82,16 +80,11 @@ function renderComponent(elem, pageid, pid) {
   showPrgress(elem);
   let gridInput = buildGridDataInput(pageid, store);
 
+const state = store.getState()
+const dispatch = store.dispatch
 
-
-
-  const state = store.getState()
-  const dispatch = store.dispatch
-  // closeForm, setFormData, setFilterFormData  
-  
-  const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData}
-//  need to also paass actions to grid
-
+const renderGrid =  renderTFApplication
+const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData, renderGrid}
 
   griddataAPI  
     .getGridData(pageid, gridInput) 
@@ -99,7 +92,7 @@ function renderComponent(elem, pageid, pid) {
     .then(griddata => {
       ReactDOM.render(
         <Provider store={store}>
-          <ReusableGrid
+          <CustomGrid
             pageid={pageid}
             metadata={compMetaData}
             pid={pid}
@@ -139,22 +132,6 @@ function showPrgress(elem) {
     </Provider>,
     document.querySelector("#" + elem)
   );
-}
-
-function editClick(index, pgid) {
-  let _id = document.querySelector("div[role='grid']").id;
-  let dataRecord = $("#" + _id).jqxGrid("getrowdata", index);
-  const data = { formData: dataRecord, mode: "Edit", index: index };
-  store.dispatch(setFormData(data));
-}
-
-function handleChildGrid(pgid) {
-  const pgData = tftools.filter(item => {
-    if (item.id === pgid) {
-      return item;
-    }
-  });
-  renderTFApplication("pageContainer", pgData[0]);
 }
 
 /**
@@ -322,7 +299,7 @@ const initIndexPage = templData => {
       rf: mnfst.renderFunction,
       anchorId: c.appContentId
     };
-     makeSearch(searchInput);
+    makeSearch(searchInput);
   } else {
     //Hide Search Input
   }
@@ -375,12 +352,6 @@ const unMountNMountContainerNode = () => {
 
 module.exports = renderTFApplication;
 window.renderTFApplication = renderTFApplication;
-
-module.exports = editClick;
-window.editClick = editClick;
-
-module.exports = handleChildGrid;
-window.handleChildGrid = handleChildGrid;
 
 module.exports = appDataset;
 window.appDataset = appDataset;

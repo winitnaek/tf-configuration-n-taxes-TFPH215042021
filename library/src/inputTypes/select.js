@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {Input, FormFeedback, Col, FormGroup, Label} from "reactstrap";
 import {AsyncTypeahead} from "react-bootstrap-typeahead";
-import autocompleteSelectAPI from '../../api/autocompleteselectAPI';
 
 class CustomSelect extends Component {
   constructor(props) {
@@ -25,9 +24,10 @@ class CustomSelect extends Component {
   }
 
   onSearchHandler(query){
+    const {autoComplete} = this.props;
     if(this.props.fieldinfo.isasync){
       this.setState({isLoading: true});
-      autocompleteSelectAPI.getAutoCompleteData(this.props.id, query)
+      autoComplete.getAutoCompleteData(this.props.id, query)
       .then((options) => {
         this.setState({
           isLoading: false,

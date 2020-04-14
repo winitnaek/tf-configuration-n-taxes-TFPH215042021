@@ -1,19 +1,24 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux';
-import { bindActionCreators } from "redux";
 import {Col, Collapse, Button} from "reactstrap";
-import {closeForm} from "../actions/formActions";
-import { tftools } from "../../base/constants/TFTools";
-import {getRecentUsage} from "../actions/usageActions";
 
 class Usage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen:false
+            isOpen:false,
+            recentUsage: []
         }
         this.toggle = this.toggle.bind(this);
       }
+
+    componentDidMount() {
+        this.props.recentUsage(this.props.pgid)
+        .then((recentUsage) =>{
+            this.setState({
+                recentUsage: recentUsage
+            })
+        })
+    }
 
     toggle() {
         this.setState({
@@ -21,18 +26,14 @@ class Usage extends Component {
         })
     }
 
-    componentDidMount() {
-            this.props.getRecentUsage(this.props.pgid)
-    }
-
     handleLink(data) {
         renderTFApplication("pageContainer", data);
-        this.props.closeForm();
+        this.props.close();
     }
 
     render() {
-        const {recentUsage} = this.props;
-        const {isOpen} = this.state;
+        const {tftools} = this.props;
+        const {isOpen, recentUsage} = this.state;
         return (
         <Col>
         {recentUsage && (
@@ -65,15 +66,4 @@ class Usage extends Component {
         )
     }
 }
-
-const mapStateToProps = state => {
-    return {
-      recentUsage: state.usage.recentUsage
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators({closeForm, getRecentUsage}, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Usage);
+export default Usage;

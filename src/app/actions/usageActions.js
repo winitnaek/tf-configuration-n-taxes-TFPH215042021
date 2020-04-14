@@ -13,10 +13,12 @@ export function getRecentUsage(pgid) {
         dispatch({type: USAGE});
         const data = await GeneralApi.getApiData('recentUsage');
         const payload = data.properties[pgid];
-        if (Metadata[pgid].formdef.hasRecentUsage)
+        if (Metadata[pgid].formdef.hasRecentUsage){
           dispatch({type: USAGE_SUCCESS, payload: payload})
-        else 
+          return payload;
+        }else{ 
           dispatch({type: USAGE_SUCCESS, payload: null});
+        }
       } catch (error) {
         dispatch({USAGE_FAILED, error})
       }
