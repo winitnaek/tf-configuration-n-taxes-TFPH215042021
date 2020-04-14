@@ -1,16 +1,28 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Col, Row, Button, UncontrolledTooltip } from "reactstrap";
 import { tftools } from "../../base/constants/TFTools";
-import { connect } from "react-redux";
 import { closeForm, setFormData } from "../actions/formActions";
-import { bindActionCreators } from "redux";
+
+import { pagetitle, helpicon } from "../../base/constants/AppConstants";
+import {Modal} from "../../../library/src/index";
+
+import * as formMetaData from "../metadata/metaData";
+import * as fieldData from "../metadata/fieldData";
+import {DynamicForm} from "../../../library/src/index";
+import {getRecentUsage} from "../actions/usageActions";
+import autocompleteSelectAPI from "../api/autocompleteselectAPI";
+
+import savegriddataAPI from "../api/savegriddataAPI";
+import { setFilterFormData } from "../actions/filterFormActions";
+import gridDataAPI from "../api/griddataAPI";
+import deleteGridDataAPI from "../api/deletegriddataAPI";
+
 const allBSIPlans = "allBSIPlans";
 const populateV3States = "populateV3States";
 const experienceRates = "experienceRates";
 const supplementalMethods = "supplementalMethods";
-import { pagetitle, helpicon } from "../../base/constants/AppConstants";
-import CustomForm from './CustomForm';
-import {Modal} from "../../../library/src/index";
 
 const TitleStyle = {
   margin: "0 auto",
@@ -73,6 +85,7 @@ class UserDataQueries extends React.Component {
   render() {
     const { permissions, cruddef, isfilterform, pgid } = this.state;
     const { deleteRow, handleChange, renderMe, handleSubmit } = this;
+    const {getRecentUsage, formData} = this.props;
     let filter;
     if (isfilterform) {
       filter = true;
@@ -158,11 +171,18 @@ class UserDataQueries extends React.Component {
           title={this.state.formTitle}
           cruddef={cruddef}
         >
-          <CustomForm
-            formProps={formProps}
-            filter={filter}
-            isfilterform={this.state.isfilterform}
-          />
+          <DynamicForm
+              formData={formData}
+              formProps={formProps}
+              filter={filter}
+              isfilterform={this.state.isfilterform}
+              tftools={tftools}
+              formMetaData={formMetaData}
+              fieldData={fieldData}
+              recentUsage={getRecentUsage}
+              autoComplete={autocompleteSelectAPI}
+              saveGridData={savegriddataAPI}
+        />
         </Modal>
       </Fragment>
     );
@@ -172,11 +192,12 @@ class UserDataQueries extends React.Component {
 function mapStateToProps(state) {
   return {
     isOpen: state.formData.isOpen,
+    formData: state.formData,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeForm, setFormData }, dispatch);
+  return bindActionCreators({ closeForm, setFormData, getRecentUsage}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDataQueries);
