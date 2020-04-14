@@ -5,7 +5,6 @@ import { Modal, ModalHeader } from "reactstrap";
 import {Col,Row,UncontrolledTooltip,Button,ModalBody,ModalFooter} from "reactstrap";
 import DynamicForm from "./dynamicForm";
 import Grid from "../../src/deps/jqwidgets-react/react_jqxgrid";
-import { autocompleteURL } from "../../src/base/utils/tfUtils";
 const customFormulasChild = "customFormulasChild";
 
 let GridFunctions;
