@@ -24,7 +24,7 @@ import {
   buildGridDataInput
 } from "./base/utils/tfUtils";
 import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
-import ReusableGrid from "./app/components/ReusableGrid";
+import CustomGrid from "./app/components/CustomGrid";
 import ReusablePage from './app/components/ReusablePage';
 import { UI_COMP, UI_PAGE, tftools } from "./base/constants/TFTools";
 import griddataAPI from "./app/api/griddataAPI";
@@ -102,7 +102,7 @@ const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData, 
       console.log(compMetaData);
       ReactDOM.render(
         <Provider store={store}>
-          <ReusableGrid
+          <CustomGrid
             pageid={pageid}
             metadata={compMetaData}
             pid={pid}

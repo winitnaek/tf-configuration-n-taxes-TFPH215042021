@@ -1,35 +1,11 @@
 import React, { Fragment } from "react";
-import { tftools } from "../../base/constants/TFTools";
-import savegriddataAPI from "../api/savegriddataAPI";
-import deletegriddataAPI from "../api/deletegriddataAPI";
-import { copyToClipboard } from "../../base/utils/copyToClipBoard";
-import { ClipboardToast } from "../../../library/src/index";
-import CustomForm from "./CustomForm";
+import { copyToClipboard } from "./utils/copyToClipboard";
+import ClipboardToast from "./clipboardToast";
 import { Modal, ModalHeader } from "reactstrap";
-import { subTitle, modal } from "../../../library/src/utils/AppConstants";
-
-import {
-  pagetitle,
-  helpicon,
-  filtericon,
-  gridStyle,
-  gridRowStyle,
-  gridLinkStyle,
-  iconPaddingRight,
-  iconPaddingLeft,
-  marginRight10,
-  rowTop,
-  helpMargin
-} from "../../base/constants/AppConstants";
-import {
-  Col,
-  Row,
-  UncontrolledTooltip,
-  Button,
-  ModalBody,
-  ModalFooter
-} from "reactstrap";
-import Grid from "../../deps/jqwidgets-react/react_jqxgrid";
+import {Col,Row,UncontrolledTooltip,Button,ModalBody,ModalFooter} from "reactstrap";
+import DynamicForm from "./dynamicForm";
+import Grid from "../../src/deps/jqwidgets-react/react_jqxgrid";
+import { autocompleteURL } from "../../src/base/utils/tfUtils";
 const customFormulasChild = "customFormulasChild";
 
 let GridFunctions;
@@ -37,23 +13,10 @@ let GridFunctions;
 class ReusableGrid extends React.Component {
   constructor(props) {
     super(props);
-    console.log("metadata>>>>");
-    console.log(this.props);
     let metadata = this.props.metadata(this.props.pageid);
-    console.log("`this is the metadata", metadata);
-
-    console.log(this.props.pageid);
-    console.log(metadata);
-    console.log("metadata>>>>");
-    console.log("permissions>>>>");
     let permissions = this.props.permissions(this.props.pid);
-
-    console.log(permissions);
-    console.log("permissions>>>>");
     //let gridDataUrl = this.props.dataurl(this.props.pageid);
     let data = this.props.griddata;
-    console.log(data);
-    console.log(metadata);
     let source = {
       datatype: "json",
       datafields: metadata.griddef.dataFields,
@@ -92,7 +55,6 @@ class ReusableGrid extends React.Component {
 
     this.editClick = (index, pgid) => {
       // this.setState({ isOpen: true });
-      console.log("Edit click in tf_index");
       let _id = document.querySelector("div[role='grid']").id;
       let dataRecord = $("#" + _id).jqxGrid("getrowdata", index);
       const data = { formData: dataRecord, mode: "Edit", index: index };
@@ -111,6 +73,7 @@ class ReusableGrid extends React.Component {
     };
 
     this.handleChildGrid = pgid => {
+      const {tftools} = this.props;
       const pgData = tftools.filter(item => {
         if (item.id === pgid) {
           return item;
@@ -137,8 +100,6 @@ class ReusableGrid extends React.Component {
     // }
 
     this.handleNewForm = e => {
-      console.log("This is the add form function");
-      console.log(this.state.isOpen);
       e.preventDefault();
       const payload = { data: {}, mode: "New" };
       this.props.gridProps.dispatch(this.props.gridProps.setFormData(payload));
@@ -146,8 +107,8 @@ class ReusableGrid extends React.Component {
     };
 
     this.handleSubmit = (pgid, payload, mode, rowid) => {
-      console.log("made it to the submit handler");
-      savegriddataAPI.saveGridData(pgid, payload, mode);
+      const {saveGridData} = this.props;
+      saveGridData.saveGridData(pgid, payload, mode);
       this.props.closeForm();
     };
 
@@ -173,21 +134,21 @@ class ReusableGrid extends React.Component {
       // need to uncomment below when hooking up to api
       // this.props.deleteGridData(pgid, rowid)
       const { pgid } = this.state;
-      deletegriddataAPI.deleteGridData(pgid, rowid);
+      const {deleteGridData} = this.props;
+      deleteGridData.deleteGridData(pgid, rowid);
     };
 
     this.renderMe = pgid => {
+      const {tftools} = this.props;
       let data = tftools.filter(tftool => {
         if (tftool.id == pgid) return tftool;
       });
       renderTFApplication("pageContainer", data[0]);
-      console.log("this is the render me function");
       this.props.close();
     };
 
     this.selectAll = event => {
       event.preventDefault();
-      console.log("trying to select all");
       this.setState({ allSelected: true });
       let _id = document.querySelector("div[role='grid']").id;
       $("#" + _id).jqxGrid("selectallrows");
@@ -195,7 +156,6 @@ class ReusableGrid extends React.Component {
 
     this.unselectAll = event => {
       event.preventDefault();
-      console.log("unselecting");
       this.setState({ allSelected: false });
       let _id = document.querySelector("div[role='grid']").id;
       $("#" + _id).jqxGrid("clearselection");
@@ -203,8 +163,6 @@ class ReusableGrid extends React.Component {
 
     this.toggleSelectAll = event => {
       event.preventDefault();
-      console.log("Trying to toggle select all");
-
       if (this.state.allSelected) {
         this.unselectAll(event);
       }
@@ -212,9 +170,7 @@ class ReusableGrid extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.griddata);
     if (!this.props.griddata) {
-      console.log("setting nodata message");
       this.setState({ noResultsFoundTxt: metadata.griddef.noResultsFoundTxt });
     }
   }
@@ -246,7 +202,6 @@ class ReusableGrid extends React.Component {
   // shouldComponentUpdate(nextProps, nextState) {
   //   console.log(nextProps, this.props)
   // }
-
   render() {
     const editCellsRenderer = ndex => {
       const { childConfig } = this.state.pgid;
@@ -308,11 +263,6 @@ class ReusableGrid extends React.Component {
     }
     const { noResultsFoundTxt } = this.state;
     const { griddata } = this.props;
-    console.log(noResultsFoundTxt);
-    console.log(this.props.griddata[0]);
-    console.log(this.state.pgid);
-    console.log(this.state.isfilterform);
-
     const { isOpen } = this.props;
     const { title, cruddef, isfilterform, pgid } = this.state;
     const { deleteRow, handleChange, renderMe, handleSubmit } = this;
@@ -338,18 +288,18 @@ class ReusableGrid extends React.Component {
 
     module.exports = this.handleChildGrid;
     window.handleChildGrid = this.handleChildGrid;
-
+    const {styles, tftools, metadata, saveGridData, deleteGridData, formData, fieldData,formMetaData, recentUsage, autoComplete} = this.props;
     return (
       <Fragment>
         <Row>
-          <h1 style={pagetitle}>{this.state.title}</h1>
+          <h1 style={styles.pagetitle}>{this.state.title}</h1>
 
-          <span style={helpMargin}>
+          <span style={styles.helpMargin}>
             <span id="help">
               <i
                 className="fas fa-question-circle  fa-lg"
                 onClick={this.OpenHelp}
-                style={helpicon}
+                style={styles.helpicon}
               />
             </span>
             <UncontrolledTooltip placement="right" target="help">
@@ -363,7 +313,7 @@ class ReusableGrid extends React.Component {
                 <span id="filter">
                   <i
                     class="fas fa-arrow-up"
-                    style={filtericon}
+                    style={styles.filtericon}
                     onClick={this.handleFilter}
                   />
                   <UncontrolledTooltip placement="right" target="filter">
@@ -374,7 +324,7 @@ class ReusableGrid extends React.Component {
                 <span id="filter">
                   <i
                     class="fas fa-filter fa-lg"
-                    style={filtericon}
+                    style={styles.filtericon}
                     onClick={this.handleFilter}
                   />
                   <UncontrolledTooltip placement="right" target="filter">
@@ -392,8 +342,8 @@ class ReusableGrid extends React.Component {
         <Row>
           <p> {!griddata[0] && noResultsFoundTxt}</p>
         </Row>
-        <Row style={rowTop}>
-          <Col sm="2" style={iconPaddingLeft}>
+        <Row style={styles.rowTop}>
+          <Col sm="2" style={styles.iconPaddingLeft}>
             {this.state.allSelected && (
               <span>
                 <span id="selectAll" style={{ marginRight: "10px" }}>
@@ -436,7 +386,7 @@ class ReusableGrid extends React.Component {
               <ClipboardToast numOfRows={this.state.numOfRows} />
             )}
           </Col>
-          <Col sm="1" style={iconPaddingRight}>
+          <Col sm="1" style={styles.iconPaddingRight}>
             {this.state.hasAddNew && (
               <span
                 style={
@@ -487,12 +437,12 @@ class ReusableGrid extends React.Component {
             pageable={true}
             autoheight={true}
             selectionmode="multiplerows"
-            style={gridStyle}
+            style={styles.gridStyle}
             virtualmode={false}
           />
         </Row>
 
-        <Row style={gridRowStyle}>
+        <Row style={styles.gridRowStyle}>
           <a href="#" id="exportToExcel" onClick={() => this.exportToExcel()}>
             <i class="fas fa-table fa-lg fa-2x"></i>
           </a>
@@ -503,7 +453,7 @@ class ReusableGrid extends React.Component {
             href="#"
             id="exportToCsv"
             onClick={() => this.exportToCsv()}
-            style={gridLinkStyle}
+            style={styles.gridLinkStyle}
           >
             <i class="fas fa-pen-square fa-lg fa-2x"></i>
           </a>
@@ -515,7 +465,7 @@ class ReusableGrid extends React.Component {
             href="#"
             id="copyToClipboard"
             onClick={e => this.copyToClipboardHandler(e)}
-            style={gridLinkStyle}
+            style={styles.gridLinkStyle}
           >
             <i class="far fa-copy fa-lg fa-2x"></i>
           </a>
@@ -523,15 +473,24 @@ class ReusableGrid extends React.Component {
             <span> Copy to clipboard </span>
           </UncontrolledTooltip>
         </Row>
-        <Modal isOpen={this.state.isOpen} size="lg" style={modal}>
+        <Modal isOpen={this.state.isOpen} size="lg" style={styles.modal}>
           <ModalHeader toggle={e => this.toggle()}>
             <span> {this.props.title} </span>
           </ModalHeader>
-          <p style={subTitle}>
+          <p style={styles.subTitle}>
             {" "}
             {this.props.subtitle && this.props.cruddef.subtitle}{" "}
           </p>
-          <CustomForm formProps={formProps} filter={filter} />
+          <DynamicForm 
+            formData={formData} //--
+            formProps={formProps} //--
+            fieldData={fieldData} // --
+            tftools={tftools}  // --
+            formMetaData={formMetaData} //--
+            recentUsage={recentUsage} // --
+            autoComplete={autoComplete} // --
+            saveGridData={saveGridData} //--
+          />
         </Modal>
       </Fragment>
     );
