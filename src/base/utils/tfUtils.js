@@ -311,7 +311,7 @@ export function getUrl(id) {
 
   const mockselectmap = [
     {
-      id: "taxCodeAutoCompl",
+      id: "taxability",
       url: './TAXCODE_AUTOCOMPLETE_MOCKDATA.json',
     },
     {
@@ -329,6 +329,9 @@ export function getUrl(id) {
     {
       id: "wrksiteAutoCompl",
       url: './WORK_SITE_AUTOCOMPLETE_MOCKDATA.json',
+    },
+    {
+      id: "taxCode",
+      url: "./EXPERIENCE_RATE_AUTOCOMPLETE_MOCKDATA.json"
     }
-
   ]
