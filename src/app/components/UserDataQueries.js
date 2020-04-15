@@ -4,13 +4,11 @@ import { bindActionCreators } from "redux";
 import { Col, Row, Button, UncontrolledTooltip } from "reactstrap";
 import { tftools } from "../../base/constants/TFTools";
 import { closeForm, setFormData } from "../actions/formActions";
-
-import { pagetitle, helpicon } from "../../base/constants/AppConstants";
-import {Modal} from "../../../library/src/index";
-
+import * as styles from "../../base/constants/AppConstants";
 import * as formMetaData from "../metadata/metaData";
 import * as fieldData from "../metadata/fieldData";
-import {DynamicForm} from "../../../library/src/index";
+import {ReusableModal} from "bsiuilib";
+import {DynamicForm} from "bsiuilib";
 import {getRecentUsage} from "../actions/usageActions";
 import autocompleteSelectAPI from "../api/autocompleteselectAPI";
 
@@ -105,14 +103,14 @@ class UserDataQueries extends React.Component {
     return (
       <Fragment>
         <Row>
-          <h1 style={pagetitle}>{this.state.title}</h1>
+          <h1 style={styles.pagetitle}>{this.state.title}</h1>
           <span style={{ marginLeft: "10px" }}>
             <span id="help">
               <span>
                 <i
                   className="fas fa-question-circle  fa-lg"
                   onClick={this.OpenHelp}
-                  style={helpicon}
+                  style={styles.helpicon}
                 />
               </span>
             </span>
@@ -165,11 +163,12 @@ class UserDataQueries extends React.Component {
           </Col>
         </Row>
 
-        <Modal
+        <ReusableModal
           open={this.state.isOpen}
           close={this.handleClose}
           title={this.state.formTitle}
           cruddef={cruddef}
+          styles={styles}
         >
           <DynamicForm
               formData={formData}
@@ -182,8 +181,9 @@ class UserDataQueries extends React.Component {
               recentUsage={getRecentUsage}
               autoComplete={autocompleteSelectAPI}
               saveGridData={savegriddataAPI}
+              styles={styles}
         />
-        </Modal>
+        </ReusableModal>
       </Fragment>
     );
   }

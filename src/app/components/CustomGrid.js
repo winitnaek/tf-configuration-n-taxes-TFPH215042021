@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {connect} from 'react-redux';
 import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
-import ReusableGrid from "../../../library/src/reusableGrid";
+import {ReusableGrid} from "bsiuilib";
 import { setFilterFormData } from "../actions/filterFormActions";
 import savegriddataAPI from "../api/savegriddataAPI";
 import * as fieldData from "../metadata/fieldData";
