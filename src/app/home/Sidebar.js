@@ -145,7 +145,6 @@ class Sidebar extends Component {
         parent ? (parent = parent.parentElement) : null;
       }
       if (!parent) {
-        console.log("trying to close menu");
         document.getElementById("mySidebar").style.display = "none";
         document.getElementById("fullSideBar").style.width = "";
         document.getElementById("fullSideBar").style.zIndex = "0";

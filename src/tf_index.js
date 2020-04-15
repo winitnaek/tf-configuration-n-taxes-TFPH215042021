@@ -353,12 +353,6 @@ const unMountNMountContainerNode = () => {
 module.exports = renderTFApplication;
 window.renderTFApplication = renderTFApplication;
 
-// module.exports = editClick;
-// window.editClick = editClick;
-
-// module.exports = handleChildGrid;
-// window.handleChildGrid = handleChildGrid;
-
 module.exports = appDataset;
 window.appDataset = appDataset;
 

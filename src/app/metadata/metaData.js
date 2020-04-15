@@ -725,7 +725,7 @@ export const companies = {
     ],
     dataFields: [
       { name: "companyName", type: "string" },
-      { name: "companyCode", type: "string" },
+      { name: "company", type: "string" },
       { name: "fein", type: "string" },
       { name: "courtesy", type: "string" },
     ]
@@ -778,7 +778,7 @@ export const worksites = {
     columns: [
      {
       text: "Company Code",
-      datafield: "companyCode",
+      datafield: "company",
       cellsalign: "center",
       align: "center",
       sortable: true,
