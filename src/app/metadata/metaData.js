@@ -129,7 +129,7 @@ export const customPayments = {
       },
       {
         text: "Taxability",
-        datafield: "taxCodeAutoCompl",
+        datafield: "taxability",
         cellsalign: "left",
         align: "left"
       },
@@ -429,7 +429,7 @@ export const experienceRates = {
     hasRecentUsage: false,
     formflds: "",
     fltrflds: [
-      { id: "taxCodeAutoCompl", "order":1, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "taxability", "order":1, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
       { id: "companyCodeAutoCompl", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
       { id: "startDate", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
       { id: "riskClassAutoCompl", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false }
@@ -493,7 +493,7 @@ export const supplementalMethods = {
     hasRecentUsage: false,
     formflds: "",
     fltrflds: [
-      { id: "taxCodeAutoCompl", "order":1, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false},
+      { id: "taxability", "order":1, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false},
       { id: "taxTypeAutoCompl", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
       { id: "formulaText", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false},
       { id: "startDate", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false}
@@ -725,7 +725,7 @@ export const companies = {
     ],
     dataFields: [
       { name: "companyName", type: "string" },
-      { name: "companyCode", type: "string" },
+      { name: "company", type: "string" },
       { name: "fein", type: "string" },
       { name: "courtesy", type: "string" },
     ]
@@ -778,7 +778,7 @@ export const worksites = {
     columns: [
      {
       text: "Company Code",
-      datafield: "companyCode",
+      datafield: "company",
       cellsalign: "center",
       align: "center",
       sortable: true,

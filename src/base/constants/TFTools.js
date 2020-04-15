@@ -254,7 +254,7 @@ export const savedatamap = [
 ];
 export const asyncselfldsmap = [
   {
-    id: "taxCodeAutoCompl",
+    id: "taxability",
     url: GET_ALL_TAXCODES_AUTOCOMPLETE,
     param:[{dataset:"","pattern":""}]
   },
@@ -272,5 +272,10 @@ export const asyncselfldsmap = [
     id: "riskClassAutoCompl",
     url: GET_ALL_RISKCLASS_AUTOCOMPLETE,
     param:[{"pattern":""}]
-  }
+  },
+  {
+    id: "taxCode",
+    url: GET_ALL_TAXCODES_AUTOCOMPLETE,
+    param:[{dataset:"","pattern":""}]
+  },
 ];
