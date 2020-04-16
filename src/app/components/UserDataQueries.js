@@ -51,7 +51,10 @@ class UserDataQueries extends React.Component {
       this.props.help("userDataQueries");
     };
 
-    this.renderMe = (pgid) => {
+    this.renderMe = (pgid, values, filter) => {
+
+    filter &&  this.props.setFilterFormData(values)
+
       console.log(pgid);
       let data = tftools.filter(tftool => {
         if (tftool.id == pgid) return tftool;
@@ -197,7 +200,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeForm, setFormData, getRecentUsage}, dispatch);
+  return bindActionCreators({ closeForm, setFormData, getRecentUsage, setFilterFormData}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDataQueries);

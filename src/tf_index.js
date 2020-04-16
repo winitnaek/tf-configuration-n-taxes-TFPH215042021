@@ -72,7 +72,7 @@ function renderTFApplication(elem, renderName, child) {
   }
 }
 /**
- * renderComponent
+ * renderComponent 
  * @param {*} elem
  */
 function renderComponent(elem, pageid, pid) {

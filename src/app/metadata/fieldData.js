@@ -92,7 +92,7 @@ export const customPayments = [
       }
     },
     {
-      id: "taxCodeAutoCompl",
+      id: "taxability",
       placeholder: "Select a type",
       fieldtype: "select",
       label: "Taxability",
@@ -1089,22 +1089,28 @@ export const worksiteCompanies = [
     }
   ];
 export const experienceRates = [
-    {
-      name: "taxCode",
-      id: "taxCode",
-      placeholder: "Enter Tax Code",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Tax Code",
-      value: "",
-      validation: [
-        {
-          required: false,
-        }
-      ]
+  {
+    id: "taxCode",
+    placeholder: "Enter Tax Code",
+    fieldtype: "select",
+    label: "Tax Code",
+    value: "",
+    errmsg: "TaxCode is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
     },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false,  
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },  
     {
       name: "startDate",
       id: "startDate",
@@ -1122,92 +1128,143 @@ export const experienceRates = [
       ]
     },
     {
-      name: "companyCode",
       id: "companyCode",
       placeholder: "Enter Company Code",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
+      fieldtype: "select",
       label: "Company Code",
       value: "",
-      validation: [
-        {
-          required: false,
-        }
-      ]
+      errmsg: "CompanyCode is required",
+      fieldlength: {
+        minlength: 1,
+        maxlength: 25
+      },
+      fieldinfo: {
+        typeahead: true,
+        isasync: true,
+        options: [],
+        multiselect: false,  
+      },
+      validation: {
+        required: false,
+        type: "string"
+      }
     },
     {
-      name: "riskClass",
       id: "riskClass",
       placeholder: "Enter Risk Class",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
+      fieldtype: "select",
       label: "Risk Class",
       value: "",
-      validation: [
-        {
-          required: false,
-        }
-      ]
-    }
+      errmsg: "Risk Class is required",
+      fieldlength: {
+        minlength: 1,
+        maxlength: 25
+      },
+      fieldinfo: {
+        typeahead: true,
+        isasync: true,
+        options: [],
+        multiselect: false,  
+      },
+      validation: {
+        required: false,
+        type: "string"
+      }
+    },    
   ];
 
 export const supplementalMethods = [
-    {
-      name: "taxCode",
-      id: "taxCode",
-      placeholder: "Enter Tax Code",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Tax Code",
-      value: "",
-      validation: [
+  {
+    id: "taxCode",
+    placeholder: "Enter Tax Code",
+    fieldtype: "select",
+    label: "Tax Code",
+    value: "",
+    errmsg: "TaxCode is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false,  
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },  
+  {
+    id: "taxType",
+    placeholder: "Enter Tax Type",
+    fieldtype: "select",
+    label: "Tax Type",
+    value: "",
+    errmsg: "Tax Type is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false,  
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "formulaNumber",
+    placeholder: "Enter Formula Number",
+    fieldtype: "text",
+    label: "Formula Number",
+    value: "",
+    errmsg: "Formula Number is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: false,
+      isasync: false,
+      options: [],
+      multiselect: false,  
+    },
+    validation: {
+      type: "number",
+      subtype: [
         {
-          required: false,
+          type: "positive",
+          message: "Formula Number cannot be negative"
+        },
+        {
+          type: "typeError",
+          message: "Must be a number"
+        }
+      ],
+      constraint: [
+        {
+          type: "min",
+          input: 0,
+          message: "Maximum Limit can not be < 0"
+        },
+        {
+          type: "max",
+          input: 100,
+          message: "Maximum Limit can not be > 100"
         }
       ]
-    },
-    {
-      name: "taxType",
-      id: "taxType",
-      placeholder: "Enter Tax Type",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "TaxType",
-      value: "",
-      validation: [
-        {
-          required: false,
-        }
-      ]
-    },
-    {
-      name: "formulaNumber",
-      id: "formulaNumber",
-      placeholder: "Enter Formula Number",
-      fieldtype: "text",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Formula Number",
-      value: "",
-      validation: [
-        {
-          required: false,
-        }
-      ]
-    },
+    }
+  }, 
     {
       name: "startDate",
       id: "startDate",
-      placeholder: "Enter Start Date",
+      placeholder: "",
       fieldtype: "date",
       fieldlength: {},
       fieldinfo: {},
@@ -1219,7 +1276,7 @@ export const supplementalMethods = [
           required: false,
         }
       ]
-    }
+    },
   ];
 
 export const worksites = [
