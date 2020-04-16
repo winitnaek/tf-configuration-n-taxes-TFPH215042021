@@ -181,14 +181,28 @@ export function buildDeleteInput(pageid, store) {
   };
   return input;
 }
-export function buildSaveInput(pageid, store) {
+export function buildSaveInput(pageid, store,formdata,mode) {
   let state = store.getState();
   let filterData = state.formSaveData;
+  console.log('buildSaveInput state');
   console.log(state);
+  console.log('buildSaveInput filterData');
+  console.log(filterData);
+  console.log('buildSaveInput formdata');
+  console.log(formdata);
+  let editMode=0;
+  if(mode==='New'){
+    editMode=1;
+  }else if(mode==='Edit'){
+    editMode=2;
+  }
   let input = {
     pageId: pageid,
     dataset: appDataset(),
-    userId: appUserId()
+    userId: appUserId(),
+    editMode:editMode,
+    taxCode:formdata.taxCode,
+    taxName:formdata.name
   };
   return input;
 }
