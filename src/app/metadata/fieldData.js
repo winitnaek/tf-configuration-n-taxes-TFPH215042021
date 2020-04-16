@@ -103,9 +103,16 @@ export const customPayments = [
         maxlength: 25
       },
       fieldinfo: {
-        typeahead: true,
-        isasync: true,
-        options: [],
+        typeahead: false,
+        isasync: false,
+        options: [
+          "Taxable",
+          "Non-Taxable",
+          "Limit-YTD",
+          "Limit-QTD",
+          "Limit-MTD",
+          "Taxable/Exclude"
+        ],
         multiselect: false,  
       },
       validation: {
