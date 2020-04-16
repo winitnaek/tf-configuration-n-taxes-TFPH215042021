@@ -259,17 +259,17 @@ export const asyncselfldsmap = [
     param:[{dataset:"","pattern":""}]
   },
   {
-    id: "taxTypeAutoCompl",
+    id: "taxType",
     url: GET_ALL_TAXTYPES_AUTOCOMPLETE,
     param:[{"pattern":""}]
   },
   {
-    id: "companyCodeAutoCompl",
+    id: "companyCode",
     url: GET_ALL_COMPCODE_AUTOCOMPLETE,
     param:[{"pattern":""}]
   },
   {
-    id: "riskClassAutoCompl",
+    id: "riskClass",
     url: GET_ALL_RISKCLASS_AUTOCOMPLETE,
     param:[{"pattern":""}]
   },

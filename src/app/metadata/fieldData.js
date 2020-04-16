@@ -1119,22 +1119,6 @@ export const experienceRates = [
     }
   },  
     {
-      name: "startDate",
-      id: "startDate",
-      placeholder: "",
-      fieldtype: "date",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Start Date",
-      value: "",
-      validation: [
-        {
-          required: false,
-        }
-      ]
-    },
-    {
       id: "companyCode",
       placeholder: "Enter Company Code",
       fieldtype: "select",
@@ -1155,6 +1139,22 @@ export const experienceRates = [
         required: false,
         type: "string"
       }
+    },
+    {
+      name: "startDate",
+      id: "startDate",
+      placeholder: "",
+      fieldtype: "date",
+      fieldlength: {},
+      fieldinfo: {},
+      validationType: "string",
+      label: "Start Date",
+      value: "",
+      validation: [
+        {
+          required: false,
+        }
+      ]
     },
     {
       id: "riskClass",

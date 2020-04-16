@@ -323,25 +323,26 @@ export function getUrl(id) {
     {id: "recentUsage",url: './RECENT_USAGE.json'},
   ];
 
+  //all for autoComplete
   const mockselectmap = [
     {
       id: "taxability",
       url: './TAXCODE_AUTOCOMPLETE_MOCKDATA.json',
     },
     {
-      id: "taxTypeAutoCompl",
+      id: "taxType",
       url: './TAXTYPE_AUTOCOMPLETE_MOCKDATA.json'
     },
     {
-      id: "companyCodeAutoCompl",
+      id: "companyCode",
       url: './COMPANYCODE_AUTOCOMPLETE_MOCKDATA.json',
     },
     {
-      id: "riskClassAutoCompl",
+      id: "riskClass",
       url: './RISKCLASS_AUTOCOMPLETE_MOCKDATA.json',
     },
     {
-      id: "wrksiteAutoCompl",
+      id: "wrksite",
       url: './WORK_SITE_AUTOCOMPLETE_MOCKDATA.json',
     },
     {
