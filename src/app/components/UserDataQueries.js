@@ -22,20 +22,9 @@ const populateV3States = "populateV3States";
 const experienceRates = "experienceRates";
 const supplementalMethods = "supplementalMethods";
 
-const TitleStyle = {
-  margin: "0 auto",
-  paddingBottom: "50px"
-};
-
-const LinkStyles = {
-  marginTop: "50px"
-};
-
 class UserDataQueries extends React.Component {
   constructor(props) {
     super(props);
-    console.log("metadata>>>>");
-    console.log(this.props.metadata);
     this.state = {
       value: "",
       helpLabel: "Click here for more info",
@@ -47,42 +36,35 @@ class UserDataQueries extends React.Component {
       permissions: " ",
       isOpen: false,
     };
+
     this.OpenHelp = () => {
       this.props.help("userDataQueries");
     };
 
     this.renderMe = (pgid, values, filter) => {
-
-    filter &&  this.props.setFilterFormData(values)
-
-      console.log(pgid);
-      let data = tftools.filter(tftool => {
-        if (tftool.id == pgid) return tftool;
-      });
-      console.log(data[0]);
+      filter &&  this.props.setFilterFormData(values)
+          let data = tftools.filter(tftool => {
+            if (tftool.id == pgid) return tftool;
+          });
       renderTFApplication("pageContainer", data[0]);
     }
 
     this.toggle = (id, title) => {
-     const payload = { data:{} , mode: "New" };
-     this.props.setFormData(payload)
-
-      this.setState({
-        isOpen: true,
-        pgid: id,
-        formTitle: title,
-        isfilterform: true
-      });
-
+      const payload = { data:{} , mode: "New" };
+      this.props.setFormData(payload)
+        this.setState({
+          isOpen: true,
+          pgid: id,
+          formTitle: title,
+          isfilterform: true
+        });
     };
 
     this.handleClose = () => {
       this.setState({ isOpen: false  });
     }
   }
-
-
-
+  
   render() {
     const { permissions, cruddef, isfilterform, pgid } = this.state;
     const { deleteRow, handleChange, renderMe, handleSubmit } = this;
@@ -93,16 +75,7 @@ class UserDataQueries extends React.Component {
     }
 
     const close = this.handleClose;
-    const formProps = {
-      close,
-      handleChange,
-      pgid,
-      permissions,
-      deleteRow,
-      handleSubmit,
-      renderMe,
-      filter
-    };
+    const formProps = {close, handleChange, pgid, permissions, deleteRow, handleSubmit, renderMe, filter};
     return (
       <Fragment>
         <Row>
