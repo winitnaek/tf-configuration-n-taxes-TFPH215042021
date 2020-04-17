@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import configureStore from "./base/config/configureStore";
 import * as rname from "./base/constants/RenderNames";
-import Progress from "./app/common/Progress";
+import {Progress} from "bsiuilib";
 import * as manifest from "../build/_manifest";
 import * as c from "./base/constants/IndexConstants";
 import { makeNavs, makeSearch } from "./base/template/navGenerator";
