@@ -1,5 +1,4 @@
-import AppError from "../../base/utils/AppError";
-import { ADMIN_ERROR_MSG } from "../../base/utils/AppErrorEvent";
+import {appError, getAdminErrorMessage}  from "bsiuilib";
 import {saveUrl, reqInfo,buildSaveInput} from "../../base/utils/tfUtils";
 import store from '../../tf_index';
 class savegriddataAPI {
@@ -16,8 +15,8 @@ class savegriddataAPI {
           return response.json();
         } else {
           var errorCode = response.status;
-          var errorMsg = "Unable to Save Grid Data Record." + ADMIN_ERROR_MSG;
-          return new AppError(errorMsg, errorCode);
+          var errorMsg = "Unable to Save Grid Data Record." + getAdminErrorMessage();
+          return new appError(errorMsg, errorCode);
         }
       })
       .catch((error) => {
@@ -30,7 +29,7 @@ class savegriddataAPI {
         } else {
           var errorCode = response.status;
           var errorMsg = "Unable to Save Grid Data Record. " + ADMIN_ERROR_MSG;
-          return new AppError(errorMsg, errorCode);
+          return new appError(errorMsg, errorCode);
         } 
       })
       .catch(error => {

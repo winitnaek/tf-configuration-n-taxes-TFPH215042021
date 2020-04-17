@@ -1,5 +1,4 @@
-import AppError from "../../base/utils/AppError";
-import { ADMIN_ERROR_MSG } from "../../base/utils/AppErrorEvent";
+import {appError, getAdminErrorMessage}  from "bsiuilib";
 import {autoCompleteUrl, reqInfo} from "../../base/utils/tfUtils";
 
 class autocompleteselectAPI {
@@ -13,8 +12,8 @@ class autocompleteselectAPI {
           return response.json(); 
         } else {
           var errorCode = response.status;
-          var errorMsg = "Unable to retrieve Auto Complete Data. " + ADMIN_ERROR_MSG;
-          return new AppError(errorMsg, errorCode);
+          var errorMsg = "Unable to retrieve Auto Complete Data. " + getAdminErrorMessage();
+          return new appError(errorMsg, errorCode);
         } 
       })
       .catch(error => {

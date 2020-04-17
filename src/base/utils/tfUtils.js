@@ -1,5 +1,5 @@
 import { metadatamap, tftools, deletedatamap, savedatamap, asyncselfldsmap } from "../constants/TFTools";
-import URLUtils from '../utils/urlUtils';
+import {generateUrl} from "bsiuilib";
 const MOCK = true;
 /**
  * buildModuleAreaLinks
@@ -76,7 +76,7 @@ export function compURL(pageid) {
   let metadataMap = metadatamap.find(metadatam => {
     if (pageid == metadatam.id) return metadatam;
   });
-  let url = URLUtils.buildURL(metadataMap.url);
+  let url = generateUrl.buildURL(metadataMap.url);
   //return url;
   return dataURL(pageid);
 }
@@ -84,7 +84,7 @@ export function compURL(pageid) {
   let metadataMap = metadatamap.find(metadatam => {
     if (pageid == metadatam.id) return metadatam;
   });
-  let url = URLUtils.buildURL(metadataMap.url);
+  let url = generateUrl.buildURL(metadataMap.url);
   console.log('buildGetRecsUrl >>>');
   var arr = [];
   arr.push('VINIT'); 
@@ -233,7 +233,7 @@ export function getUrl(id) {
     let metadataMap = metadatamap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
     });
-    let url = URLUtils.buildURL(metadataMap.url);
+    let url = generateUrl.buildURL(metadataMap.url);
     if (MOCK) {
       let metadataMap = mockdatamap.find(metadatam => {
         if (id == metadatam.id) return metadatam;
@@ -248,7 +248,7 @@ export function getUrl(id) {
     let deldataMap = deletedatamap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
     });
-    let url = URLUtils.buildURL(deldataMap.url);
+    let url = generateUrl.buildURL(deldataMap.url);
     if (MOCK) {
       let deldataMap = mockdelmap.find(metadatam => {
         if (id == metadatam.id) return metadatam;
@@ -264,7 +264,7 @@ export function getUrl(id) {
       console.log(id, metadatam.id)
       if (id == metadatam.id) return metadatam;
     });
-    let url = URLUtils.buildURL(saveDataMap.url);
+    let url = generateUrl.buildURL(saveDataMap.url);
     if (MOCK) {
       let saveDataMap = mocksavmap.find(metadatam => {
         if (id == metadatam.id) return metadatam;
@@ -281,7 +281,7 @@ export function getUrl(id) {
     console.log(id, metadatam.id)
     if (id == metadatam.id) return metadatam;
   });
-  let url = URLUtils.buildURL(autoCompleteDataMap.url);
+  let url = generateUrl.buildURL(autoCompleteDataMap.url);
   if (MOCK) {
     autoCompleteDataMap = mockselectmap.find(metadatam => {
       if (id == metadatam.id) return metadatam;

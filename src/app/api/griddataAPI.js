@@ -1,6 +1,5 @@
 import * as svcs from "../../base/constants/ServiceUrls";
-import AppError from "../../base/utils/AppError";
-import { ADMIN_ERROR_MSG } from "../../base/utils/AppErrorEvent";
+import {appError, getAdminErrorMessage}  from "bsiuilib";
 import {getUrl, reqInfo} from "../../base/utils/tfUtils";
 
 class griddataAPI {
@@ -13,8 +12,8 @@ class griddataAPI {
           return response.json();
         } else {
           var errorCode = response.status;
-          var errorMsg = "Unable to get Grid Data Records. " + ADMIN_ERROR_MSG;
-          return new AppError(errorMsg, errorCode);
+          var errorMsg = "Unable to get Grid Data Records. " + getAdminErrorMessage();
+          return new appError(errorMsg, errorCode);
         }
       })
       .catch(error => {
