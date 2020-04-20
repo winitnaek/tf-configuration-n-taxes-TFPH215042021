@@ -20,7 +20,6 @@ import {
   setPerms,
   compMetaData,
   compPermissions,
-  compURL,
   buildGridDataInput
 } from "./base/utils/tfUtils";
 import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
@@ -28,8 +27,6 @@ import CustomGrid from "./app/components/CustomGrid";
 import ReusablePage from './app/components/ReusablePage';
 import { UI_COMP, UI_PAGE, tftools } from "./base/constants/TFTools";
 import griddataAPI from "./app/api/griddataAPI";
-import moduleLinksReducer from "./app/home/actions/moduleLinksReducer";
-const customFormulasChild = "customFormulasChild";
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
   var userProfile =
@@ -52,7 +49,6 @@ let moduleAreas = buildModuleAreaLinks(usrobj.applications);
  * @param {*} renderName
  */
 function renderTFApplication(elem, renderName, child) {
-  let parentDataId;
 
   setAppAnchor(elem);
   setAppUserIDAndDataset(dataset, userId);

@@ -22,19 +22,6 @@ class savegriddataAPI {
       .catch((error) => {
         return error;
       });
-    /*return fetch(url, reqInfo(tt), mode)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          var errorCode = response.status;
-          var errorMsg = "Unable to Save Grid Data Record. " + ADMIN_ERROR_MSG;
-          return new appError(errorMsg, errorCode);
-        } 
-      })
-      .catch(error => {
-        return error;
-      });*/
   }
 }
 

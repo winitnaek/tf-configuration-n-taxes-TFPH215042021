@@ -1,4 +1,3 @@
-import * as svcs from "../../base/constants/ServiceUrls";
 import {appError, getAdminErrorMessage}  from "bsiuilib";
 import {getUrl, reqInfo} from "../../base/utils/tfUtils";
 

@@ -14,8 +14,6 @@ import {getRecentUsage} from "../actions/usageActions";
 import autocompleteSelectAPI from "../api/autocompleteselectAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
 import { setFilterFormData } from "../actions/filterFormActions";
-import gridDataAPI from "../api/griddataAPI";
-import deleteGridDataAPI from "../api/deletegriddataAPI";
 
 const allBSIPlans = "allBSIPlans";
 const populateV3States = "populateV3States";
