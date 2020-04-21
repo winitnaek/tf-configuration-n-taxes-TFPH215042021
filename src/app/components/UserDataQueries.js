@@ -52,9 +52,7 @@ class UserDataQueries extends React.Component {
     };
 
     this.renderMe = (pgid, values, filter) => {
-
     filter &&  this.props.setFilterFormData(values)
-
       console.log(pgid);
       let data = tftools.filter(tftool => {
         if (tftool.id == pgid) return tftool;
