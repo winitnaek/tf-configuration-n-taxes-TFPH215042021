@@ -1,5 +1,5 @@
 import { metadatamap, tftools, deletedatamap, savedatamap, asyncselfldsmap } from "../constants/TFTools";
-import URLUtils from '../utils/urlUtils';
+import {generateUrl} from "bsiuilib";
 const MOCK = true;
 /**
  * buildModuleAreaLinks
@@ -76,7 +76,7 @@ export function compURL(pageid) {
   let metadataMap = metadatamap.find(metadatam => {
     if (pageid == metadatam.id) return metadatam;
   });
-  let url = URLUtils.buildURL(metadataMap.url);
+  let url = generateUrl.buildURL(metadataMap.url);
   //return url;
   return dataURL(pageid);
 }
@@ -84,7 +84,7 @@ export function compURL(pageid) {
   let metadataMap = metadatamap.find(metadatam => {
     if (pageid == metadatam.id) return metadatam;
   });
-  let url = URLUtils.buildURL(metadataMap.url);
+  let url = generateUrl.buildURL(metadataMap.url);
   console.log('buildGetRecsUrl >>>');
   var arr = [];
   arr.push('VINIT'); 
@@ -181,14 +181,28 @@ export function buildDeleteInput(pageid, store) {
   };
   return input;
 }
-export function buildSaveInput(pageid, store) {
+export function buildSaveInput(pageid, store,formdata,mode) {
   let state = store.getState();
   let filterData = state.formSaveData;
+  console.log('buildSaveInput state');
   console.log(state);
+  console.log('buildSaveInput filterData');
+  console.log(filterData);
+  console.log('buildSaveInput formdata');
+  console.log(formdata);
+  let editMode=0;
+  if(mode==='New'){
+    editMode=1;
+  }else if(mode==='Edit'){
+    editMode=2;
+  }
   let input = {
     pageId: pageid,
     dataset: appDataset(),
-    userId: appUserId()
+    userId: appUserId(),
+    editMode:editMode,
+    taxCode:formdata.taxCode,
+    taxName:formdata.name
   };
   return input;
 }
@@ -219,7 +233,7 @@ export function getUrl(id) {
     let metadataMap = metadatamap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
     });
-    let url = URLUtils.buildURL(metadataMap.url);
+    let url = generateUrl.buildURL(metadataMap.url);
     if (MOCK) {
       let metadataMap = mockdatamap.find(metadatam => {
         if (id == metadatam.id) return metadatam;
@@ -234,7 +248,7 @@ export function getUrl(id) {
     let deldataMap = deletedatamap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
     });
-    let url = URLUtils.buildURL(deldataMap.url);
+    let url = generateUrl.buildURL(deldataMap.url);
     if (MOCK) {
       let deldataMap = mockdelmap.find(metadatam => {
         if (id == metadatam.id) return metadatam;
@@ -250,7 +264,7 @@ export function getUrl(id) {
       console.log(id, metadatam.id)
       if (id == metadatam.id) return metadatam;
     });
-    let url = URLUtils.buildURL(saveDataMap.url);
+    let url = generateUrl.buildURL(saveDataMap.url);
     if (MOCK) {
       let saveDataMap = mocksavmap.find(metadatam => {
         if (id == metadatam.id) return metadatam;
@@ -267,7 +281,7 @@ export function getUrl(id) {
     console.log(id, metadatam.id)
     if (id == metadatam.id) return metadatam;
   });
-  let url = URLUtils.buildURL(autoCompleteDataMap.url);
+  let url = generateUrl.buildURL(autoCompleteDataMap.url);
   if (MOCK) {
     autoCompleteDataMap = mockselectmap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
@@ -309,25 +323,26 @@ export function getUrl(id) {
     {id: "recentUsage",url: './RECENT_USAGE.json'},
   ];
 
+  //all for autoComplete
   const mockselectmap = [
     {
       id: "taxability",
       url: './TAXCODE_AUTOCOMPLETE_MOCKDATA.json',
     },
     {
-      id: "taxTypeAutoCompl",
+      id: "taxType",
       url: './TAXTYPE_AUTOCOMPLETE_MOCKDATA.json'
     },
     {
-      id: "companyCodeAutoCompl",
+      id: "companyCode",
       url: './COMPANYCODE_AUTOCOMPLETE_MOCKDATA.json',
     },
     {
-      id: "riskClassAutoCompl",
+      id: "riskClass",
       url: './RISKCLASS_AUTOCOMPLETE_MOCKDATA.json',
     },
     {
-      id: "wrksiteAutoCompl",
+      id: "wrksite",
       url: './WORK_SITE_AUTOCOMPLETE_MOCKDATA.json',
     },
     {

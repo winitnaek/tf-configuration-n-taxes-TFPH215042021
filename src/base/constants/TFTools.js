@@ -31,7 +31,7 @@ import {
   DELTE_CUSTOM_PAYMENT,
   DELETE_CUSTOM_TAX_CODES,
   SAVE_CUSTOM_PAYMENT,
-  SAVE_CUSTOM_TAX_CODE,
+  SAVE_CUSTOM_TAX_CODES,
   SAVE_CUSTOM_FORMULAS,
   SAVE_WORKSITES_LOCATIONS
 } from "../constants/ServiceUrls";
@@ -228,8 +228,8 @@ export const savedatamap = [
   },
   {
     id: "customTaxCodes",
-    url: SAVE_CUSTOM_TAX_CODE,
-    rendererInput: ["dataset", "editMode"]
+    url: SAVE_CUSTOM_TAX_CODES,
+    rendererInput: ["dataset", "userId", "editMode","taxCode","taxName"]
   },
  
   {
@@ -259,17 +259,17 @@ export const asyncselfldsmap = [
     param:[{dataset:"","pattern":""}]
   },
   {
-    id: "taxTypeAutoCompl",
+    id: "taxType",
     url: GET_ALL_TAXTYPES_AUTOCOMPLETE,
     param:[{"pattern":""}]
   },
   {
-    id: "companyCodeAutoCompl",
+    id: "companyCode",
     url: GET_ALL_COMPCODE_AUTOCOMPLETE,
     param:[{"pattern":""}]
   },
   {
-    id: "riskClassAutoCompl",
+    id: "riskClass",
     url: GET_ALL_RISKCLASS_AUTOCOMPLETE,
     param:[{"pattern":""}]
   },

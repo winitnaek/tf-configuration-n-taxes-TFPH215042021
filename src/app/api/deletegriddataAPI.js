@@ -1,5 +1,4 @@
-import AppError from "../../base/utils/AppError";
-import { ADMIN_ERROR_MSG } from "../../base/utils/AppErrorEvent";
+import {appError, getAdminErrorMessage}  from "bsiuilib";
 import {deleteUrl, reqInfo} from "../../base/utils/tfUtils";
 
 class deletegriddataAPI {
@@ -12,8 +11,8 @@ class deletegriddataAPI {
           return response.json();
         } else {
           var errorCode = response.status;
-          var errorMsg = "Unable to Delete Grid Data Record. " + ADMIN_ERROR_MSG;
-          return new AppError(errorMsg, errorCode);
+          var errorMsg = "Unable to Delete Grid Data Record. " + getAdminErrorMessage();
+          return new appError(errorMsg, errorCode);
         }
       })
       .catch(error => {

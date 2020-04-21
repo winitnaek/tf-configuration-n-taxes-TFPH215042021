@@ -430,9 +430,9 @@ export const experienceRates = {
     formflds: "",
     fltrflds: [
       { id: "taxability", "order":1, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
-      { id: "companyCodeAutoCompl", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "companyCode", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
       { id: "startDate", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
-      { id: "riskClassAutoCompl", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false }
+      { id: "riskClass", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false }
     ]
   }
 };
@@ -494,7 +494,7 @@ export const supplementalMethods = {
     formflds: "",
     fltrflds: [
       { id: "taxability", "order":1, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false},
-      { id: "taxTypeAutoCompl", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
+      { id: "taxType", "order":2, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false },
       { id: "formulaText", "order":3, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false},
       { id: "startDate", "order":4, "isReadOnlyOnEdit":false,"isReadOnlyOnNew":false}
     ]

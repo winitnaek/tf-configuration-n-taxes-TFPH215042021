@@ -26,7 +26,7 @@
     ]
   },
   "dependencies": {
-    "bsiuilib": "file:../bsi-ui-lib",
+    "bsiuilib": "file:../../uiLib/bsi-ui-lib",
     "formik": "^1.5.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",

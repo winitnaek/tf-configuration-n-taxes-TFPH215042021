@@ -103,9 +103,16 @@ export const customPayments = [
         maxlength: 25
       },
       fieldinfo: {
-        typeahead: true,
-        isasync: true,
-        options: [],
+        typeahead: false,
+        isasync: false,
+        options: [
+          "Taxable",
+          "Non-Taxable",
+          "Limit-YTD",
+          "Limit-QTD",
+          "Limit-MTD",
+          "Taxable/Exclude"
+        ],
         multiselect: false,  
       },
       validation: {
@@ -1112,22 +1119,6 @@ export const experienceRates = [
     }
   },  
     {
-      name: "startDate",
-      id: "startDate",
-      placeholder: "",
-      fieldtype: "date",
-      fieldlength: {},
-      fieldinfo: {},
-      validationType: "string",
-      label: "Start Date",
-      value: "",
-      validation: [
-        {
-          required: false,
-        }
-      ]
-    },
-    {
       id: "companyCode",
       placeholder: "Enter Company Code",
       fieldtype: "select",
@@ -1148,6 +1139,22 @@ export const experienceRates = [
         required: false,
         type: "string"
       }
+    },
+    {
+      name: "startDate",
+      id: "startDate",
+      placeholder: "",
+      fieldtype: "date",
+      fieldlength: {},
+      fieldinfo: {},
+      validationType: "string",
+      label: "Start Date",
+      value: "",
+      validation: [
+        {
+          required: false,
+        }
+      ]
     },
     {
       id: "riskClass",
