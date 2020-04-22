@@ -298,15 +298,15 @@ export function getUrl(id) {
     {id: "customTaxCodes",url: './DELETE_CUSTOM_TAX_CODE.json'}
   ];
   const mocksavmap = [
-    {id: "customPayments",url: './SAVE_CUSTOM_PAYMENTS.json'},
+    {id: "customPayments",url: './SAVE_CUSTOM_PAYMENT.json'},
     {id: "customTaxCodes",url: './SAVE_CUSTOM_TAX_CODE.json'},
     {id: "experienceRates",url: './SAVE_EXPERIENCE_RATES_MOCKDATA.json'},
     {id: "supplementalMethods",url: 'SAVE_SUPPLEMENTAL_METHODS_MOCKDATA.json'},
     {id: "customFormulas", url: './SAVE_CUSTOM_TAX_PAYMENT_MOCKDATA.json'},
     {id: "customTaxFormulas", url: './SAVE_CUSTOM_TAX_FORMULAS_MOCKDATA.json'},
     {id: "companies", url: './SAVE_COMPANIES_MOCKDATA.json'},
-    {id: "worksites", url: './SAVE_COMPANIES_MOCKDATA.json'},
-    {id: "worksiteCompanies", url: './SAVE_WORKSITES_MOCKDATA.json'},
+    {id: "worksites", url: './SAVE_WORKSITE_MOCKDATA.json'},
+    {id: "worksiteCompanies", url: './SAVE_WORKSITE_COMPANIE_MOCKDATA.json'},
   ];
   const mockdatamap = [
     {id: "customPayments",url: './CUSTOM_PAYMENTS_MOCKDATA.json'},

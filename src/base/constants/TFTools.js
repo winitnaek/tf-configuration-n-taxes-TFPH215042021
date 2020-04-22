@@ -33,7 +33,8 @@ import {
   SAVE_CUSTOM_PAYMENT,
   SAVE_CUSTOM_TAX_CODES,
   SAVE_CUSTOM_FORMULAS,
-  SAVE_WORKSITES_LOCATIONS
+  SAVE_WORKSITES_LOCATIONS,
+  SAVE_WORKSITES
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
@@ -244,7 +245,12 @@ export const savedatamap = [
     url: SAVE_WORKSITES_LOCATIONS,
     rendererInput: ["dataset", "userId"]
   }, 
-  
+  {
+    id: "worksites",
+    metadata: worksites,
+    url: SAVE_WORKSITES,
+    rendererInput: ["dataset", "userId"]
+  }, 
   {
     id: "customTaxFormulas",
     metadata: customTaxFormulas,
