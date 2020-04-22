@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
 import {ReusableGrid} from "bsiuilib";
-import  setFilterFormData  from "../actions/filterFormActions";
+import  {setFilterFormData}  from "../actions/filterFormActions";
 import * as fieldData from "../metadata/fieldData";
 import * as formMetaData from "../metadata/metaData";
 import {getRecentUsage} from "../actions/usageActions";
@@ -16,11 +16,11 @@ class CustomGrid extends Component {
   render() {
     const {
       pageid, metadata, pid, permissions, griddata, 
-      help, gridProps, formData, getRecentUsage
+      help, gridProps, formData, getRecentUsage, setFilterFormData
     } = this.props;
     const {dispatch} = gridProps;
     const filterFormAction = data => {
-      dispatch(setFilterFormData(data))
+      setFilterFormData(data)
     }
     return(
         <ReusableGrid
@@ -53,7 +53,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => {
-      return bindActionCreators({getRecentUsage}, dispatch);
+      return bindActionCreators({getRecentUsage, setFilterFormData}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomGrid);
