@@ -23,3 +23,5 @@ export const SAVE_CUSTOM_PAYMENT='/TaxCodeService/saveCustomPayment';
 export const SAVE_CUSTOM_TAX_CODES='/TaxCodeService/insertTaxCodeRec';
 export const SAVE_CUSTOM_FORMULAS = '/TaxCodeService/saveCustomTaxCode';
 export const SAVE_WORKSITES_LOCATIONS = '/CompanyService/saveWorksiteManagementLocationList';
+export const SAVE_WORKSITES = '/CompanyService/saveWorksiteManagementList';
+

@@ -21,8 +21,11 @@ if (process.env.NODE_ENV === 'development') {
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/WORKSITES_MOCKDATA.json', to: '../dist/WORKSITES_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/DELETE_CUSTOM_PAYMENT.json', to: '../dist/DELETE_CUSTOM_PAYMENT.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/DELETE_CUSTOM_TAX_CODE.json', to: '../dist/DELETE_CUSTOM_TAX_CODE.json' }]));
-  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/SAVE_CUSTOM_PAYMENTS.json', to: '../dist/SAVE_CUSTOM_PAYMENTS.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/SAVE_CUSTOM_PAYMENT.json', to: '../dist/SAVE_CUSTOM_PAYMENT.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/SAVE_CUSTOM_PAYMENT_MOCKDATA.json', to: '../dist/SAVE_CUSTOM_PAYMENT_MOCKDATA.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/SAVE_CUSTOM_TAX_PAYMENT_MOCKDATA.json', to: '../dist/SAVE_CUSTOM_TAX_PAYMENT_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/SAVE_CUSTOM_TAX_CODE.json', to: '../dist/SAVE_CUSTOM_TAX_CODE.json' }]));
+  baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/SAVE_WORKSITE_MOCKDATA.json', to: '../dist/SAVE_WORKSITE_MOCKDATA.json' }]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/TAXCODE_AUTOCOMPLETE_MOCKDATA.json', to: '../dist/TAXCODE_AUTOCOMPLETE_MOCKDATA.json'}]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/TAXTYPE_AUTOCOMPLETE_MOCKDATA.json', to: '../dist/TAXTYPE_AUTOCOMPLETE_MOCKDATA.json'}]));
   baseConfig.plugins.push(new CopyWebpackPlugin([{ from: './uitests/data/COMPANYCODE_AUTOCOMPLETE_MOCKDATA.json', to: '../dist/COMPANYCODE_AUTOCOMPLETE_MOCKDATA.json'}]));
