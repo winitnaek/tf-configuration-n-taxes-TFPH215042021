@@ -18,7 +18,6 @@ class CustomGrid extends Component {
       pageid, metadata, pid, permissions, griddata, 
       help, gridProps, formData, getRecentUsage, setFilterFormData
     } = this.props;
-    const {dispatch} = gridProps;
     const filterFormAction = data => {
       setFilterFormData(data)
     }
