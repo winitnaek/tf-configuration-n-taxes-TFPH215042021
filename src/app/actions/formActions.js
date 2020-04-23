@@ -1,6 +1,7 @@
 import  {SET_FORM_DATA, SAVE_FORM_DATA, CLOSE_FORM} from '../../base/constants/ActionTypes';
 
 export const setFormData = (data) => {
+    console.log('setting form data')
     return  {
         type: SET_FORM_DATA,
         data: data
