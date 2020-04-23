@@ -13,7 +13,6 @@ import { setFilterFormData } from "./app/actions/filterFormActions";
 
 let store = configureStore();
 export default store;
-import Welcome from "./app/home/Welcome";
 import {
   buildModuleAreaLinks,
   openHelp,

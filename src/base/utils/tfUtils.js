@@ -1,6 +1,8 @@
 import { metadatamap, tftools, deletedatamap, savedatamap, asyncselfldsmap } from "../constants/TFTools";
 import {generateUrl} from "bsiuilib";
-const MOCK = true;
+
+
+const MOCK = process.env.NODE_ENV === 'development' ? true:false;
 /**
  * buildModuleAreaLinks
  * @param {*} apps

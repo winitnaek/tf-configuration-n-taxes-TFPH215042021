@@ -762,6 +762,7 @@ export const worksiteCompanies = [
       fieldinfo: {
         typeahead: true,
         isasync: false,
+        multiselect: false,
         options: [
           "Alabama",
           "Alaska",
