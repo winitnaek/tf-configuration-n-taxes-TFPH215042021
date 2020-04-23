@@ -44,7 +44,6 @@ class CustomGrid extends Component {
       gridProps,
       formData,
       getRecentUsage,
-      setFilterFormData,
     } = this.props;
 
    
