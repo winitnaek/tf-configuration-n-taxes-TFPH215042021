@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
 import {ReusableGrid} from "bsiuilib";
 import  {setFilterFormData}  from "../actions/filterFormActions";
+import {setFormData} from '../actions/formActions'
 import * as fieldData from "../metadata/fieldData";
 import * as formMetaData from "../metadata/metaData";
 import {getRecentUsage} from "../actions/usageActions";
@@ -13,15 +14,30 @@ import autocompleteSelectAPI from "../api/autocompleteselectAPI";
 import * as gridStyles from "../../base/constants/AppConstants";
 
 class CustomGrid extends Component {
+  constructor(props) {
+    super(props);
+
+  this.renderGrid = pgData => {
+    renderTFApplication("pageContainer", pgData);
+  }
+}
+
   render() {
     const {
       pageid, metadata, pid, permissions, griddata, 
       help, gridProps, formData, getRecentUsage, setFilterFormData
     } = this.props;
+
+    
     const {dispatch} = gridProps;
     const filterFormAction = data => {
       setFilterFormData(data)
     }
+
+    const formAction = data => {
+      setFormData(data)
+    }
+
     return(
         <ReusableGrid
             pageid={pageid}
@@ -34,8 +50,10 @@ class CustomGrid extends Component {
             tftools={tftools}
             saveGridData={savegriddataAPI}
             setFilterFormData={filterFormAction}
+            setFormData={formAction}
             deleteGridData={deletegriddataAPI}
             recentUsage={getRecentUsage}
+            renderGrid={this.renderGrid}
             formMetaData={formMetaData}
             formData={formData}
             fieldData={fieldData}
@@ -53,7 +71,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => {
-      return bindActionCreators({getRecentUsage, setFilterFormData}, dispatch);
+      return bindActionCreators({getRecentUsage, setFilterFormData, setFormData}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomGrid);
