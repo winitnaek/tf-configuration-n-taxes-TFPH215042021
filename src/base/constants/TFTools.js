@@ -238,17 +238,17 @@ export const savedatamap = [
     metadata: customFormulas,
     url: SAVE_CUSTOM_FORMULAS,
     rendererInput: ["dataset", "userId"]
-  },   
-  {
-    id: "worksiteCompanies",
-    metadata: worksiteCompanies,
-    url: SAVE_WORKSITES_LOCATIONS,
-    rendererInput: ["dataset", "userId"]
   }, 
   {
     id: "worksites",
     metadata: worksites,
     url: SAVE_WORKSITES,
+    rendererInput: ["dataset", "userId"]
+  },   
+  {
+    id: "worksiteCompanies",
+    metadata: worksiteCompanies,
+    url: SAVE_WORKSITES_LOCATIONS,
     rendererInput: ["dataset", "userId"]
   }, 
   {
