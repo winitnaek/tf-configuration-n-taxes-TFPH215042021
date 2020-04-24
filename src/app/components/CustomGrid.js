@@ -27,8 +27,14 @@ class CustomGrid extends Component {
       this.props.setFormData(data);
     };
 
-    this.filterFormAction = (data) => {
-      this.props.setFilterFormData(data);
+    this.filterFormAction = (formData) => {
+      console.log('Setting filterForm Data')
+      const mode = "Edit"
+      const index = null
+      const data = {data: this.props.formFilterData , mode, index}
+      console.log(this.props.formFilterData)
+    //  this.props.setFormData(data)    //  This is needed for subsequent edits to get form data
+      this.props.setFilterFormData(formData);  // This is used to make the api call to render the grid
     };
 
   }
@@ -44,6 +50,7 @@ class CustomGrid extends Component {
       gridProps,
       formData,
       getRecentUsage,
+      formFilterData
     } = this.props;
 
    
@@ -68,6 +75,7 @@ const {formAction, filterFormAction} = this
         renderGrid={this.renderGrid}
         formMetaData={formMetaData}
         formData={formData}
+        formFilterData={formFilterData}
         fieldData={fieldData}
         autoComplete={autocompleteSelectAPI}
         styles={gridStyles}
@@ -79,6 +87,7 @@ const {formAction, filterFormAction} = this
 function mapStateToProps(state) {
   return {
     formData: state.formData,
+    formFilterData: state.formFilterData
   };
 }
 
