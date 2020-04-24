@@ -625,6 +625,7 @@ export const worksiteCompanies = [
       name: "street1",
       id: "street1",
       placeholder: "Enter Street",
+      description: "Example: PeachTree Industrial",
       fieldtype: "text",
       fieldlength: {},
       fieldinfo: {},
@@ -918,12 +919,12 @@ export const experienceRates = [
       fieldtype: "date",
       fieldlength: {},
       fieldinfo: {},
-      validationType: "string",
       label: "Start Date",
       value: "",
       validation: [
         {
           required: false,
+          type:"string"
         }
       ]
     },
