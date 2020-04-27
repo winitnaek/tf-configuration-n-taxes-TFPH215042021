@@ -1200,5 +1200,59 @@ export const worksites = [
           }
         ]
       }
-    }
+    },
+    {
+      id: "testStartDate",
+      placeholder: "StartDate",
+      fieldtype: "date",
+      label: "StartDate ",
+      value: "",
+      errmsg: "StartDate is required",
+      fieldlength: {
+        minlength: 1,
+        maxlength: 25
+      },
+      fieldinfo: {},
+      validation: {
+        required: true,
+        type: "date",
+        constraint: [
+          {
+            type: "max",
+            input: new Date(),
+            message: "Start Date cannot be in future"
+          }
+        ]
+      }
+    },
+    {
+      id: "testEndDate",
+      placeholder: "Enter EndDate",
+      fieldtype: "date",
+      label: "EndDate ",
+      value: "",
+      errmsg: "EndDate is required",
+      fieldlength: {
+        minlength: 1,
+        maxlength: 25
+      },
+      fieldinfo: {},
+      validation: {
+        required: true,
+        type: "date",
+        constraint: [
+          {
+            type: "max",
+            input: new Date(),
+            message: "Date Cannot in the future"
+          }
+        ],
+        dependent:[
+          {
+            inputField:"testStartDate",
+            message: "StartDate cannot be after EndDate",
+          }
+        ]
+      }
+    },
   ];
