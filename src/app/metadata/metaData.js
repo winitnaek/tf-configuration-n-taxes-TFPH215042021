@@ -535,7 +535,7 @@ export const customTaxFormulas = {
   pgdef: {
     pgid: "customTaxFormulas",
     pgtitle: "Custom Formulas",
-    pgsubtitle: "",
+    pgsubtitle: "The Following formulas are definded for ",
     flowtype: "flowtype2",
     hasAddNew: true,
     addNewLabel: "Click here to add new Custom Tax Code.",
@@ -806,7 +806,8 @@ export const worksiteCompanies = {
   pgdef: {
     pgid: "worksiteCompanies",
     pgtitle: "Worksites",
-    pgsubtitle: "",
+    pgsubtitle: "Manage Worksites for: ",
+    noDataMsg: "There are no locations defined for this company:  ",
     flowtype: "flowtype2",
     hasAddNew: true,
     addNewLabel: "Click here to add new Company.",
