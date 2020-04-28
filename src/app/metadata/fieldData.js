@@ -1214,7 +1214,7 @@ export const worksites = [
       },
       fieldinfo: {},
       validation: {
-        required: true,
+        required: false,
         type: "date",
         constraint: [
           {
@@ -1238,7 +1238,7 @@ export const worksites = [
       },
       fieldinfo: {},
       validation: {
-        required: true,
+        required: false,
         type: "date",
         constraint: [
           {
