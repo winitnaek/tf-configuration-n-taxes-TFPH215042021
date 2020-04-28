@@ -48,7 +48,12 @@ export default {
       startdate:"",
       riskClass:"",
       taxType:"",
-      formNumber:0
+      formNumber:0,
+      companyName: "",
+      company:'',
+      courtesy: false,
+      fein: '',
+      name:''
     },
     formDeleteData: {
       companyCode:"",
