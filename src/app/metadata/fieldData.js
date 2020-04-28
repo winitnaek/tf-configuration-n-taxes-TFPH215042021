@@ -1256,4 +1256,31 @@ export const worksites = [
         disableFields: ["testEndDate","testStartDate"]
       }
     },
+    {
+      id: "checkboxGroup",
+      placeholder:"",
+      fieldtype: "checkbox",
+      label: "CheckBox",
+      value: "",
+      fieldlength:{},
+      fieldinfo:{
+        typeahead: false,
+        isasync: false,  
+        options: [
+            {
+              "id": "checkbox1",
+              "label": "Enable/Disable"
+            }
+          ],
+        multiselect: false
+      },
+      validationType: "string",
+      validation: [
+        {
+          type: "string",
+          required: false,
+        }
+      ],
+      disable: ["testEndDate","testStartDate"]
+    }
   ];
