@@ -162,13 +162,16 @@ export function buildGridDataInput(pageid, store) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    companyCode: filterData.companyCode,
+    //companyCode: filterData.companyCode,
+    companyCode: filterData.company,
+    companyName: filterData.companyName,
     taxCode: filterData.taxCode,
-    taxName: filterData.taxName,
+    taxName: filterData.name,
     startdate: filterData.startdate,
     riskClass: filterData.riskClass,
     taxType: filterData.taxType,
-    formNumber: filterData.formNumber
+    formNumber: filterData.formNumber,
+    courtesy:filterData.courtesy
   };
   return input;
 }
