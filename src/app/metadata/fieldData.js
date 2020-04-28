@@ -1252,7 +1252,8 @@ export const worksites = [
             inputField:"testStartDate",
             message: "StartDate cannot be after EndDate",
           }
-        ]
+        ],
+        disableFields: ["testEndDate","testStartDate"]
       }
     },
   ];
