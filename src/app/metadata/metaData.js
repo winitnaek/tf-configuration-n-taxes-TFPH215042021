@@ -552,7 +552,7 @@ export const customTaxFormulas = {
     isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "There are no formulas defined for : ",
     recordEdit: true,
     recordDelete: true,
     columns: [
@@ -824,7 +824,7 @@ export const worksiteCompanies = {
     isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "There are no Locations defined for this company",
+    noResultsFoundTxt: "There are no Locations defined for this company : ",
     recordEdit: true,
     recordDelete: true,
     columns: [
