@@ -535,7 +535,7 @@ export const customTaxFormulas = {
   pgdef: {
     pgid: "customTaxFormulas",
     pgtitle: "Custom Formulas",
-    pgsubtitle: "The Following formulas are definded for ",
+    pgsubtitle: "The Following formulas are definded for : ",
     flowtype: "flowtype2",
     hasAddNew: true,
     addNewLabel: "Click here to add new Custom Tax Code.",
@@ -547,7 +547,7 @@ export const customTaxFormulas = {
     childConfig: ""
   },
   griddef: {
-    gridtype: "type1",
+    gridtype: "type2",
     isfilter: true,
     isfilterform: false,
     datatype: "json",
@@ -807,7 +807,6 @@ export const worksiteCompanies = {
     pgid: "worksiteCompanies",
     pgtitle: "Worksites",
     pgsubtitle: "Manage Worksites for: ",
-    noDataMsg: "There are no locations defined for this company:  ",
     flowtype: "flowtype2",
     hasAddNew: true,
     addNewLabel: "Click here to add new Company.",
