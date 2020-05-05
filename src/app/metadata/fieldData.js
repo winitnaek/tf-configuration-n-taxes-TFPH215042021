@@ -24,7 +24,7 @@ export const customPayments = [
           {
             type: "min",
             input: 1,
-            message: "min 5 characters"
+            message: "min 1 characters"
           },
           {
             type: "max",

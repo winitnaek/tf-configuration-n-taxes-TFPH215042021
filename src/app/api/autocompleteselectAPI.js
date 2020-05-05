@@ -1,10 +1,12 @@
 import {appError, getAdminErrorMessage}  from "bsiuilib";
-import {autocompleteURL, reqInfo} from "../../base/utils/tfUtils";
-
+import {autocompleteURL, reqInfo,buildAutoCompSelInput} from "../../base/utils/tfUtils";
+import store from '../../tf_index';
 class autocompleteSelectAPI {
-  static getAutoCompleteData(pgid, query) {    
-    let url = autocompleteURL(pgid)      
-    return fetch(url, reqInfo(null))
+  static getAutoCompleteData(fieldId, query) {    
+    let autoCompInput = buildAutoCompSelInput(fieldId,store,query);
+    let url = autocompleteURL(fieldId)      
+    let tt = JSON.stringify(autoCompInput);
+    return fetch(url, reqInfo(tt))
     .then((response) => {
       if (response.ok) {
         return response.json(); 

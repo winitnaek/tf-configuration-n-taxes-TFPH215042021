@@ -1,3 +1,10 @@
-[   "Test Company 1-(TESTCOMP1)",
-    "test-(TETS)"
+[
+    {
+        "id": "Test Company 1-(TESTCOMP1)",
+        "label": "Test Company 1-(TESTCOMP1)"
+    },
+    {
+        "id": "test-(TETS)",
+        "label": "test-(TETS)"
+    }
 ]

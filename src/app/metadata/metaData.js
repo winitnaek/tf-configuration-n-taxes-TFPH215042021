@@ -19,7 +19,7 @@ export const allBSIPlans = {
     isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "No Data Found : ",
     recordEdit: false,
     recordDelete: false,
     columns: [
@@ -101,7 +101,7 @@ export const customPayments = {
     isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "No Data Found : ",
     recordEdit: true,
     recordDelete: false,
     columns: [
@@ -196,7 +196,7 @@ export const customTaxCodes = {
     isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "No Data Found : ",
     recordEdit: true,
     recordDelete: true,
     columns: [
@@ -263,7 +263,7 @@ export const populateV3States = {
     isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "No Data Found : ",
     recordEdit: false,
     recordDelete: false,
     columns: [
@@ -327,7 +327,7 @@ export const experienceRates = {
     isfilterform: true,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "No Data Found : ",
     recordEdit: false,
     recordDelete: false,
     columns: [
@@ -457,7 +457,7 @@ export const supplementalMethods = {
     isfilterform: true,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "No Data Found : ",
     recordEdit: false,
     recordDelete: false,
     columns: [
@@ -522,7 +522,7 @@ export const customFormulas = {
     isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "No Data Found : ",
     recordEdit: true,
     recordDelete: false,
     columns: customTaxCodes.griddef.columns,
@@ -687,7 +687,7 @@ export const companies = {
     isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "No Data Found : ",
     recordEdit: true,
     recordDelete: true,
     columns: [
@@ -772,7 +772,7 @@ export const worksites = {
     isfilterform: false,
     datatype: "json",
     contenttype: "application/json",
-    noResultsFoundTxt: "No Data Found",
+    noResultsFoundTxt: "No Data Found : ",
     recordEdit: true,
     recordDelete: false,
     columns: [
