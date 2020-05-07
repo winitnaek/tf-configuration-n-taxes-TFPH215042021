@@ -1206,7 +1206,7 @@ export const worksites = [
       placeholder: "StartDate",
       fieldtype: "date",
       label: "StartDate ",
-      value: "",
+      value: "2013-03-01",
       errmsg: "StartDate is required",
       fieldlength: {
         minlength: 1,
