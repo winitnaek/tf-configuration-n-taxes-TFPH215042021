@@ -73,7 +73,7 @@ export const tftools = [
   },
   {
     value: "UQ",
-    label: "User Queries",
+    label: "User Data Queries",
     desc: "User Data Queries",
     id: "userDataQueries",
     type: UI_PAGE,

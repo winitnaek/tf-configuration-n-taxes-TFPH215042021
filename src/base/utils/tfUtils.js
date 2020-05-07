@@ -158,6 +158,12 @@ export function buildGridDataInput(pageid, store) {
   let state = store.getState();
   let filterData = state.formFilterData;
   console.log(state);
+  let stDate = ''
+  if(filterData.startDate){
+    let dt= filterData.startDate.split('-');
+    stDate = dt[1]+'/'+dt[2]+'/'+dt[0];
+  }
+
   let input = {
     pageId: pageid,
     dataset: appDataset(),
@@ -167,11 +173,22 @@ export function buildGridDataInput(pageid, store) {
     companyName: filterData.companyName,
     taxCode: filterData.taxCode,
     taxName: filterData.name,
-    startdate: filterData.startdate,
+    startdate: stDate,
     riskClass: filterData.riskClass,
     taxType: filterData.taxType,
     formNumber: filterData.formNumber,
     courtesy:filterData.courtesy
+  };
+  return input;
+}
+export function buildAutoCompSelInput(pageid, store,patten) {
+  let state = store.getState();
+  console.log(state);
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    pattern:patten
   };
   return input;
 }
