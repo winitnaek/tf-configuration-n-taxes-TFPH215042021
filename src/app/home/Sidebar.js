@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import {
   star,
   goldStar,
@@ -34,6 +33,7 @@ class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      thlink:[],
       selected: [],
       favorites: [],
       options: [],
@@ -133,7 +133,8 @@ class Sidebar extends Component {
   componentDidMount() {
     this.setState({
       options: this.props.options,
-      favorites: this.props.favorites
+      favorites: this.props.favorites,
+      thlink:this.props.thlink
     });
 
     // Set listener for clickaway
@@ -227,7 +228,7 @@ class Sidebar extends Component {
       );
     };
 
-    const { selected, options, favorites } = this.state;
+    const { selected, options, favorites,thlink } = this.state;
 
     let displayFavorites = favorites.sort().map(item => {
       return (
@@ -280,6 +281,34 @@ class Sidebar extends Component {
       }
       return comparison;
     }
+    console.log('thlink');
+    console.log(thlink);
+    console.log(this.props.thlink);
+    let displayThLink = null;
+    console.log("isMock()")
+    console.log(isMock())
+    if(isMock()){
+    displayThLink =this.props.thlink.map(item => {
+      return (
+        <Row key={item.label} className="selected">
+          <Col sm="10" style={linkColStyle}>
+            <span
+              id={`jumpto-${item.value}`}
+              onClick={e => this.handleRender(item)}
+            >
+              {item.label}
+            </span>
+            <UncontrolledTooltip
+              placement="top"
+              target={`jumpto-${item.value}`}
+            >
+              Jump to {item.label}
+            </UncontrolledTooltip>
+          </Col>
+        </Row>
+      );
+    });
+  }
 
     displayFavorites = displayFavorites.sort(compare);
 
@@ -306,6 +335,14 @@ class Sidebar extends Component {
                 components={{ Option }}
               />
               <hr />
+              {isMock()  ? (<p style={favoriteLinkStyle}> Test Harness</p>):null}
+              {isMock() ? (
+                <Container style={favoriteListStyle}>
+                <p>{displayThLink}</p>
+                </Container>
+              ) : (
+                ''
+              )}
               <p style={favoriteLinkStyle}> Favorite Links</p>
               {this.props.options ? (
                 <Container style={favoriteListStyle}>
@@ -342,8 +379,9 @@ class Sidebar extends Component {
 
 function mapStateToProps(state) {
   return {
-    options: state.moduleAreas.areas,
-    favorites: state.favoriteLinks
+    options: state.moduleAreas.areas.filter(opt=> opt.id !=='testHarness' ),
+    favorites: state.favoriteLinks.filter(opt=> opt.id !=='testHarness' ),
+    thlink:state.moduleAreas.areas.filter(opt=> opt.id =='testHarness')
   };
 }
 function mapDispatchToProps(dispatch) {

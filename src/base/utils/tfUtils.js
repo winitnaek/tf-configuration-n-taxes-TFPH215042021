@@ -1,8 +1,5 @@
 import { metadatamap, tftools, deletedatamap, savedatamap, asyncselfldsmap } from "../constants/TFTools";
 import {generateUrl} from "bsiuilib";
-
-
-const MOCK = process.env.NODE_ENV === 'development' ? true:false;
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -230,7 +227,7 @@ export function buildSaveInput(pageid, store,formdata,mode) {
 }
 export const reqInfo = data => {
     let info = {};
-    if (MOCK) {
+    if (isMock()) {
       info = {
         method: "GET",
         headers: {
@@ -256,7 +253,7 @@ export function getUrl(id) {
       if (id == metadatam.id) return metadatam;
     });
     let url = generateUrl.buildURL(metadataMap.url);
-    if (MOCK) {
+    if (isMock()) {
       let metadataMap = mockdatamap.find(metadatam => {
         if (id == metadatam.id) return metadatam;
       });
@@ -271,7 +268,7 @@ export function getUrl(id) {
       if (id == metadatam.id) return metadatam;
     });
     let url = generateUrl.buildURL(deldataMap.url);
-    if (MOCK) {
+    if (isMock()) {
       let deldataMap = mockdelmap.find(metadatam => {
         if (id == metadatam.id) return metadatam;
       });
@@ -287,7 +284,7 @@ export function getUrl(id) {
       if (id == metadatam.id) return metadatam;
     });
     let url = generateUrl.buildURL(saveDataMap.url);
-    if (MOCK) {
+    if (isMock()) {
       let saveDataMap = mocksavmap.find(metadatam => {
         if (id == metadatam.id) return metadatam;
       });
@@ -304,7 +301,7 @@ export function getUrl(id) {
     if (id == metadatam.id) return metadatam;
   });
   let url = generateUrl.buildURL(autoCompleteDataMap.url);
-  if (MOCK) {
+  if (isMock()) {
     autoCompleteDataMap = mockselectmap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
     });

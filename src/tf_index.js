@@ -10,9 +10,11 @@ import { makeNavs, makeSearch } from "./base/template/navGenerator";
 import TFHome from "./app/home/home.js";
 import { closeForm, setFormData } from "./app/actions/formActions";
 import { setFilterFormData } from "./app/actions/filterFormActions";
-
+import TestHarness from './app/test/TestHarness';
 let store = configureStore();
 export default store;
+let MOCK = process.env.NODE_ENV === 'development' ? true:false;
+setIsMock(MOCK);
 import {
   buildModuleAreaLinks,
   openHelp,
@@ -24,14 +26,22 @@ import {
 import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
 import CustomGrid from "./app/components/CustomGrid";
 import ReusablePage from './app/components/ReusablePage';
-import { UI_COMP, UI_PAGE, tftools } from "./base/constants/TFTools";
+import { UI_COMP, UI_PAGE, UI_TEST, tftools } from "./base/constants/TFTools";
 import griddataAPI from "./app/api/griddataAPI";
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
   var userProfile =
     '{\r\n   "userId":"TF11",\r\n   "firstName":"Isreal",\r\n   "lastName":"Fullerton",\r\n   "dataset":"VINIT",\r\n   "securitytokn":"fhfh484jer843je848rj393jf",\r\n   "branding":"base64ImageData",\r\n   "userTheme":"Default",\r\n   "roles":[\r\n      "ER"\r\n   ],\r\n   "applications":[\r\n      {\r\n         "id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc",\r\n         "name":"TFTools",\r\n         "accessIds":[\r\n            {\r\n               "id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8",\r\n               "visible":true\r\n            }\r\n         ],\r\n         "permissions":{\r\n            "CF":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "CT":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "CP":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "UQ":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   ],\r\n   "themeList":[\r\n      {\r\n         "id":"Default",\r\n         "name":"Default"\r\n      },\r\n      {\r\n         "id":"HighContrast",\r\n         "name":"High Contrast"\r\n      },\r\n      {\r\n         "id":"WhiteOnBlack",\r\n         "name":"White On Black"\r\n      },\r\n      {\r\n         "id":"BlackOnWhite",\r\n         "name":"Black On White"\r\n      }\r\n   ]\r\n}';
   var userdata = JSON.parse(userProfile);
-  sessionStorage.setItem("up", userProfile);
+  if(isMock()){
+    let thPerm =[1,1,1,1,0];
+    let noOfPerm = Object.keys(userdata.applications[0].permissions).length;
+    userdata.applications[0].permissions["TH"] = thPerm;
+    let up = JSON.stringify(userdata)
+    sessionStorage.setItem("up", up);
+  }else{
+    sessionStorage.setItem("up", userProfile);
+  }
 }
 //==============================================================================
 let usrobj = JSON.parse(sessionStorage.getItem("up"));
@@ -48,7 +58,6 @@ let moduleAreas = buildModuleAreaLinks(usrobj.applications);
  * @param {*} renderName
  */
 function renderTFApplication(elem, renderName, child) {
-
   setAppAnchor(elem);
   setAppUserIDAndDataset(dataset, userId);
   if (renderName === rname.RN_TF_HOME) {
@@ -64,6 +73,8 @@ function renderTFApplication(elem, renderName, child) {
     renderComponent(elem, renderName.id, renderName.value, child);
   } else if (renderName && renderName.type == UI_PAGE) {
     renderNewPage(elem, renderName.id, renderName.value);
+  } else if (renderName && renderName.type == UI_TEST) {
+    renderTestHarness(elem, renderName.id, renderName.value, child);
   }
 }
 /**
@@ -101,7 +112,48 @@ const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData, 
       );
     });
 }
-
+/**
+ * renderTestHarness
+ * @param {*} elem 
+ * @param {*} pgid 
+ * @param {*} pid 
+ */
+function renderTestHarness(elem, pgid, pid) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <TestHarness pgid={pgid}/>          
+    </Provider>,
+    document.querySelector("#" + elem)
+  );
+}
+/**
+ * renderPage
+ * @param {*} elem
+ */
+function renderTestComponent(elem, tool, metadata,mockdata) {
+  setMockMetadata(metadata);
+  const state = store.getState()
+  const dispatch = store.dispatch
+  const renderGrid =  renderTFApplication
+  const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData, renderGrid}
+  ReactDOM.render(
+    <Provider store={store}>
+      <CustomGrid
+        pageid={tool.id}
+        metadata={testMetaData}
+        pid={tool.value}
+        permissions={compPermissions}
+        griddata={mockdata}
+        help={openHelp}
+        gridProps={gridProps}
+      />
+    </Provider>,
+    document.querySelector("#" + elem)
+  );
+}
+export function testMetaData(pgid) {
+  return getMockMedata();
+}
 /**
  * renderPage
  * @param {*} elem
@@ -150,12 +202,24 @@ function setAppAnchor(elem) {
 function appAnchor() {
   return APP_ANCHOR;
 }
-var APP_DATASET, APP_USERID;
+var APP_DATASET, APP_USERID,IS_MOCK,METADATA_MOCK;
 function appDataset() {
   return APP_DATASET;
 }
 function appUserId() {
   return APP_USERID;
+}
+function isMock() {
+  return IS_MOCK;
+}
+function setIsMock(mock) {
+  IS_MOCK = mock;
+}
+function getMockMedata() {
+  return METADATA_MOCK;
+}
+function setMockMetadata(metadata) {
+  METADATA_MOCK = metadata;
 }
 function setAppUserIDAndDataset(dataset, userid) {
   APP_DATASET = dataset;
@@ -377,6 +441,12 @@ window.onloadPdfData = onloadPdfData;
 
 module.exports = onloadCompData;
 window.onloadCompData = onloadCompData;
+
+module.exports = isMock;
+window.isMock = isMock;
+
+module.exports = renderTestComponent;
+window.renderTestComponent = renderTestComponent;
 
 let w2aIndex = {
   resolveTemplates: resolveTemplates,

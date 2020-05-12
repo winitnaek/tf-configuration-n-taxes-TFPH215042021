@@ -38,7 +38,16 @@ import {
 } from "../constants/ServiceUrls";
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
+export const UI_TEST = "uitest";
 export const tftools = [
+  {
+    value: "TH",
+    label: "Test Metadata",
+    desc: "Test Metadata",
+    id: "testHarness",
+    type: UI_TEST,
+    link: true
+  },
   {
     value: "CP",
     label: "Custom Payments",
