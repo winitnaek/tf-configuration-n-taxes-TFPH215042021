@@ -150,8 +150,8 @@ class UserDataQueries extends React.Component {
               filter={filter}
               isfilterform={this.state.isfilterform}
               tftools={tftools}
-              formMetaData={formMetaData}
-              fieldData={fieldData}
+              formMetaData={formMetaData[pgid]}
+              fieldData={fieldData[pgid]}
               recentUsage={getRecentUsage}
               autoComplete={autocompleteSelectAPI}
               saveGridData={savegriddataAPI}

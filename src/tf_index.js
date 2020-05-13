@@ -11,6 +11,7 @@ import TFHome from "./app/home/home.js";
 import { closeForm, setFormData } from "./app/actions/formActions";
 import { setFilterFormData } from "./app/actions/filterFormActions";
 import TestHarness from './app/test/TestHarness';
+import * as fieldData from "./app/metadata/fieldData";
 let store = configureStore();
 export default store;
 let MOCK = process.env.NODE_ENV === 'development' ? true:false;
@@ -91,7 +92,7 @@ const dispatch = store.dispatch
 
 const renderGrid =  renderTFApplication
 const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData, renderGrid}
-
+const fieldDataX = fieldData[pageid];
   griddataAPI  
     .getGridData(pageid, gridInput) 
     .then(response => response)
@@ -106,6 +107,7 @@ const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData, 
             griddata={griddata}
             help={openHelp}
             gridProps={gridProps}
+            fieldData={fieldDataX}
           />
         </Provider>,
         document.querySelector("#" + elem)
@@ -130,7 +132,7 @@ function renderTestHarness(elem, pgid, pid) {
  * renderPage
  * @param {*} elem
  */
-function renderTestComponent(elem, tool, metadata,mockdata) {
+function renderTestComponent(elem, tool, metadata,mockdata,fieldData) {
   setMockMetadata(metadata);
   const state = store.getState()
   const dispatch = store.dispatch
@@ -146,6 +148,7 @@ function renderTestComponent(elem, tool, metadata,mockdata) {
         griddata={mockdata}
         help={openHelp}
         gridProps={gridProps}
+        fieldData={fieldData}
       />
     </Provider>,
     document.querySelector("#" + elem)

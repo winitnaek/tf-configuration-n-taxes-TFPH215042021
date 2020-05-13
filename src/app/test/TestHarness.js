@@ -127,7 +127,7 @@ class TestHarness extends React.Component {
       this.setState({
         fieldData: fieldData,
         errorMessage: "",
-        validMessage: "Field Data JSON Format is valid.",
+        validMessage: this.state.toolsInfoData.label+" Field Data JSON Format is valid.",
       });
     } catch (err) {
       this.setState({
@@ -155,20 +155,19 @@ class TestHarness extends React.Component {
     let tool=null; 
     let metadata=null; 
     let mockdata=null;
+    let fieldData=null;
     if(this.state.screenType==1 || this.state.screenType==2 || this.state.screenType==3 || this.state.screenType==4){
       tool= this.state.toolsInfoData;
       metadata = this.state.metadataFile
       mockdata= this.state.mockData;
-    }else if(this.state.screenType==3 || this.state.screenType==4){
       console.log("this.state.fieldData");
-      console.log(this.state.fieldData);
-      console.log("isMockDataProvided");
-      console.log(this.isMockDataProvided.checked);
+      fieldData = this.state.fieldData;
+      console.log(fieldData);
     }
     if(!mockdata){
       mockdata=[];
     }
-    renderTestComponent("pageContainer",tool, metadata,mockdata);
+    renderTestComponent("pageContainer",tool, metadata,mockdata,fieldData);
   }
   onScreenType(screenType) {
     this.setState({ screenType });
@@ -255,6 +254,22 @@ class TestHarness extends React.Component {
         </Col>
       </FormGroup>
     );
+    let fieldDataInput = (
+      <FormGroup row style={rowStyle}>
+        <Col sm={4}>
+          <Label for="mockData">Select Form/Filter Field Data</Label>
+        </Col>
+        <Col>
+          <Input
+            type="file"
+            innerRef={(inputfd) => (this.fieldData = inputfd)}
+            name="mockData"
+            id="mockData"
+            onChange={() => this.onFieldDataFile()}
+          />
+        </Col>
+      </FormGroup>
+    );
     if (this.state.screenType === 1) {
       screenTypeInputs = (
         <Form>
@@ -263,7 +278,16 @@ class TestHarness extends React.Component {
           {mockdataInput}
         </Form>
       );
-    } else if (this.state.screenType === 2) {
+    } else if (this.state.screenType === 3) {
+      screenTypeInputs = (
+        <Form>
+           {scrInfoInput}
+           {metadataInput}
+           {fieldDataInput}
+           {mockdataInput}
+        </Form>
+      );
+    }else if (this.state.screenType === 2) {
       screenTypeInputs = (
         <Form>
           {scrInfoInput}
@@ -300,7 +324,7 @@ class TestHarness extends React.Component {
                       <Col sm={7}>
                       <ButtonGroup>
                           <Button outline color="info" size="sm" onClick={() => this.onScreenType(1)} active={this.state.screenType === 1}>RO Grid</Button>
-                          <Button outline color="info" size="sm" onClick={() => this.onScreenType(3)} active={this.state.screenType === 3}>Type 1 Grid</Button>
+                          <Button outline color="info" size="sm" onClick={() => this.onScreenType(3)} active={this.state.screenType === 3}>RO Filter Grid</Button>
                           <Button outline color="info" size="sm" onClick={() => this.onScreenType(2)} active={this.state.screenType === 2}>Type 2 Grid</Button>
                       </ButtonGroup>
                       </Col>

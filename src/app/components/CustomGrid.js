@@ -5,8 +5,6 @@ import { tftools } from "../../base/constants/TFTools";
 import { ReusableGrid } from "bsiuilib";
 import { setFilterFormData } from "../actions/filterFormActions";
 import { setFormData } from "../actions/formActions";
-import * as fieldData from "../metadata/fieldData";
-import * as formMetaData from "../metadata/metaData";
 import { getRecentUsage } from "../actions/usageActions";
 import savegriddataAPI from "../api/savegriddataAPI";
 import deletegriddataAPI from "../api/deletegriddataAPI";
@@ -50,13 +48,12 @@ class CustomGrid extends Component {
       gridProps,
       formData,
       getRecentUsage,
-      formFilterData
+      formFilterData,
+      fieldData
     } = this.props;
 
    
 const {formAction, filterFormAction} = this
-     
-
     return (
       <ReusableGrid
         pageid={pageid}
@@ -73,7 +70,7 @@ const {formAction, filterFormAction} = this
         deleteGridData={deletegriddataAPI}
         recentUsage={getRecentUsage}
         renderGrid={this.renderGrid}
-        formMetaData={formMetaData}
+        formMetaData={metadata}
         formData={formData}
         formFilterData={formFilterData}
         fieldData={fieldData}
