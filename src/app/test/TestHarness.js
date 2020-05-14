@@ -324,7 +324,7 @@ class TestHarness extends React.Component {
                       <Col sm={7}>
                       <ButtonGroup>
                           <Button outline color="info" size="sm" onClick={() => this.onScreenType(1)} active={this.state.screenType === 1}>RO Grid</Button>
-                          <Button outline color="info" size="sm" onClick={() => this.onScreenType(3)} active={this.state.screenType === 3}>RO Filter Grid</Button>
+                          <Button outline color="info" size="sm" onClick={() => this.onScreenType(3)} active={this.state.screenType === 3}>RO Filter / Type 1 Grid</Button>
                           <Button outline color="info" size="sm" onClick={() => this.onScreenType(2)} active={this.state.screenType === 2}>Type 2 Grid</Button>
                       </ButtonGroup>
                       </Col>
