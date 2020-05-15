@@ -236,7 +236,7 @@ export const customTaxCodes = {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "taxcode", "order": 1, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
+      { id: "taxCode", "order": 1, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
       { id: "name", "order": 2, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false }
     ],
     fltrflds: ""

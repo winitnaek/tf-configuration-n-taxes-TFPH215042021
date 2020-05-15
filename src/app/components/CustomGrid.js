@@ -49,7 +49,8 @@ class CustomGrid extends Component {
       formData,
       getRecentUsage,
       formFilterData,
-      fieldData
+      fieldData,
+      formMetaData
     } = this.props;
 
    
@@ -70,7 +71,7 @@ const {formAction, filterFormAction} = this
         deleteGridData={deletegriddataAPI}
         recentUsage={getRecentUsage}
         renderGrid={this.renderGrid}
-        formMetaData={metadata}
+        formMetaData={formMetaData}
         formData={formData}
         formFilterData={formFilterData}
         fieldData={fieldData}

@@ -93,6 +93,7 @@ const dispatch = store.dispatch
 const renderGrid =  renderTFApplication
 const gridProps = { state, dispatch, closeForm, setFormData, setFilterFormData, renderGrid}
 const fieldDataX = fieldData[pageid];
+let metaData = compMetaData(pageid);
   griddataAPI  
     .getGridData(pageid, gridInput) 
     .then(response => response)
@@ -108,6 +109,7 @@ const fieldDataX = fieldData[pageid];
             help={openHelp}
             gridProps={gridProps}
             fieldData={fieldDataX}
+            formMetaData={metaData}
           />
         </Provider>,
         document.querySelector("#" + elem)
@@ -149,6 +151,7 @@ function renderTestComponent(elem, tool, metadata,mockdata,fieldData) {
         help={openHelp}
         gridProps={gridProps}
         fieldData={fieldData}
+        formMetaData={metadata}
       />
     </Provider>,
     document.querySelector("#" + elem)
