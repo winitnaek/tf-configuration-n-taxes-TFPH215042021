@@ -433,7 +433,6 @@ export const selectSamplePage = [
     },
     fieldinfo: {
       options: [
-        " ",
         "AL",
         "AR",
         "CA",
@@ -701,6 +700,48 @@ export const selectSamplePage = [
     },
     validation: {
       required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "garnishmentFormula",
+    placeholder: "Select Garnishment",
+    fieldtype: "select",
+    label: "Garnishment Formula",
+    value: "NONE",
+    errmsg: "Garnishment is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true
+    },
+    validation: {
+      required: true,
+
+      type: "string"
+    }
+  },
+  {
+    id: "customGarnishmentFormula",
+    placeholder: "Select Garnishment",
+    fieldtype: "select",
+    label: "Custom Garnishment Formula",
+    value: "NONE",
+    errmsg: "Custom Garnishment is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true
+    },
+    validation: {
+      required: true,
+
       type: "string"
     }
   },
@@ -2104,7 +2145,8 @@ export const customPayments = [
         "Limit-YTD",
         "Limit-QTD",
         "Limit-MTD",
-        "Taxable/Exclude"
+        "Taxable/Exclude",
+        "Imputed"
       ],
       multiselect: false
     },

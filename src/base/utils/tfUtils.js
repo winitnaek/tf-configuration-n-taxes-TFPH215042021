@@ -386,5 +386,13 @@ const mockselectmap = [
   {
     id: "schoolDistrict",
     url: "./SCHOOL_DISTRICT_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "garnishmentFormula",
+    url: "./GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "customGarnishmentFormula",
+    url: "./CUSTOM_GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json"
   }
 ];

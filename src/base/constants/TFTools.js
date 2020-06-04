@@ -33,6 +33,8 @@ import {
   GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE,
   GET_PLACE_CODE_AUTOCOMPLETE,
   GET_SCHOOL_DISTRICT_AUTOCOMPLETE,
+  GET_GARNISMENT_FORMULA_AUTOCOMPLETE,
+  GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE,
   DELTE_CUSTOM_PAYMENT,
   DELETE_CUSTOM_TAX_CODES,
   SAVE_CUSTOM_PAYMENT,
@@ -326,6 +328,16 @@ export const asyncselfldsmap = [
   {
     id: "schoolDistrict",
     url: GET_SCHOOL_DISTRICT_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "garnishmentFormula",
+    url: GET_GARNISMENT_FORMULA_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "customGarnishmentFormula",
+    url: GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE,
     param: [{ dataset: "", pattern: "" }]
   }
 ];

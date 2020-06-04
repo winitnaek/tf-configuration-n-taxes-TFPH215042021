@@ -1,0 +1,38 @@
+[
+  {
+    "id": "BSI504",
+    "label": "BSI504- STATE TAX LEVY"
+  },
+  {
+    "id": "BSI507",
+    "label": "BSI507- CREDITOR GARNISHMENT"
+  },
+  {
+    "id": "BSI510",
+    "label": "BSI510- CURRENT SUPPORT ARREARS"
+  },
+  {
+    "id": "BSI511",
+    "label": "BSI511- MEDICAL SUPPORT"
+  },
+  {
+    "id": "BSI512",
+    "label": "BSI512- MEDICAL SUPPORT ARREARS"
+  },
+  {
+    "id": "BSI513",
+    "label": "BSI513- SPOUSAL SUPPORT"
+  },
+  {
+    "id": "BSI514",
+    "label": "BSI514- SPOUSAL SUPPORT ARREARS"
+  },
+  {
+    "id": "BSI517",
+    "label": "BSI517- STATE STUDENT LOAN"
+  },
+  {
+    "id": "BSI600",
+    "label": "BSI600- TOTAL SUPPORT"
+  }
+]
