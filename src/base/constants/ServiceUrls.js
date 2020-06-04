@@ -29,6 +29,10 @@ export const GET_PLACE_CODE_AUTOCOMPLETE =
   "/TaxCodeService/getPlaceCodeAutoCompl";
 export const GET_SCHOOL_DISTRICT_AUTOCOMPLETE =
   "/TaxCodeService/getSchoolDistrictAutoCompl";
+export const GET_GARNISMENT_FORMULA_AUTOCOMPLETE =
+  "/TaxCodeService/getGarnishmenFormulaAutoCompl";
+export const GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE =
+  "/TaxCodeService/getCustomGarnishmenFormulaAutoCompl";
 export const DELTE_CUSTOM_PAYMENT = "/TaxCodeService/deleteCustomPayment";
 export const DELETE_CUSTOM_TAX_CODES = "/TaxCodeService/deleteCustomTaxCode";
 export const SAVE_CUSTOM_PAYMENT = "/TaxCodeService/saveCustomPayment";

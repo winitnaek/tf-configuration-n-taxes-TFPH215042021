@@ -92,6 +92,23 @@ if (process.env.NODE_ENV === "development") {
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       {
+        from: "./uitests/data/GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from:
+          "./uitests/data/CUSTOM_GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/CUSTOM_GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
         from: "./uitests/data/AUTHORITY_CODE_AUTOCOMPLETE_MOCKDATA.json",
         to: "../dist/AUTHORITY_CODE_AUTOCOMPLETE_MOCKDATA.json"
       }
