@@ -10,7 +10,9 @@ import {
   companies,
   worksites,
   worksiteCompanies,
+  selectSamplePage
 } from "../../app/metadata/metaData";
+
 import {
   GET_CUSTOM_PAYMENTS_LIST,
   GET_CUSTOM_TAX_CODES,
@@ -19,8 +21,8 @@ import {
   GET_EXPERIENCE_RATES,
   GET_SUPPLEMENTAL_INFO_FOR_TAX,
   GET_RECENT_USAGE,
-  GET_CUSTOM_FORMULAS, 
-  GET_CUSTOM_TAX_FORMULAS, 
+  GET_CUSTOM_FORMULAS,
+  GET_CUSTOM_TAX_FORMULAS,
   GET_COMPANIES,
   GET_WORKSITES,
   GET_WORKSITES_LOCATIONS,
@@ -28,6 +30,9 @@ import {
   GET_ALL_TAXTYPES_AUTOCOMPLETE,
   GET_ALL_COMPCODE_AUTOCOMPLETE,
   GET_ALL_RISKCLASS_AUTOCOMPLETE,
+  GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE,
+  GET_PLACE_CODE_AUTOCOMPLETE,
+  GET_SCHOOL_DISTRICT_AUTOCOMPLETE,
   DELTE_CUSTOM_PAYMENT,
   DELETE_CUSTOM_TAX_CODES,
   SAVE_CUSTOM_PAYMENT,
@@ -36,10 +41,20 @@ import {
   SAVE_WORKSITES_LOCATIONS,
   SAVE_WORKSITES
 } from "../constants/ServiceUrls";
+
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
 export const UI_TEST = "uitest";
+
 export const tftools = [
+  {
+    value: "UQ",
+    label: "Select Sample Page",
+    desc: "Select Sample Page",
+    id: "selectSamplePage",
+    type: UI_COMP,
+    link: true
+  },
   {
     value: "TH",
     label: "Test Metadata",
@@ -143,7 +158,7 @@ export const tftools = [
     id: "worksiteCompanies",
     type: UI_COMP,
     link: false
-  },
+  }
 ];
 export const metadatamap = [
   {
@@ -184,26 +199,26 @@ export const metadatamap = [
   },
   {
     id: "recentUsage",
-    url: GET_RECENT_USAGE,
+    url: GET_RECENT_USAGE
   },
   {
     id: "customFormulas",
     metadata: customFormulas,
     url: GET_CUSTOM_FORMULAS,
     rendererInput: ["dataset", "userId"]
-  },  
+  },
   {
     id: "worksites",
     metadata: worksites,
     url: GET_WORKSITES,
     rendererInput: ["dataset", "userId"]
-  },  
+  },
   {
     id: "worksiteCompanies",
     metadata: worksiteCompanies,
     url: GET_WORKSITES_LOCATIONS,
     rendererInput: ["dataset", "userId"]
-  }, 
+  },
   {
     id: "companies",
     metadata: companies,
@@ -215,8 +230,13 @@ export const metadatamap = [
     metadata: customTaxFormulas,
     url: GET_CUSTOM_TAX_FORMULAS,
     rendererInput: ["dataset", "userId"]
-  },  
-
+  },
+  {
+    id: "selectSamplePage",
+    metadata: selectSamplePage,
+    url: GET_CUSTOM_TAX_FORMULAS,
+    rendererInput: ["dataset", "userId"]
+  }
 ];
 export const deletedatamap = [
   {
@@ -239,27 +259,27 @@ export const savedatamap = [
   {
     id: "customTaxCodes",
     url: SAVE_CUSTOM_TAX_CODES,
-    rendererInput: ["dataset", "userId", "editMode","taxCode","taxName"]
+    rendererInput: ["dataset", "userId", "editMode", "taxCode", "taxName"]
   },
- 
+
   {
     id: "customFormulas",
     metadata: customFormulas,
     url: SAVE_CUSTOM_FORMULAS,
     rendererInput: ["dataset", "userId"]
-  }, 
+  },
   {
     id: "worksites",
     metadata: worksites,
     url: SAVE_WORKSITES,
     rendererInput: ["dataset", "userId"]
-  },   
+  },
   {
     id: "worksiteCompanies",
     metadata: worksiteCompanies,
     url: SAVE_WORKSITES_LOCATIONS,
     rendererInput: ["dataset", "userId"]
-  }, 
+  },
   {
     id: "customTaxFormulas",
     metadata: customTaxFormulas,
@@ -271,26 +291,41 @@ export const asyncselfldsmap = [
   {
     id: "taxability",
     url: GET_ALL_TAXCODES_AUTOCOMPLETE,
-    param:[{dataset:"","pattern":""}]
+    param: [{ dataset: "", pattern: "" }]
   },
   {
     id: "taxType",
     url: GET_ALL_TAXTYPES_AUTOCOMPLETE,
-    param:[{"pattern":""}]
+    param: [{ pattern: "" }]
   },
   {
     id: "companyCode",
     url: GET_ALL_COMPCODE_AUTOCOMPLETE,
-    param:[{"pattern":""}]
+    param: [{ pattern: "" }]
   },
   {
     id: "riskClass",
     url: GET_ALL_RISKCLASS_AUTOCOMPLETE,
-    param:[{"pattern":""}]
+    param: [{ pattern: "" }]
   },
   {
     id: "taxCode",
     url: GET_ALL_TAXCODES_AUTOCOMPLETE,
-    param:[{dataset:"","pattern":""}]
+    param: [{ dataset: "", pattern: "" }]
   },
+  {
+    id: "authorityCode",
+    url: GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "placeCode",
+    url: GET_PLACE_CODE_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "schoolDistrict",
+    url: GET_SCHOOL_DISTRICT_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  }
 ];

@@ -1,0 +1,46 @@
+[
+  {
+    "id": "ALL",
+    "label": "ALL"
+  },
+  {
+    "id": "00000000",
+    "label": "00000000 - FEDERAL"
+  },
+  {
+    "id": "00010000",
+    "label": "00010000 - ALABAMA"
+  },
+  {
+    "id": "00020000",
+    "label": "00020000 - ALASKA"
+  },
+  {
+    "id": "00070000",
+    "label": "00070000 - AMERICAN SAMOA"
+  },
+  {
+    "id": "00040000",
+    "label": "00040000 - ARIZONA"
+  },
+  {
+    "id": "00050000",
+    "label": "00050000 - ARKANSAS"
+  },
+  {
+    "id": "00060000",
+    "label": "00060000 - CALIFORNIA"
+  },
+  {
+    "id": "00080000",
+    "label": "00080000 - COLORADO"
+  },
+  {
+    "id": "00100000",
+    "label": "00100000 - DELAWARE"
+  },
+  {
+    "id": "00110000",
+    "label": "00110000 - DISTRICT OF COLUMBIA"
+  }
+]

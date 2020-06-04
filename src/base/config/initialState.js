@@ -3,7 +3,7 @@ export const UI_COMP = "comp";
 
 export default {
   moduleAreas: {
-    areas: [],
+    areas: []
   },
   favoriteAreas: [
     {
@@ -12,7 +12,7 @@ export default {
       desc: "Test Metadata",
       id: "testHarness",
       type: "comp",
-      link: true,
+      link: true
     },
     {
       value: "CT",
@@ -20,7 +20,7 @@ export default {
       desc: "Custom Tax Codes",
       id: "customTaxCodes",
       type: "comp",
-      link: true,
+      link: true
     },
     {
       value: "CP",
@@ -28,7 +28,7 @@ export default {
       desc: "Custom Payments",
       id: "customPayments",
       type: "comp",
-      link: true,
+      link: true
     },
     {
       value: "CF",
@@ -36,7 +36,7 @@ export default {
       desc: "Custom Formulas",
       id: "customFormulas",
       type: "comp",
-      link: true,
+      link: true
     },
     {
       value: "WS",
@@ -44,8 +44,16 @@ export default {
       desc: "Worksites",
       id: "worksites",
       type: "comp",
-      link: false,
+      link: false
     },
+    {
+      value: "SS",
+      label: "Select Sample Page",
+      desc: "Select Sample Page",
+      id: "selectSamplePage",
+      type: "comp",
+      link: false
+    }
   ],
 
   formData: { data: {}, isOpen: false, mode: "New", index: null },
@@ -61,17 +69,15 @@ export default {
     company: "",
     courtesy: false,
     fein: "",
-    name: "",
+    name: ""
   },
   formDeleteData: {
     companyCode: "",
-    taxCode: "",
+    taxCode: ""
   },
   formSaveData: {
     companyCode: "",
     taxCode: "",
-    formdata: {},
-  },
+    formdata: {}
+  }
 };
-
-
