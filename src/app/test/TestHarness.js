@@ -31,21 +31,33 @@ class TestHarness extends React.Component {
       fieldData: "",
       mockData: "",
       filterFile:"",
+      parentFile:"",
+      childFile:"",
       errorMessage: "",
       validMessage: "",
-      screenType:1
+      screenType:1,
+      prntFieldData:"",
+      childFieldData:""
+      
     };
     this.handleFileTIRead = this.handleFileTIRead.bind(this);
     this.handleFileMDRead = this.handleFileMDRead.bind(this);
     this.handleFileFDRead = this.handleFileFDRead.bind(this);
     this.handleFileDDRead = this.handleFileDDRead.bind(this);
     this.handleFileFIRead = this.handleFileFIRead.bind(this);
+    this.handleFilePIRead = this.handleFilePIRead.bind(this);
+    this.handleFileCIRead = this.handleFileCIRead.bind(this);
+    this.handleFilePDRead = this.handleFilePDRead.bind(this);
     this.metadataCancel   = this.metadataCancel.bind(this);
     this.fileReaderTI = "";
     this.fileReaderMD = "";
     this.fileReaderFD = "";
     this.fileReaderDD = "";
     this.fileReaderFI = "";
+    this.fileReaderPI = "";
+    this.fileReaderCI = "";
+    this.fileReaderPD = "";
+    this.fileReaderCD = "";
   }
   metadataCancel() {
     this.setState({modal:false});
@@ -71,10 +83,30 @@ class TestHarness extends React.Component {
     this.fileReaderFD.onloadend = this.handleFileFDRead;
     this.fileReaderFD.readAsText(this.fieldData.files[0]);
   }
+  onPrntFieldDataFile() {
+    this.fileReaderPD = new FileReader();
+    this.fileReaderPD.onloadend = this.handleFileFDRead;
+    this.fileReaderPD.readAsText(this.pfieldData.files[0]);
+  }
+  onChldFieldDataFile() {
+    this.fileReaderCD = new FileReader();
+    this.fileReaderCD.onloadend = this.handleFileFDRead;
+    this.fileReaderCD.readAsText(this.cfieldData.files[0]);
+  }
   onMockDataFile() {
     this.fileReaderDD = new FileReader();
     this.fileReaderDD.onloadend = this.handleFileDDRead;
     this.fileReaderDD.readAsText(this.mockData.files[0]);
+  }
+  onParentInfo() {
+    this.fileReaderPI = new FileReader();
+    this.fileReaderPI.onloadend = this.handleFilePIRead;
+    this.fileReaderPI.readAsText(this.parentMtdtInfo.files[0]);
+  }
+  onChildInfo() {
+    this.fileReaderCI = new FileReader();
+    this.fileReaderCI.onloadend = this.handleFileCIRead;
+    this.fileReaderCI.readAsText(this.childMtdtInfo.files[0]);
   }
   handleFileTIRead(e) {
     try {
@@ -102,6 +134,36 @@ class TestHarness extends React.Component {
     } catch (err) {
       this.setState({
         errorMessage: "Invalid Metadata JSON : " + err.message,
+        validMessage: "",
+      });
+    }
+  }
+  handleFilePIRead(e) {
+    try {
+      let parentFile = JSON.parse(e.currentTarget.result);
+      this.setState({
+        parentFile: parentFile,
+        errorMessage: "",
+        validMessage: "Parent File UI JSON Format is valid.",
+      });
+    } catch (err) {
+      this.setState({
+        errorMessage: "Invalid Parent File UI JSON : " + err.message,
+        validMessage: "",
+      });
+    }
+  }
+  handleFileCIRead(e) {
+    try {
+      let childFile = JSON.parse(e.currentTarget.result);
+      this.setState({
+        childFile: childFile,
+        errorMessage: "",
+        validMessage: "Child File UI JSON Format is valid.",
+      });
+    } catch (err) {
+      this.setState({
+        errorMessage: "Invalid Child File UI JSON : " + err.message,
         validMessage: "",
       });
     }
@@ -136,6 +198,21 @@ class TestHarness extends React.Component {
       });
     }
   }
+  handleFilePDRead(e) {
+    try {
+      let prntFieldData = JSON.parse(e.currentTarget.result);
+      this.setState({
+        prntFieldData: prntFieldData,
+        errorMessage: "",
+        validMessage: this.state.toolsInfoData.label+" Field Data JSON Format is valid.",
+      });
+    } catch (err) {
+      this.setState({
+        errorMessage: "Invalid Field Data JSON : " + err.message,
+        validMessage: "",
+      });
+    }
+  }
   handleFileDDRead(e) {
     try {
       let mockData = JSON.parse(e.currentTarget.result);
@@ -152,20 +229,32 @@ class TestHarness extends React.Component {
     }
   }
   onGenerateUIComp() {
-    let tool=null; 
-    let metadata=null; 
-    let mockdata=null;
-    let fieldData=null;
-    if(this.state.screenType==1 || this.state.screenType==2 || this.state.screenType==3 || this.state.screenType==4){
-      tool= this.state.toolsInfoData;
-      metadata = this.state.metadataFile
-      mockdata= this.state.mockData;
-      console.log("this.state.fieldData");
+    let tool = null;
+    let metadata = null;
+    let mockdata = null;
+    let fieldData = null;
+    let parentData = null;
+    let childData = null;
+    if (this.state.screenType == 1 || this.state.screenType == 3) {
+      tool = this.state.toolsInfoData;
+      metadata = this.state.metadataFile;
+      mockdata = this.state.mockData;
       fieldData = this.state.fieldData;
-      console.log(fieldData);
+    } else if (this.state.screenType == 2) {
+      tool = this.state.toolsInfoData;
+      parentData = this.state.parentFile;
+      metadata = parentData;
+      fieldData = this.state.fieldData;
+      mockdata = this.state.mockData;
+    } else if (this.state.screenType == 4) {
+      tool = this.state.toolsInfoData;
+      childData = this.state.childFile;
+      metadata = childData;
+      fieldData = this.state.fieldData;
+      mockdata = this.state.mockData;
     }
-    if(!mockdata){
-      mockdata=[];
+    if (!mockdata) {
+      mockdata = [];
     }
     renderTestComponent("pageContainer",tool, metadata,mockdata,fieldData);
   }
@@ -215,9 +304,9 @@ class TestHarness extends React.Component {
           <Input
             type="file"
             innerRef={(inputp) => (this.parentMtdtInfo = inputp)}
-            name="filterInfo"
-            id="filterInfo"
-            onChange={() => this.onFilterInfo()}
+            name="parentMtdtInfo"
+            id="parentMtdtInfo"
+            onChange={() => this.onParentInfo()}
           />
         </Col>
       </FormGroup>
@@ -231,9 +320,9 @@ class TestHarness extends React.Component {
           <Input
             type="file"
             innerRef={(inputc) => (this.childMtdtInfo = inputc)}
-            name="filterInfo"
-            id="filterInfo"
-            onChange={() => this.onFilterInfo()}
+            name="childMtdtInfo"
+            id="childMtdtInfo"
+            onChange={() => this.onChildInfo()}
           />
         </Col>
       </FormGroup>
@@ -270,6 +359,38 @@ class TestHarness extends React.Component {
         </Col>
       </FormGroup>
     );
+    let fieldInputParent = (
+      <FormGroup row style={rowStyle}>
+        <Col sm={4}>
+          <Label for="mockData">Select Parent Form Fields</Label>
+        </Col>
+        <Col>
+          <Input
+            type="file"
+            innerRef={(inputpfd) => (this.pfieldData = inputpfd)}
+            name="pfieldData"
+            id="pfieldData"
+            onChange={() => this.onPrntFieldDataFile()}
+          />
+        </Col>
+      </FormGroup>
+    );
+    let fieldInputChild = (
+      <FormGroup row style={rowStyle}>
+        <Col sm={4}>
+          <Label for="mockData">Select Child Form Fields</Label>
+        </Col>
+        <Col>
+          <Input
+            type="file"
+            innerRef={(inputcfd) => (this.cfieldData = inputcfd)}
+            name="pfieldData"
+            id="pfieldData"
+            onChange={() => this.onChldFieldDataFile()}
+          />
+        </Col>
+      </FormGroup>
+    );
     if (this.state.screenType === 1) {
       screenTypeInputs = (
         <Form>
@@ -292,7 +413,16 @@ class TestHarness extends React.Component {
         <Form>
           {scrInfoInput}
           {parentMtdtInput}
+          {fieldInputParent}
+          {mockdataInput}
+        </Form>
+      );
+    }else if (this.state.screenType === 4) {
+      screenTypeInputs = (
+        <Form>
+          {scrInfoInput}
           {childMtdtInput}
+          {fieldInputChild}
           {mockdataInput}
         </Form>
       );
@@ -322,10 +452,11 @@ class TestHarness extends React.Component {
                   <FormGroup row style={rowStyle}>
                       <Col sm={4}><Label for="filterType">Screen Type</Label></Col>
                       <Col sm={7}>
-                      <ButtonGroup>
-                          <Button outline color="info" size="sm" onClick={() => this.onScreenType(1)} active={this.state.screenType === 1}>RO Grid</Button>
-                          <Button outline color="info" size="sm" onClick={() => this.onScreenType(3)} active={this.state.screenType === 3}>RO Filter / Type 1 Grid</Button>
-                          <Button outline color="info" size="sm" onClick={() => this.onScreenType(2)} active={this.state.screenType === 2}>Type 2 Grid</Button>
+                      <ButtonGroup size="sm">
+                          <Button outline color="info" onClick={() => this.onScreenType(1)} active={this.state.screenType === 1}>RO Grid</Button>
+                          <Button outline color="info" onClick={() => this.onScreenType(3)} active={this.state.screenType === 3}>RO Filter / Type1 Grid</Button>
+                          <Button outline color="info" onClick={() => this.onScreenType(2)} active={this.state.screenType === 2}>Type2 Parent Grid</Button>
+                          <Button outline color="info" onClick={() => this.onScreenType(4)} active={this.state.screenType === 4}>Type2 Child Grid</Button>
                       </ButtonGroup>
                       </Col>
                   </FormGroup>
