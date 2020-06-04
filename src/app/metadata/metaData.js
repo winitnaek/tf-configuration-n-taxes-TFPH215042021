@@ -1,3 +1,122 @@
+export const selectSamplePage = {
+  pgdef: {
+    pgid: "selectSamplePage",
+    pgtitle: "Select Sample Page",
+    pgsubtitle: "",
+    flowtype: "flowtype1",
+    hasAddNew: true,
+    addNewLabel: "",
+    actiondel: false,
+    helpAvailable: false,
+    helpLblTxt: "Click here for more info!",
+    helpLink: "/selectSamplePage",
+    parentConfig: "",
+    childConfig: ""
+  },
+  griddef: {
+    gridtype: "ro",
+    isfilter: false,
+    isfilterform: false,
+    datatype: "json",
+    contenttype: "application/json",
+    noResultsFoundTxt: "No Data Found : ",
+    recordEdit: false,
+    recordDelete: false,
+    columns: [
+      {
+        text: "Type",
+        datafield: "payTypeLtr",
+        cellsalign: "center",
+        width: "30%",
+        align: "center",
+        sortable: true,
+        rendererInput: "",
+        rendererStaticInput: ""
+      },
+      {
+        text: "Description",
+        datafield: "usercodeDesc",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "Code",
+        datafield: "usercode",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "Plan Class",
+        datafield: "planClass",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "Start Date",
+        datafield: "effective",
+        cellsalign: "center",
+        align: "center"
+      }
+    ],
+    dataFields: [
+      { name: "payment", type: "string" },
+      { name: "effective", type: "string" },
+      { name: "effectiveDbFmt", type: "string" },
+      { name: "payType", type: "string" },
+      { name: "payTypeLtr", type: "string" },
+      { name: "taxability", type: "string" },
+      { name: "rescind", type: "string" },
+      { name: "paymentName", type: "string" },
+      { name: "planClass", type: "string" },
+      { name: "occurrance", type: "string" },
+      { name: "aggStatus", type: "string" },
+      { name: "aggRule1", type: "string" },
+      { name: "aggRule2", type: "string" },
+      { name: "eeMax", type: "string" },
+      { name: "erMax", type: "string" },
+      { name: "usercode", type: "string" },
+      { name: "usercodeDesc", type: "string" }
+    ]
+  },
+  formdef: {
+    title: "Supplemental Methods",
+    subtitle: "Select Report",
+    hasSave: false,
+    hasDelete: false,
+    hasSaveAs: false,
+    hasViewPDF: false,
+    hasView: true,
+    hasRecentUsage: false,
+    formflds: "",
+    fltrflds: [
+      {
+        id: "taxability",
+        order: 1,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "taxType",
+        order: 2,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "formulaText",
+        order: 3,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "startDate",
+        order: 4,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      }
+    ]
+  }
+};
+
 export const allBSIPlans = {
   pgdef: {
     pgid: "allBSIPlans",
@@ -80,6 +199,7 @@ export const allBSIPlans = {
   },
   formdef: ""
 };
+
 export const customPayments = {
   pgdef: {
     pgid: "customPayments",
@@ -166,11 +286,26 @@ export const customPayments = {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "userCode", "order": 1, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
-      { id: "payType", "order": 2, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
-      { id: "name", "order": 3, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "taxability", "order": 4, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "eemax", "order": 5, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false }
+      {
+        id: "userCode",
+        order: 1,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "payType",
+        order: 2,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: false
+      },
+      { id: "name", order: 3, isReadOnlyOnEdit: false, isReadOnlyOnNew: false },
+      {
+        id: "taxability",
+        order: 4,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      { id: "eemax", order: 5, isReadOnlyOnEdit: false, isReadOnlyOnNew: false }
     ],
     fltrflds: ""
   }
@@ -236,8 +371,13 @@ export const customTaxCodes = {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "taxCode", "order": 1, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
-      { id: "name", "order": 2, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false }
+      {
+        id: "taxCode",
+        order: 1,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: false
+      },
+      { id: "name", order: 2, isReadOnlyOnEdit: false, isReadOnlyOnNew: false }
     ],
     fltrflds: ""
   }
@@ -429,10 +569,30 @@ export const experienceRates = {
     hasRecentUsage: false,
     formflds: "",
     fltrflds: [
-      { id: "taxability", "order": 1, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "companyCode", "order": 2, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "startDate", "order": 3, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "riskClass", "order": 4, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false }
+      {
+        id: "taxability",
+        order: 1,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "companyCode",
+        order: 2,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "startDate",
+        order: 3,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "riskClass",
+        order: 4,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      }
     ]
   }
 };
@@ -493,10 +653,30 @@ export const supplementalMethods = {
     hasRecentUsage: false,
     formflds: "",
     fltrflds: [
-      { id: "taxability", "order": 1, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "taxType", "order": 2, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "formulaText", "order": 3, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "startDate", "order": 4, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false }
+      {
+        id: "taxability",
+        order: 1,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "taxType",
+        order: 2,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "formulaText",
+        order: 3,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "startDate",
+        order: 4,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      }
     ]
   }
 };
@@ -505,7 +685,8 @@ export const customFormulas = {
   pgdef: {
     pgid: "customFormulas",
     pgtitle: "Custom Formulas",
-    pgsubtitle: "Click the magnifying glass in the view column on the appropriate row to manage the formula",
+    pgsubtitle:
+      "Click the magnifying glass in the view column on the appropriate row to manage the formula",
     flowtype: "flowtype2",
     hasAddNew: true,
     addNewLabel: "Click here to add new Custom Tax Code.",
@@ -651,16 +832,66 @@ export const customTaxFormulas = {
     hasView: false,
     hasRecentUsage: false,
     formflds: [
-      { id: "customTaxCode", "order": 1, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": true },
-      { id: "startDate", "order": 2, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
-      { id: "endDate", "order": 3, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "calcMethods", "order": 4, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "taxRate", "order": 5, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "roundingMethods", "order": 6, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "minWage", "order": 7, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "maxWage", "order": 8, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "maxTax", "order": 9, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "flatAmount", "order": 10, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false }
+      {
+        id: "customTaxCode",
+        order: 1,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: true
+      },
+      {
+        id: "startDate",
+        order: 2,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "endDate",
+        order: 3,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "calcMethods",
+        order: 4,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "taxRate",
+        order: 5,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "roundingMethods",
+        order: 6,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "minWage",
+        order: 7,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "maxWage",
+        order: 8,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "maxTax",
+        order: 9,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "flatAmount",
+        order: 10,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      }
     ],
     fltrflds: ""
   }
@@ -727,7 +958,7 @@ export const companies = {
       { name: "companyName", type: "string" },
       { name: "company", type: "string" },
       { name: "fein", type: "string" },
-      { name: "courtesy", type: "string" },
+      { name: "courtesy", type: "string" }
     ]
   },
   formdef: {
@@ -740,23 +971,36 @@ export const companies = {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "companyName", "order": 1, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
-      { id: "companyCode", "order": 2, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "fein", "order": 3, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "localCourtesyWithholding", "order": 4, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
+      {
+        id: "companyName",
+        order: 1,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "companyCode",
+        order: 2,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      { id: "fein", order: 3, isReadOnlyOnEdit: false, isReadOnlyOnNew: false },
+      {
+        id: "localCourtesyWithholding",
+        order: 4,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      }
     ],
     fltrflds: ""
   }
 };
 
-
-
-
 export const worksites = {
   pgdef: {
     pgid: "worksites",
     pgtitle: "Worksites",
-    pgsubtitle: "Click the magnifying glass in the view column on the appropriate row to manage the worksite",
+    pgsubtitle:
+      "Click the magnifying glass in the view column on the appropriate row to manage the worksite",
     flowtype: "flowtype2",
     hasAddNew: true,
     addNewLabel: "Click here to add new Custom Tax Code.",
@@ -795,7 +1039,7 @@ export const worksites = {
         width: "47.5%",
         rendererInput: "",
         rendererStaticInput: ""
-      },//companies.griddef.columns,
+      } //companies.griddef.columns,
     ],
     dataFields: companies.griddef.dataFields
   },
@@ -875,7 +1119,7 @@ export const worksiteCompanies = {
         datafield: "zip",
         cellsalign: "center",
         align: "center"
-      },
+      }
     ],
     dataFields: [
       { name: "location", type: "string" },
@@ -884,8 +1128,7 @@ export const worksiteCompanies = {
       { name: "city", type: "string" },
       { name: "county", type: "string" },
       { name: "state", type: "string" },
-      { name: "zip", type: "string" },
-
+      { name: "zip", type: "string" }
     ]
   },
   formdef: {
@@ -899,12 +1142,42 @@ export const worksiteCompanies = {
     hasView: false,
     hasRecentUsage: true,
     formflds: [
-      { id: "worksiteLocation", "order": 1, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
-      { id: "worksiteStreet1", "order": 2, "isReadOnlyOnEdit": false, "isReadOnlyOnNew": false },
-      { id: "worksiteCity", "order": 3, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
-      { id: "worksiteCounty", "order": 4, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
-      { id: "worksiteState", "order": 5, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
-      { id: "worksiteZip", "order": 6, "isReadOnlyOnEdit": true, "isReadOnlyOnNew": false },
+      {
+        id: "worksiteLocation",
+        order: 1,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "worksiteStreet1",
+        order: 2,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "worksiteCity",
+        order: 3,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "worksiteCounty",
+        order: 4,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "worksiteState",
+        order: 5,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "worksiteZip",
+        order: 6,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: false
+      }
     ],
     fltrflds: ""
   }
