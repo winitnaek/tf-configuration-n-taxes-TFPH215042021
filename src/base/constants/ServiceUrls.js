@@ -23,7 +23,7 @@ export const GET_ALL_COMPCODE_AUTOCOMPLETE =
   "/TaxCodeService/getCompanyCodeAutoCompl";
 export const GET_ALL_RISKCLASS_AUTOCOMPLETE =
   "/TaxCodeService/getRiskClassAutoCompl";
-export const GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE =
+export const GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE ="/TaxCodeService/getAutocompleteAuthorities";
   "/TaxCodeService/getAuthorityCodeAutoCompl";
 export const GET_PLACE_CODE_AUTOCOMPLETE =
   "/TaxCodeService/getPlaceCodeAutoCompl";
