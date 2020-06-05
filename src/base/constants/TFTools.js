@@ -34,7 +34,22 @@ import {
   GET_PLACE_CODE_AUTOCOMPLETE,
   GET_SCHOOL_DISTRICT_AUTOCOMPLETE,
   GET_GARNISMENT_FORMULA_AUTOCOMPLETE,
+  GET_GARNISMENT_GROUP_CODE_AUTOCOMPLETE,
   GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE,
+  GET_COUNTY_AUTOCOMPLETE,
+  GET_GROUP_AUTOCOMPLETE,
+  GET_USER_TAX_CODE_AUTOCOMPLETE_MOCKDATA,
+  GET_GROUP_CODE_AUTOCOMPLETE,
+  GET_TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA,
+  GET_TYPEOF_DATA_AUTOCOMPLETE_MOCKDATA,
+  GET_USER_TAX_AUTOCOMPLETE_MOCKDATA,
+  GET_PAYMENT_CODE_AUTOCOMPLETE_MOCKDATA,
+  GET_TAX_CODE_RECIPROCATE_AUTOCOMPLETE_MOCKDATA,
+  GET_TAX_CODE_OVERRIDDEN_AUTOCOMPLETE_MOCKDATA,
+  GET_NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA,
+  GET_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA,
+  GET_CALCULATION_METHOD_AUTOCOMPLETE_MOCKDATA,
+  GET_WAGE_REPORTING_METHOD_AUTOCOMPLETE_MOCKDATA,
   DELTE_CUSTOM_PAYMENT,
   DELETE_CUSTOM_TAX_CODES,
   SAVE_CUSTOM_PAYMENT,
@@ -291,6 +306,36 @@ export const savedatamap = [
 ];
 export const asyncselfldsmap = [
   {
+    id: "wageReportingMethod",
+    url: GET_WAGE_REPORTING_METHOD_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "calculationMethod",
+    url: GET_CALCULATION_METHOD_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "nonResidenceTaxType",
+    url: GET_NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "residenceTaxType",
+    url: GET_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "taxCodeReciprocate",
+    url: GET_TAX_CODE_RECIPROCATE_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "userTaxCode",
+    url: GET_USER_TAX_CODE_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
     id: "taxability",
     url: GET_ALL_TAXCODES_AUTOCOMPLETE,
     param: [{ dataset: "", pattern: "" }]
@@ -336,8 +381,53 @@ export const asyncselfldsmap = [
     param: [{ dataset: "", pattern: "" }]
   },
   {
+    id: "garnishmentGroupCode",
+    url: GET_GARNISMENT_GROUP_CODE_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
     id: "customGarnishmentFormula",
     url: GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "county",
+    url: GET_COUNTY_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "groupAsync",
+    url: GET_GROUP_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "groupCode",
+    url: GET_GROUP_CODE_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "taxCodeUdq",
+    url: GET_TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "typeofData",
+    url: GET_TYPEOF_DATA_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "userTax",
+    url: GET_USER_TAX_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "paymentCode",
+    url: GET_PAYMENT_CODE_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "taxCodeOverridden",
+    url: GET_TAX_CODE_OVERRIDDEN_AUTOCOMPLETE_MOCKDATA,
     param: [{ dataset: "", pattern: "" }]
   }
 ];

@@ -352,6 +352,50 @@ const mockdatamap = [
 //all for autoComplete
 const mockselectmap = [
   {
+    id: "wageReportingMethod",
+    url: "./WAGE_REPORTING_METHOD_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "calculationMethod",
+    url: "./CALCULATION_METHOD_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "residenceTaxType",
+    url: "./RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "nonResidenceTaxType",
+    url: "./NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "taxCodeOverridden",
+    url: "./TAX_CODE_OVERRIDDEN_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "taxCodeReciprocate",
+    url: "./TAX_CODE_RECIPROCATE_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "paymentCode",
+    url: "./PAYMENT_CODE_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "userTaxCode",
+    url: "./USER_TAX_CODE_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "userTax",
+    url: "./USER_TAX_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "typeofData",
+    url: "./TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "taxCodeUdq",
+    url: "./TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
     id: "taxability",
     url: "./TAXCODE_AUTOCOMPLETE_MOCKDATA.json"
   },
@@ -392,7 +436,23 @@ const mockselectmap = [
     url: "./GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json"
   },
   {
+    id: "garnishmentGroupCode",
+    url: "./GARNISHMENT_GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
     id: "customGarnishmentFormula",
     url: "./CUSTOM_GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "county",
+    url: "./COUNTY_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "groupAsync",
+    url: "./GROUP_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "groupCode",
+    url: "./GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json"
   }
 ];

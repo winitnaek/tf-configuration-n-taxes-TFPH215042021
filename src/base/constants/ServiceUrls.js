@@ -31,8 +31,34 @@ export const GET_SCHOOL_DISTRICT_AUTOCOMPLETE =
   "/TaxCodeService/getSchoolDistrictAutoCompl";
 export const GET_GARNISMENT_FORMULA_AUTOCOMPLETE =
   "/TaxCodeService/getGarnishmenFormulaAutoCompl";
+export const GET_GARNISMENT_GROUP_CODE_AUTOCOMPLETE =
+  "/TaxCodeService/getGarnishmenGroupCodeAutoCompl";
 export const GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE =
   "/TaxCodeService/getCustomGarnishmenFormulaAutoCompl";
+export const GET_COUNTY_AUTOCOMPLETE = "/TaxCodeService/getCounty";
+export const GET_GROUP_AUTOCOMPLETE = "/TaxCodeService/getGroup";
+export const GET_GROUP_CODE_AUTOCOMPLETE = "/TaxCodeService/getGroupCode";
+export const GET_USER_TAX_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getUserTax";
+export const GET_TAX_CODE_OVERRIDDEN_AUTOCOMPLETE_MOCKDATA =
+  "/TaxCodeService/getTaxCodeOverriden";
+export const GET_NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA =
+  "/TaxCodeService/getNonResidenceTaxType";
+export const GET_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA =
+  "/TaxCodeService/getResidenceTaxType";
+export const GET_TAX_CODE_RECIPROCATE_AUTOCOMPLETE_MOCKDATA =
+  "/TaxCodeService/getTaxCodeReciprocate";
+export const GET_PAYMENT_CODE_AUTOCOMPLETE_MOCKDATA =
+  "/TaxCodeService/getPaymentCode";
+export const GET_USER_TAX_CODE_AUTOCOMPLETE_MOCKDATA =
+  "/TaxCodeService/getUserTaxCode";
+export const GET_TYPEOF_DATA_AUTOCOMPLETE_MOCKDATA =
+  "/TaxCodeService/getTypeofData";
+export const GET_TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA =
+  "/TaxCodeService/getTaxCode";
+export const GET_CALCULATION_METHOD_AUTOCOMPLETE_MOCKDATA =
+  "/TaxCodeService/getCalculationMethod";
+export const GET_WAGE_REPORTING_METHOD_AUTOCOMPLETE_MOCKDATA =
+  "/TaxCodeService/getWageReportingmethod";
 export const DELTE_CUSTOM_PAYMENT = "/TaxCodeService/deleteCustomPayment";
 export const DELETE_CUSTOM_TAX_CODES = "/TaxCodeService/deleteCustomTaxCode";
 export const SAVE_CUSTOM_PAYMENT = "/TaxCodeService/saveCustomPayment";

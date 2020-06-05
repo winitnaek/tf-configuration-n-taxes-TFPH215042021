@@ -1,0 +1,227 @@
+[
+  {
+    "id": "00010000- (BSI00010000- ALABAMA)",
+    "label": "00010000- (BSI00010000- ALABAMA)"
+  },
+  {
+    "id": "00020000- (BSI00020000- ALASKA)",
+    "label": "00020000- (BSI00020000- ALASKA)"
+  },
+  {
+    "id": "00040000- (BSI00040000- ARIZONA)",
+    "label": "00040000- (BSI00040000- ARIZONA)"
+  },
+  {
+    "id": "00050000- (BSI00050000- ARKANSAS)",
+    "label": "00050000- (BSI00050000- ARKANSAS)"
+  },
+  {
+    "id": "00060000- (BSI00060000- CALIFORNIA)",
+    "label": "00060000- (BSI00060000- CALIFORNIA)"
+  },
+  {
+    "id": "00070000- (BSI00070000- AMERICAN SAMOA)",
+    "label": "00070000- (BSI00070000- AMERICAN SAMOA)"
+  },
+  {
+    "id": "00080000- (BSI00080000- COLORADO)",
+    "label": "00080000- (BSI00080000- COLORADO)"
+  },
+  {
+    "id": "00090000- (BSI00090000- CONNECTICUT)",
+    "label": "00090000- (BSI00090000- CONNECTICUT)"
+  },
+  {
+    "id": "00100000- (BSI00100000- DELAWARE)",
+    "label": "00100000- (BSI00100000- DELAWARE)"
+  },
+  {
+    "id": "00110000- (BSI00110000- DISTRICT OF COLUMBIA)",
+    "label": "00110000- (BSI00110000- DISTRICT OF COLUMBIA)"
+  },
+  {
+    "id": "00120000- (BSI00120000- FLORIDA)",
+    "label": "00120000- (BSI00120000- FLORIDA)"
+  },
+  {
+    "id": "00130000- (BSI00130000- GEORGIA)",
+    "label": "00130000- (BSI00130000- GEORGIA)"
+  },
+  {
+    "id": "00140000- (BSI00140000- GUAM)",
+    "label": "00140000- (BSI00140000- GUAM)"
+  },
+  {
+    "id": "00150000- (BSI00150000- HAWAII)",
+    "label": "00150000- (BSI00150000- HAWAII)"
+  },
+  {
+    "id": "00160000- (BSI00160000- IDAHO)",
+    "label": "00160000- (BSI00160000- IDAHO)"
+  },
+  {
+    "id": "00170000- (BSI00170000- ILLINOIS)",
+    "label": "00170000- (BSI00170000- ILLINOIS)"
+  },
+  {
+    "id": "00180000- (BSI00180000- INDIANA)",
+    "label": "00180000- (BSI00180000- INDIANA)"
+  },
+  {
+    "id": "00190000- (BSI00190000- IOWA)",
+    "label": "00190000- (BSI00190000- IOWA)"
+  },
+  {
+    "id": "00200000- (BSI00200000- KANSAS)",
+    "label": "00200000- (BSI00200000- KANSAS)"
+  },
+  {
+    "id": "00210000- (BSI00210000- KENTUCKY)",
+    "label": "00210000- (BSI00210000- KENTUCKY)"
+  },
+  {
+    "id": "00220000- (BSI00220000- LOUISIANA)",
+    "label": "00220000- (BSI00220000- LOUISIANA)"
+  },
+  {
+    "id": "00230000- (BSI00230000- MAINE)",
+    "label": "00230000- (BSI00230000- MAINE)"
+  },
+  {
+    "id": "00240000- (BSI00240000- MARYLAND)",
+    "label": "00240000- (BSI00240000- MARYLAND)"
+  },
+  {
+    "id": "00250000- (BSI00250000- MASSACHUSETTS)",
+    "label": "00250000- (BSI00250000- MASSACHUSETTS)"
+  },
+  {
+    "id": "00260000- (BSI00260000- MICHIGAN)",
+    "label": "00260000- (BSI00260000- MICHIGAN)"
+  },
+  {
+    "id": "00270000- (BSI00270000- MINNESOTA)",
+    "label": "00270000- (BSI00270000- MINNESOTA)"
+  },
+  {
+    "id": "00280000- (BSI00280000- MISSISSIPPI)",
+    "label": "00280000- (BSI00280000- MISSISSIPPI)"
+  },
+  {
+    "id": "00290000- (BSI00290000- MISSOURI)",
+    "label": "00290000- (BSI00290000- MISSOURI)"
+  },
+  {
+    "id": "00300000- (BSI00300000- MONTANA)",
+    "label": "00300000- (BSI00300000- MONTANA)"
+  },
+  {
+    "id": "00310000- (BSI00310000- NEBRASKA)",
+    "label": "00310000- (BSI00310000- NEBRASKA)"
+  },
+  {
+    "id": "00320000- (BSI00320000- NEVADA)",
+    "label": "00320000- (BSI00320000- NEVADA)"
+  },
+  {
+    "id": "00330000- (BSI00330000- NEW HAMPSHIRE)",
+    "label": "00330000- (BSI00330000- NEW HAMPSHIRE)"
+  },
+  {
+    "id": "00340000- (BSI00340000- NEW JERSEY)",
+    "label": "00340000- (BSI00340000- NEW JERSEY)"
+  },
+  {
+    "id": "00350000- (BSI00350000- NEW MEXICO)",
+    "label": "00350000- (BSI00350000- NEW MEXICO)"
+  },
+  {
+    "id": "00360000- (BSI00360000- NEW YORK)",
+    "label": "00360000- (BSI00360000- NEW YORK)"
+  },
+  {
+    "id": "00370000- (BSI00370000- NORTH CAROLINA)",
+    "label": "00370000- (BSI00370000- NORTH CAROLINA)"
+  },
+  {
+    "id": "00380000- (BSI00380000- NORTH DAKOTA)",
+    "label": "00380000- (BSI00380000- NORTH DAKOTA)"
+  },
+  {
+    "id": "00390000- (BSI00390000- OHIO)",
+    "label": "00390000- (BSI00390000- OHIO)"
+  },
+  {
+    "id": "00400000- (BSI00400000- OKLAHOMA)",
+    "label": "00400000- (BSI00400000- OKLAHOMA)"
+  },
+  {
+    "id": "00410000- (BSI00410000- OREGON)",
+    "label": "00410000- (BSI00410000- OREGON)"
+  },
+  {
+    "id": "00420000- (BSI00420000- PENNSYLVANIA)",
+    "label": "00420000- (BSI00420000- PENNSYLVANIA)"
+  },
+  {
+    "id": "00430000- (BSI00430000- PUERTO RICO)",
+    "label": "00430000- (BSI00430000- PUERTO RICO)"
+  },
+  {
+    "id": "00440000- (BSI00440000- RHODE ISLAND)",
+    "label": "00440000- (BSI00440000- RHODE ISLAND)"
+  },
+  {
+    "id": "00450000- (BSI00450000- SOUTH CAROLINA)",
+    "label": "00450000- (BSI00450000- SOUTH CAROLINA)"
+  },
+  {
+    "id": "00460000- (BSI00460000- SOUTH DAKOTA)",
+    "label": "00460000- (BSI00460000- SOUTH DAKOTA)"
+  },
+  {
+    "id": "00470000- (BSI00470000- TENNESSEE)",
+    "label": "00470000- (BSI00470000- TENNESSEE)"
+  },
+  {
+    "id": "00480000- (BSI00480000- TEXAS)",
+    "label": "00480000- (BSI00480000- TEXAS)"
+  },
+  {
+    "id": "00490000- (BSI00490000- UTAH)",
+    "label": "00490000- (BSI00490000- UTAH)"
+  },
+  {
+    "id": "00500000- (BSI00500000- VERMONT)",
+    "label": "00500000- (BSI00500000- VERMONT)"
+  },
+  {
+    "id": "00510000- (BSI00510000- VIRGINIA)",
+    "label": "00510000- (BSI00510000- VIRGINIA)"
+  },
+  {
+    "id": "00520000- (BSI00520000- U.S. VIRGIN ISLANDS)",
+    "label": "00520000- (BSI00520000- U.S. VIRGIN ISLANDS)"
+  },
+  {
+    "id": "00530000- (BSI00530000- WASHINGTON)",
+    "label": "00530000- (BSI00530000- WASHINGTON)"
+  },
+  {
+    "id": "00540000- (BSI00540000- WEST VIRGINIA)",
+    "label": "00540000- (BSI00540000- WEST VIRGINIA)"
+  },
+  {
+    "id": "00550000- (BSI00550000- WISCONSIN)",
+    "label": "00550000- (BSI00550000- WISCONSIN)"
+  },
+  {
+    "id": "00560000- (BSI00560000- WYOMING)",
+    "label": "00560000- (BSI00560000- WYOMING)"
+  },
+  {
+    "id": "00570000- (BSI00570000- NORTHERN MARIANA ISLANDS)",
+    "label": "00570000- (BSI00570000- NORTHERN MARIANA ISLANDS)"
+  },
+  { "id": "00010000- (SSDSD- ALABAMA)", "label": "00010000- (SSDSD- ALABAMA)" }
+]

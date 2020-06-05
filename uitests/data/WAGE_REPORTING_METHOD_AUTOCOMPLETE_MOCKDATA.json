@@ -1,0 +1,26 @@
+[
+  {
+    "id": "Do NOT override wage reporting method",
+    "label": "Do NOT override wage reporting method"
+  },
+  {
+    "id": "1 - Report wages based on where the wages are earned",
+    "label": "1 - Report wages based on where the wages are earned"
+  },
+  {
+    "id": "2 - Report wages based on where the wages are taxed",
+    "label": "2 - Report wages based on where the wages are taxed"
+  },
+  {
+    "id": "3 - Report nonresident wages to resident and nonresident authority; report resident wages to resident authority",
+    "label": "3 - Report nonresident wages to resident and nonresident authority; report resident wages to resident authority"
+  },
+  {
+    "id": "4 - Do not report nonresident wages to either the resident or the nonresident authority",
+    "label": "4 - Do not report nonresident wages to either the resident or the nonresident authority"
+  },
+  {
+    "id": "5 - Report all wages to nonresident authority regardless where they are earned. Report resident wages to resident authority",
+    "label": "5 - Report all wages to nonresident authority regardless where they are earned. Report resident wages to resident authority"
+  }
+]

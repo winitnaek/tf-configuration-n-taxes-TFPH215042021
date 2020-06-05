@@ -1,0 +1,38 @@
+[
+  {
+    "id": "Do NOT override calculation method",
+    "label": "Do NOT override calculation method"
+  },
+  {
+    "id": "A-Tax nonresident wages in both resident and nonresident authorities",
+    "label": "A-Tax nonresident wages in both resident and nonresident authorities"
+  },
+  {
+    "id": "B-Tax nonresident wages only in the resident authority",
+    "label": "B-Tax nonresident wages only in the resident authority"
+  },
+  {
+    "id": "D-Turn reciprocal participation off; keep nonresident tax; always set resident tax to zero",
+    "label": "D-Turn reciprocal participation off; keep nonresident tax; always set resident tax to zero"
+  },
+  {
+    "id": "F-Subtract the nonresident tax from the full resident tax (limited by the Res tax times the Nres percent worked)",
+    "label": "F-Subtract the nonresident tax from the full resident tax (limited by the Res tax times the Nres percent worked)"
+  },
+  {
+    "id": "N-Do not tax nonresident wages in the resident authority",
+    "label": "N-Do not tax nonresident wages in the resident authority"
+  },
+  {
+    "id": "P-Using recip. rate, subtract rate times nonresident tax from the full resident tax (limited by the Res tax times the Nres percent worked)",
+    "label": "P-Using recip. rate, subtract rate times nonresident tax from the full resident tax (limited by the Res tax times the Nres percent worked)"
+  },
+  {
+    "id": "S-Subtract the nonresident tax from full pristine resident tax",
+    "label": "S-Subtract the nonresident tax from full pristine resident tax"
+  },
+  {
+    "id": "X-Do not tax nonresident wages in the resident authority; using recip. rate, subtract the rate times nonresident tax from resident tax",
+    "label": "X-Do not tax nonresident wages in the resident authority; using recip. rate, subtract the rate times nonresident tax from resident tax"
+  }
+]

@@ -1,11 +1,319 @@
 export const selectSamplePage = [
   {
+    id: "wageReportingMethod",
+    placeholder: "Wage Reporting Method",
+    fieldtype: "select",
+    label: "Wage Reporting Method",
+    value: "",
+    errmsg: "Wage Reporting Method is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "calculationMethod",
+    placeholder: "Calculation Method",
+    fieldtype: "select",
+    label: "Calculation Method",
+    value: "",
+    errmsg: "Calculation Method is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "nonResidenceTaxType",
+    placeholder: "Non Resident Tax Type",
+    fieldtype: "select",
+    label: "Non Resident Tax Type",
+    value: "",
+    errmsg: "Non Resident Tax Type is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "residenceTaxType",
+    placeholder: "Resident Tax Type",
+    fieldtype: "select",
+    label: "Resident Tax Type",
+    value: "",
+    errmsg: "Resident Tax Type is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "taxCodeOverridden",
+    placeholder: "Tax Code to be Overridden",
+    fieldtype: "select",
+    label: "Tax Code to be Overridden",
+    value: "",
+    errmsg: "Tax Code to be Overridden is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "taxCodeReciprocate",
+    placeholder: "Tax Code Reciprocate",
+    fieldtype: "select",
+    label: "Tax Code Reciprocate",
+    value: "",
+    errmsg: "Tax Code Reciprocate is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "paymentCode",
+    placeholder: "Payment Code",
+    fieldtype: "select",
+    label: "Payment Code",
+    value: "",
+    errmsg: "Payment Code is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "userTaxCode",
+    placeholder: "User Tax Code",
+    fieldtype: "select",
+    label: "User Tax Code",
+    value: "",
+    errmsg: "User Tax Code is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "userTax",
+    placeholder: "User Tax",
+    fieldtype: "select",
+    label: "User Tax",
+    value: "",
+    errmsg: "User Tax is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "typeofData",
+    placeholder: "Type Of Data",
+    fieldtype: "select",
+    label: "Type Of Data",
+    value: "",
+    errmsg: "Type Of Data is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "taxCodeUdq",
+    placeholder: "Tax Code",
+    fieldtype: "select",
+    label: "Tax Code",
+    value: "",
+    errmsg: "Tax Code is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
     id: "authorityCode",
     placeholder: "Authority Code",
     fieldtype: "select",
     label: "Authority Code",
     value: "",
     errmsg: "Authority Code is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "companyCode",
+    placeholder: "Company Code",
+    fieldtype: "select",
+    label: "Company Code",
+    value: "",
+    errmsg: "Company Code is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "riskClass",
+    placeholder: "Risk Class",
+    fieldtype: "select",
+    label: "Risk Class",
+    value: "",
+    errmsg: "Risk Class is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "garnishmentGroupCode",
+    placeholder: "Garnishment Group Code",
+    fieldtype: "select",
+    label: "Garnishment Group Code",
+    value: "",
+    errmsg: "Garnishment Group Code",
     fieldlength: {
       minlength: 1,
       maxlength: 25
@@ -547,6 +855,50 @@ export const selectSamplePage = [
     label: "School District",
     value: "",
     errmsg: "School District is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "groupAsync",
+    placeholder: "Group",
+    fieldtype: "select",
+    label: "Group",
+    value: "",
+    errmsg: "Group is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "groupCode",
+    placeholder: "Group Code",
+    fieldtype: "select",
+    label: "Group Code",
+    value: "",
+    errmsg: "Group Code is required",
     fieldlength: {
       minlength: 1,
       maxlength: 25
@@ -2032,6 +2384,27 @@ export const selectSamplePage = [
       required: false,
       type: "string"
     }
+  },
+  {
+    id: "county",
+    placeholder: "Select County",
+    fieldtype: "select",
+    label: "County",
+    value: "NONE",
+    errmsg: "County is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: false,
+      isasync: true,
+      options: []
+    },
+    validation: {
+      required: true,
+      type: "string"
+    }
   }
 ];
 
@@ -2763,7 +3136,10 @@ export const worksiteCompanies = [
     placeholder: "Select County",
     fieldtype: "text",
     fieldlength: {},
-    fieldinfo: {},
+    fieldinfo: {
+      isasync: true,
+      typeahead: false
+    },
     validationType: "string",
     label: "County",
     value: "",

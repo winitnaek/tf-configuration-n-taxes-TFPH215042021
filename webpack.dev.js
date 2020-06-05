@@ -109,6 +109,39 @@ if (process.env.NODE_ENV === "development") {
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       {
+        from: "./uitests/data/COUNTY_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/COUNTY_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from:
+          "./uitests/data/GARNISHMENT_GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/GARNISHMENT_GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/GROUP_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/GROUP_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
         from: "./uitests/data/AUTHORITY_CODE_AUTOCOMPLETE_MOCKDATA.json",
         to: "../dist/AUTHORITY_CODE_AUTOCOMPLETE_MOCKDATA.json"
       }
@@ -197,6 +230,87 @@ if (process.env.NODE_ENV === "development") {
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       {
+        from: "./uitests/data/TYPEOF_DATA_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/TYPEOF_DATA_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/USER_TAX_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/USER_TAX_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/USER_TAX_CODE_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/USER_TAX_CODE_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/PAYMENT_CODE_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/PAYMENT_CODE_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/TAX_CODE_RECIPROCATE_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/TAX_CODE_RECIPROCATE_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/WAGE_REPORTING_METHOD_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/WAGE_REPORTING_METHOD_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from:
+          "./uitests/data/NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/CALCULATION_METHOD_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/CALCULATION_METHOD_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/TAX_CODE_OVERRIDDEN_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/TAX_CODE_OVERRIDDEN_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
         from: "./uitests/data/SAVE_CUSTOM_TAX_CODE.json",
         to: "../dist/SAVE_CUSTOM_TAX_CODE.json"
       }
@@ -215,6 +329,15 @@ if (process.env.NODE_ENV === "development") {
       {
         from: "./uitests/data/TAXCODE_AUTOCOMPLETE_MOCKDATA.json",
         to: "../dist/TAXCODE_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA.json"
       }
     ])
   );
