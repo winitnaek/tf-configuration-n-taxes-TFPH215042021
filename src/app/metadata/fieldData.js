@@ -389,7 +389,7 @@ export const selectSamplePage = [
     }
   },
   {
-    id: "taxCodeUdq",
+    id: "taxCode",
     placeholder: "Tax Code",
     fieldtype: "select",
     label: "Tax Code",
@@ -415,6 +415,28 @@ export const selectSamplePage = [
     placeholder: "Authority Code",
     fieldtype: "select",
     label: "Authority Code",
+    value: "",
+    errmsg: "Authority Code is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "authorityCodeList",
+    placeholder: "Authority Code List",
+    fieldtype: "select",
+    label: "Authority List",
     value: "",
     errmsg: "Authority Code is required",
     fieldlength: {
