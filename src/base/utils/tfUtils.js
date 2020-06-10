@@ -339,6 +339,7 @@ const mockdatamap = [
   { id: "allBSIPlans", url: "./ALL_BSI_PLANS_MOCKDATA.json" },
   { id: "populateV3States", url: "./POPULATE_V3_STATES_MOCKDATA.json" },
   { id: "experienceRates", url: "./EXPERIENCE_RATES_MOCKDATA.json" },
+  { id: "sampleDateFields", url: "./DATE_FIELD_DOC_MOCKDATA.json" },
   { id: "supplementalMethods", url: "SUPPLEMENTAL_METHODS_MOCKDATA.json" },
   { id: "customFormulas", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
   { id: "customTaxFormulas", url: "./CUSTOM_TAX_FORMULAS_MOCKDATA.json" },
@@ -454,5 +455,25 @@ const mockselectmap = [
   {
     id: "groupCode",
     url: "./GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "formula",
+    url: "./FORMULA_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "residentState",
+    url: "./RESIDENT_STATE_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "exemptMilitaryLocation",
+    url: "./EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA.json"
+  },
+  {
+    id: "principalStateEmployment",
+    url: "./PRINCIPAL_STATE_EMPLOYMENT.json"
+  },
+  {
+    id: "payment",
+    url: "./PAYMENT_AUTOCOMPLETE_MOCKDATA.json"
   }
 ];

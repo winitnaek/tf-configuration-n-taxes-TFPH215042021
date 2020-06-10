@@ -10,7 +10,8 @@ import {
   companies,
   worksites,
   worksiteCompanies,
-  selectSamplePage
+  selectSamplePage,
+  sampleDateFields
 } from "../../app/metadata/metaData";
 
 import {
@@ -19,6 +20,7 @@ import {
   GET_ALL_BSI_PLANS,
   GET_ALL_POPULATED_V3_STATES,
   GET_EXPERIENCE_RATES,
+  GET_SAMPLE_DATE_FIELD_DATA,
   GET_SUPPLEMENTAL_INFO_FOR_TAX,
   GET_RECENT_USAGE,
   GET_CUSTOM_FORMULAS,
@@ -29,8 +31,11 @@ import {
   GET_ALL_TAXCODES_AUTOCOMPLETE,
   GET_ALL_TAXTYPES_AUTOCOMPLETE,
   GET_ALL_COMPCODE_AUTOCOMPLETE,
+  GET_PAYMENT_AUTOCOMPLETE_MOCKDATA,
   GET_ALL_RISKCLASS_AUTOCOMPLETE,
   GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE,
+  GET_EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA,
+  GET_PRINCIPAL_STATE_EMPLOYMENT_AUTOCOMPLETE_MOCKDATA,
   GET_PLACE_CODE_AUTOCOMPLETE,
   GET_SCHOOL_DISTRICT_AUTOCOMPLETE,
   GET_GARNISMENT_FORMULA_AUTOCOMPLETE,
@@ -50,6 +55,8 @@ import {
   GET_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA,
   GET_CALCULATION_METHOD_AUTOCOMPLETE_MOCKDATA,
   GET_WAGE_REPORTING_METHOD_AUTOCOMPLETE_MOCKDATA,
+  GET_FORMULA_AUTOCOMPLETE_MOCKDATA,
+  GET_RESIDENT_STATE_AUTOCOMPLETE_MOCKDATA,
   DELTE_CUSTOM_PAYMENT,
   DELETE_CUSTOM_TAX_CODES,
   SAVE_CUSTOM_PAYMENT,
@@ -119,6 +126,22 @@ export const tftools = [
     id: "userDataQueries",
     type: UI_PAGE,
     link: true
+  },
+  {
+    value: "DF",
+    label: "Date Field Doc",
+    desc: "Date Field Doc",
+    id: "dateFieldDoc",
+    type: UI_PAGE,
+    link: true
+  },
+  {
+    value: "DF",
+    label: "Sample Date Fields",
+    desc: "Sample Date Fields",
+    id: "sampleDateFields",
+    type: UI_COMP,
+    link: false
   },
   {
     value: "UQ",
@@ -206,6 +229,12 @@ export const metadatamap = [
     id: "experienceRates",
     metadata: experienceRates,
     url: GET_EXPERIENCE_RATES,
+    rendererInput: ["dataset", "userId"]
+  },
+  {
+    id: "sampleDateFields",
+    metadata: sampleDateFields,
+    url: GET_SAMPLE_DATE_FIELD_DATA,
     rendererInput: ["dataset", "userId"]
   },
   {
@@ -428,6 +457,31 @@ export const asyncselfldsmap = [
   {
     id: "taxCodeOverridden",
     url: GET_TAX_CODE_OVERRIDDEN_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "formula",
+    url: GET_FORMULA_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "residentState",
+    url: GET_RESIDENT_STATE_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "exemptMilitaryLocation",
+    url: GET_EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "principalStateEmployment",
+    url: GET_PRINCIPAL_STATE_EMPLOYMENT_AUTOCOMPLETE_MOCKDATA,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
+    id: "payment",
+    url: GET_PAYMENT_AUTOCOMPLETE_MOCKDATA,
     param: [{ dataset: "", pattern: "" }]
   }
 ];

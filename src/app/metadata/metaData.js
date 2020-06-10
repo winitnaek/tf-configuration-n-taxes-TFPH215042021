@@ -116,6 +116,157 @@ export const selectSamplePage = {
     ]
   }
 };
+export const sampleDateFields = {
+  pgdef: {
+    pgid: "sampleDateFields",
+    pgtitle: "Sample Date Field Data",
+    pgsubtitle: "",
+    flowtype: "flowtype1",
+    hasAddNew: false,
+    addNewLabel: "",
+    actiondel: false,
+    helpAvailable: true,
+    helpLblTxt: "Click here for more info!",
+    helpLink: "/sampleDateFields",
+    parentConfig: "",
+    childConfig: ""
+  },
+  griddef: {
+    gridtype: "ro",
+    isfilter: true,
+    isfilterform: true,
+    datatype: "json",
+    contenttype: "application/json",
+    noResultsFoundTxt: "No Data Found : ",
+    recordEdit: false,
+    recordDelete: false,
+    columns: [
+      {
+        text: "Company Code",
+        datafield: "companyCode",
+        cellsalign: "center",
+        align: "center",
+        sortable: true,
+        rendererInput: "",
+        rendererStaticInput: ""
+      },
+      {
+        text: "Tax Code",
+        datafield: "taxCode",
+        cellsalign: "center",
+        align: "center",
+        width: "10%"
+      },
+      {
+        text: "Tax Type",
+        datafield: "taxType",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "Formula No.",
+        datafield: "formula",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "Start Date",
+        datafield: "startDateDspl",
+        cellsalign: "center",
+        align: "center",
+        width: "10%"
+      },
+      {
+        text: "End Date",
+        datafield: "rescindDateDspl",
+        cellsalign: "center",
+        align: "center",
+        width: "10%"
+      },
+      {
+        text: "Account No.",
+        datafield: "acctNumber",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "Exp. Rate",
+        datafield: "exprateDspl",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "Max. Wage",
+        datafield: "maxwageDspl",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "BSI Wage",
+        datafield: "bsiWage",
+        cellsalign: "center",
+        align: "center"
+      },
+      {
+        text: "Risk Class",
+        datafield: "riskClass",
+        cellsalign: "center",
+        align: "center"
+      }
+    ],
+    dataFields: [
+      { name: "companyCode", type: "string" },
+      { name: "taxCode", type: "string" },
+      { name: "taxType", type: "string" },
+      { name: "formula", type: "string" },
+      { name: "startDateDspl", type: "string" },
+      { name: "rescindDateDspl", type: "string" },
+      { name: "acctNumber", type: "string" },
+      { name: "exprateDspl", type: "string" },
+      { name: "maxwageDspl", type: "string" },
+      { name: "bsiWage", type: "string" },
+      { name: "riskClass", type: "string" }
+    ]
+  },
+  formdef: {
+    title: "Sample Date Field Doc",
+    subtitle: "Select Report",
+    hasSave: false,
+    hasDelete: false,
+    hasSaveAs: false,
+    hasViewPDF: false,
+    hasView: true,
+    hasRecentUsage: false,
+    formflds: [
+      {
+        id: "effDate",
+        order: 1,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: true
+      }
+    ],
+    fltrflds: [
+      {
+        id: "startDate",
+        order: 1,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "endDate",
+        order: 2,
+        isReadOnlyOnEdit: false,
+        isReadOnlyOnNew: false
+      },
+      {
+        id: "effDate",
+        order: 3,
+        isReadOnlyOnEdit: true,
+        isReadOnlyOnNew: true
+      }
+    ]
+  }
+};
 
 export const allBSIPlans = {
   pgdef: {
@@ -685,8 +836,7 @@ export const customFormulas = {
   pgdef: {
     pgid: "customFormulas",
     pgtitle: "Custom Formulas",
-    pgsubtitle:
-      "Click the magnifying glass in the view column on the appropriate row to manage the formula",
+    pgsubtitle: "Click the magnifying glass in the view column on the appropriate row to manage the formula",
     flowtype: "flowtype2",
     hasAddNew: true,
     addNewLabel: "Click here to add new Custom Tax Code.",
@@ -999,8 +1149,7 @@ export const worksites = {
   pgdef: {
     pgid: "worksites",
     pgtitle: "Worksites",
-    pgsubtitle:
-      "Click the magnifying glass in the view column on the appropriate row to manage the worksite",
+    pgsubtitle: "Click the magnifying glass in the view column on the appropriate row to manage the worksite",
     flowtype: "flowtype2",
     hasAddNew: true,
     addNewLabel: "Click here to add new Custom Tax Code.",

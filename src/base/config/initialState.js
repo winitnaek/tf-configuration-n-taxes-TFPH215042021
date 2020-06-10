@@ -53,6 +53,14 @@ export default {
       id: "selectSamplePage",
       type: "comp",
       link: false
+    },
+    {
+      value: "DF",
+      label: "Date Field Doc",
+      desc: "Date Field Doc",
+      id: "dateFieldDoc",
+      type: "page",
+      link: false
     }
   ],
 

@@ -1,3 +1,62 @@
+export const sampleDateFields = [
+  {
+    name: "startDate",
+    id: "startDate",
+    placeholder: "",
+    fieldtype: "date",
+    fieldlength: {},
+    fieldinfo: {},
+    label: "Start Date",
+    value: "",
+    validation: {
+      required: true,
+      type: "string"
+    }
+  },
+  {
+    name: "endDate",
+    id: "endDate",
+    placeholder: "",
+    fieldtype: "date",
+    fieldlength: {},
+    fieldinfo: {},
+    label: "End Date",
+    value: "",
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    name: "effDate",
+    id: "effDate",
+    placeholder: "",
+    fieldtype: "date",
+    fieldlength: {},
+    fieldinfo: {},
+    label: "Effective Date",
+    value: "",
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    name: "checkDate",
+    id: "checkDate",
+    placeholder: "",
+    fieldtype: "date",
+    fieldlength: {},
+    fieldinfo: {},
+    label: "Check Date",
+    value: "",
+    validation: {
+      required: false,
+      type: "string"
+    }
+  }
+];
+
 export const selectSamplePage = [
   {
     id: "wageReportingMethod",
@@ -50,6 +109,116 @@ export const selectSamplePage = [
     label: "Non Resident Tax Type",
     value: "",
     errmsg: "Non Resident Tax Type is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "formula",
+    placeholder: "Formula",
+    fieldtype: "select",
+    label: "Formula",
+    value: "",
+    errmsg: "Formula is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "residentState",
+    placeholder: "Resident State",
+    fieldtype: "select",
+    label: "Resident State",
+    value: "",
+    errmsg: "Resident State is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "exemptMilitaryLocation",
+    placeholder: "Exempt Military Location",
+    fieldtype: "select",
+    label: "Exempt Military Location",
+    value: "",
+    errmsg: "Exempt Military Location is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "payment",
+    placeholder: "Payment",
+    fieldtype: "select",
+    label: "Payment",
+    value: "",
+    errmsg: "Payment is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "principalStateEmployment",
+    placeholder: "Principal State of Employment",
+    fieldtype: "select",
+    label: "Principal State of Employment",
+    value: "",
+    errmsg: "Principal State of Employment is required",
     fieldlength: {
       minlength: 1,
       maxlength: 25
@@ -365,13 +534,7 @@ export const selectSamplePage = [
     fieldinfo: {
       typeahead: false,
       isasync: false,
-      options: [
-        "Common Law",
-        "Independent Contractor",
-        "FICA/FUTA",
-        "FICA",
-        "Self-Employed"
-      ],
+      options: ["Common Law", "Independent Contractor", "FICA/FUTA", "FICA", "Self-Employed"],
       multiselect: false
     },
     validation: {
@@ -393,14 +556,7 @@ export const selectSamplePage = [
     fieldinfo: {
       typeahead: false,
       isasync: false,
-      options: [
-        "Taxable",
-        "Non-Taxable",
-        "Limit-YTD",
-        "Limit-QTD",
-        "Limit-MTD",
-        "Taxable/Exclude"
-      ],
+      options: ["Taxable", "Non-Taxable", "Limit-YTD", "Limit-QTD", "Limit-MTD", "Taxable/Exclude"],
       multiselect: false
     },
     validation: {
@@ -945,11 +1101,7 @@ export const selectSamplePage = [
       maxlength: 25
     },
     fieldinfo: {
-      options: [
-        "N/A",
-        "RG999 - RG999 Company",
-        "Z001 - company Z001 for cache-testing"
-      ]
+      options: ["N/A", "RG999 - RG999 Company", "Z001 - company Z001 for cache-testing"]
     },
     validation: {
       required: false,
@@ -1212,11 +1364,7 @@ export const selectSamplePage = [
       maxlength: 25
     },
     fieldinfo: {
-      options: [
-        "0 - Use Data Set Option",
-        "1 - Nonresident Tax Record wins tie",
-        "2 - Resident Tax Records win tie"
-      ]
+      options: ["0 - Use Data Set Option", "1 - Nonresident Tax Record wins tie", "2 - Resident Tax Records win tie"]
     },
     validation: {
       required: false,
@@ -1235,13 +1383,7 @@ export const selectSamplePage = [
       maxlength: 25
     },
     fieldinfo: {
-      options: [
-        "0 - Common Law",
-        "1 - Independent Contractor",
-        "2 - FICA/FUTA",
-        "3 - FICA Only",
-        "4 - Self-employed"
-      ]
+      options: ["0 - Common Law", "1 - Independent Contractor", "2 - FICA/FUTA", "3 - FICA Only", "4 - Self-employed"]
     },
     validation: {
       required: false,
@@ -1306,12 +1448,7 @@ export const selectSamplePage = [
       maxlength: 25
     },
     fieldinfo: {
-      options: [
-        "0 - Default",
-        "1 - Cents",
-        "2 - Dollars",
-        "3 - Down to Dollars"
-      ]
+      options: ["0 - Default", "1 - Cents", "2 - Dollars", "3 - Down to Dollars"]
     },
     validation: {
       required: false,
@@ -1376,11 +1513,7 @@ export const selectSamplePage = [
       maxlength: 25
     },
     fieldinfo: {
-      options: [
-        "0 - Non Exempt",
-        "1 - Exempt Taxes Only",
-        "2 - Exempt Wages &amp; Taxes"
-      ]
+      options: ["0 - Non Exempt", "1 - Exempt Taxes Only", "2 - Exempt Wages &amp; Taxes"]
     },
     validation: {
       required: false,
@@ -1810,11 +1943,7 @@ export const selectSamplePage = [
       maxlength: 25
     },
     fieldinfo: {
-      options: [
-        "0 - System Selected",
-        "1 - Total Ordered Amount",
-        "2 - Total Pay Period"
-      ]
+      options: ["0 - System Selected", "1 - Total Ordered Amount", "2 - Total Pay Period"]
     },
     validation: {
       required: false,
@@ -1833,11 +1962,7 @@ export const selectSamplePage = [
       maxlength: 25
     },
     fieldinfo: {
-      options: [
-        "0 - System Default",
-        "1 - Round To Cents",
-        "2 - Round To Dollars"
-      ]
+      options: ["0 - System Default", "1 - Round To Cents", "2 - Round To Dollars"]
     },
     validation: {
       required: false,
@@ -1884,13 +2009,11 @@ export const selectSamplePage = [
   },
   {
     id: "doesthisgarnishmentuseatimereferenceCalculation?",
-    placeholder:
-      "Select Does this garnishment use a time reference calculation?",
+    placeholder: "Select Does this garnishment use a time reference calculation?",
     fieldtype: "select",
     label: "Does this garnishment use a time reference calculation?",
     value: "NONE",
-    errmsg:
-      "Does this garnishment use a time reference calculation? is required",
+    errmsg: "Does this garnishment use a time reference calculation? is required",
     fieldlength: {
       minlength: 1,
       maxlength: 25
@@ -2512,15 +2635,7 @@ export const customPayments = [
     fieldinfo: {
       typeahead: false,
       isasync: false,
-      options: [
-        "Taxable",
-        "Non-Taxable",
-        "Limit-YTD",
-        "Limit-QTD",
-        "Limit-MTD",
-        "Taxable/Exclude",
-        "Imputed"
-      ],
+      options: ["Taxable", "Non-Taxable", "Limit-YTD", "Limit-QTD", "Limit-MTD", "Taxable/Exclude", "Imputed"],
       multiselect: false
     },
     validation: {
@@ -3333,12 +3448,10 @@ export const experienceRates = [
     fieldinfo: {},
     label: "Start Date",
     value: "",
-    validation: [
-      {
-        required: false,
-        type: "string"
-      }
-    ]
+    validation: {
+      required: false,
+      type: "string"
+    }
   },
   {
     id: "riskClass",
@@ -3462,11 +3575,9 @@ export const supplementalMethods = [
     validationType: "string",
     label: "Start Date",
     value: "",
-    validation: [
-      {
-        required: false
-      }
-    ]
+    validation: {
+      required: false
+    }
   }
 ];
 
@@ -3687,12 +3798,10 @@ export const customFormulas = [
       multiselect: false
     },
     validationType: "string",
-    validation: [
-      {
-        type: "string",
-        required: false
-      }
-    ],
+    validation: {
+      type: "string",
+      required: false
+    },
     disable: ["testEndDate", "testStartDate"]
   }
 ];

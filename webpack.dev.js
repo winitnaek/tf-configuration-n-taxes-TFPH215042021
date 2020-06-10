@@ -295,8 +295,57 @@ if (process.env.NODE_ENV === "development") {
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       {
+        from: "./uitests/data/DATE_FIELD_DOC_MOCKDATA.json",
+        to: "../dist/DATE_FIELD_DOC_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
         from: "./uitests/data/CALCULATION_METHOD_AUTOCOMPLETE_MOCKDATA.json",
         to: "../dist/CALCULATION_METHOD_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/FORMULA_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/FORMULA_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/RESIDENT_STATE_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/RESIDENT_STATE_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/PRINCIPAL_STATE_EMPLOYMENT.json",
+        to: "../dist/PRINCIPAL_STATE_EMPLOYMENT.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from:
+          "./uitests/data/EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA.json"
+      }
+    ])
+  );
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      {
+        from: "./uitests/data/PAYMENT_AUTOCOMPLETE_MOCKDATA.json",
+        to: "../dist/PAYMENT_AUTOCOMPLETE_MOCKDATA.json"
       }
     ])
   );

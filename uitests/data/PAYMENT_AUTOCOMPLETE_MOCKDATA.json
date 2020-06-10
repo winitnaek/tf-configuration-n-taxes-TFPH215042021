@@ -1,0 +1,44 @@
+[
+  { "id": "BSIC001 - TIP CREDIT", "label": "BSIC001 - TIP CREDIT" },
+  { "id": "BSIE002 - PAY ADVANCES", "label": "BSIE002 - PAY ADVANCES" },
+  {
+    "id": "BSIE003 - ATHLETIC FACILITIES",
+    "label": "BSIE003 - ATHLETIC FACILITIES"
+  },
+  {
+    "id": "BSIE004 - N.Q. PLAN AWARDS AND PRIZES",
+    "label": "BSIE004 - N.Q. PLAN AWARDS AND PRIZES"
+  },
+  { "id": "BSIE005 - BACK PAY", "label": "BSIE005 - BACK PAY" },
+  { "id": "BSIE006 - BONUSES", "label": "BSIE006 - BONUSES" },
+  {
+    "id": "BSIE007 - BUSINESS EXPENSES",
+    "label": "BSIE007 - BUSINESS EXPENSES"
+  },
+  { "id": "BSIE009 - GIFTS", "label": "BSIE009 - GIFTS" },
+  {
+    "id": "BSIE048 - GROUP TERM LIFE G.T. 50000",
+    "label": "BSIE048 - GROUP TERM LIFE G.T. 50000"
+  },
+  { "id": "BSIP001 - 401K", "label": "BSIP001 - 401K" },
+  { "id": "BSIP002 - 403B", "label": "BSIP002 - 403B" },
+  { "id": "BSIP003 - 408K", "label": "BSIP003 - 408K" },
+  {
+    "id": "BSIP004 - 457B STATE AND LOCAL GOVMNT",
+    "label": "BSIP004 - 457B STATE AND LOCAL GOVMNT"
+  },
+  { "id": "BSIP005 - 7701J", "label": "BSIP005 - 7701J" },
+  { "id": "BSIP006 - SECTION 125", "label": "BSIP006 - SECTION 125" },
+  {
+    "id": "BSIP007 - DENTAL INSURANCE (SEC 125)",
+    "label": "BSIP007 - DENTAL INSURANCE (SEC 125)"
+  },
+  {
+    "id": "BSIP008 - GROUP TERM LIFE (SEC 125)",
+    "label": "BSIP008 - GROUP TERM LIFE (SEC 125)"
+  },
+  {
+    "id": "BSIP009 - HEALTH INSURANCE (SEC 125)",
+    "label": "BSIP009 - HEALTH INSURANCE (SEC 125)"
+  }
+]
