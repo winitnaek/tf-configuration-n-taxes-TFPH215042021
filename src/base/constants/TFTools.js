@@ -366,6 +366,11 @@ export const asyncselfldsmap = [
     param: [{ dataset: "", pattern: "" }]
   },
   {
+    id: "authorityCodeList",
+    url: GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE,
+    param: [{ dataset: "", pattern: "" }]
+  },
+  {
     id: "placeCode",
     url: GET_PLACE_CODE_AUTOCOMPLETE,
     param: [{ dataset: "", pattern: "" }]
