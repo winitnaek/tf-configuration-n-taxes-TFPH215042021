@@ -1,5 +1,95 @@
 export const sampleDateFields = [
   {
+    id: "taxCodeOverridden",
+    placeholder: "Tax Code to be Overridden",
+    fieldtype: "select",
+    label: "Tax Code to be Overridden",
+    value: "",
+    errmsg: "Tax Code to be Overridden is required",
+    dependentFields: ["residenceTaxType"],
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: true,
+      type: "string"
+    }
+  },
+  {
+    id: "residenceTaxType",
+    placeholder: "Resident Tax Type",
+    fieldtype: "select",
+    label: "Resident Tax Type",
+    value: "",
+    errmsg: "Resident Tax Type is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: false,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: true,
+      type: "string"
+    }
+  },
+  {
+    id: "taxCodeReciprocate",
+    placeholder: "Tax Code Reciprocate",
+    fieldtype: "select",
+    label: "Tax Code Reciprocate",
+    value: "",
+    errmsg: "Tax Code Reciprocate is required",
+    dependentFields: ["nonResidenceTaxType"],
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: true,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: true,
+      type: "string"
+    }
+  },
+  {
+    id: "nonResidenceTaxType",
+    placeholder: "Non Resident Tax Type",
+    fieldtype: "select",
+    label: "Non Resident Tax Type",
+    value: "",
+    errmsg: "Non Resident Tax Type is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: false,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: true,
+      type: "string"
+    }
+  },
+  {
     name: "startDate",
     id: "startDate",
     placeholder: "",
@@ -54,6 +144,76 @@ export const sampleDateFields = [
       required: false,
       type: "string"
     }
+  },
+  {
+    id: "gfo_eductionsectionMethod",
+    placeholder: "Deduction Section Method",
+    fieldtype: "select",
+    label: "Deduction Section Method",
+    value: "NONE",
+    errmsg: "Method is required",
+    dependentFields: ["county"],
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      options: [
+        "0- No Deductions",
+        "1- Subtract Deduction Flat Amount",
+        "2- Subtract Deduction Amount",
+        "3- Subtract Deduction Dependent Amount * Number of Dependents",
+        "4- Subtract Deduction Amount and Deduction Dependent Amount * Number of Dependents"
+      ]
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
+  },
+  {
+    id: "county",
+    placeholder: "Select County",
+    fieldtype: "select",
+    label: "County",
+    value: "NONE",
+    errmsg: "County is required",
+    dependentFields: ["wageReportingMethod"],
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: false,
+      isasync: true,
+      options: []
+    },
+    validation: {
+      required: true,
+      type: "string"
+    }
+  },
+  {
+    id: "wageReportingMethod",
+    placeholder: "Wage Reporting Method",
+    fieldtype: "select",
+    label: "Wage Reporting Method",
+    value: "",
+    errmsg: "Wage Reporting Method is required",
+    fieldlength: {
+      minlength: 1,
+      maxlength: 25
+    },
+    fieldinfo: {
+      typeahead: false,
+      isasync: true,
+      options: [],
+      multiselect: false
+    },
+    validation: {
+      required: false,
+      type: "string"
+    }
   }
 ];
 
@@ -65,6 +225,7 @@ export const selectSamplePage = [
     label: "Wage Reporting Method",
     value: "",
     errmsg: "Wage Reporting Method is required",
+    dependentFields: ["calculationMethod"],
     fieldlength: {
       minlength: 1,
       maxlength: 25
@@ -531,6 +692,7 @@ export const selectSamplePage = [
       minlength: 1,
       maxlength: 25
     },
+    dependentFields: ["exemptionStatus"],
     fieldinfo: {
       typeahead: true,
       isasync: true,
@@ -2512,6 +2674,7 @@ export const selectSamplePage = [
     label: "Deduction Section Method",
     value: "NONE",
     errmsg: "Method is required",
+    dependentFields: ["county"],
     fieldlength: {
       minlength: 1,
       maxlength: 25
