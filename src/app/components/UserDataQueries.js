@@ -19,6 +19,7 @@ const allBSIPlans = "allBSIPlans";
 const populateV3States = "populateV3States";
 const experienceRates = "experienceRates";
 const supplementalMethods = "supplementalMethods";
+const renderTFCustomComp = "renderTFCustomComp";
 
 class UserDataQueries extends React.Component {
   constructor(props) {
@@ -45,6 +46,10 @@ class UserDataQueries extends React.Component {
             if (tftool.id == pgid) return tftool;
           });
       renderTFApplication("pageContainer", data[0]);
+    }
+
+    this.renderCustom = (renderName) => {
+      renderTFApplication("pageContainer",renderName);
     }
 
     this.toggle = (id, title) => {
@@ -94,6 +99,13 @@ class UserDataQueries extends React.Component {
           </span>
         </Row>
         <Row>
+          <Col>
+            <h3>
+              <Button color="link" onClick={() => this.renderCustom(renderTFCustomComp)}>
+                Test Custom Component
+              </Button>
+            </h3>
+          </Col>
           <Col>
             <h3>
               <Button color="link" onClick={() => this.renderMe(allBSIPlans)}>

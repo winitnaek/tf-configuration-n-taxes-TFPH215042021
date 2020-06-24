@@ -11,7 +11,7 @@ import TFHome from "./app/home/home.js";
 import { closeForm, setFormData } from "./app/actions/formActions";
 import { setFilterFormData } from "./app/actions/filterFormActions";
 import TestHarness from "./app/test/TestHarness";
-
+import CustomComp from './app/components/CustomComp';
 import * as fieldData from "./app/metadata/fieldData";
 
 let store = configureStore();
@@ -78,6 +78,8 @@ function renderTFApplication(elem, renderName, child) {
     renderNewPage(elem, renderName.id, renderName.value);
   } else if (renderName && renderName.type == UI_TEST) {
     renderTestHarness(elem, renderName.id, renderName.value, child);
+  } else if (renderName && renderName === rname.RN_TF_CSTMCOMP) {
+    renderCustomComponent(elem, renderName);
   }
 }
 /**
@@ -217,7 +219,20 @@ function renderTFHome(elem) {
     document.querySelector("#" + elem)
   );
 }
-
+/**
+ * renderTFHome
+ * @param {*} elem
+ */
+function renderCustomComponent(elem) {
+  ReactDOM.unmountComponentAtNode(document.querySelector("#" + elem));
+  showPrgress(elem);
+  ReactDOM.render(
+    <Provider store={store}>
+      <CustomComp />
+    </Provider>,
+    document.querySelector("#" + elem)
+  );
+}
 var APP_ANCHOR;
 function setAppAnchor(elem) {
   APP_ANCHOR = elem;
