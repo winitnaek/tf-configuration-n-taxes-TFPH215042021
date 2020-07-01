@@ -66,11 +66,14 @@ import {
   SAVE_WORKSITES
 } from "../constants/ServiceUrls";
 
+import tfScreens from "../../app/metadata/_screen_info";
+
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
 export const UI_TEST = "uitest";
 
 export const tftools = [
+  ...tfScreens,
   {
     value: "UQ",
     label: "Select Sample Page",

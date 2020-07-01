@@ -4,11 +4,13 @@ var CopyWebpackPlugin = require("copy-webpack-plugin");
 const baseConfig = require("./webpack.common.js");
 var path = require("path");
 const BUILD_DIR = path.resolve(__dirname, "dist");
+const AssetGenerator = require("./build/AssetGenerator");
+const getAssetGeneratorConfig = require("./build/AssetGeneratorConfig");
 
 if (process.env.NODE_ENV === "development") {
-  baseConfig.plugins.push(
-    new WebpackShellPlugin({ onBuildEnd: ["node ./uitests/server/express.js"] })
-  );
+  baseConfig.plugins.push(new AssetGenerator(getAssetGeneratorConfig(process.env.NODE_ENV)));
+
+  baseConfig.plugins.push(new WebpackShellPlugin({ onBuildEnd: ["node ./uitests/server/express.js"] }));
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       {
@@ -100,8 +102,7 @@ if (process.env.NODE_ENV === "development") {
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       {
-        from:
-          "./uitests/data/CUSTOM_GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json",
+        from: "./uitests/data/CUSTOM_GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json",
         to: "../dist/CUSTOM_GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json"
       }
     ])
@@ -117,8 +118,7 @@ if (process.env.NODE_ENV === "development") {
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       {
-        from:
-          "./uitests/data/GARNISHMENT_GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json",
+        from: "./uitests/data/GARNISHMENT_GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json",
         to: "../dist/GARNISHMENT_GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json"
       }
     ])
@@ -278,8 +278,7 @@ if (process.env.NODE_ENV === "development") {
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       {
-        from:
-          "./uitests/data/NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json",
+        from: "./uitests/data/NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json",
         to: "../dist/NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json"
       }
     ])
@@ -335,8 +334,7 @@ if (process.env.NODE_ENV === "development") {
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       {
-        from:
-          "./uitests/data/EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA.json",
+        from: "./uitests/data/EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA.json",
         to: "../dist/EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA.json"
       }
     ])

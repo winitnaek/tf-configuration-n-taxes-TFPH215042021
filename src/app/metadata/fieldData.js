@@ -1,3 +1,5 @@
+export * from "./_fieldData";
+
 export const sampleDateFields = [
   {
     id: "taxCodeOverridden",
@@ -3658,110 +3660,6 @@ export const experienceRates = [
     validation: {
       required: false,
       type: "string"
-    }
-  }
-];
-
-export const supplementalMethods = [
-  {
-    id: "taxCode",
-    placeholder: "Enter Tax Code",
-    fieldtype: "select",
-    label: "Tax Code",
-    value: "",
-    errmsg: "TaxCode is required",
-    fieldlength: {
-      minlength: 1,
-      maxlength: 25
-    },
-    fieldinfo: {
-      typeahead: true,
-      isasync: true,
-      options: [],
-      multiselect: false
-    },
-    validation: {
-      required: false,
-      type: "string"
-    }
-  },
-  {
-    id: "taxType",
-    placeholder: "Enter Tax Type",
-    fieldtype: "select",
-    label: "Tax Type",
-    value: "",
-    errmsg: "Tax Type is required",
-    fieldlength: {
-      minlength: 1,
-      maxlength: 25
-    },
-    fieldinfo: {
-      typeahead: true,
-      isasync: true,
-      options: [],
-      multiselect: false
-    },
-    validation: {
-      required: false,
-      type: "string"
-    }
-  },
-  {
-    id: "formulaNumber",
-    placeholder: "Enter Formula Number",
-    fieldtype: "text",
-    label: "Formula Number",
-    value: "",
-    errmsg: "Formula Number is required",
-    fieldlength: {
-      minlength: 1,
-      maxlength: 25
-    },
-    fieldinfo: {
-      typeahead: false,
-      isasync: false,
-      options: [],
-      multiselect: false
-    },
-    validation: {
-      type: "number",
-      subtype: [
-        {
-          type: "positive",
-          message: "Formula Number cannot be negative"
-        },
-        {
-          type: "typeError",
-          message: "Must be a number"
-        }
-      ],
-      constraint: [
-        {
-          type: "min",
-          input: 0,
-          message: "Maximum Limit can not be < 0"
-        },
-        {
-          type: "max",
-          input: 100,
-          message: "Maximum Limit can not be > 100"
-        }
-      ]
-    }
-  },
-  {
-    name: "startDate",
-    id: "startDate",
-    placeholder: "",
-    fieldtype: "date",
-    fieldlength: {},
-    fieldinfo: {},
-    validationType: "string",
-    label: "Start Date",
-    value: "",
-    validation: {
-      required: false
     }
   }
 ];
