@@ -24,15 +24,9 @@ const getAssetGeneratorConfig = environment => {
   if (environment === "development") {
     commonConfig.groupBy.push({
       pattern: "_MockData.json",
-      fileName: "./uitests/data/",
+      fileName: "./dist/",
       copyFile: true
     });
-  } else {
-    // commonConfig.groupBy.push({
-    //   pattern: "_MockData.json",
-    //   fileName: "./src/uitests/data/",
-    //   copyFile: true
-    // });
   }
   return commonConfig;
 };

@@ -1,11 +1,8 @@
-import {
-  metadatamap,
-  tftools,
-  deletedatamap,
-  savedatamap,
-  asyncselfldsmap
-} from "../constants/TFTools";
+import { metadatamap, tftools, deletedatamap, savedatamap, asyncselfldsmap } from "../constants/TFTools";
+import mockDataMapper from "../../app/metadata/_mockDataMap";
+import * as metaData from "../../app/metadata/_metaData";
 import { generateUrl } from "bsiuilib";
+
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -15,16 +12,9 @@ export function buildModuleAreaLinks(apps) {
   apps.forEach(function (app) {
     if (app.id == "73b9a516-c0ca-43c0-b0ae-190e08d77bcc") {
       app.accessIds.forEach(function (access) {
-        if (
-          access.id == "162ebe14-8d87-44e1-a786-c9365c9d5cd8" &&
-          access.visible == true
-        ) {
-          premTFtools = tftools.filter((tftool) => {
-            if (
-              app.permissions.hasOwnProperty(tftool.value) &&
-              tftool.link == true
-            )
-              return tftool;
+        if (access.id == "162ebe14-8d87-44e1-a786-c9365c9d5cd8" && access.visible == true) {
+          premTFtools = tftools.filter(tftool => {
+            if (app.permissions.hasOwnProperty(tftool.value) && tftool.link == true) return tftool;
           });
         }
       });
@@ -58,7 +48,10 @@ export function openHelp(pageid) {
  * @param {*} pageid
  */
 export function compMetaData(pageid) {
-  let metadataMap = metadatamap.find((metadatam) => {
+  if (metaData[pageid]) {
+    return metaData[pageid];
+  }
+  let metadataMap = metadatamap.find(metadatam => {
     if (pageid == metadatam.id) return metadatam;
   });
   return metadataMap.metadata;
@@ -78,7 +71,7 @@ export function compPermissions(pid) {
  * @param {*} pageid
  */
 export function compURL(pageid) {
-  let metadataMap = metadatamap.find((metadatam) => {
+  let metadataMap = metadatamap.find(metadatam => {
     if (pageid == metadatam.id) return metadatam;
   });
   let url = generateUrl.buildURL(metadataMap.url);
@@ -140,19 +133,16 @@ export function format(fmt, ...args) {
   if (!fmt.match(/^(?:(?:(?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{[0-9]+\}))+$/)) {
     throw new Error("invalid format string.");
   }
-  return fmt.replace(
-    /((?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{([0-9]+)\})/g,
-    (m, str, index) => {
-      if (str) {
-        return str.replace(/(?:{{)|(?:}})/g, (m) => m[0]);
-      } else {
-        if (index >= args.length) {
-          throw new Error("argument index is out of range in format");
-        }
-        return args[index];
+  return fmt.replace(/((?:[^{}]|(?:\{\{)|(?:\}\}))+)|(?:\{([0-9]+)\})/g, (m, str, index) => {
+    if (str) {
+      return str.replace(/(?:{{)|(?:}})/g, m => m[0]);
+    } else {
+      if (index >= args.length) {
+        throw new Error("argument index is out of range in format");
       }
+      return args[index];
     }
-  );
+  });
 }
 /**
  * buildGridDataInput
@@ -233,7 +223,7 @@ export function buildSaveInput(pageid, store, formdata, mode) {
   };
   return input;
 }
-export const reqInfo = (data) => {
+export const reqInfo = data => {
   let info = {};
   if (isMock()) {
     info = {
@@ -257,27 +247,33 @@ export const reqInfo = (data) => {
 };
 
 export function getUrl(id) {
-  let metadataMap = metadatamap.find((metadatam) => {
+  let metadataMap = metadatamap.find(metadatam => {
     if (id == metadatam.id) return metadatam;
   });
   let url = generateUrl.buildURL(metadataMap.url);
   if (isMock()) {
-    let metadataMap = mockdatamap.find((metadatam) => {
-      if (id == metadatam.id) return metadatam;
-    });
-    url = metadataMap.url;
+    // for webpack generated mock data
+    if (mockDataMapper[id]) {
+      url = mockDataMapper[id];
+    } else {
+      // For custom generated mock data
+      metadataMap = mockdatamap.find(metadatam => {
+        if (id == metadatam.id) return metadatam;
+      });
+      url = metadataMap.url;
+    }
   }
   console.log("View URL %s for page %s", url, id);
   return url;
 }
 
 export function deleteUrl(id) {
-  let deldataMap = deletedatamap.find((metadatam) => {
+  let deldataMap = deletedatamap.find(metadatam => {
     if (id == metadatam.id) return metadatam;
   });
   let url = generateUrl.buildURL(deldataMap.url);
   if (isMock()) {
-    let deldataMap = mockdelmap.find((metadatam) => {
+    let deldataMap = mockdelmap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
     });
     url = deldataMap.url;
@@ -287,13 +283,13 @@ export function deleteUrl(id) {
 }
 
 export function saveUrl(id) {
-  let saveDataMap = savedatamap.find((metadatam) => {
+  let saveDataMap = savedatamap.find(metadatam => {
     console.log(id, metadatam.id);
     if (id == metadatam.id) return metadatam;
   });
   let url = generateUrl.buildURL(saveDataMap.url);
   if (isMock()) {
-    let saveDataMap = mocksavmap.find((metadatam) => {
+    let saveDataMap = mocksavmap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
     });
     url = saveDataMap.url;
@@ -303,13 +299,13 @@ export function saveUrl(id) {
 }
 
 export function autocompleteURL(id) {
-  let autoCompleteDataMap = asyncselfldsmap.find((metadatam) => {
+  let autoCompleteDataMap = asyncselfldsmap.find(metadatam => {
     console.log(id, metadatam.id);
     if (id == metadatam.id) return metadatam;
   });
   let url = generateUrl.buildURL(autoCompleteDataMap.url);
   if (isMock()) {
-    autoCompleteDataMap = mockselectmap.find((metadatam) => {
+    autoCompleteDataMap = mockselectmap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
     });
     url = autoCompleteDataMap.url;

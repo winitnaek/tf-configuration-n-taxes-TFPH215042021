@@ -56,6 +56,9 @@ class AssetGenerator {
           es6Promise.Promise.all(groupByPromises)
             .then(opsResponse => {
               if (this.init) {
+                const fileMapper = {};
+                const regex = /(?<=\_).+?(?=\_)/;
+
                 opsResponse.forEach(({ filepath, content, copyFile }) => {
                   if (copyFile) {
                     const contents = content;
@@ -63,12 +66,27 @@ class AssetGenerator {
                       const index = file.lastIndexOf("\\") + 1;
                       const filename = file.substr(index);
                       const fileDestination = filepath + filename;
+                      const regexResults = regex.exec(filename);
+                      if (regexResults && regexResults[0]) {
+                        fileMapper[regexResults[0]] = filename;
+                      }
                       try {
                         fs.writeFileSync(fileDestination, `${JSON.stringify(fileContent)}`);
                       } catch (err) {
+                        if (regexResults && regexResults[0] && fileMapper[regexResults[0]]) {
+                          delete fileMapper[regexResults[0]];
+                        }
                         console.log(err);
                       }
                     });
+                    try {
+                      fs.writeFileSync(
+                        `./src/app/metadata/_mockDataMap.js`,
+                        `export default ${JSON.stringify(fileMapper)}`
+                      );
+                    } catch (err) {
+                      console.log(err);
+                    }
                   } else {
                     fs.writeFileSync(filepath, content);
                   }
