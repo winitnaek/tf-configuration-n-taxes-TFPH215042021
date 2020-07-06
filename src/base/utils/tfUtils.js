@@ -1,8 +1,8 @@
 import { metadatamap, tftools, deletedatamap, savedatamap, asyncselfldsmap } from "../constants/TFTools";
 import mockDataMapper from "../../app/metadata/_mockDataMap";
+import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
 import { generateUrl } from "bsiuilib";
-
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -305,10 +305,14 @@ export function autocompleteURL(id) {
   });
   let url = generateUrl.buildURL(autoCompleteDataMap.url);
   if (isMock()) {
-    autoCompleteDataMap = mockselectmap.find(metadatam => {
-      if (id == metadatam.id) return metadatam;
-    });
-    url = autoCompleteDataMap.url;
+    if (mockAutoCompleteMap[id]) {
+      url = mockAutoCompleteMap[id];
+    } else {
+      autoCompleteDataMap = mockselectmap.find(metadatam => {
+        if (id == metadatam.id) return metadatam;
+      });
+      url = autoCompleteDataMap.url;
+    }
   }
   console.log("Save URL %s for page %s", url, id);
   return url;
@@ -330,146 +334,21 @@ const mocksavmap = [
   { id: "worksiteCompanies", url: "./SAVE_WORKSITE_COMPANIE_MOCKDATA.json" }
 ];
 const mockdatamap = [
-  { id: "customPayments", url: "./CUSTOM_PAYMENTS_MOCKDATA.json" },
-  { id: "customTaxCodes", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
-  { id: "allBSIPlans", url: "./ALL_BSI_PLANS_MOCKDATA.json" },
-  { id: "populateV3States", url: "./POPULATE_V3_STATES_MOCKDATA.json" },
-  { id: "experienceRates", url: "./EXPERIENCE_RATES_MOCKDATA.json" },
-  { id: "sampleDateFields", url: "./DATE_FIELD_DOC_MOCKDATA.json" },
-  { id: "supplementalMethods", url: "SUPPLEMENTAL_METHODS_MOCKDATA.json" },
-  { id: "customFormulas", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
-  { id: "customTaxFormulas", url: "./CUSTOM_TAX_FORMULAS_MOCKDATA.json" },
-  { id: "companies", url: "./COMPANIES_MOCKDATA.json" },
-  { id: "worksites", url: "./COMPANIES_MOCKDATA.json" },
-  { id: "worksiteCompanies", url: "./WORKSITES_MOCKDATA.json" },
-  { id: "recentUsage", url: "./RECENT_USAGE.json" },
+  // { id: "customPayments", url: "./CUSTOM_PAYMENTS_MOCKDATA.json" },
+  // { id: "customTaxCodes", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
+  // { id: "allBSIPlans", url: "./ALL_BSI_PLANS_MOCKDATA.json" },
+  // { id: "populateV3States", url: "./POPULATE_V3_STATES_MOCKDATA.json" },
+  // { id: "experienceRates", url: "./EXPERIENCE_RATES_MOCKDATA.json" },
+  // { id: "sampleDateFields", url: "./DATE_FIELD_DOC_MOCKDATA.json" },
+  // { id: "supplementalMethods", url: "SUPPLEMENTAL_METHODS_MOCKDATA.json" },
+  // { id: "customFormulas", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
+  // { id: "customTaxFormulas", url: "./CUSTOM_TAX_FORMULAS_MOCKDATA.json" },
+  // { id: "companies", url: "./COMPANIES_MOCKDATA.json" },
+  // { id: "worksites", url: "./COMPANIES_MOCKDATA.json" },
+  // { id: "worksiteCompanies", url: "./WORKSITES_MOCKDATA.json" },
+  // { id: "recentUsage", url: "./RECENT_USAGE.json" },
   { id: "selectSamplePage", url: "./RECENT_USAGE.json" }
 ];
 
-//all for autoComplete
-const mockselectmap = [
-  {
-    id: "wageReportingMethod",
-    url: "./WAGE_REPORTING_METHOD_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "calculationMethod",
-    url: "./CALCULATION_METHOD_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "residenceTaxType",
-    url: "./RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "nonResidenceTaxType",
-    url: "./NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "taxCodeOverridden",
-    url: "./TAX_CODE_OVERRIDDEN_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "taxCodeReciprocate",
-    url: "./TAX_CODE_RECIPROCATE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "paymentCode",
-    url: "./PAYMENT_CODE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "userTaxCode",
-    url: "./USER_TAX_CODE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "userTax",
-    url: "./USER_TAX_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "typeofData",
-    url: "./TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "taxCodeUdq",
-    url: "./TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "taxability",
-    url: "./TAXCODE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "taxType",
-    url: "./TAXTYPE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "companyCode",
-    url: "./COMPANYCODE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "riskClass",
-    url: "./RISKCLASS_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "wrksite",
-    url: "./WORK_SITE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "taxCode",
-    url: "./EXPERIENCE_RATE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "authorityCode",
-    url: "./AUTHORITY_CODE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "placeCode",
-    url: "./PLACE_CODE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "schoolDistrict",
-    url: "./SCHOOL_DISTRICT_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "garnishmentFormula",
-    url: "./GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "garnishmentGroupCode",
-    url: "./GARNISHMENT_GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "customGarnishmentFormula",
-    url: "./CUSTOM_GARNISHMENT_FORMULA_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "county",
-    url: "./COUNTY_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "groupAsync",
-    url: "./GROUP_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "groupCode",
-    url: "./GROUP_CODE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "formula",
-    url: "./FORMULA_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "residentState",
-    url: "./RESIDENT_STATE_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "exemptMilitaryLocation",
-    url: "./EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA.json"
-  },
-  {
-    id: "principalStateEmployment",
-    url: "./PRINCIPAL_STATE_EMPLOYMENT.json"
-  },
-  {
-    id: "payment",
-    url: "./PAYMENT_AUTOCOMPLETE_MOCKDATA.json"
-  }
-];
+//all for test autoComplete
+const mockselectmap = [];

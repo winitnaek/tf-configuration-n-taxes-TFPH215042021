@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const __assign =
   (this && this.__assign) ||
   Object.assign ||
@@ -9,22 +9,23 @@ const __assign =
     }
     return t;
   };
-const es6Promise = require("es6-promise");
-const path = require("path");
-const fs = require("fs");
-const _ = require("lodash");
+const es6Promise = require('es6-promise');
+const path = require('path');
+const fs = require('fs');
+const _ = require('lodash');
 
-const UTF8_ENCODING = "utf8";
-const allowedExtensions = ".json";
+const UTF8_ENCODING = 'utf8';
+const allowedExtensions = '.json';
 class AssetGenerator {
   constructor(options) {
     this.options = options;
     this.options.encoding = this.options.encoding != null ? this.options.encoding : UTF8_ENCODING;
-    this.logger = new Logger(this.options.debug);
     this.init = true;
+    this.logger = new Logger(options.debug);
+
     this.apply = compiler => {
       const beforeCompile = (compilation, done) => {
-        this.logger.debug("AssetGeneratorPlugin beforeCompile started...");
+        this.logger.debug('AssetGeneratorPlugin beforeCompile started...');
         this.options.compilation = compilation;
         let sourceFolders = this.options.sourceFolders;
         let groupBy = this.options.groupBy;
@@ -56,14 +57,14 @@ class AssetGenerator {
           es6Promise.Promise.all(groupByPromises)
             .then(opsResponse => {
               if (this.init) {
-                const fileMapper = {};
                 const regex = /(?<=\_).+?(?=\_)/;
 
-                opsResponse.forEach(({ filepath, content, copyFile }) => {
-                  if (copyFile) {
+                opsResponse.forEach(({ filepath, content, glob }) => {
+                  const fileMapper = {};
+                  if (glob.copyFile) {
                     const contents = content;
                     contents.forEach(({ fileContent, file }) => {
-                      const index = file.lastIndexOf("\\") + 1;
+                      const index = file.lastIndexOf('\\') + 1;
                       const filename = file.substr(index);
                       const fileDestination = filepath + filename;
                       const regexResults = regex.exec(filename);
@@ -76,16 +77,13 @@ class AssetGenerator {
                         if (regexResults && regexResults[0] && fileMapper[regexResults[0]]) {
                           delete fileMapper[regexResults[0]];
                         }
-                        console.log(err);
+                        this.logger.error(err);
                       }
                     });
                     try {
-                      fs.writeFileSync(
-                        `./src/app/metadata/_mockDataMap.js`,
-                        `export default ${JSON.stringify(fileMapper)}`
-                      );
+                      fs.writeFileSync(glob.mapperFileName, `export default ${JSON.stringify(fileMapper)}`);
                     } catch (err) {
-                      console.log(err);
+                      this.logger.error(err);
                     }
                   } else {
                     fs.writeFileSync(filepath, content);
@@ -100,18 +98,18 @@ class AssetGenerator {
             });
         }
 
-        this.logger.debug("AssetGeneratorPlugin beforeCompile completed...");
+        this.logger.debug('AssetGeneratorPlugin beforeCompile completed...');
       };
 
-      const plugin = "AssetGenerator";
+      const plugin = 'AssetGenerator';
       if (compiler.hooks) {
         compiler.hooks.beforeCompile.tapAsync(plugin, beforeCompile);
       } else {
-        compiler.plugin("before-compile", beforeCompile);
+        compiler.plugin('before-compile', beforeCompile);
       }
     };
-    this.processFiles = ({ files, fileName: outputPath, exportSingleObject, copyFile }, resolve, reject) => {
-      console.log("processFiles>>>>>", outputPath);
+    this.processFiles = (glob, resolve, reject) => {
+      const { files, fileName: outputPath, exportSingleObject, copyFile } = glob;
       let readFiles = files.map(f => {
         return new es6Promise.Promise((res, rej) => {
           this.readFile(f, res, rej);
@@ -121,11 +119,11 @@ class AssetGenerator {
         .then(contents => {
           if (!copyFile) {
             const tools = contents.map(({ fileContent, file }) => {
-              let pageId = _.get(fileContent, "pgdef.pgid", null);
+              let pageId = _.get(fileContent, 'pgdef.pgid', null);
 
               if (!pageId) {
                 const regex = /(?<=\_).+?(?=\_)/;
-                const index = file.lastIndexOf("\\") + 1;
+                const index = file.lastIndexOf('\\') + 1;
                 const filename = file.substr(index);
                 const regexResults = regex.exec(filename);
                 if (regexResults && regexResults[0]) {
@@ -136,7 +134,7 @@ class AssetGenerator {
               }
 
               if (!exportSingleObject && pageId) {
-                const pgid = pageId.replace("/", "");
+                const pgid = pageId.replace('/', '');
                 return `export const ${pgid}=${JSON.stringify(fileContent)}`;
               } else {
                 return `${JSON.stringify(fileContent)}`;
@@ -144,13 +142,13 @@ class AssetGenerator {
             });
 
             if (!exportSingleObject) {
-              resolve(new Response(outputPath, tools.join(";")));
+              resolve(new Response(outputPath, tools.join(';'), glob));
             } else {
-              const screens = `export default [${tools.join(",")}];`;
-              resolve(new Response(outputPath, screens));
+              const screens = `export default [${tools.join(',')}];`;
+              resolve(new Response(outputPath, screens, glob));
             }
           } else {
-            resolve(new Response(outputPath, contents, copyFile));
+            resolve(new Response(outputPath, contents, glob));
           }
         })
         .catch(error => {
@@ -158,7 +156,6 @@ class AssetGenerator {
         });
     };
     this.readFile = (f, resolve, reject) => {
-      console.log("readFile>>>>>", f);
       f = f.trim();
       const extn = path.extname(f).toLowerCase();
 
@@ -168,7 +165,7 @@ class AssetGenerator {
 
       let entryData = undefined;
       try {
-        entryData = fs.readFileSync(f, "utf8");
+        entryData = fs.readFileSync(f, 'utf8');
       } catch (e) {
         this.logger.error(`AssetGenerator: File missing [ ${f}] in path or assets `, e);
         reject(`AssetGenerator: Unable to locate file ${f}`);
@@ -194,7 +191,7 @@ class AssetGenerator {
         return;
       }
 
-      if (typeof entryDataAsJSON !== "object") {
+      if (typeof entryDataAsJSON !== 'object') {
         this.logger.error(`AssetGenerator: Not a valid object , file  [ ${f} ]`);
         reject(`AssetGenerator: Not a valid object , file  [${f} ]`);
         return;
@@ -206,10 +203,10 @@ class AssetGenerator {
     this.getAllFiles = (dirPath, arrayOfFiles = []) => {
       const files = fs.readdirSync(dirPath);
       files.forEach(file => {
-        if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-          arrayOfFiles = this.getAllFiles(dirPath + "/" + file, arrayOfFiles);
+        if (fs.statSync(dirPath + '/' + file).isDirectory()) {
+          arrayOfFiles = this.getAllFiles(dirPath + '/' + file, arrayOfFiles);
         } else {
-          arrayOfFiles.push(path.join(dirPath, "/", file));
+          arrayOfFiles.push(path.join(dirPath, '/', file));
         }
       });
       return arrayOfFiles;
@@ -222,23 +219,22 @@ class AssetGenerator {
   }
 }
 class Response {
-  constructor(filepath, content, copyFile) {
+  constructor(filepath, content, glob) {
     this.filepath = filepath;
     this.content = content;
-    this.copyFile = copyFile;
+    this.glob = glob;
   }
 }
 class Logger {
   constructor(isDebug) {
-    this.isDebug = false;
+    this.isDebug = isDebug;
     this.debug = msg => {
-      // if (this.isDebug) console.log(msg);
+      if (this.isDebug) console.log(msg);
     };
     this.error = (msg, e) => {
-      console.error("====Error===");
-      console.error(msg, e != undefined ? e : "");
+      console.error('====Error===');
+      console.error(msg, e != undefined ? e : '');
     };
-    this.isDebug = isDebug;
   }
 }
 module.exports = AssetGenerator;

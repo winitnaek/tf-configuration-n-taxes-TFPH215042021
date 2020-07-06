@@ -1,9 +1,11 @@
 const getAssetGeneratorConfig = environment => {
   const commonConfig = {
     encoding: "utf8",
+    debug: true,
     sourceFolders: [
       "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/readonlyfilter/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/readonlygrid/"
+      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/readonlygrid/",
+      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/autoCompleteMockData/"
     ],
     groupBy: [
       {
@@ -25,6 +27,13 @@ const getAssetGeneratorConfig = environment => {
     commonConfig.groupBy.push({
       pattern: "_MockData.json",
       fileName: "./dist/",
+      mapperFileName: "./src/app/metadata/_mockDataMap.js",
+      copyFile: true
+    });
+    commonConfig.groupBy.push({
+      pattern: "_AUTOCOMPLETE_MOCKDATA.json",
+      fileName: "./dist/",
+      mapperFileName: "./src/app/metadata/_mockAutoCompleteMap.js",
       copyFile: true
     });
   }

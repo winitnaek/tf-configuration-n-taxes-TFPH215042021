@@ -56,6 +56,7 @@ import {
 export const metaDataApiMap = {
   bSITaxes: GET_USER_DATA_QUERIES,
   customOverridesForAuthority: GET_USER_DATA_QUERIES,
+  populatedV3States: GET_USER_DATA_QUERIES,
   bSITaxes: GET_USER_DATA_QUERIES,
   companies: GET_USER_DATA_QUERIES,
   customGarnishmentFormula: GET_USER_DATA_QUERIES,
@@ -72,7 +73,7 @@ export const metaDataApiMap = {
   garnishmentRequiringFilingStatus: GET_USER_DATA_QUERIES,
   maritalStatus: GET_USER_DATA_QUERIES,
   minimumAgeTaxes: GET_USER_DATA_QUERIES,
-  QuarterlyTaxType: GET_USER_DATA_QUERIES,
+  monthlyQuarterlyTaxType: GET_USER_DATA_QUERIES,
   orderedPercentGarnishments: GET_USER_DATA_QUERIES,
   residentWorkValidation: GET_USER_DATA_QUERIES,
   supplementalMethods: GET_USER_DATA_QUERIES,

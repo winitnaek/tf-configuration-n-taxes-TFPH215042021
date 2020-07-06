@@ -81,38 +81,6 @@ export const tftools = [
     link: false
   },
   {
-    value: "UQ",
-    label: "All BSI Plans",
-    desc: "All BSI Plans",
-    id: "allBSIPlans",
-    type: UI_COMP,
-    link: false
-  },
-  {
-    value: "UQ",
-    label: "Populate V3 States",
-    desc: "Populate V3 States",
-    id: "populateV3States",
-    type: UI_COMP,
-    link: false
-  },
-  {
-    value: "UQ",
-    label: "Experience Rates",
-    desc: "Experience Rates",
-    id: "experienceRates",
-    type: UI_COMP,
-    link: false
-  },
-  {
-    value: "UQ",
-    label: "Supplemental Methods",
-    desc: "Supplemental Methods",
-    id: "supplementalMethods",
-    type: UI_COMP,
-    link: false
-  },
-  {
     value: "CO",
     label: "Companies",
     desc: "Companies",
