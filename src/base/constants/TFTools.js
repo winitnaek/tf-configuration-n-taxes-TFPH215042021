@@ -9,7 +9,7 @@ export const UI_TEST = "uitest";
 export const tftools = [
   ...tfScreens,
   {
-    value: "UQ",
+    value: "SP",
     label: "Select Sample Page",
     desc: "Select Sample Page",
     id: "selectSamplePage",

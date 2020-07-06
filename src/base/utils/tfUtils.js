@@ -334,19 +334,15 @@ const mocksavmap = [
   { id: "worksiteCompanies", url: "./SAVE_WORKSITE_COMPANIE_MOCKDATA.json" }
 ];
 const mockdatamap = [
-  // { id: "customPayments", url: "./CUSTOM_PAYMENTS_MOCKDATA.json" },
-  // { id: "customTaxCodes", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
-  // { id: "allBSIPlans", url: "./ALL_BSI_PLANS_MOCKDATA.json" },
-  // { id: "populateV3States", url: "./POPULATE_V3_STATES_MOCKDATA.json" },
-  // { id: "experienceRates", url: "./EXPERIENCE_RATES_MOCKDATA.json" },
-  // { id: "sampleDateFields", url: "./DATE_FIELD_DOC_MOCKDATA.json" },
-  // { id: "supplementalMethods", url: "SUPPLEMENTAL_METHODS_MOCKDATA.json" },
-  // { id: "customFormulas", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
-  // { id: "customTaxFormulas", url: "./CUSTOM_TAX_FORMULAS_MOCKDATA.json" },
-  // { id: "companies", url: "./COMPANIES_MOCKDATA.json" },
-  // { id: "worksites", url: "./COMPANIES_MOCKDATA.json" },
-  // { id: "worksiteCompanies", url: "./WORKSITES_MOCKDATA.json" },
-  // { id: "recentUsage", url: "./RECENT_USAGE.json" },
+  { id: "customPayments", url: "./CUSTOM_PAYMENTS_MOCKDATA.json" },
+  { id: "customTaxCodes", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
+  { id: "sampleDateFields", url: "./DATE_FIELD_DOC_MOCKDATA.json" },
+  { id: "customFormulas", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
+  { id: "customTaxFormulas", url: "./CUSTOM_TAX_FORMULAS_MOCKDATA.json" },
+  { id: "companies", url: "./COMPANIES_MOCKDATA.json" },
+  { id: "worksites", url: "./COMPANIES_MOCKDATA.json" },
+  { id: "worksiteCompanies", url: "./WORKSITES_MOCKDATA.json" },
+  { id: "recentUsage", url: "./RECENT_USAGE.json" },
   { id: "selectSamplePage", url: "./RECENT_USAGE.json" }
 ];
 
