@@ -56,7 +56,7 @@ import {
 export const metaDataApiMap = {
   bSITaxes: GET_USER_DATA_QUERIES,
   customOverridesForAuthority: GET_USER_DATA_QUERIES,
-  populatedV3States: GET_USER_DATA_QUERIES,
+  populatedV3States: GET_ALL_POPULATED_V3_STATES,
   bSITaxes: GET_USER_DATA_QUERIES,
   companies: GET_USER_DATA_QUERIES,
   customGarnishmentFormula: GET_USER_DATA_QUERIES,
@@ -91,7 +91,6 @@ export const metaDataApiMap = {
   customPayments: GET_CUSTOM_PAYMENTS_LIST,
   customTaxCodes: GET_CUSTOM_TAX_CODES,
   allBSIPlans: GET_ALL_BSI_PLANS,
-  populateV3States: GET_ALL_POPULATED_V3_STATES,
   experienceRates: GET_EXPERIENCE_RATES,
   sampleDateFields: GET_SAMPLE_DATE_FIELD_DATA,
   supplementalMethods: GET_SUPPLEMENTAL_INFO_FOR_TAX,
