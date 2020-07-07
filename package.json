@@ -49,6 +49,7 @@
     "css-loader": "^0.28.9",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "es6-promise": "^4.2.8",
     "exit": "^0.1.2",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.2",
