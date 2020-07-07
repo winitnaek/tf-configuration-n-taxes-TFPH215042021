@@ -49,14 +49,18 @@ class UserDataQueries extends React.Component {
     };
 
     this.toggle = (id, title) => {
-      const payload = { data: {}, mode: "New" };
-      this.props.setFormData(payload);
-      this.setState({
-        isOpen: true,
-        pgid: id,
-        formTitle: title,
-        isfilterform: true
-      });
+      if (!fieldData[id]) {
+        this.renderMe(id);
+      } else {
+        const payload = { data: {}, mode: "New" };
+        this.props.setFormData(payload);
+        this.setState({
+          isOpen: true,
+          pgid: id,
+          formTitle: title,
+          isfilterform: true
+        });
+      }
     };
 
     this.handleClose = () => {
@@ -102,7 +106,7 @@ class UserDataQueries extends React.Component {
             return value === "UQ" && type !== "page" ? (
               <Col xs="6">
                 <h3>
-                  <Button color="link" onClick={() => this.renderMe(id)}>
+                  <Button color="link" onClick={() => this.toggle(id, label)}>
                     {label}
                   </Button>
                 </h3>
