@@ -172,7 +172,8 @@ export function buildGridDataInput(pageid, store) {
     riskClass: filterData.riskClass,
     taxType: filterData.taxType,
     formNumber: filterData.formNumber,
-    courtesy: filterData.courtesy
+    courtesy: filterData.courtesy,
+    authCode: filterData.authorityCode
   };
   return input;
 }
