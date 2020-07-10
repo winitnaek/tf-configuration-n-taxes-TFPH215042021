@@ -11,7 +11,7 @@ import TFHome from "./app/home/home.js";
 import { closeForm, setFormData } from "./app/actions/formActions";
 import { setFilterFormData } from "./app/actions/filterFormActions";
 import TestHarness from "./app/test/TestHarness";
-import CustomComp from './app/components/CustomComp';
+import CustomComp from "./app/components/CustomComp";
 import * as fieldData from "./app/metadata/fieldData";
 
 let store = configureStore();
@@ -40,6 +40,14 @@ if (!sessionStorage.getItem("up")) {
     let thPerm = [1, 1, 1, 1, 0];
     let noOfPerm = Object.keys(userdata.applications[0].permissions).length;
     userdata.applications[0].permissions["TH"] = thPerm;
+    userdata.applications[0].permissions["EG"] = thPerm;
+    userdata.applications[0].permissions["GG"] = thPerm;
+    userdata.applications[0].permissions["AO"] = thPerm;
+    userdata.applications[0].permissions["CP"] = thPerm;
+    userdata.applications[0].permissions["CT"] = thPerm;
+    userdata.applications[0].permissions["GC"] = thPerm;
+    userdata.applications[0].permissions["LI"] = thPerm;
+    userdata.applications[0].permissions["TEDO"] = thPerm;
     let up = JSON.stringify(userdata);
     sessionStorage.setItem("up", up);
   } else {
@@ -109,8 +117,8 @@ function renderComponent(elem, pageid, pid) {
   let metaData = compMetaData(pageid);
   griddataAPI
     .getGridData(pageid, gridInput)
-    .then((response) => response)
-    .then((griddata) => {
+    .then(response => response)
+    .then(griddata => {
       ReactDOM.render(
         <Provider store={store}>
           <CustomGrid
@@ -264,13 +272,7 @@ function setAppUserIDAndDataset(dataset, userid) {
   APP_DATASET = dataset;
   APP_USERID = userid;
 }
-var CP_RIGHTS,
-  CT_RIGHTS,
-  CF_RIGHTS,
-  CFC_RIGHTS,
-  WS_RIGHTS,
-  UQ_RIGHTS,
-  ALL_RIGHTS;
+var CP_RIGHTS, CT_RIGHTS, CF_RIGHTS, CFC_RIGHTS, WS_RIGHTS, UQ_RIGHTS, ALL_RIGHTS;
 function setCPRights(perm) {
   CP_RIGHTS = setPerms(perm);
 }
@@ -319,10 +321,7 @@ function setModulePermissions(apps) {
   apps.forEach(function (app) {
     if (app.id == "73b9a516-c0ca-43c0-b0ae-190e08d77bcc") {
       app.accessIds.forEach(function (access) {
-        if (
-          access.id == "162ebe14-8d87-44e1-a786-c9365c9d5cd8" &&
-          access.visible == true
-        ) {
+        if (access.id == "162ebe14-8d87-44e1-a786-c9365c9d5cd8" && access.visible == true) {
           // setCPRights(app.permissions.CP);
           // setCTRights(app.permissions.CT);
           // setCFRights(app.permissions.CF)
@@ -357,7 +356,7 @@ const resolveTemplates = async () => {
   return templates;
 };
 
-const initIndexPage = (templData) => {
+const initIndexPage = templData => {
   let mnfst = manifest._manifest;
   console.debug("manifest =>", mnfst);
 
@@ -367,12 +366,8 @@ const initIndexPage = (templData) => {
   }
 
   if (!mnfst.name || !mnfst.desc) {
-    console.error(
-      "ERROR: Manifest missing application name and/or application description!"
-    );
-    throw new Error(
-      "Application name and/or application description not found!"
-    );
+    console.error("ERROR: Manifest missing application name and/or application description!");
+    throw new Error("Application name and/or application description not found!");
   }
   $("#" + c.appTitleId).html($("#" + c.appTitleId).html() + " " + mnfst.desc);
   $("#" + c.appNameId).html($("#" + c.appNameId).html() + " " + mnfst.desc);
@@ -403,8 +398,8 @@ const initIndexPage = (templData) => {
   }
 };
 
-const getVisibleAreas = (mnfst) => {
-  let visibleAreas = mnfst.areas.filter((a) => {
+const getVisibleAreas = mnfst => {
+  let visibleAreas = mnfst.areas.filter(a => {
     return a.visible === true;
   });
   console.debug("visible areas =>", visibleAreas);
@@ -419,29 +414,27 @@ const getVisibleAreas = (mnfst) => {
   return visibleAreas;
 };
 
-const getSearchData = (mnfst) => {
+const getSearchData = mnfst => {
   console.debug("search data =>", mnfst.search);
   let searchdata = mnfst.search;
   return searchdata;
 };
 
-const checkIfAreasDefined = (areas) => {
+const checkIfAreasDefined = areas => {
   if (!areas) {
     console.error("ERROR: At least one area must be defined in manifest!");
     throw new Error("No areas defined in manifest!");
   }
 };
 
-const renderWelcomePage = (elem) => {
+const renderWelcomePage = elem => {
   document.getElementById(elem).innerHTML =
     "<h3>Welcome to the Application Module Test Page. Please click on the links to load your single page application.</h3>";
 };
 
 const unMountNMountContainerNode = () => {
   $("div").remove("#" + c.appContentId);
-  $(
-    '<div id="' + c.appContentId + '" class="main-content p-5 m-5"></div>'
-  ).insertAfter($("#" + c.navId));
+  $('<div id="' + c.appContentId + '" class="main-content p-5 m-5"></div>').insertAfter($("#" + c.navId));
 };
 
 module.exports = renderTFApplication;

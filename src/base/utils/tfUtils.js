@@ -273,10 +273,14 @@ export function deleteUrl(id) {
   });
   let url = generateUrl.buildURL(deldataMap.url);
   if (isMock()) {
+    if (mockDataMapper[id]) {
+      url = mockDataMapper[id];
+    } else {
     let deldataMap = mockdelmap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
     });
     url = deldataMap.url;
+  }
   }
   console.log("Delete URL %s for page %s", url, id);
   return url;
@@ -289,10 +293,14 @@ export function saveUrl(id) {
   });
   let url = generateUrl.buildURL(saveDataMap.url);
   if (isMock()) {
+    if (mockDataMapper[id]) {
+      url = mockDataMapper[id];
+    } else {
     let saveDataMap = mocksavmap.find(metadatam => {
       if (id == metadatam.id) return metadatam;
     });
     url = saveDataMap.url;
+  }
   }
   console.log("Save URL %s for page %s", url, id);
   return url;
@@ -334,8 +342,6 @@ const mocksavmap = [
   { id: "worksiteCompanies", url: "./SAVE_WORKSITE_COMPANIE_MOCKDATA.json" }
 ];
 const mockdatamap = [
-  { id: "customPayments", url: "./CUSTOM_PAYMENTS_MOCKDATA.json" },
-  { id: "customTaxCodes", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
   { id: "sampleDateFields", url: "./DATE_FIELD_DOC_MOCKDATA.json" },
   { id: "customFormulas", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
   { id: "customTaxFormulas", url: "./CUSTOM_TAX_FORMULAS_MOCKDATA.json" },
