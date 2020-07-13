@@ -25,22 +25,6 @@ export const tftools = [
     link: true
   },
   {
-    value: "CP",
-    label: "Custom Payments",
-    desc: "Custom Payments",
-    id: "customPayments",
-    type: UI_COMP,
-    link: true
-  },
-  {
-    value: "CT",
-    label: "Custom Tax Codes",
-    desc: "Custom Tax Codes",
-    id: "customTaxCodes",
-    type: UI_COMP,
-    link: true
-  },
-  {
     value: "CF",
     label: "Custom Formulas",
     desc: "Custom Formulas",

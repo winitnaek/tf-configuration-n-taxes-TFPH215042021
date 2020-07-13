@@ -100,17 +100,26 @@ export const metaDataApiMap = {
   worksiteCompanies: GET_WORKSITES_LOCATIONS,
   companies: GET_COMPANIES,
   customTaxFormulas: GET_CUSTOM_TAX_FORMULAS,
-  selectSamplePage: GET_CUSTOM_TAX_FORMULA
+  selectSamplePage: GET_CUSTOM_TAX_FORMULA,
+  // TODO: Update below Urls after get the actual Urls
+  employeeGroup: GET_CUSTOM_TAX_CODES,
+  garnishmentGroup: GET_CUSTOM_TAX_CODES,
+  addressOverrides: GET_CUSTOM_TAX_CODES,
+  customGarnishment: GET_CUSTOM_TAX_CODES,
+  taxEffectiveDateOverrides: GET_CUSTOM_TAX_CODES,
+  logins: GET_CUSTOM_TAX_CODES
 };
 
 export const deleteDataApiMap = {
   customPayments: DELTE_CUSTOM_PAYMENT,
-  customTaxCodes: DELETE_CUSTOM_TAX_CODES
+  customTaxCodes: DELETE_CUSTOM_TAX_CODES,
+  addressOverrides: DELTE_CUSTOM_PAYMENT
 };
 
 export const saveDataApiMap = {
   customPayments: SAVE_CUSTOM_PAYMENT,
   customTaxCodes: SAVE_CUSTOM_TAX_CODES,
+  addressOverrides: SAVE_CUSTOM_PAYMENT,
   customFormulas: SAVE_CUSTOM_FORMULAS,
   worksites: SAVE_WORKSITES,
   worksiteCompanies: SAVE_WORKSITES_LOCATIONS,

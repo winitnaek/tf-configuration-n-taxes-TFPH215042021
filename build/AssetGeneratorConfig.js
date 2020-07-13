@@ -5,7 +5,8 @@ const getAssetGeneratorConfig = environment => {
     sourceFolders: [
       "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/readonlyfilter/",
       "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/readonlygrid/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/autoCompleteMockData/"
+      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/autoCompleteMockData/",
+      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type1grid/"
     ],
     groupBy: [
       {
