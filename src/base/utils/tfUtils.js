@@ -3,6 +3,7 @@ import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
 import { generateUrl } from "bsiuilib";
+import {authCodeauthNamerenderer,taxTypeCodeNamerenderer} from '../../app/metadata/cellsrenderer';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -49,12 +50,24 @@ export function openHelp(pageid) {
  */
 export function compMetaData(pageid) {
   if (metaData[pageid]) {
-    return metaData[pageid];
+    let metadata = checkForStaticRender(metaData[pageid])
+    return metadata;
   }
   let metadataMap = metadatamap.find(metadatam => {
     if (pageid == metadatam.id) return metadatam;
   });
-  return metadataMap.metadata;
+  let metadata = checkForStaticRender(metadataMap.metadata)
+  return metadata;
+}
+export function checkForStaticRender(metadata) {
+  metadata.griddef.columns.forEach(function (value) {
+    if (value.rendererStaticInput && value.rendererStaticInput == 'authCodeauthNamerenderer') {
+      value.cellsrenderer = authCodeauthNamerenderer;
+    } else if (value.rendererStaticInput && value.rendererStaticInput == 'taxTypeCodeNamerenderer') {
+      value.cellsrenderer = taxTypeCodeNamerenderer;
+    }
+  });
+  return metadata;
 }
 /**
  * compPermissions

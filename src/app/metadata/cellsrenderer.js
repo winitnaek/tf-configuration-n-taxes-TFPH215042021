@@ -1,7 +1,24 @@
-import ReusableGrid from '../components/ReusableGrid'
 import React from 'react'; 
 let row = null;
 
+export function authCodeauthNamerenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	return rowdata.authorityCode +'-' + rowdata.authorityName;
+}
+export function taxTypeCodeNamerenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	return rowdata.taxType + '-' + rowdata.taxTypeName;
+}
 export function editCellsRenderer(
 	ndex,
 	datafield,
