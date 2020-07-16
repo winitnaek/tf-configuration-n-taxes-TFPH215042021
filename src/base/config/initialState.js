@@ -45,22 +45,6 @@ export default {
       id: "worksites",
       type: "comp",
       link: false
-    },
-    {
-      value: "SS",
-      label: "Select Sample Page",
-      desc: "Select Sample Page",
-      id: "selectSamplePage",
-      type: "comp",
-      link: false
-    },
-    {
-      value: "DF",
-      label: "Date Field Doc",
-      desc: "Date Field Doc",
-      id: "dateFieldDoc",
-      type: "page",
-      link: false
     }
   ],
 

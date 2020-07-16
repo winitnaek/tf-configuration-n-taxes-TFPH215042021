@@ -7,7 +7,7 @@ import {
   GET_EXPERIENCE_RATES,
   GET_SAMPLE_DATE_FIELD_DATA,
   GET_SUPPLEMENTAL_INFO_FOR_TAX,
-  GET_RECENT_USAG,
+  GET_RECENT_USAGE,
   GET_CUSTOM_FORMULAS,
   GET_WORKSITES,
   GET_WORKSITES_LOCATIONS,
@@ -94,7 +94,7 @@ export const metaDataApiMap = {
   experienceRates: GET_EXPERIENCE_RATES,
   sampleDateFields: GET_SAMPLE_DATE_FIELD_DATA,
   supplementalMethods: GET_SUPPLEMENTAL_INFO_FOR_TAX,
-  recentUsage: GET_RECENT_USAG,
+  recentUsage: GET_RECENT_USAGE,
   customFormulas: GET_CUSTOM_FORMULAS,
   worksites: GET_WORKSITES,
   worksiteCompanies: GET_WORKSITES_LOCATIONS,
@@ -107,7 +107,10 @@ export const metaDataApiMap = {
   addressOverrides: GET_CUSTOM_TAX_CODES,
   customGarnishment: GET_CUSTOM_TAX_CODES,
   taxEffectiveDateOverrides: GET_CUSTOM_TAX_CODES,
-  logins: GET_CUSTOM_TAX_CODES
+  logins: GET_CUSTOM_TAX_CODES,
+  company: GET_COMPANIES,
+  unemploymentOverrides: GET_CUSTOM_FORMULAS,
+  unemploymentCompanyOverrides: GET_CUSTOM_TAX_FORMULAS
 };
 
 export const deleteDataApiMap = {

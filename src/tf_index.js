@@ -34,20 +34,12 @@ import griddataAPI from "./app/api/griddataAPI";
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
   var userProfile =
-    '{\r\n   "userId":"TF11",\r\n   "firstName":"Isreal",\r\n   "lastName":"Fullerton",\r\n   "dataset":"VINIT",\r\n   "securitytokn":"fhfh484jer843je848rj393jf",\r\n   "branding":"base64ImageData",\r\n   "userTheme":"Default",\r\n   "roles":[\r\n      "ER"\r\n   ],\r\n   "applications":[\r\n      {\r\n         "id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc",\r\n         "name":"TFTools",\r\n         "accessIds":[\r\n            {\r\n               "id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8",\r\n               "visible":true\r\n            }\r\n         ],\r\n         "permissions":{\r\n            "CF":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "CT":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "CP":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ],\r\n            "UQ":[\r\n               1,\r\n               1,\r\n               1,\r\n               1,\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   ],\r\n   "themeList":[\r\n      {\r\n         "id":"Default",\r\n         "name":"Default"\r\n      },\r\n      {\r\n         "id":"HighContrast",\r\n         "name":"High Contrast"\r\n      },\r\n      {\r\n         "id":"WhiteOnBlack",\r\n         "name":"White On Black"\r\n      },\r\n      {\r\n         "id":"BlackOnWhite",\r\n         "name":"Black On White"\r\n      }\r\n   ]\r\n}';
+    '{"userId":"TF11","firstName":"Isreal","lastName":"Fullerton","dataset":"VINIT","securitytokn":"fhfh484jer843je848rj393jf","branding":"base64ImageData","userTheme":"Default","roles":["ER"],"applications":[{"id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc","name":"TFTools","accessIds":[{"id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8","visible":true}],"permissions":{"CF":[1,1,1,1,0],"CT":[1,1,1,1,0],"CP":[1,1,1,1,0],"AO":[1,1,1,1,0],"CO":[1,1,1,1,0],"EG":[1,1,1,1,0],"UQ":[1,1,1,1,0],"GG":[1,1,1,1,0],"GC":[1,1,1,1,0],"LI":[1,1,1,1,0],"TEDO":[1,1,1,1,0]}}],"themeList":[{"id":"Default","name":"Default"},{"id":"HighContrast","name":"High Contrast"},{"id":"WhiteOnBlack","name":"White On Black"},{"id":"BlackOnWhite","name":"Black On White"}]}';
   var userdata = JSON.parse(userProfile);
   if (isMock()) {
     let thPerm = [1, 1, 1, 1, 0];
     let noOfPerm = Object.keys(userdata.applications[0].permissions).length;
     userdata.applications[0].permissions["TH"] = thPerm;
-    userdata.applications[0].permissions["EG"] = thPerm;
-    userdata.applications[0].permissions["GG"] = thPerm;
-    userdata.applications[0].permissions["AO"] = thPerm;
-    userdata.applications[0].permissions["CP"] = thPerm;
-    userdata.applications[0].permissions["CT"] = thPerm;
-    userdata.applications[0].permissions["GC"] = thPerm;
-    userdata.applications[0].permissions["LI"] = thPerm;
-    userdata.applications[0].permissions["TEDO"] = thPerm;
     let up = JSON.stringify(userdata);
     sessionStorage.setItem("up", up);
   } else {
