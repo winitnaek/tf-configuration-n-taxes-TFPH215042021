@@ -187,6 +187,9 @@ export function buildGridDataInput(pageid, store) {
     formNumber: filterData.formNumber,
     courtesy: filterData.courtesy,
     authCode: filterData.authorityCode,
+    garnishmentGroupCode:filterData.garnishmentGroupCode,
+    groupCode:filterData.groupCode,
+    exemptStat:filterData.exemptionStatus,
     customTaxCode:(filterData.customTaxCode ==="ALL"?"":filterData.customTaxCode)
   };
   return input;
