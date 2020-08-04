@@ -190,7 +190,8 @@ export function buildGridDataInput(pageid, store) {
     garnishmentGroupCode:filterData.garnishmentGroupCode,
     groupCode:filterData.groupCode,
     exemptStat:filterData.exemptionStatus,
-    customTaxCode:(filterData.customTaxCode ==="ALL"?"":filterData.customTaxCode)
+    customTaxCode:(filterData.customTaxCode ==="ALL"?"":filterData.customTaxCode),
+    pmtUsrCode:filterData.typeOfData
   };
   return input;
 }
