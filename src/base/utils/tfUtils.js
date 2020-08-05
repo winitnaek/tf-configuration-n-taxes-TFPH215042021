@@ -59,6 +59,20 @@ export function compMetaData(pageid) {
   let metadata = checkForStaticRender(metadataMap.metadata)
   return metadata;
 }
+export function decorateData(griddata,pageid){
+  if(pageid=='taxabilityForAuthority'){
+    let state = store.getState();
+    let filterData = state.formFilterData;
+    console.log(state);
+    griddata.forEach(function (value) {
+      value.authorityCode = filterData.authorityCode;
+    });
+    return griddata
+  }else{
+    return griddata
+  }
+  
+}
 export function checkForStaticRender(metadata) {
   metadata.griddef.columns.forEach(function (value) {
     if (value.rendererStaticInput && value.rendererStaticInput == 'authCodeauthNamerenderer') {
@@ -191,10 +205,18 @@ export function buildGridDataInput(pageid, store) {
     groupCode:filterData.groupCode,
     exemptStat:filterData.exemptionStatus,
     customTaxCode:(filterData.customTaxCode ==="ALL"?"":filterData.customTaxCode),
-    pmtUsrCode:filterData.typeOfData
+    pmtUsrCode:getPmtUsrCode(filterData)
   };
   return input;
 }
+export function getPmtUsrCode(filterData){
+  if(filterData && filterData.typeOfData){
+    return filterData.typeOfData;
+  }else if(filterData && filterData.customTypeOfData){
+    return filterData.customTypeOfData;
+  }
+}
+
 export function buildAutoCompSelInput(pageid, store, patten) {
   let state = store.getState();
   console.log(state);
