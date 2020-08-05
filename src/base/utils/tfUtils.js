@@ -4,6 +4,7 @@ import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
 import { generateUrl } from "bsiuilib";
 import {authCodeauthNamerenderer,taxTypeCodeNamerenderer} from '../../app/metadata/cellsrenderer';
+import store from '../../tf_index';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
