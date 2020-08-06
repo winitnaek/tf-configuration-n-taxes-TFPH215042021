@@ -43,6 +43,7 @@ import {
   GET_WAGE_REPORTING_METHOD_AUTOCOMPLETE_MOCKDATA,
   GET_FORMULA_AUTOCOMPLETE_MOCKDATA,
   GET_RESIDENT_STATE_AUTOCOMPLETE_MOCKDATA,
+  GET_CUSTOM_GARNISMENT_CODE_AUTOCOMPLETE,
   DELTE_CUSTOM_PAYMENT,
   DELETE_CUSTOM_TAX_CODES,
   SAVE_CUSTOM_PAYMENT,
@@ -112,13 +113,37 @@ export const metaDataApiMap = {
   logins: GET_CUSTOM_TAX_CODES,
   company: GET_COMPANIES,
   unemploymentOverrides: GET_CUSTOM_FORMULAS,
-  unemploymentCompanyOverrides: GET_CUSTOM_TAX_FORMULAS
+  unemploymentCompanyOverrides: GET_CUSTOM_TAX_FORMULAS,
+  optionalRateOverrides: GET_CUSTOM_FORMULAS,
+  optionalRateOverride: GET_CUSTOM_TAX_FORMULAS,
+  customNexusData: GET_CUSTOM_FORMULAS,
+  customNexusCompanyData: GET_CUSTOM_TAX_FORMULAS,
+  disposableRateOverrides: GET_CUSTOM_FORMULAS,
+  disposableOverride: GET_CUSTOM_TAX_FORMULAS,
+  customGarnishmentFormulas: GET_CUSTOM_FORMULAS,
+  customGarnishmentTaxFormulas: GET_CUSTOM_TAX_FORMULAS,
+  customPaymentExceptions: GET_CUSTOM_FORMULAS,
+  customPaymentTaxExceptions: GET_CUSTOM_TAX_FORMULAS,
+  customTaxPaymentOverrides: GET_CUSTOM_FORMULAS,
+  customTaxPaymentOverride: GET_CUSTOM_TAX_FORMULAS,
+  paymentOverrides: GET_CUSTOM_FORMULAS,
+  paymentOverride: GET_CUSTOM_TAX_FORMULAS,
+  reciprocalOverrides: GET_CUSTOM_FORMULAS,
+  reciprocalOverride: GET_CUSTOM_TAX_FORMULAS,
+  viewDisposableOverride: GET_CUSTOM_TAX_FORMULAS,
+  messageViewer: GET_CUSTOM_TAX_FORMULAS,
+  messagesViewer: GET_CUSTOM_TAX_FORMULAS,
+  paServicesTaxReport: GET_CUSTOM_TAX_FORMULAS,
+  paServiceTaxReport: GET_CUSTOM_TAX_FORMULAS
 };
 
 export const deleteDataApiMap = {
   customPayments: DELTE_CUSTOM_PAYMENT,
   customTaxCodes: DELETE_CUSTOM_TAX_CODES,
-  addressOverrides: DELTE_CUSTOM_PAYMENT
+  addressOverrides: DELTE_CUSTOM_PAYMENT,
+  taxEffectiveDateOverrides: DELTE_CUSTOM_PAYMENT,
+  customTaxPaymentOverride: DELTE_CUSTOM_PAYMENT,
+  messageViewer: DELTE_CUSTOM_PAYMENT
 };
 
 export const saveDataApiMap = {
@@ -128,7 +153,11 @@ export const saveDataApiMap = {
   customFormulas: SAVE_CUSTOM_FORMULAS,
   worksites: SAVE_WORKSITES,
   worksiteCompanies: SAVE_WORKSITES_LOCATIONS,
-  customTaxFormulas: SAVE_CUSTOM_FORMULAS
+  customTaxFormulas: SAVE_CUSTOM_FORMULAS,
+  optionalRateOverride: SAVE_CUSTOM_FORMULAS,
+  unemploymentOverrides: SAVE_CUSTOM_FORMULAS,
+  taxEffectiveDateOverrides: SAVE_CUSTOM_FORMULAS,
+  customTaxPaymentOverride: SAVE_CUSTOM_FORMULAS
 };
 
 export const autoCompleteApiMap = {
@@ -150,6 +179,7 @@ export const autoCompleteApiMap = {
   garnishmentFormula: GET_GARNISMENT_FORMULA_AUTOCOMPLETE,
   garnishmentGroupCode: GET_UDQ_AUTOCOMPLETE,
   customGarnishmentFormula: GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE,
+  customGarnishmentCode: GET_CUSTOM_GARNISMENT_CODE_AUTOCOMPLETE,
   county: GET_COUNTY_AUTOCOMPLETE,
   groupAsync: GET_GROUP_AUTOCOMPLETE,
   groupCode: GET_UDQ_AUTOCOMPLETE,

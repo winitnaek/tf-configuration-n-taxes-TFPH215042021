@@ -25,22 +25,6 @@ export const tftools = [
     link: true
   },
   {
-    value: "CF",
-    label: "Custom Formulas",
-    desc: "Custom Formulas",
-    id: "customFormulas",
-    type: UI_COMP,
-    link: true
-  },
-  {
-    value: "CF",
-    label: "Custom Formulas",
-    desc: "Custom Formulas",
-    id: "customTaxFormulas",
-    type: UI_COMP,
-    link: false
-  },
-  {
     value: "UQ",
     label: "User Data Queries",
     desc: "User Data Queries",
@@ -71,29 +55,17 @@ export const tftools = [
     id: "companies",
     type: UI_COMP,
     link: false
-  },
-  {
-    value: "WS",
-    label: "Worksites",
-    desc: "Worksites",
-    id: "worksites",
-    type: UI_COMP,
-    link: false
-  },
-  {
-    value: "WC",
-    label: "Worksites",
-    desc: "Worksites",
-    id: "worksiteCompanies",
-    type: UI_COMP,
-    link: false
   }
 ];
 
 export const metadatamap = Object.keys(metaDataApiMap).map(pageId => {
+  const _metaData = metaData[pageId];
+  if(_metaData && _metaData.pgdef && _metaData.pgdef.parentConfig && typeof _metaData.pgdef.parentConfig === 'string'){
+    _metaData.pgdef.parentConfig = metaData[_metaData.pgdef.parentConfig]
+  }
   return {
     id: pageId,
-    metadata: metaData[pageId],
+    metadata: _metaData,
     url: metaDataApiMap[pageId]
   };
 });

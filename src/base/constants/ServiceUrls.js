@@ -30,6 +30,7 @@ export const GET_SCHOOL_DISTRICT_AUTOCOMPLETE = "/TaxCodeService/getSchoolDistri
 export const GET_GARNISMENT_FORMULA_AUTOCOMPLETE = "/TaxCodeService/getGarnishmenFormulaAutoCompl";
 export const GET_GARNISMENT_GROUP_CODE_AUTOCOMPLETE = "/TaxCodeService/getGarnishmenGroupCodeAutoCompl";
 export const GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE = "/TaxCodeService/getCustomGarnishmenFormulaAutoCompl";
+export const GET_CUSTOM_GARNISMENT_CODE_AUTOCOMPLETE = "/TaxCodeService/getCustomGarnishmentCodeAutoCompl";
 export const GET_COUNTY_AUTOCOMPLETE = "/TaxCodeService/getCounty";
 export const GET_GROUP_AUTOCOMPLETE = "/TaxCodeService/getGroup";
 export const GET_UDQ_AUTOCOMPLETE = "/TfApiService/getAutocomplete";
