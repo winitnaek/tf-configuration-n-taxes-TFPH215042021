@@ -33,7 +33,6 @@ export const GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE = "/TaxCodeService/getCu
 export const GET_COUNTY_AUTOCOMPLETE = "/TaxCodeService/getCounty";
 export const GET_GROUP_AUTOCOMPLETE = "/TaxCodeService/getGroup";
 export const GET_UDQ_AUTOCOMPLETE = "/TfApiService/getAutocomplete";
-export const GET_USER_TAX_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getUserTax";
 export const GET_TAX_CODE_OVERRIDDEN_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getTaxCodeOverriden";
 export const GET_FORMULA_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getFormulaAutoComplete";
 export const GET_NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getNonResidenceTaxType";

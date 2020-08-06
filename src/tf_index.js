@@ -16,7 +16,7 @@ import * as fieldData from "./app/metadata/fieldData";
 
 let store = configureStore();
 export default store;
-let MOCK = process.env.NODE_ENV === "development" ? true : false;
+let MOCK = process.env.NODE_ENV === "development" ? false : false;
 setIsMock(MOCK);
 import {
   buildModuleAreaLinks,
@@ -24,7 +24,8 @@ import {
   setPerms,
   compMetaData,
   compPermissions,
-  buildGridDataInput
+  buildGridDataInput,
+  decorateData
 } from "./base/utils/tfUtils";
 import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
 import CustomGrid from "./app/components/CustomGrid";
@@ -111,6 +112,7 @@ function renderComponent(elem, pageid, pid) {
     .getGridData(pageid, gridInput)
     .then(response => response)
     .then(griddata => {
+      let griddatanew = decorateData(griddata,pageid);
       ReactDOM.render(
         <Provider store={store}>
           <CustomGrid
@@ -118,7 +120,7 @@ function renderComponent(elem, pageid, pid) {
             metadata={compMetaData}
             pid={pid}
             permissions={compPermissions}
-            griddata={griddata}
+            griddata={griddatanew}
             help={openHelp}
             gridProps={gridProps}
             fieldData={fieldDataX}

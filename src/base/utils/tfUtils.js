@@ -203,12 +203,19 @@ export function buildGridDataInput(pageid, store) {
     courtesy: filterData.courtesy,
     authCode: filterData.authorityCode,
     garnishmentGroupCode:filterData.garnishmentGroupCode,
-    groupCode:filterData.groupCode,
+    groupCode:getGroupcode(filterData),
     exemptStat:filterData.exemptionStatus,
     customTaxCode:(filterData.customTaxCode ==="ALL"?"":filterData.customTaxCode),
     pmtUsrCode:getPmtUsrCode(filterData)
   };
   return input;
+}
+export function getGroupcode(filterData){
+  if(filterData && filterData.groupCode){
+    return filterData.groupCode;
+  }else if(filterData && filterData.employeeGroupCode){
+    return filterData.employeeGroupCode;
+  }
 }
 export function getPmtUsrCode(filterData){
   if(filterData && filterData.typeOfData){
