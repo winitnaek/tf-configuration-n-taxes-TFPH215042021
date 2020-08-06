@@ -4,6 +4,7 @@ import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
 import { generateUrl } from "bsiuilib";
 import {authCodeauthNamerenderer,taxTypeCodeNamerenderer} from '../../app/metadata/cellsrenderer';
+import store from '../../tf_index';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -58,6 +59,20 @@ export function compMetaData(pageid) {
   });
   let metadata = checkForStaticRender(metadataMap.metadata)
   return metadata;
+}
+export function decorateData(griddata,pageid){
+  if(pageid=='taxabilityForAuthority'){
+    let state = store.getState();
+    let filterData = state.formFilterData;
+    console.log(state);
+    griddata.forEach(function (value) {
+      value.authorityCode = filterData.authorityCode;
+    });
+    return griddata
+  }else{
+    return griddata
+  }
+  
 }
 export function checkForStaticRender(metadata) {
   metadata.griddef.columns.forEach(function (value) {
@@ -186,10 +201,23 @@ export function buildGridDataInput(pageid, store) {
     taxType: filterData.taxType,
     formNumber: filterData.formNumber,
     courtesy: filterData.courtesy,
-    authCode: filterData.authorityCode
+    authCode: filterData.authorityCode,
+    garnishmentGroupCode:filterData.garnishmentGroupCode,
+    groupCode:filterData.groupCode,
+    exemptStat:filterData.exemptionStatus,
+    customTaxCode:(filterData.customTaxCode ==="ALL"?"":filterData.customTaxCode),
+    pmtUsrCode:getPmtUsrCode(filterData)
   };
   return input;
 }
+export function getPmtUsrCode(filterData){
+  if(filterData && filterData.typeOfData){
+    return filterData.typeOfData;
+  }else if(filterData && filterData.customTypeOfData){
+    return filterData.customTypeOfData;
+  }
+}
+
 export function buildAutoCompSelInput(pageid, store, patten) {
   let state = store.getState();
   console.log(state);
