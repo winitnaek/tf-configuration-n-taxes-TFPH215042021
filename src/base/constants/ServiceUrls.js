@@ -20,7 +20,6 @@ export const GET_CUSTOM_TAX_FORMULAS = "/TaxCodeService/getCustomFormulaList";
 export const GET_ALL_TAXCODES_AUTOCOMPLETE = "/TaxCodeService/getAllTaxCodesAutocomplete";
 export const GET_ALL_TAXTYPES_AUTOCOMPLETE = "/TaxCodeService/getAllTaxTypeAutocomplete";
 export const GET_PAYMENT_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getPaymentAutoCompl";
-export const GET_ALL_RISKCLASS_AUTOCOMPLETE = "/TaxCodeService/getRiskClassAutoCompl";
 export const GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE = "/TaxCodeService/getAutocompleteAuthorities";
 export const GET_PLACE_CODE_AUTOCOMPLETE = "/TaxCodeService/getPlaceCodeAutoCompl";
 export const GET_SCHOOL_DISTRICT_AUTOCOMPLETE = "/TaxCodeService/getSchoolDistrictAutoCompl";
