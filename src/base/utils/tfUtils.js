@@ -192,7 +192,7 @@ export function buildGridDataInput(pageid, store) {
     dataset: appDataset(),
     userId: appUserId(),
     //companyCode: filterData.companyCode,
-    companyCode: filterData.company,
+    companyCode: getCompanyCode(filterData),
     companyName: filterData.companyName,
     taxCode: filterData.taxCode,
     taxName: filterData.name,
@@ -209,6 +209,13 @@ export function buildGridDataInput(pageid, store) {
     pmtUsrCode:getPmtUsrCode(filterData)
   };
   return input;
+}
+export function getCompanyCode(filterData){
+  if(filterData && filterData.company){
+    return filterData.company;
+  }else if(filterData && filterData.companyCode){
+    return filterData.companyCode;
+  }
 }
 export function getGroupcode(filterData){
   if(filterData && filterData.groupCode){

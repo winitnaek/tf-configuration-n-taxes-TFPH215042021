@@ -19,7 +19,6 @@ export const GET_WORKSITES_LOCATIONS = "/CompanyService/getWorksiteManagementLoc
 export const GET_CUSTOM_TAX_FORMULAS = "/TaxCodeService/getCustomFormulaList";
 export const GET_ALL_TAXCODES_AUTOCOMPLETE = "/TaxCodeService/getAllTaxCodesAutocomplete";
 export const GET_ALL_TAXTYPES_AUTOCOMPLETE = "/TaxCodeService/getAllTaxTypeAutocomplete";
-export const GET_ALL_COMPCODE_AUTOCOMPLETE = "/TaxCodeService/getCompanyCodeAutoCompl";
 export const GET_PAYMENT_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getPaymentAutoCompl";
 export const GET_ALL_RISKCLASS_AUTOCOMPLETE = "/TaxCodeService/getRiskClassAutoCompl";
 export const GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE = "/TaxCodeService/getAutocompleteAuthorities";
