@@ -1,8 +1,6 @@
 export const GET_USER_DATA_QUERIES = "/TfApiService/userDataQueries";
-
 export const GET_CUSTOM_PAYMENTS_LIST = "/PaymentsService/getCustomPaymentList";
 export const GET_CUSTOM_TAX_CODES = "/TaxCodeService/getCustomTaxCodesList";
-export const GET_ALL_BSI_PLANS = "/PaymentsService/getMasterPaymentList";
 export const GET_ALL_POPULATED_V3_STATES = "/TfApiService/getAllPopulatedV3States";
 export const GET_EXPERIENCE_RATES = "/TfApiService/userDataQueries";
 export const GET_RESIDENT_STATE_AUTOCOMPLETE_MOCKDATA = "/TfApiService/getResidentState";
