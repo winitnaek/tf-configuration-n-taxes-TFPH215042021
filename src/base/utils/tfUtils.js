@@ -198,7 +198,7 @@ export function buildGridDataInput(pageid, store) {
     taxName: filterData.name,
     startdate: stDate,
     riskClass: filterData.riskClass,
-    taxType: filterData.taxType,
+    taxType: getTaxType(filterData),
     formNumber: filterData.formNumber,
     courtesy: filterData.courtesy,
     authCode: filterData.authorityCode,
@@ -209,6 +209,13 @@ export function buildGridDataInput(pageid, store) {
     pmtUsrCode:getPmtUsrCode(filterData)
   };
   return input;
+}
+export function getTaxType(filterData){
+  if(filterData && filterData.taxType){
+    return filterData.taxType;
+  }else if(filterData && filterData.garnishParamTaxType){
+    return filterData.garnishParamTaxType;
+  }
 }
 export function getCompanyCode(filterData){
   if(filterData && filterData.company){
