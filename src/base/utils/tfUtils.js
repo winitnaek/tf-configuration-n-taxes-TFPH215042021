@@ -182,8 +182,8 @@ export function buildGridDataInput(pageid, store) {
   let filterData = state.formFilterData;
   console.log(state);
   let stDate = "";
-  if (filterData.startDate) {
-    let dt = filterData.startDate.split("-");
+  if (filterData.startDate || filterData.startdate) {
+    let dt = filterData.startDate ? filterData.startDate.split("-") : filterData.startdate.split("-");
     stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
   }
 
