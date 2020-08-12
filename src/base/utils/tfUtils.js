@@ -206,7 +206,8 @@ export function buildGridDataInput(pageid, store) {
     groupCode:getGroupcode(filterData),
     exemptStat:filterData.exemptionStatus,
     customTaxCode:(filterData.customTaxCode ==="ALL"?"":filterData.customTaxCode),
-    pmtUsrCode:getPmtUsrCode(filterData)
+    pmtUsrCode:getPmtUsrCode(filterData),
+    formula:filterData.formula
   };
   return input;
 }
