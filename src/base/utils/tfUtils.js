@@ -207,7 +207,8 @@ export function buildGridDataInput(pageid, store) {
     exemptStat:filterData.exemptionStatus,
     customTaxCode:(filterData.customTaxCode ==="ALL"?"":filterData.customTaxCode),
     pmtUsrCode:getPmtUsrCode(filterData),
-    formula:filterData.formula
+    formula:filterData.formula,
+    formNumber:filterData.formNumber
   };
   return input;
 }
