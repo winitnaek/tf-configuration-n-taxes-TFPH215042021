@@ -31,7 +31,6 @@ export const GET_COUNTY_AUTOCOMPLETE = "/TaxCodeService/getCounty";
 export const GET_GROUP_AUTOCOMPLETE = "/TaxCodeService/getGroup";
 export const GET_UDQ_AUTOCOMPLETE = "/TfApiService/getAutocomplete";
 export const GET_TAX_CODE_OVERRIDDEN_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getTaxCodeOverriden";
-export const GET_FORMULA_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getFormulaAutoComplete";
 export const GET_NON_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getNonResidenceTaxType";
 export const GET_RESIDENCE_TAX_TYPE_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getResidenceTaxType";
 export const GET_TAX_CODE_RECIPROCATE_AUTOCOMPLETE_MOCKDATA = "/TaxCodeService/getTaxCodeReciprocate";

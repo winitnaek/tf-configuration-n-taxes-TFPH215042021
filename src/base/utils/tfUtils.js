@@ -247,7 +247,11 @@ export function buildAutoCompSelInput(pageid, store, patten) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    pattern: patten
+    pattern: patten,
+    taxCode:"BSI00000000",//samplevalues - update it with value of field from filter
+    taxType:"001",//samplevalues - update it with value of field from filter
+    formula:"1",//samplevalues - update it with value of field from filter
+    startdate:"08/12/2020"//samplevalues - update it with value of field from filter
   };
   return input;
 }
