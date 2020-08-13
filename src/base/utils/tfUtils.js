@@ -3,7 +3,7 @@ import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
 import { generateUrl } from "bsiuilib";
-import {authCodeauthNamerenderer,taxTypeCodeNamerenderer} from '../../app/metadata/cellsrenderer';
+import {authCodeauthNamerenderer,taxTypeCodeNamerenderer,courtesyRenderer} from '../../app/metadata/cellsrenderer';
 import store from '../../tf_index';
 /**
  * buildModuleAreaLinks
@@ -80,7 +80,10 @@ export function checkForStaticRender(metadata) {
       value.cellsrenderer = authCodeauthNamerenderer;
     } else if (value.rendererStaticInput && value.rendererStaticInput == 'taxTypeCodeNamerenderer') {
       value.cellsrenderer = taxTypeCodeNamerenderer;
-    }
+    }  else if (value.rendererStaticInput && value.rendererStaticInput == 'courtesyRenderer') {
+      value.cellsrenderer = courtesyRenderer;
+    } 
+    
   });
   return metadata;
 }

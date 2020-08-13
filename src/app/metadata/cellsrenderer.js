@@ -19,6 +19,20 @@ export function taxTypeCodeNamerenderer(ndex,
 ) {
 	return rowdata.taxType + '-' + rowdata.taxTypeName;
 }
+export function courtesyRenderer(
+  ndex,
+  datafield,
+  value,
+  defaultvalue,
+  column,
+  rowdata
+) {
+  if (rowdata.courtesy) {
+	return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">On</div>';
+  } else {
+    return "";
+  }
+}
 export function editCellsRenderer(
 	ndex,
 	datafield,
