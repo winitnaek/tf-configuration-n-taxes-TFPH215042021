@@ -185,8 +185,8 @@ export function buildGridDataInput(pageid, store) {
   let filterData = state.formFilterData;
   console.log(state);
   let stDate = "";
-  if (filterData.startDate) {
-    let dt = filterData.startDate.split("-");
+  if (filterData.startDate || filterData.startdate) {
+    let dt = filterData.startDate ? filterData.startDate.split("-") : filterData.startdate.split("-");
     stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
   }
 
@@ -244,7 +244,7 @@ export function getPmtUsrCode(filterData){
   }
 }
 
-export function buildAutoCompSelInput(pageid, store, patten) {
+export function buildAutoCompSelInput(pageid, store, patten, formValues={}) {
   let state = store.getState();
   console.log(state);
   let input = {
@@ -252,12 +252,9 @@ export function buildAutoCompSelInput(pageid, store, patten) {
     dataset: appDataset(),
     userId: appUserId(),
     pattern: patten,
-    taxCode:"BSI00000000",//samplevalues - update it with value of field from filter
-    taxType:"001",//samplevalues - update it with value of field from filter
-    formula:"1",//samplevalues - update it with value of field from filter
-    startdate:"08/12/2020"//samplevalues - update it with value of field from filter
   };
-  return input;
+  
+  return Object.assign(input, formValues);
 }
 export function buildDeleteInput(pageid, store) {
   let state = store.getState();

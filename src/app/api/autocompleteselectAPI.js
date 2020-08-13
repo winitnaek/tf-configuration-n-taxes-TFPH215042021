@@ -2,8 +2,8 @@ import { appError, getAdminErrorMessage } from 'bsiuilib';
 import { autocompleteURL, reqInfo, buildAutoCompSelInput } from '../../base/utils/tfUtils';
 import store from '../../tf_index';
 class autocompleteSelectAPI {
-  static getAutoCompleteData(fieldId, query) {
-    let autoCompInput = buildAutoCompSelInput(fieldId, store, query);
+  static getAutoCompleteData(fieldId, query, formValues={}) {
+    let autoCompInput = buildAutoCompSelInput(fieldId, store, query, formValues);
     let url = autocompleteURL(fieldId);
     let tt = JSON.stringify(autoCompInput);
     return fetch(url, reqInfo(tt))
