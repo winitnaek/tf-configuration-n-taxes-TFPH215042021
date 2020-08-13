@@ -202,7 +202,7 @@ export function buildGridDataInput(pageid, store) {
     startdate: stDate,
     riskClass: filterData.riskClass,
     taxType: getTaxType(filterData),
-    formNumber: filterData.formNumber,
+    formNumber: getFormNum(filterData),
     courtesy: filterData.courtesy,
     authCode: filterData.authorityCode,
     garnishmentGroupCode:filterData.garnishmentGroupCode,
@@ -210,10 +210,16 @@ export function buildGridDataInput(pageid, store) {
     exemptStat:filterData.exemptionStatus,
     customTaxCode:(filterData.customTaxCode ==="ALL"?"":filterData.customTaxCode),
     pmtUsrCode:getPmtUsrCode(filterData),
-    formula:filterData.formula,
-    formNumber:filterData.formNumber
+    formula:filterData.formula
   };
   return input;
+}
+export function getFormNum(filterData){
+  if(filterData && filterData.formNumber){
+    return filterData.formNumber;
+  }else if(filterData && filterData.formula){
+    return filterData.formula;
+  }
 }
 export function getTaxType(filterData){
   if(filterData && filterData.taxType){
