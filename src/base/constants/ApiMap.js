@@ -49,7 +49,9 @@ import {
   SAVE_WORKSITES,
   GET_CUSTOM_TAXCODES_AUTOCOMPLETE,
   GET_TYPEOF_DATA,
-  GET_UDQ_AUTOCOMPLETE
+  GET_UDQ_AUTOCOMPLETE,
+  SAVE_COMPANY,
+  DELETE_COMPANY
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -139,7 +141,8 @@ export const deleteDataApiMap = {
   addressOverrides: DELTE_CUSTOM_PAYMENT,
   taxEffectiveDateOverrides: DELTE_CUSTOM_PAYMENT,
   customTaxPaymentOverride: DELTE_CUSTOM_PAYMENT,
-  messageViewer: DELTE_CUSTOM_PAYMENT
+  messageViewer: DELTE_CUSTOM_PAYMENT,
+  company:DELETE_COMPANY
 };
 
 export const saveDataApiMap = {
@@ -153,7 +156,8 @@ export const saveDataApiMap = {
   optionalRateOverride: SAVE_CUSTOM_FORMULAS,
   unemploymentOverrides: SAVE_CUSTOM_FORMULAS,
   taxEffectiveDateOverrides: SAVE_CUSTOM_FORMULAS,
-  customTaxPaymentOverride: SAVE_CUSTOM_FORMULAS
+  customTaxPaymentOverride: SAVE_CUSTOM_FORMULAS,
+  company:SAVE_COMPANY
 };
 
 export const autoCompleteApiMap = {

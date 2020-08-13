@@ -256,25 +256,20 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues={}) {
   
   return Object.assign(input, formValues);
 }
-export function buildDeleteInput(pageid, store) {
+export function buildDeleteInput(pageid, store, formdata, mode) {
   let state = store.getState();
-  let filterData = state.formDeleteData;
-  console.log(state);
+  console.log("formdata")
+  console.log(formdata);
   let input = {
     pageId: pageid,
     dataset: appDataset(),
-    userId: appUserId()
+    userId: appUserId(),
+    compCode:getCode(formdata)
   };
   return input;
 }
 export function buildSaveInput(pageid, store, formdata, mode) {
   let state = store.getState();
-  let filterData = state.formSaveData;
-  console.log("buildSaveInput state");
-  console.log(state);
-  console.log("buildSaveInput filterData");
-  console.log(filterData);
-  console.log("buildSaveInput formdata");
   console.log(formdata);
   let editMode = 0;
   if (mode === "New") {
@@ -287,10 +282,22 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     dataset: appDataset(),
     userId: appUserId(),
     editMode: editMode,
-    taxCode: formdata.taxCode,
-    taxName: formdata.name
+    code:getCode(formdata),
+    name:getName(formdata),
+    fein:formdata.fein,
+    courtesy:formdata.courtesy
   };
   return input;
+}
+export function getCode(formdata){
+  if(formdata && formdata.company){
+    return formdata.company;
+  }
+}
+export function getName(formdata){
+  if(formdata && formdata.companyName){
+    return formdata.companyName;
+  }
 }
 export const reqInfo = data => {
   let info = {};

@@ -49,3 +49,5 @@ export const SAVE_CUSTOM_FORMULAS = "/TaxCodeService/saveCustomTaxCode";
 export const SAVE_WORKSITES_LOCATIONS = "/CompanyService/saveWorksiteManagementLocationList";
 export const SAVE_WORKSITES = "/CompanyService/saveWorksiteManagementList";
 export const GET_CUSTOM_TAXCODES_AUTOCOMPLETE = "/TaxCodeService/getCustomTaxCodesAutocomplete";
+export const SAVE_COMPANY="/CompanyService/saveCompany";
+export const DELETE_COMPANY="/CompanyService/deleteCompany";
