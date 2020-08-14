@@ -184,12 +184,7 @@ export function buildGridDataInput(pageid, store) {
   let state = store.getState();
   let filterData = state.formFilterData;
   console.log(state);
-  let stDate = "";
-  if (filterData.startDate || filterData.startdate) {
-    let dt = filterData.startDate ? filterData.startDate.split("-") : filterData.startdate.split("-");
-    stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
-  }
-
+  let stDate = getStartDate(filterData);
   let input = {
     pageId: pageid,
     dataset: appDataset(),
@@ -213,6 +208,16 @@ export function buildGridDataInput(pageid, store) {
     formula:filterData.formula
   };
   return input;
+}
+export function getStartDate(filterData){ 
+  if(filterData && filterData.includeAllDates){
+    return "ALL";
+  }else if (filterData && (filterData.startDate || filterData.startdate)) {
+      let dt = filterData.startDate ? filterData.startDate.split("-") : filterData.startdate.split("-");
+      stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
+  }else{
+    return ""
+  }
 }
 export function getFormNum(filterData){
   if(filterData && filterData.formNumber){
