@@ -196,5 +196,6 @@ export const autoCompleteApiMap = {
   payment: GET_PAYMENT_AUTOCOMPLETE_MOCKDATA,
   customTaxCode:GET_CUSTOM_TAXCODES_AUTOCOMPLETE,
   customTypeOfData:GET_CUSTOM_TYPEOF_DATA,
-  employeeGroupCode: GET_UDQ_AUTOCOMPLETE
+  employeeGroupCode: GET_UDQ_AUTOCOMPLETE,
+  bsiAuth:GET_UDQ_AUTOCOMPLETE
 };

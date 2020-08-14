@@ -199,7 +199,7 @@ export function buildGridDataInput(pageid, store) {
     taxType: getTaxType(filterData),
     formNumber: getFormNum(filterData),
     courtesy: filterData.courtesy,
-    authCode: filterData.authorityCode,
+    authCode: getAuthCode(filterData),
     garnishmentGroupCode:filterData.garnishmentGroupCode,
     groupCode:getGroupcode(filterData),
     exemptStat:filterData.exemptionStatus,
@@ -209,12 +209,20 @@ export function buildGridDataInput(pageid, store) {
   };
   return input;
 }
+export function getAuthCode(filterData){
+  if(filterData && filterData.authorityCode){
+    return filterData.authorityCode;
+  }else if(filterData && filterData.bsiAuth){
+    return filterData.bsiAuth;
+  }
+}
 export function getStartDate(filterData){ 
   if(filterData && filterData.includeAllDates){
     return "ALL";
   }else if (filterData && (filterData.startDate || filterData.startdate)) {
       let dt = filterData.startDate ? filterData.startDate.split("-") : filterData.startdate.split("-");
-      stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
+      let stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
+      return stDate;
   }else{
     return ""
   }
