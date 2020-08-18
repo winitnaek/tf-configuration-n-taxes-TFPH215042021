@@ -283,7 +283,9 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    compCode:getCode(formdata)
+    compCode:getCode(formdata),
+    taxCode:formdata.taxCode,
+    taxName:formdata.name
   };
   return input;
 }
