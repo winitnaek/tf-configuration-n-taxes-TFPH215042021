@@ -304,7 +304,12 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     code:getCode(formdata),
     name:getName(formdata),
     fein:formdata.fein,
-    courtesy:formdata.courtesy
+    courtesy:formdata.courtesy,
+    payCode:formdata.userCode,
+    payType:formdata.payType,
+    payName:formdata.name,
+    e_taxability:formdata.taxability,
+    e_maxLimit:formdata.eemax
   };
   return input;
 }
