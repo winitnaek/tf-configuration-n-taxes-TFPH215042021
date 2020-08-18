@@ -309,7 +309,9 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     payType:formdata.payType,
     payName:formdata.name,
     e_taxability:formdata.taxability,
-    e_maxLimit:formdata.eemax
+    e_maxLimit:formdata.eemax,
+    taxCode:formdata.taxCode,
+    taxName:formdata.name
   };
   return input;
 }
