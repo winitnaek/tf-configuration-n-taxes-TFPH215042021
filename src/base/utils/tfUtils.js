@@ -430,6 +430,18 @@ export function autocompleteURL(id) {
   return url;
 }
 
+export const setTemplateData = (str, data)=>{
+  const regex = /\${(.*?)}/ig;
+  const matches = str.match(regex);
+  if(matches){
+    matches.forEach(match=>{
+      const fieldName = regex.exec(match)[1];
+      str = str.replace(match, data[fieldName])
+    })
+  }
+  return str;
+}
+
 const mockdelmap = [
   { id: "customPayments", url: "./DELETE_CUSTOM_PAYMENT.json" },
   { id: "customTaxCodes", url: "./DELETE_CUSTOM_TAX_CODE.json" }

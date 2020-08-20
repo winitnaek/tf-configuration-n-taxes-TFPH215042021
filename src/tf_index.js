@@ -41,6 +41,7 @@ if (!sessionStorage.getItem("up")) {
     let thPerm = [1, 1, 1, 1, 0];
     let noOfPerm = Object.keys(userdata.applications[0].permissions).length;
     userdata.applications[0].permissions["TH"] = thPerm;
+    userdata.applications[0].permissions["MT"] = thPerm;
     let up = JSON.stringify(userdata);
     sessionStorage.setItem("up", up);
   } else {

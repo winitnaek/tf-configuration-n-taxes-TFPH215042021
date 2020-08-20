@@ -1,8 +1,13 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Col, Row, Button, UncontrolledTooltip, Container } from "reactstrap";
+import { Col, Row, UncontrolledTooltip, Container } from "reactstrap";
 import { tftools } from "../../base/constants/TFTools";
+import Tool from "./Tool";
+
+import { UserDataQueries } from "./UserDataQueries";
+import { mappingTools } from "../metadata/metaData";
+
 import { closeForm, setFormData } from "../actions/formActions";
 import * as styles from "../../base/constants/AppConstants";
 import * as formMetaData from "../metadata/metaData";
@@ -13,76 +18,51 @@ import { DynamicForm } from "bsiuilib";
 import { getRecentUsage } from "../actions/usageActions";
 import autocompleteSelectAPI from "../api/autocompleteselectAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
+import GeneralApi from "../api/generalApi";
 import { setFilterFormData } from "../actions/filterFormActions";
 
-const renderTFCustomComp = "renderTFCustomComp";
-
-export class UserDataQueries extends React.Component {
-  constructor(props) {
-    super(props);
+class MappingTools extends UserDataQueries {
+  constructor() {
+    super();
     this.state = {
-      value: "",
-      helpLabel: "Click here for more info",
-      title: "User Data Queries",
-      pgid: "",
-      formTitle: "",
-      isOpen: false,
-      isfilterform: false,
-      permissions: " ",
-      isOpen: false
+      tools: []
     };
-
     this.OpenHelp = () => {
-      this.props.help("userDataQueries");
-    };
-
-    this.renderMe = (pgid, values, filter) => {
-      filter && this.props.setFilterFormData(values);
-      let data = tftools.filter(tftool => {
-        if (tftool.id == pgid) return tftool;
-      });
-      renderTFApplication("pageContainer", data[0]);
-    };
-
-    this.renderCustom = renderName => {
-      renderTFApplication("pageContainer", renderName);
-    };
-
-    this.toggle = (id, title) => {
-      if (!fieldData[id]) {
-        this.renderMe(id);
-      } else {
-        const payload = { data: {}, mode: "New" };
-        this.props.setFormData(payload);
-        this.setState({
-          isOpen: true,
-          pgid: id,
-          formTitle: title,
-          isfilterform: true
-        });
-      }
-    };
-
-    this.handleClose = () => {
-      this.setState({ isOpen: false });
+      this.props.help("mappingTools");
     };
   }
 
+  componentDidMount() {
+    const { pgid } = this.props;
+    const { tools } = this.state;
+    GeneralApi.getApiData(pgid).then(res => {
+      tftools.forEach(tool => {
+        const { value, type, id, label } = tool;
+        if (value === "MT" && type !== "page" && mappingTools.tools[id]) {
+          tools.push(Object.assign({ label, id, type, value }, mappingTools.tools[id], { items: res[id] }));
+        }
+      });
+      this.setState({
+        tools
+      });
+    });
+  }
+
   render() {
-    const { permissions, cruddef, isfilterform, pgid } = this.state;
+    const { permissions, cruddef, isfilterform, pgid, tools } = this.state;
     const { deleteRow, handleChange, renderMe, handleSubmit } = this;
     const { getRecentUsage, formData } = this.props;
     let filter;
     if (isfilterform) {
       filter = true;
     }
-
     const close = this.handleClose;
     const formProps = { close, handleChange, pgid, permissions, deleteRow, handleSubmit, renderMe, filter };
+
     return (
       <Container>
         <Row>
-          <h1 style={styles.pagetitle}>{this.state.title}</h1>
+          <h1 style={styles.pagetitle}>Mapping Tools</h1>
           <span style={{ marginLeft: "10px" }}>
             <span id="help">
               <span>
@@ -90,29 +70,16 @@ export class UserDataQueries extends React.Component {
               </span>
             </span>
             <UncontrolledTooltip placement="right" target="help">
-              <span> {this.state.helpLabel} </span>
+              <span> Help Label </span>
             </UncontrolledTooltip>
           </span>
         </Row>
         <Row>
-          <Col xs="6">
-            <h3>
-              <Button color="link" onClick={() => this.renderCustom(renderTFCustomComp)}>
-                Test Custom Component
-              </Button>
-            </h3>
-          </Col>
-          {tftools.map(({ label, id, value, type }) => {
-            return value === "UQ" && type !== "page" ? (
-              <Col xs="6">
-                <h3>
-                  <Button color="link" onClick={() => this.toggle(id, label)}>
-                    {label}
-                  </Button>
-                </h3>
-              </Col>
-            ) : null;
-          })}
+          {tools.map(tool => (
+            <Col xs="12" key={tool.id}>
+              <Tool {...tool} toggle={this.toggle} />
+            </Col>
+          ))}
         </Row>
 
         <ReusableModal
@@ -152,5 +119,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ closeForm, setFormData, getRecentUsage, setFilterFormData }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserDataQueries);
-
+export default connect(mapStateToProps, mapDispatchToProps)(MappingTools);

@@ -60,7 +60,7 @@ export const tftools = [
 
 export const metadatamap = Object.keys(metaDataApiMap).map(pageId => {
   const _metaData = metaData[pageId];
-  if(_metaData && _metaData.pgdef && _metaData.pgdef.parentConfig && typeof _metaData.pgdef.parentConfig === 'string'){
+  if(_metaData && _metaData.pgdef && _metaData.pgdef.parentConfig && typeof _metaData.pgdef.parentConfig === 'string' && _metaData.griddef){
     _metaData.pgdef.parentConfig = metaData[_metaData.pgdef.parentConfig]
   }
   return {
