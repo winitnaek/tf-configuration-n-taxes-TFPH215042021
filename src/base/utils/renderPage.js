@@ -1,5 +1,7 @@
 import React from "react";
 import UserDataQueries from "../../app/components/UserDataQueries";
+import MappingTools from "../../app/components/MappingTools";
+import MapToolUsage from "../../app/components/MapToolUsage";
 import DateFieldDoc from "../../app/components/DateFieldDoc";
 import Home from "../../app/home/home";
 
@@ -8,6 +10,14 @@ const renderPage = (pgid, help) => {
   switch (pgid) {
     case "userDataQueries":
       page = <UserDataQueries help={help} />;
+      break;
+    case "mappingTools":
+      page = <MappingTools help={help} pgid={pgid}/>;
+      break;
+    case "taxCodeUsage":
+    case "taxTypeUsage":
+    case "paymentCodeUsage":
+      page = <MapToolUsage help={help} pgid={pgid} />;
       break;
     case "dateFieldDoc":
       page = <DateFieldDoc help={help} />;

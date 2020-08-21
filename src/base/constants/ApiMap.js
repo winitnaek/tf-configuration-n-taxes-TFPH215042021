@@ -108,6 +108,7 @@ export const metaDataApiMap = {
   addressOverrides: GET_CUSTOM_TAX_CODES,
   customGarnishment: GET_CUSTOM_TAX_CODES,
   taxEffectiveDateOverrides: GET_CUSTOM_TAX_CODES,
+  auditLogViewer: GET_CUSTOM_TAX_CODES,
   logins: GET_CUSTOM_TAX_CODES,
   company: GET_COMPANIES,
   unemploymentOverrides: GET_CUSTOM_FORMULAS,
@@ -132,7 +133,18 @@ export const metaDataApiMap = {
   messageViewer: GET_CUSTOM_TAX_FORMULAS,
   messagesViewer: GET_CUSTOM_TAX_FORMULAS,
   paServicesTaxReport: GET_CUSTOM_TAX_FORMULAS,
-  paServiceTaxReport: GET_CUSTOM_TAX_FORMULAS
+  paServiceTaxReport: GET_CUSTOM_TAX_FORMULAS,
+  // Mapping Tools 
+  mappingTools: GET_CUSTOM_TAX_FORMULAS,
+  mapPaymentCodes: GET_CUSTOM_TAX_FORMULAS,
+  mapPaymentCode: GET_CUSTOM_TAX_FORMULAS,
+  mapTaxCodes: GET_CUSTOM_TAX_FORMULAS,
+  mapTaxCode: GET_CUSTOM_TAX_FORMULAS,
+  mapTaxTypes: GET_CUSTOM_TAX_FORMULAS,
+  mapTaxType: GET_CUSTOM_TAX_FORMULAS,
+  taxCodeUsage: GET_CUSTOM_TAX_FORMULAS,
+  taxTypeUsage: GET_CUSTOM_TAX_FORMULAS,
+  paymentCodeUsage: GET_CUSTOM_TAX_FORMULAS
 };
 
 export const deleteDataApiMap = {
@@ -142,6 +154,7 @@ export const deleteDataApiMap = {
   taxEffectiveDateOverrides: DELTE_CUSTOM_PAYMENT,
   customTaxPaymentOverride: DELTE_CUSTOM_PAYMENT,
   messageViewer: DELTE_CUSTOM_PAYMENT,
+  auditLogViewer: DELTE_CUSTOM_PAYMENT,
   company:DELETE_COMPANY
 };
 

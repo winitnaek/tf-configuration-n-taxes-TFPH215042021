@@ -18,7 +18,7 @@ import { setFilterFormData } from "../actions/filterFormActions";
 
 const renderTFCustomComp = "renderTFCustomComp";
 
-class UserDataQueries extends React.Component {
+export class UserDataQueries extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -154,3 +154,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDataQueries);
+
