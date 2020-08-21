@@ -36,10 +36,11 @@ class MappingTools extends UserDataQueries {
     const { pgid } = this.props;
     const { tools } = this.state;
     GeneralApi.getApiData(pgid).then(res => {
+
       tftools.forEach(tool => {
         const { value, type, id, label } = tool;
         if (value === "MT" && type !== "page" && mappingTools.tools[id]) {
-          tools.push(Object.assign({ label, id, type, value }, mappingTools.tools[id], { items: res[id] }));
+          tools.push(Object.assign({ label, id, type, value }, mappingTools.tools[id], { items: res[id] || [] }));
         }
       });
       this.setState({

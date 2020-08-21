@@ -7,7 +7,7 @@ const Tool = ({ label, id, title, subTitle, items, toggle }) => {
       <h4 className="border-bottom border-primary">{title}</h4>
       <p>{subTitle}</p>
       <ul>
-        {items.map(item => (
+        {items && items.map(item => (
           <li>
             <p className="m-0">{item.name}:</p>
             <ul>

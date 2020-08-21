@@ -37,7 +37,7 @@ class MapToolUsage extends UserDataQueries {
     const { customCode, taxCode, customTaxType } = formFilterData;
     mappingToolUsageAPI.getToolUsage(pgid, { mappedId: customCode || taxCode || customTaxType }).then(usageGroup => {
       this.setState({
-        usageGroup
+        usageGroup: usageGroup instanceof Array ? usageGroup : []
       });
     });
   }

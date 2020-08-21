@@ -11,7 +11,26 @@ class mappingToolUsageAPI {
           return response.json();
         } else {
           var errorCode = response.status;
-          var errorMsg = "Unable to get Grid Data Records. " + getAdminErrorMessage();
+          var errorMsg = "Unable to get mapping tool usage. " + getAdminErrorMessage();
+          return new appError(errorMsg, errorCode);
+        }
+      })
+      .catch(error => {
+        return error;
+      });
+  }
+
+  static createDefaultMapping(pageid, action){
+    // TODO: create a get URL for mapping tools like delete and save after payload format is ready
+    let url = getUrl(pageid);
+    let tt = JSON.stringify(action);
+    return fetch(url, reqInfo(tt))
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          var errorCode = response.status;
+          var errorMsg = "Unable to map. " + getAdminErrorMessage();
           return new appError(errorMsg, errorCode);
         }
       })

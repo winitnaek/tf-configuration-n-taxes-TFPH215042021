@@ -7,6 +7,7 @@ import { setFilterFormData } from "../actions/filterFormActions";
 import { setFormData } from "../actions/formActions";
 import { getRecentUsage } from "../actions/usageActions";
 import savegriddataAPI from "../api/savegriddataAPI";
+import mappingToolUsageAPI from "../api/mappingToolUsageAPI";
 import deletegriddataAPI from "../api/deletegriddataAPI";
 import autocompleteSelectAPI from "../api/autocompleteselectAPI";
 import * as gridStyles from "../../base/constants/AppConstants";
@@ -98,6 +99,7 @@ class CustomGrid extends Component {
           fieldData={fieldData}
           autoComplete={autocompleteSelectAPI}
           styles={gridStyles}
+          mapToolUsage={mappingToolUsageAPI}
         />
         <ConfirmModal showConfirm={this.state.showAlert} handleOk={this.handleOk} {...metaInfo} />
       </Fragment>
