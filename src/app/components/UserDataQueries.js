@@ -10,7 +10,8 @@ import * as fieldData from "../metadata/fieldData";
 import { ReusableModal } from "bsiuilib";
 import { DynamicForm } from "bsiuilib";
 
-import { getRecentUsage } from "../actions/usageActions";
+//import { getRecentUsage } from "../actions/usageActions";
+import {getUsageData} from "../api/getUsageDataAPI";
 import autocompleteSelectAPI from "../api/autocompleteselectAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
 import { setFilterFormData } from "../actions/filterFormActions";
@@ -71,7 +72,7 @@ export class UserDataQueries extends React.Component {
   render() {
     const { permissions, cruddef, isfilterform, pgid } = this.state;
     const { deleteRow, handleChange, renderMe, handleSubmit } = this;
-    const { getRecentUsage, formData } = this.props;
+    const {formData } = this.props;
     let filter;
     if (isfilterform) {
       filter = true;
@@ -130,7 +131,7 @@ export class UserDataQueries extends React.Component {
             tftools={tftools}
             formMetaData={formMetaData[pgid]}
             fieldData={fieldData[pgid]}
-            recentUsage={getRecentUsage}
+            recentUsage={getUsageData}
             autoComplete={autocompleteSelectAPI}
             saveGridData={savegriddataAPI}
             styles={styles}
@@ -149,7 +150,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeForm, setFormData, getRecentUsage, setFilterFormData }, dispatch);
+  return bindActionCreators({ closeForm, setFormData, setFilterFormData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDataQueries);

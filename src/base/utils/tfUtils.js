@@ -275,6 +275,21 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues={}) {
   
   return Object.assign(input, formValues);
 }
+export function buildUsageDataInput(pageid, store, formdata, mode) {
+  let state = store.getState();
+  console.log("formdata")
+  console.log(formdata);
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    pmtUsrCode:formdata.userCode,
+    taxCode:formdata.taxCode,
+    companyCode:formdata.company,
+    companyName:formdata.companyName
+  };
+  return input;
+}
 export function buildDeleteInput(pageid, store, formdata, mode) {
   let state = store.getState();
   console.log("formdata")
