@@ -5,7 +5,8 @@ import { tftools } from "../../base/constants/TFTools";
 import { ReusableGrid, ConfirmModal } from "bsiuilib";
 import { setFilterFormData } from "../actions/filterFormActions";
 import { setFormData } from "../actions/formActions";
-import { getRecentUsage } from "../actions/usageActions";
+//import { getRecentUsage } from "../actions/usageActions";
+import {getUsageData} from "../api/getUsageDataAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
 import deletegriddataAPI from "../api/deletegriddataAPI";
 import autocompleteSelectAPI from "../api/autocompleteselectAPI";
@@ -65,7 +66,6 @@ class CustomGrid extends Component {
       help,
       gridProps,
       formData,
-      getRecentUsage,
       formFilterData,
       fieldData,
       formMetaData
@@ -90,7 +90,7 @@ class CustomGrid extends Component {
           setFilterFormData={filterFormAction}
           setFormData={formAction}
           deleteGridData={deletegriddataAPI}
-          recentUsage={getRecentUsage}
+          recentUsage={getUsageData}
           renderGrid={this.renderGrid}
           formMetaData={formMetaData}
           formData={formData}
@@ -114,7 +114,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { getRecentUsage, setFilterFormData, setFormData },
+    {setFilterFormData, setFormData },
     dispatch
   );
 };
