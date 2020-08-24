@@ -300,7 +300,9 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     userId: appUserId(),
     compCode:getCode(formdata),
     taxCode:formdata.taxCode,
-    taxName:formdata.name
+    taxName:formdata.name,
+    code:getCode(formdata),
+    name:getName(formdata),
   };
   return input;
 }
@@ -335,11 +337,15 @@ export function buildSaveInput(pageid, store, formdata, mode) {
 export function getCode(formdata){
   if(formdata && formdata.company){
     return formdata.company;
+  }else if(formdata && formdata.code){
+    return formdata.code;
   }
 }
 export function getName(formdata){
   if(formdata && formdata.companyName){
     return formdata.companyName;
+  }else if(formdata && formdata.name){
+    return formdata.name;
   }
 }
 export const reqInfo = data => {
