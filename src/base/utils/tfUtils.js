@@ -286,9 +286,15 @@ export function buildUsageDataInput(pageid, store, formdata, mode) {
     pmtUsrCode:formdata.userCode,
     taxCode:formdata.taxCode,
     companyCode:formdata.company,
-    companyName:formdata.companyName
+    companyName:formdata.companyName,
+    usrtax: getUsageDataCode(formdata)
   };
   return input;
+}
+export function getUsageDataCode(formdata){
+  if(formdata && formdata.code){
+    return formdata.code;
+  }
 }
 export function buildDeleteInput(pageid, store, formdata, mode) {
   let state = store.getState();
