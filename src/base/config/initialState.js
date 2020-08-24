@@ -15,6 +15,14 @@ export default {
       link: true
     },
     {
+      "value":"CO",
+      "label":"Companies",
+      "desc":"Companies",
+      "id":"company",
+      "type":"comp",
+      "link":true
+    },
+    {
       value: "CT",
       label: "Custom Tax Codes",
       desc: "Custom Tax Codes",
@@ -37,7 +45,7 @@ export default {
       id: "customFormulas",
       type: "comp",
       link: true
-    },
+    }/*,
     {
       value: "WS",
       label: "Worksites",
@@ -45,6 +53,22 @@ export default {
       id: "worksites",
       type: "comp",
       link: false
+    }*/,
+    {
+      "value": "EG",
+      "label": "Custom Garnishments",
+      "desc": "Custom Garnishments",
+      "id": "customGarnishment",
+      "type": "comp",
+      "link": true
+    },
+    {
+      value: "UQ",
+      label: "User Data Queries",
+      desc: "User Data Queries",
+      id: "userDataQueries",
+      type: UI_PAGE,
+      link: true
     }
   ],
 
