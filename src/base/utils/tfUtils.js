@@ -288,11 +288,19 @@ export function buildUsageDataInput(pageid, store, formdata, mode) {
     companyCode:getUsageCompany(formdata),
     companyName:getUsageCompnanyName(formdata),
     usrtax: getUsageDataCode(formdata),
-    groupCode:formdata.id,
+    groupCode:getUsageCode(formdata),
     groupName:formdata.groupName
   };
   return input;
 }
+export function getUsageCode(formdata){
+  if(formdata && formdata.id){
+    return formdata.company;
+  }else if(formdata && formdata.code){
+    return formdata.code;
+  }
+}
+
 export function getUsageCompany(formdata){
   if(formdata && formdata.company){
     return formdata.company;
