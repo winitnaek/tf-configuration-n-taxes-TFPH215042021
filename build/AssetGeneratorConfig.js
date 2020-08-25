@@ -8,6 +8,10 @@ const getAssetGeneratorConfig = environment => {
       "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/autoCompleteMockData/",
       "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type1grid/",
       "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type2grid/Screens/",
+      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/Tools/",
+      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/Map Tax Codes/",
+      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/Map Tax Types/",
+      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/Map Payment Codes/"
     ],
     groupBy: [
       {
