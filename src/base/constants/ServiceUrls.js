@@ -57,3 +57,6 @@ export const DELETE_CUSTOM_GARNISHMENT_CODE="/GarnishmentService/deleteCustomGar
 export const GET_EMPLOYEE_GROUPS= "/EmployeeService/getEmployeeGroupList";
 export const SAVE_EMPLOYEE_GROUP="/EmployeeService/saveEmployeeGroup";
 export const DELETE_EMPLOYEE_GROUP="/EmployeeService/deleteEmployeeGroup";
+export const GET_GARNISHMENT_GROUPS="/GarnishmentService/getGarnishmentGroupList";
+export const DELETE_GARNISHMENT_GROUP="/GarnishmentService/deleteGarnishmentGroup";
+export const SAVE_GARNISHMENT_GROUP="/GarnishmentService/saveGarnishmentGroup";
