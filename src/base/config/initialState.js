@@ -70,6 +70,14 @@ export default {
       "type":"comp",
       "link":true
    },
+   {
+    "value":"GG",
+    "label":"Garnishment Groups",
+    "desc":"Garnishment Groups",
+    "id":"garnishmentGroup",
+    "type":"comp",
+    "link":true
+   },
     {
       value: "UQ",
       label: "User Data Queries",
