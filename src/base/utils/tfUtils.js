@@ -283,13 +283,35 @@ export function buildUsageDataInput(pageid, store, formdata, mode) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    pmtUsrCode:formdata.userCode,
-    taxCode:formdata.taxCode,
-    companyCode:formdata.company,
-    companyName:formdata.companyName,
-    usrtax: getUsageDataCode(formdata)
+    pmtUsrCode:getUsageUserCode(formdata),
+    taxCode:getUsageTaxCode(formdata),
+    companyCode:getUsageCompany(formdata),
+    companyName:getUsageCompnanyName(formdata),
+    usrtax: getUsageDataCode(formdata),
+    groupCode:formdata.id,
+    groupName:formdata.groupName
   };
   return input;
+}
+export function getUsageCompany(formdata){
+  if(formdata && formdata.company){
+    return formdata.company;
+  }
+}
+export function getUsageCompnanyName(formdata){
+  if(formdata && formdata.companyName){
+    return formdata.companyName;
+  }
+}
+export function getUsageTaxCode(formdata){
+  if(formdata && formdata.taxCode){
+    return formdata.taxCode;
+  }
+}
+export function getUsageUserCode(formdata){
+  if(formdata && formdata.userCode){
+    return formdata.userCode;
+  }
 }
 export function getUsageDataCode(formdata){
   if(formdata && formdata.code){
@@ -345,6 +367,8 @@ export function getCode(formdata){
     return formdata.company;
   }else if(formdata && formdata.code){
     return formdata.code;
+  }else if(formdata && formdata.id){
+    return formdata.id;
   }
 }
 export function getName(formdata){
@@ -352,6 +376,8 @@ export function getName(formdata){
     return formdata.companyName;
   }else if(formdata && formdata.name){
     return formdata.name;
+  }else if(formdata && formdata.groupName){
+    return formdata.groupName;
   }
 }
 export const reqInfo = data => {

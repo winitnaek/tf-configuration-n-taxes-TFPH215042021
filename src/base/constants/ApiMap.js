@@ -54,7 +54,10 @@ import {
   DELETE_COMPANY,
   GET_CUSTOM_GARNISHMENT_CODES,
   SAVE_CUSTOM_GARNISHMENT_CODE,
-  DELETE_CUSTOM_GARNISHMENT_CODE
+  DELETE_CUSTOM_GARNISHMENT_CODE,
+  GET_EMPLOYEE_GROUPS,
+  SAVE_EMPLOYEE_GROUP,
+  DELETE_EMPLOYEE_GROUP
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -106,7 +109,7 @@ export const metaDataApiMap = {
   customTaxFormulas: GET_CUSTOM_TAX_FORMULAS,
   selectSamplePage: GET_CUSTOM_TAX_FORMULA,
   // TODO: Update below Urls after get the actual Urls
-  employeeGroup: GET_CUSTOM_TAX_CODES,
+  employeeGroup: GET_EMPLOYEE_GROUPS,
   garnishmentGroup: GET_CUSTOM_TAX_CODES,
   addressOverrides: GET_CUSTOM_TAX_CODES,
   customGarnishment: GET_CUSTOM_GARNISHMENT_CODES,
@@ -159,7 +162,8 @@ export const deleteDataApiMap = {
   messageViewer: DELTE_CUSTOM_PAYMENT,
   auditLogViewer: DELTE_CUSTOM_PAYMENT,
   company:DELETE_COMPANY,
-  customGarnishment:DELETE_CUSTOM_GARNISHMENT_CODE
+  customGarnishment:DELETE_CUSTOM_GARNISHMENT_CODE,
+  employeeGroup:DELETE_EMPLOYEE_GROUP
 };
 
 export const saveDataApiMap = {
@@ -175,7 +179,8 @@ export const saveDataApiMap = {
   taxEffectiveDateOverrides: SAVE_CUSTOM_FORMULAS,
   customTaxPaymentOverride: SAVE_CUSTOM_FORMULAS,
   company:SAVE_COMPANY,
-  customGarnishment:SAVE_CUSTOM_GARNISHMENT_CODE
+  customGarnishment:SAVE_CUSTOM_GARNISHMENT_CODE,
+  employeeGroup:SAVE_EMPLOYEE_GROUP
 };
 
 export const autoCompleteApiMap = {

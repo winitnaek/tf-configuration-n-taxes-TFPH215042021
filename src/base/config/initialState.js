@@ -63,6 +63,14 @@ export default {
       "link": true
     },
     {
+      "value":"EG",
+      "label":"Employee Groups",
+      "desc":"Employee Groups",
+      "id":"employeeGroup",
+      "type":"comp",
+      "link":true
+   },
+    {
       value: "UQ",
       label: "User Data Queries",
       desc: "User Data Queries",
