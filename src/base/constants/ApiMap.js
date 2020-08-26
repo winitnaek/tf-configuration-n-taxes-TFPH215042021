@@ -60,7 +60,9 @@ import {
   DELETE_EMPLOYEE_GROUP,
   GET_GARNISHMENT_GROUPS,
   DELETE_GARNISHMENT_GROUP,
-  SAVE_GARNISHMENT_GROUP
+  SAVE_GARNISHMENT_GROUP,
+  SAVE_CUSTOM_FORMULA,
+  DELETE_CUSTOM_FORMULA
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -167,14 +169,15 @@ export const deleteDataApiMap = {
   company:DELETE_COMPANY,
   customGarnishment:DELETE_CUSTOM_GARNISHMENT_CODE,
   employeeGroup:DELETE_EMPLOYEE_GROUP,
-  garnishmentGroup:DELETE_GARNISHMENT_GROUP
+  garnishmentGroup:DELETE_GARNISHMENT_GROUP,
+  customFormulas:DELETE_CUSTOM_FORMULA
 };
 
 export const saveDataApiMap = {
   customPayments: SAVE_CUSTOM_PAYMENT,
   customTaxCodes: SAVE_CUSTOM_TAX_CODES,
   addressOverrides: SAVE_CUSTOM_PAYMENT,
-  customFormulas: SAVE_CUSTOM_FORMULAS,
+  customFormulas: SAVE_CUSTOM_FORMULA,
   worksites: SAVE_WORKSITES,
   worksiteCompanies: SAVE_WORKSITES_LOCATIONS,
   customTaxFormulas: SAVE_CUSTOM_FORMULAS,
