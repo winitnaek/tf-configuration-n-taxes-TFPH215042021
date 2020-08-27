@@ -216,6 +216,36 @@ export function getAuthCode(filterData){
     return filterData.bsiAuth;
   }
 }
+export function getFrmEndDate(filterData) {
+  if (filterData && (filterData.startDate || filterData.startdate)) {
+    let dt = filterData.endDate ? filterData.endDate : filterData.rescind;
+    let newdt = "";
+    if (dt.indexOf("/") > 0) {
+      return dt;
+    } else if (dt.indexOf("-") > 0) {
+      let spldt = dt.split("-");
+      let newdt = spldt[1] + "/" + spldt[2] + "/" + spldt[0];
+      return newdt;
+    }
+  } else {
+    return "";
+  }
+}
+export function getFrmStartDate(filterData) {
+  if (filterData && (filterData.startDate || filterData.startdate)) {
+    let dt = filterData.startDate ? filterData.startDate : filterData.startdate;
+    let newdt = "";
+    if (dt.indexOf("/") > 0) {
+      return dt;
+    } else if (dt.indexOf("-") > 0) {
+      let spldt = dt.split("-");
+      let newdt = spldt[1] + "/" + spldt[2] + "/" +spldt[0] ;
+      return newdt;
+    }
+  } else {
+    return "";
+  }
+}
 export function getStartDate(filterData){ 
   if(filterData && filterData.includeAllDates){
     return "ALL";
@@ -366,10 +396,21 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     e_taxability:formdata.taxability,
     e_maxLimit:formdata.eemax,
     taxCode:formdata.taxCode,
-    taxName:formdata.name
+    taxName:formdata.name,
+    calcMethod: formdata.cmName,
+    flatAmount: formdata.flatAmount,
+    maxTax:formdata.maxTax,
+    maxWage:formdata.maxWage,
+    minWage:formdata.minWage,
+    endDate:getFrmEndDate(formdata),
+    rounding:formdata.roundingDisplay,
+    roundingDisplay:formdata.roundingDisplay,
+    startDate:getFrmStartDate(formdata),
+    taxRate:formdata.taxRate
   };
   return input;
 }
+
 export function getCode(formdata){
   if(formdata && formdata.company){
     return formdata.company;

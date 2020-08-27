@@ -180,7 +180,7 @@ export const saveDataApiMap = {
   customFormulas: SAVE_CUSTOM_FORMULA,
   worksites: SAVE_WORKSITES,
   worksiteCompanies: SAVE_WORKSITES_LOCATIONS,
-  customTaxFormulas: SAVE_CUSTOM_FORMULAS,
+  customTaxFormulas: SAVE_CUSTOM_FORMULA,
   optionalRateOverride: SAVE_CUSTOM_FORMULAS,
   unemploymentOverrides: SAVE_CUSTOM_FORMULAS,
   taxEffectiveDateOverrides: SAVE_CUSTOM_FORMULAS,
