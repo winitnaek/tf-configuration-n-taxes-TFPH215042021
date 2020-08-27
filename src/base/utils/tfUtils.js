@@ -369,6 +369,7 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     taxName:formdata.name,
     code:getCode(formdata),
     name:getName(formdata),
+    startDate:getFrmStartDate(formdata)
   };
   return input;
 }

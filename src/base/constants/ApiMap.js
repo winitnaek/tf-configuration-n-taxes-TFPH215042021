@@ -170,6 +170,7 @@ export const deleteDataApiMap = {
   customGarnishment:DELETE_CUSTOM_GARNISHMENT_CODE,
   employeeGroup:DELETE_EMPLOYEE_GROUP,
   garnishmentGroup:DELETE_GARNISHMENT_GROUP,
+  customTaxFormulas:DELETE_CUSTOM_FORMULA,
   customFormulas:DELETE_CUSTOM_FORMULA
 };
 
