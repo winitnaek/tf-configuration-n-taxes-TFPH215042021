@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import configureStore from "./base/config/configureStore";
@@ -35,13 +35,12 @@ import griddataAPI from "./app/api/griddataAPI";
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
   var userProfile =
-    '{"userId":"vinit","firstName":"Vinit","lastName":"Naik","dataset":"VINIT","securitytokn":"fhfh484jer843je848rj393jf","branding":"base64ImageData","userTheme":"Default","roles":["ER"],"applications":[{"id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc","name":"TFTools","accessIds":[{"id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8","visible":true}],"permissions":{"CF":[1,1,1,1,0],"CT":[1,1,1,1,0],"CP":[1,1,1,1,0],"AO":[1,1,1,1,0],"CO":[1,1,1,1,0],"OO":[1,1,1,1,0],"EG":[1,1,1,1,0],"UQ":[1,1,1,1,0],"GG":[1,1,1,1,0],"GC":[1,1,1,1,0],"UO":[1,1,1,1,0],"LI":[1,1,1,1,0],"MT":[1,1,1,1,0],"TEDO":[1,1,1,1,0]}}],"themeList":[{"id":"Default","name":"Default"},{"id":"HighContrast","name":"High Contrast"},{"id":"WhiteOnBlack","name":"White On Black"},{"id":"BlackOnWhite","name":"Black On White"}]}';
+    '{"userId":"vinit","firstName":"Vinit","lastName":"Naik","dataset":"VINIT","securitytokn":"fhfh484jer843je848rj393jf","branding":"base64ImageData","userTheme":"Default","roles":["ER"],"applications":[{"id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc","name":"TFTools","accessIds":[{"id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8","visible":true}],"permissions":{"CF":[1,1,1,1,0],"CT":[1,1,1,1,0],"CP":[1,1,1,1,0],"AO":[1,1,1,1,0],"CO":[1,1,1,1,0],"OO":[1,1,1,1,0],"EG":[1,1,1,1,0],"UQ":[1,1,1,1,0],"GG":[1,1,1,1,0],"GC":[1,1,1,1,0],"UO":[1,1,1,1,0],"LI":[1,1,1,1,0],"TR":[1,1,1,1,0],"MT":[1,1,1,1,0],"TEDO":[1,1,1,1,0]}}],"themeList":[{"id":"Default","name":"Default"},{"id":"HighContrast","name":"High Contrast"},{"id":"WhiteOnBlack","name":"White On Black"},{"id":"BlackOnWhite","name":"Black On White"}]}';
   var userdata = JSON.parse(userProfile);
   if (isMock()) {
     let thPerm = [1, 1, 1, 1, 0];
     let noOfPerm = Object.keys(userdata.applications[0].permissions).length;
     userdata.applications[0].permissions["TH"] = thPerm;
-    userdata.applications[0].permissions["MT"] = thPerm;
     let up = JSON.stringify(userdata);
     sessionStorage.setItem("up", up);
   } else {
@@ -108,16 +107,31 @@ function renderComponent(elem, pageid, pid) {
 
   const fieldDataX = fieldData[pageid];
 
-  let metaData = compMetaData(pageid);
   griddataAPI
     .getGridData(pageid, gridInput)
     .then(response => response)
     .then(griddata => {
-      let griddatanew = decorateData(griddata,pageid);
+      let griddatanew = decorateData(griddata, pageid);
       ReactDOM.render(
         <Provider store={store}>
+          <Fragment>
+            {griddatanew[0] && griddatanew[0] instanceof Array ? (
+              griddatanew.map((data, key) => (
           <CustomGrid
             pageid={pageid}
+                  metadata={page => compMetaData(pageid, key)}
+                  pid={pid}
+                  permissions={compPermissions}
+                  griddata={data}
+                  help={openHelp}
+                  gridProps={gridProps}
+                  fieldData={fieldDataX}
+                  formMetaData={compMetaData(pageid, key)}
+                />
+              ))
+            ) : (
+              <CustomGrid
+                pageid={pageid}
             metadata={compMetaData}
             pid={pid}
             permissions={compPermissions}
@@ -125,8 +139,10 @@ function renderComponent(elem, pageid, pid) {
             help={openHelp}
             gridProps={gridProps}
             fieldData={fieldDataX}
-            formMetaData={metaData}
+                formMetaData={compMetaData(pageid)}
           />
+            )}
+          </Fragment>
         </Provider>,
         document.querySelector("#" + elem)
       );

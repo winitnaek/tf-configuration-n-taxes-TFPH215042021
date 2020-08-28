@@ -155,7 +155,9 @@ export const metaDataApiMap = {
   mapTaxType: GET_CUSTOM_TAX_FORMULAS,
   taxCodeUsage: GET_CUSTOM_TAX_FORMULAS,
   taxTypeUsage: GET_CUSTOM_TAX_FORMULAS,
-  paymentCodeUsage: GET_CUSTOM_TAX_FORMULAS
+  paymentCodeUsage: GET_CUSTOM_TAX_FORMULAS,
+  taxHistory: GET_CUSTOM_TAX_FORMULAS,
+  taxHistoryReport: GET_CUSTOM_TAX_FORMULAS
 };
 
 export const deleteDataApiMap = {

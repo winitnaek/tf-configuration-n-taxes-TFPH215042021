@@ -3,8 +3,8 @@ import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
 import { generateUrl } from "bsiuilib";
-import {authCodeauthNamerenderer,taxTypeCodeNamerenderer,courtesyRenderer} from '../../app/metadata/cellsrenderer';
-import store from '../../tf_index';
+import { authCodeauthNamerenderer, taxTypeCodeNamerenderer, courtesyRenderer } from "../../app/metadata/cellsrenderer";
+import store from "../../tf_index";
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -49,41 +49,51 @@ export function openHelp(pageid) {
  * compMetaData
  * @param {*} pageid
  */
-export function compMetaData(pageid) {
-  if (metaData[pageid]) {
-    let metadata = checkForStaticRender(metaData[pageid])
+export function compMetaData(pageid, key) {
+  if (key >= 0) {
+    const { formFilterData } = store.getState();
+    const gridMetaData = JSON.parse(JSON.stringify(metaData[pageid][key]));
+    if (key === 0 && typeof gridMetaData.pgdef.parentConfig === "string") {
+      gridMetaData.pgdef.parentConfig = metaData[gridMetaData.pgdef.parentConfig];
+    }
+    if (gridMetaData.pgdef.caption) {
+      gridMetaData.pgdef.caption = setTemplateData(gridMetaData.pgdef.caption, formFilterData);
+    }
+    return gridMetaData;
+  } else {
+    if (metaData[pageid]) {
+      let metadata = checkForStaticRender(metaData[pageid]);
+      return metadata;
+    }
+    let metadataMap = metadatamap.find(metadatam => {
+      if (pageid == metadatam.id) return metadatam;
+    });
+    let metadata = checkForStaticRender(metadataMap.metadata);
     return metadata;
   }
-  let metadataMap = metadatamap.find(metadatam => {
-    if (pageid == metadatam.id) return metadatam;
-  });
-  let metadata = checkForStaticRender(metadataMap.metadata)
-  return metadata;
 }
-export function decorateData(griddata,pageid){
-  if(pageid=='taxabilityForAuthority'){
+export function decorateData(griddata, pageid) {
+  if (pageid == "taxabilityForAuthority") {
     let state = store.getState();
     let filterData = state.formFilterData;
     console.log(state);
     griddata.forEach(function (value) {
       value.authorityCode = filterData.authorityCode;
     });
-    return griddata
-  }else{
-    return griddata
+    return griddata;
+  } else {
+    return griddata;
   }
-  
 }
 export function checkForStaticRender(metadata) {
   metadata.griddef.columns.forEach(function (value) {
-    if (value.rendererStaticInput && value.rendererStaticInput == 'authCodeauthNamerenderer') {
+    if (value.rendererStaticInput && value.rendererStaticInput == "authCodeauthNamerenderer") {
       value.cellsrenderer = authCodeauthNamerenderer;
-    } else if (value.rendererStaticInput && value.rendererStaticInput == 'taxTypeCodeNamerenderer') {
+    } else if (value.rendererStaticInput && value.rendererStaticInput == "taxTypeCodeNamerenderer") {
       value.cellsrenderer = taxTypeCodeNamerenderer;
-    }  else if (value.rendererStaticInput && value.rendererStaticInput == 'courtesyRenderer') {
+    } else if (value.rendererStaticInput && value.rendererStaticInput == "courtesyRenderer") {
       value.cellsrenderer = courtesyRenderer;
-    } 
-    
+    }
   });
   return metadata;
 }
@@ -200,145 +210,145 @@ export function buildGridDataInput(pageid, store) {
     formNumber: getFormNum(filterData),
     courtesy: filterData.courtesy,
     authCode: getAuthCode(filterData),
-    garnishmentGroupCode:filterData.garnishmentGroupCode,
-    groupCode:getGroupcode(filterData),
-    exemptStat:filterData.exemptionStatus,
-    customTaxCode:(filterData.customTaxCode ==="ALL"?"":filterData.customTaxCode),
-    pmtUsrCode:getPmtUsrCode(filterData),
-    formula:filterData.formula
+    garnishmentGroupCode: filterData.garnishmentGroupCode,
+    groupCode: getGroupcode(filterData),
+    exemptStat: filterData.exemptionStatus,
+    customTaxCode: filterData.customTaxCode === "ALL" ? "" : filterData.customTaxCode,
+    pmtUsrCode: getPmtUsrCode(filterData),
+    formula: filterData.formula
   };
   return input;
 }
-export function getAuthCode(filterData){
-  if(filterData && filterData.authorityCode){
+export function getAuthCode(filterData) {
+  if (filterData && filterData.authorityCode) {
     return filterData.authorityCode;
-  }else if(filterData && filterData.bsiAuth){
+  } else if (filterData && filterData.bsiAuth) {
     return filterData.bsiAuth;
   }
 }
-export function getStartDate(filterData){ 
-  if(filterData && filterData.includeAllDates){
+export function getStartDate(filterData) {
+  if (filterData && filterData.includeAllDates) {
     return "ALL";
-  }else if (filterData && (filterData.startDate || filterData.startdate)) {
-      let dt = filterData.startDate ? filterData.startDate.split("-") : filterData.startdate.split("-");
-      let stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
-      return stDate;
-  }else{
-    return ""
+  } else if (filterData && (filterData.startDate || filterData.startdate)) {
+    let dt = filterData.startDate ? filterData.startDate.split("-") : filterData.startdate.split("-");
+    let stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
+    return stDate;
+  } else {
+    return "";
   }
 }
-export function getFormNum(filterData){
-  if(filterData && filterData.formNumber){
+export function getFormNum(filterData) {
+  if (filterData && filterData.formNumber) {
     return filterData.formNumber;
-  }else if(filterData && filterData.formula){
+  } else if (filterData && filterData.formula) {
     return filterData.formula;
   }
 }
-export function getTaxType(filterData){
-  if(filterData && filterData.taxType){
+export function getTaxType(filterData) {
+  if (filterData && filterData.taxType) {
     return filterData.taxType;
-  }else if(filterData && filterData.garnishParamTaxType){
+  } else if (filterData && filterData.garnishParamTaxType) {
     return filterData.garnishParamTaxType;
   }
 }
-export function getCompanyCode(filterData){
-  if(filterData && filterData.company){
+export function getCompanyCode(filterData) {
+  if (filterData && filterData.company) {
     return filterData.company;
-  }else if(filterData && filterData.companyCode){
+  } else if (filterData && filterData.companyCode) {
     return filterData.companyCode;
   }
 }
-export function getGroupcode(filterData){
-  if(filterData && filterData.groupCode){
+export function getGroupcode(filterData) {
+  if (filterData && filterData.groupCode) {
     return filterData.groupCode;
-  }else if(filterData && filterData.employeeGroupCode){
+  } else if (filterData && filterData.employeeGroupCode) {
     return filterData.employeeGroupCode;
   }
 }
-export function getPmtUsrCode(filterData){
-  if(filterData && filterData.typeOfData){
+export function getPmtUsrCode(filterData) {
+  if (filterData && filterData.typeOfData) {
     return filterData.typeOfData;
-  }else if(filterData && filterData.customTypeOfData){
+  } else if (filterData && filterData.customTypeOfData) {
     return filterData.customTypeOfData;
   }
 }
 
-export function buildAutoCompSelInput(pageid, store, patten, formValues={}) {
+export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   let state = store.getState();
   console.log(state);
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    pattern: patten,
+    pattern: patten
   };
-  
+
   return Object.assign(input, formValues);
 }
 export function buildUsageDataInput(pageid, store, formdata, mode) {
   let state = store.getState();
-  console.log("formdata")
+  console.log("formdata");
   console.log(formdata);
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    pmtUsrCode:getUsageUserCode(formdata),
-    taxCode:getUsageTaxCode(formdata),
-    companyCode:getUsageCompany(formdata),
-    companyName:getUsageCompnanyName(formdata),
+    pmtUsrCode: getUsageUserCode(formdata),
+    taxCode: getUsageTaxCode(formdata),
+    companyCode: getUsageCompany(formdata),
+    companyName: getUsageCompnanyName(formdata),
     usrtax: getUsageDataCode(formdata),
-    groupCode:getUsageCode(formdata),
-    groupName:formdata.groupName
+    groupCode: getUsageCode(formdata),
+    groupName: formdata.groupName
   };
   return input;
 }
-export function getUsageCode(formdata){
-  if(formdata && formdata.id){
+export function getUsageCode(formdata) {
+  if (formdata && formdata.id) {
     return formdata.company;
-  }else if(formdata && formdata.code){
+  } else if (formdata && formdata.code) {
     return formdata.code;
   }
 }
 
-export function getUsageCompany(formdata){
-  if(formdata && formdata.company){
+export function getUsageCompany(formdata) {
+  if (formdata && formdata.company) {
     return formdata.company;
   }
 }
-export function getUsageCompnanyName(formdata){
-  if(formdata && formdata.companyName){
+export function getUsageCompnanyName(formdata) {
+  if (formdata && formdata.companyName) {
     return formdata.companyName;
   }
 }
-export function getUsageTaxCode(formdata){
-  if(formdata && formdata.taxCode){
+export function getUsageTaxCode(formdata) {
+  if (formdata && formdata.taxCode) {
     return formdata.taxCode;
   }
 }
-export function getUsageUserCode(formdata){
-  if(formdata && formdata.userCode){
+export function getUsageUserCode(formdata) {
+  if (formdata && formdata.userCode) {
     return formdata.userCode;
   }
 }
-export function getUsageDataCode(formdata){
-  if(formdata && formdata.code){
+export function getUsageDataCode(formdata) {
+  if (formdata && formdata.code) {
     return formdata.code;
   }
 }
 export function buildDeleteInput(pageid, store, formdata, mode) {
   let state = store.getState();
-  console.log("formdata")
+  console.log("formdata");
   console.log(formdata);
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    compCode:getCode(formdata),
-    taxCode:formdata.taxCode,
-    taxName:formdata.name,
-    code:getCode(formdata),
-    name:getName(formdata),
+    compCode: getCode(formdata),
+    taxCode: formdata.taxCode,
+    taxName: formdata.name,
+    code: getCode(formdata),
+    name: getName(formdata)
   };
   return input;
 }
@@ -356,35 +366,35 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     dataset: appDataset(),
     userId: appUserId(),
     editMode: editMode,
-    code:getCode(formdata),
-    name:getName(formdata),
-    fein:formdata.fein,
-    courtesy:formdata.courtesy,
-    payCode:formdata.userCode,
-    payType:formdata.payType,
-    payName:formdata.name,
-    e_taxability:formdata.taxability,
-    e_maxLimit:formdata.eemax,
-    taxCode:formdata.taxCode,
-    taxName:formdata.name
+    code: getCode(formdata),
+    name: getName(formdata),
+    fein: formdata.fein,
+    courtesy: formdata.courtesy,
+    payCode: formdata.userCode,
+    payType: formdata.payType,
+    payName: formdata.name,
+    e_taxability: formdata.taxability,
+    e_maxLimit: formdata.eemax,
+    taxCode: formdata.taxCode,
+    taxName: formdata.name
   };
   return input;
 }
-export function getCode(formdata){
-  if(formdata && formdata.company){
+export function getCode(formdata) {
+  if (formdata && formdata.company) {
     return formdata.company;
-  }else if(formdata && formdata.code){
+  } else if (formdata && formdata.code) {
     return formdata.code;
-  }else if(formdata && formdata.id){
+  } else if (formdata && formdata.id) {
     return formdata.id;
   }
 }
-export function getName(formdata){
-  if(formdata && formdata.companyName){
+export function getName(formdata) {
+  if (formdata && formdata.companyName) {
     return formdata.companyName;
-  }else if(formdata && formdata.name){
+  } else if (formdata && formdata.name) {
     return formdata.name;
-  }else if(formdata && formdata.groupName){
+  } else if (formdata && formdata.groupName) {
     return formdata.groupName;
   }
 }
@@ -441,11 +451,11 @@ export function deleteUrl(id) {
     if (mockDataMapper[id]) {
       url = mockDataMapper[id];
     } else {
-    let deldataMap = mockdelmap.find(metadatam => {
-      if (id == metadatam.id) return metadatam;
-    });
-    url = deldataMap.url;
-  }
+      let deldataMap = mockdelmap.find(metadatam => {
+        if (id == metadatam.id) return metadatam;
+      });
+      url = deldataMap.url;
+    }
   }
   console.log("Delete URL %s for page %s", url, id);
   return url;
@@ -461,11 +471,11 @@ export function saveUrl(id) {
     if (mockDataMapper[id]) {
       url = mockDataMapper[id];
     } else {
-    let saveDataMap = mocksavmap.find(metadatam => {
-      if (id == metadatam.id) return metadatam;
-    });
-    url = saveDataMap.url;
-  }
+      let saveDataMap = mocksavmap.find(metadatam => {
+        if (id == metadatam.id) return metadatam;
+      });
+      url = saveDataMap.url;
+    }
   }
   console.log("Save URL %s for page %s", url, id);
   return url;
@@ -491,17 +501,20 @@ export function autocompleteURL(id) {
   return url;
 }
 
-export const setTemplateData = (str, data)=>{
-  const regex = /\${(.*?)}/ig;
+export const setTemplateData = (str, data) => {
+  const regex = /\${(.*?)}/gi;
   const matches = str.match(regex);
-  if(matches){
-    matches.forEach(match=>{
-      const fieldName = regex.exec(match)[1];
-      str = str.replace(match, data[fieldName])
-    })
+  if (matches) {
+    matches.forEach(match => {
+      const regexObj = new RegExp(/\${(.*?)}/, "gi");
+      const fieldMatches = regexObj.exec(match);
+      if (fieldMatches && fieldMatches[1]) {
+        str = str.replace(match, data[fieldMatches[1]]);
+      }
+    });
   }
   return str;
-}
+};
 
 const mockdelmap = [
   { id: "customPayments", url: "./DELETE_CUSTOM_PAYMENT.json" },
