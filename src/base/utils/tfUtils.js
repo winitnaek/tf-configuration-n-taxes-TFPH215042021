@@ -226,8 +226,38 @@ export function getAuthCode(filterData) {
     return filterData.bsiAuth;
   }
 }
-export function getStartDate(filterData) {
-  if (filterData && filterData.includeAllDates) {
+export function getFrmEndDate(filterData) {
+  if (filterData && (filterData.startDate || filterData.startdate)) {
+    let dt = filterData.endDate ? filterData.endDate : filterData.rescind;
+    let newdt = "";
+    if (dt.indexOf("/") > 0) {
+      return dt;
+    } else if (dt.indexOf("-") > 0) {
+      let spldt = dt.split("-");
+      let newdt = spldt[1] + "/" + spldt[2] + "/" + spldt[0];
+      return newdt;
+    }
+  } else {
+    return "";
+  }
+}
+export function getFrmStartDate(filterData) {
+  if (filterData && (filterData.startDate || filterData.startdate)) {
+    let dt = filterData.startDate ? filterData.startDate : filterData.startdate;
+    let newdt = "";
+    if (dt.indexOf("/") > 0) {
+      return dt;
+    } else if (dt.indexOf("-") > 0) {
+      let spldt = dt.split("-");
+      let newdt = spldt[1] + "/" + spldt[2] + "/" +spldt[0] ;
+      return newdt;
+    }
+  } else {
+    return "";
+  }
+}
+export function getStartDate(filterData){ 
+  if(filterData && filterData.includeAllDates){
     return "ALL";
   } else if (filterData && (filterData.startDate || filterData.startdate)) {
     let dt = filterData.startDate ? filterData.startDate.split("-") : filterData.startdate.split("-");
@@ -344,11 +374,12 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    compCode: getCode(formdata),
-    taxCode: formdata.taxCode,
-    taxName: formdata.name,
-    code: getCode(formdata),
-    name: getName(formdata)
+    compCode:getCode(formdata),
+    taxCode:formdata.taxCode,
+    taxName:formdata.name,
+    code:getCode(formdata),
+    name:getName(formdata),
+    startDate:getFrmStartDate(formdata)
   };
   return input;
 }
@@ -366,22 +397,33 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     dataset: appDataset(),
     userId: appUserId(),
     editMode: editMode,
-    code: getCode(formdata),
-    name: getName(formdata),
-    fein: formdata.fein,
-    courtesy: formdata.courtesy,
-    payCode: formdata.userCode,
-    payType: formdata.payType,
-    payName: formdata.name,
-    e_taxability: formdata.taxability,
-    e_maxLimit: formdata.eemax,
-    taxCode: formdata.taxCode,
-    taxName: formdata.name
+    code:getCode(formdata),
+    name:getName(formdata),
+    fein:formdata.fein,
+    courtesy:formdata.courtesy,
+    payCode:formdata.userCode,
+    payType:formdata.payType,
+    payName:formdata.name,
+    e_taxability:formdata.taxability,
+    e_maxLimit:formdata.eemax,
+    taxCode:formdata.taxCode,
+    taxName:formdata.name,
+    calcMethod: formdata.cmName,
+    flatAmount: formdata.flatAmount,
+    maxTax:formdata.maxTax,
+    maxWage:formdata.maxWage,
+    minWage:formdata.minWage,
+    endDate:getFrmEndDate(formdata),
+    rounding:formdata.roundingDisplay,
+    roundingDisplay:formdata.roundingDisplay,
+    startDate:getFrmStartDate(formdata),
+    taxRate:formdata.taxRate
   };
   return input;
 }
-export function getCode(formdata) {
-  if (formdata && formdata.company) {
+
+export function getCode(formdata){
+  if(formdata && formdata.company){
     return formdata.company;
   } else if (formdata && formdata.code) {
     return formdata.code;
