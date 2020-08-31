@@ -6,7 +6,7 @@ import DateFieldDoc from "../../app/components/DateFieldDoc";
 import MaritalStatusReport from "../../app/components/MaritalStatusReport";
 import Home from "../../app/home/home";
 
-const renderPage = (pgid, help) => {
+const renderPage = (pgid, help, initialProps) => {
   let page;
   switch (pgid) {
     case "userDataQueries":
@@ -24,7 +24,7 @@ const renderPage = (pgid, help) => {
       page = <DateFieldDoc help={help} />;
       break;
     case "maritalStatusReport":
-      page = <MaritalStatusReport help={help} pgid={pgid} />;
+      page = <MaritalStatusReport help={help} pgid={pgid} initialProps={initialProps}/>;
       break;
     default:
       page = <Home />;
