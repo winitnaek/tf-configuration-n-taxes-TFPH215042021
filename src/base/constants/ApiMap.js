@@ -191,7 +191,8 @@ export const saveDataApiMap = {
   company:SAVE_COMPANY,
   customGarnishment:SAVE_CUSTOM_GARNISHMENT_CODE,
   employeeGroup:SAVE_EMPLOYEE_GROUP,
-  garnishmentGroup:SAVE_GARNISHMENT_GROUP
+  garnishmentGroup:SAVE_GARNISHMENT_GROUP,
+  maritalStatusReport:SAVE_GARNISHMENT_GROUP,
 };
 
 export const autoCompleteApiMap = {

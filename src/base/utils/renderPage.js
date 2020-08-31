@@ -3,6 +3,7 @@ import UserDataQueries from "../../app/components/UserDataQueries";
 import MappingTools from "../../app/components/MappingTools";
 import MapToolUsage from "../../app/components/MapToolUsage";
 import DateFieldDoc from "../../app/components/DateFieldDoc";
+import MaritalStatusReport from "../../app/components/MaritalStatusReport";
 import Home from "../../app/home/home";
 
 const renderPage = (pgid, help) => {
@@ -21,6 +22,9 @@ const renderPage = (pgid, help) => {
       break;
     case "dateFieldDoc":
       page = <DateFieldDoc help={help} />;
+      break;
+    case "maritalStatusReport":
+      page = <MaritalStatusReport help={help} pgid={pgid} />;
       break;
     default:
       page = <Home />;

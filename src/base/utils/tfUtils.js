@@ -523,6 +523,17 @@ export function saveUrl(id) {
   return url;
 }
 
+export function generateReportUrl(id) {
+  let generateRportMap = savedatamap.find(metadatam => {
+    if (id == metadatam.id) return metadatam;
+  });
+  let url = generateUrl.buildURL(generateRportMap.url);
+  if (isMock() && mockDataMapper[id]) {
+      url = mockDataMapper[id];
+  }
+  return url;
+}
+
 export function autocompleteURL(id) {
   let autoCompleteDataMap = asyncselfldsmap.find(metadatam => {
     console.log(id, metadatam.id);

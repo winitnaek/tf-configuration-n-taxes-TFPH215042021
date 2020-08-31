@@ -3,15 +3,15 @@ const getAssetGeneratorConfig = environment => {
     encoding: "utf8",
     debug: true,
     sourceFolders: [
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/readonlyfilter/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/readonlygrid/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/autoCompleteMockData/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type1grid/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type2grid/Screens/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/Tools/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/Map Tax Codes/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/Map Tax Types/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/Map Payment Codes/"
+      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/readonlyfilter/",
+      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/readonlygrid/",
+      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/autoCompleteMockData/",
+      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type1grid/",
+      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type2grid/Screens/",
+      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/Tools/",
+      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/Map Tax Codes/",
+      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/Map Tax Types/",
+      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/Map Payment Codes/"
     ],
     groupBy: [
       {
