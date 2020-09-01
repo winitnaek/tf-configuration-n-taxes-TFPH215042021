@@ -63,4 +63,7 @@ export const DELETE_EMPLOYEE_GROUP = "/EmployeeService/deleteEmployeeGroup";
 export const GET_GARNISHMENT_GROUPS = "/GarnishmentService/getGarnishmentGroupList";
 export const DELETE_GARNISHMENT_GROUP = "/GarnishmentService/deleteGarnishmentGroup";
 export const SAVE_GARNISHMENT_GROUP = "/GarnishmentService/saveGarnishmentGroup";
+export const GET_TAX_EFFECTIVE_DATE_OVERRIDES = "/TaxCodeService/getTaxEffectiveDateOverrides";
+export const DELETE_TAX_EFFECTIVE_DATE_OVERRIDE = "/TaxCodeService/deleteTaxEffectiveDateOverride";
+export const SAVE_TAX_EFFECTIVE_DATE_OVERRIDE = "/TaxCodeService/saveTaxEffectiveDateOverride";
 export const GENERATE_MARITAL_REPORT = "/GarnishmentService/saveGarnishmentGroup";
