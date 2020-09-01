@@ -62,7 +62,10 @@ import {
   DELETE_GARNISHMENT_GROUP,
   SAVE_GARNISHMENT_GROUP,
   SAVE_CUSTOM_FORMULA,
-  DELETE_CUSTOM_FORMULA
+  DELETE_CUSTOM_FORMULA,
+  GET_TAX_EFFECTIVE_DATE_OVERRIDES,
+  DELETE_TAX_EFFECTIVE_DATE_OVERRIDE,
+  SAVE_TAX_EFFECTIVE_DATE_OVERRIDE
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -118,7 +121,7 @@ export const metaDataApiMap = {
   garnishmentGroup: GET_GARNISHMENT_GROUPS,
   addressOverrides: GET_CUSTOM_TAX_CODES,
   customGarnishment: GET_CUSTOM_GARNISHMENT_CODES,
-  taxEffectiveDateOverrides: GET_CUSTOM_TAX_CODES,
+  taxEffectiveDateOverrides: GET_TAX_EFFECTIVE_DATE_OVERRIDES,
   auditLogViewer: GET_CUSTOM_TAX_CODES,
   logins: GET_CUSTOM_TAX_CODES,
   company: GET_COMPANIES,
@@ -164,7 +167,7 @@ export const deleteDataApiMap = {
   customPayments: DELTE_CUSTOM_PAYMENT,
   customTaxCodes: DELETE_CUSTOM_TAX_CODES,
   addressOverrides: DELTE_CUSTOM_PAYMENT,
-  taxEffectiveDateOverrides: DELTE_CUSTOM_PAYMENT,
+  taxEffectiveDateOverrides: DELETE_TAX_EFFECTIVE_DATE_OVERRIDE,
   customTaxPaymentOverride: DELTE_CUSTOM_PAYMENT,
   messageViewer: DELTE_CUSTOM_PAYMENT,
   auditLogViewer: DELTE_CUSTOM_PAYMENT,
@@ -186,7 +189,7 @@ export const saveDataApiMap = {
   customTaxFormulas: SAVE_CUSTOM_FORMULA,
   optionalRateOverride: SAVE_CUSTOM_FORMULAS,
   unemploymentOverrides: SAVE_CUSTOM_FORMULAS,
-  taxEffectiveDateOverrides: SAVE_CUSTOM_FORMULAS,
+  taxEffectiveDateOverrides: SAVE_TAX_EFFECTIVE_DATE_OVERRIDE,
   customTaxPaymentOverride: SAVE_CUSTOM_FORMULAS,
   company:SAVE_COMPANY,
   customGarnishment:SAVE_CUSTOM_GARNISHMENT_CODE,
