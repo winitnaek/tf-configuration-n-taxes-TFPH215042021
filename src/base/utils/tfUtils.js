@@ -1,4 +1,4 @@
-import { metadatamap, tftools, deletedatamap, savedatamap, asyncselfldsmap } from "../constants/TFTools";
+import { metadatamap, tftools, deletedatamap, savedatamap, asyncselfldsmap, generateDataMap } from "../constants/TFTools";
 import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
@@ -524,7 +524,7 @@ export function saveUrl(id) {
 }
 
 export function generateReportUrl(id) {
-  let generateRportMap = savedatamap.find(metadatam => {
+  let generateRportMap = generateDataMap.find(metadatam => {
     if (id == metadatam.id) return metadatam;
   });
   let url = generateUrl.buildURL(generateRportMap.url);
