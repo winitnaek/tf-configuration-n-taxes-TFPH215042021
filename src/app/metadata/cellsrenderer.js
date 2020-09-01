@@ -10,6 +10,15 @@ export function authCodeauthNamerenderer(ndex,
 ) {
 	return rowdata.authorityCode +'-' + rowdata.authorityName;
 }
+export function baiAuthAuthNamerenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	return rowdata.bsiAuth +'-' + rowdata.authName;
+}
 export function taxTypeCodeNamerenderer(ndex,
 	datafield,
 	value,
