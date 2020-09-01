@@ -76,7 +76,7 @@ function renderTFApplication(elem, renderName, child) {
   } else if (renderName && renderName.type == UI_COMP) {
     renderComponent(elem, renderName.id, renderName.value, child);
   } else if (renderName && renderName.type == UI_PAGE) {
-    renderNewPage(elem, renderName.id, renderName.value);
+    renderNewPage(elem, renderName.id, renderName.value, child);
   } else if (renderName && renderName.type == UI_TEST) {
     renderTestHarness(elem, renderName.id, renderName.value, child);
   } else if (renderName && renderName === rname.RN_TF_CSTMCOMP) {
@@ -203,11 +203,11 @@ export function testMetaData(pgid) {
  * renderPage
  * @param {*} elem
  */
-function renderNewPage(elem, pgid, pid) {
+function renderNewPage(elem, pgid, pid, initialProps) {
   const help = openHelp;
   ReactDOM.render(
     <Provider store={store}>
-      <ReusablePage pgid={pgid} help={help} />
+      <ReusablePage pgid={pgid} help={help} initialProps={initialProps}/>
     </Provider>,
     document.querySelector("#" + elem)
   );

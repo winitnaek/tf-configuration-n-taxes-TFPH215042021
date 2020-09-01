@@ -12,20 +12,17 @@ import * as fieldData from "../metadata/fieldData";
 class MaritalStatusReport extends Component {
   constructor(props) {
     super(props);
-    this.state = {url:''};
+
     this.renderMe = (pgid, formValues, response) => {
-      this.setState({
-        url: response.link
-      })
+      const page = tftools.find(tftool => tftool.id === pgid);
+      renderTFApplication("pageContainer", page, { url: response.link });
     };
-  
   }
   
-  
   render() {
-    const { pgid, formData } = this.props;
+    const { pgid, formData, initialProps } = this.props;
     const { pgdef } = metaData[pgid];
-    const formProps = { pgid, permissions: "", close: () => {}, filter: false, renderMe:this.renderMe };
+    const formProps = { pgid, permissions: "", close: () => {}, filter: false, renderMe: this.renderMe };
 
     return (
       <Container>
@@ -55,7 +52,12 @@ class MaritalStatusReport extends Component {
               saveGridData={generateReportApi}
               styles={styles}
             />
-            {this.state.url && <p>Right click the filename below and select 'Save Target As...' to save csv file. <br/><a href={this.state.url}>{this.state.url}</a></p>}
+            {initialProps && initialProps.url && (
+              <p>
+                Right click the filename below and select 'Save Target As...' to save csv file. <br />
+                <a href={initialProps.url}>{initialProps.url}</a>
+              </p>
+            )}
           </Col>
         </Row>
       </Container>
@@ -65,10 +67,9 @@ class MaritalStatusReport extends Component {
 function mapStateToProps(state) {
   return {
     isOpen: state.formData.isOpen,
-    formData: state.formData
+    formData: state.formData,
+    formFilterData: state.formFilterData
   };
 }
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({}, dispatch);
-}
-export default connect(mapStateToProps, mapDispatchToProps)(MaritalStatusReport);
+
+export default connect(mapStateToProps, null)(MaritalStatusReport);
