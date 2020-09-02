@@ -2,7 +2,7 @@ import {appError, getAdminErrorMessage}  from "bsiuilib";
 import {generateReportUrl, reqInfo,buildSaveInput} from "../../base/utils/tfUtils";
 
 class generateReportApi {
-  static saveGridData(pageid, data) {
+  static generate(pageid, data) {
     let url = generateReportUrl(pageid);
     let tt = JSON.stringify(data);
     return fetch(url, reqInfo(tt))

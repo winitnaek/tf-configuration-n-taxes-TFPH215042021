@@ -1,6 +1,6 @@
 import * as metaData from "../../app/metadata/metaData";
 import tfScreens from "../../app/metadata/_screen_info";
-import { metaDataApiMap, autoCompleteApiMap, deleteDataApiMap, saveDataApiMap } from "./ApiMap";
+import { metaDataApiMap, autoCompleteApiMap, deleteDataApiMap, saveDataApiMap, generateApiMap } from "./ApiMap";
 
 export const UI_PAGE = "page";
 export const UI_COMP = "comp";
@@ -60,8 +60,14 @@ export const tftools = [
 
 export const metadatamap = Object.keys(metaDataApiMap).map(pageId => {
   const _metaData = metaData[pageId];
-  if(_metaData && _metaData.pgdef && _metaData.pgdef.parentConfig && typeof _metaData.pgdef.parentConfig === 'string' && _metaData.griddef){
-    _metaData.pgdef.parentConfig = metaData[_metaData.pgdef.parentConfig]
+  if (
+    _metaData &&
+    _metaData.pgdef &&
+    _metaData.pgdef.parentConfig &&
+    typeof _metaData.pgdef.parentConfig === "string" &&
+    _metaData.griddef
+  ) {
+    _metaData.pgdef.parentConfig = metaData[_metaData.pgdef.parentConfig];
   }
   return {
     id: pageId,
@@ -78,6 +84,12 @@ export const deletedatamap = Object.keys(deleteDataApiMap).map(pageId => ({
 export const savedatamap = Object.keys(saveDataApiMap).map(pageId => ({
   id: pageId,
   url: saveDataApiMap[pageId],
+  metadata: metaData[pageId]
+}));
+
+export const generateDataMap = Object.keys(generateApiMap).map(pageId => ({
+  id: pageId,
+  url: generateApiMap[pageId],
   metadata: metaData[pageId]
 }));
 

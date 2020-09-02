@@ -8,19 +8,23 @@ import { tftools } from "../../base/constants/TFTools";
 import * as metaData from "../metadata/metaData";
 import * as styles from "../../base/constants/AppConstants";
 import * as fieldData from "../metadata/fieldData";
+import { setFilterFormData } from "../actions/filterFormActions";
 
 class MaritalStatusReport extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      url: ""
+    };
     this.renderMe = (pgid, formValues, response) => {
-      const page = tftools.find(tftool => tftool.id === pgid);
-      renderTFApplication("pageContainer", page, { url: response.link });
+      formValues && this.props.setFilterFormData(formValues);
+      this.setState({ url: response.link });
     };
   }
-  
+
   render() {
-    const { pgid, formData, initialProps } = this.props;
+    const { pgid, formData, formFilterData } = this.props;
+    const { url } = this.state;
     const { pgdef } = metaData[pgid];
     const formProps = { pgid, permissions: "", close: () => {}, filter: false, renderMe: this.renderMe };
 
@@ -43,19 +47,20 @@ class MaritalStatusReport extends Component {
           <Col>
             <DynamicForm
               formData={formData}
+              filterFormData={formFilterData}
               formProps={formProps}
               filter={true}
               isfilterform={false}
               tftools={tftools}
               formMetaData={metaData[pgid]}
               fieldData={fieldData[pgid]}
-              saveGridData={generateReportApi}
+              formHandlerService={generateReportApi}
               styles={styles}
             />
-            {initialProps && initialProps.url && (
+            {url && (
               <p>
                 Right click the filename below and select 'Save Target As...' to save csv file. <br />
-                <a href={initialProps.url}>{initialProps.url}</a>
+                <a href={url}>{url}</a>
               </p>
             )}
           </Col>
@@ -72,4 +77,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(MaritalStatusReport);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setFilterFormData }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MaritalStatusReport);

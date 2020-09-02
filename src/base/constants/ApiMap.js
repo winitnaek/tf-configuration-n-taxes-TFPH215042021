@@ -63,6 +63,7 @@ import {
   SAVE_GARNISHMENT_GROUP,
   SAVE_CUSTOM_FORMULA,
   DELETE_CUSTOM_FORMULA,
+  GENERATE_MARITAL_REPORT,
   GET_TAX_EFFECTIVE_DATE_OVERRIDES,
   DELETE_TAX_EFFECTIVE_DATE_OVERRIDE,
   SAVE_TAX_EFFECTIVE_DATE_OVERRIDE
@@ -148,7 +149,7 @@ export const metaDataApiMap = {
   messagesViewer: GET_CUSTOM_TAX_FORMULAS,
   paServicesTaxReport: GET_CUSTOM_TAX_FORMULAS,
   paServiceTaxReport: GET_CUSTOM_TAX_FORMULAS,
-  // Mapping Tools 
+  // Mapping Tools
   mappingTools: GET_CUSTOM_TAX_FORMULAS,
   mapPaymentCodes: GET_CUSTOM_TAX_FORMULAS,
   mapPaymentCode: GET_CUSTOM_TAX_FORMULAS,
@@ -171,12 +172,12 @@ export const deleteDataApiMap = {
   customTaxPaymentOverride: DELTE_CUSTOM_PAYMENT,
   messageViewer: DELTE_CUSTOM_PAYMENT,
   auditLogViewer: DELTE_CUSTOM_PAYMENT,
-  company:DELETE_COMPANY,
-  customGarnishment:DELETE_CUSTOM_GARNISHMENT_CODE,
-  employeeGroup:DELETE_EMPLOYEE_GROUP,
-  garnishmentGroup:DELETE_GARNISHMENT_GROUP,
-  customTaxFormulas:DELETE_CUSTOM_FORMULA,
-  customFormulas:DELETE_CUSTOM_FORMULA
+  company: DELETE_COMPANY,
+  customGarnishment: DELETE_CUSTOM_GARNISHMENT_CODE,
+  employeeGroup: DELETE_EMPLOYEE_GROUP,
+  garnishmentGroup: DELETE_GARNISHMENT_GROUP,
+  customTaxFormulas: DELETE_CUSTOM_FORMULA,
+  customFormulas: DELETE_CUSTOM_FORMULA
 };
 
 export const saveDataApiMap = {
@@ -191,11 +192,14 @@ export const saveDataApiMap = {
   unemploymentOverrides: SAVE_CUSTOM_FORMULAS,
   taxEffectiveDateOverrides: SAVE_TAX_EFFECTIVE_DATE_OVERRIDE,
   customTaxPaymentOverride: SAVE_CUSTOM_FORMULAS,
-  company:SAVE_COMPANY,
-  customGarnishment:SAVE_CUSTOM_GARNISHMENT_CODE,
-  employeeGroup:SAVE_EMPLOYEE_GROUP,
-  garnishmentGroup:SAVE_GARNISHMENT_GROUP,
-  maritalStatusReport:SAVE_GARNISHMENT_GROUP,
+  company: SAVE_COMPANY,
+  customGarnishment: SAVE_CUSTOM_GARNISHMENT_CODE,
+  employeeGroup: SAVE_EMPLOYEE_GROUP,
+  garnishmentGroup: SAVE_GARNISHMENT_GROUP
+};
+
+export const generateApiMap = {
+  maritalStatusReport: GENERATE_MARITAL_REPORT
 };
 
 export const autoCompleteApiMap = {
@@ -207,7 +211,7 @@ export const autoCompleteApiMap = {
   userTaxCode: GET_USER_TAX_CODE_AUTOCOMPLETE_MOCKDATA,
   taxability: GET_ALL_TAXCODES_AUTOCOMPLETE,
   taxType: GET_ALL_TAXTYPES_AUTOCOMPLETE,
-  garnishParamTaxType:GET_UDQ_AUTOCOMPLETE,
+  garnishParamTaxType: GET_UDQ_AUTOCOMPLETE,
   companyCode: GET_UDQ_AUTOCOMPLETE,
   riskClass: GET_UDQ_AUTOCOMPLETE,
   taxCode: GET_ALL_TAXCODES_AUTOCOMPLETE,
@@ -232,8 +236,8 @@ export const autoCompleteApiMap = {
   exemptMilitaryLocation: GET_EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA,
   principalStateEmployment: GET_PRINCIPAL_STATE_EMPLOYMENT_AUTOCOMPLETE_MOCKDATA,
   payment: GET_PAYMENT_AUTOCOMPLETE_MOCKDATA,
-  customTaxCode:GET_CUSTOM_TAXCODES_AUTOCOMPLETE,
-  customTypeOfData:GET_CUSTOM_TYPEOF_DATA,
+  customTaxCode: GET_CUSTOM_TAXCODES_AUTOCOMPLETE,
+  customTypeOfData: GET_CUSTOM_TYPEOF_DATA,
   employeeGroupCode: GET_UDQ_AUTOCOMPLETE,
-  bsiAuth:GET_UDQ_AUTOCOMPLETE
+  bsiAuth: GET_UDQ_AUTOCOMPLETE
 };
