@@ -78,6 +78,14 @@ export default {
     "type":"comp",
     "link":true
    },
+   {
+    "value": "TEDO",
+    "label": "Tax Effective Date Overrides",
+    "desc": "Tax Effective Date Overrides",
+    "id": "taxEffectiveDateOverrides",
+    "type": "comp",
+    "link": true
+  },
     {
       value: "UQ",
       label: "User Data Queries",

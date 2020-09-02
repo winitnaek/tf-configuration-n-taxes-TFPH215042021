@@ -243,6 +243,20 @@ export function getFrmEndDate(filterData) {
     return "";
   }
 }
+export function getFrmEffDate(filterData) {
+  if (filterData && (filterData.effecDate)) {
+    let dt = filterData.effecDate;
+    if (dt.indexOf("/") > 0) {
+      return dt;
+    } else if (dt.indexOf("-") > 0) {
+      let spldt = dt.split("-");
+      let newdt = spldt[1] + "/" + spldt[2] + "/" +spldt[0] ;
+      return newdt;
+    }
+  } else {
+    return "";
+  }
+}
 export function getFrmStartDate(filterData) {
   if (filterData && (filterData.startDate || filterData.startdate)) {
     let dt = filterData.startDate ? filterData.startDate : filterData.startdate;
@@ -379,6 +393,7 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     compCode:getCode(formdata),
     taxCode:formdata.taxCode,
     taxName:formdata.name,
+    type:formdata.taxType,
     code:getCode(formdata),
     name:getName(formdata),
     startDate:getFrmStartDate(formdata)
@@ -419,7 +434,9 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     rounding:formdata.roundingDisplay,
     roundingDisplay:formdata.roundingDisplay,
     startDate:getFrmStartDate(formdata),
-    taxRate:formdata.taxRate
+    effDate:getFrmEffDate(formdata),
+    taxRate:formdata.taxRate,
+    type:formdata.taxType
   };
   return input;
 }
@@ -431,6 +448,8 @@ export function getCode(formdata){
     return formdata.code;
   } else if (formdata && formdata.id) {
     return formdata.id;
+  }else if (formdata && formdata.bsiAuth) {
+    return formdata.bsiAuth;
   }
 }
 export function getName(formdata) {
