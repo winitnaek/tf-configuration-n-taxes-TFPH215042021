@@ -17,7 +17,7 @@ export function baiAuthAuthNamerenderer(ndex,
 	column,
 	rowdata
 ) {
-	return rowdata.bsiAuth +'-' + rowdata.authName;
+	return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.bsiAuth +'-' + rowdata.authName}</div>`;
 }
 export function taxTypeCodeNamerenderer(ndex,
 	datafield,
@@ -26,7 +26,7 @@ export function taxTypeCodeNamerenderer(ndex,
 	column,
 	rowdata
 ) {
-	return rowdata.taxType + '-' + rowdata.taxTypeName;
+	return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.taxType + '-' + rowdata.taxTypeName}</div>`;
 }
 export function courtesyRenderer(
   ndex,
