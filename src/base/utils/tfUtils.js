@@ -204,7 +204,7 @@ export function buildGridDataInput(pageid, store) {
     //companyCode: filterData.companyCode,
     companyCode: getCompanyCode(filterData),
     companyName: filterData.companyName,
-    taxCode: filterData.taxCode,
+    taxCode: getTaxCode(filterData),
     taxName: filterData.name,
     startdate: stDate,
     riskClass: filterData.riskClass,
@@ -220,6 +220,13 @@ export function buildGridDataInput(pageid, store) {
     formula: filterData.formula
   };
   return input;
+}
+export function getTaxCode(filterData) {
+  if (filterData && filterData.taxCode) {
+    return filterData.taxCode;
+  } else if (filterData && filterData.customTaxName) {
+    return filterData.customTaxName;
+  }
 }
 export function getAuthCode(filterData) {
   if (filterData && filterData.authorityCode) {

@@ -66,7 +66,8 @@ import {
   GENERATE_MARITAL_REPORT,
   GET_TAX_EFFECTIVE_DATE_OVERRIDES,
   DELETE_TAX_EFFECTIVE_DATE_OVERRIDE,
-  SAVE_TAX_EFFECTIVE_DATE_OVERRIDE
+  SAVE_TAX_EFFECTIVE_DATE_OVERRIDE,
+  GET_CUSTOM_GARNISMENT_FORMULAS
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -75,7 +76,7 @@ export const metaDataApiMap = {
   populatedV3States: GET_ALL_POPULATED_V3_STATES,
   bSITaxes: GET_USER_DATA_QUERIES,
   companies: GET_USER_DATA_QUERIES,
-  customGarnishmentFormula: GET_USER_DATA_QUERIES,
+  customGarnishmentFormula: GET_CUSTOM_GARNISMENT_FORMULAS,
   customGarnishments: GET_USER_DATA_QUERIES,
   customOverridesForAuthority: GET_USER_DATA_QUERIES,
   customTaxabilityForAuthority: GET_USER_DATA_QUERIES,
@@ -221,7 +222,7 @@ export const autoCompleteApiMap = {
   schoolDistrict: GET_SCHOOL_DISTRICT_AUTOCOMPLETE,
   garnishmentFormula: GET_GARNISMENT_FORMULA_AUTOCOMPLETE,
   garnishmentGroupCode: GET_UDQ_AUTOCOMPLETE,
-  customGarnishmentFormula: GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE,
+  customTaxName: GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE,
   customGarnishmentCode: GET_CUSTOM_GARNISMENT_CODE_AUTOCOMPLETE,
   county: GET_COUNTY_AUTOCOMPLETE,
   groupAsync: GET_GROUP_AUTOCOMPLETE,
