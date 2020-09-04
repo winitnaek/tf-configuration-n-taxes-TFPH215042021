@@ -39,22 +39,6 @@ export default {
       link: true
     },
     {
-      value: "CF",
-      label: "Custom Formulas",
-      desc: "Custom Formulas",
-      id: "customFormulas",
-      type: "comp",
-      link: true
-    }/*,
-    {
-      value: "WS",
-      label: "Worksites",
-      desc: "Worksites",
-      id: "worksites",
-      type: "comp",
-      link: false
-    }*/,
-    {
       "value": "EG",
       "label": "Custom Garnishments",
       "desc": "Custom Garnishments",
@@ -85,6 +69,22 @@ export default {
     "id": "taxEffectiveDateOverrides",
     "type": "comp",
     "link": true
+   },
+   {
+    value: "CF",
+    label: "Custom Formulas",
+    desc: "Custom Formulas",
+    id: "customFormulas",
+    type: "comp",
+    link: true
+  },
+  {
+    value: "WS",
+    label: "Worksites",
+    desc: "Worksites",
+    id: "worksites",
+    type: "comp",
+    link: false
   },
     {
       value: "UQ",
