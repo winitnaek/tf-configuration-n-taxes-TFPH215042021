@@ -67,7 +67,8 @@ import {
   GET_TAX_EFFECTIVE_DATE_OVERRIDES,
   DELETE_TAX_EFFECTIVE_DATE_OVERRIDE,
   SAVE_TAX_EFFECTIVE_DATE_OVERRIDE,
-  GET_CUSTOM_GARNISMENT_FORMULAS
+  GET_CUSTOM_GARNISMENT_FORMULAS,
+  DELETE_WORKSITES_LOCATIONS
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -178,7 +179,8 @@ export const deleteDataApiMap = {
   employeeGroup: DELETE_EMPLOYEE_GROUP,
   garnishmentGroup: DELETE_GARNISHMENT_GROUP,
   customTaxFormulas: DELETE_CUSTOM_FORMULA,
-  customFormulas: DELETE_CUSTOM_FORMULA
+  customFormulas: DELETE_CUSTOM_FORMULA,
+  worksiteCompanies:DELETE_WORKSITES_LOCATIONS
 };
 
 export const saveDataApiMap = {
