@@ -39,22 +39,6 @@ export default {
       link: true
     },
     {
-      value: "CF",
-      label: "Custom Formulas",
-      desc: "Custom Formulas",
-      id: "customFormulas",
-      type: "comp",
-      link: true
-    }/*,
-    {
-      value: "WS",
-      label: "Worksites",
-      desc: "Worksites",
-      id: "worksites",
-      type: "comp",
-      link: false
-    }*/,
-    {
       "value": "EG",
       "label": "Custom Garnishments",
       "desc": "Custom Garnishments",
@@ -78,6 +62,30 @@ export default {
     "type":"comp",
     "link":true
    },
+   {
+    "value": "TEDO",
+    "label": "Tax Effective Date Overrides",
+    "desc": "Tax Effective Date Overrides",
+    "id": "taxEffectiveDateOverrides",
+    "type": "comp",
+    "link": true
+   },
+   {
+    value: "CF",
+    label: "Custom Formulas",
+    desc: "Custom Formulas",
+    id: "customFormulas",
+    type: "comp",
+    link: true
+  },
+  {
+    value: "WS",
+    label: "Worksites",
+    desc: "Worksites",
+    id: "worksites",
+    type: "comp",
+    link: false
+  },
     {
       value: "UQ",
       label: "User Data Queries",

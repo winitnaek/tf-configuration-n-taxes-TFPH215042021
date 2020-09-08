@@ -67,7 +67,9 @@ import {
   GET_TAX_EFFECTIVE_DATE_OVERRIDES,
   DELETE_TAX_EFFECTIVE_DATE_OVERRIDE,
   SAVE_TAX_EFFECTIVE_DATE_OVERRIDE,
-  GENERATE_BATCH_TEST_REPORT
+  GENERATE_BATCH_TEST_REPORT,
+  GET_CUSTOM_GARNISMENT_FORMULAS,
+  DELETE_WORKSITES_LOCATIONS
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -76,7 +78,7 @@ export const metaDataApiMap = {
   populatedV3States: GET_ALL_POPULATED_V3_STATES,
   bSITaxes: GET_USER_DATA_QUERIES,
   companies: GET_USER_DATA_QUERIES,
-  customGarnishmentFormula: GET_USER_DATA_QUERIES,
+  customGarnishmentFormula: GET_CUSTOM_GARNISMENT_FORMULAS,
   customGarnishments: GET_USER_DATA_QUERIES,
   customOverridesForAuthority: GET_USER_DATA_QUERIES,
   customTaxabilityForAuthority: GET_USER_DATA_QUERIES,
@@ -178,7 +180,8 @@ export const deleteDataApiMap = {
   employeeGroup: DELETE_EMPLOYEE_GROUP,
   garnishmentGroup: DELETE_GARNISHMENT_GROUP,
   customTaxFormulas: DELETE_CUSTOM_FORMULA,
-  customFormulas: DELETE_CUSTOM_FORMULA
+  customFormulas: DELETE_CUSTOM_FORMULA,
+  worksiteCompanies:DELETE_WORKSITES_LOCATIONS
 };
 
 export const saveDataApiMap = {
@@ -223,7 +226,7 @@ export const autoCompleteApiMap = {
   schoolDistrict: GET_SCHOOL_DISTRICT_AUTOCOMPLETE,
   garnishmentFormula: GET_GARNISMENT_FORMULA_AUTOCOMPLETE,
   garnishmentGroupCode: GET_UDQ_AUTOCOMPLETE,
-  customGarnishmentFormula: GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE,
+  customTaxName: GET_CUSTOM_GARNISMENT_FORMULA_AUTOCOMPLETE,
   customGarnishmentCode: GET_CUSTOM_GARNISMENT_CODE_AUTOCOMPLETE,
   county: GET_COUNTY_AUTOCOMPLETE,
   groupAsync: GET_GROUP_AUTOCOMPLETE,
