@@ -67,3 +67,4 @@ export const GET_TAX_EFFECTIVE_DATE_OVERRIDES = "/TaxCodeService/getTaxEffective
 export const DELETE_TAX_EFFECTIVE_DATE_OVERRIDE = "/TaxCodeService/deleteTaxEffectiveDateOverride";
 export const SAVE_TAX_EFFECTIVE_DATE_OVERRIDE = "/TaxCodeService/saveTaxEffectiveDateOverride";
 export const GENERATE_MARITAL_REPORT = "/GarnishmentService/saveGarnishmentGroup";
+export const GENERATE_BATCH_TEST_REPORT = "/BatchTestService/generateBatchTest";

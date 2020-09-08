@@ -4,6 +4,7 @@ import MappingTools from "../../app/components/MappingTools";
 import MapToolUsage from "../../app/components/MapToolUsage";
 import DateFieldDoc from "../../app/components/DateFieldDoc";
 import MaritalStatusReport from "../../app/components/MaritalStatusReport";
+import BatchTest from "../../app/components/BatchTest";
 import Home from "../../app/home/home";
 
 const renderPage = (pgid, help, initialProps) => {
@@ -25,6 +26,9 @@ const renderPage = (pgid, help, initialProps) => {
       break;
     case "maritalStatusReport":
       page = <MaritalStatusReport help={help} pgid={pgid} initialProps={initialProps}/>;
+      break;
+    case "batchTest":
+      page = <BatchTest help={help} pgid={pgid} />;
       break;
     default:
       page = <Home />;

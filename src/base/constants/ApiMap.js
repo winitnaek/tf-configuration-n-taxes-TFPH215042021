@@ -66,7 +66,8 @@ import {
   GENERATE_MARITAL_REPORT,
   GET_TAX_EFFECTIVE_DATE_OVERRIDES,
   DELETE_TAX_EFFECTIVE_DATE_OVERRIDE,
-  SAVE_TAX_EFFECTIVE_DATE_OVERRIDE
+  SAVE_TAX_EFFECTIVE_DATE_OVERRIDE,
+  GENERATE_BATCH_TEST_REPORT
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -199,7 +200,8 @@ export const saveDataApiMap = {
 };
 
 export const generateApiMap = {
-  maritalStatusReport: GENERATE_MARITAL_REPORT
+  maritalStatusReport: GENERATE_MARITAL_REPORT,
+  batchTest: GENERATE_BATCH_TEST_REPORT,
 };
 
 export const autoCompleteApiMap = {
