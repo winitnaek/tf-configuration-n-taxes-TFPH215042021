@@ -69,7 +69,9 @@ import {
   SAVE_TAX_EFFECTIVE_DATE_OVERRIDE,
   GENERATE_BATCH_TEST_REPORT,
   GET_CUSTOM_GARNISMENT_FORMULAS,
-  DELETE_WORKSITES_LOCATIONS
+  DELETE_WORKSITES_LOCATIONS,
+  SAVE_SUPPRESS_MESSAGES,
+  GET_SUPPRESSED_MESSAGES
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -164,7 +166,8 @@ export const metaDataApiMap = {
   taxTypeUsage: GET_CUSTOM_TAX_FORMULAS,
   paymentCodeUsage: GET_CUSTOM_TAX_FORMULAS,
   taxHistory: GET_CUSTOM_TAX_FORMULAS,
-  taxHistoryReport: GET_CUSTOM_TAX_FORMULAS
+  taxHistoryReport: GET_CUSTOM_TAX_FORMULAS,
+  messageToSuppress: GET_SUPPRESSED_MESSAGES
 };
 
 export const deleteDataApiMap = {
@@ -199,7 +202,8 @@ export const saveDataApiMap = {
   company: SAVE_COMPANY,
   customGarnishment: SAVE_CUSTOM_GARNISHMENT_CODE,
   employeeGroup: SAVE_EMPLOYEE_GROUP,
-  garnishmentGroup: SAVE_GARNISHMENT_GROUP
+  garnishmentGroup: SAVE_GARNISHMENT_GROUP,
+  messageToSuppress: SAVE_SUPPRESS_MESSAGES
 };
 
 export const generateApiMap = {

@@ -70,3 +70,5 @@ export const SAVE_TAX_EFFECTIVE_DATE_OVERRIDE = "/TaxCodeService/saveTaxEffectiv
 export const GENERATE_MARITAL_REPORT = "/GarnishmentService/saveGarnishmentGroup";
 export const GENERATE_BATCH_TEST_REPORT = "/BatchTestService/generateBatchTest";
 export const DELETE_WORKSITES_LOCATIONS="/CompanyResource/deleteWksiteMgmtLocation";
+export const SAVE_SUPPRESS_MESSAGES = "/MessageSuppress/saveMessagesToSuppress"
+export const GET_SUPPRESSED_MESSAGES = "/MessageSuppress/getSuppressedMessages"

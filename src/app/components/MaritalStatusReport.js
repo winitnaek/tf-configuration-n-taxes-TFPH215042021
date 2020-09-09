@@ -20,6 +20,10 @@ class MaritalStatusReport extends Component {
       formValues && this.props.setFilterFormData(formValues);
       this.setState({ url: response.link });
     };
+
+    this.OpenHelp = () => {
+      this.props.help(this.props.pgid);
+    };
   }
 
   render() {
