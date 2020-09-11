@@ -1,60 +1,68 @@
-import * as metaData from "../../app/metadata/metaData";
-import tfScreens from "../../app/metadata/_screen_info";
-import { metaDataApiMap, autoCompleteApiMap, deleteDataApiMap, saveDataApiMap, generateApiMap } from "./ApiMap";
+import * as metaData from '../../app/metadata/metaData';
+import tfScreens from '../../app/metadata/_screen_info';
+import { metaDataApiMap, autoCompleteApiMap, deleteDataApiMap, saveDataApiMap, generateApiMap } from './ApiMap';
 
-export const UI_PAGE = "page";
-export const UI_COMP = "comp";
-export const UI_TEST = "uitest";
+export const UI_PAGE = 'page';
+export const UI_COMP = 'comp';
+export const UI_TEST = 'uitest';
 
 export const tftools = [
   ...tfScreens,
   {
-    value: "SP",
-    label: "Select Sample Page",
-    desc: "Select Sample Page",
-    id: "selectSamplePage",
+    value: 'SP',
+    label: 'Select Sample Page',
+    desc: 'Select Sample Page',
+    id: 'selectSamplePage',
     type: UI_COMP,
     link: true
   },
   {
-    value: "TH",
-    label: "Test Metadata",
-    desc: "Test Metadata",
-    id: "testHarness",
+    value: 'TH',
+    label: 'Test Metadata',
+    desc: 'Test Metadata',
+    id: 'testHarness',
     type: UI_TEST,
     link: true
   },
   {
-    value: "UQ",
-    label: "User Data Queries",
-    desc: "User Data Queries",
-    id: "userDataQueries",
+    value: 'UQ',
+    label: 'User Data Queries',
+    desc: 'User Data Queries',
+    id: 'userDataQueries',
     type: UI_PAGE,
     link: true
   },
   {
-    value: "DF",
-    label: "Date Field Doc",
-    desc: "Date Field Doc",
-    id: "dateFieldDoc",
+    value: 'DF',
+    label: 'Date Field Doc',
+    desc: 'Date Field Doc',
+    id: 'dateFieldDoc',
     type: UI_PAGE,
     link: true
   },
   {
-    value: "DF",
-    label: "Sample Date Fields",
-    desc: "Sample Date Fields",
-    id: "sampleDateFields",
+    value: 'DF',
+    label: 'Sample Date Fields',
+    desc: 'Sample Date Fields',
+    id: 'sampleDateFields',
     type: UI_COMP,
     link: false
   },
   {
-    value: "CO",
-    label: "Companies",
-    desc: "Companies",
-    id: "companies",
+    value: 'CO',
+    label: 'Companies',
+    desc: 'Companies',
+    id: 'companies',
     type: UI_COMP,
     link: false
+  },
+  {
+    value: 'MS',
+    label: 'Messages to Suppress',
+    desc: 'Messages to Suppress',
+    id: 'messageToSuppress',
+    type: 'page',
+    link: true
   }
 ];
 
@@ -64,7 +72,7 @@ export const metadatamap = Object.keys(metaDataApiMap).map(pageId => {
     _metaData &&
     _metaData.pgdef &&
     _metaData.pgdef.parentConfig &&
-    typeof _metaData.pgdef.parentConfig === "string" &&
+    typeof _metaData.pgdef.parentConfig === 'string' &&
     _metaData.griddef
   ) {
     _metaData.pgdef.parentConfig = metaData[_metaData.pgdef.parentConfig];
@@ -96,5 +104,5 @@ export const generateDataMap = Object.keys(generateApiMap).map(pageId => ({
 export const asyncselfldsmap = Object.keys(autoCompleteApiMap).map(fieldId => ({
   id: fieldId,
   url: autoCompleteApiMap[fieldId],
-  param: [{ dataset: "", pattern: "" }]
+  param: [{ dataset: '', pattern: '' }]
 }));

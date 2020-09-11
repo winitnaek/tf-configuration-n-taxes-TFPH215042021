@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as metaData from '../metadata/metaData';
 import { Row, Col, Container, Table, UncontrolledTooltip, Button } from 'reactstrap';
 import * as styles from '../../base/constants/AppConstants';
 import MessageSuppressApi from '../api/messageSuppressAPI';
@@ -82,11 +81,10 @@ class MessagesToSuppress extends Component {
   }
 
   render() {
-    const { pgdef } = metaData[this.props.pgid];
     return (
       <Container>
         <Row>
-          <h1 style={styles.pagetitle}>{pgdef.pgtitle}</h1>
+          <h1 style={styles.pagetitle}>Messages to Suppress</h1>
           <span style={{ marginLeft: '10px' }}>
             <span id='help'>
               <span>
@@ -94,7 +92,7 @@ class MessagesToSuppress extends Component {
               </span>
             </span>
             <UncontrolledTooltip placement='right' target='help'>
-              <span> {pgdef.helpLabel} </span>
+              <span> </span>
             </UncontrolledTooltip>
           </span>
         </Row>
