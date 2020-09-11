@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import * as metaData from '../metadata/metaData';
 import { Row, Col, Container, Table, UncontrolledTooltip, Button } from 'reactstrap';
 import * as styles from '../../base/constants/AppConstants';
-import messageSuppressApi from '../api/messageSuppressAPI';
+import MessageSuppressApi from '../api/messageSuppressAPI';
+import GeneralApi from '../api/generalApi';
 import { tftools as tfTools } from '../../base/constants/TFTools';
 
 class MessagesToSuppress extends Component {
@@ -35,15 +36,16 @@ class MessagesToSuppress extends Component {
     this.save = () => {
       const { pgid } = this.props;
       const { messages } = this.state;
+      const messageData = messages.filter(message=>!!message)
       let valid = true;
-      for (let i = 0; i < messages.length; i++) {
-        if (isNaN(+messages[i]) || +messages[i] >= 3000) {
+      for (let i = 0; i < messageData.length; i++) {
+        if (isNaN(+messageData[i]) || +messageData[i] >= 3000) {
           valid = false;
           break;
         }
       }
       if (valid) {
-        messageSuppressApi.suppressMessages(pgid, messages).then(res => {
+        MessageSuppressApi.suppressMessages(pgid, messageData).then(res => {
           if (res.status !== 'ERORR') {
             const data = tfTools.find(tool => tool.id === 'messageViewer');
             if (data) {
@@ -66,10 +68,14 @@ class MessagesToSuppress extends Component {
   }
 
   componentDidMount() {
-    messageSuppressApi.getSuppressedMessages(this.props.pgid).then(res => {
+    GeneralApi.getApiData(this.props.pgid).then(res => {
       if (res.status !== 'ERORR' && res.messages) {
+        const {length}=res.messages;
+        const {messages}=this.state;
+        const newMessages = res.messages;
+        newMessages.concat(messages.slice(length));
         this.setState({
-          messages: res.messages
+          messages: newMessages
         });
       }
     });

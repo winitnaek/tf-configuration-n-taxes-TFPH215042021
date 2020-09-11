@@ -71,7 +71,10 @@ import {
   GET_CUSTOM_GARNISMENT_FORMULAS,
   DELETE_WORKSITES_LOCATIONS,
   SAVE_SUPPRESS_MESSAGES,
-  GET_SUPPRESSED_MESSAGES
+  GET_SUPPRESSED_MESSAGES,
+  GARNISHMENT_FORMULAS_OVERRIDE,
+  GARNISHMENT_FORMULA_OVERRIDES,
+  GET_DATASETS
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -167,7 +170,11 @@ export const metaDataApiMap = {
   paymentCodeUsage: GET_CUSTOM_TAX_FORMULAS,
   taxHistory: GET_CUSTOM_TAX_FORMULAS,
   taxHistoryReport: GET_CUSTOM_TAX_FORMULAS,
-  messageToSuppress: GET_SUPPRESSED_MESSAGES
+  messageToSuppress: GET_SUPPRESSED_MESSAGES,
+  // Garnishnishment Formula Override
+  garnishmentFormulasOverride: GARNISHMENT_FORMULAS_OVERRIDE,
+  garnishmentFormulaOverrides: GARNISHMENT_FORMULA_OVERRIDES,
+  dataSets:GET_DATASETS
 };
 
 export const deleteDataApiMap = {
