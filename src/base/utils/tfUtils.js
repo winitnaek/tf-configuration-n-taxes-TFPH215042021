@@ -309,6 +309,8 @@ export function getCompanyCode(filterData) {
     return filterData.company;
   } else if (filterData && filterData.companyCode) {
     return filterData.companyCode;
+  } else if (filterData && filterData.location) {
+    return filterData.location;
   }
 }
 export function getGroupcode(filterData) {
@@ -397,13 +399,20 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    compCode:getCode(formdata),
+    compCode:getCode(formdata,pageid),
     taxCode:formdata.taxCode,
     taxName:formdata.name,
     type:formdata.taxType,
-    code:getCode(formdata),
-    name:getName(formdata),
-    startDate:getFrmStartDate(formdata)
+    code:getCode(formdata,pageid),
+    name:getName(formdata,pageid),
+    startDate:getFrmStartDate(formdata),
+    location: formdata.location,
+    street1: formdata.street1,
+    street2: formdata.street2,
+    city:formdata.city,
+    county:formdata.county,
+    state: formdata.state,
+    zip: formdata.zip
   };
   return input;
 }
@@ -421,8 +430,8 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     dataset: appDataset(),
     userId: appUserId(),
     editMode: editMode,
-    code:getCode(formdata),
-    name:getName(formdata),
+    code:getCode(formdata,pageid),
+    name:getName(formdata,pageid),
     fein:formdata.fein,
     courtesy:formdata.courtesy,
     payCode:formdata.userCode,
@@ -443,12 +452,19 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     startDate:getFrmStartDate(formdata),
     effDate:getFrmEffDate(formdata),
     taxRate:formdata.taxRate,
-    type:formdata.taxType
+    type:formdata.taxType,
+    location: formdata.location,
+    street1: formdata.street1,
+    street2: formdata.street2,
+    city:formdata.city,
+    county:formdata.county,
+    state: formdata.state,
+    zip: formdata.zip
   };
   return input;
 }
 
-export function getCode(formdata){
+export function getCode(formdata,pageid){
   if(formdata && formdata.company){
     return formdata.company;
   } else if (formdata && formdata.code) {
@@ -457,15 +473,20 @@ export function getCode(formdata){
     return formdata.id;
   }else if (formdata && formdata.bsiAuth) {
     return formdata.bsiAuth;
+  }else if(pageid && pageid =="worksiteCompanies"){
+      return store.getState().formFilterData.company;
   }
+
 }
-export function getName(formdata) {
+export function getName(formdata,pageid) {
   if (formdata && formdata.companyName) {
     return formdata.companyName;
   } else if (formdata && formdata.name) {
     return formdata.name;
   } else if (formdata && formdata.groupName) {
     return formdata.groupName;
+  }else if(pageid && pageid =="worksiteCompanies"){
+    return store.getState().formFilterData.companyName;
   }
 }
 export const reqInfo = data => {
