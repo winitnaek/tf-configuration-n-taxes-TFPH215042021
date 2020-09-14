@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Row, Col, Container, UncontrolledTooltip } from "reactstrap";
 import { DynamicForm } from "bsiuilib";
-import generateReportApi from "../api/generateReportApi";
+import generateReportApi from "../api/generateReportAPI";
 import { tftools } from "../../base/constants/TFTools";
 import * as metaData from "../metadata/metaData";
 import * as styles from "../../base/constants/AppConstants";
