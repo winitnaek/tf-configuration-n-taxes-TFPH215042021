@@ -174,6 +174,7 @@ export const metaDataApiMap = {
   // Garnishnishment Formula Override
   garnishmentFormulasOverride: GARNISHMENT_FORMULAS_OVERRIDE,
   garnishmentFormulaOverrides: GARNISHMENT_FORMULA_OVERRIDES,
+  garnishmentFormulaOverrideDetails:GET_USER_DATA_QUERIES,
   dataSets:GET_DATASETS
 };
 
