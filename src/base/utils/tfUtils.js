@@ -1,9 +1,21 @@
-import { metadatamap, tftools, deletedatamap, savedatamap, asyncselfldsmap, generateDataMap } from "../constants/TFTools";
+import {
+  metadatamap,
+  tftools,
+  deletedatamap,
+  savedatamap,
+  asyncselfldsmap,
+  generateDataMap
+} from "../constants/TFTools";
 import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
 import { generateUrl } from "bsiuilib";
-import { authCodeauthNamerenderer, taxTypeCodeNamerenderer, courtesyRenderer,baiAuthAuthNamerenderer } from "../../app/metadata/cellsrenderer";
+import {
+  authCodeauthNamerenderer,
+  taxTypeCodeNamerenderer,
+  courtesyRenderer,
+  baiAuthAuthNamerenderer
+} from "../../app/metadata/cellsrenderer";
 import store from "../../tf_index";
 /**
  * buildModuleAreaLinks
@@ -45,14 +57,18 @@ export function setPerms(perm) {
 export function openHelp(pageid) {
   window.open("/help/" + pageid, "_blank");
 }
+export function getMetaData(pageid) {
+  return metaData[pageid];
+}
 /**
  * compMetaData
  * @param {*} pageid
  */
 export function compMetaData(pageid, key) {
-  if (key >= 0) {
+  if (key !== undefined && metaData[pageid] instanceof Array && metaData[pageid][key]) {
     const { formFilterData } = store.getState();
-    const gridMetaData = JSON.parse(JSON.stringify(metaData[pageid][key]));
+    const gridMetaData = JSON.parse(JSON.stringify(metaData[pageid][key])); // Copy medata
+    // for first table to have back button to parent we check for key === 0
     if (key === 0 && typeof gridMetaData.pgdef.parentConfig === "string") {
       gridMetaData.pgdef.parentConfig = metaData[gridMetaData.pgdef.parentConfig];
     }
@@ -93,7 +109,7 @@ export function checkForStaticRender(metadata) {
       value.cellsrenderer = taxTypeCodeNamerenderer;
     } else if (value.rendererStaticInput && value.rendererStaticInput == "courtesyRenderer") {
       value.cellsrenderer = courtesyRenderer;
-    }else if (value.rendererStaticInput && value.rendererStaticInput == "baiAuthAuthNamerenderer") {
+    } else if (value.rendererStaticInput && value.rendererStaticInput == "baiAuthAuthNamerenderer") {
       value.cellsrenderer = baiAuthAuthNamerenderer;
     }
   });
@@ -251,13 +267,13 @@ export function getFrmEndDate(filterData) {
   }
 }
 export function getFrmEffDate(filterData) {
-  if (filterData && (filterData.effecDate)) {
+  if (filterData && filterData.effecDate) {
     let dt = filterData.effecDate;
     if (dt.indexOf("/") > 0) {
       return dt;
     } else if (dt.indexOf("-") > 0) {
       let spldt = dt.split("-");
-      let newdt = spldt[1] + "/" + spldt[2] + "/" +spldt[0] ;
+      let newdt = spldt[1] + "/" + spldt[2] + "/" + spldt[0];
       return newdt;
     }
   } else {
@@ -272,15 +288,15 @@ export function getFrmStartDate(filterData) {
       return dt;
     } else if (dt.indexOf("-") > 0) {
       let spldt = dt.split("-");
-      let newdt = spldt[1] + "/" + spldt[2] + "/" +spldt[0] ;
+      let newdt = spldt[1] + "/" + spldt[2] + "/" + spldt[0];
       return newdt;
     }
   } else {
     return "";
   }
 }
-export function getStartDate(filterData){ 
-  if(filterData && filterData.includeAllDates){
+export function getStartDate(filterData) {
+  if (filterData && filterData.includeAllDates) {
     return "ALL";
   } else if (filterData && (filterData.startDate || filterData.startdate)) {
     let dt = filterData.startDate ? filterData.startDate.split("-") : filterData.startdate.split("-");
@@ -399,18 +415,18 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    compCode:getCode(formdata,pageid),
-    taxCode:formdata.taxCode,
-    taxName:formdata.name,
-    type:formdata.taxType,
-    code:getCode(formdata,pageid),
-    name:getName(formdata,pageid),
-    startDate:getFrmStartDate(formdata),
+    compCode: getCode(formdata, pageid),
+    taxCode: formdata.taxCode,
+    taxName: formdata.name,
+    type: formdata.taxType,
+    code: getCode(formdata, pageid),
+    name: getName(formdata, pageid),
+    startDate: getFrmStartDate(formdata),
     location: formdata.location,
     street1: formdata.street1,
     street2: formdata.street2,
-    city:formdata.city,
-    county:formdata.county,
+    city: formdata.city,
+    county: formdata.county,
     state: formdata.state,
     zip: formdata.zip
   };
@@ -430,62 +446,61 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     dataset: appDataset(),
     userId: appUserId(),
     editMode: editMode,
-    code:getCode(formdata,pageid),
-    name:getName(formdata,pageid),
-    fein:formdata.fein,
-    courtesy:formdata.courtesy,
-    payCode:formdata.userCode,
-    payType:formdata.payType,
-    payName:formdata.name,
-    e_taxability:formdata.taxability,
-    e_maxLimit:formdata.eemax,
-    taxCode:formdata.taxCode,
-    taxName:formdata.name,
+    code: getCode(formdata, pageid),
+    name: getName(formdata, pageid),
+    fein: formdata.fein,
+    courtesy: formdata.courtesy,
+    payCode: formdata.userCode,
+    payType: formdata.payType,
+    payName: formdata.name,
+    e_taxability: formdata.taxability,
+    e_maxLimit: formdata.eemax,
+    taxCode: formdata.taxCode,
+    taxName: formdata.name,
     calcMethod: formdata.cmName,
     flatAmount: formdata.flatAmount,
-    maxTax:formdata.maxTax,
-    maxWage:formdata.maxWage,
-    minWage:formdata.minWage,
-    endDate:getFrmEndDate(formdata),
-    rounding:formdata.roundingDisplay,
-    roundingDisplay:formdata.roundingDisplay,
-    startDate:getFrmStartDate(formdata),
-    effDate:getFrmEffDate(formdata),
-    taxRate:formdata.taxRate,
-    type:formdata.taxType,
+    maxTax: formdata.maxTax,
+    maxWage: formdata.maxWage,
+    minWage: formdata.minWage,
+    endDate: getFrmEndDate(formdata),
+    rounding: formdata.roundingDisplay,
+    roundingDisplay: formdata.roundingDisplay,
+    startDate: getFrmStartDate(formdata),
+    effDate: getFrmEffDate(formdata),
+    taxRate: formdata.taxRate,
+    type: formdata.taxType,
     location: formdata.location,
     street1: formdata.street1,
     street2: formdata.street2,
-    city:formdata.city,
-    county:formdata.county,
+    city: formdata.city,
+    county: formdata.county,
     state: formdata.state,
     zip: formdata.zip
   };
   return input;
 }
 
-export function getCode(formdata,pageid){
-  if(formdata && formdata.company){
+export function getCode(formdata, pageid) {
+  if (formdata && formdata.company) {
     return formdata.company;
   } else if (formdata && formdata.code) {
     return formdata.code;
   } else if (formdata && formdata.id) {
     return formdata.id;
-  }else if (formdata && formdata.bsiAuth) {
+  } else if (formdata && formdata.bsiAuth) {
     return formdata.bsiAuth;
-  }else if(pageid && pageid =="worksiteCompanies"){
-      return store.getState().formFilterData.company;
+  } else if (pageid && pageid == "worksiteCompanies") {
+    return store.getState().formFilterData.company;
   }
-
 }
-export function getName(formdata,pageid) {
+export function getName(formdata, pageid) {
   if (formdata && formdata.companyName) {
     return formdata.companyName;
   } else if (formdata && formdata.name) {
     return formdata.name;
   } else if (formdata && formdata.groupName) {
     return formdata.groupName;
-  }else if(pageid && pageid =="worksiteCompanies"){
+  } else if (pageid && pageid == "worksiteCompanies") {
     return store.getState().formFilterData.companyName;
   }
 }
@@ -578,7 +593,7 @@ export function generateReportUrl(id) {
   });
   let url = generateUrl.buildURL(generateRportMap.url);
   if (isMock() && mockDataMapper[id]) {
-      url = mockDataMapper[id];
+    url = mockDataMapper[id];
   }
   return url;
 }

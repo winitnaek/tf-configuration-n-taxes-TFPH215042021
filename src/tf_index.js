@@ -23,6 +23,7 @@ import {
   openHelp,
   setPerms,
   compMetaData,
+  getMetaData,
   compPermissions,
   buildGridDataInput,
   decorateData
@@ -111,14 +112,21 @@ function renderComponent(elem, pageid, pid) {
     .getGridData(pageid, gridInput)
     .then(response => response)
     .then(griddata => {
+      const metaData = getMetaData(pageid);
       let griddatanew = decorateData(griddata, pageid);
+      const isSingleTable = !(metaData instanceof Array);
+
+      if (isSingleTable && griddatanew[0] instanceof Array) {
+        griddatanew = griddatanew[0];
+      }
+
       ReactDOM.render(
         <Provider store={store}>
           <Fragment>
-            {griddatanew[0] && griddatanew[0] instanceof Array ? (
+            {!isSingleTable ? (
               griddatanew.map((data, key) => (
-          <CustomGrid
-            pageid={pageid}
+                <CustomGrid
+                  pageid={pageid}
                   metadata={page => compMetaData(pageid, key)}
                   pid={pid}
                   permissions={compPermissions}
@@ -132,15 +140,15 @@ function renderComponent(elem, pageid, pid) {
             ) : (
               <CustomGrid
                 pageid={pageid}
-            metadata={compMetaData}
-            pid={pid}
-            permissions={compPermissions}
-            griddata={griddatanew}
-            help={openHelp}
-            gridProps={gridProps}
-            fieldData={fieldDataX}
+                metadata={compMetaData}
+                pid={pid}
+                permissions={compPermissions}
+                griddata={griddatanew}
+                help={openHelp}
+                gridProps={gridProps}
+                fieldData={fieldDataX}
                 formMetaData={compMetaData(pageid)}
-          />
+              />
             )}
           </Fragment>
         </Provider>,
@@ -207,7 +215,7 @@ function renderNewPage(elem, pgid, pid, initialProps) {
   const help = openHelp;
   ReactDOM.render(
     <Provider store={store}>
-      <ReusablePage pgid={pgid} help={help} initialProps={initialProps}/>
+      <ReusablePage pgid={pgid} help={help} initialProps={initialProps} />
     </Provider>,
     document.querySelector("#" + elem)
   );
