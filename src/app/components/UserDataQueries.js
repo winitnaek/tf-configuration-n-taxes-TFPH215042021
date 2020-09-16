@@ -96,13 +96,6 @@ export class UserDataQueries extends React.Component {
           </span>
         </Row>
         <Row>
-          <Col xs="6">
-            <h3>
-              <Button color="link" onClick={() => this.renderCustom(renderTFCustomComp)}>
-                Test Custom Component
-              </Button>
-            </h3>
-          </Col>
           {tftools.map(({ label, id, value, type }) => {
             return value === "UQ" && type !== "page" ? (
               <Col xs="6">
