@@ -26,7 +26,8 @@ import {
   getMetaData,
   compPermissions,
   buildGridDataInput,
-  decorateData
+  decorateData,
+  addUserId
 } from "./base/utils/tfUtils";
 import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
 import CustomGrid from "./app/components/CustomGrid";
@@ -106,7 +107,7 @@ function renderComponent(elem, pageid, pid) {
     renderGrid
   };
 
-  const fieldDataX = fieldData[pageid];
+  
 
   griddataAPI
     .getGridData(pageid, gridInput)
@@ -114,6 +115,7 @@ function renderComponent(elem, pageid, pid) {
     .then(griddata => {
       const metaData = getMetaData(pageid);
       let griddatanew = decorateData(griddata, pageid);
+      const fieldDataX = addUserId(fieldData[pageid], pageid, appUserId());
       const isSingleTable = !(metaData instanceof Array);
 
       if (isSingleTable && griddatanew[0] instanceof Array) {
@@ -127,7 +129,7 @@ function renderComponent(elem, pageid, pid) {
               griddatanew.map((data, key) => (
                 <CustomGrid
                   pageid={pageid}
-                  metadata={page => compMetaData(pageid, key)}
+                  metadata={() => compMetaData(pageid, key)}
                   pid={pid}
                   permissions={compPermissions}
                   griddata={data}

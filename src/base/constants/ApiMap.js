@@ -74,7 +74,10 @@ import {
   GET_SUPPRESSED_MESSAGES,
   GARNISHMENT_FORMULAS_OVERRIDE,
   GARNISHMENT_FORMULA_OVERRIDES,
-  GET_DATASETS
+  GET_DATASETS,
+  GET_PERMISSIONS,
+  SAVE_PERMISSIONS,
+  PERMISSION_FOR
 } from "./ServiceUrls";
 
 export const metaDataApiMap = {
@@ -175,7 +178,8 @@ export const metaDataApiMap = {
   garnishmentFormulasOverride: GARNISHMENT_FORMULAS_OVERRIDE,
   garnishmentFormulaOverrides: GARNISHMENT_FORMULA_OVERRIDES,
   garnishmentFormulaOverrideDetails:GET_USER_DATA_QUERIES,
-  dataSets:GET_DATASETS
+  dataSets:GET_DATASETS,
+  permissions: GET_PERMISSIONS
 };
 
 export const deleteDataApiMap = {
@@ -211,7 +215,8 @@ export const saveDataApiMap = {
   customGarnishment: SAVE_CUSTOM_GARNISHMENT_CODE,
   employeeGroup: SAVE_EMPLOYEE_GROUP,
   garnishmentGroup: SAVE_GARNISHMENT_GROUP,
-  messageToSuppress: SAVE_SUPPRESS_MESSAGES
+  messageToSuppress: SAVE_SUPPRESS_MESSAGES,
+  permissions: SAVE_PERMISSIONS
 };
 
 export const generateApiMap = {
@@ -256,5 +261,6 @@ export const autoCompleteApiMap = {
   customTaxCode: GET_CUSTOM_TAXCODES_AUTOCOMPLETE,
   customTypeOfData: GET_CUSTOM_TYPEOF_DATA,
   employeeGroupCode: GET_UDQ_AUTOCOMPLETE,
-  bsiAuth: GET_UDQ_AUTOCOMPLETE
+  bsiAuth: GET_UDQ_AUTOCOMPLETE,
+  permissionFor: PERMISSION_FOR
 };

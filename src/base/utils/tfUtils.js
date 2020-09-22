@@ -60,6 +60,16 @@ export function openHelp(pageid) {
 export function getMetaData(pageid) {
   return metaData[pageid];
 }
+
+export const cellbeginedit = (row, datafield) => {
+  let _id = document.querySelector("div[role='grid']").id;
+  const rowdata = $(`#${_id}`).jqxGrid("getrowdata", row);
+  if(datafield === 'audit'){
+    return rowdata.isAuditable;
+  }
+  return true;
+};
+
 /**
  * compMetaData
  * @param {*} pageid
@@ -79,15 +89,34 @@ export function compMetaData(pageid, key) {
   } else {
     if (metaData[pageid]) {
       let metadata = checkForStaticRender(metaData[pageid]);
+      if (pageid === "permissions") {
+        metadata.griddef.columns.forEach(column => {
+          column.cellbeginedit = cellbeginedit;
+        });
+      }
       return metadata;
     }
     let metadataMap = metadatamap.find(metadatam => {
       if (pageid == metadatam.id) return metadatam;
     });
     let metadata = checkForStaticRender(metadataMap.metadata);
+
     return metadata;
   }
 }
+
+export const addUserId = (fieldData, pageId, userId) => {
+  if (pageId === "permissions") {
+    fieldData.forEach(field => {
+      if (field.id === "permissionFor") {
+        const state = store.getState();
+        field.value = state.formData.data.permissionFor || userId;
+      }
+    });
+  }
+  return fieldData;
+};
+
 export function decorateData(griddata, pageid) {
   if (pageid == "taxabilityForAuthority") {
     let state = store.getState();

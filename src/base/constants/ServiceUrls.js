@@ -74,3 +74,6 @@ export const GET_SUPPRESSED_MESSAGES = '/MessageSuppress/getSuppressedMessages';
 export const GARNISHMENT_FORMULAS_OVERRIDE = '/GarnishmentOverrite/getFormulasOverride';
 export const GARNISHMENT_FORMULA_OVERRIDES = '/GarnishmentOverrite/getFormulaOverrides';
 export const GET_DATASETS = '/getDataSEts';
+export const GET_PERMISSIONS = './GET_PERMISSIONS'
+export const SAVE_PERMISSIONS = './SAVE_PERMISSIONS'
+export const PERMISSION_FOR = './PERMISSION_FOR'
