@@ -64,7 +64,7 @@ export function getMetaData(pageid) {
 export const cellbeginedit = (row, datafield) => {
   let _id = document.querySelector("div[role='grid']").id;
   const rowdata = $(`#${_id}`).jqxGrid("getrowdata", row);
-  if(datafield === 'audit'){
+  if (datafield === "audit") {
     return rowdata.isAuditable;
   }
   return true;
@@ -110,7 +110,11 @@ export const addUserId = (fieldData, pageId, userId) => {
     fieldData.forEach(field => {
       if (field.id === "permissionFor") {
         const state = store.getState();
-        field.value = state.formData.data.permissionFor || userId;
+        if (state.formData && state.formData.data && state.formData.data.permissionFor) {
+          field.value = state.formData.data.permissionFor;
+        } else {
+          field.value = userId;
+        }
       }
     });
   }
@@ -263,7 +267,7 @@ export function buildGridDataInput(pageid, store) {
     customTaxCode: filterData.customTaxCode === "ALL" ? "" : filterData.customTaxCode,
     pmtUsrCode: getPmtUsrCode(filterData),
     formula: filterData.formula,
-    usrtax:filterData.userTax
+    usrtax: filterData.userTax
   };
   return input;
 }
