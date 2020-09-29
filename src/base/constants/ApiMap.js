@@ -77,8 +77,10 @@ import {
   GET_DATASETS,
   GET_PERMISSIONS,
   SAVE_PERMISSIONS,
-  PERMISSION_FOR
-} from "./ServiceUrls";
+  PERMISSION_FOR,
+  CUSTOM_GARNISHMENT_FORMULA,
+  GARNISHMENT
+} from './ServiceUrls';
 
 export const metaDataApiMap = {
   bSITaxes: GET_USER_DATA_QUERIES,
@@ -177,9 +179,10 @@ export const metaDataApiMap = {
   // Garnishnishment Formula Override
   garnishmentFormulasOverride: GARNISHMENT_FORMULAS_OVERRIDE,
   garnishmentFormulaOverrides: GARNISHMENT_FORMULA_OVERRIDES,
-  garnishmentFormulaOverrideDetails:GET_USER_DATA_QUERIES,
-  dataSets:GET_DATASETS,
-  permissions: GET_PERMISSIONS
+  garnishmentFormulaOverrideDetails: GET_USER_DATA_QUERIES,
+  dataSets: GET_DATASETS,
+  permissions: GET_PERMISSIONS,
+  selectSamplePage: GET_SAMPLE_DATE_FIELD_DATA
 };
 
 export const deleteDataApiMap = {
@@ -196,7 +199,7 @@ export const deleteDataApiMap = {
   garnishmentGroup: DELETE_GARNISHMENT_GROUP,
   customTaxFormulas: DELETE_CUSTOM_FORMULA,
   customFormulas: DELETE_CUSTOM_FORMULA,
-  worksiteCompanies:DELETE_WORKSITES_LOCATIONS
+  worksiteCompanies: DELETE_WORKSITES_LOCATIONS
 };
 
 export const saveDataApiMap = {
@@ -221,7 +224,7 @@ export const saveDataApiMap = {
 
 export const generateApiMap = {
   maritalStatusReport: GENERATE_MARITAL_REPORT,
-  batchTest: GENERATE_BATCH_TEST_REPORT,
+  batchTest: GENERATE_BATCH_TEST_REPORT
 };
 
 export const autoCompleteApiMap = {
@@ -262,5 +265,7 @@ export const autoCompleteApiMap = {
   customTypeOfData: GET_CUSTOM_TYPEOF_DATA,
   employeeGroupCode: GET_UDQ_AUTOCOMPLETE,
   bsiAuth: GET_UDQ_AUTOCOMPLETE,
-  permissionFor: PERMISSION_FOR
+  permissionFor: PERMISSION_FOR,
+  customGarnishmentFormula: CUSTOM_GARNISHMENT_FORMULA,
+  garnishment: GARNISHMENT
 };

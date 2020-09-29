@@ -9,14 +9,6 @@ export const UI_TEST = 'uitest';
 export const tftools = [
   ...tfScreens,
   {
-    value: 'SP',
-    label: 'Select Sample Page',
-    desc: 'Select Sample Page',
-    id: 'selectSamplePage',
-    type: UI_COMP,
-    link: true
-  },
-  {
     value: 'TH',
     label: 'Test Metadata',
     desc: 'Test Metadata',
@@ -31,22 +23,6 @@ export const tftools = [
     id: 'userDataQueries',
     type: UI_PAGE,
     link: true
-  },
-  {
-    value: 'DF',
-    label: 'Date Field Doc',
-    desc: 'Date Field Doc',
-    id: 'dateFieldDoc',
-    type: UI_PAGE,
-    link: true
-  },
-  {
-    value: 'DF',
-    label: 'Sample Date Fields',
-    desc: 'Sample Date Fields',
-    id: 'sampleDateFields',
-    type: UI_COMP,
-    link: false
   },
   {
     value: 'CO',
