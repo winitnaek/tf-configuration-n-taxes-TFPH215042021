@@ -11,9 +11,9 @@
     "areas": [ {
         "id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8",
         "groupId":"Group1", 
-        "title": "System Tools",
+        "title": "Reporting",
         "icon": "fas fa-file-alt fa-sm",
-        "tooltip": "System Tools",
+        "tooltip": "Reporting",
         "renderName": "renderTFHome",
         "visible": true
     }]
