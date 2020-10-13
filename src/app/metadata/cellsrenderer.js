@@ -10,6 +10,15 @@ export function authCodeauthNamerenderer(ndex,
 ) {
 	return rowdata.authorityCode +'-' + rowdata.authorityName;
 }
+export function formulaNamerenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.formula +'-' + rowdata.formulaTitle}</div>`
+}
 export function baiAuthAuthNamerenderer(ndex,
 	datafield,
 	value,

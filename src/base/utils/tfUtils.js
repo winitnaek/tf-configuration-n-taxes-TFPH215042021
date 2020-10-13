@@ -1,3 +1,4 @@
+import moment from 'moment'; 
 import {
   metadatamap,
   tftools,
@@ -10,12 +11,7 @@ import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
 import { generateUrl } from "bsiuilib";
-import {
-  authCodeauthNamerenderer,
-  taxTypeCodeNamerenderer,
-  courtesyRenderer,
-  baiAuthAuthNamerenderer
-} from "../../app/metadata/cellsrenderer";
+import * as CellsRenderer from "../../app/metadata/cellsrenderer";
 import store from "../../tf_index";
 /**
  * buildModuleAreaLinks
@@ -77,7 +73,8 @@ export const cellbeginedit = (row, datafield) => {
 export function compMetaData(pageid, key) {
   if (key !== undefined && metaData[pageid] instanceof Array && metaData[pageid][key]) {
     const { formFilterData } = store.getState();
-    const gridMetaData = JSON.parse(JSON.stringify(metaData[pageid][key])); // Copy medata
+    const metaDataCopy = JSON.parse(JSON.stringify(metaData[pageid][key])); // Copy medata
+    let gridMetaData = checkForStaticRender(metaDataCopy);
     // for first table to have back button to parent we check for key === 0
     if (key === 0 && typeof gridMetaData.pgdef.parentConfig === "string") {
       gridMetaData.pgdef.parentConfig = metaData[gridMetaData.pgdef.parentConfig];
@@ -105,10 +102,10 @@ export function compMetaData(pageid, key) {
   }
 }
 
-export const addUserId = (fieldData, pageId, userId) => {
-  if (pageId === "permissions") {
+export const formatFieldData = (fieldData, pageId, userId) => {
+  if (fieldData) {
     fieldData.forEach(field => {
-      if (field.id === "permissionFor") {
+      if (field.id === "permissionFor" && pageId === "permissions") {
         const state = store.getState();
         if (state.formData && state.formData.data && state.formData.data.permissionFor) {
           field.value = state.formData.data.permissionFor;
@@ -116,8 +113,12 @@ export const addUserId = (fieldData, pageId, userId) => {
           field.value = userId;
         }
       }
+      if (field.value === "new Date()") {
+        field.value = moment().format("MM/DD/yyyy");
+      }
     });
   }
+
   return fieldData;
 };
 
@@ -136,14 +137,8 @@ export function decorateData(griddata, pageid) {
 }
 export function checkForStaticRender(metadata) {
   metadata.griddef.columns.forEach(function (value) {
-    if (value.rendererStaticInput && value.rendererStaticInput == "authCodeauthNamerenderer") {
-      value.cellsrenderer = authCodeauthNamerenderer;
-    } else if (value.rendererStaticInput && value.rendererStaticInput == "taxTypeCodeNamerenderer") {
-      value.cellsrenderer = taxTypeCodeNamerenderer;
-    } else if (value.rendererStaticInput && value.rendererStaticInput == "courtesyRenderer") {
-      value.cellsrenderer = courtesyRenderer;
-    } else if (value.rendererStaticInput && value.rendererStaticInput == "baiAuthAuthNamerenderer") {
-      value.cellsrenderer = baiAuthAuthNamerenderer;
+    if (value.rendererStaticInput && CellsRenderer[value.rendererStaticInput]) {
+      value.cellsrenderer = CellsRenderer[value.rendererStaticInput];
     }
   });
   return metadata;
@@ -293,8 +288,8 @@ export function getTaxCode(filterData) {
 export function getAuthCode(filterData) {
   if (filterData && filterData.authorityCode) {
     return filterData.authorityCode;
-  } else if (filterData && filterData.bsiAuth) {
-    return filterData.bsiAuth;
+  } else if (filterData && (filterData.bsiAuth || filterData.bsiauth)) {
+    return filterData.bsiAuth || filterData.bsiauth;
   }
 }
 export function getFrmEndDate(filterData) {
@@ -345,8 +340,14 @@ export function getStartDate(filterData) {
   if (filterData && filterData.includeAllDates) {
     return "ALL";
   } else if (filterData && (filterData.startDate || filterData.startdate)) {
-    let dt = filterData.startDate ? filterData.startDate.split("-") : filterData.startdate.split("-");
-    let stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
+    const date = filterData.startDate || filterData.startdate;
+    let stDate = date;
+    
+    if( date.indexOf('-') !== -1){
+        const dt = date.split("-");
+        stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
+    }
+     
     return stDate;
   } else {
     return "";

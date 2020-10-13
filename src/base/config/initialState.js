@@ -39,7 +39,7 @@ export default {
       link: true
     },
     {
-      "value": "EG",
+      "value": "CG",
       "label": "Custom Garnishments",
       "desc": "Custom Garnishments",
       "id": "customGarnishment",

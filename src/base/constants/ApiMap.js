@@ -1,4 +1,8 @@
 import {
+  GET_TAX_HISTORY,
+  GET_TAX_HISTORY_REPORT,
+  GET_PA_SERVICES_TAX_REPORT,
+  GET_PA_SERVICE_TAX_REPORT,
   GET_USER_DATA_QUERIES,
   GET_CUSTOM_PAYMENTS_LIST,
   GET_CUSTOM_TAX_CODES,
@@ -79,7 +83,8 @@ import {
   SAVE_PERMISSIONS,
   PERMISSION_FOR,
   CUSTOM_GARNISHMENT_FORMULA,
-  GARNISHMENT
+  GARNISHMENT,
+  AUTHORITY_NAME
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -160,8 +165,8 @@ export const metaDataApiMap = {
   viewDisposableOverride: GET_CUSTOM_TAX_FORMULAS,
   messageViewer: GET_CUSTOM_TAX_FORMULAS,
   messagesViewer: GET_CUSTOM_TAX_FORMULAS,
-  paServicesTaxReport: GET_CUSTOM_TAX_FORMULAS,
-  paServiceTaxReport: GET_CUSTOM_TAX_FORMULAS,
+  paServicesTaxReport: GET_PA_SERVICES_TAX_REPORT,
+  paServiceTaxReport: GET_PA_SERVICE_TAX_REPORT,
   // Mapping Tools
   mappingTools: GET_CUSTOM_TAX_FORMULAS,
   mapPaymentCodes: GET_CUSTOM_TAX_FORMULAS,
@@ -173,8 +178,8 @@ export const metaDataApiMap = {
   taxCodeUsage: GET_CUSTOM_TAX_FORMULAS,
   taxTypeUsage: GET_CUSTOM_TAX_FORMULAS,
   paymentCodeUsage: GET_CUSTOM_TAX_FORMULAS,
-  taxHistory: GET_CUSTOM_TAX_FORMULAS,
-  taxHistoryReport: GET_CUSTOM_TAX_FORMULAS,
+  taxHistory: GET_TAX_HISTORY,
+  taxHistoryReport: GET_TAX_HISTORY_REPORT,
   messageToSuppress: GET_SUPPRESSED_MESSAGES,
   // Garnishnishment Formula Override
   garnishmentFormulasOverride: GARNISHMENT_FORMULAS_OVERRIDE,
@@ -267,5 +272,6 @@ export const autoCompleteApiMap = {
   bsiAuth: GET_UDQ_AUTOCOMPLETE,
   permissionFor: PERMISSION_FOR,
   customGarnishmentFormula: CUSTOM_GARNISHMENT_FORMULA,
-  garnishment: GARNISHMENT
+  garnishment: GARNISHMENT,
+  authorityName: AUTHORITY_NAME
 };
