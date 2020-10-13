@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Col, Row, Button, UncontrolledTooltip, Container } from "reactstrap";
+import { Col, Row, Button, UncontrolledTooltip, Container,Card, CardHeader, CardFooter, CardBody,
+  CardTitle, CardText} from "reactstrap";
 import { tftools } from "../../base/constants/TFTools";
 import { closeForm, setFormData } from "../actions/formActions";
 import * as styles from "../../base/constants/AppConstants";
@@ -24,13 +25,13 @@ export class UserDataQueries extends React.Component {
     this.state = {
       value: "",
       helpLabel: "Click here for more info",
-      title: "User Data Queries",
+      title: "Reporting",
       pgid: "",
       formTitle: "",
       isOpen: false,
       isfilterform: false,
       permissions: " ",
-      isOpen: false
+      isOpen: false,
     };
 
     this.OpenHelp = () => {
@@ -39,18 +40,18 @@ export class UserDataQueries extends React.Component {
 
     this.renderMe = (pgid, values, filter) => {
       filter && this.props.setFilterFormData(values);
-      let data = tftools.filter(tftool => {
+      let data = tftools.filter((tftool) => {
         if (tftool.id == pgid) return tftool;
       });
       renderTFApplication("pageContainer", data[0]);
     };
 
-    this.renderCustom = renderName => {
+    this.renderCustom = (renderName) => {
       renderTFApplication("pageContainer", renderName);
     };
 
-    this.toggle = (id, title) => {
-      if (!fieldData[id]) {
+    this.toggle = (id, title, type) => {
+      if (!fieldData[id] || id==="maritalStatusReport") {
         this.renderMe(id);
       } else {
         const payload = { data: {}, mode: "New" };
@@ -59,7 +60,7 @@ export class UserDataQueries extends React.Component {
           isOpen: true,
           pgid: id,
           formTitle: title,
-          isfilterform: true
+          isfilterform: true,
         });
       }
     };
@@ -68,18 +69,63 @@ export class UserDataQueries extends React.Component {
       this.setState({ isOpen: false });
     };
   }
-
+  GetSortOrder(prop) {
+    return function (a, b) {
+      if (a[prop] > b[prop]) {
+        return 1;
+      } else if (a[prop] < b[prop]) {
+        return -1;
+      }
+      return 0;
+    };
+  }
+  renderSection(sectionHeader, sectionName, cols) {
+    return (<Row><Card style={{ width: "100%" }}>
+    <CardHeader>{sectionHeader}</CardHeader>
+    <CardBody>
+      <Row>
+        {tftools.sort(this.GetSortOrder("label")).map(({ label, id, value, type, href,section }, index) => {
+          return value === "UQ" && sectionName===section  ? (
+            <Col xs={cols}>
+              <h3>
+                <Button
+                  color="link"
+                  onClick={() =>
+                    type === "externallink" && href
+                      ? window.open(href, "_blank")
+                      : this.toggle(id, label)
+                  }
+                >
+                  {label}
+                </Button>
+              </h3>
+            </Col>
+          ) : null;
+        })}
+      </Row>
+    </CardBody>
+  </Card></Row>
+    );
+  }
   render() {
     const { permissions, cruddef, isfilterform, pgid } = this.state;
     const { deleteRow, handleChange, renderMe, handleSubmit } = this;
-    const {formData } = this.props;
+    const { formData } = this.props;
     let filter;
     if (isfilterform) {
       filter = true;
     }
-
     const close = this.handleClose;
-    const formProps = { close, handleChange, pgid, permissions, deleteRow, handleSubmit, renderMe, filter };
+    const formProps = {
+      close,
+      handleChange,
+      pgid,
+      permissions,
+      deleteRow,
+      handleSubmit,
+      renderMe,
+      filter,
+    };
     return (
       <Container>
         <Row>
@@ -87,7 +133,11 @@ export class UserDataQueries extends React.Component {
           <span style={{ marginLeft: "10px" }}>
             <span id="help">
               <span>
-                <i className="fas fa-question-circle  fa-lg" onClick={this.OpenHelp} style={styles.helpicon} />
+                <i
+                  className="fas fa-question-circle  fa-lg"
+                  onClick={this.OpenHelp}
+                  style={styles.helpicon}
+                />
               </span>
             </span>
             <UncontrolledTooltip placement="right" target="help">
@@ -96,19 +146,11 @@ export class UserDataQueries extends React.Component {
           </span>
         </Row>
         <Row>
-          {tftools.map(({ label, id, value, type }) => {
-            return value === "UQ" && type !== "page" ? (
-              <Col xs="6">
-                <h3>
-                  <Button color="link" onClick={() => this.toggle(id, label)}>
-                    {label}
-                  </Button>
-                </h3>
-              </Col>
-            ) : null;
-          })}
+        <Col style={{marginBottom:10}}>{this.renderSection('Tax Details','Tax Details',6)}</Col>
+        <Col style={{marginBottom:10,marginLeft:10}}>{this.renderSection('Quick Formulas','formulas',6)}</Col>
+        <p>{this.renderSection('User Data Queries',undefined,4)}</p>
         </Row>
-
+        
         <ReusableModal
           open={this.state.isOpen}
           close={this.handleClose}

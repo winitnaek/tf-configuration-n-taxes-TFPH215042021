@@ -271,6 +271,18 @@ export function buildGridDataInput(pageid, store) {
   };
   return input;
 }
+export function buildMaritalStatusInput(pageid, store,formdata) {
+  let state = store.getState();
+  console.log(formdata);
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    startdate:getFrmStartDate(formdata),
+    allDates:(formdata.allDates && formdata.allDates===true) ? true:false
+  };
+  return input;
+}
 export function getTaxCode(filterData) {
   if (filterData && filterData.taxCode) {
     return filterData.taxCode;

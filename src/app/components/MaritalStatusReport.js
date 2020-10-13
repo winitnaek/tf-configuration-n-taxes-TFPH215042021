@@ -14,23 +14,56 @@ class MaritalStatusReport extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: ""
+      url: "",
+      docData: "",
     };
     this.renderMe = (pgid, formValues, response) => {
+      console.log("pgid");
+      console.log(pgid);
+      console.log("response");
+      console.log(response);
+      console.log("formValues");
+      console.log(formValues);
       formValues && this.props.setFilterFormData(formValues);
-      this.setState({ url: response.link });
+      this.setState({ url: response.message, docData: response.docData });
     };
 
     this.OpenHelp = () => {
       this.props.help(this.props.pgid);
     };
   }
+  download() {
+    const byteCharacters = atob(this.state.docData);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const output = new Blob([byteArray]);
+    var anchor = document.createElement("a");
+    var url = window.URL || window.webkitURL;
+    anchor.href = url.createObjectURL(output);
+    var downloadFileName = this.state.url;
+    anchor.download = downloadFileName;
+    document.body.append(anchor);
+    anchor.click();
 
+    setTimeout(function () {
+      document.body.removeChild(anchor);
+      url.revokeObjectURL(anchor.href);
+    }, 100);
+  }
   render() {
     const { pgid, formData, formFilterData } = this.props;
     const { url } = this.state;
     const { pgdef } = metaData[pgid];
-    const formProps = { pgid, permissions: "", close: () => {}, filter: false, renderMe: this.renderMe };
+    const formProps = {
+      pgid,
+      permissions: "",
+      close: () => {},
+      filter: false,
+      renderMe: this.renderMe,
+    };
 
     return (
       <Container>
@@ -39,7 +72,11 @@ class MaritalStatusReport extends Component {
           <span style={{ marginLeft: "10px" }}>
             <span id="help">
               <span>
-                <i className="fas fa-question-circle  fa-lg" onClick={this.OpenHelp} style={styles.helpicon} />
+                <i
+                  className="fas fa-question-circle  fa-lg"
+                  onClick={this.OpenHelp}
+                  style={styles.helpicon}
+                />
               </span>
             </span>
             <UncontrolledTooltip placement="right" target="help">
@@ -63,8 +100,11 @@ class MaritalStatusReport extends Component {
             />
             {url && (
               <p>
-                Right click the filename below and select 'Save Target As...' to save csv file. <br />
-                <a href={url}>{url}</a>
+                Right click the filename below and select 'Save Target As...' to
+                save csv file. <br />
+                <a href="#" onClick={() => this.download()}>
+                  {url}
+                </a>
               </p>
             )}
           </Col>
@@ -84,5 +124,4 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ setFilterFormData }, dispatch);
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(MaritalStatusReport);

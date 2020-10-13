@@ -5,6 +5,7 @@ import { metaDataApiMap, autoCompleteApiMap, deleteDataApiMap, saveDataApiMap, g
 export const UI_PAGE = 'page';
 export const UI_COMP = 'comp';
 export const UI_TEST = 'uitest';
+export const UI_EXTN = 'externallink';
 
 export const tftools = [
   ...tfScreens,
@@ -18,13 +19,43 @@ export const tftools = [
   },
   {
     value: 'UQ',
-    label: 'User Data Queries',
-    desc: 'User Data Queries',
+    label: 'Reporting',
+    desc: 'Reporting',
     id: 'userDataQueries',
     type: UI_PAGE,
     link: true
   },
   {
+    value: 'UQ',
+    label: 'U.S. QuickFormulas',
+    desc: 'U.S. QuickFormulas',
+    id: 'USQuickFormulas',
+    type: UI_EXTN,
+    link: false,
+    href:"https://mybsiconnect.force.com/CustomLogin?startURL=%2Fpage_quickForms2%3Fd",
+    section:'formulas'
+  },
+  {
+    value: 'UQ',
+    label: 'U.S. Pension QuickFormulas',
+    desc: 'U.S. Pension QuickFormulas',
+    id: 'USPensionQuickFormulas',
+    type: UI_EXTN,
+    link: false,
+    href:"https://mybsiconnect.force.com/CustomLogin?startURL=%2Fpage_quickForms2%3Fdirect%3Dwspenqf%252Fversion%252F10",
+    section:'formulas'
+  },
+  {
+    value: 'UQ',
+    label: 'U.S. WageAttachment QuickFormulas',
+    desc: 'U.S. WageAttachment QuickFormulas',
+    id: 'USWageAttachmentQuickFormulas',
+    type: UI_EXTN,
+    link: false,
+    href:"https://mybsiconnect.force.com/CustomLogin?startURL=%2Fpage_quickForms2%3Fdirect%3Dwswagqf%252Fversion%252F10",
+    section:'formulas'
+  },
+ {
     value: 'CO',
     label: 'Companies',
     desc: 'Companies',

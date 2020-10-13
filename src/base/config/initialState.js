@@ -88,8 +88,8 @@ export default {
   },
     {
       value: "UQ",
-      label: "User Data Queries",
-      desc: "User Data Queries",
+      label: "Reporting",
+      desc: "Reporting",
       id: "userDataQueries",
       type: UI_PAGE,
       link: true
