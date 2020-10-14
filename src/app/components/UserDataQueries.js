@@ -31,7 +31,6 @@ export class UserDataQueries extends React.Component {
       isOpen: false,
       isfilterform: false,
       permissions: " ",
-      isOpen: false,
     };
 
     this.OpenHelp = () => {

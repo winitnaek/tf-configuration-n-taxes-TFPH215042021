@@ -9,7 +9,7 @@ const __assign =
     }
     return t;
   };
-const es6Promise = require('es6-promise');
+
 const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
@@ -49,12 +49,12 @@ class AssetGenerator {
 
         if (groupBy && this.init) {
           let groupByPromises = groupBy.map(glob => {
-            return new es6Promise.Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
               this.processFiles(glob, resolve, reject);
             });
           });
 
-          es6Promise.Promise.all(groupByPromises)
+          Promise.all(groupByPromises)
             .then(opsResponse => {
               if (this.init) {
                 const regex = /(?<=\_).+?(?=\_)/;
@@ -111,11 +111,11 @@ class AssetGenerator {
     this.processFiles = (glob, resolve, reject) => {
       const { files, fileName: outputPath, exportSingleObject, copyFile } = glob;
       let readFiles = files.map(f => {
-        return new es6Promise.Promise((res, rej) => {
+        return new Promise((res, rej) => {
           this.readFile(f, res, rej);
         });
       });
-      es6Promise.Promise.all(readFiles)
+      Promise.all(readFiles)
         .then(contents => {
           if (!copyFile) {
             const tools = contents.map(({ fileContent, file }) => {

@@ -16,7 +16,8 @@ const getAssetGeneratorConfig = environment => {
       "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/MessageViewer/",
       "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/AuditLogViewer/",
       "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type3grid/PA Services Tax Report/",
-      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type4grid/"
+      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/type4grid/",
+      "//ntsrv/common/Strategic Solutions/Designs & Specs/TF New Arch/Metadata-Mockdata/sampleDemo/"
     ],
     groupBy: [
       {
