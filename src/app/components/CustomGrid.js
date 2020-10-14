@@ -69,7 +69,8 @@ class CustomGrid extends Component {
       formData,
       formFilterData,
       fieldData,
-      formMetaData
+      formMetaData,
+      className=''
     } = this.props;
 
     const { pgdef } = metadata(pageid);
@@ -100,6 +101,7 @@ class CustomGrid extends Component {
           autoComplete={autocompleteSelectAPI}
           styles={gridStyles}
           mapToolUsage={mappingToolUsageAPI}
+          className={className}
         />
         <ConfirmModal showConfirm={this.state.showAlert} handleOk={this.handleOk} {...metaInfo} />
       </Fragment>

@@ -50,7 +50,7 @@ export class UserDataQueries extends React.Component {
     };
 
     this.toggle = (id, title, type) => {
-      if (!fieldData[id] || id==="maritalStatusReport") {
+      if (!fieldData[id] || id==="maritalStatusReport" || id === "paServicesTaxReport") {
         this.renderMe(id);
       } else {
         const payload = { data: {}, mode: "New" };

@@ -16,7 +16,7 @@ import * as fieldData from "./app/metadata/fieldData";
 
 let store = configureStore();
 export default store;
-let MOCK = process.env.NODE_ENV === "development";
+let MOCK = process.env.NODE_ENV === "development" ? false : false;
 setIsMock(MOCK);
 import {
   buildModuleAreaLinks,
@@ -139,6 +139,7 @@ function renderComponent(elem, pageid, pid) {
                   gridProps={gridProps}
                   fieldData={fieldDataX}
                   formMetaData={compMetaData(pageid, key)}
+                  className={key !== 0 ? 'mt-3' : '' }
                 />
               ))
             ) : (

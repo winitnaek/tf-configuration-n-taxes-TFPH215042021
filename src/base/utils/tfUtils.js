@@ -76,7 +76,7 @@ export function compMetaData(pageid, key) {
     const metaDataCopy = JSON.parse(JSON.stringify(metaData[pageid][key])); // Copy medata
     let gridMetaData = checkForStaticRender(metaDataCopy);
     // for first table to have back button to parent we check for key === 0
-    if (key === 0 && typeof gridMetaData.pgdef.parentConfig === "string") {
+    if (typeof gridMetaData.pgdef.parentConfig === "string") {
       gridMetaData.pgdef.parentConfig = metaData[gridMetaData.pgdef.parentConfig];
     }
     if (gridMetaData.pgdef.caption) {
@@ -104,6 +104,7 @@ export function compMetaData(pageid, key) {
 
 export const formatFieldData = (fieldData, pageId, userId) => {
   if (fieldData) {
+    
     fieldData.forEach(field => {
       if (field.id === "permissionFor" && pageId === "permissions") {
         const state = store.getState();
