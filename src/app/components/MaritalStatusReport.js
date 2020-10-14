@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Row, Col, Container, UncontrolledTooltip } from "reactstrap";
+import { Row, Col, Container, UncontrolledTooltip,Alert,Form,Button } from "reactstrap";
 import { DynamicForm } from "bsiuilib";
 import generateReportApi from "../api/generateReportAPI";
 import { tftools } from "../../base/constants/TFTools";
@@ -16,7 +16,11 @@ class MaritalStatusReport extends Component {
     this.state = {
       url: "",
       docData: "",
+      showAlert:true,
+      reportGenInProgress:false
     };
+    this.onDismiss = this.onDismiss.bind(this);
+    this.showProgress = this.showProgress.bind(this);
     this.renderMe = (pgid, formValues, response) => {
       console.log("pgid");
       console.log(pgid);
@@ -25,12 +29,22 @@ class MaritalStatusReport extends Component {
       console.log("formValues");
       console.log(formValues);
       formValues && this.props.setFilterFormData(formValues);
-      this.setState({ url: response.message, docData: response.docData });
+      this.setState({ url: response.message, docData: response.docData, showAlert:true,reportGenInProgress:false });
     };
 
     this.OpenHelp = () => {
       this.props.help(this.props.pgid);
     };
+  }
+  onDismiss() {
+    this.setState({
+      showAlert:false
+    });
+  }
+  showProgress(show){
+    this.setState({
+      reportGenInProgress:show,showAlert:false
+    });
   }
   download() {
     const byteCharacters = atob(this.state.docData);
@@ -52,6 +66,9 @@ class MaritalStatusReport extends Component {
       document.body.removeChild(anchor);
       url.revokeObjectURL(anchor.href);
     }, 100);
+  }
+  exportToCsv() {
+    alert('export csv');
   }
   render() {
     const { pgid, formData, formFilterData } = this.props;
@@ -80,10 +97,42 @@ class MaritalStatusReport extends Component {
               </span>
             </span>
             <UncontrolledTooltip placement="right" target="help">
-              <span> {pgdef.helpLabel} </span>
+              <span> {pgdef.helpLblTxt} </span>
             </UncontrolledTooltip>
           </span>
         </Row>
+        {url && (<Form style={{
+                      display: 'flex',
+                      margin: '0 auto',
+                      width: '70%',
+                      flexWrap: 'wrap'
+                    }}>
+          <Col>
+            <Alert color="success" isOpen={this.state.showAlert} toggle={this.onDismiss} fade={false}>
+            Marital Status Report Generated Successfully.
+            <a href="#" id="exportToCsv" class="float-right" onClick={() => this.download()}>
+            <i class="fas fa-pen-square fa-lg fa-2x"></i>
+            </a>
+            <UncontrolledTooltip placement="right" target="exportToCsv">
+              <span>Download CSV</span>
+            </UncontrolledTooltip>
+            </Alert>
+          </Col>
+        </Form>
+        )}
+        {this.state.reportGenInProgress && (<Form style={{
+                      display: 'flex',
+                      margin: '0 auto',
+                      width: '70%',
+                      flexWrap: 'wrap'
+                    }}>
+          <Col>
+            <Alert color="success" isOpen={this.state.reportGenInProgress} fade={false}>
+              <span href="#" id="inProgressSpinner"> <i class="fas fa-spinner fa-spin"></i> Marital Status Report Generation is in progress.</span>
+            </Alert>
+          </Col>
+        </Form>
+        )}
         <Row>
           <Col>
             <DynamicForm
@@ -97,16 +146,8 @@ class MaritalStatusReport extends Component {
               fieldData={fieldData[pgid]}
               formHandlerService={generateReportApi}
               styles={styles}
+              showProgress={this.showProgress}
             />
-            {url && (
-              <p>
-                Right click the filename below and select 'Save Target As...' to
-                save csv file. <br />
-                <a href="#" onClick={() => this.download()}>
-                  {url}
-                </a>
-              </p>
-            )}
           </Col>
         </Row>
       </Container>
