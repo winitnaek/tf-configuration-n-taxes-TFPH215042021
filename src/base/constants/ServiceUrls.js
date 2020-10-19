@@ -6,8 +6,7 @@ export const GET_EXPERIENCE_RATES = '/UserDataQueriesService/userDataQueries';
 export const GET_RESIDENT_STATE_AUTOCOMPLETE_MOCKDATA = '/UserDataQueriesService/getResidentState';
 export const GET_SAMPLE_DATE_FIELD_DATA = '/UserDataQueriesService/filterDateFieldGridData';
 export const GET_EXEMPT_MILITARY_LOCATION_AUTOCOMPLETE_MOCKDATA = '/UserDataQueriesService/getExemptmilitaryLocation';
-export const GET_PRINCIPAL_STATE_EMPLOYMENT_AUTOCOMPLETE_MOCKDATA =
-  '/UserDataQueriesService/getPrincipalStateEmployment';
+export const GET_PRINCIPAL_STATE_EMPLOYMENT_AUTOCOMPLETE_MOCKDATA ='/UserDataQueriesService/getPrincipalStateEmployment';
 export const GET_SUPPLEMENTAL_INFO_FOR_TAX = '/UserDataQueriesService/userDataQueries';
 export const GET_EXISTING_FAVORITE_LINKS = '/getExistingFavoriteLinks';
 export const DELETE_EXISTING_FAVORITE_LINKS = '/deleteExistingFavoriteLinks';
@@ -28,7 +27,6 @@ export const GET_ALL_TAXCODES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxCodesAuto
 export const GET_ALL_TAXTYPES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxTypeAutocomplete';
 export const GET_PAYMENT_AUTOCOMPLETE_MOCKDATA = '/TaxCodeService/getPaymentAutoCompl';
 export const GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE = '/TaxCodeService/getAuthoritiesAutocomplete';
-export const GET_ALL_AUTHORITY_CODE_GDW = '/UserDataQueriesService/getAutocomplete';
 export const GET_PLACE_CODE_AUTOCOMPLETE = '/TaxCodeService/getPlaceCodeAutoCompl';
 export const GET_SCHOOL_DISTRICT_AUTOCOMPLETE = '/TaxCodeService/getSchoolDistrictAutoCompl';
 export const GET_GARNISMENT_FORMULA_AUTOCOMPLETE = '/TaxCodeService/getGarnishmenFormulaAutoCompl';

@@ -84,8 +84,7 @@ import {
   PERMISSION_FOR,
   CUSTOM_GARNISHMENT_FORMULA,
   GARNISHMENT,
-  AUTHORITY_NAME,
-  GET_ALL_AUTHORITY_CODE_GDW
+  AUTHORITY_NAME
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -248,7 +247,8 @@ export const autoCompleteApiMap = {
   taxCode: GET_ALL_TAXCODES_AUTOCOMPLETE,
   authorityCode: GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE,
   authorityCodeList: GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE,
-  authorityCodegdw: GET_ALL_AUTHORITY_CODE_GDW,
+  authorityCodegdw: GET_UDQ_AUTOCOMPLETE,
+  authorityCodegp:GET_UDQ_AUTOCOMPLETE,
   placeCode: GET_PLACE_CODE_AUTOCOMPLETE,
   schoolDistrict: GET_SCHOOL_DISTRICT_AUTOCOMPLETE,
   garnishmentFormula: GET_GARNISMENT_FORMULA_AUTOCOMPLETE,
