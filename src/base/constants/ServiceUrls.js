@@ -28,6 +28,7 @@ export const GET_ALL_TAXCODES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxCodesAuto
 export const GET_ALL_TAXTYPES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxTypeAutocomplete';
 export const GET_PAYMENT_AUTOCOMPLETE_MOCKDATA = '/TaxCodeService/getPaymentAutoCompl';
 export const GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE = '/TaxCodeService/getAuthoritiesAutocomplete';
+export const GET_ALL_AUTHORITY_CODE_GDW = '/UserDataQueriesService/getAutocomplete';
 export const GET_PLACE_CODE_AUTOCOMPLETE = '/TaxCodeService/getPlaceCodeAutoCompl';
 export const GET_SCHOOL_DISTRICT_AUTOCOMPLETE = '/TaxCodeService/getSchoolDistrictAutoCompl';
 export const GET_GARNISMENT_FORMULA_AUTOCOMPLETE = '/TaxCodeService/getGarnishmenFormulaAutoCompl';

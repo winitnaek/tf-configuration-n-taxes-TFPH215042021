@@ -291,6 +291,8 @@ export function getAuthCode(filterData) {
     return filterData.authorityCode;
   } else if (filterData && (filterData.bsiAuth || filterData.bsiauth)) {
     return filterData.bsiAuth || filterData.bsiauth;
+  } else if (filterData && (filterData.authorityCodegdw)) {
+    return filterData.authorityCodegdw;
   }
 }
 export function getFrmEndDate(filterData) {
