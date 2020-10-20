@@ -25,6 +25,7 @@ export const SAVE_CUSTOM_FORMULA = '/TaxCodeService/saveCustomFormula';
 export const DELETE_CUSTOM_FORMULA = '/TaxCodeService/deleteCustomFormula';
 export const GET_ALL_TAXCODES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxCodesAutocomplete';
 export const GET_ALL_TAXTYPES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxTypeAutocomplete';
+export const GET_TAXTYPES_AUTOCOMPLETE = '/TaxCodeService/getTaxTypeAutocomplete';
 export const GET_PAYMENT_AUTOCOMPLETE_MOCKDATA = '/TaxCodeService/getPaymentAutoCompl';
 export const GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE = '/TaxCodeService/getAuthoritiesAutocomplete';
 export const GET_PLACE_CODE_AUTOCOMPLETE = '/TaxCodeService/getPlaceCodeAutoCompl';

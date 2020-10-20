@@ -284,6 +284,8 @@ export function getTaxCode(filterData) {
     return filterData.taxCode;
   } else if (filterData && filterData.customTaxName) {
     return filterData.customTaxName;
+  }else if (filterData && filterData.taxTypeALL) {
+    return filterData.taxTypeALL;
   }
 }
 export function getAuthCode(filterData) {
