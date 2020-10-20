@@ -84,7 +84,7 @@ export class UserDataQueries extends React.Component {
     <CardBody>
       <Row>
         {tftools.sort(this.GetSortOrder("label")).map(({ label, id, value, type, href,section }, index) => {
-          return value === "UQ" && sectionName===section  ? (
+          return value === "UQ" && sectionName===section && label !=="Reporting"  ? (
             <Col xs={cols}>
               <h3>
                 <Button
