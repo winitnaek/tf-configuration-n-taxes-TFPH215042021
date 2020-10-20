@@ -295,6 +295,8 @@ export function getAuthCode(filterData) {
     return filterData.authorityCodegdw;
   }else if (filterData && (filterData.authorityCodegp)) {
     return filterData.authorityCodegp;
+  }else if (filterData && (filterData.authorityCodeNoall)) {
+    return filterData.authorityCodeNoall;
   }
 }
 export function getFrmEndDate(filterData) {

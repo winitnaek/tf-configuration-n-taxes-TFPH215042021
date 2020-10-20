@@ -249,6 +249,7 @@ export const autoCompleteApiMap = {
   authorityCodeList: GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE,
   authorityCodegdw: GET_UDQ_AUTOCOMPLETE,
   authorityCodegp:GET_UDQ_AUTOCOMPLETE,
+  authorityCodeNoall:GET_UDQ_AUTOCOMPLETE,
   placeCode: GET_PLACE_CODE_AUTOCOMPLETE,
   schoolDistrict: GET_SCHOOL_DISTRICT_AUTOCOMPLETE,
   garnishmentFormula: GET_GARNISMENT_FORMULA_AUTOCOMPLETE,
