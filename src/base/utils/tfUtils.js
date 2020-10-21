@@ -378,6 +378,8 @@ export function getTaxType(filterData) {
     return filterData.garnishParamTaxType;
   } else if (filterData && filterData.taxTypeALL) {
     return filterData.taxTypeALL;
+  } else if (filterData && filterData.taxTypes) {
+    return filterData.taxTypes;
   }
 }
 export function getCompanyCode(filterData) {

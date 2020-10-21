@@ -27,6 +27,7 @@ export const GET_ALL_TAXCODES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxCodesAuto
 export const GET_ALL_TAXTYPES_AUTOCOMPLETE = '/TaxCodeService/getAllTaxTypeAutocomplete';
 export const GET_TAXCODES_AUTOCOMPLETE = '/TaxCodeService/getTaxCodesAutocomplete';
 export const GET_TAXTYPES_AUTOCOMPLETE = '/TaxCodeService/getTaxTypeAutocomplete';
+export const GET_TAXTYPES = '/TaxCodeService/getTaxTypes';
 export const GET_PAYMENT_AUTOCOMPLETE_MOCKDATA = '/TaxCodeService/getPaymentAutoCompl';
 export const GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE = '/TaxCodeService/getAuthoritiesAutocomplete';
 export const GET_PLACE_CODE_AUTOCOMPLETE = '/TaxCodeService/getPlaceCodeAutoCompl';

@@ -86,7 +86,8 @@ import {
   GARNISHMENT,
   AUTHORITY_NAME,
   GET_TAXTYPES_AUTOCOMPLETE,
-  GET_TAXCODES_AUTOCOMPLETE
+  GET_TAXCODES_AUTOCOMPLETE,
+  GET_TAXTYPES
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -244,6 +245,7 @@ export const autoCompleteApiMap = {
   taxability: GET_TAXCODES_AUTOCOMPLETE,
   taxType: GET_ALL_TAXTYPES_AUTOCOMPLETE,
   taxTypeALL:GET_TAXTYPES_AUTOCOMPLETE,
+  taxTypes:GET_TAXTYPES,
   garnishParamTaxType: GET_UDQ_AUTOCOMPLETE,
   companyCode: GET_UDQ_AUTOCOMPLETE,
   riskClass: GET_UDQ_AUTOCOMPLETE,
