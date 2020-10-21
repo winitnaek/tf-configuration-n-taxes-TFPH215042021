@@ -262,6 +262,7 @@ export const autoCompleteApiMap = {
   county: GET_COUNTY_AUTOCOMPLETE,
   groupAsync: GET_GROUP_AUTOCOMPLETE,
   groupCode: GET_UDQ_AUTOCOMPLETE,
+  garnishmentGroup: GET_UDQ_AUTOCOMPLETE,
   taxCodeUdq: GET_TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA,
   typeOfData: GET_TYPEOF_DATA,
   userTax: GET_UDQ_AUTOCOMPLETE,

@@ -392,6 +392,8 @@ export function getGroupcode(filterData) {
     return filterData.groupCode;
   } else if (filterData && filterData.employeeGroupCode) {
     return filterData.employeeGroupCode;
+  }else if (filterData && filterData.garnishmentGroup) {
+    return filterData.garnishmentGroup;
   }
 }
 export function getPmtUsrCode(filterData) {
