@@ -129,7 +129,7 @@ export function decorateData(griddata, pageid) {
     let filterData = state.formFilterData;
     console.log(state);
     griddata.forEach(function (value) {
-      value.authorityCode = filterData.authorityCode;
+      value.authorityCode = filterData.authorityCodeNoall;
     });
     return griddata;
   } else {
