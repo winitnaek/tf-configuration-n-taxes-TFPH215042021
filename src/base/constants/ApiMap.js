@@ -84,7 +84,13 @@ import {
   PERMISSION_FOR,
   CUSTOM_GARNISHMENT_FORMULA,
   GARNISHMENT,
-  AUTHORITY_NAME
+  AUTHORITY_NAME,
+  GET_MESSAGE_VIEWER,
+  GET_MESSAGES_VIEWER,
+  GET_MESSAGES_VIEWER_TYPE,
+  GET_MESSAGES_RUN_LIST_BY_DATE,
+  DELETE_ALL_MESSAGES,
+  DELETE_ALL_MESSAGES_BY_RUN_ID
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -163,8 +169,10 @@ export const metaDataApiMap = {
   reciprocalOverrides: GET_CUSTOM_FORMULAS,
   reciprocalOverride: GET_CUSTOM_TAX_FORMULAS,
   viewDisposableOverride: GET_CUSTOM_TAX_FORMULAS,
-  messageViewer: GET_CUSTOM_TAX_FORMULAS,
-  messagesViewer: GET_CUSTOM_TAX_FORMULAS,
+  messageViewer: GET_MESSAGE_VIEWER,
+  messagesViewer: GET_MESSAGES_VIEWER,
+  messageViewListByMessageType: GET_MESSAGES_VIEWER_TYPE,
+  getMessageRunListByFilterDate: GET_MESSAGES_RUN_LIST_BY_DATE,
   paServicesTaxReport: GET_PA_SERVICES_TAX_REPORT,
   paServiceTaxReport: GET_PA_SERVICE_TAX_REPORT,
   // Mapping Tools
@@ -196,7 +204,8 @@ export const deleteDataApiMap = {
   addressOverrides: DELTE_CUSTOM_PAYMENT,
   taxEffectiveDateOverrides: DELETE_TAX_EFFECTIVE_DATE_OVERRIDE,
   customTaxPaymentOverride: DELTE_CUSTOM_PAYMENT,
-  messageViewer: DELTE_CUSTOM_PAYMENT,
+  messageViewer: DELETE_ALL_MESSAGES,
+  messagesViewer: DELETE_ALL_MESSAGES_BY_RUN_ID,
   auditLogViewer: DELTE_CUSTOM_PAYMENT,
   company: DELETE_COMPANY,
   customGarnishment: DELETE_CUSTOM_GARNISHMENT_CODE,

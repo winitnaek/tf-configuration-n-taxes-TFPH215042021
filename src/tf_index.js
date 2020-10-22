@@ -12,6 +12,7 @@ import { closeForm, setFormData } from "./app/actions/formActions";
 import { setFilterFormData } from "./app/actions/filterFormActions";
 import TestHarness from "./app/test/TestHarness";
 import CustomComp from "./app/components/CustomComp";
+import MessageViewerContainer from "./app/components/MessageViewerContainer";
 import * as fieldData from "./app/metadata/fieldData";
 
 let store = configureStore();
@@ -78,15 +79,61 @@ function renderTFApplication(elem, renderName, child) {
       600
     );
   } else if (renderName && renderName.type == UI_COMP) {
-    renderComponent(elem, renderName.id, renderName.value, child);
+    if (renderName.id === "messageViewer" || renderName.id === "messagesViewer") {
+      renderMessageViewer(elem, renderName.id, renderName.value, child);
+    } else {
+      renderComponent(elem, renderName.id, renderName.value, child);
+    }
   } else if (renderName && renderName.type == UI_PAGE) {
-    renderNewPage(elem, renderName.id, renderName.value, child);
+      renderNewPage(elem, renderName.id, renderName.value, child);
   } else if (renderName && renderName.type == UI_TEST) {
     renderTestHarness(elem, renderName.id, renderName.value, child);
   } else if (renderName && renderName === rname.RN_TF_CSTMCOMP) {
     renderCustomComponent(elem, renderName);
   }
 }
+
+/**
+ * renderMessageViewer
+ * @param {*} elem
+ */
+
+function renderMessageViewer(elem, pageid, pid) {
+  ReactDOM.unmountComponentAtNode(document.querySelector("#" + elem));
+  const gridInput = buildGridDataInput(pageid, store);
+  const state = store.getState();
+  const dispatch = store.dispatch;
+  const fieldDataX = formatFieldData(fieldData[pageid], pageid, appUserId());
+  const gridProps = {
+    state,
+    dispatch,
+    closeForm,
+    setFormData,
+    setFilterFormData,
+    renderGrid: renderTFApplication
+  };
+
+  const formMetaData = compMetaData(pageid);
+
+  ReactDOM.render(
+    <Provider store={store}>
+          <MessageViewerContainer
+            pageid={pageid}
+            metadata={compMetaData}
+            pid={pid}
+            permissions={compPermissions}
+            help={openHelp}
+            gridProps={gridProps}
+            fieldData={fieldDataX}
+            formMetaData={formMetaData}
+            getGridData={griddataAPI.getGridData}
+            gridInput={gridInput}
+          />
+    </Provider>,
+    document.querySelector("#" + elem)
+  );
+}
+
 /**
  * renderComponent
  * @param {*} elem
@@ -220,7 +267,7 @@ function renderNewPage(elem, pgid, pid, initialProps) {
   const help = openHelp;
   ReactDOM.render(
     <Provider store={store}>
-      <ReusablePage pgid={pgid} help={help} initialProps={initialProps} />
+      <ReusablePage pgid={pgid} help={help} initialProps={initialProps} pid={pid} />
     </Provider>,
     document.querySelector("#" + elem)
   );

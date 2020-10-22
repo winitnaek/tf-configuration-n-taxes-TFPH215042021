@@ -104,19 +104,26 @@ export function compMetaData(pageid, key) {
 
 export const formatFieldData = (fieldData, pageId, userId) => {
   if (fieldData) {
-    
     fieldData.forEach(field => {
+      const state = store.getState();
       if (field.id === "permissionFor" && pageId === "permissions") {
-        const state = store.getState();
         if (state.formData && state.formData.data && state.formData.data.permissionFor) {
           field.value = state.formData.data.permissionFor;
         } else {
           field.value = userId;
         }
       }
+
       if (field.value === "new Date()") {
         field.value = moment().format("MM/DD/yyyy");
       }
+
+      // retain form values of date filter in the field values of messageViwer 
+      // if ((field.id === "startdate" || field.id === "enddate") && pageId === "messageViewer"){
+      //   if (state.formData && state.formData.data && state.formData.data[field.id]) {
+      //     field.value = state.formData.data[field.id];
+      //   }
+      // }
     });
   }
 
@@ -242,6 +249,7 @@ export function buildGridDataInput(pageid, store) {
   let filterData = state.formFilterData;
   console.log(state);
   let stDate = getStartDate(filterData);
+  let enDate = getEndDate(filterData);
   let input = {
     pageId: pageid,
     dataset: appDataset(),
@@ -252,6 +260,7 @@ export function buildGridDataInput(pageid, store) {
     taxCode: getTaxCode(filterData),
     taxName: filterData.name,
     startdate: stDate,
+    endDate: enDate,
     riskClass: filterData.riskClass,
     taxType: getTaxType(filterData),
     formNumber: getFormNum(filterData),
@@ -263,7 +272,9 @@ export function buildGridDataInput(pageid, store) {
     customTaxCode: filterData.customTaxCode === "ALL" ? "" : filterData.customTaxCode,
     pmtUsrCode: getPmtUsrCode(filterData),
     formula: filterData.formula,
-    usrtax: filterData.userTax
+    usrtax: filterData.userTax,
+    runId: filterData.runid,
+    messageType: filterData.messageType
   };
   return input;
 }
@@ -304,6 +315,23 @@ export function getFrmEndDate(filterData) {
       let newdt = spldt[1] + "/" + spldt[2] + "/" + spldt[0];
       return newdt;
     }
+  } else {
+    return "";
+  }
+}
+export function getEndDate(filterData) {
+  if (filterData && filterData.includeAllDates) {
+    return "ALL";
+  } else if (filterData && (filterData.endDate || filterData.enddate)) {
+    const date = filterData.endDate || filterData.enddate;
+    let enDate = date;
+    
+    if( date.indexOf('-') !== -1){
+        const dt = date.split("-");
+        enDate = dt[1] + "/" + dt[2] + "/" + dt[0];
+    }
+     
+    return enDate;
   } else {
     return "";
   }
@@ -459,6 +487,9 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
   let state = store.getState();
   console.log("formdata");
   console.log(formdata);
+  
+  const {formFilterData} = state;
+
   let input = {
     pageId: pageid,
     dataset: appDataset(),
@@ -476,7 +507,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     city: formdata.city,
     county: formdata.county,
     state: formdata.state,
-    zip: formdata.zip
+    zip: formdata.zip,
+    runId: formFilterData.runid,
   };
   return input;
 }
@@ -576,9 +608,7 @@ export const reqInfo = data => {
 };
 
 export function getUrl(id) {
-  let metadataMap = metadatamap.find(metadatam => {
-    if (id == metadatam.id) return metadatam;
-  });
+  let metadataMap = metadatamap.find(metadatam => id == metadatam.id);
   let url = generateUrl.buildURL(metadataMap.url);
   if (isMock()) {
     // for webpack generated mock data
