@@ -136,7 +136,7 @@ export function decorateData(griddata, pageid) {
     let filterData = state.formFilterData;
     console.log(state);
     griddata.forEach(function (value) {
-      value.authorityCode = filterData.authorityCode;
+      value.authorityCode = filterData.authorityCodeNoall;
     });
     return griddata;
   } else {
@@ -295,6 +295,10 @@ export function getTaxCode(filterData) {
     return filterData.taxCode;
   } else if (filterData && filterData.customTaxName) {
     return filterData.customTaxName;
+  }else if (filterData && filterData.taxTypeALL) {
+    return filterData.taxTypeALL;
+  }else if (filterData && filterData.taxability) {
+    return filterData.taxability;
   }
 }
 export function getAuthCode(filterData) {
@@ -302,6 +306,12 @@ export function getAuthCode(filterData) {
     return filterData.authorityCode;
   } else if (filterData && (filterData.bsiAuth || filterData.bsiauth)) {
     return filterData.bsiAuth || filterData.bsiauth;
+  } else if (filterData && (filterData.authorityCodegdw)) {
+    return filterData.authorityCodegdw;
+  }else if (filterData && (filterData.authorityCodegp)) {
+    return filterData.authorityCodegp;
+  }else if (filterData && (filterData.authorityCodeNoall)) {
+    return filterData.authorityCodeNoall;
   }
 }
 export function getFrmEndDate(filterData) {
@@ -394,6 +404,10 @@ export function getTaxType(filterData) {
     return filterData.taxType;
   } else if (filterData && filterData.garnishParamTaxType) {
     return filterData.garnishParamTaxType;
+  } else if (filterData && filterData.taxTypeALL) {
+    return filterData.taxTypeALL;
+  } else if (filterData && filterData.taxTypes) {
+    return filterData.taxTypes;
   }
 }
 export function getCompanyCode(filterData) {
@@ -410,6 +424,8 @@ export function getGroupcode(filterData) {
     return filterData.groupCode;
   } else if (filterData && filterData.employeeGroupCode) {
     return filterData.employeeGroupCode;
+  }else if (filterData && filterData.garnishmentGroup) {
+    return filterData.garnishmentGroup;
   }
 }
 export function getPmtUsrCode(filterData) {
