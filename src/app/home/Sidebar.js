@@ -4,36 +4,23 @@ import { bindActionCreators } from "redux";
 import {
   star,
   goldStar,
-  goldStar2,
   link,
-  CardStyle,
-  Style,
   rowStyle,
   linkColStyle,
   buttonColStyle,
   favoriteLinkStyle,
-  selectStyle,
   favoriteListStyle,
-  StyleOff
 } from "../../css/sidebar-css";
 import { getFavoriteLinks, saveFavoriteLinks } from "./favoriteLinksActions";
 import { setModuleLinks } from "./actions/moduleLinksActions";
-import {
-  Card,
-  Row,
-  Col,
-  UncontrolledTooltip,
-  Container,
-  Navbar,
-  NavbarToggler
-} from "reactstrap";
+import {  Row, Col, UncontrolledTooltip, Container, Navbar, NavbarToggler } from "reactstrap";
 import Select, { components } from "react-select";
 
 class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      thlink:[],
+      thlink: [],
       selected: [],
       favorites: [],
       options: [],
@@ -45,20 +32,8 @@ class Sidebar extends Component {
         favorites: []
       }
     };
-    this.onChange = selectedOptions => {
-      const isAlreadySlected = this.state.selected.includes(selectedOptions);
 
-      if (!isAlreadySlected) {
-        this.setState({
-          currentSelected: selectedOptions,
-          selected: [...this.state.selected, selectedOptions]
-        });
-        const savedLinks = this.state.selected;
-        localStorage.setItem("favoriteLinks", JSON.stringify(savedLinks));
-      }
-    };
-
-    this.setFavorite = fav => {
+   this.setFavorite = fav => {
       if (!this.state.favorites.includes(fav)) {
         this.setState({
           options: [],
@@ -70,21 +45,8 @@ class Sidebar extends Component {
       }
     };
 
-    this.toggleNavbar = () => {
-      this.setState({
-        collapsed: !this.state.collapsed
-      });
-    };
-
     this.handleRender = data => {
-      this.setState({
-        isOpen: !this.state.isOpen,
-        collapsed: !this.state.collapsed
-      });
-
-      this.openNav();
-
-      this.props.handleLink(data);
+      renderTFApplication("pageContainer", data);
     };
 
     this.toggle = () => {
@@ -104,59 +66,14 @@ class Sidebar extends Component {
         }
       });
     };
-
-    this.openNav = () => {
-      if (this.state.isOpen) {
-        document.getElementById("mySidebar").style.display = "none";
-        document.getElementById("fullSideBar").style.width = "";
-        document.getElementById("fullSideBar").style.zIndex = "0";
-        document.getElementById("cardBody").style.padding = "0";
-        document.getElementById("cardBody").style.paddingRight = "10px";
-        document.getElementById("cardBody").style.paddingTop = "10px";
-        document.getElementById("cardBody").style.width = "70px";
-        document.getElementById("navToggler").style.marginLeft = "10px";
-      } else {
-        document.getElementById("mySidebar").style.display = "";
-        document.getElementById("fullSideBar").style.width = "";
-        document.getElementById("fullSideBar").style.zIndex = "500";
-        document.getElementById("cardBody").style.width = "100%";
-        document.getElementById("cardBody").style.padding = "15px";
-        document.getElementById("cardBody").style.paddingRight = "0";
-      }
-      this.setState({
-        isOpen: !this.state.isOpen,
-        collapsed: false
-      });
-    };
   }
 
   componentDidMount() {
     this.setState({
       options: this.props.options,
       favorites: this.props.favorites,
-      thlink:this.props.thlink
+      thlink: this.props.thlink
     });
-
-    // Set listener for clickaway
-    document.addEventListener("click", function(evt) {
-      var sidebar = document.getElementById("fullSideBar"),
-      targetElement = evt.target; // clicked element
-      let parent = targetElement.parentElement;
-      while (parent !== sidebar && parent !== null) {
-        parent ? (parent = parent.parentElement) : null;
-      }
-      if (!parent) {
-        document.getElementById("mySidebar").style.display = "none";
-        document.getElementById("fullSideBar").style.width = "";
-        document.getElementById("fullSideBar").style.zIndex = "0";
-        document.getElementById("cardBody").style.padding = "0";
-        document.getElementById("cardBody").style.paddingRight = "10px";
-        document.getElementById("cardBody").style.paddingTop = "10px";
-        document.getElementById("cardBody").style.width = "70px";
-        document.getElementById("navToggler").style.marginLeft = "10px";
-        this.setState({ isOpen: false });
-      }
-    }.bind(this));
   }
 
   _renderOption(option) {
@@ -175,16 +92,10 @@ class Sidebar extends Component {
         <Row key={data} style={rowStyle}>
           <Col sm="10" style={{ padding: "0px" }}>
             <div className="mylink" style={link}>
-              <span
-                id={`jumpto-${data.value}`}
-                onClick={e => this.handleRender(data)}
-              >
+              <span id={`jumpto-${data.value}`} onClick={e => this.handleRender(data)}>
                 {data.label}
               </span>
-              <UncontrolledTooltip
-                placement="bottom"
-                target={`jumpto-${data.value}`}
-              >
+              <UncontrolledTooltip placement="bottom" target={`jumpto-${data.value}`}>
                 Jump to {data.label}
               </UncontrolledTooltip>
             </div>
@@ -198,25 +109,16 @@ class Sidebar extends Component {
               })}
 
               {isFavorite ? (
-                <button
-                  style={buttonColStyle}
-                  onClick={e => this.removeFavorite(data)}
-                >
+                <button style={buttonColStyle} onClick={e => this.removeFavorite(data)}>
                   <i className="fas fa-star" style={goldStar}></i>
                 </button>
               ) : (
-                <button
-                  style={buttonColStyle}
-                  onClick={e => this.setFavorite(data)}
-                >
+                <button style={buttonColStyle} onClick={e => this.setFavorite(data)}>
                   <i class="far fa-star" style={star}></i>
                 </button>
               )}
             </span>
-            <UncontrolledTooltip
-              placement="right"
-              target={`markas-${data.value}`}
-            >
+            <UncontrolledTooltip placement="right" target={`markas-${data.value}`}>
               {isFavorite ? (
                 <span> Remove {data.label} from favorites </span>
               ) : (
@@ -228,40 +130,17 @@ class Sidebar extends Component {
       );
     };
 
-    const { selected, options, favorites,thlink } = this.state;
+    const { selected, options, favorites, thlink } = this.state;
 
     let displayFavorites = favorites.sort().map(item => {
       return (
         <Row key={item.label} className="selected">
-          <Col sm="10" style={linkColStyle}>
-            <span
-              id={`jumpto-${item.value}`}
-              onClick={e => this.handleRender(item)}
-            >
+          <Col style={linkColStyle}>
+            <span id={`jumpto-${item.value}`} onClick={e => this.handleRender(item)}>
               {item.label}
             </span>
-            <UncontrolledTooltip
-              placement="top"
-              target={`jumpto-${item.value}`}
-            >
+            <UncontrolledTooltip placement="top" target={`jumpto-${item.value}`}>
               Jump to {item.label}
-            </UncontrolledTooltip>
-          </Col>
-          <Col sm="2">
-            <span id={`remove-${item.value}`}>
-              <button style={buttonColStyle}>
-                <i
-                  className="fas fa-star"
-                  style={goldStar2}
-                  onClick={e => this.removeFavorite(item)}
-                ></i>
-              </button>
-            </span>
-            <UncontrolledTooltip
-              placement="left"
-              target={`remove-${item.value}`}
-            >
-              Remove {item.label}
             </UncontrolledTooltip>
           </Col>
         </Row>
@@ -281,113 +160,62 @@ class Sidebar extends Component {
       }
       return comparison;
     }
-    console.log('thlink');
+    console.log("thlink");
     console.log(thlink);
     console.log(this.props.thlink);
     let displayThLink = null;
-    console.log("isMock()")
-    console.log(isMock())
-    if(isMock()){
-    displayThLink =this.props.thlink.map(item => {
-      return (
-        <Row key={item.label} className="selected">
-          <Col sm="10" style={linkColStyle}>
-            <span
-              id={`jumpto-${item.value}`}
-              onClick={e => this.handleRender(item)}
-            >
-              {item.label}
-            </span>
-            <UncontrolledTooltip
-              placement="top"
-              target={`jumpto-${item.value}`}
-            >
-              Jump to {item.label}
-            </UncontrolledTooltip>
-          </Col>
-        </Row>
-      );
-    });
-  }
+    console.log("isMock()");
+    console.log(isMock());
+    if (isMock()) {
+      displayThLink = this.props.thlink.map(item => {
+        return (
+          <Row key={item.label} className="selected">
+            <Col sm="10" style={linkColStyle}>
+              <span id={`jumpto-${item.value}`} onClick={e => this.handleRender(item)}>
+                {item.label}
+              </span>
+              <UncontrolledTooltip placement="top" target={`jumpto-${item.value}`}>
+                Jump to {item.label}
+              </UncontrolledTooltip>
+            </Col>
+          </Row>
+        );
+      });
+    }
 
     displayFavorites = displayFavorites.sort(compare);
 
     return (
-      <div
-        id="fullSideBar"
-        style={this.state.searchLinksIsOpen === true ? Style : StyleOff}
-      >
-        <Card
-          body
-          id="cardBody"
-          style={{ height: "100%", paddingTop: "15px", paddingRight: "0" }}
-        >
-          <Row>
-            <Col sm="9" style={CardStyle} id="mySidebar" className="sidebar">
-              <Select
-                singleValue
-                isSearchable
-                placeholder="Search Links"
-                options={this.props.options}
-                onChange={this.onChange}
-                value={this.state.currentSelected}
-                style={selectStyle}
-                components={{ Option }}
-              />
-              <hr />
-              {isMock()  ? (<p style={favoriteLinkStyle}> Test Harness</p>):null}
-              {isMock() ? (
-                <Container style={favoriteListStyle}>
-                <p>{displayThLink}</p>
-                </Container>
-              ) : (
-                ''
-              )}
-              <p style={favoriteLinkStyle}> Favorite Links</p>
-              {this.props.options ? (
-                <Container style={favoriteListStyle}>
-                  {displayFavorites.sort()}
-                </Container>
-              ) : (
-                <p> None</p>
-              )}
-            </Col>
-            <Col sm="2" style={{ marginRight: "10px" }}>
-              <Navbar
-                color="faded"
-                light
-                style={{
-                  paddingTop: "0",
-                  marginRight: "25px",
-                  paddingLeft: "0"
-                }}
-              >
-                <NavbarToggler
-                  id="navToggler"
-                  style={{ color: "black", fontSize: "1rem" }}
-                  onClick={e => this.openNav()}
-                  className="mr-2"
-                />
-              </Navbar>
-            </Col>
-          </Row>
-        </Card>
-      </div>
+      <Row>
+        <Col className="sidebar">
+          {isMock() ? <p style={favoriteLinkStyle}> Test Harness</p> : null}
+          {isMock() ? (
+            <Container style={favoriteListStyle}>
+              <p>{displayThLink}</p>
+            </Container>
+          ) : (
+            ""
+          )}
+          <p style={favoriteLinkStyle}> Favorite Links</p>
+          {this.props.options ? (
+            <Container style={favoriteListStyle}>{displayFavorites.sort()}</Container>
+          ) : (
+            <p> None</p>
+          )}
+        </Col>
+      </Row>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    options: state.moduleAreas.areas.filter(opt=> opt.id !=='testHarness' ),
-    favorites: state.favoriteLinks.filter(opt=> opt.id !=='testHarness' ),
-    thlink:state.moduleAreas.areas.filter(opt=> opt.id =='testHarness')
+    options: state.moduleAreas.areas.filter(opt => opt.id !== "testHarness"),
+    favorites: state.favoriteLinks.filter(opt => opt.id !== "testHarness"),
+    thlink: state.moduleAreas.areas.filter(opt => opt.id == "testHarness")
   };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    { getFavoriteLinks, saveFavoriteLinks, setModuleLinks },
-    dispatch
-  );
+  return bindActionCreators({ getFavoriteLinks, saveFavoriteLinks, setModuleLinks }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

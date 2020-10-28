@@ -1,69 +1,110 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Row, Col, Container, Button, Modal } from "reactstrap";
-import SystemSummary from "./SystemSummary";
-import PayrollAndEmployeeTestMessages from "./PayrollAndEmployeeTestMessages";
-
-const Style = {
-  margin: "0 auto"
-}
+import { Row, Col } from "reactstrap";
+import { closeForm, setFormData } from "../actions/formActions";
+import * as styles from "../../base/constants/AppConstants";
+import * as formMetaData from "../metadata/metaData";
+import * as fieldData from "../metadata/fieldData";
+import { getUsageData } from "../api/getUsageDataAPI";
+import autocompleteSelectAPI from "../api/autocompleteselectAPI";
+import savegriddataAPI from "../api/savegriddataAPI";
+import { setFilterFormData } from "../actions/filterFormActions";
+import { tftools } from "../../base/constants/TFTools";
+import { ReusableModal, DynamicForm } from "bsiuilib";
+import FlyoutMenu from "../components/FlyoutMenu";
 
 class Welcome extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isOpen: false,
+      pgid: "",
+      isfilterform: true
+    };
+    this.search = this.search.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.renderMe = this.renderMe.bind(this);
   }
 
-  componentDidMount() {
-    
+  handleClose() {
+    this.setState({ isOpen: false });
+  }
 
-    this.setState({});
+  search(e) {
+    const { value } = e.target;
+    this.setState({
+      filter: value
+    });
+  }
+
+  renderMe(pageId, values, filter) {
+    filter && this.props.setFilterFormData(values);
+    let data = tftools.find(tftool => tftool.id == pageId);
+    renderTFApplication("pageContainer", data);
+  }
+
+  toggle(id, title, type) {
+    if (!fieldData[id] || id === "maritalStatusReport" || id === "paServicesTaxReport") {
+      this.renderMe(id);
+    } else {
+      const payload = { data: {}, mode: "New" };
+      this.props.setFormData(payload);
+      this.setState({
+        isOpen: true,
+        pgid: id,
+        formTitle: title,
+        isfilterform: true
+      });
+    }
   }
 
   render() {
-    const {
-      taxCodes,
-      unmappedAuthorites,
-      overrides,
-      testMessages
-    } = this.props;
+    const {  isOpen, formTitle, isfilterform, pgid } = this.state;
+    const { renderMe } = this;
+    const { formData } = this.props;
+    const formProps = {
+      close: this.handleClose,
+      pgid,
+      renderMe,
+      filter: isfilterform
+    };
 
     return (
-      <Container style={{ marginTop: "-50px" }}>
+      <Row>
         <Col>
-          <Row >
-            <p  sytle={Style}>
-              <strong> Welcome! </strong>
-            </p>
-          </Row>
-
-          {/* <Row style={{ marginTop: "25px" }}>
-            <SystemSummary />
-          </Row>
-
-          <Row>
-            <PayrollAndEmployeeTestMessages />
-          </Row> */}
+          <FlyoutMenu onClick={this.toggle} showSideMenu={false}/>
+          <ReusableModal open={isOpen} close={this.handleClose} title={formTitle} styles={styles}>
+            <DynamicForm
+              formData={formData}
+              formProps={formProps}
+              filter={false}
+              isfilterform={isfilterform}
+              tftools={tftools}
+              formMetaData={formMetaData[pgid]}
+              fieldData={fieldData[pgid]}
+              recentUsage={getUsageData}
+              autoComplete={autocompleteSelectAPI}
+              saveGridData={savegriddataAPI}
+              styles={styles}
+            />
+          </ReusableModal>
         </Col>
-      </Container>
+      </Row>
     );
   }
 }
 
-// function connectWithStore(store, WrappedComponent, ...args) {
-//   var ConnectedWrappedComponent = connect(...args)(WrappedComponent)
-//   return function (props) {
-//     return <ConnectedWrappedComponent {...props} store={store} />
-//   }
-// }
-
 function mapStateToProps(state) {
   return {
-    
+    isOpen: state.formData.isOpen,
+    formData: state.formData
   };
 }
+
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ closeForm, setFormData, setFilterFormData }, dispatch);
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

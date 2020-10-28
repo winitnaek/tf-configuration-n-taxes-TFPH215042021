@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Provider } from "react-redux";
-import configureStore from "../../base/config/configureStore";
-import { Col, Container, Button } from "reactstrap";
+import { Row, Col, Container, Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import Search from "../components/Search";
 import Welcome from "./Welcome";
-let store = configureStore();
-
 import { setModuleLinks } from "./actions/moduleLinksActions";
-import Sidebar from './Sidebar';
+import FlyoutMenu from "../components/FlyoutMenu";
+
 class TFHome extends Component {
   constructor(props) {
     super(props);
@@ -19,35 +16,19 @@ class TFHome extends Component {
       sideDrawerOpen: true,
       getGridData: this.props.fetchGridData
     };
-    this.drawerToggleClickHandler = () => {
-      this.setState({
-        sideDrawerOpen: !this.state.sideDrawerOpen
-      });
-    };
+    this.toggle = this.toggle.bind(this);
   }
 
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
 
   handleLink(data) {
     renderTFApplication("pageContainer", data);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.links !== this.props.links) {
-      if (
-        nextProps.links &&
-        nextProps.links.data &&
-        nextProps.links.data.links
-      ) {
-        const payload = nextProps.links.data.links;
-        const { setModuleLinks } = this.props;
-        setModuleLinks(payload);
-      }
-    }
-
-    if (nextState.isOpen !== this.state.isOpen) {
-      this.setState({ isOpen: true });
-    }
-  }
   getJsonCallback() {
     console.log(this.refs.formBuilder.getJson(data));
   }
@@ -55,27 +36,52 @@ class TFHome extends Component {
   render() {
     return (
       <div style={{ marginTop: 0 }}>
-          <Container>
-          <div class="col" id="pageContainerSib">
-             <Sidebar handleLink={this.handleLink} />
-          </div> 
-          <div class="col" id="pageContainer">
-              <Welcome/> 
-          </div>
-         </Container> 
+        <Container fluid>
+          <Row>
+            <Col xs="2">
+              <Button color="link" onClick={this.toggle}>
+                Reporting
+              </Button>
+              {this.state.isOpen ? (
+                <div className="modal-content" style={{ position: "fixed", zIndex: 99, width: "94%", marginTop: "10px" }}>
+                  <div className="modal-header">
+                    <button type="button" className="close" aria-label="Close" onClick={this.toggle}>
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <div className="row">
+                      <div className="col">
+                        <FlyoutMenu showSideMenu />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+            </Col>
+            <Col>
+              <Search />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div id="pageContainer" className="container w-100 p-0">
+                <Welcome />
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
 }
 function mapStateToProps(state) {
   return {
-    options: state.moduleAreas.areas,
+    options: state.moduleAreas.areas
     // data: state.gridData.data
-  }
+  };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    { setModuleLinks, },dispatch
-  );
+  return bindActionCreators({ setModuleLinks }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TFHome);
