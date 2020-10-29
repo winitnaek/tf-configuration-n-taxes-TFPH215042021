@@ -51,7 +51,7 @@ export const StyleOff = {
   minWidth: "375px"
 };
 
-export const buttonColStyle = { backgroundColor: "white", border: "none" }
+export const buttonColStyle = { backgroundColor: "transparent", border: "none" }
 
 
 export const rowStyle = { marginTop: "10px", zIndex: "200", width: "90%" };

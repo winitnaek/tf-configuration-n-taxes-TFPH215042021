@@ -44,17 +44,17 @@ class TFHome extends Component {
     const { isOpen } = this.state;
     return (
       <div style={{ marginTop: 0 }}>
-        <Container fluid className='overflow-auto'>
+        <Container fluid style={{overflowY:'auto'}}>
           <div style={{ position: "relative" }}>
-            <Row className="pt-3 mb-3" style={{ backgroundColor: "#bbdefb" }}>
+            <Row className="p-2 mb-3 bg-light" style={{borderBottom:'1px solid #003764'}}>
               <Col xs="2">
                 <Button color="link" onClick={this.toggle}>
                   <span className="d-inline-block mr-1"> Reporting </span>
                   <i className={`fas fa-caret-${isOpen ? "up" : "down"}`} aria-hidden="true"></i>
                 </Button>
               </Col>
-              <Col>
-                <Search />
+              <Col xs='8'>
+                <Search toggle={this.toggle}/>
               </Col>
             </Row>
             {isOpen ? (

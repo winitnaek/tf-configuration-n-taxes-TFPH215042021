@@ -29,6 +29,7 @@ class Search extends Component {
 
   handleRender(data) {
     renderTFApplication("pageContainer", data);
+    this.props.toggle();
   }
 
   onChange(currentSelected) {
@@ -68,7 +69,7 @@ class Search extends Component {
     };
 
     return (
-      <FormGroup style={{ zIndex: 999, position: "relative" }}>
+      <FormGroup style={{ zIndex: 999, position: "relative" }} className='m-0'>
         <Select
           singleValue
           isSearchable
