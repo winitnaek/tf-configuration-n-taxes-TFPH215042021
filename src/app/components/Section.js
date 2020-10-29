@@ -1,24 +1,57 @@
-import React from "react";
-import { tftools } from "../../base/constants/TFTools";
+import React, {Component} from "react";
 import { Button } from "reactstrap";
+import { star, goldStar, buttonColStyle } from "../../css/sidebar-css";
+class Section extends Component {
+  constructor() {
+    super();
+    this.setFavorite = this.setFavorite.bind(this);
+    this.setUnFavorite = this.setUnFavorite.bind(this);
+  }
 
-export const Section = ({ sectionHeader, section, value, onClick }) => {
-  return (
-    <div>
-      <p className="mb-1 mt-2">{sectionHeader}</p>
-      {tftools.map(tool => {
-        return (value === tool.value && section === tool.section) || (!section && value === tool.value) ? (
-            <Button
-              color="link"
-              onClick={() =>
-                tool.type === "externallink" && tool.href ? window.open(tool.href, "_blank") : onClick(tool.id)
-              }
-              className="d-block p-0"
-            >
-              {tool.label}
-            </Button>
-        ) : null;
-      })}
-    </div>
-  );
-};
+  setFavorite(fav) {
+    if (!this.props.favorites.some(favItem=>favItem.id === fav.id)) {
+      this.props.setFavorite([...this.props.favorites, fav]);
+    }
+  }
+
+  setUnFavorite(fav) {
+    const favorites = this.props.favorites.filter(option => option.id !== fav.id);
+    this.props.setFavorite(favorites);
+  }
+
+  render() {
+    const { sectionHeader, section, value, onClick, options, favorites,sectionIcon } = this.props;
+    return (
+      <div>
+        <p className="mb-1 mt-2"><i class={`fas fa-${sectionIcon}`} aria-hidden="true"></i> {sectionHeader}</p>
+        {options.map(option => {
+          return (section === option.section) ? (
+            <div className="d-flex menu-link">
+              {favorites.some(fav=>fav.id === option.id) ? (
+                <button className="fav-icon" style={buttonColStyle} onClick={e => this.setUnFavorite(option)}>
+                  <i class="far fa-star fav" style={goldStar}></i>
+                </button>
+              ) : (
+                <button className="fav-icon" style={buttonColStyle} onClick={e => this.setFavorite(option)}>
+                  <i class="far fa-star" style={star}></i>
+                </button>
+              )}
+
+              <Button
+                color="link"
+                onClick={() =>
+                  option.type === "externallink" && option.href ? window.open(option.href, "_blank") : onClick(option.id)
+                }
+                className="d-block p-0"
+              >
+                {option.label}
+              </Button>
+            </div>
+          ) : null;
+        })}
+      </div>
+    );
+  }
+}
+
+export default Section;

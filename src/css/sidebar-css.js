@@ -1,15 +1,14 @@
 export const star = {
-  marginLeft: "25px",
-  fontSize: "22px",
+  fontSize: "16px",
   cursor:'pointer'
 };
 
 export const goldStar = {
-  marginLeft: "25px",
-  fontSize: "22px",
+  fontSize: "16px",
   color: "gold",
   cursor:'pointer'
 };
+
 export const goldStar2 = {
  fontSize: "22px",
   color: "gold",

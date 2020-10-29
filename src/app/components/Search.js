@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { link, rowStyle, selectStyle } from "../../css/sidebar-css";
+import { link, rowStyle, selectStyle, star, goldStar, buttonColStyle } from "../../css/sidebar-css";
 import { Row, FormGroup, Col, UncontrolledTooltip } from "reactstrap";
-import Select, { components } from "react-select";
+import Select from "react-select";
+import { saveFavoriteLinks } from "../home/favoriteLinksActions";
 
 class Search extends Component {
   constructor() {
@@ -10,6 +12,19 @@ class Search extends Component {
     this.state = {};
     this.handleRender = this.handleRender.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.setFavorite = this.setFavorite.bind(this);
+    this.setUnFavorite = this.setUnFavorite.bind(this);
+  }
+
+  setFavorite(fav) {
+    if (!this.props.favorites.some(favItem => favItem.id === fav.id)) {
+      this.props.saveFavoriteLinks([...this.props.favorites, fav]);
+    }
+  }
+
+  setUnFavorite(fav) {
+    const favorites = this.props.favorites.filter(option => option.id !== fav.id);
+    this.props.saveFavoriteLinks(favorites);
   }
 
   handleRender(data) {
@@ -23,10 +38,12 @@ class Search extends Component {
   }
 
   render() {
+    const { favorites } = this.props;
+
     const Option = props => {
       const { data } = props;
       return (
-        <Row key={data} style={rowStyle}>
+        <Row key={data.id} style={rowStyle}>
           <Col className="p-0">
             <div className="mylink" style={link}>
               <span id={`jumpto-${data.value}`} onClick={e => this.handleRender(data)}>
@@ -35,6 +52,15 @@ class Search extends Component {
               <UncontrolledTooltip placement="bottom" target={`jumpto-${data.value}`}>
                 Jump to {data.label}
               </UncontrolledTooltip>
+              {favorites.some(fav => fav.id === data.id) ? (
+                <button className="fav-icon" style={buttonColStyle} onClick={e => this.setUnFavorite(data)}>
+                  <i class="far fa-star fav" style={goldStar}></i>
+                </button>
+              ) : (
+                <button className="fav-icon" style={buttonColStyle} onClick={e => this.setFavorite(data)}>
+                  <i class="far fa-star" style={star}></i>
+                </button>
+              )}
             </div>
           </Col>
         </Row>
@@ -42,7 +68,7 @@ class Search extends Component {
     };
 
     return (
-      <FormGroup style={{zIndex:999, position:'relative'}}>
+      <FormGroup style={{ zIndex: 999, position: "relative" }}>
         <Select
           singleValue
           isSearchable
@@ -60,7 +86,11 @@ class Search extends Component {
 
 function mapStateToProps(state) {
   return {
-    options: state.moduleAreas.areas
+    options: state.moduleAreas.areas,
+    favorites: state.favoriteLinks.filter(opt => opt.id !== "testHarness")
   };
 }
-export default connect(mapStateToProps, null)(Search);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ saveFavoriteLinks }, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

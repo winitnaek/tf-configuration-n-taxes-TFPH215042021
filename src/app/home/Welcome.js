@@ -13,6 +13,7 @@ import { setFilterFormData } from "../actions/filterFormActions";
 import { tftools } from "../../base/constants/TFTools";
 import { ReusableModal, DynamicForm } from "bsiuilib";
 import FlyoutMenu from "../components/FlyoutMenu";
+import { saveFavoriteLinks } from "./favoriteLinksActions";
 
 class Welcome extends Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class Welcome extends Component {
   }
 
   render() {
-    const {  isOpen, formTitle, isfilterform, pgid } = this.state;
+    const { isOpen, formTitle, isfilterform, pgid } = this.state;
     const { renderMe } = this;
     const { formData } = this.props;
     const formProps = {
@@ -74,7 +75,13 @@ class Welcome extends Component {
     return (
       <Row>
         <Col>
-          <FlyoutMenu onClick={this.toggle} showSideMenu={false}/>
+          <FlyoutMenu
+            favorites={this.props.favorites}
+            options={tftools}
+            onClick={this.toggle}
+            showSideMenu={false}
+            setFavorite={this.props.saveFavoriteLinks}
+          />
           <ReusableModal open={isOpen} close={this.handleClose} title={formTitle} styles={styles}>
             <DynamicForm
               formData={formData}
@@ -99,12 +106,14 @@ class Welcome extends Component {
 function mapStateToProps(state) {
   return {
     isOpen: state.formData.isOpen,
-    formData: state.formData
+    formData: state.formData,
+    options: state.moduleAreas.areas.filter(opt => opt.id !== "testHarness"),
+    favorites: state.favoriteLinks.filter(opt => opt.id !== "testHarness")
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeForm, setFormData, setFilterFormData }, dispatch);
+  return bindActionCreators({ closeForm, setFormData, setFilterFormData, saveFavoriteLinks }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

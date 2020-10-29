@@ -505,7 +505,7 @@ const renderWelcomePage = elem => {
 
 const unMountNMountContainerNode = () => {
   $("div").remove("#" + c.appContentId);
-  $('<div id="' + c.appContentId + '" class="main-content p-2 m-2"></div>').insertAfter($("#" + c.navId));
+  $('<div id="' + c.appContentId + '" class="main-content"></div>').insertAfter($("#" + c.navId));
 };
 
 module.exports = renderTFApplication;
