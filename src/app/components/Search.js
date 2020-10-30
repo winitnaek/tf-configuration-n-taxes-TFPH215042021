@@ -9,9 +9,7 @@ import { saveFavoriteLinks } from "../home/favoriteLinksActions";
 class Search extends Component {
   constructor() {
     super();
-    this.state = {};
     this.handleRender = this.handleRender.bind(this);
-    this.onChange = this.onChange.bind(this);
     this.setFavorite = this.setFavorite.bind(this);
     this.setUnFavorite = this.setUnFavorite.bind(this);
   }
@@ -21,6 +19,7 @@ class Search extends Component {
       this.props.saveFavoriteLinks([...this.props.favorites, fav]);
     }
   }
+  
 
   setUnFavorite(fav) {
     const favorites = this.props.favorites.filter(option => option.id !== fav.id);
@@ -29,13 +28,7 @@ class Search extends Component {
 
   handleRender(data) {
     renderTFApplication("pageContainer", data);
-    this.props.toggle();
-  }
-
-  onChange(currentSelected) {
-    this.setState({
-      currentSelected
-    });
+    this.props.showModals(false);
   }
 
   render() {
@@ -47,13 +40,7 @@ class Search extends Component {
         <Row key={data.id} style={rowStyle}>
           <Col className="p-0">
             <div className="mylink" style={link}>
-              <span id={`jumpto-${data.value}`} onClick={e => this.handleRender(data)}>
-                {data.label}
-              </span>
-              <UncontrolledTooltip placement="bottom" target={`jumpto-${data.value}`}>
-                Jump to {data.label}
-              </UncontrolledTooltip>
-              {favorites.some(fav => fav.id === data.id) ? (
+            {favorites.some(fav => fav.id === data.id) ? (
                 <button className="fav-icon" style={buttonColStyle} onClick={e => this.setUnFavorite(data)}>
                   <i class="far fa-star fav" style={goldStar}></i>
                 </button>
@@ -62,6 +49,13 @@ class Search extends Component {
                   <i class="far fa-star" style={star}></i>
                 </button>
               )}
+              <span id={`jumpto-${data.value}`} onClick={e => this.handleRender(data)}>
+                {data.label}
+              </span>
+              <UncontrolledTooltip placement="right" target={`jumpto-${data.value}`}>
+                Jump to {data.label}
+              </UncontrolledTooltip>
+              
             </div>
           </Col>
         </Row>
@@ -75,8 +69,6 @@ class Search extends Component {
           isSearchable
           placeholder="Search Links"
           options={this.props.options}
-          onChange={this.onChange}
-          value={this.state.currentSelected}
           style={selectStyle}
           components={{ Option }}
         />

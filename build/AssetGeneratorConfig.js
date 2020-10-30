@@ -1,23 +1,23 @@
-const getAssetGeneratorConfig = environment => {
+const getAssetGeneratorConfig = (environment, sourcePath) => {
   const commonConfig = {
     encoding: "utf8",
     debug: true,
     sourceFolders: [
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/readonlyfilter/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/readonlygrid/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/autoCompleteMockData/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/cruds/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type1grid/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type2grid/Screens/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/Tools/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/Map Tax Codes/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/Map Tax Types/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/Map Payment Codes/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/MessageViewer/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/AuditLogViewer/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type3grid/PA Services Tax Report/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/type4grid/",
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata/sampleDemo/"
+      `${sourcePath}/readonlyfilter/`,
+      `${sourcePath}/readonlygrid/`,
+      `${sourcePath}/autoCompleteMockData/`,
+      `${sourcePath}/type1grid/`,
+      `${sourcePath}/type2grid/Screens/`,
+      `${sourcePath}/type3grid/Tools/`,
+      `${sourcePath}/type3grid/Map Tax Codes/`,
+      `${sourcePath}/type3grid/Map Tax Types/`,
+      `${sourcePath}/type3grid/Map Payment Codes/`,
+      `${sourcePath}/type3grid/MessageViewer/`,
+      `${sourcePath}/type3grid/AuditLogViewer/`,
+      `${sourcePath}/type3grid/PA Services Tax Report/`,
+      `${sourcePath}/type4grid/`,
+      `${sourcePath}/cruds/`,
+      `${sourcePath}/sampleDemo/`
     ],
     groupBy: [
       {

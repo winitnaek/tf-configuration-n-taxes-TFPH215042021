@@ -18,7 +18,7 @@ export const goldStar2 = {
 export const link = {
   textDecoration: "none",
   width: "90%",
-  marginLeft: "40px",
+  marginLeft: "20px",
   cursor:'pointer'
 };
 

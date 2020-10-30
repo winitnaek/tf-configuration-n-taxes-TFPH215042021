@@ -20,12 +20,19 @@ class TFHome extends Component {
     };
     this.toggle = this.toggle.bind(this);
     this.handleLink = this.handleLink.bind(this);
+    this.showModals = this.showModals.bind(this);
   }
 
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  showModals(show){
+    this.setState({
+      isOpen: show
+    })
   }
 
   handleLink(pageId) {
@@ -54,7 +61,7 @@ class TFHome extends Component {
                 </Button>
               </Col>
               <Col xs='8'>
-                <Search toggle={this.toggle}/>
+                <Search showModals={this.showModals}/>
               </Col>
             </Row>
             {isOpen ? (
@@ -63,7 +70,7 @@ class TFHome extends Component {
                 style={{
                   position: "absolute",
                   zIndex: 99,
-                  top: "71px",
+                  top: "55px",
                   left: "0",
                   height: "calc(100vh - 134px)",
                   overflowY: "auto"
