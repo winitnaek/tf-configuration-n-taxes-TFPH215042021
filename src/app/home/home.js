@@ -100,7 +100,7 @@ class TFHome extends Component {
 
           <Row>
             <Col>
-              <div id="pageContainer" className="container w-100 p-0">
+              <div id="pageContainer" className="container w-100 pl-5 pr-5" style={{maxWidth:'100%'}}>
                 <Welcome />
               </div>
             </Col>

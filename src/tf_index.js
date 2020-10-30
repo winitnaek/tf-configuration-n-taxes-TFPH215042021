@@ -61,12 +61,12 @@ setModulePermissions(usrobj.applications);
 let moduleAreas = buildModuleAreaLinks(usrobj.applications);
 
 /**
- * renderW2AdmApplication TEST
+ * renderTFApplication TEST
  * master branch
  * @param {*} elem
  * @param {*} renderName
  */
-function renderTFApplication(elem, renderName, child) {
+function renderTFApplication(elem, renderName, renderCtx) {
   setAppAnchor(elem);
   setAppUserIDAndDataset(dataset, userId);
   if (renderName === rname.RN_TF_HOME) {
@@ -78,16 +78,25 @@ function renderTFApplication(elem, renderName, child) {
       }.bind(this),
       600
     );
+    if(renderCtx){
+      setTimeout(
+        function () {
+          renderTFApplication('pageContainer', renderCtx); 
+        }.bind(this),
+        600
+      );
+      
+    }
   } else if (renderName && renderName.type == UI_COMP) {
     if (renderName.id === "messageViewer" || renderName.id === "messagesViewer") {
-      renderMessageViewer(elem, renderName.id, renderName.value, child);
+      renderMessageViewer(elem, renderName.id, renderName.value);
     } else {
-      renderComponent(elem, renderName.id, renderName.value, child);
+      renderComponent(elem, renderName.id, renderName.value);
     }
   } else if (renderName && renderName.type == UI_PAGE) {
-      renderNewPage(elem, renderName.id, renderName.value, child);
+      renderNewPage(elem, renderName.id, renderName.value,null);
   } else if (renderName && renderName.type == UI_TEST) {
-    renderTestHarness(elem, renderName.id, renderName.value, child);
+    renderTestHarness(elem, renderName.id, renderName.value);
   } else if (renderName && renderName === rname.RN_TF_CSTMCOMP) {
     renderCustomComponent(elem, renderName);
   }
