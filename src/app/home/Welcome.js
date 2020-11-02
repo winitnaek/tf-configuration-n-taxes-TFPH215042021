@@ -11,8 +11,7 @@ import autocompleteSelectAPI from "../api/autocompleteselectAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
 import { setFilterFormData } from "../actions/filterFormActions";
 import { tftools } from "../../base/constants/TFTools";
-import { ReusableModal, DynamicForm } from "bsiuilib";
-import FlyoutMenu from "../components/FlyoutMenu";
+import { ReusableModal, DynamicForm, FlyoutMenu } from "bsiuilib";
 import { saveFavoriteLinks } from "./favoriteLinksActions";
 
 class Welcome extends Component {
@@ -46,7 +45,7 @@ class Welcome extends Component {
     renderTFApplication("pageContainer", data);
   }
 
-  toggle(id, title, type) {
+  toggle({id, title, type}) {
     if (!fieldData[id] || id === "maritalStatusReport" || id === "paServicesTaxReport") {
       this.renderMe(id);
     } else {
@@ -78,9 +77,10 @@ class Welcome extends Component {
           <FlyoutMenu
             favorites={this.props.favorites}
             options={tftools}
-            onClick={this.toggle}
             showSideMenu={false}
             setFavorite={this.props.saveFavoriteLinks}
+            renderApplication={this.toggle}
+            sectionLayout={this.props.sectionLayout}
           />
           <ReusableModal open={isOpen} close={this.handleClose} title={formTitle} styles={styles}>
             <DynamicForm

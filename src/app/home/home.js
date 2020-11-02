@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Row, Col, Container, Button } from "reactstrap";
-import Search from "../components/Search";
+import { Row, Col, Container } from "reactstrap";
 import Welcome from "./Welcome";
 import { setModuleLinks } from "./actions/moduleLinksActions";
 import { saveFavoriteLinks } from "./favoriteLinksActions";
-import FlyoutMenu from "../components/FlyoutMenu";
+import { SearchBar } from "bsiuilib";
 import { tftools } from "../../base/constants/TFTools";
 
 class TFHome extends Component {
@@ -18,90 +17,72 @@ class TFHome extends Component {
       sideDrawerOpen: true,
       getGridData: this.props.fetchGridData
     };
-    this.toggle = this.toggle.bind(this);
-    this.handleLink = this.handleLink.bind(this);
-    this.showModals = this.showModals.bind(this);
-  }
 
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-
-  showModals(show){
-    this.setState({
-      isOpen: show
-    })
-  }
-
-  handleLink(pageId) {
-    this.setState({
-      isOpen:false
-    })
-    let data = tftools.find(tftool => tftool.id == pageId);
-    renderTFApplication("pageContainer", data);
+    this.sectionLayout = [
+      [
+        {
+          section: "Tax Details",
+          sectionHeader: "Tax Details",
+          sectionIcon: "book",
+          value: "UQ"
+        },
+        {
+          section: "formulas",
+          sectionHeader: "Quick Formulas",
+          sectionIcon: "flask",
+          value: "UQ"
+        }
+      ],
+      [
+        {
+          sectionHeader: "User Data Queries",
+          section: "User Data Queries",
+          sectionIcon: "users",
+          value: "UQ",
+          from: 0,
+          to: 17
+        }
+      ],
+      [
+        {
+          section: "User Data Queries",
+          sectionIcon: "users",
+          value: "UQ",
+          from: 17
+        }
+      ]
+    ];
   }
 
   getJsonCallback() {
     console.log(this.refs.formBuilder.getJson(data));
   }
 
+  renderApplication(data) {
+    renderTFApplication("pageContainer", data);
+  }
+
+  getOptions() {
+    const excluededPages = ['testHarness', 'selectSamplePage', 'dateFieldDoc']
+    return tftools.filter(tool => !excluededPages.includes(tool.id));
+  }
+
   render() {
-    const { isOpen } = this.state;
     return (
       <div style={{ marginTop: 0 }}>
-        <Container fluid style={{overflowY:'auto'}}>
-          <div style={{ position: "relative" }}>
-            <Row className="p-2 mb-3 bg-light" style={{borderBottom:'1px solid #003764'}}>
-              <Col xs="2">
-                <Button color="link" onClick={this.toggle}>
-                  <span className="d-inline-block mr-1"> Reporting </span>
-                  <i className={`fas fa-caret-${isOpen ? "up" : "down"}`} aria-hidden="true"></i>
-                </Button>
-              </Col>
-              <Col xs='8'>
-                <Search showModals={this.showModals}/>
-              </Col>
-            </Row>
-            {isOpen ? (
-              <div
-                className="modal-content"
-                style={{
-                  position: "absolute",
-                  zIndex: 99,
-                  top: "55px",
-                  left: "0",
-                  height: "calc(100vh - 134px)",
-                  overflowY: "auto"
-                }}
-              >
-                <div className="modal-header">
-                  <button type="button" className="close" aria-label="Close" onClick={this.toggle}>
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <div className="row">
-                    <div className="col">
-                      <FlyoutMenu
-                        favorites={this.props.favorites}
-                        options={tftools}
-                        onClick={this.handleLink}
-                        setFavorite={this.props.saveFavoriteLinks}
-                        showSideMenu
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : null}
-          </div>
-
+        <Container fluid style={{ overflowY: "auto" }}>
+          <SearchBar
+            title="Reporting"
+            sectionLayout={this.sectionLayout}
+            options={this.getOptions()}
+            favorites={this.props.favorites}
+            setFavorite={this.props.saveFavoriteLinks}
+            renderApplication={this.renderApplication}
+          />
           <Row>
             <Col>
-              <div id="pageContainer" className="container w-100 pl-5 pr-5" style={{maxWidth:'100%'}}>
-                <Welcome />
+              <div id="pageContainer" className="container w-100 pl-5 pr-5" style={{ maxWidth: "100%" }}>
+                <Welcome sectionLayout={this.sectionLayout} />
               </div>
             </Col>
           </Row>
@@ -112,7 +93,6 @@ class TFHome extends Component {
 }
 function mapStateToProps(state) {
   return {
-    options: state.moduleAreas.areas,
     favorites: state.favoriteLinks.filter(opt => opt.id !== "testHarness")
   };
 }
