@@ -99,7 +99,7 @@ class TFHome extends Component {
 
   getOptions() {
     const excluededPages = ["testHarness", "selectSamplePage", "dateFieldDoc"];
-    return tftools.filter(tool => !excluededPages.includes(tool.id));
+    return tftools.filter(tool => !excluededPages.includes(tool.id)).sort(this.GetSortOrder("label"));
   }
 
   GetSortOrder(prop) {
