@@ -67,7 +67,8 @@ class TFHome extends Component {
     this.renderMe = this.renderMe.bind(this);
   }
 
-  toggle({ id, label }) {
+  toggle(pageData) {
+    const { id, label } = pageData;
     const payload = { data: {}, mode: "New" };
     this.props.setFormData(payload);
     this.setState({
@@ -89,8 +90,8 @@ class TFHome extends Component {
   }
 
   renderApplication(data) {
-    const { id } = data;
-    if (!fieldData[id] || id === "maritalStatusReport" || id === "paServicesTaxReport") {
+    const { id, value } = data;
+    if (!fieldData[id] || value !== "UQ" || id === "maritalStatusReport" || id === "paServicesTaxReport") {
       this.renderMe(id);
     } else {
       this.toggle(data);
