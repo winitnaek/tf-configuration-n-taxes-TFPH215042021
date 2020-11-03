@@ -160,7 +160,7 @@ class TFHome extends Component {
                   options={tftools}
                   showSideMenu={false}
                   setFavorite={this.props.saveFavoriteLinks}
-                  renderApplication={this.toggle}
+                  renderApplication={this.renderApplication}
                   sectionLayout={this.sectionLayout}
                 />
               </div>
