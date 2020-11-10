@@ -15,6 +15,14 @@ export default {
       link: true
     },
     {
+      "value":"CF",
+      "label":"What-If Test",
+      "desc":"What-If Test",
+      "id":"whatifEmp",
+      "type":"comp",
+      "link":true
+   },
+    {
       "value":"CO",
       "label":"Companies",
       "desc":"Companies",

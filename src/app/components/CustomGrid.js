@@ -12,6 +12,7 @@ import mappingToolUsageAPI from "../api/mappingToolUsageAPI";
 import deletegriddataAPI from "../api/deletegriddataAPI";
 import autocompleteSelectAPI from "../api/autocompleteselectAPI";
 import * as gridStyles from "../../base/constants/AppConstants";
+import ButtonBar from './ButtonBar';
 
 class CustomGrid extends Component {
   constructor(props) {
@@ -73,8 +74,9 @@ class CustomGrid extends Component {
       className=''
     } = this.props;
 
-    const { pgdef } = metadata(pageid);
+    const { pgdef, griddef } = metadata(pageid);
     const { metaInfo } = pgdef;
+    const portalContainer = document.getElementById('buttonBar');
 
     const { formAction, filterFormAction } = this;
     return (
@@ -103,6 +105,7 @@ class CustomGrid extends Component {
           mapToolUsage={mappingToolUsageAPI}
           className={className}
         />
+        {griddef.hasButtonBar && griddef.hasButtonBar==true  ?(<ButtonBar pageid={pageid} metadata={metadata} pid={pid} permissions={permissions} tftools={tftools}/>):null}
         <ConfirmModal showConfirm={this.state.showAlert} handleOk={this.handleOk} {...metaInfo} />
       </Fragment>
     );
