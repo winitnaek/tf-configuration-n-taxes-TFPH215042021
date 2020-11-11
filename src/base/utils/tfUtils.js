@@ -213,6 +213,8 @@ function dataURL(pageid) {
       gridDataUrl = "./CUSTOM_FORMULAS_MOCKDATA.json";
     case "worksites":
       gridDataUrl = "./COMPANIES_MOCKDATA.json";
+    case "whatifEmp":
+        gridDataUrl = "./_whatifEmp_MockData.json";
     default:
       break;
   }
@@ -750,7 +752,8 @@ const mockdatamap = [
   { id: "worksites", url: "./COMPANIES_MOCKDATA.json" },
   { id: "worksiteCompanies", url: "./WORKSITES_MOCKDATA.json" },
   { id: "recentUsage", url: "./RECENT_USAGE.json" },
-  { id: "selectSamplePage", url: "./RECENT_USAGE.json" }
+  { id: "selectSamplePage", url: "./RECENT_USAGE.json" },
+  { id: "whatifEmp", url: "./_whatifEmp_MockData.json"}
 ];
 
 //all for test autoComplete

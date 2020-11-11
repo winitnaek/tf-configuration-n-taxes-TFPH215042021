@@ -17,8 +17,9 @@ const getAssetGeneratorConfig = (environment, sourcePath) => {
       `${sourcePath}/type3grid/PA Services Tax Report/`,
       `${sourcePath}/type4grid/`,
       `${sourcePath}/cruds/`,
-      `${sourcePath}/sampleDemo/`
-    ],
+      `${sourcePath}/sampleDemo/`,
+      `${sourcePath}/type2grid/What if employee`
+     ],
     groupBy: [
       {
         pattern: "_field data.json",
