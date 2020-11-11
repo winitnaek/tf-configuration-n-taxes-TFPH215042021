@@ -10,7 +10,7 @@ const getAssetGeneratorConfig = require("./build/AssetGeneratorConfig");
 
 const APP_DIR = path.resolve(__dirname, "src");
 
-module.exports = {
+const commonConfig = {
   entry: [
     APP_DIR + "/tf_index.js" // Your appʼs entry point
   ],
@@ -93,12 +93,16 @@ module.exports = {
     new CleanWebpackPlugin(["dist/*.*", "dist/res", "dist/src", "dist/pdfjs"]),
     new ExtractTextPlugin({ filename: "tfBundle.css", allChunks: true }),
     new ProgressBarPlugin(),
-    new IndexGeneratorPlugin(),
-    new AssetGenerator(
-      getAssetGeneratorConfig(
-        process.env.NODE_ENV,
-        "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata"
-      )
-    )
+    new IndexGeneratorPlugin()
   ]
 };
+
+if(!process.env.SKIP){
+  commonConfig.plugins.push(new AssetGenerator(
+    getAssetGeneratorConfig(
+      process.env.NODE_ENV,
+      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata"
+    )
+  ));
+}
+module.exports = commonConfig;

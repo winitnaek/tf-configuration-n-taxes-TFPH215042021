@@ -15,19 +15,18 @@ class MessageViewer extends Component {
 
   componentDidMount() {
     // pageid : camel case not followed as ReusableGrid needs in this format
-    const { getGridData, pageid, gridInput, metadata, formFilterData } = this.props;
+    const { getGridData, pageid, gridInput, metadata: metaData, formFilterData } = this.props;
     const { messageType } = gridInput;
-    const metaData = metadata(pageid);
     const { pgdef } = metaData;
     let pageUrl = pageid;
 
     // if Child
     if (!pgdef.childConfig && messageType) {
       pageUrl = "messageViewListByMessageType";
-    } 
+    }
     // for parent
-    if(pgdef.childConfig && (formFilterData.startdate || formFilterData.enddate)) {
-        pageUrl = "getMessageRunListByFilterDate";
+    if (pgdef.childConfig && (formFilterData.startdate || formFilterData.enddate)) {
+      pageUrl = "getMessageRunListByFilterDate";
     }
 
     getGridData(pageUrl, gridInput)
@@ -44,9 +43,9 @@ class MessageViewer extends Component {
   }
 
   getFilterComponent() {
-    const { pageid, gridInput, fieldData, metadata } = this.props;
+    const { gridInput, fieldData, metadata: metaData } = this.props;
     const { messageType = "0" } = gridInput;
-    const metaData = metadata(pageid);
+    // const metaData = metadata(pageid);
     const { pgdef } = metaData;
 
     // if Child
@@ -60,6 +59,7 @@ class MessageViewer extends Component {
           columnClassName="d-flex p-0 align-items-center"
           labelClassName="mb-0 mr-2"
           inputClassName="w-25"
+          resetFields={{}}
         />
       );
     }
@@ -67,15 +67,8 @@ class MessageViewer extends Component {
   }
 
   onMessageTypeChange(event, selected) {
-    const { 
-      pageid, 
-      setFilterFormData, 
-      tftools, 
-      renderGrid, 
-      fieldData, 
-      formFilterData
-     } = this.props;
-     
+    const { pageid, setFilterFormData, tftools, renderGrid, fieldData, formFilterData } = this.props;
+
     const { id } = fieldData[0];
     formFilterData[id] = selected.id;
     setFilterFormData(formFilterData);
@@ -83,24 +76,27 @@ class MessageViewer extends Component {
     renderGrid(pgData);
   }
 
-  deleteGridData(pageId, rows, mode){
-    const metaData = this.props.metadata(pageId);
-    this.props.deleteGridData.deleteGridData(pageId, rows, mode).then(res=>{
-     if(res.status === "SUCCESS"){
-       metaData.pgdef.subHeader = `There are ${0} message(s) stored for the current Dataset.`;
-       this.setState({gridData:[]});
-     }
+  deleteGridData(pageId, rows, mode) {
+    const metaData = this.props.metadata;
+    this.props.deleteGridData.deleteGridData(pageId, rows, mode).then(res => {
+      if (res.status === "SUCCESS") {
+        metaData.pgdef.subHeader = `There are ${0} message(s) stored for the current Dataset.`;
+        this.setState({ gridData: [] });
+      }
     });
   }
 
   render() {
     const { gridData } = this.state;
     if (gridData) {
-      return <ReusableGrid 
-      {...this.props} 
-      griddata={gridData} 
-      filterComp={this.getFilterComponent()} 
-      deleteGridData={this}/>;
+      return (
+        <ReusableGrid
+          {...this.props}
+          griddata={gridData}
+          filterComp={this.getFilterComponent()}
+          deleteGridData={this}
+        />
+      );
     }
     return <Progress />;
   }
