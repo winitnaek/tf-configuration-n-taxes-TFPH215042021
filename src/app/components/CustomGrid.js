@@ -10,7 +10,7 @@ import {getUsageData} from "../api/getUsageDataAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
 import mappingToolUsageAPI from "../api/mappingToolUsageAPI";
 import deletegriddataAPI from "../api/deletegriddataAPI";
-import autocompleteSelectAPI from "../api/autocompleteselectAPI";
+import formDataAPI from "../api/formDataAPI";
 import * as gridStyles from "../../base/constants/AppConstants";
 import ButtonBar from './ButtonBar';
 
@@ -51,7 +51,7 @@ class CustomGrid extends Component {
 
   componentDidMount() {
     const { metadata, pageid } = this.props;
-    const { pgdef } = metadata(pageid);
+    const { pgdef } = metadata;
     const { metaInfo } = pgdef;
     this.setState({
       showAlert: !!metaInfo
@@ -74,7 +74,7 @@ class CustomGrid extends Component {
       className=''
     } = this.props;
 
-    const { pgdef, griddef } = metadata(pageid);
+    const { pgdef } = metadata;
     const { metaInfo } = pgdef;
     const portalContainer = document.getElementById('buttonBar');
 
@@ -100,7 +100,7 @@ class CustomGrid extends Component {
           formData={formData}
           formFilterData={formFilterData}
           fieldData={fieldData}
-          autoComplete={autocompleteSelectAPI}
+          getFormData={formDataAPI}
           styles={gridStyles}
           mapToolUsage={mappingToolUsageAPI}
           className={className}
