@@ -98,6 +98,8 @@ import {
 
 export const metaDataApiMap = {
   whatifEmp:'./_whatifEmp_MockData.json',
+  whatifTaxes:'./_whatifTaxes_MockData.json',
+  whatifGarnishment:'./_whatifGarnishment_MockData.json',
   bSITaxes: GET_USER_DATA_QUERIES,
   customOverridesForAuthority: GET_USER_DATA_QUERIES,
   populatedV3States: GET_ALL_POPULATED_V3_STATES,

@@ -64,21 +64,21 @@ class ButtonBar extends Component {
         </UncontrolledTooltip>
       </div>
     );
-    if(this.props.pageid==='whatifEmp1' || this.props.pageid==='whatifDeductionsBenefit' && this.props.pageid==='taxLocator'){ 
+    if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionsBenefit' && this.props.pageid==='taxLocator'){ 
       //whatifEmp && whatifDeductionsBenefit && taxLocator
       taxLocator=null;
       calculateTaxes=null;
       runLocatorService=null;
       addressFromWorksite=null;
-    }else if(this.props.pageid==='whatifEmpTaxes'){ //whatifEmpTaxes
+    }else if(this.props.pageid==='whatifTaxes'){ //whatifTaxes
       runLocatorService=null;
       addressFromWorksite=null;
       deleteAll=null;
-    }else if(this.props.pageid==='whatifEmpGarnishment'){ //whatifEmpGarnishment
+    }else if(this.props.pageid==='whatifGarnishment'){ //whatifEmpGarnishment
       taxLocator=null;
       runLocatorService=null;
       addressFromWorksite=null;
-    }else if(this.props.pageid==='whatifEmp'){ //taxLocatorLocation
+    }else if(this.props.pageid==='taxLocatorLocation'){ //taxLocatorLocation
       taxLocator=null;
       calculateTaxes=null;
     }
