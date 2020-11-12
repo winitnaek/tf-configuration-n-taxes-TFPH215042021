@@ -74,7 +74,7 @@ class CustomGrid extends Component {
       className=''
     } = this.props;
 
-    const { pgdef } = metadata;
+    const { pgdef,griddef } = metadata;
     const { metaInfo } = pgdef;
     const portalContainer = document.getElementById('buttonBar');
 
