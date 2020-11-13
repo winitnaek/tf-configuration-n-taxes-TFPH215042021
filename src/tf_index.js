@@ -248,14 +248,14 @@ function renderTestComponent(elem, tool, metadata, mockdata, fieldData) {
     <Provider store={store}>
       <CustomGrid
         pageid={tool.id}
-        metadata={testMetaData}
+        metadata={getMockMedata()}
         pid={tool.value}
         permissions={compPermissions}
         griddata={mockdata}
         help={openHelp}
         gridProps={gridProps}
         fieldData={fieldData}
-        formMetaData={metadata}
+        formMetaData={getMockMedata()}
       />
     </Provider>,
     document.querySelector("#" + elem)

@@ -99,7 +99,10 @@ class TFHome extends Component {
   }
 
   getOptions() {
-    const excluededPages = isMock() ? [] : ["testHarness", "selectSamplePage", "dateFieldDoc"];
+    let excluededPages=[];
+    if(!isMock()){
+      excluededPages = ["testHarness", "selectSamplePage", "dateFieldDoc"];
+    }
     return tftools.filter(tool => !excluededPages.includes(tool.id)).sort(this.GetSortOrder("label"));
   }
 
@@ -176,7 +179,7 @@ class TFHome extends Component {
 function mapStateToProps(state) {
   return {
     formData: state.formData,
-    favorites: state.favoriteLinks.filter(opt => opt.id !== "testHarness")
+    favorites: state.favoriteLinks//.filter(opt => opt.id !== "testHarness")
   };
 }
 function mapDispatchToProps(dispatch) {

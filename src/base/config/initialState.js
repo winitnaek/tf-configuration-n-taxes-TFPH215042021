@@ -7,12 +7,12 @@ export default {
   },
   favoriteAreas: [
     {
-      value: "TH",
-      label: "Test Metadata",
-      desc: "Test Metadata",
-      id: "testHarness",
-      type: "comp",
-      link: true
+      "value": "TH",
+      "label": "Test Metadata",
+      "desc": "Test Metadata",
+      "id": "testHarness",
+      "type": "comp",
+      "link": true
     },
     {
       "value":"CF",
