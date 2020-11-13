@@ -452,7 +452,8 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
     pattern: patten
   };
 
-  return Object.assign(input, formValues);
+  // return Object.assign(input, formValues);
+  return input;
 }
 export function buildUsageDataInput(pageid, store, formdata, mode) {
   let state = store.getState();

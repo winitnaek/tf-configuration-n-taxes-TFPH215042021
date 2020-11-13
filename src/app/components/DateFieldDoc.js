@@ -15,7 +15,7 @@ import { getUsageData } from "../api/getUsageDataAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
 import { setFilterFormData } from "../actions/filterFormActions";
 import formDataAPI from "../api/formDataAPI";
-import metadata from "../metadata/_metaData";
+import * as metadata from "../metadata/_metaData";
 
 const sampleDateFields = "sampleDateFields";
 

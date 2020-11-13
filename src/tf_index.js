@@ -332,7 +332,7 @@ function appDataset() {
 function appUserId() {
   return APP_USERID;
 }
-function isMock() {
+export function isMock() {
   return IS_MOCK;
 }
 function setIsMock(mock) {

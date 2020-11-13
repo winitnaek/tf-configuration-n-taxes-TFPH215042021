@@ -9,6 +9,7 @@ import * as metaData from "../metadata/metaData";
 import * as styles from "../../base/constants/AppConstants";
 import * as fieldData from "../metadata/fieldData";
 import { setFilterFormData } from "../actions/filterFormActions";
+import { formatFieldData } from "../../base/utils/tfUtils";
 
 class MaritalStatusReport extends Component {
   constructor(props) {
@@ -81,7 +82,7 @@ class MaritalStatusReport extends Component {
       filter: false,
       renderMe: this.renderMe,
     };
-
+    const fieldDataX = formatFieldData(fieldData[pgid], pgid, appUserId());
     return (
       <Container>
         <Row>
@@ -143,7 +144,7 @@ class MaritalStatusReport extends Component {
               isfilterform={false}
               tftools={tftools}
               metadata={metaData[pgid]}
-              fieldData={fieldData[pgid]}
+              fieldData={fieldDataX}
               formHandlerService={generateReportApi}
               styles={styles}
               showProgress={this.showProgress}

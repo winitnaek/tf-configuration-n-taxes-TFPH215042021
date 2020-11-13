@@ -15,7 +15,7 @@ import * as styles from "../../base/constants/AppConstants";
 import { getUsageData } from "../api/getUsageDataAPI";
 import formDataAPI from "../api/formDataAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
-
+import { isMock } from '../../tf_index';
 class TFHome extends Component {
   constructor(props) {
     super(props);
@@ -99,7 +99,7 @@ class TFHome extends Component {
   }
 
   getOptions() {
-    const excluededPages = ["testHarness", "selectSamplePage", "dateFieldDoc"];
+    const excluededPages = isMock() ? [] : ["testHarness", "selectSamplePage", "dateFieldDoc"];
     return tftools.filter(tool => !excluededPages.includes(tool.id)).sort(this.GetSortOrder("label"));
   }
 
