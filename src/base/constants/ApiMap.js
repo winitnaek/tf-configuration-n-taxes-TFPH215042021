@@ -97,9 +97,9 @@ import {
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
-  whatifEmp:'./_whatifEmp_MockData.json',
-  whatifTaxes:'./_whatifTaxes_MockData.json',
-  whatifGarnishment:'./_whatifGarnishment_MockData.json',
+  whatifEmp:'/WhatIfService/getWhatIfEmployees',
+  whatifTaxes:'/WhatIfService/getWhatIfTaxes',
+  whatifGarnishment:'/WhatIfService/getWhatIfEmployeeGarnishments',
   bSITaxes: GET_USER_DATA_QUERIES,
   customOverridesForAuthority: GET_USER_DATA_QUERIES,
   populatedV3States: GET_ALL_POPULATED_V3_STATES,

@@ -280,7 +280,11 @@ export function buildGridDataInput(pageid, store) {
     formula: filterData.formula,
     usrtax: filterData.userTax,
     runId: filterData.runid,
-    messageType: filterData.messageType
+    messageType: filterData.messageType,
+    empCode:filterData.empCode,
+    checkDate:filterData.checkDate,
+    empName:filterData.empName,
+    regPen: "R"
   };
   return input;
 }
