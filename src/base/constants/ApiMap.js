@@ -100,6 +100,7 @@ export const metaDataApiMap = {
   whatifEmp:'/WhatIfService/getWhatIfEmployees',
   whatifTaxes:'/WhatIfService/getWhatIfTaxes',
   whatifGarnishment:'/WhatIfService/getWhatIfEmployeeGarnishments',
+  whatifLocations:'./_whatifLocations_MockData.json',
   bSITaxes: GET_USER_DATA_QUERIES,
   customOverridesForAuthority: GET_USER_DATA_QUERIES,
   populatedV3States: GET_ALL_POPULATED_V3_STATES,
