@@ -31,7 +31,7 @@ const addSearchLinks = (search) => {
 const abbrvTitles = (obj) => {
     _.forEach(obj.areas, function (area) {
         if (area.title && area.title.length > 20) {
-            area.title = area.title.slice(0, 16).concat('..');
+            area.title = area.title;//.slice(0, 16).concat('..');
         }
     });
 };

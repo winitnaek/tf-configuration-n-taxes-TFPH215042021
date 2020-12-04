@@ -93,15 +93,23 @@ import {
   DELETE_ALL_MESSAGES_BY_RUN_ID,
   GET_TAXTYPES_AUTOCOMPLETE,
   GET_TAXCODES_AUTOCOMPLETE,
-  GET_TAXTYPES
+  GET_TAXTYPES,
+  WHAT_IF_EMP,
+  SAVE_WHATIF_EMP,
+  WHAT_IF_TAXES,
+  WHAT_IF_GARNISHMENTS,
+  WHAT_IF_DEDUCTION_BENEFITS,
+  TAX_LOCATOR,
+  WHAT_IF_LOCATIONS
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
-  whatifEmp:'/WhatIfService/getWhatIfEmployees',
-  whatifTaxes:'/WhatIfService/getWhatIfTaxes',
-  whatifGarnishment:'/WhatIfService/getWhatIfEmployeeGarnishments',
-  taxLocator:'./_taxLocator_MockData.json',
-  whatifLocations:'./_whatifLocations_MockData.json',
+  whatifEmp:WHAT_IF_EMP,
+  whatifTaxes:WHAT_IF_TAXES,
+  whatifGarnishment:WHAT_IF_GARNISHMENTS,
+  taxLocator:TAX_LOCATOR,
+  whatifLocations:WHAT_IF_LOCATIONS,
+  whatifDeductionBenefits:WHAT_IF_DEDUCTION_BENEFITS,
   bSITaxes: GET_USER_DATA_QUERIES,
   customOverridesForAuthority: GET_USER_DATA_QUERIES,
   populatedV3States: GET_ALL_POPULATED_V3_STATES,
@@ -241,7 +249,8 @@ export const saveDataApiMap = {
   employeeGroup: SAVE_EMPLOYEE_GROUP,
   garnishmentGroup: SAVE_GARNISHMENT_GROUP,
   messageToSuppress: SAVE_SUPPRESS_MESSAGES,
-  permissions: SAVE_PERMISSIONS
+  permissions: SAVE_PERMISSIONS,
+  whatifEmp:SAVE_WHATIF_EMP
 };
 
 export const generateApiMap = {
@@ -296,5 +305,7 @@ export const autoCompleteApiMap = {
   permissionFor: PERMISSION_FOR,
   customGarnishmentFormula: CUSTOM_GARNISHMENT_FORMULA,
   garnishment: GARNISHMENT,
-  authorityName: AUTHORITY_NAME
+  authorityName: AUTHORITY_NAME,
+  employeeGroup: GET_EMPLOYEE_GROUPS,
+  company: GET_COMPANIES
 };

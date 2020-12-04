@@ -539,15 +539,54 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
   };
   return input;
 }
-export function buildSaveInput(pageid, store, formdata, mode) {
-  let state = store.getState();
-  console.log(formdata);
-  let editMode = 0;
-  if (mode === "New") {
-    editMode = 1;
-  } else if (mode === "Edit") {
-    editMode = 2;
+function buildWhatifEmpSaveInput(pageid,formdata,editMode){
+  let input= {
+    pageId:pageid,      
+    dataset:appDataset() ,
+    userId: appUserId(),    
+    empCode: "TD3",
+    checkDate: "02/03/2020",
+    regPen: "R",
+    empGroup: "0",
+    companyCode: "0",
+    paymentType: 0,
+    payFreq: 52,
+    vacHours: 12.0,
+    prorationFreq: 7,  
+    ytdPayPeriod: 7,
+    payPeriodHours: 7.0,
+    grossUpInd: 0,
+    netWages: 7.0,
+    estAnnualGrossAmt: 7.0,
+    reciprocalCode: "0",
+    residentState: "",
+    grossWages: 6.0,
+    avgWkGross: 7.0,
+    garnishment: 2,
+    garnishmentGroup: "0",
+    principalStateOfEmp: "AL",
+    calcType: 5,
+    wageProcCode: 3,
+    estSpousalIncome: 0.0,
+    empType: 0,
+    birthDate: "",
+    dateofDeath: "",
+    calculatedLocalTaxIn: 0,
+    statEEInd: 0,
+    foreignEarnedIncome: 0,
+    exemptMilitaryLocation: "",
+    editRec: "false"
   }
+  return input;
+}
+export function buildSaveInputForPage(pageid,formdata,editMode){
+  if(pageid==='whatifEmp'){
+    return buildWhatifEmpSaveInput(pageid,formdata,editMode);
+  }else{
+    return buildOtherSaveInput(pageid,formdata,editMode);
+  }
+}
+function buildOtherSaveInput(pageid,formdata,editMode){
   let input = {
     pageId: pageid,
     dataset: appDataset(),
@@ -583,10 +622,21 @@ export function buildSaveInput(pageid, store, formdata, mode) {
     county: formdata.county,
     state: formdata.state,
     zip: formdata.zip
-  };
+  }
   return input;
 }
-
+export function buildSaveInput(pageid, store, formdata, mode) {
+  let state = store.getState();
+  console.log(formdata);
+  let editMode = 0;
+  if (mode === "New") {
+    editMode = 1;
+  } else if (mode === "Edit") {
+    editMode = 2;
+  }
+  let input = buildSaveInputForPage(pageid,formdata,editMode);
+  return input;
+}
 export function getCode(formdata, pageid) {
   if (formdata && formdata.company) {
     return formdata.company;
