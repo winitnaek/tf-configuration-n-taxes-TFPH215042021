@@ -309,6 +309,63 @@ function deductionBenefitsGridInput(pageid, filterData, stDate, enDate) {
   return input;
 }
 /**
+ * garnishmentsGridInput
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ */
+function whatIfGarnishmentsGridInput(pageid, filterData, stDate, enDate) {
+  let empCode  = filterData.empCode ? filterData.empCode:filterData.empcode;
+  let checkDate= filterData.checkDate ? filterData.checkDate:filterData.chkdt;
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    empCode: empCode ,
+    checkDate:checkDate,
+    empName:filterData.empName,
+    regPen: "R",
+  };
+  return input;
+}
+/**
+ * whatifTaxesGridInput
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ */
+function whatifTaxesGridInput(pageid, filterData, stDate, enDate) {
+  let empCode  = filterData.empCode ? filterData.empCode:filterData.empcode;
+  let checkDate= filterData.checkDate ? filterData.checkDate:filterData.chkdt;
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    empCode: empCode ,
+    checkDate:checkDate,
+    empName:filterData.empName,
+    regPen: "R",
+  };
+  return input;
+}
+/**
+ * 
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ */
+function whatIfEmployeeGridInput(pageid, filterData, stDate, enDate) {
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+  };
+  return input;
+}
+/**
  * buildGridDataInput
  * @param {*} pageid
  * @param {*} store
@@ -320,7 +377,13 @@ export function buildGridDataInput(pageid, store) {
   let stDate = getStartDate(filterData);
   let enDate = getEndDate(filterData);
   let input;
-  if(pageid==='whatifDeductionBenefits'){
+  if(pageid==='whatifEmp'){
+    input= whatIfEmployeeGridInput(pageid,filterData,stDate,enDate);
+  }else if(pageid==='whatifTaxes'){
+    input= whatifTaxesGridInput(pageid,filterData,stDate,enDate);
+  }else if(pageid==='whatifGarnishment'){
+    input= whatIfGarnishmentsGridInput(pageid,filterData,stDate,enDate);
+  }else if(pageid==='whatifDeductionBenefits'){
     input= deductionBenefitsGridInput(pageid,filterData,stDate,enDate);
   }else{
     input = buildGridInputForPage(pageid,filterData,stDate,enDate);
