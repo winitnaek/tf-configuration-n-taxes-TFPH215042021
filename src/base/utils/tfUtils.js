@@ -246,16 +246,13 @@ export function format(fmt, ...args) {
   });
 }
 /**
- * buildGridDataInput
- * @param {*} pageid
- * @param {*} store
+ * buildGridInputForPage
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
  */
-export function buildGridDataInput(pageid, store) {
-  let state = store.getState();
-  let filterData = state.formFilterData;
-  console.log(state);
-  let stDate = getStartDate(filterData);
-  let enDate = getEndDate(filterData);
+export function buildGridInputForPage(pageid,filterData,stDate,enDate){
   let input = {
     pageId: pageid,
     dataset: appDataset(),
@@ -286,6 +283,48 @@ export function buildGridDataInput(pageid, store) {
     empName:filterData.empName,
     regPen: "R"
   };
+  return input;
+}
+/**
+ * deductionBenefitsGridInput
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ */
+function deductionBenefitsGridInput(pageid, filterData, stDate, enDate) {
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    empcode: "101",
+    chkdt: "01/01/2020",
+    usrauth: "BSI00000000",
+    usrtxtyp: "BSI503",
+    gform: "1",
+    caseid: "00001A",
+    docket: "",
+    regpen: "R",
+  };
+  return input;
+}
+/**
+ * buildGridDataInput
+ * @param {*} pageid
+ * @param {*} store
+ */
+export function buildGridDataInput(pageid, store) {
+  let state = store.getState();
+  let filterData = state.formFilterData;
+  console.log(state);
+  let stDate = getStartDate(filterData);
+  let enDate = getEndDate(filterData);
+  let input;
+  if(pageid==='whatifDeductionBenefits'){
+    input= deductionBenefitsGridInput(pageid,filterData,stDate,enDate);
+  }else{
+    input = buildGridInputForPage(pageid,filterData,stDate,enDate);
+  }
   return input;
 }
 export function buildMaritalStatusInput(pageid, store,formdata) {
