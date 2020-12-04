@@ -1,6 +1,26 @@
 import React from 'react'; 
 let row = null;
 
+export function deductionBenefitPlanCodeRenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	//D (D002) - BSID002
+	return rowdata.paytype +' ('+rowdata.paycode+')'+' - '+rowdata.remncd;
+}
+export function gwPriorityRenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	//0 - Time of Writ
+	return rowdata.gwPriority+' - '+rowdata.gwPriorityString;
+}
 export function authCodeauthNamerenderer(ndex,
 	datafield,
 	value,
