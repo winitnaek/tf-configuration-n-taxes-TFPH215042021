@@ -307,5 +307,9 @@ export const autoCompleteApiMap = {
   garnishment: GARNISHMENT,
   authorityName: AUTHORITY_NAME,
   employeeGroup: GET_EMPLOYEE_GROUPS,
-  company: GET_COMPANIES
+  empGroup:GET_EMPLOYEE_GROUPS,
+  company: GET_COMPANIES,
+  exemptMilitaryLocation:'/WhatIfService/getWhatIfUSStates',
+  residentState:'/WhatIfService/getWhatIfUSStates',
+  principalStateOfEmp:'/WhatIfService/getWhatIfUSStates'
 };

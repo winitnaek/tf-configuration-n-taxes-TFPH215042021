@@ -642,42 +642,54 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
   return input;
 }
 function buildWhatifEmpSaveInput(pageid,formdata,editMode){
+  let editRec = "false";
+  if(editMode==1){
+    editRec= "false"
+  }else if(editMode==2){
+    editRec= "true"
+  }
   let input= {
     pageId:pageid,      
     dataset:appDataset() ,
     userId: appUserId(),    
-    empCode: "TD3",
-    checkDate: "02/03/2020",
+    empCode: formdata.empCode,
+    checkDate: formdata.checkDate,
+    empName: formdata.empName,
     regPen: "R",
-    empGroup: "0",
-    companyCode: "0",
-    paymentType: 0,
-    payFreq: 52,
-    vacHours: 12.0,
-    prorationFreq: 7,  
-    ytdPayPeriod: 7,
-    payPeriodHours: 7.0,
-    grossUpInd: 0,
-    netWages: 7.0,
-    estAnnualGrossAmt: 7.0,
-    reciprocalCode: "0",
-    residentState: "",
-    grossWages: 6.0,
-    avgWkGross: 7.0,
-    garnishment: 2,
-    garnishmentGroup: "0",
-    principalStateOfEmp: "AL",
-    calcType: 5,
-    wageProcCode: 3,
-    estSpousalIncome: 0.0,
-    empType: 0,
-    birthDate: "",
-    dateofDeath: "",
-    calculatedLocalTaxIn: 0,
-    statEEInd: 0,
-    foreignEarnedIncome: 0,
-    exemptMilitaryLocation: "",
-    editRec: "false"
+    empGroup: formdata.empGroup,
+    companyCode: formdata.companyCode,
+    paymentType: formdata.paymentType,
+    payFreq:formdata.payFreq,
+    vacHours: formdata.vacHours,
+    prorationFreq: formdata.prorationFreq,  
+    ytdPayPeriod: formdata.ytdPayPeriod,
+    payPeriodHours: formdata.payPeriodHours,
+    grossUpInd: formdata.grossUpInd,
+    netWages: formdata.netWages,
+    estAnnualGrossAmt: formdata.estAnnualGrossAmt,
+    reciprocalCode:formdata.reciprocalCode,
+    residentState: formdata.residentState,
+    grossWages: formdata.grossWages,
+    avgWkGross: formdata.avgWkGross,
+    garnishment: formdata.garnishment,
+    garnishmentGroup:formdata.garnishmentGroup,
+    principalStateOfEmp: formdata.principalStateOfEmp,
+    calcType: formdata.calcType,
+    wageProcCode: formdata.wageProcCode,
+    estSpousalIncome:formdata.estSpousalIncome,
+    empType: formdata.empType,
+    emplType:formdata.emplType,
+    birthDate: formdata.birthDate,
+    dateofDeath:formdata.dateofDeath,
+    calculatedLocalTaxIn:formdata.calculatedLocalTaxIn,
+    statEEInd: formdata.statEEInd,
+    foreignEarnedIncome: formdata.foreignEarnedIncome,
+    exemptMilitaryLocation: formdata.exemptMilitaryLocation,
+    editRec:editRec,
+    contribAlloc:formdata.contribAlloc,
+    terminationDate:getTerminationDate(formdata),
+    formulaEffectiveDateYYYYMMDD: formdata.formulaEffectiveDateYYYYMMDD,
+    taxN:formdata.taxN
   }
   return input;
 }
@@ -738,6 +750,21 @@ export function buildSaveInput(pageid, store, formdata, mode) {
   }
   let input = buildSaveInputForPage(pageid,formdata,editMode);
   return input;
+}
+export function getTerminationDate(filterData) {
+  if (filterData && (filterData.terminationDate)) {
+    let dt = filterData.terminationDate;
+    let newdt = "";
+    if (dt.indexOf("/") > 0) {
+      return dt;
+    } else if (dt.indexOf("-") > 0) {
+      let spldt = dt.split("-");
+      let newdt = spldt[1] + "/" + spldt[2] + "/" + spldt[0];
+      return newdt;
+    }
+  } else {
+    return "";
+  }
 }
 export function getCode(formdata, pageid) {
   if (formdata && formdata.company) {
