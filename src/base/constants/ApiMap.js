@@ -99,6 +99,8 @@ import {
   WHAT_IF_TAXES,
   WHAT_IF_GARNISHMENTS,
   WHAT_IF_DEDUCTION_BENEFITS,
+  SAVE_WHAT_IF_DEDUCTION_BENEFITS,
+  GET_BENEFITS_PLANS,
   TAX_LOCATOR,
   WHAT_IF_LOCATIONS,
   WAGE_CODE_DESC,
@@ -265,6 +267,7 @@ export const saveDataApiMap = {
   messageToSuppress: SAVE_SUPPRESS_MESSAGES,
   permissions: SAVE_PERMISSIONS,
   whatifEmp:SAVE_WHATIF_EMP,
+  whatifDeductionBenefits:SAVE_WHAT_IF_DEDUCTION_BENEFITS,
   wageDetails: SAVE_WAGE_DETAILS
 };
 
@@ -327,5 +330,6 @@ export const autoCompleteApiMap = {
   exemptMilitaryLocation:'/WhatIfService/getWhatIfUSStates',
   residentState:'/WhatIfService/getWhatIfUSStates',
   principalStateOfEmp:'/WhatIfService/getWhatIfUSStates',
+  remncd:GET_BENEFITS_PLANS,
   wageCodedesc: WAGE_CODE_DESC
 };

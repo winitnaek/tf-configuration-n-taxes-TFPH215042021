@@ -307,7 +307,7 @@ function deductionBenefitsGridInput(pageid, filterData, stDate, enDate) {
     gform: filterData.gform,
     caseid: filterData.caseid,
     docket: filterData.docket,
-    regpen: "R",
+    regpen: "R"
   };
   return input;
 }
@@ -667,6 +667,12 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
   };
   return input;
 }
+/**
+ * buildWhatifEmpSaveInput
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ */
 function buildWhatifEmpSaveInput(pageid,formdata,editMode){
   let editRec = "false";
   if(editMode==1){
@@ -719,7 +725,40 @@ function buildWhatifEmpSaveInput(pageid,formdata,editMode){
   }
   return input;
 }
-
+/**
+ * buildWhatifDeductionBenefitsSaveInput
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ */
+function buildWhatifDeductionBenefitsSaveInput(pageid, formdata, editMode,state) {
+  let editRec = "false";
+  if (editMode == 1) {
+    editRec = "false";
+  } else if (editMode == 2) {
+    editRec = "true";
+  }
+  let formstate = state.formFilterData;
+  let input = {
+    id: {
+      dataset: appDataset(),
+      regpen: "R",
+      empcode: editMode == 2 ? formdata.empcode : formstate.empcode,
+      chkdt: editMode == 2 ? formdata.chkdt : formstate.chkdt,
+      usrauth: editMode == 2 ? formdata.usrauth : formstate.usrauth,
+      usrtxtyp: editMode == 2 ? formdata.usrtxtyp : formstate.usrtxtyp,
+      gform: editMode == 2 ? formdata.gform : formstate.gform,
+      caseid: editMode == 2 ? formdata.caseid : formstate.caseid,
+      docket: editMode == 2 ? formdata.docket : formstate.docket,
+      wseqn: editMode == 2 ? formdata.wseqn : 1//formstate.wseqn,
+    },
+    editMode: editMode,
+    amount: formdata.wamount,
+    remncd: formdata.remncd,
+    garnwagepriority: 1//formdata.gwPriority, Update when static select fixed in library.
+  };
+  return input;
+}
 function buildWhatifWageSaveInput(pageid,formdata,editMode, state) {
   const filterFormData = state.formFilterData;
  
@@ -758,9 +797,10 @@ function buildWhatifWageSaveInput(pageid,formdata,editMode, state) {
 export function buildSaveInputForPage(pageid,formdata,editMode, state){
   if(pageid === "wageDetails") {
     return buildWhatifWageSaveInput(pageid,formdata,editMode, state);
-  }
-  else if(pageid==='whatifEmp'){
+  }else if(pageid==='whatifEmp'){
     return buildWhatifEmpSaveInput(pageid,formdata,editMode);
+  }else if(pageid==='whatifDeductionBenefits'){
+    return buildWhatifDeductionBenefitsSaveInput(pageid,formdata,editMode,state);
   }else{
     return buildOtherSaveInput(pageid,formdata,editMode);
   }
