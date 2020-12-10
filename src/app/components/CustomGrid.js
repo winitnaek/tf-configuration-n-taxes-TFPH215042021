@@ -1,4 +1,4 @@
-import React, { Component , Fragment} from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
@@ -6,20 +6,23 @@ import { ReusableGrid, ConfirmModal } from "bsiuilib";
 import { setFilterFormData } from "../actions/filterFormActions";
 import { setFormData } from "../actions/formActions";
 //import { getRecentUsage } from "../actions/usageActions";
-import {getUsageData} from "../api/getUsageDataAPI";
+import { getUsageData } from "../api/getUsageDataAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
 import mappingToolUsageAPI from "../api/mappingToolUsageAPI";
 import deletegriddataAPI from "../api/deletegriddataAPI";
 import formDataAPI from "../api/formDataAPI";
 import * as gridStyles from "../../base/constants/AppConstants";
-import ButtonBar from './ButtonBar';
-
+import ButtonBar from "./ButtonBar";
+import { Modal, ModalHeader, ModalBody, Row, Col } from "reactstrap";
+import { compMetaData} from "../../base/utils/tfUtils";
 class CustomGrid extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      showAlert: false
+      showAlert: false,
+      isOpen: false,
+      clickedPageId: '',
+      modalGridData: [],
     };
 
     this.renderGrid = pgData => {
@@ -47,6 +50,9 @@ class CustomGrid extends Component {
         showAlert: false
       });
     };
+    this.handleRunLocator = this.handleRunLocator.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.getGridPopupData = this.getGridPopupData.bind(this);
   }
 
   componentDidMount() {
@@ -56,6 +62,28 @@ class CustomGrid extends Component {
     this.setState({
       showAlert: !!metaInfo
     });
+  }
+
+  handleRunLocator(clickPageId) {
+    this.setState({
+      clickedPageId: clickPageId,
+    }, () => {
+      this.getGridPopupData();
+    });
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+  async getGridPopupData(){
+    const data = await this.props.getDataForChildGrid({ pgid: this.state.clickedPageId });
+    this.setState({
+      modalGridData: data[0] ? data[0].locationTaxes : [],
+      isOpen: true,
+    })
   }
 
   render() {
@@ -71,12 +99,12 @@ class CustomGrid extends Component {
       formFilterData,
       fieldData,
       formMetaData,
-      className=''
+      className = "",
+      getDataForChildGrid,
     } = this.props;
 
-    const { pgdef,griddef } = metadata;
+    const { pgdef, griddef } = metadata;
     const { metaInfo } = pgdef;
-    const portalContainer = document.getElementById('buttonBar');
 
     const { formAction, filterFormAction } = this;
     return (
@@ -104,9 +132,54 @@ class CustomGrid extends Component {
           styles={gridStyles}
           mapToolUsage={mappingToolUsageAPI}
           className={className}
+          getDataForChildGrid={getDataForChildGrid}
         />
-        {griddef.hasButtonBar && griddef.hasButtonBar==true  ?(<ButtonBar pageid={pageid} metadata={metadata} pid={pid} permissions={permissions} tftools={tftools}/>):null}
+        {griddef.hasButtonBar && griddef.hasButtonBar == true ? (
+          <ButtonBar
+            pageid={pageid}
+            metadata={metadata}
+            pid={pid}
+            permissions={permissions}
+            tftools={tftools}
+            handleRunLocator={this.handleRunLocator}
+          />
+        ) : null}
         <ConfirmModal showConfirm={this.state.showAlert} handleOk={this.handleOk} {...metaInfo} />
+
+        <Modal isOpen={this.state.isOpen} size="lg" style={gridStyles.modal}>
+          <ModalHeader toggle={this.toggle}>
+          </ModalHeader>
+          <ModalBody>
+            <Row>
+              <Col className='grid-modal mr-2 ml-2'>
+                {this.state.isOpen ? (
+                  <ReusableGrid
+                    pageid={this.state.clickedPageId}
+                    metadata={compMetaData(this.state.clickedPageId)}
+                    permissions={permissions}
+                    griddata={this.state.modalGridData}
+                    gridProps={gridProps}
+                    tftools={tftools}
+                    saveGridData={savegriddataAPI}
+                    setFilterFormData={filterFormAction}
+                    setFormData={formAction}
+                    deleteGridData={deletegriddataAPI}
+                    recentUsage={getUsageData}
+                    renderGrid={this.renderGrid}
+                    formMetaData={formMetaData}
+                    formData={formData}
+                    formFilterData={formFilterData}
+                    fieldData={fieldData}
+                    getFormData={formDataAPI}
+                    styles={gridStyles}
+                    mapToolUsage={mappingToolUsageAPI}
+                    className={className}
+                  />
+                ) : null}
+              </Col>
+            </Row>
+          </ModalBody>
+        </Modal>
       </Fragment>
     );
   }
@@ -119,11 +192,8 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {setFilterFormData, setFormData },
-    dispatch
-  );
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ setFilterFormData, setFormData }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomGrid);

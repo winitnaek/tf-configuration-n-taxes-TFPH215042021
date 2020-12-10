@@ -100,16 +100,29 @@ import {
   WHAT_IF_GARNISHMENTS,
   WHAT_IF_DEDUCTION_BENEFITS,
   TAX_LOCATOR,
-  WHAT_IF_LOCATIONS
+  WHAT_IF_LOCATIONS,
+  WAGE_CODE_DESC,
+  GET_PENSION_WHAT_IF,
+  GET_WHAT_IF_WAGES,
+  DELETE_WAGE_DETAILS,
+  SAVE_WAGE_DETAILS,
+  GET_WHAT_IF_EMPLOYEES,
+  GET_TAX_LOCATOR,
+  GET_RUN_LOCATOR_SERVICE,
+  GET_ADRRESS_FROM_WORKSITES
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
-  whatifEmp:WHAT_IF_EMP,
-  whatifTaxes:WHAT_IF_TAXES,
-  whatifGarnishment:WHAT_IF_GARNISHMENTS,
-  taxLocator:TAX_LOCATOR,
-  whatifLocations:WHAT_IF_LOCATIONS,
+  whatifEmp: GET_WHAT_IF_EMPLOYEES,
+  whatifTaxes:'/WhatIfService/getWhatIfTaxes',
+  whatifGarnishment:'/WhatIfService/getWhatIfEmployeeGarnishments',
+  taxLocator: GET_TAX_LOCATOR,
+  whatifLocations: WHAT_IF_LOCATIONS,
+  runLocatorService: GET_RUN_LOCATOR_SERVICE,
+  addressFromWorksite: GET_ADRRESS_FROM_WORKSITES,
   whatifDeductionBenefits:WHAT_IF_DEDUCTION_BENEFITS,
+  wageDetails: GET_WHAT_IF_WAGES,
+  pensionWhatIfTest: GET_PENSION_WHAT_IF,
   bSITaxes: GET_USER_DATA_QUERIES,
   customOverridesForAuthority: GET_USER_DATA_QUERIES,
   populatedV3States: GET_ALL_POPULATED_V3_STATES,
@@ -229,7 +242,8 @@ export const deleteDataApiMap = {
   garnishmentGroup: DELETE_GARNISHMENT_GROUP,
   customTaxFormulas: DELETE_CUSTOM_FORMULA,
   customFormulas: DELETE_CUSTOM_FORMULA,
-  worksiteCompanies: DELETE_WORKSITES_LOCATIONS
+  worksiteCompanies: DELETE_WORKSITES_LOCATIONS,
+  wageDetails: DELETE_WAGE_DETAILS
 };
 
 export const saveDataApiMap = {
@@ -250,7 +264,8 @@ export const saveDataApiMap = {
   garnishmentGroup: SAVE_GARNISHMENT_GROUP,
   messageToSuppress: SAVE_SUPPRESS_MESSAGES,
   permissions: SAVE_PERMISSIONS,
-  whatifEmp:SAVE_WHATIF_EMP
+  whatifEmp:SAVE_WHATIF_EMP,
+  wageDetails: SAVE_WAGE_DETAILS
 };
 
 export const generateApiMap = {
@@ -311,5 +326,6 @@ export const autoCompleteApiMap = {
   company: GET_COMPANIES,
   exemptMilitaryLocation:'/WhatIfService/getWhatIfUSStates',
   residentState:'/WhatIfService/getWhatIfUSStates',
-  principalStateOfEmp:'/WhatIfService/getWhatIfUSStates'
+  principalStateOfEmp:'/WhatIfService/getWhatIfUSStates',
+  wageCodedesc: WAGE_CODE_DESC
 };

@@ -36,7 +36,7 @@ class ButtonBar extends Component {
     );
     let runLocatorService = (
       <div>
-        <a href="#" id="runLocatorService" onClick={this.copyToClipboardHandler}>
+        <a href="#" id="runLocatorService" onClick={() => this.props.handleRunLocator('runLocatorService')}>
           <i class="fas fa-map-marker fa-lg fa-2x"></i>
         </a>
         <UncontrolledTooltip placement="right" target="runLocatorService">
@@ -46,7 +46,7 @@ class ButtonBar extends Component {
     );
     let addressFromWorksite = (
       <div>
-        <a href="#" id="addressFromWorksite" onClick={this.copyToClipboardHandler}>
+        <a href="#" id="addressFromWorksite" onClick={() => this.props.handleRunLocator("addressFromWorksite")}>
           <i class="fas fa-address-card fa-lg fa-2x"></i>
         </a>
         <UncontrolledTooltip placement="right" target="addressFromWorksite">
@@ -78,7 +78,7 @@ class ButtonBar extends Component {
       taxLocator=null;
       runLocatorService=null;
       addressFromWorksite=null;
-    }else if(this.props.pageid==='taxLocatorLocation'){ //taxLocatorLocation
+    }else if(this.props.pageid==='whatifLocations'){ //taxLocatorLocation
       taxLocator=null;
       calculateTaxes=null;
     }

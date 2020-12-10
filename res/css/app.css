@@ -10,3 +10,7 @@
 .fav-icon:hover .fa-star, .fa-star.fav {
   visibility: visible;
 }
+
+.grid-modal .fa-calendar-plus{
+  margin-left: -20px;
+}

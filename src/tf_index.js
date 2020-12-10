@@ -38,7 +38,7 @@ import griddataAPI from "./app/api/griddataAPI";
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
   var userProfile =
-    '{"userId":"vinit","firstName":"Vinit","lastName":"Naik","dataset":"VINIT","securitytokn":"fhfh484jer843je848rj393jf","branding":"base64ImageData","userTheme":"Default","roles":["ER"],"applications":[{"id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc","name":"TFTools","accessIds":[{"id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8","visible":true}],"permissions":{"CF":[1,1,1,1,0],"CT":[1,1,1,1,0],"CP":[1,1,1,1,0],"AO":[1,1,1,1,0],"CO":[1,1,1,1,0],"OO":[1,1,1,1,0],"EG":[1,1,1,1,0],"UQ":[1,1,1,1,0],"GG":[1,1,1,1,0],"GC":[1,1,1,1,0],"UO":[1,1,1,1,0],"CG":[1,1,1,1,0],"TR":[1,1,1,1,0],"MR":[1,1,1,1,0],"MT":[1,1,1,1,0],"TEDO":[1,1,1,1,0], "BT":[1,1,1,1,0],"MS":[1,1,1,1,0],"LI":[1,1,1,1,0]}}],"themeList":[{"id":"Default","name":"Default"},{"id":"HighContrast","name":"High Contrast"},{"id":"WhiteOnBlack","name":"White On Black"},{"id":"BlackOnWhite","name":"Black On White"}]}';
+    '{"userId":"vinit","firstName":"Vinit","lastName":"Naik","dataset":"VINIT","securitytokn":"fhfh484jer843je848rj393jf","branding":"base64ImageData","userTheme":"Default","roles":["ER"],"applications":[{"id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc","name":"TFTools","accessIds":[{"id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8","visible":true}],"permissions":{"CF":[1,1,1,1,0],"CT":[1,1,1,1,0],"CP":[1,1,1,1,0],"AO":[1,1,1,1,0],"CO":[1,1,1,1,0],"OO":[1,1,1,1,0],"EG":[1,1,1,1,0],"UQ":[1,1,1,1,0],"GG":[1,1,1,1,0],"GC":[1,1,1,1,0],"UO":[1,1,1,1,0],"CG":[1,1,1,1,0],"TR":[1,1,1,1,0],"MR":[1,1,1,1,0],"MT":[1,1,1,1,0],"TEDO":[1,1,1,1,0],"PWI":[1,1,1,1,0], "BT":[1,1,1,1,0],"MS":[1,1,1,1,0],"LI":[1,1,1,1,0]}}],"themeList":[{"id":"Default","name":"Default"},{"id":"HighContrast","name":"High Contrast"},{"id":"WhiteOnBlack","name":"White On Black"},{"id":"BlackOnWhite","name":"Black On White"}]}';
   var userdata = JSON.parse(userProfile);
   if (isMock()) {
     let thPerm = [1, 1, 1, 1, 0];
@@ -78,14 +78,13 @@ function renderTFApplication(elem, renderName, renderCtx) {
       }.bind(this),
       600
     );
-    if(renderCtx){
+    if (renderCtx) {
       setTimeout(
         function () {
-          renderTFApplication('pageContainer', renderCtx); 
+          renderTFApplication("pageContainer", renderCtx);
         }.bind(this),
         600
       );
-      
     }
   } else if (renderName && renderName.type == UI_COMP) {
     if (renderName.id === "messageViewer" || renderName.id === "messagesViewer") {
@@ -94,7 +93,7 @@ function renderTFApplication(elem, renderName, renderCtx) {
       renderComponent(elem, renderName.id, renderName.value);
     }
   } else if (renderName && renderName.type == UI_PAGE) {
-      renderNewPage(elem, renderName.id, renderName.value,null);
+    renderNewPage(elem, renderName.id, renderName.value, null);
   } else if (renderName && renderName.type == UI_TEST) {
     renderTestHarness(elem, renderName.id, renderName.value);
   } else if (renderName && renderName === rname.RN_TF_CSTMCOMP) {
@@ -124,22 +123,27 @@ function renderMessageViewer(elem, pageid, pid) {
   const metadata = compMetaData(pageid);
   ReactDOM.render(
     <Provider store={store}>
-          <MessageViewerContainer
-            pageid={pageid}
-            metadata={metadata}
-            pid={pid}
-            permissions={compPermissions}
-            help={openHelp}
-            gridProps={gridProps}
-            fieldData={fieldDataX}
-            formMetaData={metadata}
-            getGridData={griddataAPI.getGridData}
-            gridInput={gridInput}
-          />
+      <MessageViewerContainer
+        pageid={pageid}
+        metadata={metadata}
+        pid={pid}
+        permissions={compPermissions}
+        help={openHelp}
+        gridProps={gridProps}
+        fieldData={fieldDataX}
+        formMetaData={metadata}
+        getGridData={griddataAPI.getGridData}
+        gridInput={gridInput}
+      />
     </Provider>,
     document.querySelector("#" + elem)
   );
 }
+
+const getGridData = ({ pgid }) => {
+  let gridInput = buildGridDataInput(pgid, store);
+  return griddataAPI.getGridData(pgid, gridInput).then(response => response);
+};
 
 /**
  * renderComponent
@@ -163,8 +167,6 @@ function renderComponent(elem, pageid, pid) {
     renderGrid
   };
 
-  
-
   griddataAPI
     .getGridData(pageid, gridInput)
     .then(response => response)
@@ -173,11 +175,10 @@ function renderComponent(elem, pageid, pid) {
       let griddatanew = decorateData(griddata, pageid);
       const fieldDataX = formatFieldData(fieldData[pageid], pageid, appUserId());
       const isSingleTable = !(metaData instanceof Array);
-
       if (isSingleTable && griddatanew[0] instanceof Array) {
         griddatanew = griddatanew[0];
       }
-
+      
       ReactDOM.render(
         <Provider store={store}>
           <Fragment>
@@ -192,7 +193,8 @@ function renderComponent(elem, pageid, pid) {
                   help={openHelp}
                   gridProps={gridProps}
                   fieldData={fieldDataX}
-                  className={key !== 0 ? 'mt-3' : '' }
+                  className={key !== 0 ? "mt-3" : ""}
+                  getDataForChildGrid={getGridData}
                 />
               ))
             ) : (
@@ -205,16 +207,19 @@ function renderComponent(elem, pageid, pid) {
                 help={openHelp}
                 gridProps={gridProps}
                 fieldData={fieldDataX}
+                getDataForChildGrid={getGridData}
               />
             )}
           </Fragment>
         </Provider>,
         document.querySelector("#" + elem)
       );
+      // }
     });
 }
+
 /**
- * renderTestHarness
+ * renderTestHarnesscccccc
  * @param {*} elem
  * @param {*} pgid
  * @param {*} pid

@@ -1,4 +1,4 @@
-import moment from 'moment'; 
+import moment from "moment";
 import {
   metadatamap,
   tftools,
@@ -118,7 +118,7 @@ export const formatFieldData = (fieldData, pageId, userId) => {
         field.value = moment().format("MM/DD/yyyy");
       }
 
-      // retain form values of date filter in the field values of messageViwer 
+      // retain form values of date filter in the field values of messageViwer
       // if ((field.id === "startdate" || field.id === "enddate") && pageId === "messageViewer"){
       //   if (state.formData && state.formData.data && state.formData.data[field.id]) {
       //     field.value = state.formData.data[field.id];
@@ -214,11 +214,11 @@ function dataURL(pageid) {
     case "worksites":
       gridDataUrl = "./COMPANIES_MOCKDATA.json";
     case "whatifEmp":
-        gridDataUrl = "./_whatifEmp_MockData.json";
+      gridDataUrl = "./_whatifEmp_MockData.json";
     case "whatifTaxes":
-        gridDataUrl = "./_whatifTaxes_MockData.json";
+      gridDataUrl = "./_whatifTaxes_MockData.json";
     case "whatifGarnishment":
-        gridDataUrl = "./_whatifGarnishment_MockData.json";
+      gridDataUrl = "./_whatifGarnishment_MockData.json";
     default:
       break;
   }
@@ -278,10 +278,13 @@ export function buildGridInputForPage(pageid,filterData,stDate,enDate){
     usrtax: filterData.userTax,
     runId: filterData.runid,
     messageType: filterData.messageType,
-    empCode:filterData.empCode,
-    checkDate:filterData.checkDate,
-    empName:filterData.empName,
-    regPen: "R"
+    empCode: filterData.empCode,
+    checkDate: filterData.checkDate,
+    checkdate: filterData.checkDate,
+    empName: filterData.empName,
+    regPen: filterData.regPen,
+    taxN: filterData.taxN,
+    employee: filterData.employeeCode
   };
   return input;
 }
@@ -397,8 +400,8 @@ export function buildMaritalStatusInput(pageid, store,formdata) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    startdate:getFrmStartDate(formdata),
-    allDates:(formdata.allDates && formdata.allDates===true) ? true:false
+    startdate: getFrmStartDate(formdata),
+    allDates: formdata.allDates && formdata.allDates === true ? true : false
   };
   return input;
 }
@@ -407,9 +410,9 @@ export function getTaxCode(filterData) {
     return filterData.taxCode;
   } else if (filterData && filterData.customTaxName) {
     return filterData.customTaxName;
-  }else if (filterData && filterData.taxTypeALL) {
+  } else if (filterData && filterData.taxTypeALL) {
     return filterData.taxTypeALL;
-  }else if (filterData && filterData.taxability) {
+  } else if (filterData && filterData.taxability) {
     return filterData.taxability;
   }
 }
@@ -418,11 +421,11 @@ export function getAuthCode(filterData) {
     return filterData.authorityCode;
   } else if (filterData && (filterData.bsiAuth || filterData.bsiauth)) {
     return filterData.bsiAuth || filterData.bsiauth;
-  } else if (filterData && (filterData.authorityCodegdw)) {
+  } else if (filterData && filterData.authorityCodegdw) {
     return filterData.authorityCodegdw;
-  }else if (filterData && (filterData.authorityCodegp)) {
+  } else if (filterData && filterData.authorityCodegp) {
     return filterData.authorityCodegp;
-  }else if (filterData && (filterData.authorityCodeNoall)) {
+  } else if (filterData && filterData.authorityCodeNoall) {
     return filterData.authorityCodeNoall;
   }
 }
@@ -447,12 +450,12 @@ export function getEndDate(filterData) {
   } else if (filterData && (filterData.endDate || filterData.enddate)) {
     const date = filterData.endDate || filterData.enddate;
     let enDate = date;
-    
-    if( date.indexOf('-') !== -1){
-        const dt = date.split("-");
-        enDate = dt[1] + "/" + dt[2] + "/" + dt[0];
+
+    if (date.indexOf("-") !== -1) {
+      const dt = date.split("-");
+      enDate = dt[1] + "/" + dt[2] + "/" + dt[0];
     }
-     
+
     return enDate;
   } else {
     return "";
@@ -493,12 +496,12 @@ export function getStartDate(filterData) {
   } else if (filterData && (filterData.startDate || filterData.startdate)) {
     const date = filterData.startDate || filterData.startdate;
     let stDate = date;
-    
-    if( date.indexOf('-') !== -1){
-        const dt = date.split("-");
-        stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
+
+    if (date.indexOf("-") !== -1) {
+      const dt = date.split("-");
+      stDate = dt[1] + "/" + dt[2] + "/" + dt[0];
     }
-     
+
     return stDate;
   } else {
     return "";
@@ -536,7 +539,7 @@ export function getGroupcode(filterData) {
     return filterData.groupCode;
   } else if (filterData && filterData.employeeGroupCode) {
     return filterData.employeeGroupCode;
-  }else if (filterData && filterData.garnishmentGroup) {
+  } else if (filterData && filterData.garnishmentGroup) {
     return filterData.garnishmentGroup;
   }
 }
@@ -612,12 +615,35 @@ export function getUsageDataCode(formdata) {
     return formdata.code;
   }
 }
+
+export function buildWhatifWagDeleteInput(pageid,formdata,editMode, state) {
+  const { formFilterData } = state;
+  return {
+    btxtwge : {
+      id : {
+        dataset : appDataset(),
+        regpen : formFilterData.regPen,
+        empcode : formFilterData.empCode,
+        chkdt : formFilterData.checkDate,
+        taxn : formFilterData.taxN
+      }
+    }, 
+    bwapay : {
+      name : formdata.wageCodedesc
+    }
+   
+  }
+}
+
 export function buildDeleteInput(pageid, store, formdata, mode) {
   let state = store.getState();
+  if(pageid === "wageDetails") {
+    return buildWhatifWagDeleteInput(pageid,formdata,mode, state);
+  }
   console.log("formdata");
   console.log(formdata);
-  
-  const {formFilterData} = state;
+
+  const { formFilterData } = state;
 
   let input = {
     pageId: pageid,
@@ -637,7 +663,7 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     county: formdata.county,
     state: formdata.state,
     zip: formdata.zip,
-    runId: formFilterData.runid,
+    runId: formFilterData.runid
   };
   return input;
 }
@@ -693,8 +719,47 @@ function buildWhatifEmpSaveInput(pageid,formdata,editMode){
   }
   return input;
 }
-export function buildSaveInputForPage(pageid,formdata,editMode){
-  if(pageid==='whatifEmp'){
+
+function buildWhatifWageSaveInput(pageid,formdata,editMode, state) {
+  const filterFormData = state.formFilterData;
+ 
+  return {
+    btxtwge : {
+      id : {
+        dataset : appDataset(),
+        regpen : filterFormData.regPen,
+        empcode : filterFormData.empCode,
+        chkdt : filterFormData.checkDate,
+        taxn : filterFormData.taxN
+      },
+     curern: formdata.currentEarning || 0.00,
+     curcnt : formdata.currentContribution || 0.00,
+     curcrdt : formdata.currentCredit || null,
+     curmch : formdata.currentMatch || 0.00,
+     mtdcnt : formdata.mtdcnt || 0.00,
+     mtdmch : formdata.mtdmch || 0.00,
+     qtdcnt : formdata.qtdcnt || 0.00,
+     qtdmch : formdata.qtdmch || 0.00,
+     ytdcnt : formdata.ytdcnt || 0.00,
+     ytdmch : formdata.ytdmch || 0.00,
+     eelim : formdata.eelim || 0.00,
+     erlim : formdata.erlim || 0.00,
+     eeind : formdata.employeeIndicator || 0,
+     erind : formdata.employerIndicator || 0,
+     catchupEI : formdata.catchupEI || 0,
+     remncd : formdata.wageCodedesc.split(' - ')[formdata.wageCodedesc.split(' - ').length-1],
+     initdt : moment(formdata.initiationDate).format("MM/DD/YYYY")
+    }, 
+    bwapay : {
+      name : formdata.wageCodedesc
+    }
+  }
+}
+export function buildSaveInputForPage(pageid,formdata,editMode, state){
+  if(pageid === "wageDetails") {
+    return buildWhatifWageSaveInput(pageid,formdata,editMode, state);
+  }
+  else if(pageid==='whatifEmp'){
     return buildWhatifEmpSaveInput(pageid,formdata,editMode);
   }else{
     return buildOtherSaveInput(pageid,formdata,editMode);
@@ -748,7 +813,7 @@ export function buildSaveInput(pageid, store, formdata, mode) {
   } else if (mode === "Edit") {
     editMode = 2;
   }
-  let input = buildSaveInputForPage(pageid,formdata,editMode);
+  let input = buildSaveInputForPage(pageid,formdata,editMode, state);
   return input;
 }
 export function getTerminationDate(filterData) {
@@ -941,9 +1006,9 @@ const mockdatamap = [
   { id: "worksiteCompanies", url: "./WORKSITES_MOCKDATA.json" },
   { id: "recentUsage", url: "./RECENT_USAGE.json" },
   { id: "selectSamplePage", url: "./RECENT_USAGE.json" },
-  { id: "whatifEmp", url: "./_whatifEmp_MockData.json"},
-  { id: "whatifTaxes", url: "./_whatifTaxes_MockData.json"},
-  { id: "whatifGarnishment", url: "./_whatifGarnishment_MockData.json"}
+  { id: "whatifEmp", url: "./_whatifEmp_MockData.json" },
+  { id: "whatifTaxes", url: "./_whatifTaxes_MockData.json" },
+  { id: "whatifGarnishment", url: "./_whatifGarnishment_MockData.json" }
 ];
 
 //all for test autoComplete
