@@ -634,38 +634,66 @@ export function buildWhatifWagDeleteInput(pageid,formdata,editMode, state) {
    
   }
 }
-
+/**
+ * buildWhatifDeductionBenefitsDelete
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildWhatifDeductionBenefitsDelete(pageid, formdata, editMode, state) {
+  let input = {
+    id: {
+      dataset: appDataset(),
+      regpen: "R",
+      empcode: formdata.empcode,
+      chkdt: formdata.chkdt,
+      usrauth: formdata.usrauth,
+      usrtxtyp: formdata.usrtxtyp,
+      gform: formdata.gform,
+      caseid: formdata.caseid,
+      docket: formdata.docket,
+      wseqn: formdata.wseqn,
+    },
+    editMode: 2,
+    amount: formdata.wamount,
+    remncd: formdata.remncd,
+    garnwagepriority: formdata.gwPriority,
+  };
+  return input;
+}
 export function buildDeleteInput(pageid, store, formdata, mode) {
   let state = store.getState();
   if(pageid === "wageDetails") {
     return buildWhatifWagDeleteInput(pageid,formdata,mode, state);
+  }else if(pageid==="whatifDeductionBenefits"){
+    return buildWhatifDeductionBenefitsDelete(pageid,formdata,mode, state);
+  }else{
+    console.log("formdata");
+    console.log(formdata);
+    const { formFilterData } = state;
+    let input = {
+      pageId: pageid,
+      dataset: appDataset(),
+      userId: appUserId(),
+      compCode: getCode(formdata, pageid),
+      taxCode: formdata.taxCode,
+      taxName: formdata.name,
+      type: formdata.taxType,
+      code: getCode(formdata, pageid),
+      name: getName(formdata, pageid),
+      startDate: getFrmStartDate(formdata),
+      location: formdata.location,
+      street1: formdata.street1,
+      street2: formdata.street2,
+      city: formdata.city,
+      county: formdata.county,
+      state: formdata.state,
+      zip: formdata.zip,
+      runId: formFilterData.runid
+    };
+    return input;
   }
-  console.log("formdata");
-  console.log(formdata);
-
-  const { formFilterData } = state;
-
-  let input = {
-    pageId: pageid,
-    dataset: appDataset(),
-    userId: appUserId(),
-    compCode: getCode(formdata, pageid),
-    taxCode: formdata.taxCode,
-    taxName: formdata.name,
-    type: formdata.taxType,
-    code: getCode(formdata, pageid),
-    name: getName(formdata, pageid),
-    startDate: getFrmStartDate(formdata),
-    location: formdata.location,
-    street1: formdata.street1,
-    street2: formdata.street2,
-    city: formdata.city,
-    county: formdata.county,
-    state: formdata.state,
-    zip: formdata.zip,
-    runId: formFilterData.runid
-  };
-  return input;
 }
 /**
  * buildWhatifEmpSaveInput

@@ -111,7 +111,8 @@ import {
   GET_WHAT_IF_EMPLOYEES,
   GET_TAX_LOCATOR,
   GET_RUN_LOCATOR_SERVICE,
-  GET_ADRRESS_FROM_WORKSITES
+  GET_ADRRESS_FROM_WORKSITES,
+  DELETE_GARN_DED_BENEFITS
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -245,7 +246,8 @@ export const deleteDataApiMap = {
   customTaxFormulas: DELETE_CUSTOM_FORMULA,
   customFormulas: DELETE_CUSTOM_FORMULA,
   worksiteCompanies: DELETE_WORKSITES_LOCATIONS,
-  wageDetails: DELETE_WAGE_DETAILS
+  wageDetails: DELETE_WAGE_DETAILS,
+  whatifDeductionBenefits:DELETE_GARN_DED_BENEFITS
 };
 
 export const saveDataApiMap = {
