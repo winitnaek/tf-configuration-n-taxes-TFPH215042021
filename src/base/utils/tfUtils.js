@@ -635,6 +635,16 @@ export function buildWhatifWagDeleteInput(pageid,formdata,editMode, state) {
   }
 }
 /**
+ * buildWhatifGarnishmentDelete
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildWhatifGarnishmentDelete(pageid,formdata,editMode, state) {
+}
+
+/**
  * buildWhatifDeductionBenefitsDelete
  * @param {*} pageid 
  * @param {*} formdata 
@@ -668,6 +678,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildWhatifWagDeleteInput(pageid,formdata,mode, state);
   }else if(pageid==="whatifDeductionBenefits"){
     return buildWhatifDeductionBenefitsDelete(pageid,formdata,mode, state);
+  }else if(pageid==='whatifGarnishment'){
+    return buildWhatifGarnishmentDelete(pageid,formdata,mode, state);
   }else{
     console.log("formdata");
     console.log(formdata);
@@ -822,6 +834,16 @@ function buildWhatifWageSaveInput(pageid,formdata,editMode, state) {
     }
   }
 }
+/**
+ * buildWhatIfEmployeeGarnishmentSaveInput
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode, state){
+
+}
 export function buildSaveInputForPage(pageid,formdata,editMode, state){
   if(pageid === "wageDetails") {
     return buildWhatifWageSaveInput(pageid,formdata,editMode, state);
@@ -829,6 +851,8 @@ export function buildSaveInputForPage(pageid,formdata,editMode, state){
     return buildWhatifEmpSaveInput(pageid,formdata,editMode);
   }else if(pageid==='whatifDeductionBenefits'){
     return buildWhatifDeductionBenefitsSaveInput(pageid,formdata,editMode,state);
+  }else if(pageid==='whatifGarnishment'){
+    return buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state);
   }else{
     return buildOtherSaveInput(pageid,formdata,editMode);
   }
