@@ -114,7 +114,12 @@ import {
   GET_ADRRESS_FROM_WORKSITES,
   DELETE_GARN_DED_BENEFITS,
   SAVE_WHATIF_GARNISHMENT,
-  DELETE_WHATIF_GARNISHMENT
+  DELETE_WHATIF_GARNISHMENT,
+  DELETE_WHAT_IF_EMPLOYEES,
+  DELETEALL_WHAT_IF_EMPLOYEES,
+  WHATIF_GARN_AUTOCOMPLETE_AUTHS,
+  WHATIF_GARN_AUTOCOMPLETE_TAXTYPES,
+  WHATIF_GARN_AUTOCOMPLETE_FORMULAS
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -250,7 +255,8 @@ export const deleteDataApiMap = {
   worksiteCompanies: DELETE_WORKSITES_LOCATIONS,
   wageDetails: DELETE_WAGE_DETAILS,
   whatifDeductionBenefits:DELETE_GARN_DED_BENEFITS,
-  whatifGarnishment:DELETE_WHATIF_GARNISHMENT
+  whatifGarnishment:DELETE_WHATIF_GARNISHMENT,
+  whatifEmp:DELETE_WHAT_IF_EMPLOYEES
 };
 
 export const saveDataApiMap = {
@@ -337,5 +343,8 @@ export const autoCompleteApiMap = {
   residentState:'/WhatIfService/getWhatIfUSStates',
   principalStateOfEmp:'/WhatIfService/getWhatIfUSStates',
   remncd:GET_BENEFITS_PLANS,
-  wageCodedesc: WAGE_CODE_DESC
+  wageCodedesc: WAGE_CODE_DESC,
+  usrauth:WHATIF_GARN_AUTOCOMPLETE_AUTHS,
+  usrtxtyp:WHATIF_GARN_AUTOCOMPLETE_TAXTYPES,
+  gform:WHATIF_GARN_AUTOCOMPLETE_FORMULAS
 };
