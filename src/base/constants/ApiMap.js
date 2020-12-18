@@ -119,7 +119,10 @@ import {
   DELETEALL_WHAT_IF_EMPLOYEES,
   WHATIF_GARN_AUTOCOMPLETE_AUTHS,
   WHATIF_GARN_AUTOCOMPLETE_TAXTYPES,
-  WHATIF_GARN_AUTOCOMPLETE_FORMULAS
+  WHATIF_GARN_AUTOCOMPLETE_FORMULAS,
+  GET_PAYMENT_OVERRIDE,
+  DELETE_PAYMENT_OVERRIDE,
+  SAVE_PAYMENT_OVERRIDE
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -203,8 +206,8 @@ export const metaDataApiMap = {
   customPaymentTaxExceptions: GET_CUSTOM_TAX_FORMULAS,
   customTaxPaymentOverrides: GET_CUSTOM_FORMULAS,
   customTaxPaymentOverride: GET_CUSTOM_TAX_FORMULAS,
-  paymentOverrides: GET_CUSTOM_FORMULAS,
-  paymentOverride: GET_CUSTOM_TAX_FORMULAS,
+  paymentOverrides: GET_EMPLOYEE_GROUPS,
+  paymentOverride: GET_PAYMENT_OVERRIDE,
   reciprocalOverrides: GET_CUSTOM_FORMULAS,
   reciprocalOverride: GET_CUSTOM_TAX_FORMULAS,
   viewDisposableOverride: GET_CUSTOM_TAX_FORMULAS,
@@ -256,7 +259,8 @@ export const deleteDataApiMap = {
   wageDetails: DELETE_WAGE_DETAILS,
   whatifDeductionBenefits:DELETE_GARN_DED_BENEFITS,
   whatifGarnishment:DELETE_WHATIF_GARNISHMENT,
-  whatifEmp:DELETE_WHAT_IF_EMPLOYEES
+  whatifEmp:DELETE_WHAT_IF_EMPLOYEES,
+  paymentOverride:DELETE_PAYMENT_OVERRIDE
 };
 
 export const saveDataApiMap = {
@@ -280,7 +284,8 @@ export const saveDataApiMap = {
   whatifEmp:SAVE_WHATIF_EMP,
   whatifDeductionBenefits:SAVE_WHAT_IF_DEDUCTION_BENEFITS,
   wageDetails: SAVE_WAGE_DETAILS,
-  whatifGarnishment:SAVE_WHATIF_GARNISHMENT
+  whatifGarnishment:SAVE_WHATIF_GARNISHMENT,
+  paymentOverride:SAVE_PAYMENT_OVERRIDE
 };
 
 export const generateApiMap = {
@@ -346,5 +351,7 @@ export const autoCompleteApiMap = {
   wageCodedesc: WAGE_CODE_DESC,
   usrauth:WHATIF_GARN_AUTOCOMPLETE_AUTHS,
   usrtxtyp:WHATIF_GARN_AUTOCOMPLETE_TAXTYPES,
-  gform:WHATIF_GARN_AUTOCOMPLETE_FORMULAS
+  gform:WHATIF_GARN_AUTOCOMPLETE_FORMULAS,
+  authTaxCode:GET_UDQ_AUTOCOMPLETE,
+  planId:GET_UDQ_AUTOCOMPLETE
 };

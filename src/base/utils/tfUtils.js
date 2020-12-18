@@ -388,9 +388,45 @@ export function buildGridDataInput(pageid, store) {
     input= whatIfGarnishmentsGridInput(pageid,filterData,stDate,enDate);
   }else if(pageid==='whatifDeductionBenefits'){
     input= deductionBenefitsGridInput(pageid,filterData,stDate,enDate);
+  }else if(pageid==='paymentOverrides'){
+    input= paymentOverridesGridInput(pageid,filterData,stDate,enDate);
+  }else if(pageid==='paymentOverride'){
+    input= paymentOverrideGridInput(pageid,filterData,stDate,enDate,state);
   }else{
     input = buildGridInputForPage(pageid,filterData,stDate,enDate);
   }
+  return input;
+}
+/**
+ * paymentOverridesGridInput
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ */
+function paymentOverridesGridInput(pageid,filterData,stDate,enDate){
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+  };
+  return input;
+}
+/**
+ * paymentOverrideGridInput
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ */
+function paymentOverrideGridInput(pageid,filterData,stDate,enDate,state){
+  console.log(state);
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    groupCode:filterData.id ? filterData.id :state.formFilterData.groupCode   
+  };
   return input;
 }
 export function buildMaritalStatusInput(pageid, store,formdata) {
@@ -558,7 +594,8 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    pattern: patten
+    pattern: patten,
+    startdate:"12/16/2020",
   };
 
   // return Object.assign(input, formValues);
@@ -677,6 +714,27 @@ function buildWhatifEmpDelete(pageid, formdata, editMode, state) {
   return input;
 }
 /**
+ * buildPaymentOverrideDelete
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildPaymentOverrideDelete(pageid, formdata, editMode, state) {
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId:appUserId(),
+    code:state.formFilterData.id,
+    authority:formdata.authTaxCode,
+    taxCode:formdata.authTaxCode.substring(3, 11),
+    taxType:formdata.taxType,
+    payCode:formdata.planId,
+    startDate:moment(formdata.startDate).format("MM/DD/YYYY")
+  }
+  return input;
+}
+/**
  * buildWhatifDeductionBenefitsDelete
  * @param {*} pageid 
  * @param {*} formdata 
@@ -714,6 +772,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildWhatifGarnishmentDelete(pageid,formdata,mode, state);
   }else if(pageid==='whatifEmp'){
     return buildWhatifEmpDelete(pageid,formdata,mode, state);
+  }else if(pageid==='paymentOverride'){
+    return buildPaymentOverrideDelete(pageid,formdata,mode, state);
   }else{
     console.log("formdata");
     console.log(formdata);
@@ -965,6 +1025,55 @@ function buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state)
   };
   return input;
 }
+/**
+ * buildPaymentOverrideSaveInput
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildPaymentOverrideSaveInput(pageid,formdata,editMode,state){
+  let editRec = "false";
+  if (editMode == 1) {
+    editRec = "false";
+  } else if (editMode == 2) {
+    editRec = "true";
+  }
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    code: formdata.groupCode,
+    authority: formdata.authTaxCode,
+    taxCode: formdata.authTaxCode.substring(3, 11),
+    taxType: formdata.taxType,
+    payCode: formdata.planId,
+    type: formdata.payType,
+    startDate: moment(formdata.startDate).format("MM/DD/YYYY"),
+    endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
+    ee_Max: formdata.eeMaxAmount,
+    editMode: editMode,
+  };
+  let formValues = {};
+  if (formdata.payType && formdata.payType === "E") {
+    formValues = {
+      ee_Max: formdata.eeMaxAmount,
+      taxability: formdata.taxability,
+      aggStatus: formdata.aggStatus
+    };
+  } else {
+    formValues = {
+      ee_Max: formdata.eeMaxAmount,
+      er_Max: formdata.eeMaxAmount,
+      aggStatus: formdata.aggStatus,
+      taxability: formdata.taxability,
+      er_taxability: formdata.erTaxability,
+      useEEMax: formdata.useEEMax,
+      useERMax: formdata.useERMax,
+    };
+  }
+  return Object.assign(input, formValues);
+}
 export function buildSaveInputForPage(pageid,formdata,editMode, state){
   if(pageid === "wageDetails") {
     return buildWhatifWageSaveInput(pageid,formdata,editMode, state);
@@ -974,6 +1083,8 @@ export function buildSaveInputForPage(pageid,formdata,editMode, state){
     return buildWhatifDeductionBenefitsSaveInput(pageid,formdata,editMode,state);
   }else if(pageid==='whatifGarnishment'){
     return buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state);
+  }else if(pageid==='paymentOverride'){
+    return buildPaymentOverrideSaveInput(pageid,formdata,editMode,state);
   }else{
     return buildOtherSaveInput(pageid,formdata,editMode);
   }

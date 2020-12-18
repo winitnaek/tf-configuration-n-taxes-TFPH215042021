@@ -119,3 +119,6 @@ export const DELETEALL_WHAT_IF_EMPLOYEES = '/WhatIfService/deleteAllWhatIfEmploy
 export const WHATIF_GARN_AUTOCOMPLETE_AUTHS= '/TaxCodeService/getAutocompleteAuthorities'
 export const WHATIF_GARN_AUTOCOMPLETE_TAXTYPES= '/WhatIfService/getWhatIfGarnAutocompleteTaxTypes'
 export const WHATIF_GARN_AUTOCOMPLETE_FORMULAS='/WhatIfService/getWhatIfAutocompleteFormulas'
+export const GET_PAYMENT_OVERRIDE = '/PaymentsService/getPaymentOverrideList'
+export const DELETE_PAYMENT_OVERRIDE ='/PaymentsService/deletePaymentOverride'
+export const SAVE_PAYMENT_OVERRIDE ='/PaymentsService/savePaymentOverride'
