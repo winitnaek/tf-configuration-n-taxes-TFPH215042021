@@ -122,7 +122,12 @@ import {
   WHATIF_GARN_AUTOCOMPLETE_FORMULAS,
   GET_PAYMENT_OVERRIDE,
   DELETE_PAYMENT_OVERRIDE,
-  SAVE_PAYMENT_OVERRIDE
+  SAVE_PAYMENT_OVERRIDE,
+  GET_ADDRESS_OVERRIDES,
+  DELETE_ADDRESS_OVERRIDES,
+  SAVE_ADDRESS_OVERRIDES,
+  GET_REDUNDANT_ADDRESS_OVERRIDES,
+  GENERATE_WHATIF_EMPLOYEE_DETAIL_PDF
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -186,7 +191,7 @@ export const metaDataApiMap = {
   // TODO: Update below Urls after get the actual Urls
   employeeGroup: GET_EMPLOYEE_GROUPS,
   garnishmentGroup: GET_GARNISHMENT_GROUPS,
-  addressOverrides: GET_CUSTOM_TAX_CODES,
+  addressOverrides: GET_ADDRESS_OVERRIDES,
   customGarnishment: GET_CUSTOM_GARNISHMENT_CODES,
   taxEffectiveDateOverrides: GET_TAX_EFFECTIVE_DATE_OVERRIDES,
   auditLogViewer: GET_CUSTOM_TAX_CODES,
@@ -237,13 +242,14 @@ export const metaDataApiMap = {
   garnishmentFormulaOverrideDetails: GET_USER_DATA_QUERIES,
   dataSets: GET_DATASETS,
   permissions: GET_PERMISSIONS,
-  selectSamplePage: GET_SAMPLE_DATE_FIELD_DATA
+  selectSamplePage: GET_SAMPLE_DATE_FIELD_DATA,
+  findRedundantOverrides:GET_REDUNDANT_ADDRESS_OVERRIDES
 };
 
 export const deleteDataApiMap = {
   customPayments: DELTE_CUSTOM_PAYMENT,
   customTaxCodes: DELETE_CUSTOM_TAX_CODES,
-  addressOverrides: DELTE_CUSTOM_PAYMENT,
+  addressOverrides: DELETE_ADDRESS_OVERRIDES,
   taxEffectiveDateOverrides: DELETE_TAX_EFFECTIVE_DATE_OVERRIDE,
   customTaxPaymentOverride: DELTE_CUSTOM_PAYMENT,
   messageViewer: DELETE_ALL_MESSAGES,
@@ -266,7 +272,7 @@ export const deleteDataApiMap = {
 export const saveDataApiMap = {
   customPayments: SAVE_CUSTOM_PAYMENT,
   customTaxCodes: SAVE_CUSTOM_TAX_CODES,
-  addressOverrides: SAVE_CUSTOM_PAYMENT,
+  addressOverrides: SAVE_ADDRESS_OVERRIDES,
   customFormulas: SAVE_CUSTOM_FORMULA,
   worksites: SAVE_WORKSITES,
   worksiteCompanies: SAVE_WORKSITES_LOCATIONS,

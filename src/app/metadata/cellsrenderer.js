@@ -150,3 +150,22 @@ export function editCellsRenderer(
 export const getRowIndex = () => {
 	return row;
 }
+export function addressOverrideStreetNameRenderer(ndex, datafield, value, defaultvalue, column,rowdata) {
+	//N 100 PEACHTREE ROAD AVE N
+	return rowdata.fpre+' '+rowdata.fname+' '+rowdata.ftype+' '+rowdata.fpost;
+}
+export function parityNameRenderer(ndex, datafield, value, defaultvalue, column,rowdata) {
+	if(rowdata.parity==='B'){
+		return 'BOTH'
+	}else if(rowdata.parity==='O'){
+		return 'ODD'
+	}else if(rowdata.parity==='E'){
+		return 'EVEN'
+	}
+}
+export function placeCodeNameRenderer(ndex, datafield, value, defaultvalue, column,rowdata) {
+	return rowdata.classCode+' - '+rowdata.placeName;
+}
+export function schoolDistrictNameRenderer(ndex, datafield, value, defaultvalue, column,rowdata) {
+	return rowdata.sdCounty+'| '+rowdata.sdName;
+}

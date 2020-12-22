@@ -735,6 +735,22 @@ function buildPaymentOverrideDelete(pageid, formdata, editMode, state) {
   return input;
 }
 /**
+ * buildAddressOverridesDelete
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildAddressOverridesDelete(pageid, formdata, editMode, state) {
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    bsiseqn: formdata.bsiseqn,
+  };
+  return input;
+}
+/**
  * buildWhatifDeductionBenefitsDelete
  * @param {*} pageid 
  * @param {*} formdata 
@@ -774,6 +790,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildWhatifEmpDelete(pageid,formdata,mode, state);
   }else if(pageid==='paymentOverride'){
     return buildPaymentOverrideDelete(pageid,formdata,mode, state);
+  }else if(pageid==='addressOverrides'){
+    return buildAddressOverridesDelete(pageid,formdata,mode, state);
   }else{
     console.log("formdata");
     console.log(formdata);
@@ -1074,6 +1092,68 @@ function buildPaymentOverrideSaveInput(pageid,formdata,editMode,state){
   }
   return Object.assign(input, formValues);
 }
+/**
+ * buildAddressOverridesSaveInput
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildAddressOverridesSaveInput(pageid,formdata,editMode,state){
+  let editRec = "false";
+  if (editMode == 1) {
+    editRec = "false";
+  } else if (editMode == 2) {
+    editRec = "true";
+  }
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    streetName:formdata.fname,
+    state:formdata.state,
+    countyName:formdata.countyName,
+    placeCode:formdata.placeCode,
+    sdName:formdata.sdName,
+    postDirection:formdata.fpost,  
+    startNumber:formdata.fadd, 
+    endNumber:formdata.tadd,     
+    snt:formdata.snt,
+    secUnit:formdata.sunit,
+    placesCode:formdata.placeCode,
+    parity:formdata.parity,
+    addChangeDate:moment().format("YYYYMMDD"),
+    streetType:formdata.ftype,
+    preDirection:formdata.fpre,
+    showMessage:formdata.showmsg,
+    sdCountyName:"FAIRFIELD",
+    taxCode:"BSI00391899",
+    county:"175",
+    placeName:"WYANDOT",
+    classCode:formdata.classCode,
+    postalCode:formdata.fzip,
+    placeCodeAutoCompl:"U6 | 86716 | WYANDOT",
+    classesCode:formdata.classCode,
+    placesName:"",
+    schoolDistrictAutoCompl:"AMANDA-CLEARCREEK LSD | BSI00391899 | FAIRFIELD",
+    sdCode:"",
+    schooldistrictCode:"",
+    schooldistrictName:"",
+    schooldistrictCounty:"",
+    editMode:editMode
+  };
+  let formValues = {};
+  if (editMode==1) {
+    formValues = {
+      bsiseqn:"3",
+    };
+  } else {
+    formValues = {
+      bsiseqn:formdata.bsiseqn
+    };
+  }
+  return Object.assign(input, formValues);
+}
 export function buildSaveInputForPage(pageid,formdata,editMode, state){
   if(pageid === "wageDetails") {
     return buildWhatifWageSaveInput(pageid,formdata,editMode, state);
@@ -1085,6 +1165,8 @@ export function buildSaveInputForPage(pageid,formdata,editMode, state){
     return buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state);
   }else if(pageid==='paymentOverride'){
     return buildPaymentOverrideSaveInput(pageid,formdata,editMode,state);
+  }else if(pageid==='addressOverrides'){
+    return buildAddressOverridesSaveInput(pageid,formdata,editMode,state);
   }else{
     return buildOtherSaveInput(pageid,formdata,editMode);
   }
