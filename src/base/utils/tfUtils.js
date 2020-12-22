@@ -5,7 +5,9 @@ import {
   deletedatamap,
   savedatamap,
   asyncselfldsmap,
-  generateDataMap
+  generateDataMap,
+  viewPDFMap,
+  saveAsdatamap,
 } from "../constants/TFTools";
 import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
@@ -284,7 +286,9 @@ export function buildGridInputForPage(pageid,filterData,stDate,enDate){
     empName: filterData.empName,
     regPen: filterData.regPen,
     taxN: filterData.taxN,
-    employee: filterData.employeeCode
+    employee: filterData.employeeCode,
+    companyCode: filterData.cpycode,
+    empGroup: filterData.id
   };
   return input;
 }
@@ -634,6 +638,16 @@ export function buildWhatifWagDeleteInput(pageid,formdata,editMode, state) {
    
   }
 }
+
+export function buildwhatifLocationsDelete(pageid,formdata,editMode, state) {
+  const { formFilterData } = state;
+  return {
+    dataset: appDataset(),
+    employee: formFilterData.employeeCode,
+    checkdate: formFilterData.checkDate,
+    locnnumbr: formdata.locnnumbr,
+  }
+}
 /**
  * buildWhatifGarnishmentDelete
  * @param {*} pageid 
@@ -680,6 +694,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildWhatifDeductionBenefitsDelete(pageid,formdata,mode, state);
   }else if(pageid==='whatifGarnishment'){
     return buildWhatifGarnishmentDelete(pageid,formdata,mode, state);
+  }else if(pageid==="whatifLocations"){
+    return buildwhatifLocationsDelete(pageid,formdata,mode, state);
   }else{
     console.log("formdata");
     console.log(formdata);
@@ -702,6 +718,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
       county: formdata.county,
       state: formdata.state,
       zip: formdata.zip,
+      employee: formdata.employeeCode,
+      checkdate: formdata.checkDate,
       runId: formFilterData.runid
     };
     return input;
@@ -713,6 +731,27 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
  * @param {*} formdata 
  * @param {*} editMode 
  */
+
+
+export function buildPdfInput(pageid, store, formdata, mode) {
+  const state = store.getState();
+  const filterData = state.formFilterData;
+//   return  { "dataset": "DEFAULT",
+//   "employee": "PA",
+//   "checkdate": "12/06/2016",
+//   "userId": "TF11",
+//   "showSummary": "true"
+        
+// }
+  return {
+    "dataset": appDataset(),
+    "employee": filterData.employeeCode,
+    "checkdate": filterData.checkDate,
+    "userId": appUserId(),
+    "showSummary": "true"
+  }
+  
+}
 function buildWhatifEmpSaveInput(pageid,formdata,editMode){
   let editRec = "false";
   if(editMode==1){
@@ -844,16 +883,103 @@ function buildWhatifWageSaveInput(pageid,formdata,editMode, state) {
 function buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode, state){
 
 }
+
+
+function buildwhatifLocationsSaveInput(pageid,formdata,editMode, state) {
+  const filterFormData = state.formFilterData;
+ 
+  return {
+    btxldetl: {
+        id: {
+            dataset: appDataset(),
+            employee: filterFormData.employeeCode,
+            checkdate: filterFormData.checkDate
+        },
+        street1: formdata.street1,
+        street2: formdata.street2,
+        city: formdata.city,
+        county: formdata.county,
+        stateabb: formdata.state,
+        zipcode: formdata.zip,
+        eiccode: formdata.eicCode,
+        primews: formdata.primews
+    },
+     editMode: 1
+   
+}
+}
+export function buildTaxLocatorSaveInput(pageId,formData, editMode) {
+  return {
+      btxlemp: {
+          id: {
+            dataset: appDataset(),
+            employee: formData.employeeCode,
+            checkdate: moment(formData.checkDate).format("MM/DD/YYYY") 
+          },
+          empclass: formData.employeeClass || 1,
+         eicstatus: formData.eicCode || 1,
+         grosswages: formData.grossAmount || 0,
+         railroad: formData.railRoadCode || 0,
+         taxfilter: formData.taxFilter || 0,
+         whopays: formData.paidBy || 0,
+         hiredate: formData.hireDate,
+         deathdate: formData.dateOfDeath,
+         allstates: formData.returnAllStates || 0,
+         retireplan: formData.privateSectorRetirementPlanIndicator || 0,
+         dataver: formData.dataVersion || 0,           
+         empsts: 0,
+         selstaind: formData.selectedStateIndicator || 0,
+         bylocation: 0,           
+         resicntry: formData.residentCountry,
+         selstat: formData.selectedState,            
+         cpycode: formData.companyCode,
+         fed: formData.fedWthForEeLive,
+         empltype:  formData.employmentType || 0,
+         wCompFlag: 0
+      },
+      createNew: true,      
+      checkDateYYYYMMDD: "20170119",
+      hireDateYYYYMMDD: "",
+      dateOfDeathYYYYMMDD: null,
+      terminationDateYYYYMMDD: null,
+      numberOfTaxEntries: 0,
+      numberOfLocationEntries: 0
+     
+  }
+}
+
+export function buildWorkSiteSaveInput(pageid, formdata, editmode, state) {
+  const filterFormData = state.formFilterData;
+  const worksites = [];
+  formdata.forEach(data => {
+    let payload = `W1~111~~abc~${data.city}~${data.state}~${data.zip}`;
+    worksites.push(payload);
+  })
+  return {
+    "dataset": appDataset(),
+    "empCode": filterFormData.employeeCode,
+    "checkDate":  filterFormData.checkDate,
+    "selectedWorksites": worksites
+  }
+}
+
 export function buildSaveInputForPage(pageid,formdata,editMode, state){
   if(pageid === "wageDetails") {
     return buildWhatifWageSaveInput(pageid,formdata,editMode, state);
+  }else if(pageid==='whatifLocations'){
+    return buildwhatifLocationsSaveInput(pageid,formdata,editMode, state);
   }else if(pageid==='whatifEmp'){
     return buildWhatifEmpSaveInput(pageid,formdata,editMode);
-  }else if(pageid==='whatifDeductionBenefits'){
+  } else if(pageid === "taxLocator"){
+    return buildTaxLocatorSaveInput(pageid, formdata, editMode, state);
+  } else if(pageid === "addressFromWorksite") {
+    return buildWorkSiteSaveInput(pageid, formdata, editMode, state);
+  } else if(pageid==='whatifDeductionBenefits'){
     return buildWhatifDeductionBenefitsSaveInput(pageid,formdata,editMode,state);
   }else if(pageid==='whatifGarnishment'){
     return buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state);
-  }else{
+  }
+    else{
     return buildOtherSaveInput(pageid,formdata,editMode);
   }
 }
@@ -908,6 +1034,50 @@ export function buildSaveInput(pageid, store, formdata, mode) {
   let input = buildSaveInputForPage(pageid,formdata,editMode, state);
   return input;
 }
+
+export function buildSaveAsInput(pageid, store, formData, mode) {
+  return {
+    btxlemp: {
+        id: {
+          dataset: appDataset(),
+          employee: formData.employeeCode,
+          checkdate: moment(formData.checkDate).format("MM/DD/YYYY") 
+        },
+        btxldetls: [],
+        btxdset: null,
+        empclass: formData.employeeClass || 1,
+       eicstatus: formData.eicCode || 1,
+       grosswages: formData.grossAmount || 0,
+       railroad: formData.railRoadCode || 0,
+       taxfilter: formData.taxFilter || 0,
+       whopays: formData.paidBy || 0,
+       hiredate: formData.hireDate,
+       deathdate: formData.dateOfDeath,
+       allstates: formData.returnAllStates || 0,
+       retireplan: formData.privateSectorRetirementPlanIndicator || 0,
+       dataver: formData.dataVersion || 0,           
+       empsts: 0,
+       bylocation: 0,           
+       resicntry: formData.residentCountry,
+       selstaind: 0,
+       selstat:  formData.selectedState,          
+       cpycode: formData.companyCode,
+       fed: formData.fedWthForEeLive || 0,
+       empltype:  formData.employmentType || 0,
+       wCompFlag: 0
+    },
+    createNew: true,      
+    checkDateYYYYMMDD: "20170119",
+    hireDateYYYYMMDD: "",
+    dateOfDeathYYYYMMDD: null,
+    terminationDateYYYYMMDD: null,
+    numberOfTaxEntries: 0,
+    numberOfLocationEntries: 0,
+    saveAsEmployee: formData.employeeCode,
+    saveAsCheckdate: moment(formData.checkDate).format("MM/DD/YYYY") ,
+}
+}
+
 export function getTerminationDate(filterData) {
   if (filterData && (filterData.terminationDate)) {
     let dt = filterData.terminationDate;
@@ -1008,6 +1178,25 @@ export function deleteUrl(id) {
   return url;
 }
 
+export function viewPDFUrl(id) {
+  let viewPdf = viewPDFMap.find(metadatam => {
+    if (id == metadatam.id) return metadatam;
+  });
+  let url = generateUrl.buildURL(viewPdf.url);
+  if (isMock()) {
+    if (mockDataMapper[id]) {
+      url = mockDataMapper[id];
+    } else {
+      let viewPdf = mockdelmap.find(metadatam => {
+        if (id == metadatam.id) return metadatam;
+      });
+      url = viewPdf.url;
+    }
+  }
+  console.log("VIEW PDF URL %s for page %s", url, id);
+  return url;
+}
+
 export function saveUrl(id) {
   let saveDataMap = savedatamap.find(metadatam => {
     console.log(id, metadatam.id);
@@ -1025,6 +1214,27 @@ export function saveUrl(id) {
     }
   }
   console.log("Save URL %s for page %s", url, id);
+  return url;
+}
+
+//saveAsAPIMap
+export function saveAsUrl(id) {
+  let saveAsDataMap = saveAsdatamap.find(metadatam => {
+    console.log(id, metadatam.id);
+    if (id == metadatam.id) return metadatam;
+  });
+  let url = generateUrl.buildURL(saveAsDataMap.url);
+  if (isMock()) {
+    if (mockDataMapper[id]) {
+      url = mockDataMapper[id];
+    } else {
+      let saveAsDataMap = mocksavmap.find(metadatam => {
+        if (id == metadatam.id) return metadatam;
+      });
+      url = saveAsDataMap.url;
+    }
+  }
+  console.log("SaveAs URL %s for page %s", url, id);
   return url;
 }
 

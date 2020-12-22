@@ -1,6 +1,6 @@
 import * as metaData from '../../app/metadata/metaData';
 import tfScreens from '../../app/metadata/_screen_info';
-import { metaDataApiMap, autoCompleteApiMap, deleteDataApiMap, saveDataApiMap, generateApiMap } from './ApiMap';
+import { metaDataApiMap, autoCompleteApiMap, deleteDataApiMap, saveDataApiMap, generateApiMap, viewPDFApiMap, saveAsAPIMap } from './ApiMap';
 
 export const UI_PAGE = 'page';
 export const UI_COMP = 'comp';
@@ -103,6 +103,13 @@ export const savedatamap = Object.keys(saveDataApiMap).map(pageId => ({
   metadata: metaData[pageId]
 }));
 
+
+export const saveAsdatamap = Object.keys(saveAsAPIMap).map(pageId => ({
+  id: pageId,
+  url: saveAsAPIMap[pageId],
+  metadata: metaData[pageId]
+}));
+
 export const generateDataMap = Object.keys(generateApiMap).map(pageId => ({
   id: pageId,
   url: generateApiMap[pageId],
@@ -113,4 +120,9 @@ export const asyncselfldsmap = Object.keys(autoCompleteApiMap).map(fieldId => ({
   id: fieldId,
   url: autoCompleteApiMap[fieldId],
   param: [{ dataset: '', pattern: '' }]
+}));
+
+export const viewPDFMap = Object.keys(viewPDFApiMap).map(pageId => ({
+  id: pageId,
+  url: viewPDFApiMap[pageId]
 }));

@@ -114,13 +114,30 @@ import {
   GET_ADRRESS_FROM_WORKSITES,
   DELETE_GARN_DED_BENEFITS,
   SAVE_WHATIF_GARNISHMENT,
-  DELETE_WHATIF_GARNISHMENT
+  DELETE_WHATIF_GARNISHMENT,
+  SAVE_ADDRESS_FROM_WORKSITES,
+  SAVE_TAX_LOCATOR,
+  SAVE_AS_TAX_LOCATOR,
+  VIEW_PDF_TAX_LOCATOR,
+  VIEW_PDF_RUN_LOCATOR_SERVICE,
+  SAVE_MANAGE_LOCATIONS,
+  DELETE_TAX_LOCATOR,
+  DELETE_WHATIF_LOCATIONS,
+  GET_GROUP_OVERRIDE,
+  GET_GROUP_OVERRIDES,
+  GROUP_OVERRIDE_AUTHORITY,
+  GROUP_OVERRIDE_FORMULA,
+  VIEW_PDF_GROUP_OVERRIDE,
+  SAVE_GROUP_OVERRIDE,
+  DELETE_GROUP_OVERRIDE
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
   whatifEmp: GET_WHAT_IF_EMPLOYEES,
   whatifTaxes:'/WhatIfService/getWhatIfTaxes',
   whatifGarnishment:'/WhatIfService/getWhatIfEmployeeGarnishments',
+  groupOverride: GET_GROUP_OVERRIDE,
+  groupOverrides: GET_GROUP_OVERRIDES,
   taxLocator: GET_TAX_LOCATOR,
   whatifLocations: WHAT_IF_LOCATIONS,
   runLocatorService: GET_RUN_LOCATOR_SERVICE,
@@ -232,6 +249,12 @@ export const metaDataApiMap = {
   selectSamplePage: GET_SAMPLE_DATE_FIELD_DATA
 };
 
+export const viewPDFApiMap = {
+  taxLocator: VIEW_PDF_TAX_LOCATOR,
+  runLocatorService: VIEW_PDF_RUN_LOCATOR_SERVICE,
+  groupOverride: VIEW_PDF_GROUP_OVERRIDE
+}
+
 export const deleteDataApiMap = {
   customPayments: DELTE_CUSTOM_PAYMENT,
   customTaxCodes: DELETE_CUSTOM_TAX_CODES,
@@ -250,7 +273,10 @@ export const deleteDataApiMap = {
   worksiteCompanies: DELETE_WORKSITES_LOCATIONS,
   wageDetails: DELETE_WAGE_DETAILS,
   whatifDeductionBenefits:DELETE_GARN_DED_BENEFITS,
-  whatifGarnishment:DELETE_WHATIF_GARNISHMENT
+  whatifGarnishment:DELETE_WHATIF_GARNISHMENT,
+  taxLocator: DELETE_TAX_LOCATOR,
+  whatifLocations: DELETE_WHATIF_LOCATIONS,
+  groupOverride: DELETE_GROUP_OVERRIDE
 };
 
 export const saveDataApiMap = {
@@ -274,8 +300,17 @@ export const saveDataApiMap = {
   whatifEmp:SAVE_WHATIF_EMP,
   whatifDeductionBenefits:SAVE_WHAT_IF_DEDUCTION_BENEFITS,
   wageDetails: SAVE_WAGE_DETAILS,
-  whatifGarnishment:SAVE_WHATIF_GARNISHMENT
+  whatifGarnishment:SAVE_WHATIF_GARNISHMENT,
+  wageDetails: SAVE_WAGE_DETAILS,
+  taxLocator: SAVE_TAX_LOCATOR,
+  whatifLocations: SAVE_MANAGE_LOCATIONS,
+  addressFromWorksite: SAVE_ADDRESS_FROM_WORKSITES,
+  groupOverride: SAVE_GROUP_OVERRIDE
 };
+
+export const saveAsAPIMap = {
+  taxLocator: SAVE_AS_TAX_LOCATOR,
+}
 
 export const generateApiMap = {
   maritalStatusReport: GENERATE_MARITAL_REPORT,
@@ -337,5 +372,7 @@ export const autoCompleteApiMap = {
   residentState:'/WhatIfService/getWhatIfUSStates',
   principalStateOfEmp:'/WhatIfService/getWhatIfUSStates',
   remncd:GET_BENEFITS_PLANS,
-  wageCodedesc: WAGE_CODE_DESC
+  wageCodedesc: WAGE_CODE_DESC,
+  authority: GROUP_OVERRIDE_AUTHORITY,
+  formula: GROUP_OVERRIDE_FORMULA,
 };

@@ -10,6 +10,7 @@ import { getUsageData } from "../api/getUsageDataAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
 import mappingToolUsageAPI from "../api/mappingToolUsageAPI";
 import deletegriddataAPI from "../api/deletegriddataAPI";
+import getPdfDataAPI from "../api/getPdfDataAPI";
 import formDataAPI from "../api/formDataAPI";
 import * as gridStyles from "../../base/constants/AppConstants";
 import ButtonBar from "./ButtonBar";
@@ -23,6 +24,7 @@ class CustomGrid extends Component {
       isOpen: false,
       clickedPageId: '',
       modalGridData: [],
+      showSummary: false
     };
 
     this.renderGrid = pgData => {
@@ -51,6 +53,7 @@ class CustomGrid extends Component {
       });
     };
     this.handleRunLocator = this.handleRunLocator.bind(this);
+    this.clickCheckBox = this.clickCheckBox.bind(this);
     this.toggle = this.toggle.bind(this);
     this.getGridPopupData = this.getGridPopupData.bind(this);
   }
@@ -72,6 +75,12 @@ class CustomGrid extends Component {
     });
   }
 
+  clickCheckBox(event) {
+    this.setState({
+      showSummary: event.target.value === "on",
+    })
+  }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -79,9 +88,9 @@ class CustomGrid extends Component {
   }
 
   async getGridPopupData(){
-    const data = await this.props.getDataForChildGrid({ pgid: this.state.clickedPageId });
+    const data = await this.props.getDataForChildGrid({ pgid: this.state.clickedPageId, showSummary: this.state.showSummary });
     this.setState({
-      modalGridData: data[0] ? data[0].locationTaxes : [],
+      modalGridData: data.length === 1 ? data[0].locationTaxes : data,
       isOpen: true,
     })
   }
@@ -133,6 +142,7 @@ class CustomGrid extends Component {
           mapToolUsage={mappingToolUsageAPI}
           className={className}
           getDataForChildGrid={getDataForChildGrid}
+          getPdfDataAPI={getPdfDataAPI}
         />
         {griddef.hasButtonBar && griddef.hasButtonBar == true ? (
           <ButtonBar
@@ -141,6 +151,7 @@ class CustomGrid extends Component {
             pid={pid}
             permissions={permissions}
             tftools={tftools}
+            clickCheckBox={this.clickCheckBox}
             handleRunLocator={this.handleRunLocator}
           />
         ) : null}
@@ -154,6 +165,7 @@ class CustomGrid extends Component {
               <Col className='grid-modal mr-2 ml-2'>
                 {this.state.isOpen ? (
                   <ReusableGrid
+                    parentPageid={pageid}
                     pageid={this.state.clickedPageId}
                     metadata={compMetaData(this.state.clickedPageId)}
                     permissions={permissions}
@@ -174,6 +186,8 @@ class CustomGrid extends Component {
                     styles={gridStyles}
                     mapToolUsage={mappingToolUsageAPI}
                     className={className}
+                    hideModal={this.toggle}
+                    getPdfDataAPI={getPdfDataAPI}
                   />
                 ) : null}
               </Col>
