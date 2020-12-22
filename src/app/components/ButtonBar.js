@@ -71,24 +71,44 @@ class ButtonBar extends Component {
         </UncontrolledTooltip>
       </div>
     );
+    let findRedundantOverrides = (
+      <div>
+        <a href="#" id="findRedundantOverrides" onClick={() => this.props.handleRunLocator("findRedundantOverrides")}>
+          <i class="fas fa-address-book fa-lg fa-2x"></i>
+        </a>
+        <UncontrolledTooltip placement="right" target="findRedundantOverrides">
+          <span>Find Redundant Overrides</span>
+        </UncontrolledTooltip>
+      </div>
+    );
     if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionsBenefit' && this.props.pageid==='taxLocator'){ 
       //whatifEmp && whatifDeductionsBenefit && taxLocator
       taxLocator=null;
       calculateTaxes=null;
       runLocatorService=null;
       addressFromWorksite=null;
+      findRedundantOverrides=null;
     }else if(this.props.pageid==='whatifTaxes'){ //whatifTaxes
       runLocatorService=null;
       addressFromWorksite=null;
       deleteAll=null;
+      findRedundantOverrides=null;
     }else if(this.props.pageid==='whatifGarnishment'){ //whatifEmpGarnishment
       taxLocator=null;
       runLocatorService=null;
       addressFromWorksite=null;
+      findRedundantOverrides=null;
     }else if(this.props.pageid==='whatifLocations'){ //taxLocatorLocation
       taxLocator=null;
       calculateTaxes=null;
       deleteAll = null
+      findRedundantOverrides=null;
+    }else if(this.props.pageid==='addressOverrides'){ //addressOverrides
+      taxLocator=null;
+      calculateTaxes=null;
+      runLocatorService=null;
+      addressFromWorksite=null;
+      deleteAll=null;
     }
     return (
       <Row className="justify-content-around bg-light" style={{ paddingTop: "3px",paddingBottom:'2px',marginTop:'30px',borderRadius:'0.25rem'}}>
@@ -98,6 +118,7 @@ class ButtonBar extends Component {
         {runLocatorService}
         {addressFromWorksite}
         {deleteAll}
+        {findRedundantOverrides}
       </Row>
     );
   }

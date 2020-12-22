@@ -392,9 +392,45 @@ export function buildGridDataInput(pageid, store) {
     input= whatIfGarnishmentsGridInput(pageid,filterData,stDate,enDate);
   }else if(pageid==='whatifDeductionBenefits'){
     input= deductionBenefitsGridInput(pageid,filterData,stDate,enDate);
+  }else if(pageid==='paymentOverrides'){
+    input= paymentOverridesGridInput(pageid,filterData,stDate,enDate);
+  }else if(pageid==='paymentOverride'){
+    input= paymentOverrideGridInput(pageid,filterData,stDate,enDate,state);
   }else{
     input = buildGridInputForPage(pageid,filterData,stDate,enDate);
   }
+  return input;
+}
+/**
+ * paymentOverridesGridInput
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ */
+function paymentOverridesGridInput(pageid,filterData,stDate,enDate){
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+  };
+  return input;
+}
+/**
+ * paymentOverrideGridInput
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ */
+function paymentOverrideGridInput(pageid,filterData,stDate,enDate,state){
+  console.log(state);
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    groupCode:filterData.id ? filterData.id :state.formFilterData.groupCode   
+  };
   return input;
 }
 export function buildMaritalStatusInput(pageid, store,formdata) {
@@ -562,7 +598,8 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    pattern: patten
+    pattern: patten,
+    startdate:"12/16/2020",
   };
 
   // return Object.assign(input, formValues);
@@ -655,9 +692,78 @@ export function buildwhatifLocationsDelete(pageid,formdata,editMode, state) {
  * @param {*} editMode 
  * @param {*} state 
  */
-function buildWhatifGarnishmentDelete(pageid,formdata,editMode, state) {
+function buildWhatifGarnishmentDelete(pageid, formdata, editMode, state) {
+  let input = {
+    btxtgrn: {
+      id: {
+        dataset: appDataset(),
+        regpen: "R",
+        empcode: formdata.empcode,
+        chkdt: moment(formdata.chkdt).format("MM/DD/YYYY"),
+        usrauth: formdata.usrauth,
+        usrtxtyp: formdata.usrtxtyp,
+        gform: formdata.gform,
+        caseid: formdata.caseid,
+        docket: formdata.docket,
+      },
+    },
+  };
+  return input;
 }
-
+/**
+ * buildWhatifEmpDelete
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildWhatifEmpDelete(pageid, formdata, editMode, state) {
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    empCode: formdata.empCode,
+    checkDate: moment(formdata.checkDate).format("MM/DD/YYYY"),
+    regPen: "R",
+  };
+  return input;
+}
+/**
+ * buildPaymentOverrideDelete
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildPaymentOverrideDelete(pageid, formdata, editMode, state) {
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId:appUserId(),
+    code:state.formFilterData.id,
+    authority:formdata.authTaxCode,
+    taxCode:formdata.authTaxCode.substring(3, 11),
+    taxType:formdata.taxType,
+    payCode:formdata.planId,
+    startDate:moment(formdata.startDate).format("MM/DD/YYYY")
+  }
+  return input;
+}
+/**
+ * buildAddressOverridesDelete
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildAddressOverridesDelete(pageid, formdata, editMode, state) {
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    bsiseqn: formdata.bsiseqn,
+  };
+  return input;
+}
 /**
  * buildWhatifDeductionBenefitsDelete
  * @param {*} pageid 
@@ -696,6 +802,12 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildWhatifGarnishmentDelete(pageid,formdata,mode, state);
   }else if(pageid==="whatifLocations"){
     return buildwhatifLocationsDelete(pageid,formdata,mode, state);
+  }else if(pageid==='whatifEmp'){
+    return buildWhatifEmpDelete(pageid,formdata,mode, state);
+  }else if(pageid==='paymentOverride'){
+    return buildPaymentOverrideDelete(pageid,formdata,mode, state);
+  }else if(pageid==='addressOverrides'){
+    return buildAddressOverridesDelete(pageid,formdata,mode, state);
   }else{
     console.log("formdata");
     console.log(formdata);
@@ -759,49 +871,49 @@ function buildWhatifEmpSaveInput(pageid,formdata,editMode){
   }else if(editMode==2){
     editRec= "true"
   }
-  let input= {
-    pageId:pageid,      
-    dataset:appDataset() ,
-    userId: appUserId(),    
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
     empCode: formdata.empCode,
-    checkDate: formdata.checkDate,
+    checkDate: moment(formdata.checkDate).format("MM/DD/YYYY"),
     empName: formdata.empName,
     regPen: "R",
     empGroup: formdata.empGroup,
     companyCode: formdata.companyCode,
     paymentType: formdata.paymentType,
-    payFreq:formdata.payFreq,
-    vacHours: formdata.vacHours,
-    prorationFreq: formdata.prorationFreq,  
-    ytdPayPeriod: formdata.ytdPayPeriod,
-    payPeriodHours: formdata.payPeriodHours,
-    grossUpInd: formdata.grossUpInd,
-    netWages: formdata.netWages,
-    estAnnualGrossAmt: formdata.estAnnualGrossAmt,
-    reciprocalCode:formdata.reciprocalCode,
+    payFreq: formdata.payFreq || 0,
+    vacHours: formdata.vacHours || 0.0,
+    prorationFreq: formdata.prorationFreq || 0,
+    ytdPayPeriod: formdata.ytdPayPeriod || 0,
+    payPeriodHours: formdata.payPeriodHours || 0.0,
+    grossUpInd: formdata.grossUpInd || 0,
+    netWages: formdata.netWages || 0.0,
+    estAnnualGrossAmt: formdata.estAnnualGrossAmt || 0.0,
+    reciprocalCode: formdata.reciprocalCode,
     residentState: formdata.residentState,
-    grossWages: formdata.grossWages,
-    avgWkGross: formdata.avgWkGross,
+    grossWages: formdata.grossWages || 0.00,
+    avgWkGross: formdata.avgWkGross || 0.00,
     garnishment: formdata.garnishment,
-    garnishmentGroup:formdata.garnishmentGroup,
+    garnishmentGroup: formdata.garnishmentGroup,
     principalStateOfEmp: formdata.principalStateOfEmp,
     calcType: formdata.calcType,
     wageProcCode: formdata.wageProcCode,
-    estSpousalIncome:formdata.estSpousalIncome,
+    estSpousalIncome: formdata.estSpousalIncome || 0.00,
     empType: formdata.empType,
-    emplType:formdata.emplType,
+    emplType: formdata.emplType,
     birthDate: formdata.birthDate,
-    dateofDeath:formdata.dateofDeath,
-    calculatedLocalTaxIn:formdata.calculatedLocalTaxIn,
+    dateofDeath: formdata.dateofDeath,
+    calculatedLocalTaxIn: formdata.calculatedLocalTaxIn,
     statEEInd: formdata.statEEInd,
     foreignEarnedIncome: formdata.foreignEarnedIncome,
     exemptMilitaryLocation: formdata.exemptMilitaryLocation,
-    editRec:editRec,
-    contribAlloc:formdata.contribAlloc,
-    terminationDate:getTerminationDate(formdata),
+    editRec: editRec,
+    contribAlloc: formdata.contribAlloc,
+    terminationDate: getTerminationDate(formdata),
     formulaEffectiveDateYYYYMMDD: formdata.formulaEffectiveDateYYYYMMDD,
-    taxN:formdata.taxN
-  }
+    taxN: formdata.taxN,
+  };
   return input;
 }
 /**
@@ -880,8 +992,206 @@ function buildWhatifWageSaveInput(pageid,formdata,editMode, state) {
  * @param {*} editMode 
  * @param {*} state 
  */
-function buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode, state){
-
+function buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state) {
+  let editRec = "false";
+  if (editMode == 1) {
+    editRec = "false";
+  } else if (editMode == 2) {
+    editRec = "true";
+  }
+  let input = {
+    btxtgrn: {
+      id: {
+        dataset: appDataset(),
+        regpen: "R",
+        empcode: formdata.empcode,
+        chkdt: moment(formdata.chkdt).format("MM/DD/YYYY"),
+        usrauth: formdata.usrauth,
+        usrtxtyp: formdata.usrtxtyp,
+        gform: formdata.gform,
+        caseid: formdata.caseid,
+        docket: formdata.docket,
+      },
+      mtdwage: formdata.mtdwage,
+      annsal: formdata.annsal,
+      ordamt: formdata.ordamt,
+      dispern: formdata.dispern,
+      exmptamt: formdata.exmptamt,
+      addexamt: formdata.addexamt,
+      prioramt: formdata.prioramt,
+      mtddispe: formdata.mtddispe,
+      ytddispe: formdata.ytddispe,
+      mtdgarn: formdata.mtdgarn,
+      ytdgarn: formdata.ytdgarn,
+      qtdgarn: formdata.qtdgarn,
+      pptdgarn: formdata.pptdgarn,
+      garncap: formdata.garncap,
+      garnexem: formdata.garnexem,
+      calcamnt: formdata.calcamnt,
+      drsvd0: formdata.drsvd0,
+      drsvd1:formdata.drsvd1,
+      hrsvd0: formdata.hrsvd0,
+      pctwthd: formdata.pctwthd,
+      ordpctg: formdata.ordpctg,
+      thd: formdata.thd,
+      ohi: formdata.ohi,
+      priovrd: formdata.priovrd,
+      gstats: formdata.gstats,
+      fstats: formdata.fstats,
+      nexem: formdata.nexem,
+      addded: formdata.addded,
+      family2: formdata.family2,
+      familyh: formdata.familyh,
+      ndeps: formdata.ndeps,
+      ndepchld: formdata.ndepchld,
+      vocation: formdata.vocation,
+      delinq: formdata.delinq,
+      gduratn: formdata.gduratn,
+      consent: formdata.consent,
+      typedebt: formdata.typedebt,
+      pymtnmbr: formdata.pymtnmbr,
+      ordamtflg: formdata.ordamtflg,
+      rndind: formdata.rndind,
+      usefedlmt: formdata.usefedlmt,
+      lumpsum: formdata.lumpsum,
+      nperdspmt: formdata.nperdspmt,
+      grnlmtind: formdata.grnlmtind,
+      hassoe: formdata.hassoe,
+      useAlternateLimit: formdata.useAlternateLimit,
+      firstPayCode: formdata.firstPayCode,
+      taxtype: formdata.taxtype,
+      grcvddt: moment(formdata.grcvddt).format("MM/DD/YYYY"),
+      gstrtdt: moment(formdata.gstrtdt).format("MM/DD/YYYY"),
+      genddt: moment(formdata.genddt).format("MM/DD/YYYY"),
+      remainderOfDisposable: formdata.remainderOfDisposable,
+      taxLeftOver: formdata.taxLeftOver,
+      garnGross: formdata.garnGross,
+      reducingD:formdata.reducingD,
+      lHourlyMin: formdata.lHourlyMin,
+      lprotHours: formdata.lprotHours,
+      garnType: formdata.garnType,
+      useSoIssue: formdata.useSoIssue,
+    },
+    empName: null,
+    authorityName: formdata.authorityName,
+    garnishmentName: formdata.garnishmentName,
+    formulaTitle: formdata.formulaTitle,
+    fstats: formdata.fstats,
+    editMode: editMode,
+    calculatedAmount: formdata.calculatedAmount,
+  };
+  return input;
+}
+/**
+ * buildPaymentOverrideSaveInput
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildPaymentOverrideSaveInput(pageid,formdata,editMode,state){
+  let editRec = "false";
+  if (editMode == 1) {
+    editRec = "false";
+  } else if (editMode == 2) {
+    editRec = "true";
+  }
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    code: formdata.groupCode,
+    authority: formdata.authTaxCode,
+    taxCode: formdata.authTaxCode.substring(3, 11),
+    taxType: formdata.taxType,
+    payCode: formdata.planId,
+    type: formdata.payType,
+    startDate: moment(formdata.startDate).format("MM/DD/YYYY"),
+    endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
+    ee_Max: formdata.eeMaxAmount,
+    editMode: editMode,
+  };
+  let formValues = {};
+  if (formdata.payType && formdata.payType === "E") {
+    formValues = {
+      ee_Max: formdata.eeMaxAmount,
+      taxability: formdata.taxability,
+      aggStatus: formdata.aggStatus
+    };
+  } else {
+    formValues = {
+      ee_Max: formdata.eeMaxAmount,
+      er_Max: formdata.eeMaxAmount,
+      aggStatus: formdata.aggStatus,
+      taxability: formdata.taxability,
+      er_taxability: formdata.erTaxability,
+      useEEMax: formdata.useEEMax,
+      useERMax: formdata.useERMax,
+    };
+  }
+  return Object.assign(input, formValues);
+}
+/**
+ * buildAddressOverridesSaveInput
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildAddressOverridesSaveInput(pageid,formdata,editMode,state){
+  let editRec = "false";
+  if (editMode == 1) {
+    editRec = "false";
+  } else if (editMode == 2) {
+    editRec = "true";
+  }
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    streetName:formdata.fname,
+    state:formdata.state,
+    countyName:formdata.countyName,
+    placeCode:formdata.placeCode,
+    sdName:formdata.sdName,
+    postDirection:formdata.fpost,  
+    startNumber:formdata.fadd, 
+    endNumber:formdata.tadd,     
+    snt:formdata.snt,
+    secUnit:formdata.sunit,
+    placesCode:formdata.placeCode,
+    parity:formdata.parity,
+    addChangeDate:moment().format("YYYYMMDD"),
+    streetType:formdata.ftype,
+    preDirection:formdata.fpre,
+    showMessage:formdata.showmsg,
+    sdCountyName:"FAIRFIELD",
+    taxCode:"BSI00391899",
+    county:"175",
+    placeName:"WYANDOT",
+    classCode:formdata.classCode,
+    postalCode:formdata.fzip,
+    placeCodeAutoCompl:"U6 | 86716 | WYANDOT",
+    classesCode:formdata.classCode,
+    placesName:"",
+    schoolDistrictAutoCompl:"AMANDA-CLEARCREEK LSD | BSI00391899 | FAIRFIELD",
+    sdCode:"",
+    schooldistrictCode:"",
+    schooldistrictName:"",
+    schooldistrictCounty:"",
+    editMode:editMode
+  };
+  let formValues = {};
+  if (editMode==1) {
+    formValues = {
+      bsiseqn:"3",
+    };
+  } else {
+    formValues = {
+      bsiseqn:formdata.bsiseqn
+    };
+  }
+  return Object.assign(input, formValues);
 }
 
 
@@ -979,7 +1289,11 @@ export function buildSaveInputForPage(pageid,formdata,editMode, state){
   }else if(pageid==='whatifGarnishment'){
     return buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state);
   }
-    else{
+  else if(pageid==='paymentOverride'){
+    return buildPaymentOverrideSaveInput(pageid,formdata,editMode,state);
+  }else if(pageid==='addressOverrides'){
+    return buildAddressOverridesSaveInput(pageid,formdata,editMode,state);
+  }else{
     return buildOtherSaveInput(pageid,formdata,editMode);
   }
 }

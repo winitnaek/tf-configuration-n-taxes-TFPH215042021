@@ -28,7 +28,54 @@ export function authCodeauthNamerenderer(ndex,
 	column,
 	rowdata
 ) {
-	return rowdata.authorityCode +'-' + rowdata.authorityName;
+	if(rowdata.authorityCode && rowdata.authorityName){
+		return rowdata.authorityCode +'-' + rowdata.authorityName;
+	}else if(rowdata.authTaxCode && rowdata.authName){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.authTaxCode + '-' + rowdata.authName}</div>`;
+	}
+}
+export function planIdNamerenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	if(rowdata.authTaxCode && rowdata.authName){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.planId + '-' + rowdata.planName}</div>`;
+	}
+}
+export function payTypeNamerenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	if(rowdata.payType==='E'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${'Earning'}</div>`;
+	}else if(rowdata.payType==='C'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${'Credit'}</div>`;
+	}
+}
+export function aggStatusNamerenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	if(rowdata.aggStatus==='Y' && rowdata.payType==='C'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${'Aggregate to Highest Maximum'}</div>`;
+	}else if(rowdata.aggStatus==='L' && rowdata.payType==='C'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${'Credit'}</div>`;
+	}else if(rowdata.aggStatus==='N' && rowdata.payType==='C'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${'Do Not Aggregate Plans'}</div>`;
+	}else if(rowdata.aggStatus==='X' && rowdata.payType==='C'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${'Use Authority Default Aggregation Rule'}</div>`;
+	}else{
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${'N/A'}</div>`;
+	}
 }
 export function formulaNamerenderer(ndex,
 	datafield,
@@ -55,7 +102,11 @@ export function taxTypeCodeNamerenderer(ndex,
 	column,
 	rowdata
 ) {
-	return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.taxType + '-' + rowdata.taxTypeName}</div>`;
+	if(rowdata.taxType && rowdata.taxTypeName){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.taxType + '-' + rowdata.taxTypeName}</div>`;
+	}else if(rowdata.taxType && rowdata.taxName){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.taxType + '-' + rowdata.taxName}</div>`;
+	}
 }
 export function courtesyRenderer(
   ndex,
@@ -98,4 +149,23 @@ export function editCellsRenderer(
 
 export const getRowIndex = () => {
 	return row;
+}
+export function addressOverrideStreetNameRenderer(ndex, datafield, value, defaultvalue, column,rowdata) {
+	//N 100 PEACHTREE ROAD AVE N
+	return rowdata.fpre+' '+rowdata.fname+' '+rowdata.ftype+' '+rowdata.fpost;
+}
+export function parityNameRenderer(ndex, datafield, value, defaultvalue, column,rowdata) {
+	if(rowdata.parity==='B'){
+		return 'BOTH'
+	}else if(rowdata.parity==='O'){
+		return 'ODD'
+	}else if(rowdata.parity==='E'){
+		return 'EVEN'
+	}
+}
+export function placeCodeNameRenderer(ndex, datafield, value, defaultvalue, column,rowdata) {
+	return rowdata.classCode+' - '+rowdata.placeName;
+}
+export function schoolDistrictNameRenderer(ndex, datafield, value, defaultvalue, column,rowdata) {
+	return rowdata.sdCounty+'| '+rowdata.sdName;
 }
