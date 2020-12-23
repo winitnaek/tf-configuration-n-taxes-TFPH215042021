@@ -12,7 +12,9 @@ import {
 import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
-import { generateUrl } from "bsiuilib";
+import {
+  generateUrl
+} from "bsiuilib";
 import * as CellsRenderer from "../../app/metadata/cellsrenderer";
 import store from "../../tf_index";
 /**
@@ -74,7 +76,9 @@ export const cellbeginedit = (row, datafield) => {
  */
 export function compMetaData(pageid, key) {
   if (key !== undefined && metaData[pageid] instanceof Array && metaData[pageid][key]) {
-    const { formFilterData } = store.getState();
+    const {
+      formFilterData
+    } = store.getState();
     const metaDataCopy = JSON.parse(JSON.stringify(metaData[pageid][key])); // Copy medata
     let gridMetaData = checkForStaticRender(metaDataCopy);
     // for first table to have back button to parent we check for key === 0
@@ -254,7 +258,7 @@ export function format(fmt, ...args) {
  * @param {*} stDate 
  * @param {*} enDate 
  */
-export function buildGridInputForPage(pageid,filterData,stDate,enDate){
+export function buildGridInputForPage(pageid, filterData, stDate, enDate) {
   let input = {
     pageId: pageid,
     dataset: appDataset(),
@@ -323,15 +327,15 @@ function deductionBenefitsGridInput(pageid, filterData, stDate, enDate) {
  * @param {*} enDate 
  */
 function whatIfGarnishmentsGridInput(pageid, filterData, stDate, enDate) {
-  let empCode  = filterData.empCode ? filterData.empCode:filterData.empcode;
-  let checkDate= filterData.checkDate ? filterData.checkDate:filterData.chkdt;
+  let empCode = filterData.empCode ? filterData.empCode : filterData.empcode;
+  let checkDate = filterData.checkDate ? filterData.checkDate : filterData.chkdt;
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    empCode: empCode ,
-    checkDate:checkDate,
-    empName:filterData.empName,
+    empCode: empCode,
+    checkDate: checkDate,
+    empName: filterData.empName,
     regPen: "R",
   };
   return input;
@@ -344,15 +348,15 @@ function whatIfGarnishmentsGridInput(pageid, filterData, stDate, enDate) {
  * @param {*} enDate 
  */
 function whatifTaxesGridInput(pageid, filterData, stDate, enDate) {
-  let empCode  = filterData.empCode ? filterData.empCode:filterData.empcode;
-  let checkDate= filterData.checkDate ? filterData.checkDate:filterData.chkdt;
+  let empCode = filterData.empCode ? filterData.empCode : filterData.empcode;
+  let checkDate = filterData.checkDate ? filterData.checkDate : filterData.chkdt;
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    empCode: empCode ,
-    checkDate:checkDate,
-    empName:filterData.empName,
+    empCode: empCode,
+    checkDate: checkDate,
+    empName: filterData.empName,
     regPen: "R",
   };
   return input;
@@ -384,20 +388,22 @@ export function buildGridDataInput(pageid, store) {
   let stDate = getStartDate(filterData);
   let enDate = getEndDate(filterData);
   let input;
-  if(pageid==='whatifEmp'){
-    input= whatIfEmployeeGridInput(pageid,filterData,stDate,enDate);
-  }else if(pageid==='whatifTaxes'){
-    input= whatifTaxesGridInput(pageid,filterData,stDate,enDate);
-  }else if(pageid==='whatifGarnishment'){
-    input= whatIfGarnishmentsGridInput(pageid,filterData,stDate,enDate);
-  }else if(pageid==='whatifDeductionBenefits'){
-    input= deductionBenefitsGridInput(pageid,filterData,stDate,enDate);
-  }else if(pageid==='paymentOverrides'){
-    input= paymentOverridesGridInput(pageid,filterData,stDate,enDate);
-  }else if(pageid==='paymentOverride'){
-    input= paymentOverrideGridInput(pageid,filterData,stDate,enDate,state);
-  }else{
-    input = buildGridInputForPage(pageid,filterData,stDate,enDate);
+  if (pageid === 'whatifEmp') {
+    input = whatIfEmployeeGridInput(pageid, filterData, stDate, enDate);
+  } else if (pageid === 'whatifTaxes') {
+    input = whatifTaxesGridInput(pageid, filterData, stDate, enDate);
+  } else if (pageid === 'whatifGarnishment') {
+    input = whatIfGarnishmentsGridInput(pageid, filterData, stDate, enDate);
+  } else if (pageid === 'whatifDeductionBenefits') {
+    input = deductionBenefitsGridInput(pageid, filterData, stDate, enDate);
+  } else if (pageid === 'paymentOverrides') {
+    input = paymentOverridesGridInput(pageid, filterData, stDate, enDate);
+  } else if (pageid === 'paymentOverride') {
+    input = paymentOverrideGridInput(pageid, filterData, stDate, enDate, state);
+  } else if (pageid === 'unemploymentCompanyOverrides') {
+    input = unemploymentCompanyOverridesGridInput(pageid, filterData, stDate, enDate, state);
+  } else {
+    input = buildGridInputForPage(pageid, filterData, stDate, enDate);
   }
   return input;
 }
@@ -408,7 +414,7 @@ export function buildGridDataInput(pageid, store) {
  * @param {*} stDate 
  * @param {*} enDate 
  */
-function paymentOverridesGridInput(pageid,filterData,stDate,enDate){
+function paymentOverridesGridInput(pageid, filterData, stDate, enDate) {
   let input = {
     pageId: pageid,
     dataset: appDataset(),
@@ -423,17 +429,35 @@ function paymentOverridesGridInput(pageid,filterData,stDate,enDate){
  * @param {*} stDate 
  * @param {*} enDate 
  */
-function paymentOverrideGridInput(pageid,filterData,stDate,enDate,state){
+function paymentOverrideGridInput(pageid, filterData, stDate, enDate, state) {
   console.log(state);
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    groupCode:filterData.id ? filterData.id :state.formFilterData.groupCode   
+    groupCode: filterData.id ? filterData.id : state.formFilterData.groupCode
   };
   return input;
 }
-export function buildMaritalStatusInput(pageid, store,formdata) {
+/**
+ * unemploymentCompanyOverridesGridInput
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ * @param {*} state 
+ */
+function unemploymentCompanyOverridesGridInput(pageid, filterData, stDate, enDate, state) {
+  console.log(state);
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    companyCode: filterData.company
+  };
+  return input;
+}
+export function buildMaritalStatusInput(pageid, store, formdata) {
   let state = store.getState();
   console.log(formdata);
   let input = {
@@ -599,9 +623,23 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
     dataset: appDataset(),
     userId: appUserId(),
     pattern: patten,
-    startdate:"12/16/2020",
+   
   };
-
+  let additionalFields ={}
+  if(pageid==='taxTypeUnemp' && formValues){
+    additionalFields = {
+      startdate: moment().format("MM/DD/YYYY"),
+      authCode: formValues['taxCode'].taxCode.substring(3, 11)
+    }
+    return Object.assign(input, additionalFields);
+  }else if(pageid==='formulaUnemp' && formValues){
+    additionalFields = {
+      startdate: moment().format("MM/DD/YYYY"),
+      authCode: formValues['taxCode'].taxCode.substring(3, 11),
+      taxType:formValues['taxTypeUnemp'].id
+    }
+    return Object.assign(input, additionalFields);
+  }
   // return Object.assign(input, formValues);
   return input;
 }
@@ -657,27 +695,31 @@ export function getUsageDataCode(formdata) {
   }
 }
 
-export function buildWhatifWagDeleteInput(pageid,formdata,editMode, state) {
-  const { formFilterData } = state;
+export function buildWhatifWagDeleteInput(pageid, formdata, editMode, state) {
+  const {
+    formFilterData
+  } = state;
   return {
-    btxtwge : {
-      id : {
-        dataset : appDataset(),
-        regpen : formFilterData.regPen,
-        empcode : formFilterData.empCode,
-        chkdt : formFilterData.checkDate,
-        taxn : formFilterData.taxN
+    btxtwge: {
+      id: {
+        dataset: appDataset(),
+        regpen: formFilterData.regPen,
+        empcode: formFilterData.empCode,
+        chkdt: formFilterData.checkDate,
+        taxn: formFilterData.taxN
       }
-    }, 
-    bwapay : {
-      name : formdata.wageCodedesc
+    },
+    bwapay: {
+      name: formdata.wageCodedesc
     }
-   
+
   }
 }
 
-export function buildwhatifLocationsDelete(pageid,formdata,editMode, state) {
-  const { formFilterData } = state;
+export function buildwhatifLocationsDelete(pageid, formdata, editMode, state) {
+  const {
+    formFilterData
+  } = state;
   return {
     dataset: appDataset(),
     employee: formFilterData.employeeCode,
@@ -738,13 +780,13 @@ function buildPaymentOverrideDelete(pageid, formdata, editMode, state) {
   let input = {
     pageId: pageid,
     dataset: appDataset(),
-    userId:appUserId(),
-    code:state.formFilterData.id,
-    authority:formdata.authTaxCode,
-    taxCode:formdata.authTaxCode.substring(3, 11),
-    taxType:formdata.taxType,
-    payCode:formdata.planId,
-    startDate:moment(formdata.startDate).format("MM/DD/YYYY")
+    userId: appUserId(),
+    code: state.formFilterData.id,
+    authority: formdata.authTaxCode,
+    taxCode: formdata.authTaxCode.substring(3, 11),
+    taxType: formdata.taxType,
+    payCode: formdata.planId,
+    startDate: moment(formdata.startDate).format("MM/DD/YYYY")
   }
   return input;
 }
@@ -761,6 +803,26 @@ function buildAddressOverridesDelete(pageid, formdata, editMode, state) {
     dataset: appDataset(),
     userId: appUserId(),
     bsiseqn: formdata.bsiseqn,
+  };
+  return input;
+}
+/**
+ * buildEmploymentCompanyOverridesDelete
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildEmploymentCompanyOverridesDelete(pageid, formdata, editMode, state) {
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    code: formdata.company,
+    startDate: formdata.startDate,
+    taxCode: formdata.taxCode,
+    taxType: formdata.taxType,
+    formula: formdata.formula
   };
   return input;
 }
@@ -794,24 +856,28 @@ function buildWhatifDeductionBenefitsDelete(pageid, formdata, editMode, state) {
 }
 export function buildDeleteInput(pageid, store, formdata, mode) {
   let state = store.getState();
-  if(pageid === "wageDetails") {
-    return buildWhatifWagDeleteInput(pageid,formdata,mode, state);
-  }else if(pageid==="whatifDeductionBenefits"){
-    return buildWhatifDeductionBenefitsDelete(pageid,formdata,mode, state);
-  }else if(pageid==='whatifGarnishment'){
-    return buildWhatifGarnishmentDelete(pageid,formdata,mode, state);
-  }else if(pageid==="whatifLocations"){
-    return buildwhatifLocationsDelete(pageid,formdata,mode, state);
-  }else if(pageid==='whatifEmp'){
-    return buildWhatifEmpDelete(pageid,formdata,mode, state);
-  }else if(pageid==='paymentOverride'){
-    return buildPaymentOverrideDelete(pageid,formdata,mode, state);
-  }else if(pageid==='addressOverrides'){
-    return buildAddressOverridesDelete(pageid,formdata,mode, state);
-  }else{
+  if (pageid === "wageDetails") {
+    return buildWhatifWagDeleteInput(pageid, formdata, mode, state);
+  } else if (pageid === "whatifDeductionBenefits") {
+    return buildWhatifDeductionBenefitsDelete(pageid, formdata, mode, state);
+  } else if (pageid === 'whatifGarnishment') {
+    return buildWhatifGarnishmentDelete(pageid, formdata, mode, state);
+  } else if (pageid === "whatifLocations") {
+    return buildwhatifLocationsDelete(pageid, formdata, mode, state);
+  } else if (pageid === 'whatifEmp') {
+    return buildWhatifEmpDelete(pageid, formdata, mode, state);
+  } else if (pageid === 'paymentOverride') {
+    return buildPaymentOverrideDelete(pageid, formdata, mode, state);
+  } else if (pageid === 'addressOverrides') {
+    return buildAddressOverridesDelete(pageid, formdata, mode, state);
+  } else if (pageid === 'unemploymentCompanyOverrides') {
+    return buildEmploymentCompanyOverridesDelete(pageid, formdata, mode, state);
+  } else {
     console.log("formdata");
     console.log(formdata);
-    const { formFilterData } = state;
+    const {
+      formFilterData
+    } = state;
     let input = {
       pageId: pageid,
       dataset: appDataset(),
@@ -848,13 +914,13 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
 export function buildPdfInput(pageid, store, formdata, mode) {
   const state = store.getState();
   const filterData = state.formFilterData;
-//   return  { "dataset": "DEFAULT",
-//   "employee": "PA",
-//   "checkdate": "12/06/2016",
-//   "userId": "TF11",
-//   "showSummary": "true"
-        
-// }
+  //   return  { "dataset": "DEFAULT",
+  //   "employee": "PA",
+  //   "checkdate": "12/06/2016",
+  //   "userId": "TF11",
+  //   "showSummary": "true"
+
+  // }
   return {
     "dataset": appDataset(),
     "employee": filterData.employeeCode,
@@ -862,14 +928,15 @@ export function buildPdfInput(pageid, store, formdata, mode) {
     "userId": appUserId(),
     "showSummary": "true"
   }
-  
+
 }
-function buildWhatifEmpSaveInput(pageid,formdata,editMode){
+
+function buildWhatifEmpSaveInput(pageid, formdata, editMode) {
   let editRec = "false";
-  if(editMode==1){
-    editRec= "false"
-  }else if(editMode==2){
-    editRec= "true"
+  if (editMode == 1) {
+    editRec = "false"
+  } else if (editMode == 2) {
+    editRec = "true"
   }
   let input = {
     pageId: pageid,
@@ -922,7 +989,7 @@ function buildWhatifEmpSaveInput(pageid,formdata,editMode){
  * @param {*} formdata 
  * @param {*} editMode 
  */
-function buildWhatifDeductionBenefitsSaveInput(pageid, formdata, editMode,state) {
+function buildWhatifDeductionBenefitsSaveInput(pageid, formdata, editMode, state) {
   let editRec = "false";
   if (editMode == 1) {
     editRec = "false";
@@ -941,47 +1008,48 @@ function buildWhatifDeductionBenefitsSaveInput(pageid, formdata, editMode,state)
       gform: editMode == 2 ? formdata.gform : formstate.gform,
       caseid: editMode == 2 ? formdata.caseid : formstate.caseid,
       docket: editMode == 2 ? formdata.docket : formstate.docket,
-      wseqn: editMode == 2 ? formdata.wseqn : 1//formstate.wseqn,
+      wseqn: editMode == 2 ? formdata.wseqn : 1 //formstate.wseqn,
     },
     editMode: editMode,
     amount: formdata.wamount,
     remncd: formdata.remncd,
-    garnwagepriority: 1//formdata.gwPriority, Update when static select fixed in library.
+    garnwagepriority: 1 //formdata.gwPriority, Update when static select fixed in library.
   };
   return input;
 }
-function buildWhatifWageSaveInput(pageid,formdata,editMode, state) {
+
+function buildWhatifWageSaveInput(pageid, formdata, editMode, state) {
   const filterFormData = state.formFilterData;
- 
+
   return {
-    btxtwge : {
-      id : {
-        dataset : appDataset(),
-        regpen : filterFormData.regPen,
-        empcode : filterFormData.empCode,
-        chkdt : filterFormData.checkDate,
-        taxn : filterFormData.taxN
+    btxtwge: {
+      id: {
+        dataset: appDataset(),
+        regpen: filterFormData.regPen,
+        empcode: filterFormData.empCode,
+        chkdt: filterFormData.checkDate,
+        taxn: filterFormData.taxN
       },
-     curern: formdata.currentEarning || 0.00,
-     curcnt : formdata.currentContribution || 0.00,
-     curcrdt : formdata.currentCredit || null,
-     curmch : formdata.currentMatch || 0.00,
-     mtdcnt : formdata.mtdcnt || 0.00,
-     mtdmch : formdata.mtdmch || 0.00,
-     qtdcnt : formdata.qtdcnt || 0.00,
-     qtdmch : formdata.qtdmch || 0.00,
-     ytdcnt : formdata.ytdcnt || 0.00,
-     ytdmch : formdata.ytdmch || 0.00,
-     eelim : formdata.eelim || 0.00,
-     erlim : formdata.erlim || 0.00,
-     eeind : formdata.employeeIndicator || 0,
-     erind : formdata.employerIndicator || 0,
-     catchupEI : formdata.catchupEI || 0,
-     remncd : formdata.wageCodedesc.split(' - ')[formdata.wageCodedesc.split(' - ').length-1],
-     initdt : moment(formdata.initiationDate).format("MM/DD/YYYY")
-    }, 
-    bwapay : {
-      name : formdata.wageCodedesc
+      curern: formdata.currentEarning || 0.00,
+      curcnt: formdata.currentContribution || 0.00,
+      curcrdt: formdata.currentCredit || null,
+      curmch: formdata.currentMatch || 0.00,
+      mtdcnt: formdata.mtdcnt || 0.00,
+      mtdmch: formdata.mtdmch || 0.00,
+      qtdcnt: formdata.qtdcnt || 0.00,
+      qtdmch: formdata.qtdmch || 0.00,
+      ytdcnt: formdata.ytdcnt || 0.00,
+      ytdmch: formdata.ytdmch || 0.00,
+      eelim: formdata.eelim || 0.00,
+      erlim: formdata.erlim || 0.00,
+      eeind: formdata.employeeIndicator || 0,
+      erind: formdata.employerIndicator || 0,
+      catchupEI: formdata.catchupEI || 0,
+      remncd: formdata.wageCodedesc.split(' - ')[formdata.wageCodedesc.split(' - ').length - 1],
+      initdt: moment(formdata.initiationDate).format("MM/DD/YYYY")
+    },
+    bwapay: {
+      name: formdata.wageCodedesc
     }
   }
 }
@@ -992,7 +1060,7 @@ function buildWhatifWageSaveInput(pageid,formdata,editMode, state) {
  * @param {*} editMode 
  * @param {*} state 
  */
-function buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state) {
+function buildWhatIfEmployeeGarnishmentSaveInput(pageid, formdata, editMode, state) {
   let editRec = "false";
   if (editMode == 1) {
     editRec = "false";
@@ -1029,7 +1097,7 @@ function buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state)
       garnexem: formdata.garnexem,
       calcamnt: formdata.calcamnt,
       drsvd0: formdata.drsvd0,
-      drsvd1:formdata.drsvd1,
+      drsvd1: formdata.drsvd1,
       hrsvd0: formdata.hrsvd0,
       pctwthd: formdata.pctwthd,
       ordpctg: formdata.ordpctg,
@@ -1066,7 +1134,7 @@ function buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state)
       remainderOfDisposable: formdata.remainderOfDisposable,
       taxLeftOver: formdata.taxLeftOver,
       garnGross: formdata.garnGross,
-      reducingD:formdata.reducingD,
+      reducingD: formdata.reducingD,
       lHourlyMin: formdata.lHourlyMin,
       lprotHours: formdata.lprotHours,
       garnType: formdata.garnType,
@@ -1089,7 +1157,7 @@ function buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state)
  * @param {*} editMode 
  * @param {*} state 
  */
-function buildPaymentOverrideSaveInput(pageid,formdata,editMode,state){
+function buildPaymentOverrideSaveInput(pageid, formdata, editMode, state) {
   let editRec = "false";
   if (editMode == 1) {
     editRec = "false";
@@ -1138,7 +1206,7 @@ function buildPaymentOverrideSaveInput(pageid,formdata,editMode,state){
  * @param {*} editMode 
  * @param {*} state 
  */
-function buildAddressOverridesSaveInput(pageid,formdata,editMode,state){
+function buildAddressOverridesSaveInput(pageid, formdata, editMode, state) {
   let editRec = "false";
   if (editMode == 1) {
     editRec = "false";
@@ -1149,112 +1217,153 @@ function buildAddressOverridesSaveInput(pageid,formdata,editMode,state){
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    streetName:formdata.fname,
-    state:formdata.state,
-    countyName:formdata.countyName,
-    placeCode:formdata.placeCode,
-    sdName:formdata.sdName,
-    postDirection:formdata.fpost,  
-    startNumber:formdata.fadd, 
-    endNumber:formdata.tadd,     
-    snt:formdata.snt,
-    secUnit:formdata.sunit,
-    placesCode:formdata.placeCode,
-    parity:formdata.parity,
-    addChangeDate:moment().format("YYYYMMDD"),
-    streetType:formdata.ftype,
-    preDirection:formdata.fpre,
-    showMessage:formdata.showmsg,
-    sdCountyName:"FAIRFIELD",
-    taxCode:"BSI00391899",
-    county:"175",
-    placeName:"WYANDOT",
-    classCode:formdata.classCode,
-    postalCode:formdata.fzip,
-    placeCodeAutoCompl:"U6 | 86716 | WYANDOT",
-    classesCode:formdata.classCode,
-    placesName:"",
-    schoolDistrictAutoCompl:"AMANDA-CLEARCREEK LSD | BSI00391899 | FAIRFIELD",
-    sdCode:"",
-    schooldistrictCode:"",
-    schooldistrictName:"",
-    schooldistrictCounty:"",
-    editMode:editMode
+    streetName: formdata.fname,
+    state: formdata.state,
+    countyName: formdata.countyName,
+    placeCode: formdata.placeCode,
+    sdName: formdata.sdName,
+    postDirection: formdata.fpost,
+    startNumber: formdata.fadd,
+    endNumber: formdata.tadd,
+    snt: formdata.snt,
+    secUnit: formdata.sunit,
+    placesCode: formdata.placeCode,
+    parity: formdata.parity,
+    addChangeDate: moment().format("YYYYMMDD"),
+    streetType: formdata.ftype,
+    preDirection: formdata.fpre,
+    showMessage: formdata.showmsg,
+    sdCountyName: "FAIRFIELD",
+    taxCode: "BSI00391899",
+    county: "175",
+    placeName: "WYANDOT",
+    classCode: formdata.classCode,
+    postalCode: formdata.fzip,
+    placeCodeAutoCompl: "U6 | 86716 | WYANDOT",
+    classesCode: formdata.classCode,
+    placesName: "",
+    schoolDistrictAutoCompl: "AMANDA-CLEARCREEK LSD | BSI00391899 | FAIRFIELD",
+    sdCode: "",
+    schooldistrictCode: "",
+    schooldistrictName: "",
+    schooldistrictCounty: "",
+    editMode: editMode
   };
   let formValues = {};
-  if (editMode==1) {
+  if (editMode == 1) {
     formValues = {
-      bsiseqn:"3",
+      bsiseqn: "3",
     };
   } else {
     formValues = {
-      bsiseqn:formdata.bsiseqn
+      bsiseqn: formdata.bsiseqn
+    };
+  }
+  return Object.assign(input, formValues);
+}
+/**
+ * buildUnemploymentCompanyOverridesSaveInput
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, state) {
+  let editRec = "false";
+  if (editMode == 1) {
+    editRec = "false";
+  } else if (editMode == 2) {
+    editRec = "true";
+  }
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    code: formdata.company,
+    startDate: formdata.startDate,
+    taxCode: formdata.taxCode,
+    authority: formdata.auth,
+    authorityName: formdata.authName,
+    taxType: formdata.taxType,
+    formula: formdata.formula,
+    endDate: formdata.endDate,
+    account: formdata.account,
+    rate: formdata.rate,
+    maxWage: formdata.maxWage,
+  };
+  let formValues = {};
+  if (editMode == 1) {
+    formValues = {
+      editMode: editMode,
+    };
+  } else {
+    formValues = {
+      editMode: editMode,
     };
   }
   return Object.assign(input, formValues);
 }
 
-
-function buildwhatifLocationsSaveInput(pageid,formdata,editMode, state) {
+function buildwhatifLocationsSaveInput(pageid, formdata, editMode, state) {
   const filterFormData = state.formFilterData;
- 
+
   return {
     btxldetl: {
-        id: {
-            dataset: appDataset(),
-            employee: filterFormData.employeeCode,
-            checkdate: filterFormData.checkDate
-        },
-        street1: formdata.street1,
-        street2: formdata.street2,
-        city: formdata.city,
-        county: formdata.county,
-        stateabb: formdata.state,
-        zipcode: formdata.zip,
-        eiccode: formdata.eicCode,
-        primews: formdata.primews
-    },
-     editMode: 1
-   
-}
-}
-export function buildTaxLocatorSaveInput(pageId,formData, editMode) {
-  return {
-      btxlemp: {
-          id: {
-            dataset: appDataset(),
-            employee: formData.employeeCode,
-            checkdate: moment(formData.checkDate).format("MM/DD/YYYY") 
-          },
-          empclass: formData.employeeClass || 1,
-         eicstatus: formData.eicCode || 1,
-         grosswages: formData.grossAmount || 0,
-         railroad: formData.railRoadCode || 0,
-         taxfilter: formData.taxFilter || 0,
-         whopays: formData.paidBy || 0,
-         hiredate: formData.hireDate,
-         deathdate: formData.dateOfDeath,
-         allstates: formData.returnAllStates || 0,
-         retireplan: formData.privateSectorRetirementPlanIndicator || 0,
-         dataver: formData.dataVersion || 0,           
-         empsts: 0,
-         selstaind: formData.selectedStateIndicator || 0,
-         bylocation: 0,           
-         resicntry: formData.residentCountry,
-         selstat: formData.selectedState,            
-         cpycode: formData.companyCode,
-         fed: formData.fedWthForEeLive,
-         empltype:  formData.employmentType || 0,
-         wCompFlag: 0
+      id: {
+        dataset: appDataset(),
+        employee: filterFormData.employeeCode,
+        checkdate: filterFormData.checkDate
       },
-      createNew: true,      
-      checkDateYYYYMMDD: "20170119",
-      hireDateYYYYMMDD: "",
-      dateOfDeathYYYYMMDD: null,
-      terminationDateYYYYMMDD: null,
-      numberOfTaxEntries: 0,
-      numberOfLocationEntries: 0
-     
+      street1: formdata.street1,
+      street2: formdata.street2,
+      city: formdata.city,
+      county: formdata.county,
+      stateabb: formdata.state,
+      zipcode: formdata.zip,
+      eiccode: formdata.eicCode,
+      primews: formdata.primews
+    },
+    editMode: 1
+
+  }
+}
+export function buildTaxLocatorSaveInput(pageId, formData, editMode) {
+  return {
+    btxlemp: {
+      id: {
+        dataset: appDataset(),
+        employee: formData.employeeCode,
+        checkdate: moment(formData.checkDate).format("MM/DD/YYYY")
+      },
+      empclass: formData.employeeClass || 1,
+      eicstatus: formData.eicCode || 1,
+      grosswages: formData.grossAmount || 0,
+      railroad: formData.railRoadCode || 0,
+      taxfilter: formData.taxFilter || 0,
+      whopays: formData.paidBy || 0,
+      hiredate: formData.hireDate,
+      deathdate: formData.dateOfDeath,
+      allstates: formData.returnAllStates || 0,
+      retireplan: formData.privateSectorRetirementPlanIndicator || 0,
+      dataver: formData.dataVersion || 0,
+      empsts: 0,
+      selstaind: formData.selectedStateIndicator || 0,
+      bylocation: 0,
+      resicntry: formData.residentCountry,
+      selstat: formData.selectedState,
+      cpycode: formData.companyCode,
+      fed: formData.fedWthForEeLive,
+      empltype: formData.employmentType || 0,
+      wCompFlag: 0
+    },
+    createNew: true,
+    checkDateYYYYMMDD: "20170119",
+    hireDateYYYYMMDD: "",
+    dateOfDeathYYYYMMDD: null,
+    terminationDateYYYYMMDD: null,
+    numberOfTaxEntries: 0,
+    numberOfLocationEntries: 0
+
   }
 }
 
@@ -1268,36 +1377,38 @@ export function buildWorkSiteSaveInput(pageid, formdata, editmode, state) {
   return {
     "dataset": appDataset(),
     "empCode": filterFormData.employeeCode,
-    "checkDate":  filterFormData.checkDate,
+    "checkDate": filterFormData.checkDate,
     "selectedWorksites": worksites
   }
 }
 
-export function buildSaveInputForPage(pageid,formdata,editMode, state){
-  if(pageid === "wageDetails") {
-    return buildWhatifWageSaveInput(pageid,formdata,editMode, state);
-  }else if(pageid==='whatifLocations'){
-    return buildwhatifLocationsSaveInput(pageid,formdata,editMode, state);
-  }else if(pageid==='whatifEmp'){
-    return buildWhatifEmpSaveInput(pageid,formdata,editMode);
-  } else if(pageid === "taxLocator"){
+export function buildSaveInputForPage(pageid, formdata, editMode, state) {
+  if (pageid === "wageDetails") {
+    return buildWhatifWageSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === 'whatifLocations') {
+    return buildwhatifLocationsSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === 'whatifEmp') {
+    return buildWhatifEmpSaveInput(pageid, formdata, editMode);
+  } else if (pageid === "taxLocator") {
     return buildTaxLocatorSaveInput(pageid, formdata, editMode, state);
-  } else if(pageid === "addressFromWorksite") {
+  } else if (pageid === "addressFromWorksite") {
     return buildWorkSiteSaveInput(pageid, formdata, editMode, state);
-  } else if(pageid==='whatifDeductionBenefits'){
-    return buildWhatifDeductionBenefitsSaveInput(pageid,formdata,editMode,state);
-  }else if(pageid==='whatifGarnishment'){
-    return buildWhatIfEmployeeGarnishmentSaveInput(pageid,formdata,editMode,state);
-  }
-  else if(pageid==='paymentOverride'){
-    return buildPaymentOverrideSaveInput(pageid,formdata,editMode,state);
-  }else if(pageid==='addressOverrides'){
-    return buildAddressOverridesSaveInput(pageid,formdata,editMode,state);
-  }else{
-    return buildOtherSaveInput(pageid,formdata,editMode);
+  } else if (pageid === 'whatifDeductionBenefits') {
+    return buildWhatifDeductionBenefitsSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === 'whatifGarnishment') {
+    return buildWhatIfEmployeeGarnishmentSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === 'paymentOverride') {
+    return buildPaymentOverrideSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === 'addressOverrides') {
+    return buildAddressOverridesSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === 'unemploymentCompanyOverrides') {
+    return buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, state);
+  } else {
+    return buildOtherSaveInput(pageid, formdata, editMode);
   }
 }
-function buildOtherSaveInput(pageid,formdata,editMode){
+
+function buildOtherSaveInput(pageid, formdata, editMode) {
   let input = {
     pageId: pageid,
     dataset: appDataset(),
@@ -1345,42 +1456,42 @@ export function buildSaveInput(pageid, store, formdata, mode) {
   } else if (mode === "Edit") {
     editMode = 2;
   }
-  let input = buildSaveInputForPage(pageid,formdata,editMode, state);
+  let input = buildSaveInputForPage(pageid, formdata, editMode, state);
   return input;
 }
 
 export function buildSaveAsInput(pageid, store, formData, mode) {
   return {
     btxlemp: {
-        id: {
-          dataset: appDataset(),
-          employee: formData.employeeCode,
-          checkdate: moment(formData.checkDate).format("MM/DD/YYYY") 
-        },
-        btxldetls: [],
-        btxdset: null,
-        empclass: formData.employeeClass || 1,
-       eicstatus: formData.eicCode || 1,
-       grosswages: formData.grossAmount || 0,
-       railroad: formData.railRoadCode || 0,
-       taxfilter: formData.taxFilter || 0,
-       whopays: formData.paidBy || 0,
-       hiredate: formData.hireDate,
-       deathdate: formData.dateOfDeath,
-       allstates: formData.returnAllStates || 0,
-       retireplan: formData.privateSectorRetirementPlanIndicator || 0,
-       dataver: formData.dataVersion || 0,           
-       empsts: 0,
-       bylocation: 0,           
-       resicntry: formData.residentCountry,
-       selstaind: 0,
-       selstat:  formData.selectedState,          
-       cpycode: formData.companyCode,
-       fed: formData.fedWthForEeLive || 0,
-       empltype:  formData.employmentType || 0,
-       wCompFlag: 0
+      id: {
+        dataset: appDataset(),
+        employee: formData.employeeCode,
+        checkdate: moment(formData.checkDate).format("MM/DD/YYYY")
+      },
+      btxldetls: [],
+      btxdset: null,
+      empclass: formData.employeeClass || 1,
+      eicstatus: formData.eicCode || 1,
+      grosswages: formData.grossAmount || 0,
+      railroad: formData.railRoadCode || 0,
+      taxfilter: formData.taxFilter || 0,
+      whopays: formData.paidBy || 0,
+      hiredate: formData.hireDate,
+      deathdate: formData.dateOfDeath,
+      allstates: formData.returnAllStates || 0,
+      retireplan: formData.privateSectorRetirementPlanIndicator || 0,
+      dataver: formData.dataVersion || 0,
+      empsts: 0,
+      bylocation: 0,
+      resicntry: formData.residentCountry,
+      selstaind: 0,
+      selstat: formData.selectedState,
+      cpycode: formData.companyCode,
+      fed: formData.fedWthForEeLive || 0,
+      empltype: formData.employmentType || 0,
+      wCompFlag: 0
     },
-    createNew: true,      
+    createNew: true,
     checkDateYYYYMMDD: "20170119",
     hireDateYYYYMMDD: "",
     dateOfDeathYYYYMMDD: null,
@@ -1388,8 +1499,8 @@ export function buildSaveAsInput(pageid, store, formData, mode) {
     numberOfTaxEntries: 0,
     numberOfLocationEntries: 0,
     saveAsEmployee: formData.employeeCode,
-    saveAsCheckdate: moment(formData.checkDate).format("MM/DD/YYYY") ,
-}
+    saveAsCheckdate: moment(formData.checkDate).format("MM/DD/YYYY"),
+  }
 }
 
 export function getTerminationDate(filterData) {
@@ -1598,33 +1709,96 @@ export const setTemplateData = (str, data) => {
   return str;
 };
 
-const mockdelmap = [
-  { id: "customPayments", url: "./DELETE_CUSTOM_PAYMENT.json" },
-  { id: "customTaxCodes", url: "./DELETE_CUSTOM_TAX_CODE.json" }
+const mockdelmap = [{
+    id: "customPayments",
+    url: "./DELETE_CUSTOM_PAYMENT.json"
+  },
+  {
+    id: "customTaxCodes",
+    url: "./DELETE_CUSTOM_TAX_CODE.json"
+  }
 ];
-const mocksavmap = [
-  { id: "customPayments", url: "./SAVE_CUSTOM_PAYMENT.json" },
-  { id: "customTaxCodes", url: "./SAVE_CUSTOM_TAX_CODE.json" },
-  { id: "experienceRates", url: "./SAVE_EXPERIENCE_RATES_MOCKDATA.json" },
-  { id: "supplementalMethods", url: "SAVE_SUPPLEMENTAL_METHODS_MOCKDATA.json" },
-  { id: "customFormulas", url: "./SAVE_CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
-  { id: "customTaxFormulas", url: "./SAVE_CUSTOM_TAX_FORMULAS_MOCKDATA.json" },
-  { id: "companies", url: "./SAVE_COMPANIES_MOCKDATA.json" },
-  { id: "worksites", url: "./SAVE_WORKSITE_MOCKDATA.json" },
-  { id: "worksiteCompanies", url: "./SAVE_WORKSITE_COMPANIE_MOCKDATA.json" }
+const mocksavmap = [{
+    id: "customPayments",
+    url: "./SAVE_CUSTOM_PAYMENT.json"
+  },
+  {
+    id: "customTaxCodes",
+    url: "./SAVE_CUSTOM_TAX_CODE.json"
+  },
+  {
+    id: "experienceRates",
+    url: "./SAVE_EXPERIENCE_RATES_MOCKDATA.json"
+  },
+  {
+    id: "supplementalMethods",
+    url: "SAVE_SUPPLEMENTAL_METHODS_MOCKDATA.json"
+  },
+  {
+    id: "customFormulas",
+    url: "./SAVE_CUSTOM_TAX_PAYMENT_MOCKDATA.json"
+  },
+  {
+    id: "customTaxFormulas",
+    url: "./SAVE_CUSTOM_TAX_FORMULAS_MOCKDATA.json"
+  },
+  {
+    id: "companies",
+    url: "./SAVE_COMPANIES_MOCKDATA.json"
+  },
+  {
+    id: "worksites",
+    url: "./SAVE_WORKSITE_MOCKDATA.json"
+  },
+  {
+    id: "worksiteCompanies",
+    url: "./SAVE_WORKSITE_COMPANIE_MOCKDATA.json"
+  }
 ];
-const mockdatamap = [
-  { id: "sampleDateFields", url: "./DATE_FIELD_DOC_MOCKDATA.json" },
-  { id: "customFormulas", url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json" },
-  { id: "customTaxFormulas", url: "./CUSTOM_TAX_FORMULAS_MOCKDATA.json" },
-  { id: "companies", url: "./COMPANIES_MOCKDATA.json" },
-  { id: "worksites", url: "./COMPANIES_MOCKDATA.json" },
-  { id: "worksiteCompanies", url: "./WORKSITES_MOCKDATA.json" },
-  { id: "recentUsage", url: "./RECENT_USAGE.json" },
-  { id: "selectSamplePage", url: "./RECENT_USAGE.json" },
-  { id: "whatifEmp", url: "./_whatifEmp_MockData.json" },
-  { id: "whatifTaxes", url: "./_whatifTaxes_MockData.json" },
-  { id: "whatifGarnishment", url: "./_whatifGarnishment_MockData.json" }
+const mockdatamap = [{
+    id: "sampleDateFields",
+    url: "./DATE_FIELD_DOC_MOCKDATA.json"
+  },
+  {
+    id: "customFormulas",
+    url: "./CUSTOM_TAX_PAYMENT_MOCKDATA.json"
+  },
+  {
+    id: "customTaxFormulas",
+    url: "./CUSTOM_TAX_FORMULAS_MOCKDATA.json"
+  },
+  {
+    id: "companies",
+    url: "./COMPANIES_MOCKDATA.json"
+  },
+  {
+    id: "worksites",
+    url: "./COMPANIES_MOCKDATA.json"
+  },
+  {
+    id: "worksiteCompanies",
+    url: "./WORKSITES_MOCKDATA.json"
+  },
+  {
+    id: "recentUsage",
+    url: "./RECENT_USAGE.json"
+  },
+  {
+    id: "selectSamplePage",
+    url: "./RECENT_USAGE.json"
+  },
+  {
+    id: "whatifEmp",
+    url: "./_whatifEmp_MockData.json"
+  },
+  {
+    id: "whatifTaxes",
+    url: "./_whatifTaxes_MockData.json"
+  },
+  {
+    id: "whatifGarnishment",
+    url: "./_whatifGarnishment_MockData.json"
+  }
 ];
 
 //all for test autoComplete

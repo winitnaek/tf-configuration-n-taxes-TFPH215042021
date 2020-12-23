@@ -32,6 +32,8 @@ export function authCodeauthNamerenderer(ndex,
 		return rowdata.authorityCode +'-' + rowdata.authorityName;
 	}else if(rowdata.authTaxCode && rowdata.authName){
 		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.authTaxCode + '-' + rowdata.authName}</div>`;
+	}else if(rowdata.taxCode && rowdata.authName){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.taxCode + '-' + rowdata.authName}</div>`;
 	}
 }
 export function planIdNamerenderer(ndex,

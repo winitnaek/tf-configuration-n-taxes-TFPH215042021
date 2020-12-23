@@ -142,7 +142,10 @@ import {
   DELETE_ADDRESS_OVERRIDES,
   SAVE_ADDRESS_OVERRIDES,
   GET_REDUNDANT_ADDRESS_OVERRIDES,
-  GENERATE_WHATIF_EMPLOYEE_DETAIL_PDF
+  GENERATE_WHATIF_EMPLOYEE_DETAIL_PDF,
+  GET_UM_EMPLOYMENT_OVERRIDE_LIST,
+  GET_UM_EMPLOYMENT_OVERRIDE_DELETE,
+  GET_UM_EMPLOYMENT_OVERRIDE_SAVE
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -214,8 +217,8 @@ export const metaDataApiMap = {
   auditLogViewer: GET_CUSTOM_TAX_CODES,
   logins: GET_CUSTOM_TAX_CODES,
   company: GET_COMPANIES,
-  unemploymentOverrides: GET_CUSTOM_FORMULAS,
-  unemploymentCompanyOverrides: GET_CUSTOM_TAX_FORMULAS,
+  unemploymentOverrides: GET_COMPANIES,
+  unemploymentCompanyOverrides: GET_UM_EMPLOYMENT_OVERRIDE_LIST,
   optionalRateOverrides: GET_CUSTOM_FORMULAS,
   optionalRateOverride: GET_CUSTOM_TAX_FORMULAS,
   customNexusData: GET_CUSTOM_FORMULAS,
@@ -292,7 +295,8 @@ export const deleteDataApiMap = {
   whatifLocations: DELETE_WHATIF_LOCATIONS,
   groupOverride: DELETE_GROUP_OVERRIDE,
   whatifEmp:DELETE_WHAT_IF_EMPLOYEES,
-  paymentOverride:DELETE_PAYMENT_OVERRIDE
+  paymentOverride:DELETE_PAYMENT_OVERRIDE,
+  unemploymentCompanyOverrides:GET_UM_EMPLOYMENT_OVERRIDE_DELETE
 };
 
 export const saveDataApiMap = {
@@ -322,7 +326,8 @@ export const saveDataApiMap = {
   whatifLocations: SAVE_MANAGE_LOCATIONS,
   addressFromWorksite: SAVE_ADDRESS_FROM_WORKSITES,
   groupOverride: SAVE_GROUP_OVERRIDE,
-  paymentOverride:SAVE_PAYMENT_OVERRIDE
+  paymentOverride:SAVE_PAYMENT_OVERRIDE,
+  unemploymentCompanyOverrides:GET_UM_EMPLOYMENT_OVERRIDE_SAVE
 };
 
 export const saveAsAPIMap = {
@@ -396,5 +401,7 @@ export const autoCompleteApiMap = {
   usrtxtyp:WHATIF_GARN_AUTOCOMPLETE_TAXTYPES,
   gform:WHATIF_GARN_AUTOCOMPLETE_FORMULAS,
   authTaxCode:GET_UDQ_AUTOCOMPLETE,
-  planId:GET_UDQ_AUTOCOMPLETE
+  planId:GET_UDQ_AUTOCOMPLETE,
+  taxTypeUnemp:GET_UDQ_AUTOCOMPLETE,
+  formulaUnemp:GET_UDQ_AUTOCOMPLETE
 };
