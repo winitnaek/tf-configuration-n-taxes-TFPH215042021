@@ -143,6 +143,7 @@ class CustomGrid extends Component {
           className={className}
           getDataForChildGrid={getDataForChildGrid}
           getPdfDataAPI={getPdfDataAPI}
+          clickCheckBox={this.clickCheckBox}
         />
         {griddef.hasButtonBar && griddef.hasButtonBar == true ? (
           <ButtonBar
@@ -151,7 +152,6 @@ class CustomGrid extends Component {
             pid={pid}
             permissions={permissions}
             tftools={tftools}
-            clickCheckBox={this.clickCheckBox}
             handleRunLocator={this.handleRunLocator}
           />
         ) : null}
@@ -183,6 +183,7 @@ class CustomGrid extends Component {
                     formFilterData={formFilterData}
                     fieldData={fieldData}
                     getFormData={formDataAPI}
+                    clickCheckBox={this.clickCheckBox}
                     styles={gridStyles}
                     mapToolUsage={mappingToolUsageAPI}
                     className={className}

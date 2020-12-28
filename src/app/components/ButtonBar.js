@@ -13,14 +13,6 @@ class ButtonBar extends Component {
   componentDidMount() {}
 
   renderButtonBarForPage() {
-    let displayLocalTax = (
-      <div>
-      <input type="checkbox" id="displayLocalTax" onChange={(event) => this.props.clickCheckBox(event)} style={{width: "27px", height: "27px"}} />
-      <UncontrolledTooltip placement="right" target="displayLocalTax">
-        <span> Display Local Tax Codes by Location </span>
-      </UncontrolledTooltip>
-    </div>
-    );
     let taxLocator = (
       <div>
         <a href="#" id="taxLocator">
@@ -112,7 +104,6 @@ class ButtonBar extends Component {
     }
     return (
       <Row className="justify-content-around bg-light" style={{ paddingTop: "3px",paddingBottom:'2px',marginTop:'30px',borderRadius:'0.25rem'}}>
-        {displayLocalTax}
         {taxLocator}
         {calculateTaxes}
         {runLocatorService}
