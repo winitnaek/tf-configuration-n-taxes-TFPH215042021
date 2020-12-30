@@ -354,6 +354,7 @@ export const autoCompleteApiMap = {
   companyCode: GET_UDQ_AUTOCOMPLETE,
   riskClass: GET_UDQ_AUTOCOMPLETE,
   taxCode: GET_ALL_TAXCODES_AUTOCOMPLETE,
+  taxCodeUnEmp:GET_UDQ_AUTOCOMPLETE,
   authorityCode: GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE,
   authorityCodeList: GET_ALL_AUTHORITY_CODE_AUTOCOMPLETE,
   authorityCodegdw: GET_UDQ_AUTOCOMPLETE,

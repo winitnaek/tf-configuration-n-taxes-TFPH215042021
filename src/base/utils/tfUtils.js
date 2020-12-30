@@ -404,6 +404,10 @@ export function buildGridDataInput(pageid, store) {
   } else if (pageid === 'unemploymentCompanyOverrides') {
     input = unemploymentCompanyOverridesGridInput(pageid, filterData, stDate, enDate, state);
   } else {
+    if(state.parentData){//Reset Parent Data
+      let parentData={};
+      store.dispatch(setParentData(parentData))
+    }
     input = buildGridInputForPage(pageid, filterData, stDate, enDate);
   }
   return input;
@@ -456,10 +460,6 @@ function unemploymentCompanyOverridesGridInput(pageid, filterData, stDate, enDat
     userId: appUserId(),
     companyCode: filterData.company ? filterData.company : state.parentData.company
   };
-  if(state.parentData && state.parentData.company){
-    let parentData={};
-    store.dispatch(setParentData(parentData))
-  }
   return input;
 }
 export function buildMaritalStatusInput(pageid, store, formdata) {
@@ -646,13 +646,13 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   if (pageid === 'taxTypeUnemp' && formValues) {
     additionalFields = {
       startdate: formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
-      authCode: formValues['taxCode'].taxCode.substring(3, 11)
+      authCode: formValues['taxCodeUnEmp'].id
     }
     return Object.assign(input, additionalFields);
   } else if (pageid === 'formulaUnemp' && formValues) {
     additionalFields = {
       startdate: formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
-      authCode: formValues['taxCode'].taxCode.substring(3, 11),
+      authCode: formValues['taxCodeUnEmp'].id,
       taxType: formValues['taxTypeUnemp'].id
     }
     return Object.assign(input, additionalFields);
@@ -1328,14 +1328,15 @@ function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, 
     store.dispatch(setParentData(state.formFilterData));
   } else if (editMode == 2) {
     editRec = "true";
+    store.dispatch(setParentData(state.formFilterData));
   }
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
     startDate: moment(formdata.startDate).format("MM/DD/YYYY"),
-    taxCode: formdata.taxCode,
-    authority: formdata.taxCode.substring(3, 11),
+    taxCode: 'BSI'+formdata.taxCodeUnEmp,
+    authority: formdata.taxCodeUnEmp,
     authorityName: formdata.authName,
     taxType: formdata.taxTypeUnemp,
     formula: formdata.formulaUnemp,
@@ -1348,7 +1349,7 @@ function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, 
   if (editMode == 1) {
     formValues = {
       editMode: editMode,
-      code: state.formFilterData.company
+      code: state.formFilterData.company ? state.formFilterData.company: state.parentData.company
     };
   } else {
     formValues = {
