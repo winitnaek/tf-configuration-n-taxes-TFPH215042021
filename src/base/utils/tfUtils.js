@@ -1328,14 +1328,14 @@ function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, 
     store.dispatch(setParentData(state.formFilterData));
   } else if (editMode == 2) {
     editRec = "true";
-    store.dispatch(setParentData(state.formFilterData));
+    //store.dispatch(setParentData(state.formFilterData));
   }
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
     startDate: moment(formdata.startDate).format("MM/DD/YYYY"),
-    taxCode: 'BSI'+formdata.taxCodeUnEmp,
+    taxCode: formdata.taxCodeUnEmp.indexOf("BSI")===0? formdata.taxCodeUnEmp:'BSI'+formdata.taxCodeUnEmp,
     authority: formdata.taxCodeUnEmp,
     authorityName: formdata.authName,
     taxType: formdata.taxTypeUnemp,
@@ -1354,7 +1354,8 @@ function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, 
   } else {
     formValues = {
       editMode: editMode,
-      code: formdata.company
+      code: formdata.company,
+      taxCode: formdata.taxCodeUnEmp
     };
   }
   return Object.assign(input, formValues);
