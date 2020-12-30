@@ -12,6 +12,7 @@ import {
 import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
+import {setParentData} from '../../app/actions/parentDataActions';
 import {
   generateUrl
 } from "bsiuilib";
@@ -453,8 +454,12 @@ function unemploymentCompanyOverridesGridInput(pageid, filterData, stDate, enDat
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    companyCode: filterData.company
+    companyCode: filterData.company ? filterData.company : state.parentData.company
   };
+  if(state.parentData && state.parentData.company){
+    let parentData={};
+    store.dispatch(setParentData(parentData))
+  }
   return input;
 }
 export function buildMaritalStatusInput(pageid, store, formdata) {
@@ -638,17 +643,17 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
    
   };
   let additionalFields ={}
-  if(pageid==='taxTypeUnemp' && formValues){
+  if (pageid === 'taxTypeUnemp' && formValues) {
     additionalFields = {
-      startdate: moment().format("MM/DD/YYYY"),
+      startdate: formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
       authCode: formValues['taxCode'].taxCode.substring(3, 11)
     }
     return Object.assign(input, additionalFields);
-  }else if(pageid==='formulaUnemp' && formValues){
+  } else if (pageid === 'formulaUnemp' && formValues) {
     additionalFields = {
-      startdate: moment().format("MM/DD/YYYY"),
+      startdate: formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
       authCode: formValues['taxCode'].taxCode.substring(3, 11),
-      taxType:formValues['taxTypeUnemp'].id
+      taxType: formValues['taxTypeUnemp'].id
     }
     return Object.assign(input, additionalFields);
   }
@@ -1320,6 +1325,7 @@ function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, 
   let editRec = "false";
   if (editMode == 1) {
     editRec = "false";
+    store.dispatch(setParentData(state.formFilterData));
   } else if (editMode == 2) {
     editRec = "true";
   }
@@ -1327,14 +1333,13 @@ function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, 
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    code: formdata.company,
-    startDate: formdata.startDate,
+    startDate: moment(formdata.startDate).format("MM/DD/YYYY"),
     taxCode: formdata.taxCode,
-    authority: formdata.auth,
+    authority: formdata.taxCode.substring(3, 11),
     authorityName: formdata.authName,
-    taxType: formdata.taxType,
-    formula: formdata.formula,
-    endDate: formdata.endDate,
+    taxType: formdata.taxTypeUnemp,
+    formula: formdata.formulaUnemp,
+    endDate:  moment(formdata.endDate).format("MM/DD/YYYY"),
     account: formdata.account,
     rate: formdata.rate,
     maxWage: formdata.maxWage,
@@ -1343,10 +1348,12 @@ function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, 
   if (editMode == 1) {
     formValues = {
       editMode: editMode,
+      code: state.formFilterData.company
     };
   } else {
     formValues = {
       editMode: editMode,
+      code: formdata.company
     };
   }
   return Object.assign(input, formValues);

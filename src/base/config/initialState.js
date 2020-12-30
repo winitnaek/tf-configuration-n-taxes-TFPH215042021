@@ -127,5 +127,6 @@ export default {
     companyCode: "",
     taxCode: "",
     formdata: {}
-  }
+  },
+  parentData:{}
 };
