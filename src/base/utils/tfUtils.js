@@ -12,7 +12,9 @@ import {
 import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
-import {setParentData} from '../../app/actions/parentDataActions';
+import {
+  setParentData
+} from '../../app/actions/parentDataActions';
 import {
   generateUrl
 } from "bsiuilib";
@@ -351,13 +353,20 @@ function whatIfGarnishmentsGridInput(pageid, filterData, stDate, enDate) {
 function whatifTaxesGridInput(pageid, filterData, stDate, enDate) {
   let empCode = filterData.empCode ? filterData.empCode : filterData.empcode;
   let checkDate = filterData.checkDate ? filterData.checkDate : filterData.chkdt;
+  let state = store.getState();
+  if(!checkDate){
+    checkDate = state.parentData.checkDate ? state.parentData.checkDate : state.parentData.chkdt;
+  } 
+  if(!empCode){
+    empCode = state.parentData.empCode ? state.parentData.empCode:state.parentData.empcode
+  } 
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
     empCode: empCode,
-    checkDate: checkDate,
-    empName: filterData.empName,
+    checkDate: moment(checkDate).format("MM/DD/YYYY"),
+    empName: filterData.empName ? filterData.empName:state.parentData.empName,
     regPen: "R",
   };
   return input;
@@ -404,8 +413,8 @@ export function buildGridDataInput(pageid, store) {
   } else if (pageid === 'unemploymentCompanyOverrides') {
     input = unemploymentCompanyOverridesGridInput(pageid, filterData, stDate, enDate, state);
   } else {
-    if(state.parentData){//Reset Parent Data
-      let parentData={};
+    if (state.parentData) { //Reset Parent Data
+      let parentData = {};
       store.dispatch(setParentData(parentData))
     }
     input = buildGridInputForPage(pageid, filterData, stDate, enDate);
@@ -623,7 +632,7 @@ export function getPmtUsrCode(filterData) {
 export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   let state = store.getState();
   let input;
-  if(pageid === "formulaGroupOverride") {
+  if (pageid === "formulaGroupOverride") {
     input = {
       pageId: pageid,
       dataset: appDataset(),
@@ -640,9 +649,9 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
     dataset: appDataset(),
     userId: appUserId(),
     pattern: patten,
-   
+
   };
-  let additionalFields ={}
+  let additionalFields = {}
   if (pageid === 'taxTypeUnemp' && formValues) {
     additionalFields = {
       startdate: formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
@@ -654,6 +663,20 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       startdate: formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
       authCode: formValues['taxCodeUnEmp'].id,
       taxType: formValues['taxTypeUnemp'].id
+    }
+    return Object.assign(input, additionalFields);
+  }
+  if (pageid === 'bsitaxtyp' && formValues) {
+    additionalFields = {
+      checkDate: formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
+      taxAuth: formValues['usrauthcd'].id
+    }
+    return Object.assign(input, additionalFields);
+  } else if (pageid === 'formulawhatif' && formValues) {
+    additionalFields = {
+      checkDate: formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
+      authCode: formValues['usrauthcd'].id,
+      taxType: formValues['bsitaxtyp'].id
     }
     return Object.assign(input, additionalFields);
   }
@@ -873,65 +896,89 @@ function buildWhatifDeductionBenefitsDelete(pageid, formdata, editMode, state) {
 }
 
 function buildGroupOverrideDelete(pageid, formdata, mode, state) {
-  const { formFilterData } = state;
+  const {
+    formFilterData
+  } = state;
   return {
-    "btxover" : {
-      "id" : {
-        dataset : appDataset(),
-        userID : appUserId(),
-        empgroup : formFilterData.id,
-        taxcode : formdata.authority,
-        taxtype : formdata.taxType,
-        formula : formdata.formulaGroupOverride,
-        startdate : formdata.startDate,
-        resident : false
+    "btxover": {
+      "id": {
+        dataset: appDataset(),
+        userID: appUserId(),
+        empgroup: formFilterData.id,
+        taxcode: formdata.authority,
+        taxtype: formdata.taxType,
+        formula: formdata.formulaGroupOverride,
+        startdate: formdata.startDate,
+        resident: false
       },
-      "btxtaxt" : {
-        taxtype : formdata.taxType,
-        taxname : formdata.taxname      
-       
+      "btxtaxt": {
+        taxtype: formdata.taxType,
+        taxname: formdata.taxname
+
       },
-      "btxtaxc" : {
-        "id" : null,
-        "btxauth" : {
-          bsiauth : formdata.authority,
-          name : formdata.name  
-        
-        }   
-       
+      "btxtaxc": {
+        "id": null,
+        "btxauth": {
+          bsiauth: formdata.authority,
+          name: formdata.name
+
+        }
+
       },
-      rescind : formdata.endDate,
-      overtype : formdata.overrideType,
-      amount : formdata.flatAmunt,
-      rate : formdata.rate,
-     
+      rescind: formdata.endDate,
+      overtype: formdata.overrideType,
+      amount: formdata.flatAmunt,
+      rate: formdata.rate,
+
     },
-    formulaTitle : formdata.formulaTitle,
-    "startDate" : "2020-12-22T05:00:00.000+0000"
+    formulaTitle: formdata.formulaTitle,
+    "startDate": "2020-12-22T05:00:00.000+0000"
   }
 }
-
+/**
+ * buildWhatIfTaxesDelete
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildWhatIfTaxesDelete(pageid, formdata, editMode, state) {
+  let input = {
+    btxttax: {
+      id: {
+        dataset: appDataset(),
+        regpen: "R",
+        empcode: formdata.empCode,
+        chkdt: moment(formdata.chkdt).format("MM/DD/YYYY"),
+        taxn: formdata.taxn,
+      },
+    },
+  };
+  return input;
+}
 export function buildDeleteInput(pageid, store, formdata, mode) {
   let state = store.getState();
-  if(pageid === "wageDetails") {
-    return buildWhatifWagDeleteInput(pageid,formdata,mode, state);
-  }else if(pageid==="whatifDeductionBenefits"){
-    return buildWhatifDeductionBenefitsDelete(pageid,formdata,mode, state);
-  }else if(pageid==='whatifGarnishment'){
-    return buildWhatifGarnishmentDelete(pageid,formdata,mode, state);
-  }else if(pageid==="whatifLocations"){
-    return buildwhatifLocationsDelete(pageid,formdata,mode, state);
-  }else if(pageid==='whatifEmp'){
-    return buildWhatifEmpDelete(pageid,formdata,mode, state);
-  }else if(pageid==='paymentOverride'){
-    return buildPaymentOverrideDelete(pageid,formdata,mode, state);
-  }else if(pageid==='addressOverrides'){
-    return buildAddressOverridesDelete(pageid,formdata,mode, state);
+  if (pageid === "wageDetails") {
+    return buildWhatifWagDeleteInput(pageid, formdata, mode, state);
+  } else if (pageid === "whatifDeductionBenefits") {
+    return buildWhatifDeductionBenefitsDelete(pageid, formdata, mode, state);
+  } else if (pageid === 'whatifGarnishment') {
+    return buildWhatifGarnishmentDelete(pageid, formdata, mode, state);
+  } else if (pageid === "whatifLocations") {
+    return buildwhatifLocationsDelete(pageid, formdata, mode, state);
+  } else if (pageid === 'whatifEmp') {
+    return buildWhatifEmpDelete(pageid, formdata, mode, state);
+  } else if (pageid === 'paymentOverride') {
+    return buildPaymentOverrideDelete(pageid, formdata, mode, state);
+  } else if (pageid === 'addressOverrides') {
+    return buildAddressOverridesDelete(pageid, formdata, mode, state);
   } else if (pageid === 'unemploymentCompanyOverrides') {
     return buildEmploymentCompanyOverridesDelete(pageid, formdata, mode, state);
-  } else if(pageid ==="groupOverride"){
+  } else if (pageid === "groupOverride") {
     return buildGroupOverrideDelete(pageid, formdata, mode, state);
-  }else{
+  } else if (pageid === "whatifTaxes") {
+    return buildWhatIfTaxesDelete(pageid, formdata, mode, state);
+  } else {
     console.log("formdata");
     console.log(formdata);
     const {
@@ -962,18 +1009,11 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return input;
   }
 }
-/**
- * buildWhatifEmpSaveInput
- * @param {*} pageid 
- * @param {*} formdata 
- * @param {*} editMode 
- */
-
 
 export function buildPdfInput(pageid, store, formdata, mode) {
   const state = store.getState();
   const filterData = state.formFilterData;
-return {
+  return {
     dataset: appDataset(),
     employee: filterData.employeeCode,
     checkdate: filterData.checkDate,
@@ -983,7 +1023,12 @@ return {
   }
 
 }
-
+/**
+ * buildWhatifEmpSaveInput
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ */
 function buildWhatifEmpSaveInput(pageid, formdata, editMode) {
   let editRec = "false";
   if (editMode == 1) {
@@ -1335,12 +1380,12 @@ function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, 
     dataset: appDataset(),
     userId: appUserId(),
     startDate: moment(formdata.startDate).format("MM/DD/YYYY"),
-    taxCode: formdata.taxCodeUnEmp.indexOf("BSI")===0? formdata.taxCodeUnEmp:'BSI'+formdata.taxCodeUnEmp,
+    taxCode: formdata.taxCodeUnEmp.indexOf("BSI") === 0 ? formdata.taxCodeUnEmp : 'BSI' + formdata.taxCodeUnEmp,
     authority: formdata.taxCodeUnEmp,
     authorityName: formdata.authName,
     taxType: formdata.taxTypeUnemp,
     formula: formdata.formulaUnemp,
-    endDate:  moment(formdata.endDate).format("MM/DD/YYYY"),
+    endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
     account: formdata.account,
     rate: formdata.rate,
     maxWage: formdata.maxWage,
@@ -1349,13 +1394,156 @@ function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, 
   if (editMode == 1) {
     formValues = {
       editMode: editMode,
-      code: state.formFilterData.company ? state.formFilterData.company: state.parentData.company
+      code: state.formFilterData.company ? state.formFilterData.company : state.parentData.company
     };
   } else {
     formValues = {
       editMode: editMode,
       code: formdata.company,
       taxCode: formdata.taxCodeUnEmp
+    };
+  }
+  return Object.assign(input, formValues);
+}
+/**
+ * buildWhatIfTaxesSaveInput
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildWhatIfTaxesSaveInput(pageid, formdata, editMode, state) {
+  let editRec = "false";
+  if (editMode == 1) {
+    editRec = "false";
+    store.dispatch(setParentData(state.formFilterData));
+  } else if (editMode == 2) {
+    editRec = "true";
+  }
+  let input = {
+    btxttax: {
+      id: {
+        dataset: appDataset(),
+        regpen: 'R',//formdata.regPen,
+        empcode: formdata.empCode ? formdata.empCode : state.formFilterData.empCode,
+        chkdt: formdata.chkdt ? moment(formdata.chkdt).format("MM/DD/YYYY"): moment(state.formFilterData.checkDate).format("MM/DD/YYYY"),
+        taxn: formdata.taxn,
+      },
+      btxtaxc: {
+        id: null,
+        btxauth: {
+          bsiauth: formdata.usrauthcd.indexOf("BSI")>=0 ? formdata.usrauthcd.substring(3, 11):formdata.usrauthcd,
+          name: formdata.name,
+        },
+      },
+      altagglim: formdata.altagglim,
+      ppdwgs: formdata.ppdwgs,
+      aytdwgs: formdata.aytdwgs,
+      ytdwgs: formdata.ytdwgs,
+      ytdtax: formdata.ytdtax,
+      regexmamt: formdata.regexmamt,
+      addexmamt: formdata.addexmamt,
+      basewage: formdata.basewage,
+      prrcom: formdata.prrcom,
+      addamt: formdata.addamt,
+      ppdtax: formdata.ppdtax,
+      pptdwgs: formdata.pptdwgs,
+      mtdwgs: formdata.mtdwgs,
+      mtdtax: formdata.mtdtax,
+      qtdwgs: formdata.qtdwgs,
+      qtdtax: formdata.qtdtax,
+      rcptxcram: formdata.rcptxcram,
+      maxwgovr: formdata.maxwgovr,
+      calctax: formdata.calctax,
+      ttltxbern: formdata.ttltxbern,
+      ttlntxecnt: formdata.ttlntxecnt,
+      ttlntxrcnt: formdata.ttlntxrcnt,
+      ytdsupp: formdata.ytdsupp,
+      ytdtaxpws: formdata.ytdtaxpws,
+      opttaxpws: formdata.opttaxpws,
+      ytdsubjwg: formdata.ytdsubjwg,
+      ytdExmptWg: formdata.ytdExmptWg,
+      hrswrk: formdata.hrswrk,
+      exprate: formdata.exprate,
+      pctwrkd: formdata.pctwrkd,
+      addtxrt: formdata.addtxrt,
+      txrt: formdata.txrt,
+      estquargrosswages: formdata.estquargrosswages,
+      grossannp: formdata.grossannp,
+      addnwi: formdata.addnwi,
+      taxcredit: formdata.taxcredit,
+      resicd: formdata.resicd,
+      rndind: formdata.rndind,
+      mart: formdata.mart,
+      supcd: formdata.supcd,
+      addtxcd: formdata.addtxcd,
+      eicstsind: formdata.eicstsind,
+      selfadj: formdata.selfadj,
+      calcsts: formdata.calcsts,
+      aggind: formdata.aggind,
+      rcpform: formdata.rcpform,
+      formula: formdata.formulawhatif,
+      taxexpind: formdata.taxexpind,
+      rcppart: formdata.rcppart,
+      certcd: formdata.certcd,
+      regex: formdata.regex,
+      prsex: formdata.prsex,
+      depex: formdata.depex,
+      addex: formdata.addex,
+      elcstind: formdata.elcstind,
+      nxind: formdata.nxind,
+      srsvd0: 0,
+      srsvd1: 0,
+      bsitaxtyp: formdata.bsitaxtyp,
+      usrtaxtyp: "",
+      crsvd0: "",
+      crsvd1: "",
+      drsvd0: 0.0,
+      usrauthcd: formdata.usrauthcd.indexOf("BSI")>=0 ? formdata.usrauthcd:'BSI'+formdata.usrauthcd,
+      pnd: formdata.pnd,
+      ynd: formdata.ynd,
+      qnd: formdata.qnd,
+      mnd: formdata.mnd,
+      addexind: "",
+      taxeffdt: " ",
+      riskclass: formdata.riskclass,
+      btxtwges: [],
+      taxLeftOver: formdata.taxLeftOver,
+      currtaxleft: formdata.currtaxleft,
+      subjWages: formdata.subjWages,
+    },
+    btxtaxt: {
+      taxtype: formdata.bsitaxtyp,
+      taxname: formdata.taxname,
+      payee: null,
+      recip: false,
+      taxid: false,
+      railroad: false,
+      gttype: formdata.gttype,
+      admin: false,
+      info: null,
+      psrp: false,
+      hiredate: null,
+    },
+    numberOfPaymentEntries: formdata.numberOfPaymentEntries,
+    empName: "",
+    taxcodetype: formdata.taxcodetype,
+    taxeffdate: formdata.taxeffdate
+      ? moment(formdata.taxeffdate).format("MM/DD/YYYY")
+      : "",
+    txblhrs_out: formdata.txblhrs_out,
+    wages: null,
+    rptTax: formdata.rptTax,
+    fymj: formdata.fymj,
+  };
+  let formValues = {};
+  if (editMode == 1) {
+    formValues = {
+      editMode: editMode,
+    };
+  } else {
+    formValues = {
+      editMode: editMode,
     };
   }
   return Object.assign(input, formValues);
@@ -1424,123 +1612,123 @@ export function buildTaxLocatorSaveInput(pageId, formData, editMode) {
   }
 }
 
-function buildGroupOverrideSaveInput(pageid,formData,editMode, state) {
+function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
   const filterFormData = state.formFilterData;
- 
+
   return {
-      "btxover" : {
-        "id" : {
-          dataset : appDataset(),
-          userID : appUserId(),
-          empgroup : filterFormData.id,
-          taxcode : formData.taxcode,
-          taxtype : formData.taxType,
-          formula : formData.formulaGroupOverride,
-          startdate : formData.startDate,
-          resident : formData.residentType
-        },
-        "btxtaxt" : {
-          taxtype : formData.taxType,
-          taxname : formData.taxname    
-        },
-        "btxegrp" : null,
-        "btxtaxc" : {
-          "id" : null,
-          "btxauth" : {
-            bsiauth : formData.authority,
-            name : formData.name       
-          }    
-        },
-        rescind : formData.endDate,
-        overtype : formData.overrideType,
-        amount : formData.flatAmunt,
-        rate : formData.rate,
-        "btxovfrs" : [ {
-          "id" : {
-            "empgroup" : null,
-            "taxcode" : null,
-            "taxtype" : null,
-            "formula" : 0,
-            "startdate" : null,
-            "resident" : true,
-            "paytype" : formData.paymentType
-          },
-          "btxover" : null,
-          "calcmeth" : 14,
-          "ovfrtax" : 0.05,
-          "ovfrmaxw" : 51.0,
-          "ovfrminw" : 520.0,
-          "ovfrmaxt" : 535.0,
-          "ovfrflat" : 5455.0,
-          "ovfrround" : 1,
-          "rescind" : null
-        }, {
-          "id" : {
-            "dataset" : null,
-            "empgroup" : null,
-            "taxcode" : null,
-            "taxtype" : null,
-            "formula" : 0,
-            "startdate" : null,
-            "resident" : true,
-            "paytype" : 1
-          },
-          "btxover" : null,
-          "calcmeth" : 6,
-          "ovfrtax" : 6.0,
-          "ovfrmaxw" : 61.0,
-          "ovfrminw" : 62.0,
-          "ovfrmaxt" : 63.0,
-          "ovfrflat" : 64.0,
-          "ovfrround" : 1,
-          "rescind" : null
-        }, {
-          "id" : {
-            "dataset" : null,
-            "empgroup" : null,
-            "taxcode" : null,
-            "taxtype" : null,
-            "formula" : 0,
-            "startdate" : null,
-            "resident" : true,
-            "paytype" : 2
-          },
-          "btxover" : null,
-          "calcmeth" : 7,
-          "ovfrtax" : 7.0,
-          "ovfrmaxw" : 72.0,
-          "ovfrminw" : 73.0,
-          "ovfrmaxt" : 74.0,
-          "ovfrflat" : 75.0,
-          "ovfrround" : 2,
-          "rescind" : null
-        }, {
-          "id" : {
-            "dataset" : null,
-            "empgroup" : null,
-            "taxcode" : null,
-            "taxtype" : null,
-            "formula" : 0,
-            "startdate" : null,
-            "resident" : true,
-            "paytype" : 3
-          },
-          "btxover" : null,
-          "calcmeth" : 0,
-          "ovfrtax" : 8.0,
-          "ovfrmaxw" : 82.0,
-          "ovfrminw" : 83.0,
-          "ovfrmaxt" : 84.0,
-          "ovfrflat" : 85.0,
-          "ovfrround" : 0,
-          "rescind" : null
-        } ]
+    "btxover": {
+      "id": {
+        dataset: appDataset(),
+        userID: appUserId(),
+        empgroup: filterFormData.id,
+        taxcode: formData.taxcode,
+        taxtype: formData.taxType,
+        formula: formData.formulaGroupOverride,
+        startdate: formData.startDate,
+        resident: formData.residentType
       },
-      "formulaTitle" : formData.formulaTitle,
-      "startDate" : "2019-01-01T05:00:00.000+0000",
-      "editMode" : 1,
-      "residency" : "N"
-    }
+      "btxtaxt": {
+        taxtype: formData.taxType,
+        taxname: formData.taxname
+      },
+      "btxegrp": null,
+      "btxtaxc": {
+        "id": null,
+        "btxauth": {
+          bsiauth: formData.authority,
+          name: formData.name
+        }
+      },
+      rescind: formData.endDate,
+      overtype: formData.overrideType,
+      amount: formData.flatAmunt,
+      rate: formData.rate,
+      "btxovfrs": [{
+        "id": {
+          "empgroup": null,
+          "taxcode": null,
+          "taxtype": null,
+          "formula": 0,
+          "startdate": null,
+          "resident": true,
+          "paytype": formData.paymentType
+        },
+        "btxover": null,
+        "calcmeth": 14,
+        "ovfrtax": 0.05,
+        "ovfrmaxw": 51.0,
+        "ovfrminw": 520.0,
+        "ovfrmaxt": 535.0,
+        "ovfrflat": 5455.0,
+        "ovfrround": 1,
+        "rescind": null
+      }, {
+        "id": {
+          "dataset": null,
+          "empgroup": null,
+          "taxcode": null,
+          "taxtype": null,
+          "formula": 0,
+          "startdate": null,
+          "resident": true,
+          "paytype": 1
+        },
+        "btxover": null,
+        "calcmeth": 6,
+        "ovfrtax": 6.0,
+        "ovfrmaxw": 61.0,
+        "ovfrminw": 62.0,
+        "ovfrmaxt": 63.0,
+        "ovfrflat": 64.0,
+        "ovfrround": 1,
+        "rescind": null
+      }, {
+        "id": {
+          "dataset": null,
+          "empgroup": null,
+          "taxcode": null,
+          "taxtype": null,
+          "formula": 0,
+          "startdate": null,
+          "resident": true,
+          "paytype": 2
+        },
+        "btxover": null,
+        "calcmeth": 7,
+        "ovfrtax": 7.0,
+        "ovfrmaxw": 72.0,
+        "ovfrminw": 73.0,
+        "ovfrmaxt": 74.0,
+        "ovfrflat": 75.0,
+        "ovfrround": 2,
+        "rescind": null
+      }, {
+        "id": {
+          "dataset": null,
+          "empgroup": null,
+          "taxcode": null,
+          "taxtype": null,
+          "formula": 0,
+          "startdate": null,
+          "resident": true,
+          "paytype": 3
+        },
+        "btxover": null,
+        "calcmeth": 0,
+        "ovfrtax": 8.0,
+        "ovfrmaxw": 82.0,
+        "ovfrminw": 83.0,
+        "ovfrmaxt": 84.0,
+        "ovfrflat": 85.0,
+        "ovfrround": 0,
+        "rescind": null
+      }]
+    },
+    "formulaTitle": formData.formulaTitle,
+    "startDate": "2019-01-01T05:00:00.000+0000",
+    "editMode": 1,
+    "residency": "N"
+  }
 }
 
 export function buildWorkSiteSaveInput(pageid, formdata, editmode, state) {
@@ -1580,8 +1768,10 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildAddressOverridesSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === 'unemploymentCompanyOverrides') {
     return buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, state);
-  } else if(pageid ==='groupOverride'){
-    return buildGroupOverrideSaveInput(pageid,formdata,editMode,state);
+  } else if (pageid === 'groupOverride') {
+    return buildGroupOverrideSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "whatifTaxes") {
+    return buildWhatIfTaxesSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }

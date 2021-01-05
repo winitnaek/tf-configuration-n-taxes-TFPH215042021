@@ -145,3 +145,7 @@ export const GENERATE_WHATIF_EMPLOYEE_DETAIL_PDF = '/WhatIfService/generateWhatI
 export const GET_UM_EMPLOYMENT_OVERRIDE_LIST ='/TaxCodeService/getUnempOverrideList'
 export const GET_UM_EMPLOYMENT_OVERRIDE_DELETE='/TaxCodeService/deleteUnemploymentOverride'
 export const GET_UM_EMPLOYMENT_OVERRIDE_SAVE='/TaxCodeService/saveUnemploymentOverride'
+export const GET_CUSTOM_GARNISHMENT_FORMULAS='/GarnishmentService/getCustomGarnishmentFormulasList'
+export const GET_WHATIF_AUTOCOMPLETE_TAXTYPES='/WhatIfService/getWhatIfAutocompleteTaxTypes'
+export const DELETE_WHATIF_EMPLOYEE_TAX='/WhatIfService/deleteWhatIfEmployeeTax'
+export const SAVE_WHATIF_EMPLOYEE_TAX='/WhatIfService/saveWhatIfEmployeeTax'

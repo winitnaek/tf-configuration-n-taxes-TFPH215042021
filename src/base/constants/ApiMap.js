@@ -145,7 +145,11 @@ import {
   GENERATE_WHATIF_EMPLOYEE_DETAIL_PDF,
   GET_UM_EMPLOYMENT_OVERRIDE_LIST,
   GET_UM_EMPLOYMENT_OVERRIDE_DELETE,
-  GET_UM_EMPLOYMENT_OVERRIDE_SAVE
+  GET_UM_EMPLOYMENT_OVERRIDE_SAVE,
+  GET_CUSTOM_GARNISHMENT_FORMULAS,
+  GET_WHATIF_AUTOCOMPLETE_TAXTYPES,
+  DELETE_WHATIF_EMPLOYEE_TAX,
+  SAVE_WHATIF_EMPLOYEE_TAX
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -226,7 +230,7 @@ export const metaDataApiMap = {
   disposableRateOverrides: GET_CUSTOM_FORMULAS,
   disposableOverride: GET_CUSTOM_TAX_FORMULAS,
   customGarnishmentFormulas: GET_CUSTOM_FORMULAS,
-  customGarnishmentTaxFormulas: GET_CUSTOM_TAX_FORMULAS,
+  customGarnishmentTaxFormulas: GET_CUSTOM_GARNISHMENT_FORMULAS,
   customPaymentExceptions: GET_CUSTOM_FORMULAS,
   customPaymentTaxExceptions: GET_CUSTOM_TAX_FORMULAS,
   customTaxPaymentOverrides: GET_CUSTOM_FORMULAS,
@@ -296,7 +300,8 @@ export const deleteDataApiMap = {
   groupOverride: DELETE_GROUP_OVERRIDE,
   whatifEmp:DELETE_WHAT_IF_EMPLOYEES,
   paymentOverride:DELETE_PAYMENT_OVERRIDE,
-  unemploymentCompanyOverrides:GET_UM_EMPLOYMENT_OVERRIDE_DELETE
+  unemploymentCompanyOverrides:GET_UM_EMPLOYMENT_OVERRIDE_DELETE,
+  whatifTaxes:DELETE_WHATIF_EMPLOYEE_TAX
 };
 
 export const saveDataApiMap = {
@@ -327,7 +332,8 @@ export const saveDataApiMap = {
   addressFromWorksite: SAVE_ADDRESS_FROM_WORKSITES,
   groupOverride: SAVE_GROUP_OVERRIDE,
   paymentOverride:SAVE_PAYMENT_OVERRIDE,
-  unemploymentCompanyOverrides:GET_UM_EMPLOYMENT_OVERRIDE_SAVE
+  unemploymentCompanyOverrides:GET_UM_EMPLOYMENT_OVERRIDE_SAVE,
+  whatifTaxes:SAVE_WHATIF_EMPLOYEE_TAX
 };
 
 export const saveAsAPIMap = {
@@ -404,5 +410,9 @@ export const autoCompleteApiMap = {
   authTaxCode:GET_UDQ_AUTOCOMPLETE,
   planId:GET_UDQ_AUTOCOMPLETE,
   taxTypeUnemp:GET_UDQ_AUTOCOMPLETE,
-  formulaUnemp:GET_UDQ_AUTOCOMPLETE
+  formulaUnemp:GET_UDQ_AUTOCOMPLETE,
+  usrTax: GET_UDQ_AUTOCOMPLETE,
+  usrauthcd:WHATIF_GARN_AUTOCOMPLETE_AUTHS,
+  bsitaxtyp:GET_WHATIF_AUTOCOMPLETE_TAXTYPES,
+  formulawhatif:WHATIF_GARN_AUTOCOMPLETE_FORMULAS
 };
