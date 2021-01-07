@@ -1,10 +1,16 @@
 import {appError, getAdminErrorMessage}  from "bsiuilib";
-import {generateReportUrl, reqInfo,buildMaritalStatusInput} from "../../base/utils/tfUtils";
+import {generateReportUrl, reqInfo,buildMaritalStatusInput, buildBatchTestInput} from "../../base/utils/tfUtils";
 import store from '../../tf_index';
 class generateReportApi {
   static generate(pageid, data) {
     let url = generateReportUrl(pageid);
-    let formInput = buildMaritalStatusInput(pageid, store, data);
+    let formInput;
+    if(pageid === "batchTest")
+    {
+        formInput = buildBatchTestInput(pageid, store, data);
+    } else {
+        formInput = buildMaritalStatusInput(pageid, store, data);
+    }
     let tt = JSON.stringify(formInput);
     return fetch(url, reqInfo(tt))
     .then(response => {

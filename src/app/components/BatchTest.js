@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Row, Col, Container, UncontrolledTooltip, Button } from "reactstrap";
+import { Row, Col, Container, UncontrolledTooltip, Alert, Button, ButtonGroup } from "reactstrap";
 import { CustomFile, CustomCheckbox } from "bsiuilib";
 import generateReportAPI from "../api/generateReportAPI";
 import * as metaData from "../metadata/metaData";
@@ -20,7 +20,11 @@ class BatchTest extends Component {
       values: {
         [uploadField.id]: uploadField.value,
         [modeField.id]: modeField.value || []
-      }
+      },
+      cSelected: [1],
+      rSelected: 1,
+      testContent: '',
+      fileName: '',
     };
     const toBase64 = file =>
       new Promise((resolve, reject) => {
@@ -38,7 +42,8 @@ class BatchTest extends Component {
       values[uploadField.id] = event.target.value;
       this.setState(
         {
-          values
+          values,
+          fileName: file.name,
         },
         async () => {
           this.base64File = await toBase64(file);
@@ -46,24 +51,18 @@ class BatchTest extends Component {
       );
     };
 
-    this.onFilterChange = (fieldId, value) => {
-      const { values } = this.state;
-      values[fieldId] = value;
-      this.setState({
-        values
-      });
-    };
-
     this.onUpload = () => {
       const { pgid } = this.props;
       const [uploadField, modeField] = fieldData[pgid];
       const { base64File } = this;
-      const { values } = this.state;
-      const data = {
-        [uploadField.id]: base64File,
-        [modeField.id]: values[modeField.id]
+      const { cSelected, rSelected, testContent, fileName } = this.state;
+      const inputFile =  rSelected === 1 ? base64File : btoa(testContent);
+      const payload = {
+        data: inputFile.substring(inputFile.indexOf(',') + 1, inputFile.length),
+        exportMode: cSelected,
+        fileName,
       };
-      generateReportAPI.generate(pgid, data).then(uploadResults => {
+      generateReportAPI.generate(pgid, payload).then(uploadResults => {
         this.setState({
           uploadResults,
           values: {
@@ -73,11 +72,25 @@ class BatchTest extends Component {
         });
       });
     };
+
+
+   this.onCheckboxBtnClick = (selected) => {
+     const currSelected = this.state.cSelected;
+    const index = currSelected.indexOf(selected);
+    if (index < 0) {
+      currSelected.push(selected);
+    } else {
+      currSelected.splice(index, 1);
+    }
+    this.setState({ cSelected: currSelected });
   }
+  }
+
+  
 
   render() {
     const { pgid } = this.props;
-    const { values, uploadResults } = this.state;
+    const { values, uploadResults, type, mode } = this.state;
     const { pgdef } = metaData[pgid];
     const [uploadField, modeField] = fieldData[pgid];
     return (
@@ -90,35 +103,107 @@ class BatchTest extends Component {
                 <i className="fas fa-question-circle  fa-lg" onClick={this.OpenHelp} style={styles.helpicon} />
               </span>
             </span>
-            <UncontrolledTooltip placement="right" target="help">
-              <span> {pgdef.helpLabel} </span>
+            <UncontrolledTooltip placement="top" target="help">
+              <span> Help </span>
+            </UncontrolledTooltip>
+            </span>
+            <span style={{ marginLeft: "10px" }}>
+            <span id="pageInfo">
+              <span>
+                <i className="fas fa-info-circle  fa-lg" style={styles.helpicon} />
+              </span>
+            </span>
+            <UncontrolledTooltip placement="right" target="pageInfo">
+              <span> {pgdef.pgsubtitle} </span>
             </UncontrolledTooltip>
           </span>
-          {pgdef.pgsubtitle && <p>{pgdef.pgsubtitle}</p>}
         </Row>
-        <Row>
-          <Col>
-            <CustomFile {...uploadField} value={values[uploadField.id]} onChange={this.onFileSelect} />
-            <CustomCheckbox {...modeField} value={values[modeField.id]} onChange={this.onFilterChange} />
-            <div className="clearfix">
-              <Button color="success" className="float-right" onClick={this.onUpload}>
-                Upload
-              </Button>
-            </div>
-          </Col>
-        </Row>
-        <Row>
+         <Row>
           <Col>
             <div>
-              <label>{pgdef.messageLabel}</label>
-              {uploadResults && uploadResults.status !== "ERROR" && uploadResults.results ? (
-                <UploadResults {...uploadResults} />
-              ) : (
-                <p>{uploadResults && uploadResults.message ? uploadResults.message : null}</p>
-              )}
+              <UploadResults {...uploadResults} />
             </div>
-            {pgdef.disclaimer && <p>{pgdef.disclaimer}</p>}
+            {/* {pgdef.disclaimer && <p>{pgdef.disclaimer}</p>} */}
           </Col>
+        </Row>
+        
+        <Row>
+          <div style={{ display: 'flex', marginBottom: '10px'}}>
+            <span style={{     width: '50px',
+    display: 'inline-block',
+    textAlign: 'left'}}> Test </span> :
+            <div 
+              style={{ 
+                marginLeft: '10px',
+                marginBottom: '15px',
+                marginTop: '-6px'
+              }} 
+              class="btn-group btn-group-toggle" 
+              data-toggle="buttons"
+            >
+              <ButtonGroup>
+                <Button color="primary" onClick={() => this.setState({ rSelected:1})} active={this.state.rSelected === 1}>File</Button>
+                <Button color="primary" onClick={() => this.setState({ rSelected:2})} active={this.state.rSelected === 2}>Test Content</Button>
+              </ButtonGroup>
+            </div>
+          </div> 
+        </Row>
+        <Row>
+        <div style={{ display: 'flex'}}>
+          <span style={{     width: '50px',
+    display: 'inline-block',
+    textAlign: 'left'}}>Mode </span> :
+          <div style={{ 
+                marginLeft: '10px',
+                marginBottom: '15px',
+                marginTop: '-6px'
+              }}  
+              data-toggle="buttons"
+            >
+            <ButtonGroup>
+              <Button id="whatifCheckbox" color="primary" onClick={() => this.onCheckboxBtnClick(1)} active={this.state.cSelected.includes(1)}> Export
+              <UncontrolledTooltip placement="top" target="whatifCheckbox">
+                <span> Export to What-if Test </span>
+              </UncontrolledTooltip></Button>
+              <Button id="extendedCheckbox" color="primary" onClick={() => this.onCheckboxBtnClick(2)} active={this.state.cSelected.includes(2)}>Extended Format
+              <UncontrolledTooltip placement="top" target="extendedCheckbox">
+                <span> Output in Extended Format </span>
+              </UncontrolledTooltip></Button>
+              <Button id="summaryCheckbox" color="primary" onClick={() => this.onCheckboxBtnClick(3)} active={this.state.cSelected.includes(3)}> Generate Summary
+              <UncontrolledTooltip placement="top" target="summaryCheckbox">
+                <span> Generate Summary MNC file </span>
+              </UncontrolledTooltip></Button>
+            </ButtonGroup>
+          </div> 
+          </div>
+        </Row>
+        <Row>
+        <div style={{ display: 'flex'}}>
+          <span style={{     width: '50px',
+              display: 'inline-block',
+              textAlign: 'left'}}>File </span> :
+          <div style={{
+            display: 'flex',
+            marginTop: '-5px',
+            marginLeft: '-5px',
+            alignItems: `${this.state.rSelected === 1 ? 'flex-start' : 'flex-end'}`
+          }}>
+            {
+              this.state.rSelected === 1
+              ? <CustomFile {...uploadField} value={values[uploadField.id]} onChange={this.onFileSelect} />
+              : <textarea style={{ marginLeft: '15px'}} rows="4" cols="50" value={this.state.testContent} onChange={(event) => this.setState({ testContent: event.target.value})} />
+            }
+              <Button style={{ height: "36px", marginLeft: `${this.state.rSelected === 1 ? '-5px' : '10px'}`, marginRight: '10px'}} color="primary" onClick={this.onUpload}>
+                  Upload
+              </Button>
+              <span id="uploadInfo">
+              <i className="fas fa-exclamation-triangle fa-lg" style={styles.helpicon} />
+              </span>
+              <UncontrolledTooltip placement="right" target="uploadInfo">
+                  <span> {pgdef.disclaimer} </span>
+              </UncontrolledTooltip>
+          </div>
+        </div>
         </Row>
       </Container>
     );
@@ -139,7 +224,7 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(BatchTest);
 
 export const UploadResults = props => {
-  const { uploadStatus, batchStatus, instruction, results } = props;
+  const { uploadStatus, batchStatus, instruction, results, resultType="success" } = props;
   const openMessageViewer = () => {
     const data = tfTools.find(tool => tool.id === "messageViewer");
     if (data) {
@@ -148,23 +233,50 @@ export const UploadResults = props => {
   };
 
   return (
-    <Fragment>
-      <div className="border p-2 mb-3">
-        <p>{uploadStatus}</p>
+    // <Fragment>
+    //   <div className="border p-2 mb-3" 
+    //     style={{display: 'flex',
+    //     alignItems: 'center',
+    //     justifyContent: 'space-between',
+    //     border: `2px solid ${resultType === 'success' ? 'green': 'red'} !important`,
+    //     color: `${resultType === 'success' ? 'green': 'red'}`,
+    //   }}>
+        /* <span> Test REsult for: JAJSJASJA.txt</span> */
+        <Alert color="success" style={{display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between', width: '80%',
+            marginLeft: '120px' }}>
+          Test Result for:
+        <div style={{width: '100px',
+          display: 'flex', color: ' rgb(76, 115, 146)', justifyContent: 'space-around'}}>
+        <span id="downloadResult" onClick={openMessageViewer}>
+          <i class="fa fa-download" aria-hidden="true" />
+          <UncontrolledTooltip placement="top" target="downloadResult">
+            <span> Download Result </span>
+          </UncontrolledTooltip>
+        </span>
+        <span id="viewPdf" onClick={() => {}}>
+          <i className="fa fa-file-pdf fa-lg" />
+          <UncontrolledTooltip placement="bottom" target="viewPdf">
+            <span> View Result as PDF</span>
+          </UncontrolledTooltip>
+        </span>
+        <span id="messageViewer" onClick={openMessageViewer}>
+          <i class="fa fa-eye" aria-hidden="true"></i>
+          <UncontrolledTooltip placement="top" target="messageViewer">
+            <span> View Result in MessageViewer</span>
+          </UncontrolledTooltip>
+        </span>
+        </div>
+        </Alert>
+        /* <p>{uploadStatus}</p>
         <p>{batchStatus}</p>
         <p>{instruction}</p>
         {results.map(result => (
           <ResultRow {...result} />
-        ))}
-      </div>
-      <p>
-        Open{" "}
-        <span className="text-primary" style={{cursor:'pointer'}} onClick={openMessageViewer}>
-          Message Viewer
-        </span>{" "}
-        for details.
-      </p>
-    </Fragment>
+        ))} */
+    //   </div>
+    //  </Fragment>
   );
 };
 
