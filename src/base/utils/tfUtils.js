@@ -331,7 +331,9 @@ function deductionBenefitsGridInput(pageid, filterData, stDate, enDate) {
  */
 function whatIfGarnishmentsGridInput(pageid, filterData, stDate, enDate) {
   let empCode = filterData.empCode ? filterData.empCode : filterData.empcode;
-  let checkDate = filterData.checkDate ? filterData.checkDate : filterData.chkdt;
+  let checkDate = filterData.checkDate ?
+    filterData.checkDate :
+    filterData.chkdt;
   let input = {
     pageId: pageid,
     dataset: appDataset(),
