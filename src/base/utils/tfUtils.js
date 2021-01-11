@@ -20,6 +20,7 @@ import {
 } from "bsiuilib";
 import * as CellsRenderer from "../../app/metadata/cellsrenderer";
 import store from "../../tf_index";
+import {garnishmentFormulaOverrides,buildGarnishmentFormulaOverridesDelete,getGarnFormulaOverdTaxTypeInput,buildGarnishmentFormulaOverridesSaveInput} from './gfOverridesUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -414,6 +415,8 @@ export function buildGridDataInput(pageid, store) {
     input = paymentOverrideGridInput(pageid, filterData, stDate, enDate, state);
   } else if (pageid === 'unemploymentCompanyOverrides') {
     input = unemploymentCompanyOverridesGridInput(pageid, filterData, stDate, enDate, state);
+  } else if (pageid === 'garnishmentFormulaOverrides') {
+    input = garnishmentFormulaOverrides(pageid, filterData, stDate, enDate, state);
   } else {
     if (state.parentData) { //Reset Parent Data
       let parentData = {};
@@ -695,6 +698,9 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       taxType: formValues['bsitaxtyp'].id
     }
     return Object.assign(input, additionalFields);
+  }
+  if(pageid === 'garnishmentType' && formValues){
+    return getGarnFormulaOverdTaxTypeInput(input,formValues);
   }
   // return Object.assign(input, formValues);
   return input;
@@ -989,6 +995,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildGroupOverrideDelete(pageid, formdata, mode, state);
   } else if (pageid === "whatifTaxes") {
     return buildWhatIfTaxesDelete(pageid, formdata, mode, state);
+  } else if (pageid === "garnishmentFormulaOverrides") {
+    return buildGarnishmentFormulaOverridesDelete(pageid, formdata, mode, state);
   } else {
     console.log("formdata");
     console.log(formdata);
@@ -1717,6 +1725,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildGroupOverrideSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "whatifTaxes") {
     return buildWhatIfTaxesSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "garnishmentFormulaOverrides") {
+    return buildGarnishmentFormulaOverridesSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }
