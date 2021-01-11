@@ -648,6 +648,14 @@ export function getPmtUsrCode(filterData) {
 export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   let state = store.getState();
   let input;
+  if(pageid === "residentTaxTypelocal" || pageid === "residentTaxType" || pageid === "nonresidentTaxType" || pageid === "nonresidentTaxTypelocal") {
+    input = {
+        "authCode": patten[0].authId
+    }
+
+    return input;
+  }
+  
   if (pageid === "formulaTitle") {
     input = {
       pageId: pageid,
@@ -781,6 +789,29 @@ export function buildwhatifLocationsDelete(pageid, formdata, editMode, state) {
     employee: formFilterData.employeeCode,
     checkdate: formFilterData.checkDate,
     locnnumbr: formdata.locnnumbr,
+  }
+}
+
+export function buildReciprocalOverrideDelete(pageid, formdata, editMode, state) {
+  const {
+    formFilterData
+  } = state;
+  return {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    emplGroup: formFilterData.id,
+    startDate: formdata.startDate,
+    resTaxCode: formdata.resAuthDisplay.split('\n')[0],
+    resAuth: formdata.resAuth,
+    resFormula: 0, 
+    resOvrFltr:"0",
+    resTaxType:formdata.resTaxTypeDisplay.split('\n')[0],
+    nonResTaxCode:  formdata.nonResAuthDisplay.split('\n')[0],
+    nonResAuth: formdata.nonResAuth,
+    nonResFormula:"0",
+    nonResOvrFltr: "0",
+    nonResTaxType: formdata.nonResTaxTypeDisplay.split('\n')[0],
   }
 }
 /**
@@ -987,6 +1018,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildEmploymentCompanyOverridesDelete(pageid, formdata, mode, state);
   } else if (pageid === "groupOverride") {
     return buildGroupOverrideDelete(pageid, formdata, mode, state);
+  } else if (pageid === "reciprocalOverride") {
+      return buildReciprocalOverrideDelete(pageid, formdata, mode, state);
   } else if (pageid === "whatifTaxes") {
     return buildWhatIfTaxesDelete(pageid, formdata, mode, state);
   } else {
@@ -1583,6 +1616,61 @@ function buildwhatifLocationsSaveInput(pageid, formdata, editMode, state) {
 
   }
 }
+
+function buildReciprocalOverrideSaveInput(pageid, formdata, editMode, state) {
+  const filterFormData = state.formFilterData;
+if(editMode === 2) {
+  return {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    emplGroup: filterFormData.id,
+    ovrType: formdata.ovrType,
+    startDate: moment(formdata.startDate).format("MM/DD/YYYY"), 
+    resTaxCode: formdata.resAuthDisplay && formdata.resAuthDisplay.split('\n')[0],
+    resAuth: formdata.resAuth,
+    resOvrFltr:"0",
+    resTaxType:formdata.resTaxTypeDisplay && formdata.resTaxTypeDisplay.split('\n')[0],
+    nonResTaxCode: formdata.nonResAuthDisplay && formdata.nonResAuthDisplay.split('\n')[0],
+    nonResAuth: formdata.nonResAuth,
+    nonResOvrFltr:"0",
+    nonResTaxType: formdata.nonResTaxTypeDisplay && formdata.nonResTaxTypeDisplay.split('\n')[0],
+    endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
+    method:"Z",
+    rate: formdata.rate,
+    calcMsg: editMode === 2 ? (formdata.calcMsgDisplay === "N" ? "false": "true") : formdata.showcalcmesg,
+    wgRpt: formdata.wageReportingMethod,
+    rptMsg: editMode === 2 ? (formdata.rptMsgDisplay === "N" ? "false" : "true") : formdata.showreportmesg,
+    editMode,
+}
+} else {
+  return {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    emplGroup: filterFormData.id,
+    ovrType: formdata.ovrType,
+    startDate: moment(formdata.startDate).format("MM/DD/YYYY"), 
+    resTaxCode: formdata.taxCodeToBeOverridden || formdata.taxCodeToBeOverriddenlocal,
+    resAuth:  formdata.taxCodeToBeOverridden || formdata.taxCodeToBeOverriddenlocal,
+    resOvrFltr:"0",
+    resTaxType:formdata.residentTaxType || formdata.residentTaxTypelocal,
+    nonResTaxCode: formdata.taxCodeToReciprocate || formdata.taxCodeToReciprocatelocal,
+    nonResAuth: formdata.taxCodeToReciprocate || formdata.taxCodeToReciprocatelocal,
+    nonResOvrFltr:"0",
+    nonResTaxType: formdata.nonresidentTaxType || formdata.nonresidentTaxTypelocal,
+    endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
+    "method": formdata.calculationMethod || formdata.calculationMthd,
+    rate: formdata.rate,
+    calcMsg: editMode === 2 ? (formdata.calcMsgDisplay === "N" ? "false": "true") : formdata.showcalcmesg,
+    wgRpt: formdata.wageReportingMethod,
+    rptMsg: editMode === 2 ? (formdata.rptMsgDisplay === "N" ? "false" : "true") : formdata.showreportmesg,
+    editMode,
+}
+}
+  
+}
+
 export function buildTaxLocatorSaveInput(pageId, formData, editMode) {
   return {
     btxlemp: {
@@ -1717,6 +1805,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildGroupOverrideSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "whatifTaxes") {
     return buildWhatIfTaxesSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "reciprocalOverride") {
+    return buildReciprocalOverrideSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }
