@@ -162,7 +162,11 @@ import {
   GET_NON_RESIDENT_TAX_TYPE_LOCAL,
   DELETE_RECIPROCAL_OVERRIDE,
   SAVE_RECIPROCAL_OVERRIDE,
-  GET_CONNECT_TO_DATA_SETS
+  GET_CONNECT_TO_DATA_SETS,
+  DELETE_GARNISHMENT_FORMULA_OVERRIDE,
+  GET_GARN_FORMULA_OVERD_TAXTYPE_AUTOCOMP,
+  SAVE_GARNISHMENT_FORMULA_OVD,
+  GARNISHMENT_FORMULA_OVERRIDE_PDF
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -274,7 +278,7 @@ export const metaDataApiMap = {
   taxHistoryReport: GET_TAX_HISTORY_REPORT,
   messageToSuppress: GET_SUPPRESSED_MESSAGES,
   // Garnishnishment Formula Override
-  garnishmentFormulasOverride: GARNISHMENT_FORMULAS_OVERRIDE,
+  garnishmentFormulasOverride: GET_GARNISHMENT_GROUPS,
   garnishmentFormulaOverrides: GARNISHMENT_FORMULA_OVERRIDES,
   garnishmentFormulaOverrideDetails: GET_USER_DATA_QUERIES,
   dataSets: GET_DATASETS,
@@ -289,7 +293,8 @@ export const metaDataApiMap = {
 export const viewPDFApiMap = {
   taxLocator: VIEW_PDF_TAX_LOCATOR,
   runLocatorService: VIEW_PDF_RUN_LOCATOR_SERVICE,
-  groupOverride: VIEW_PDF_GROUP_OVERRIDE
+  groupOverride: VIEW_PDF_GROUP_OVERRIDE,
+  garnishmentFormulaOverrides:GARNISHMENT_FORMULA_OVERRIDE_PDF
 }
 
 export const deleteDataApiMap = {
@@ -318,7 +323,8 @@ export const deleteDataApiMap = {
   paymentOverride:DELETE_PAYMENT_OVERRIDE,
   unemploymentCompanyOverrides:GET_UM_EMPLOYMENT_OVERRIDE_DELETE,
   whatifTaxes:DELETE_WHATIF_EMPLOYEE_TAX,
-  reciprocalOverride: DELETE_RECIPROCAL_OVERRIDE
+  reciprocalOverride: DELETE_RECIPROCAL_OVERRIDE,
+  garnishmentFormulaOverrides:DELETE_GARNISHMENT_FORMULA_OVERRIDE
 };
 
 export const saveDataApiMap = {
@@ -351,7 +357,8 @@ export const saveDataApiMap = {
   paymentOverride:SAVE_PAYMENT_OVERRIDE,
   unemploymentCompanyOverrides:GET_UM_EMPLOYMENT_OVERRIDE_SAVE,
   whatifTaxes:SAVE_WHATIF_EMPLOYEE_TAX,
-  reciprocalOverride: SAVE_RECIPROCAL_OVERRIDE
+  reciprocalOverride: SAVE_RECIPROCAL_OVERRIDE,
+  garnishmentFormulaOverrides:SAVE_GARNISHMENT_FORMULA_OVD
 };
 
 export const saveAsAPIMap = {
@@ -410,7 +417,7 @@ export const autoCompleteApiMap = {
   bsiAuth: GET_UDQ_AUTOCOMPLETE,
   permissionFor: PERMISSION_FOR,
   customGarnishmentFormula: CUSTOM_GARNISHMENT_FORMULA,
-  garnishment: GARNISHMENT,
+  garnishmentType: GET_GARN_FORMULA_OVERD_TAXTYPE_AUTOCOMP,
   authorityName: AUTHORITY_NAME,
   employeeGroup: GET_EMPLOYEE_GROUPS,
   empGroup:GET_EMPLOYEE_GROUPS,
