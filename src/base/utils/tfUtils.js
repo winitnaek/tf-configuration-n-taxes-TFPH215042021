@@ -20,7 +20,7 @@ import {
 } from "bsiuilib";
 import * as CellsRenderer from "../../app/metadata/cellsrenderer";
 import store from "../../tf_index";
-import {garnishmentFormulaOverrides,buildGarnishmentFormulaOverridesDelete,getGarnFormulaOverdTaxTypeInput,buildGarnishmentFormulaOverridesSaveInput} from './gfOverridesUtil';
+import {garnishmentFormulaOverrides,buildGarnishmentFormulaOverridesDelete,getGarnFormulaOverdTaxTypeInput,buildGarnishmentFormulaOverridesSaveInput,generateGarnishmentFormulaOverridePDF} from './gfOverridesUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -1065,15 +1065,18 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
 export function buildPdfInput(pageid, store, formdata, mode) {
   const state = store.getState();
   const filterData = state.formFilterData;
-  return {
-    dataset: appDataset(),
-    employee: filterData.employeeCode,
-    checkdate: filterData.checkDate,
-    empGroup: filterData.id,
-    userId: appUserId(),
-    showSummary: true
+  if(pageid==='garnishmentFormulaOverrides'){
+    return generateGarnishmentFormulaOverridePDF(pageid, store, formdata, mode)
+  }else{
+    return {
+      dataset: appDataset(),
+      employee: filterData.employeeCode,
+      checkdate: filterData.checkDate,
+      empGroup: filterData.id,
+      userId: appUserId(),
+      showSummary: true
+    }
   }
-
 }
 /**
  * buildWhatifEmpSaveInput
