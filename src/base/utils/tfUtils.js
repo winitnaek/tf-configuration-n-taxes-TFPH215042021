@@ -710,6 +710,18 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   if(pageid === 'garnishmentType' && formValues){
     return getGarnFormulaOverdTaxTypeInput(input,formValues);
   }
+  if(pageid === 'formula' && formValues){
+    input = {
+      pageId: pageid,
+      dataset: appDataset(),
+      userId: appUserId(),
+      pattern: patten,
+      taxCode:  formValues['taxCode'].id,
+      taxType:  formValues['taxType'].id,
+      startdate:formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
+    }
+    return input;
+  }
   // return Object.assign(input, formValues);
   return input;
 }
