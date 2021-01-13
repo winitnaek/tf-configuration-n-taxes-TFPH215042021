@@ -21,6 +21,7 @@ import {
 import * as CellsRenderer from "../../app/metadata/cellsrenderer";
 import store from "../../tf_index";
 import {garnishmentFormulaOverrides,buildGarnishmentFormulaOverridesDelete,getGarnFormulaOverdTaxTypeInput,buildGarnishmentFormulaOverridesSaveInput,generateGarnishmentFormulaOverridePDF} from './gfOverridesUtil';
+import {buildCustomTaxFormulasSaveInput} from './cfFormulaUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -1832,6 +1833,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildReciprocalOverrideSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "garnishmentFormulaOverrides") {
     return buildGarnishmentFormulaOverridesSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "customTaxFormulas") {
+    return buildCustomTaxFormulasSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }
