@@ -15,7 +15,8 @@ import formDataAPI from "../api/formDataAPI";
 import * as gridStyles from "../../base/constants/AppConstants";
 import ButtonBar from "./ButtonBar";
 import { Modal, ModalHeader, ModalBody, Row, Col } from "reactstrap";
-import { compMetaData} from "../../base/utils/tfUtils";
+import { compMetaData,populateParentData} from "../../base/utils/tfUtils";
+import {setParentInfo} from '../../app/actions/parentInfoActions';
 class CustomGrid extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +47,7 @@ class CustomGrid extends Component {
       //  this.props.setFormData(data)    //  This is needed for subsequent edits to get form data
       this.props.setFilterFormData(formData); // This is used to make the api call to render the grid
     };
-
+    
     this.handleOk = () => {
       this.setState({
         showAlert: false
@@ -56,6 +57,7 @@ class CustomGrid extends Component {
     this.clickCheckBox = this.clickCheckBox.bind(this);
     this.toggle = this.toggle.bind(this);
     this.getGridPopupData = this.getGridPopupData.bind(this);
+    this.parentInfoAction = this.parentInfoAction.bind(this);
   }
 
   componentDidMount() {
@@ -81,6 +83,9 @@ class CustomGrid extends Component {
     })
   }
 
+  parentInfoAction(formData){
+    this.props.setParentInfo(formData);
+  };
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -115,7 +120,7 @@ class CustomGrid extends Component {
     const { pgdef, griddef } = metadata;
     const { metaInfo } = pgdef;
 
-    const { formAction, filterFormAction } = this;
+    const { formAction, filterFormAction , parentInfoAction } = this;
     return (
       <Fragment>
         <ReusableGrid
@@ -144,6 +149,8 @@ class CustomGrid extends Component {
           getDataForChildGrid={getDataForChildGrid}
           getPdfDataAPI={getPdfDataAPI}
           clickCheckBox={this.clickCheckBox}
+          setParentInfo={parentInfoAction}
+          fillParentInfo={populateParentData}
         />
         {griddef.hasButtonBar && griddef.hasButtonBar == true ? (
           <ButtonBar
@@ -189,6 +196,8 @@ class CustomGrid extends Component {
                     className={className}
                     hideModal={this.toggle}
                     getPdfDataAPI={getPdfDataAPI}
+                    setParentInfo={this.parentInfoAction}
+                    fillParentInfo={this.populateParentData}
                   />
                 ) : null}
               </Col>
@@ -203,12 +212,13 @@ class CustomGrid extends Component {
 function mapStateToProps(state) {
   return {
     formData: state.formData,
-    formFilterData: state.formFilterData
+    formFilterData: state.formFilterData,
+    parentInfo:state.parentInfo
   };
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setFilterFormData, setFormData }, dispatch);
+  return bindActionCreators({ setFilterFormData, setFormData, setParentInfo }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomGrid);

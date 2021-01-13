@@ -128,5 +128,6 @@ export default {
     taxCode: "",
     formdata: {}
   },
-  parentData:{}
+  parentData:{},
+  parentInfo:{}
 };

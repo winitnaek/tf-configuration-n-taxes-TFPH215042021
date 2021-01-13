@@ -2229,6 +2229,18 @@ const mockdatamap = [{
     url: "./_whatifGarnishment_MockData.json"
   }
 ];
-
+export function populateParentData(fieldInfo,initialValues, pageId) {
+  if (pageId === 'customTaxFormulas') {
+    const state = store.getState();
+    const parentInfo  = state.parentInfo;
+    initialValues.taxCode = parentInfo.taxCode;
+  }else if (pageId === 'worksiteCompanies') {
+    const state = store.getState();
+    const parentInfo  = state.parentInfo;
+    initialValues.company = parentInfo.company;
+    initialValues.companyName = parentInfo.companyName;
+  }
+  return initialValues;
+}
 //all for test autoComplete
 const mockselectmap = [];

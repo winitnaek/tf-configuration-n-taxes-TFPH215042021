@@ -4,7 +4,7 @@ import favoriteLinks from '../../app/home/actions/favoriteLinksReducer';
 import moduleAreaReducer from "../../app/home/actions/moduleLinksReducer";
 import formFilterData from '../../app/reducers/filterFormReducer';
 import parentData from '../../app/reducers/parentDataReducer';
-
+import parentInfo from '../../app/reducers/parentInfoReducer';
 import usage from "../../app/reducers/usageReducer";
 
 const rootReducer = combineReducers({
@@ -14,5 +14,6 @@ const rootReducer = combineReducers({
   favoriteLinks,
   usage,
   parentData,
+  parentInfo,
 });
 export default rootReducer;
