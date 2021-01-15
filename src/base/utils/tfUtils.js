@@ -22,6 +22,7 @@ import * as CellsRenderer from "../../app/metadata/cellsrenderer";
 import store from "../../tf_index";
 import {garnishmentFormulaOverrides,buildGarnishmentFormulaOverridesDelete,getGarnFormulaOverdTaxTypeInput,buildGarnishmentFormulaOverridesSaveInput,generateGarnishmentFormulaOverridePDF} from './gfOverridesUtil';
 import {buildCustomTaxFormulasSaveInput} from './cfFormulaUtil';
+import {optionalRateOverrideGridInput,buildOptionalRateOverrideDelete,getOrOverrideTaxTypeInput,getOrOverrideFormulaInput,buildOptionalRateOverrideSaveInput} from './orOverridesUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -418,6 +419,8 @@ export function buildGridDataInput(pageid, store) {
     input = unemploymentCompanyOverridesGridInput(pageid, filterData, stDate, enDate, state);
   } else if (pageid === 'garnishmentFormulaOverrides') {
     input = garnishmentFormulaOverrides(pageid, filterData, stDate, enDate, state);
+  } else if (pageid === 'optionalRateOverride') {
+    input = optionalRateOverrideGridInput(pageid, filterData, stDate, enDate, state);
   } else {
     if (state.parentData) { //Reset Parent Data
       let parentData = {};
@@ -700,7 +703,7 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       taxAuth: formValues['usrauthcd'].id
     }
     return Object.assign(input, additionalFields);
-  } else if (pageid === 'formulawhatif' && formValues) {
+  } if (pageid === 'formulawhatif' && formValues) {
     additionalFields = {
       checkDate: formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
       authCode: formValues['usrauthcd'].id,
@@ -710,6 +713,12 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   }
   if(pageid === 'garnishmentType' && formValues){
     return getGarnFormulaOverdTaxTypeInput(input,formValues);
+  }
+  if(pageid === 'orOverrideTaxType' && formValues){
+    return getOrOverrideTaxTypeInput(input,formValues);
+  }
+  if(pageid === 'orOverrideFormula' && formValues){
+    return getOrOverrideFormulaInput(input,formValues);
   }
   if(pageid === 'formula' && formValues){
     input = {
@@ -1043,6 +1052,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildWhatIfTaxesDelete(pageid, formdata, mode, state);
   } else if (pageid === "garnishmentFormulaOverrides") {
     return buildGarnishmentFormulaOverridesDelete(pageid, formdata, mode, state);
+  } else if (pageid === "optionalRateOverride") {
+    return buildOptionalRateOverrideDelete(pageid, formdata, mode, state);
   } else {
     console.log("formdata");
     console.log(formdata);
@@ -1835,6 +1846,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildGarnishmentFormulaOverridesSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "customTaxFormulas") {
     return buildCustomTaxFormulasSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "optionalRateOverride") {
+    return buildOptionalRateOverrideSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }

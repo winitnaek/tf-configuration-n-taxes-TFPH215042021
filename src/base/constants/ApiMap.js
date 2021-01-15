@@ -166,7 +166,14 @@ import {
   DELETE_GARNISHMENT_FORMULA_OVERRIDE,
   GET_GARN_FORMULA_OVERD_TAXTYPE_AUTOCOMP,
   SAVE_GARNISHMENT_FORMULA_OVD,
-  GARNISHMENT_FORMULA_OVERRIDE_PDF
+  GARNISHMENT_FORMULA_OVERRIDE_PDF,
+  GET_OPTIONAL_RATE_OVERRIDES,
+  GET_OPTIONAL_RATE_OVRD_AUTO_COMP_AUTH,
+  GET_OPTIONAL_RATE_OVRD_AUTO_COMP_TAXT,
+  GET_OPTIONAL_RATE_OVRD_AUTO_COMP_FORM,
+  GET_OPTIONAL_RATE_OVRD_BSI_WAGE,
+  DELETE_OPTIONAL_RATE_OVERRIDE,
+  SAVE_OPTIONAL_RATE_OVERRIDE
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -240,8 +247,8 @@ export const metaDataApiMap = {
   company: GET_COMPANIES,
   unemploymentOverrides: GET_COMPANIES,
   unemploymentCompanyOverrides: GET_UM_EMPLOYMENT_OVERRIDE_LIST,
-  optionalRateOverrides: GET_CUSTOM_FORMULAS,
-  optionalRateOverride: GET_CUSTOM_TAX_FORMULAS,
+  optionalRateOverrides: GET_COMPANIES,
+  optionalRateOverride: GET_OPTIONAL_RATE_OVERRIDES,
   customNexusData: GET_CUSTOM_FORMULAS,
   customNexusCompanyData: GET_CUSTOM_TAX_FORMULAS,
   disposableRateOverrides: GET_CUSTOM_FORMULAS,
@@ -324,7 +331,8 @@ export const deleteDataApiMap = {
   unemploymentCompanyOverrides:GET_UM_EMPLOYMENT_OVERRIDE_DELETE,
   whatifTaxes:DELETE_WHATIF_EMPLOYEE_TAX,
   reciprocalOverride: DELETE_RECIPROCAL_OVERRIDE,
-  garnishmentFormulaOverrides:DELETE_GARNISHMENT_FORMULA_OVERRIDE
+  garnishmentFormulaOverrides:DELETE_GARNISHMENT_FORMULA_OVERRIDE,
+  optionalRateOverride:DELETE_OPTIONAL_RATE_OVERRIDE
 };
 
 export const saveDataApiMap = {
@@ -335,7 +343,7 @@ export const saveDataApiMap = {
   worksites: SAVE_WORKSITES,
   worksiteCompanies: SAVE_WORKSITES_LOCATIONS,
   customTaxFormulas: SAVE_CUSTOM_FORMULA,
-  optionalRateOverride: SAVE_CUSTOM_FORMULAS,
+  optionalRateOverride: SAVE_OPTIONAL_RATE_OVERRIDE,
   unemploymentOverrides: SAVE_CUSTOM_FORMULAS,
   taxEffectiveDateOverrides: SAVE_TAX_EFFECTIVE_DATE_OVERRIDE,
   customTaxPaymentOverride: SAVE_CUSTOM_FORMULAS,
@@ -447,5 +455,9 @@ export const autoCompleteApiMap = {
   taxCodeToBeOverriddenlocal: GET_TAX_CODE_TOBE_OVERRIDEN_LOCAL,
   residentTaxTypelocal: GET_RESIDENT_TAX_TYPE_LOCAL,
   taxCodeToReciprocatelocal: GET_TAX_CODE_TO_RECIPROCATE_LOCAL,
-  nonresidentTaxTypelocal: GET_NON_RESIDENT_TAX_TYPE_LOCAL
+  nonresidentTaxTypelocal: GET_NON_RESIDENT_TAX_TYPE_LOCAL,
+  orOverrideAuth:GET_OPTIONAL_RATE_OVRD_AUTO_COMP_AUTH,
+  orOverrideTaxType:GET_OPTIONAL_RATE_OVRD_AUTO_COMP_TAXT,
+  orOverrideFormula:GET_OPTIONAL_RATE_OVRD_AUTO_COMP_FORM,
+  orOverrideBsiWage:GET_OPTIONAL_RATE_OVRD_BSI_WAGE
 };
