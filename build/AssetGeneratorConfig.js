@@ -19,8 +19,7 @@ const getAssetGeneratorConfig = (environment, sourcePath) => {
       `${sourcePath}/cruds/`,
       `${sourcePath}/sampleDemo/`,
       `${sourcePath}/type2grid/What if employee`,
-      `${sourcePath}/type2grid/TaxLocator`,
-      `${sourcePath}/type2grid/Pension What If`
+      `${sourcePath}/type2grid/TaxLocator`
      ],
     groupBy: [
       {

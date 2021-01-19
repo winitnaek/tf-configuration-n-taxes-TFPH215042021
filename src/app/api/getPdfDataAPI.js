@@ -1,6 +1,6 @@
 import {appError, getAdminErrorMessage}  from "bsiuilib";
 import {viewPDFUrl, reqInfo, buildPdfInput} from "../../base/utils/tfUtils";
-import store from '../../tf_index';
+import store from '../../tf-configuration-n-taxes';
 class getPdfDataAPI {
   static getPdfData(pageid, data, mode) {
     let url = viewPDFUrl(pageid);

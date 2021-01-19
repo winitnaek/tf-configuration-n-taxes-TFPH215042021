@@ -12,10 +12,10 @@ const APP_DIR = path.resolve(__dirname, "src");
 
 const commonConfig = {
   entry: [
-    APP_DIR + "/tf_index.js" // Your appʼs entry point
+    APP_DIR + "/tf-configuration-n-taxes.js" // Your appʼs entry point
   ],
   output: {
-    filename: "tfBundle.js",
+    filename: "tfConfigurationNTaxesBundle.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: "/"
   },
@@ -101,7 +101,7 @@ if(!process.env.SKIP){
   commonConfig.plugins.push(new AssetGenerator(
     getAssetGeneratorConfig(
       process.env.NODE_ENV,
-      "C:/Users/rdangi/Documents/Project/tf-new-arch-artifacts/Metadata-Mockdata"
+      "D:/W/TaxFactory/tf-artifacts/tf-new-arch-artifacts/Metadata-Mockdata"
     )
   ));
 }

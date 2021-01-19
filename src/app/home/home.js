@@ -15,7 +15,7 @@ import * as styles from "../../base/constants/AppConstants";
 import { getUsageData } from "../api/getUsageDataAPI";
 import formDataAPI from "../api/formDataAPI";
 import savegriddataAPI from "../api/savegriddataAPI";
-import { isMock } from '../../tf_index';
+import { isMock } from '../../tf-configuration-n-taxes';
 class TFHome extends Component {
   constructor(props) {
     super(props);

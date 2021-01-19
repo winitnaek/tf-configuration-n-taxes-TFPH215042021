@@ -1,5 +1,5 @@
 import moment from "moment";
-import store from "../../tf_index";
+import store from "../../tf-configuration-n-taxes";
 import {setParentData} from '../../app/actions/parentDataActions';
 /**
  * buildCustomTaxFormulasSaveInput

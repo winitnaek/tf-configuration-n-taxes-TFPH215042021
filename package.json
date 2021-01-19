@@ -1,5 +1,5 @@
 {
-  "name": "compliancefactory",
+  "name": "taxfactory",
   "jest": {
     "verbose": true,
     "setupFiles": [
@@ -7,7 +7,7 @@
     ]
   },
   "version": "1.0.0",
-  "description": "ComplianceFactory",
+  "description": "Tax Factory Configuration & Taxes",
   "main": "cf_index.js",
   "scripts": {
     "build-dev": "NODE_ENV=builddev webpack --config ./webpack.dev.js",

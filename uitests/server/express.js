@@ -17,8 +17,8 @@ const put = 'PUT';
  */
 const host  = 'http://ssqa01:'; // REST Web Service HOST 
 const port  = '1900';            // REST Web Service PORT
-const username = 'WSUSERXXX';  // REST Web Service USER
-const password = 'WSUSERXXX';  // REST Web Service PASS
+const username = 'CFWSUSER';  // REST Web Service USER
+const password = 'bsi';  // REST Web Service PASS
 /**
  * approuter
  * @param {*} app 
@@ -143,12 +143,12 @@ eew2auth = ()=> {
  **/
 if (process.env.NODE_ENV === development || process.env.NODE_ENV === production) {
     var express = require('express')
-    const port = 2020;
+    const port = 2022;
     var app = express()
     app.use('/', express.static(BUILD_DIR))
     app.use(bodyParser.json()); // support json encoded bodies
     app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-    app.use(cors({origin: 'http://localhost:2020'}));
+    app.use(cors({origin: 'http://localhost:2022'}));
     app.listen(port);
     console.log('======================================================>');
     console.log('Starting Web server at http://localhost:' + port + '/');
