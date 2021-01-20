@@ -1,11 +1,11 @@
 {
     "id": "73b9a516-c0ca-43c0-b0ae-190e08d77bcc",
-    "name": "TaxFactory",
-    "desc": "Tax Factory",
+    "name": "TaxFactoryConfigurationTaxess",
+    "desc": "Tax Factory Configuration & Taxess",
     "badge": "tf",
-    "bundleName": "tfBundle.js",
+    "bundleName": "tfConfigurationNTaxesBundle.js",
     "version": "1",
-    "buildNo":"2020_01_14_TF",
+    "buildNo":"2021_01_20_TC",
     "renderFunction": "renderTFConfigNTaxes",
     "macVersion":"1.0", 
     "areas": [ {
