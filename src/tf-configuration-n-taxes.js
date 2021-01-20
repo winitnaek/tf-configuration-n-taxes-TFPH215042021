@@ -61,12 +61,12 @@ setModulePermissions(usrobj.applications);
 let moduleAreas = buildModuleAreaLinks(usrobj.applications);
 
 /**
- * renderTFApplication TEST
+ * renderTFConfigNTaxes TEST
  * master branch
  * @param {*} elem
  * @param {*} renderName
  */
-function renderTFApplication(elem, renderName, renderCtx) {
+function renderTFConfigNTaxes(elem, renderName, renderCtx) {
   setAppAnchor(elem);
   setAppUserIDAndDataset(dataset, userId);
   if (renderName === rname.RN_TF_HOME) {
@@ -81,7 +81,7 @@ function renderTFApplication(elem, renderName, renderCtx) {
     if (renderCtx) {
       setTimeout(
         function () {
-          renderTFApplication("pageContainer", renderCtx);
+          renderTFConfigNTaxes("pageContainer", renderCtx);
         }.bind(this),
         600
       );
@@ -118,7 +118,7 @@ function renderMessageViewer(elem, pageid, pid) {
     closeForm,
     setFormData,
     setFilterFormData,
-    renderGrid: renderTFApplication
+    renderGrid: renderTFConfigNTaxes
   };
   const metadata = compMetaData(pageid);
   ReactDOM.render(
@@ -158,7 +158,7 @@ function renderComponent(elem, pageid, pid) {
   const state = store.getState();
   const dispatch = store.dispatch;
 
-  const renderGrid = renderTFApplication;
+  const renderGrid = renderTFConfigNTaxes;
   const gridProps = {
     state,
     dispatch,
@@ -241,7 +241,7 @@ function renderTestComponent(elem, tool, metadata, mockdata, fieldData) {
   setMockMetadata(metadata);
   const state = store.getState();
   const dispatch = store.dispatch;
-  const renderGrid = renderTFApplication;
+  const renderGrid = renderTFConfigNTaxes;
   const gridProps = {
     state,
     dispatch,
@@ -519,8 +519,8 @@ const unMountNMountContainerNode = () => {
   $('<div id="' + c.appContentId + '" class="main-content"></div>').insertAfter($("#" + c.navId));
 };
 
-module.exports = renderTFApplication;
-window.renderTFApplication = renderTFApplication;
+module.exports = renderTFConfigNTaxes;
+window.renderTFConfigNTaxes = renderTFConfigNTaxes;
 
 module.exports = appDataset;
 window.appDataset = appDataset;

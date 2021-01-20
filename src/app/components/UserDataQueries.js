@@ -41,11 +41,11 @@ export class UserDataQueries extends React.Component {
       let data = tftools.filter(tftool => {
         if (tftool.id == pgid) return tftool;
       });
-      renderTFApplication("pageContainer", data[0]);
+      renderTFConfigNTaxes("pageContainer", data[0]);
     };
 
     this.renderCustom = renderName => {
-      renderTFApplication("pageContainer", renderName);
+      renderTFConfigNTaxes("pageContainer", renderName);
     };
 
     this.toggle = (id, title, type) => {

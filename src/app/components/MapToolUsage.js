@@ -28,7 +28,7 @@ class MapToolUsage extends UserDataQueries {
           return item;
         }
       });
-      renderTFApplication("pageContainer", pgData[0]);
+      renderTFConfigNTaxes("pageContainer", pgData[0]);
     };
   }
 

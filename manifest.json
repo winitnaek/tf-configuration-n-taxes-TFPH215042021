@@ -6,7 +6,7 @@
     "bundleName": "tfBundle.js",
     "version": "1",
     "buildNo":"2020_01_14_TF",
-    "renderFunction": "renderTFApplication",
+    "renderFunction": "renderTFConfigNTaxes",
     "macVersion":"1.0", 
     "areas": [ {
         "id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8",

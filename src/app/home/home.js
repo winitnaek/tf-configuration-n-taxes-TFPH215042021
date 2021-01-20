@@ -29,34 +29,50 @@ class TFHome extends Component {
     this.sectionLayout = [
       [
         {
-          section: "Tax Details",
-          sectionHeader: "Tax Details",
+          section: "Company Data",
+          sectionHeader: "Company Data",
           sectionIcon: "book",
-          value: "UQ"
+          value: "CD"
         },
         {
-          section: "formulas",
-          sectionHeader: "Quick Formulas",
+          section: "Groups Data",
+          sectionHeader: "Groups Data",
           sectionIcon: "flask",
-          value: "UQ"
+          value: "GD"
+        },
+        {
+          section: "Custom Tax Data",
+          sectionHeader: "Custom Tax Data",
+          sectionIcon: "money-bill-alt",
+          value: "CT"
         }
       ],
       [
         {
-          sectionHeader: "User Data Queries",
-          section: "User Data Queries",
-          sectionIcon: "users",
-          value: "UQ",
-          from: 0,
-          to: 17
+          sectionHeader: "Garnishment Data",
+          section: "Garnishment Data",
+          sectionIcon: "gavel",
+          value: "GD"
+        },
+        {
+          sectionHeader: "Payments Data",
+          section: "Payments Data",
+          sectionIcon: "dollar-sign",
+          value: "PD"
+        },
+        {
+          sectionHeader: "Tools",
+          section: "Tools",
+          sectionIcon: "cogs",
+          value: "MT"
         }
       ],
       [
         {
-          section: "User Data Queries",
-          sectionIcon: "users",
-          value: "UQ",
-          from: 17
+          sectionHeader: "Tests",
+          section: "Tests",
+          sectionIcon: "balance-scale",
+          value: "TS"
         }
       ]
     ];
@@ -86,7 +102,7 @@ class TFHome extends Component {
   renderMe(pageId, values, filter) {
     filter && this.props.setFilterFormData(values);
     let data = tftools.find(tftool => tftool.id == pageId);
-    renderTFApplication("pageContainer", data);
+    renderTFConfigNTaxes("pageContainer", data);
   }
 
   renderApplication(data) {
