@@ -173,3 +173,6 @@ export const GET_OPTIONAL_RATE_OVRD_AUTO_COMP_FORM ='/CompanyService/getOptional
 export const GET_OPTIONAL_RATE_OVRD_BSI_WAGE='/CompanyService/calculateBsiWage'
 export const DELETE_OPTIONAL_RATE_OVERRIDE ='/CompanyService/deleteOptionalRateOverride'
 export const SAVE_OPTIONAL_RATE_OVERRIDE='/CompanyService/saveOptionalRateOverride'
+export const DELETE_CUSTOM_GARNISHMENT_FORMULA = '/TaxCodeService/deleteCustomGarnishmentFormula'
+export const SAVE_CUSTOM_GARNISHMENT_FORMULA='/TaxCodeService/saveCustomGarnishmentFormula'
+export const GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF='/TaxCodeService/generateCustomGarnishmentFormulaPDF'

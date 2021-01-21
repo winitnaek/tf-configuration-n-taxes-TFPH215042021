@@ -173,7 +173,10 @@ import {
   GET_OPTIONAL_RATE_OVRD_AUTO_COMP_FORM,
   GET_OPTIONAL_RATE_OVRD_BSI_WAGE,
   DELETE_OPTIONAL_RATE_OVERRIDE,
-  SAVE_OPTIONAL_RATE_OVERRIDE
+  SAVE_OPTIONAL_RATE_OVERRIDE,
+  DELETE_CUSTOM_GARNISHMENT_FORMULA,
+  SAVE_CUSTOM_GARNISHMENT_FORMULA,
+  GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -301,7 +304,8 @@ export const viewPDFApiMap = {
   taxLocator: VIEW_PDF_TAX_LOCATOR,
   runLocatorService: VIEW_PDF_RUN_LOCATOR_SERVICE,
   groupOverride: VIEW_PDF_GROUP_OVERRIDE,
-  garnishmentFormulaOverrides:GARNISHMENT_FORMULA_OVERRIDE_PDF
+  garnishmentFormulaOverrides:GARNISHMENT_FORMULA_OVERRIDE_PDF,
+  customGarnishmentTaxFormulas:GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF
 }
 
 export const deleteDataApiMap = {
@@ -332,7 +336,8 @@ export const deleteDataApiMap = {
   whatifTaxes:DELETE_WHATIF_EMPLOYEE_TAX,
   reciprocalOverride: DELETE_RECIPROCAL_OVERRIDE,
   garnishmentFormulaOverrides:DELETE_GARNISHMENT_FORMULA_OVERRIDE,
-  optionalRateOverride:DELETE_OPTIONAL_RATE_OVERRIDE
+  optionalRateOverride:DELETE_OPTIONAL_RATE_OVERRIDE,
+  customGarnishmentTaxFormulas:DELETE_CUSTOM_GARNISHMENT_FORMULA
 };
 export const deleteAllDataApiMap = {
   whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES
@@ -369,7 +374,8 @@ export const saveDataApiMap = {
   unemploymentCompanyOverrides:GET_UM_EMPLOYMENT_OVERRIDE_SAVE,
   whatifTaxes:SAVE_WHATIF_EMPLOYEE_TAX,
   reciprocalOverride: SAVE_RECIPROCAL_OVERRIDE,
-  garnishmentFormulaOverrides:SAVE_GARNISHMENT_FORMULA_OVD
+  garnishmentFormulaOverrides:SAVE_GARNISHMENT_FORMULA_OVD,
+  customGarnishmentTaxFormulas:SAVE_CUSTOM_GARNISHMENT_FORMULA
 };
 
 export const saveAsAPIMap = {
