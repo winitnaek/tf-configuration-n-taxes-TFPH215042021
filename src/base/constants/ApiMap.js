@@ -334,6 +334,9 @@ export const deleteDataApiMap = {
   garnishmentFormulaOverrides:DELETE_GARNISHMENT_FORMULA_OVERRIDE,
   optionalRateOverride:DELETE_OPTIONAL_RATE_OVERRIDE
 };
+export const deleteAllDataApiMap = {
+  whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES
+};
 
 export const saveDataApiMap = {
   customPayments: SAVE_CUSTOM_PAYMENT,

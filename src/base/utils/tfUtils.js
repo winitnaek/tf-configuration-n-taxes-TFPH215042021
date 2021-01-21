@@ -8,6 +8,7 @@ import {
   generateDataMap,
   viewPDFMap,
   saveAsdatamap,
+  deletealldatamap,
 } from "../constants/TFTools";
 import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
@@ -885,6 +886,20 @@ function buildWhatifEmpDelete(pageid, formdata, editMode, state) {
   return input;
 }
 /**
+ * buildWhatifEmpDeleteAll
+ * @param {*} pageid 
+ * @param {*} formdata 
+ * @param {*} editMode 
+ * @param {*} state 
+ */
+function buildWhatifEmpDeleteAll(pageid, formdata, editMode, state) {
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+  };
+  return input;
+}
+/**
  * buildPaymentOverrideDelete
  * @param {*} pageid 
  * @param {*} formdata 
@@ -1084,6 +1099,16 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     };
     return input;
   }
+}
+
+export function buildDeleteAllInput(pageid, store, formdata, mode) {
+  let state = store.getState();
+  if (pageid === 'whatifEmp') {
+    return buildWhatifEmpDeleteAll(pageid, formdata, mode, state);
+  }
+}
+function buildWhatifEmpDelete(pageid, formdata, mode, state){
+
 }
 
 export function buildPdfInput(pageid, store, formdata, mode) {
@@ -2045,6 +2070,15 @@ export function deleteUrl(id) {
     }
   }
   console.log("Delete URL %s for page %s", url, id);
+  return url;
+}
+
+export function deleteAllUrl(id) {
+  let deldataallMap = deletealldatamap.find(metadatam => {
+    if (id == metadatam.id) return metadatam;
+  });
+  let url = generateUrl.buildURL(deldataallMap.url);
+  console.log("Delete All URL %s for page %s", url, id);
   return url;
 }
 

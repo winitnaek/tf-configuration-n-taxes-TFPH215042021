@@ -25,7 +25,10 @@ class CustomGrid extends Component {
       isOpen: false,
       clickedPageId: '',
       modalGridData: [],
-      showSummary: false
+      showSummary: false,
+      showConfirm:false,
+      cheader:'',
+      cbody:''
     };
 
     this.renderGrid = pgData => {
@@ -53,11 +56,15 @@ class CustomGrid extends Component {
         showAlert: false
       });
     };
+    
     this.handleRunLocator = this.handleRunLocator.bind(this);
     this.clickCheckBox = this.clickCheckBox.bind(this);
     this.toggle = this.toggle.bind(this);
     this.getGridPopupData = this.getGridPopupData.bind(this);
     this.parentInfoAction = this.parentInfoAction.bind(this);
+    this.handleDeleteAll = this.handleDeleteAll.bind(this);
+    this.handleConfirmDeleteOk = this.handleConfirmDeleteOk.bind(this);
+    this.handleConfirmDeleteCancel = this.handleConfirmDeleteCancel.bind(this);
   }
 
   componentDidMount() {
@@ -68,7 +75,7 @@ class CustomGrid extends Component {
       showAlert: !!metaInfo
     });
   }
-
+  
   handleRunLocator(clickPageId) {
     this.setState({
       clickedPageId: clickPageId,
@@ -77,6 +84,36 @@ class CustomGrid extends Component {
     });
   }
 
+  handleDeleteAll(clickPageId) {
+    if(clickPageId==='whatifEmp'){
+      this.showConfirm(true,'Warning!','Are you sure you want to delete all?');
+    }
+  }
+  showConfirm(cshow, cheader, cbody){
+    this.setState({
+        showConfirm: cshow,
+        cheader:cheader,
+        cbody:cbody
+    });
+  }
+  handleConfirmDeleteOk(){
+    this.setState({
+      showConfirm: false
+    });
+    deletegriddataAPI.deleteAllGridData(this.props.pageid).then().then((response) => response).then((repos) => {
+      alert(repos.message)
+      const data = tftools.find(tool => tool.id === this.props.pageid);
+      if (data) {
+        renderTFConfigNTaxes("pageContainer", data);
+      }
+    });
+  }
+  handleConfirmDeleteCancel(){
+      this.setState({
+          showConfirm: !this.state.showConfirm
+      });
+  }
+  
   clickCheckBox(event) {
     this.setState({
       showSummary: event.target.value === "on",
@@ -119,7 +156,7 @@ class CustomGrid extends Component {
 
     const { pgdef, griddef } = metadata;
     const { metaInfo } = pgdef;
-
+   
     const { formAction, filterFormAction , parentInfoAction } = this;
     return (
       <Fragment>
@@ -160,6 +197,7 @@ class CustomGrid extends Component {
             permissions={permissions}
             tftools={tftools}
             handleRunLocator={this.handleRunLocator}
+            handleDeleteAll={this.handleDeleteAll}
           />
         ) : null}
         <ConfirmModal showConfirm={this.state.showAlert} handleOk={this.handleOk} {...metaInfo} />
@@ -204,6 +242,7 @@ class CustomGrid extends Component {
             </Row>
           </ModalBody>
         </Modal>
+       <ConfirmModal handleOk={this.handleConfirmDeleteOk} handleCancel={this.handleConfirmDeleteCancel}  showConfirm={this.state.showConfirm} cheader={this.state.cheader} cbody={this.state.cbody} okbtnlbl={'Ok'} cancelbtnlbl={'Cancel'}/>;
       </Fragment>
     );
   }

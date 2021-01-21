@@ -1,6 +1,6 @@
 import * as metaData from '../../app/metadata/metaData';
 import tfScreens from '../../app/metadata/_screen_info';
-import { metaDataApiMap, autoCompleteApiMap, deleteDataApiMap, saveDataApiMap, generateApiMap, viewPDFApiMap, saveAsAPIMap } from './ApiMap';
+import { metaDataApiMap, autoCompleteApiMap, deleteDataApiMap, saveDataApiMap, generateApiMap, viewPDFApiMap, saveAsAPIMap,deleteAllDataApiMap } from './ApiMap';
 
 export const UI_PAGE = 'page';
 export const UI_COMP = 'comp';
@@ -95,6 +95,11 @@ export const metadatamap = Object.keys(metaDataApiMap).map(pageId => {
 export const deletedatamap = Object.keys(deleteDataApiMap).map(pageId => ({
   id: pageId,
   url: deleteDataApiMap[[pageId]]
+}));
+
+export const deletealldatamap = Object.keys(deleteAllDataApiMap).map(pageId => ({
+  id: pageId,
+  url: deleteAllDataApiMap[[pageId]]
 }));
 
 export const savedatamap = Object.keys(saveDataApiMap).map(pageId => ({

@@ -55,7 +55,7 @@ class ButtonBar extends Component {
     );
     let deleteAll = (
       <div>
-        <a href="#" id="deleteAll">
+        <a href="#" id="deleteAll" onClick={() => this.props.handleDeleteAll(this.props.pageid)}>
           <i class="fas fa-calendar-minus fa-lg fa-2x"></i>
         </a>
         <UncontrolledTooltip placement="right" target="deleteAll">
