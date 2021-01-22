@@ -24,6 +24,7 @@ import store from "../../tf-configuration-n-taxes";
 import {garnishmentFormulaOverrides,buildGarnishmentFormulaOverridesDelete,getGarnFormulaOverdTaxTypeInput,buildGarnishmentFormulaOverridesSaveInput,generateGarnishmentFormulaOverridePDF} from './gfOverridesUtil';
 import {buildCustomTaxFormulasSaveInput} from './cfFormulaUtil';
 import {optionalRateOverrideGridInput,buildOptionalRateOverrideDelete,getOrOverrideTaxTypeInput,getOrOverrideFormulaInput,buildOptionalRateOverrideSaveInput} from './orOverridesUtil';
+import {buildCustomGarnishmentTaxFormulasDelete,buildCustomGarnishmentTaxFormulasSaveInput,buildCustomGarnishmentTaxFormulasViewPDF} from './cgFormulasUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -1069,6 +1070,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildGarnishmentFormulaOverridesDelete(pageid, formdata, mode, state);
   } else if (pageid === "optionalRateOverride") {
     return buildOptionalRateOverrideDelete(pageid, formdata, mode, state);
+  } else if (pageid === "customGarnishmentTaxFormulas") {
+    return buildCustomGarnishmentTaxFormulasDelete(pageid, formdata, mode, state);
   } else {
     console.log("formdata");
     console.log(formdata);
@@ -1115,7 +1118,9 @@ export function buildPdfInput(pageid, store, formdata, mode) {
   const state = store.getState();
   const filterData = state.formFilterData;
   if(pageid==='garnishmentFormulaOverrides'){
-    return generateGarnishmentFormulaOverridePDF(pageid, store, formdata, mode)
+    return generateGarnishmentFormulaOverridePDF(pageid, store, formdata, mode);
+  }else if(pageid === "customGarnishmentTaxFormulas"){
+    return buildCustomGarnishmentTaxFormulasViewPDF(pageid, store, formdata, mode);
   }else{
     return {
       dataset: appDataset(),
@@ -1873,6 +1878,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildCustomTaxFormulasSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "optionalRateOverride") {
     return buildOptionalRateOverrideSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "customGarnishmentTaxFormulas") {
+    return buildCustomGarnishmentTaxFormulasSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }
