@@ -176,3 +176,4 @@ export const SAVE_OPTIONAL_RATE_OVERRIDE='/CompanyService/saveOptionalRateOverri
 export const DELETE_CUSTOM_GARNISHMENT_FORMULA = '/TaxCodeService/deleteCustomGarnishmentFormula'
 export const SAVE_CUSTOM_GARNISHMENT_FORMULA='/TaxCodeService/saveCustomGarnishmentFormula'
 export const GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF='/TaxCodeService/generateCustomGarnishmentFormulaPDF'
+export const AUTOCOMPLETE_CUSTOM_GARNISHMENT = '/TaxCodeService/autocompleteCustomGarnishments'

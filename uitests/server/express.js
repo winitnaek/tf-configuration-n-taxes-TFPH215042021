@@ -50,8 +50,8 @@ callServiceRequestGet = (requrl, res) => {
         method: get,
         headers: {
             Authorization: auth,
-            'X-DATASET':'00_EE_W2_DATA',
-            'X-USER':'001907'
+            'X-DATASET':'VINIT',
+            'X-USER':'vinit'
         },
         credentials: 'same-origin'
     };
@@ -73,8 +73,8 @@ callServiceRequestPost = (requrl, postData, res) => {
         url: `${host}${port}${url}`,
         headers: {
             Authorization: auth,
-            'X-DATASET':'00_EE_W2_DATA',
-            'X-USER':'001907'
+            'X-DATASET':'VINIT',
+            'X-USER':'vinit'
         },
         credentials: 'same-origin'
     };
@@ -95,8 +95,8 @@ callServiceRequestDelete = (requrl, res) => {
     const options = {
         method: mdelete,
         credentials: 'same-origin',
-        'X-DATASET':'00_EE_W2_DATA',
-        'X-USER':'001907',
+        'X-DATASET':'VINIT',
+        'X-USER':'vinit',
         json: true,
         url: `${host}${port}${url}`,
     };
@@ -119,8 +119,8 @@ callServiceRequestPut = (requrl, putData, res) => {
         method: put,
         body: putData,
         credentials: 'same-origin',
-        'X-DATASET':'00_EE_W2_DATA',
-        'X-USER':'001907',
+        'X-DATASET':'VINIT',
+        'X-USER':'vinit',
         json: true,
         url: `${host}${port}${url}`,
     };

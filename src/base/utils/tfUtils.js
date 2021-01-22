@@ -24,7 +24,7 @@ import store from "../../tf-configuration-n-taxes";
 import {garnishmentFormulaOverrides,buildGarnishmentFormulaOverridesDelete,getGarnFormulaOverdTaxTypeInput,buildGarnishmentFormulaOverridesSaveInput,generateGarnishmentFormulaOverridePDF} from './gfOverridesUtil';
 import {buildCustomTaxFormulasSaveInput} from './cfFormulaUtil';
 import {optionalRateOverrideGridInput,buildOptionalRateOverrideDelete,getOrOverrideTaxTypeInput,getOrOverrideFormulaInput,buildOptionalRateOverrideSaveInput} from './orOverridesUtil';
-import {buildCustomGarnishmentTaxFormulasDelete,buildCustomGarnishmentTaxFormulasSaveInput,buildCustomGarnishmentTaxFormulasViewPDF} from './cgFormulasUtil';
+import {customGarnishmentTaxFormulasGridInput,getUsrTaxInput,buildCustomGarnishmentTaxFormulasDelete,buildCustomGarnishmentTaxFormulasSaveInput,buildCustomGarnishmentTaxFormulasViewPDF} from './cgFormulasUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -423,6 +423,8 @@ export function buildGridDataInput(pageid, store) {
     input = garnishmentFormulaOverrides(pageid, filterData, stDate, enDate, state);
   } else if (pageid === 'optionalRateOverride') {
     input = optionalRateOverrideGridInput(pageid, filterData, stDate, enDate, state);
+  } else if (pageid === "customGarnishmentTaxFormulas") {
+    return customGarnishmentTaxFormulasGridInput(pageid, filterData, stDate, enDate, state);
   } else {
     if (state.parentData) { //Reset Parent Data
       let parentData = {};
@@ -721,6 +723,9 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   }
   if(pageid === 'orOverrideFormula' && formValues){
     return getOrOverrideFormulaInput(input,formValues);
+  }
+  if(pageid === 'usrTax'){
+    return getUsrTaxInput(input,state);
   }
   if(pageid === 'formula' && formValues){
     input = {
@@ -1120,7 +1125,7 @@ export function buildPdfInput(pageid, store, formdata, mode) {
   if(pageid==='garnishmentFormulaOverrides'){
     return generateGarnishmentFormulaOverridePDF(pageid, store, formdata, mode);
   }else if(pageid === "customGarnishmentTaxFormulas"){
-    return buildCustomGarnishmentTaxFormulasViewPDF(pageid, store, formdata, mode);
+    return buildCustomGarnishmentTaxFormulasViewPDF(pageid, state, formdata, mode);
   }else{
     return {
       dataset: appDataset(),
