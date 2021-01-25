@@ -25,6 +25,7 @@ import {garnishmentFormulaOverrides,buildGarnishmentFormulaOverridesDelete,getGa
 import {buildCustomTaxFormulasSaveInput} from './cfFormulaUtil';
 import {optionalRateOverrideGridInput,buildOptionalRateOverrideDelete,getOrOverrideTaxTypeInput,getOrOverrideFormulaInput,buildOptionalRateOverrideSaveInput} from './orOverridesUtil';
 import {customGarnishmentTaxFormulasGridInput,getUsrTaxInput,buildCustomGarnishmentTaxFormulasDelete,buildCustomGarnishmentTaxFormulasSaveInput,buildCustomGarnishmentTaxFormulasViewPDF} from './cgFormulasUtil';
+import {customPaymentTaxExceptionsGridInput} from './cpExceptionsUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -425,6 +426,8 @@ export function buildGridDataInput(pageid, store) {
     input = optionalRateOverrideGridInput(pageid, filterData, stDate, enDate, state);
   } else if (pageid === "customGarnishmentTaxFormulas") {
     return customGarnishmentTaxFormulasGridInput(pageid, filterData, stDate, enDate, state);
+  } else if (pageid === "customPaymentTaxExceptions") {
+    return customPaymentTaxExceptionsGridInput(pageid, filterData, stDate, enDate, state);
   } else {
     if (state.parentData) { //Reset Parent Data
       let parentData = {};

@@ -177,3 +177,4 @@ export const DELETE_CUSTOM_GARNISHMENT_FORMULA = '/TaxCodeService/deleteCustomGa
 export const SAVE_CUSTOM_GARNISHMENT_FORMULA='/TaxCodeService/saveCustomGarnishmentFormula'
 export const GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF='/TaxCodeService/generateCustomGarnishmentFormulaPDF'
 export const AUTOCOMPLETE_CUSTOM_GARNISHMENT = '/TaxCodeService/autocompleteCustomGarnishments'
+export const GET_CUSTOM_PAYMENT='/PaymentsService/getCustomPayment'

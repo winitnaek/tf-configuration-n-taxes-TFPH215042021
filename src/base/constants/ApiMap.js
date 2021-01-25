@@ -177,7 +177,8 @@ import {
   DELETE_CUSTOM_GARNISHMENT_FORMULA,
   SAVE_CUSTOM_GARNISHMENT_FORMULA,
   GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF,
-  AUTOCOMPLETE_CUSTOM_GARNISHMENT
+  AUTOCOMPLETE_CUSTOM_GARNISHMENT,
+  GET_CUSTOM_PAYMENT
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -259,8 +260,8 @@ export const metaDataApiMap = {
   disposableOverride: GET_CUSTOM_TAX_FORMULAS,
   customGarnishmentFormulas: GET_CUSTOM_FORMULAS,
   customGarnishmentTaxFormulas: GET_CUSTOM_GARNISHMENT_FORMULAS,
-  customPaymentExceptions: GET_CUSTOM_FORMULAS,
-  customPaymentTaxExceptions: GET_CUSTOM_TAX_FORMULAS,
+  customPaymentExceptions: GET_CUSTOM_PAYMENTS_LIST,
+  customPaymentTaxExceptions: GET_CUSTOM_PAYMENT,
   customTaxPaymentOverrides: GET_CUSTOM_FORMULAS,
   customTaxPaymentOverride: GET_CUSTOM_TAX_FORMULAS,
   paymentOverrides: GET_EMPLOYEE_GROUPS,
