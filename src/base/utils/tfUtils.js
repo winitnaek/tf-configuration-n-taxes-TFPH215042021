@@ -9,6 +9,7 @@ import {
   viewPDFMap,
   saveAsdatamap,
   deletealldatamap,
+  viewCalcPDFMap
 } from "../constants/TFTools";
 import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
@@ -26,6 +27,7 @@ import {buildCustomTaxFormulasSaveInput} from './cfFormulaUtil';
 import {optionalRateOverrideGridInput,buildOptionalRateOverrideDelete,getOrOverrideTaxTypeInput,getOrOverrideFormulaInput,buildOptionalRateOverrideSaveInput} from './orOverridesUtil';
 import {customGarnishmentTaxFormulasGridInput,getUsrTaxInput,buildCustomGarnishmentTaxFormulasDelete,buildCustomGarnishmentTaxFormulasSaveInput,buildCustomGarnishmentTaxFormulasViewPDF} from './cgFormulasUtil';
 import {customPaymentTaxExceptionsGridInput} from './cpExceptionsUtil';
+import {buildWhatifEmpDeleteAll,buildWhatifDeductionBenefitsDeleteAll,buildWhatifEmpDelete} from './tfWhatIfUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -877,37 +879,7 @@ function buildWhatifGarnishmentDelete(pageid, formdata, editMode, state) {
   };
   return input;
 }
-/**
- * buildWhatifEmpDelete
- * @param {*} pageid 
- * @param {*} formdata 
- * @param {*} editMode 
- * @param {*} state 
- */
-function buildWhatifEmpDelete(pageid, formdata, editMode, state) {
-  let input = {
-    pageId: pageid,
-    dataset: appDataset(),
-    empCode: formdata.empCode,
-    checkDate: moment(formdata.checkDate).format("MM/DD/YYYY"),
-    regPen: "R",
-  };
-  return input;
-}
-/**
- * buildWhatifEmpDeleteAll
- * @param {*} pageid 
- * @param {*} formdata 
- * @param {*} editMode 
- * @param {*} state 
- */
-function buildWhatifEmpDeleteAll(pageid, formdata, editMode, state) {
-  let input = {
-    pageId: pageid,
-    dataset: appDataset(),
-  };
-  return input;
-}
+
 /**
  * buildPaymentOverrideDelete
  * @param {*} pageid 
@@ -1116,10 +1088,9 @@ export function buildDeleteAllInput(pageid, store, formdata, mode) {
   let state = store.getState();
   if (pageid === 'whatifEmp') {
     return buildWhatifEmpDeleteAll(pageid, formdata, mode, state);
+  }else if(pageid==='whatifDeductionBenefits'){
+    return buildWhatifDeductionBenefitsDeleteAll(pageid, formdata, mode, state);
   }
-}
-function buildWhatifEmpDelete(pageid, formdata, mode, state){
-
 }
 
 export function buildPdfInput(pageid, store, formdata, mode) {
@@ -2113,6 +2084,14 @@ export function viewPDFUrl(id) {
     }
   }
   console.log("VIEW PDF URL %s for page %s", url, id);
+  return url;
+}
+export function viewCalcPDFUrl(id) {
+  let viewPdf = viewCalcPDFMap.find(metadatam => {
+    if (id == metadatam.id) return metadatam;
+  });
+  let url = generateUrl.buildURL(viewPdf.url);
+  console.log("VIEW CALC PDF URL %s for page %s", url, id);
   return url;
 }
 

@@ -178,7 +178,11 @@ import {
   SAVE_CUSTOM_GARNISHMENT_FORMULA,
   GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF,
   AUTOCOMPLETE_CUSTOM_GARNISHMENT,
-  GET_CUSTOM_PAYMENT
+  GET_CUSTOM_PAYMENT,
+  DELETE_ALL_WHHATIF_EMPLOYEE_GARN_DEDBENEFITS,
+  GET_WHATIF_EMPLOYEEDETAIL_PDF,
+  GET_WHATIF_EMPLOYEEGARN_PDF,
+  CALCULATE_WHATIF_TAXES_PDF
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -310,6 +314,11 @@ export const viewPDFApiMap = {
   customGarnishmentTaxFormulas:GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF
 }
 
+export const viewCalcPDFApiMap = {
+  whatifTaxes:CALCULATE_WHATIF_TAXES_PDF,
+  whatifGarnishment:CALCULATE_WHATIF_TAXES_PDF
+}
+
 export const deleteDataApiMap = {
   customPayments: DELTE_CUSTOM_PAYMENT,
   customTaxCodes: DELETE_CUSTOM_TAX_CODES,
@@ -342,7 +351,8 @@ export const deleteDataApiMap = {
   customGarnishmentTaxFormulas:DELETE_CUSTOM_GARNISHMENT_FORMULA
 };
 export const deleteAllDataApiMap = {
-  whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES
+  whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES,
+  whatifDeductionBenefits:DELETE_ALL_WHHATIF_EMPLOYEE_GARN_DEDBENEFITS
 };
 
 export const saveDataApiMap = {

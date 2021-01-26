@@ -15,7 +15,7 @@ class ButtonBar extends Component {
   renderButtonBarForPage() {
     let taxLocator = (
       <div>
-        <a href="#" id="taxLocator">
+        <a href="#" id="taxLocator" onClick={() => this.props.handleGotoTaxLocator(this.props.pageid)}>
           <i class="fas fa-thumbtack fa-lg fa-2x"></i>
         </a>
         <UncontrolledTooltip placement="right" target="taxLocator">
@@ -25,7 +25,7 @@ class ButtonBar extends Component {
     );
     let calculateTaxes = (
       <div>
-        <a href="#" id="calculateTaxes">
+        <a href="#" id="calculateTaxes" onClick={() => this.props.handleCalculateTaxes(this.props.pageid)}>
           <i class="fas fa-calculator fa-lg fa-2x"></i>
         </a>
         <UncontrolledTooltip placement="right" target="calculateTaxes">
@@ -90,6 +90,7 @@ class ButtonBar extends Component {
       runLocatorService=null;
       addressFromWorksite=null;
       findRedundantOverrides=null;
+      deleteAll=null;
     }else if(this.props.pageid==='whatifLocations'){ //taxLocatorLocation
       taxLocator=null;
       calculateTaxes=null;
@@ -101,6 +102,13 @@ class ButtonBar extends Component {
       runLocatorService=null;
       addressFromWorksite=null;
       deleteAll=null;
+    }
+    if(this.props.pageid==='whatifDeductionBenefits'){//whatifDeductionBenefits
+      taxLocator=null;
+      calculateTaxes=null;
+      runLocatorService=null;
+      addressFromWorksite=null;
+      findRedundantOverrides=null;
     }
     return (
       <Row className="justify-content-around bg-light" style={{ paddingTop: "3px",paddingBottom:'2px',marginTop:'30px',borderRadius:'0.25rem'}}>

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
-import { ReusableGrid, ConfirmModal } from "bsiuilib";
+import { ReusableGrid, ConfirmModal,ViewPDF } from "bsiuilib";
 import { setFilterFormData } from "../actions/filterFormActions";
 import { setFormData } from "../actions/formActions";
 //import { getRecentUsage } from "../actions/usageActions";
@@ -17,6 +17,8 @@ import ButtonBar from "./ButtonBar";
 import { Modal, ModalHeader, ModalBody, Row, Col } from "reactstrap";
 import { compMetaData,populateParentData} from "../../base/utils/tfUtils";
 import {setParentInfo} from '../../app/actions/parentInfoActions';
+import store from "../../tf-configuration-n-taxes";
+import {calculateTaxesPDFInput} from '../../base/utils/tfWhatIfUtil'
 class CustomGrid extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +30,9 @@ class CustomGrid extends Component {
       showSummary: false,
       showConfirm:false,
       cheader:'',
-      cbody:''
+      cbody:'',
+      showPDF: false,
+      pdfData: {}
     };
 
     this.renderGrid = pgData => {
@@ -65,6 +69,9 @@ class CustomGrid extends Component {
     this.handleDeleteAll = this.handleDeleteAll.bind(this);
     this.handleConfirmDeleteOk = this.handleConfirmDeleteOk.bind(this);
     this.handleConfirmDeleteCancel = this.handleConfirmDeleteCancel.bind(this);
+    this.handleCalculateTaxes=this.handleCalculateTaxes.bind(this);
+    this.handleHidePDF = this.handleHidePDF.bind(this);
+    this.handleShowPDF = this.handleShowPDF.bind(this);
   }
 
   componentDidMount() {
@@ -75,7 +82,9 @@ class CustomGrid extends Component {
       showAlert: !!metaInfo
     });
   }
-  
+  handleHidePDF() {
+    this.setState({ showPDF: false })
+  }
   handleRunLocator(clickPageId) {
     this.setState({
       clickedPageId: clickPageId,
@@ -83,9 +92,52 @@ class CustomGrid extends Component {
       this.getGridPopupData();
     });
   }
-
+  handleCalculateTaxes(clickPageId) {
+    if(clickPageId==='whatifTaxes'){
+      let getGridDataInput = calculateTaxesPDFInput(clickPageId,"false");
+      getPdfDataAPI.getPdf(clickPageId,getGridDataInput,true).then().then((response) => response).then((repos) => {
+        console.log(repos)
+        this.handleShowPDF(repos, 'Employee Taxes');
+      });
+    }else if(clickPageId==='whatifGarnishment'){
+      let getGridDataInput = calculateTaxesPDFInput(clickPageId,"true");
+      getPdfDataAPI.getPdf(clickPageId,getGridDataInput,true).then().then((response) => response).then((repos) => {
+        console.log(repos)
+        this.handleShowPDF(repos,'Employee Garnishment');
+      });
+    }
+  }
+  handleShowPDF(rowdata, title) {
+    this.renderPDFData(rowdata,title);
+  }
+  
+  renderPDFData(pdfData,title){
+    this.setState({
+      showPDF: true,
+      title:title,
+      pdfData :pdfData
+    });
+  }
+  renderErrorPDF(yrEndTaxDoc) {
+      var printFrame = document.getElementById('pdfi-frametf');
+      let errorContent = `<html><head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></head><body><div class="alert alert-danger" style="margin:3px;" role="alert"><strong>Error: </strong>Unable to Get Year End Tax Document. Please contact your system administrator.</div></body></html>`;
+      if (printFrame) {
+          printFrame.height='100'
+          printFrame.src = "data:text/html;charset=utf-8,"+errorContent
+      }
+  }
+  handleGotoTaxLocator(clickPageId) {
+    if(clickPageId==='whatifTaxes'){
+      const data = tftools.find(tool => tool.id === 'taxLocator');
+      if (data) {
+        renderTFConfigNTaxes("pageContainer", data);
+      }
+    }
+  }
   handleDeleteAll(clickPageId) {
     if(clickPageId==='whatifEmp'){
+      this.showConfirm(true,'Warning!','Are you sure you want to delete all?');
+    }else if(clickPageId==='whatifDeductionBenefits'){
       this.showConfirm(true,'Warning!','Are you sure you want to delete all?');
     }
   }
@@ -100,13 +152,15 @@ class CustomGrid extends Component {
     this.setState({
       showConfirm: false
     });
-    deletegriddataAPI.deleteAllGridData(this.props.pageid).then().then((response) => response).then((repos) => {
-      alert(repos.message)
-      const data = tftools.find(tool => tool.id === this.props.pageid);
-      if (data) {
-        renderTFConfigNTaxes("pageContainer", data);
-      }
-    });
+    if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionBenefits'){
+      deletegriddataAPI.deleteAllGridData(this.props.pageid).then().then((response) => response).then((repos) => {
+        alert(repos.message)
+        const data = tftools.find(tool => tool.id === this.props.pageid);
+        if (data) {
+          renderTFConfigNTaxes("pageContainer", data);
+        }
+      });
+    }
   }
   handleConfirmDeleteCancel(){
       this.setState({
@@ -198,6 +252,8 @@ class CustomGrid extends Component {
             tftools={tftools}
             handleRunLocator={this.handleRunLocator}
             handleDeleteAll={this.handleDeleteAll}
+            handleGotoTaxLocator={this.handleGotoTaxLocator}
+            handleCalculateTaxes={this.handleCalculateTaxes}
           />
         ) : null}
         <ConfirmModal showConfirm={this.state.showAlert} handleOk={this.handleOk} {...metaInfo} />
@@ -242,9 +298,10 @@ class CustomGrid extends Component {
             </Row>
           </ModalBody>
         </Modal>
-       <ConfirmModal handleOk={this.handleConfirmDeleteOk} handleCancel={this.handleConfirmDeleteCancel}  showConfirm={this.state.showConfirm} cheader={this.state.cheader} cbody={this.state.cbody} okbtnlbl={'Ok'} cancelbtnlbl={'Cancel'}/>;
+       <ConfirmModal handleOk={this.handleConfirmDeleteOk} handleCancel={this.handleConfirmDeleteCancel}  showConfirm={this.state.showConfirm} cheader={this.state.cheader} cbody={this.state.cbody} okbtnlbl={'Ok'} cancelbtnlbl={'Cancel'}/>
+       {this.state.showPDF ? (<ViewPDF view={this.state.showPDF} title={this.state.title} handleHidePDF={this.handleHidePDF} pdfData={this.state.pdfData} />) : null}
       </Fragment>
-    );
+    )
   }
 }
 

@@ -178,3 +178,7 @@ export const SAVE_CUSTOM_GARNISHMENT_FORMULA='/TaxCodeService/saveCustomGarnishm
 export const GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF='/TaxCodeService/generateCustomGarnishmentFormulaPDF'
 export const AUTOCOMPLETE_CUSTOM_GARNISHMENT = '/TaxCodeService/autocompleteCustomGarnishments'
 export const GET_CUSTOM_PAYMENT='/PaymentsService/getCustomPayment'
+export const DELETE_ALL_WHHATIF_EMPLOYEE_GARN_DEDBENEFITS='/WhatIfService/deleteAllWhatIfEmployeeGarnDedBenefits'
+export const GET_WHATIF_EMPLOYEEDETAIL_PDF='/WhatIfService/generateWhatIfEmployeeTaxDetailPDF'
+export const GET_WHATIF_EMPLOYEEGARN_PDF='/WhatIfService/generateWhatIfEmployeeGarnishmentPDF'
+export const CALCULATE_WHATIF_TAXES_PDF ='/WhatIfService/calculateWhatIfTaxesPDF'
