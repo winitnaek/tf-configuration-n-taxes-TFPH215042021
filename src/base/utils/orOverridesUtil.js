@@ -92,7 +92,7 @@ export function buildOptionalRateOverrideSaveInput(pageId, formData, editMode, s
       account: formData.account ? formData.account: 'N/A',
       exprate: formData.exprateDspl ? formData.exprateDspl : '0.000000000' ,
       maxwage: formData.maxwage ? formData.maxwage : '0.00',
-      rescind: formData.rescindDateDspl,
+      rescind: formData.rescindDateDspl? moment(formData.rescindDateDspl).format("MM/DD/YYYY"):'12/31/9999',
     },
     badRecord: 0,
     editMode: editMode,
