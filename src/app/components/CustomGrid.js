@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
-import { ReusableGrid, ConfirmModal,ViewPDF } from "bsiuilib";
+import { ReusableGrid, ConfirmModal, ViewPDF } from "bsiuilib";
 import { setFilterFormData } from "../actions/filterFormActions";
 import { setFormData } from "../actions/formActions";
 //import { getRecentUsage } from "../actions/usageActions";
@@ -32,7 +32,8 @@ class CustomGrid extends Component {
       cheader:'',
       cbody:'',
       showPDF: false,
-      pdfData: {}
+      pdfData: {},
+      viewPdfMode: false,
     };
 
     this.renderGrid = pgData => {
@@ -60,6 +61,23 @@ class CustomGrid extends Component {
         showAlert: false
       });
     };
+
+    this.openTaxLocator = () => {
+      const data = tftools.find(tool => tool.id === "taxLocator");
+      if (data) {
+        renderTFConfigNTaxes("pageContainer", data);
+      }
+    };
+
+    this.handlePDF = async (event, fromBar) => {
+      event.preventDefault();
+        const { pageid, formData } = this.props;
+        const pdfData = await getPdfDataAPI.getPdfData(pageid, {}, undefined, fromBar);
+        this.setState({
+          viewPdfMode: !this.state.viewPdfMode,
+          pdfData,
+        });
+    }
     
     this.handleRunLocator = this.handleRunLocator.bind(this);
     this.clickCheckBox = this.clickCheckBox.bind(this);
@@ -214,6 +232,7 @@ class CustomGrid extends Component {
     const { formAction, filterFormAction , parentInfoAction } = this;
     return (
       <Fragment>
+        <ViewPDF view={this.state.viewPdfMode} handleHidePDF={() => this.setState({viewPdfMode: false })} pdfData={this.state.pdfData} />
         <ReusableGrid
           pageid={pageid}
           metadata={metadata}
@@ -254,6 +273,8 @@ class CustomGrid extends Component {
             handleDeleteAll={this.handleDeleteAll}
             handleGotoTaxLocator={this.handleGotoTaxLocator}
             handleCalculateTaxes={this.handleCalculateTaxes}
+            handlePdf={(event) => this.handlePDF(event, true)}
+            handleTaxLocator={this.openTaxLocator}
           />
         ) : null}
         <ConfirmModal showConfirm={this.state.showAlert} handleOk={this.handleOk} {...metaInfo} />

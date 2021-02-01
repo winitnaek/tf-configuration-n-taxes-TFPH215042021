@@ -15,7 +15,7 @@ class ButtonBar extends Component {
   renderButtonBarForPage() {
     let taxLocator = (
       <div>
-        <a href="#" id="taxLocator" onClick={() => this.props.handleGotoTaxLocator(this.props.pageid)}>
+        <a href="#" id="taxLocator" onClick={() => this.props.handleTaxLocator()}>
           <i class="fas fa-thumbtack fa-lg fa-2x"></i>
         </a>
         <UncontrolledTooltip placement="right" target="taxLocator">
@@ -25,7 +25,7 @@ class ButtonBar extends Component {
     );
     let calculateTaxes = (
       <div>
-        <a href="#" id="calculateTaxes" onClick={() => this.props.handleCalculateTaxes(this.props.pageid)}>
+        <a href="#" id="calculateTaxes" onClick={(event) => this.props.handlePdf(event)}>
           <i class="fas fa-calculator fa-lg fa-2x"></i>
         </a>
         <UncontrolledTooltip placement="right" target="calculateTaxes">
@@ -80,7 +80,7 @@ class ButtonBar extends Component {
       runLocatorService=null;
       addressFromWorksite=null;
       findRedundantOverrides=null;
-    }else if(this.props.pageid==='whatifTaxes'){ //whatifTaxes
+    }else if(this.props.pageid==='whatifTaxes' || this.props.pageid==='pensionWhatIfTaxes'){ //whatifTaxes
       runLocatorService=null;
       addressFromWorksite=null;
       deleteAll=null;

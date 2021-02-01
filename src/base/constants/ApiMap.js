@@ -182,7 +182,17 @@ import {
   DELETE_ALL_WHHATIF_EMPLOYEE_GARN_DEDBENEFITS,
   GET_WHATIF_EMPLOYEEDETAIL_PDF,
   GET_WHATIF_EMPLOYEEGARN_PDF,
-  CALCULATE_WHATIF_TAXES_PDF
+  CALCULATE_WHATIF_TAXES_PDF,
+  GET_PENSION_WHAT_IF_TAXES,
+  SAVE_PENSION_WHAT_IF_TEST,
+  GENERATE_PENSION_WHAT_IF_TEST,
+  GENERATE_PENSION_WHAT_IF_TEST_TAXES,
+  DELETE_PENSION_WHAT_IF_TEST,
+  GENERATE_PENSION_WHAT_IF_TEST_CALCULATE_TAXES,
+  AUTOCOMPLETE_PENSION_TAX_TYPE,
+  SAVE_PENSION_WHAT_IF_TEST_TAXES,
+  DELETE_PENSION_WHAT_IF_TEST_TAXES,
+  GET_CUSTOM_NEXUS_COMPANY_DATA
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -254,12 +264,12 @@ export const metaDataApiMap = {
   auditLogViewer: GET_CUSTOM_TAX_CODES,
   logins: GET_CUSTOM_TAX_CODES,
   company: GET_COMPANIES,
+  customNexusData: GET_COMPANIES,
   unemploymentOverrides: GET_COMPANIES,
   unemploymentCompanyOverrides: GET_UM_EMPLOYMENT_OVERRIDE_LIST,
   optionalRateOverrides: GET_COMPANIES,
   optionalRateOverride: GET_OPTIONAL_RATE_OVERRIDES,
-  customNexusData: GET_CUSTOM_FORMULAS,
-  customNexusCompanyData: GET_CUSTOM_TAX_FORMULAS,
+  customNexusCompanyData: GET_CUSTOM_NEXUS_COMPANY_DATA,
   disposableRateOverrides: GET_CUSTOM_FORMULAS,
   disposableOverride: GET_CUSTOM_TAX_FORMULAS,
   customGarnishmentFormulas: GET_CUSTOM_FORMULAS,
@@ -303,7 +313,8 @@ export const metaDataApiMap = {
   findRedundantOverrides:GET_REDUNDANT_ADDRESS_OVERRIDES,
   reciprocalOverrides: GET_RECIPROCAL_OVERRIDES,
   reciprocalOverride: GET_RECIPROCAL_OVERRIDE,
-  connectToDataSets: GET_CONNECT_TO_DATA_SETS
+  connectToDataSets: GET_CONNECT_TO_DATA_SETS,
+  pensionWhatIfTaxes: GET_PENSION_WHAT_IF_TAXES
 };
 
 export const viewPDFApiMap = {
@@ -311,7 +322,13 @@ export const viewPDFApiMap = {
   runLocatorService: VIEW_PDF_RUN_LOCATOR_SERVICE,
   groupOverride: VIEW_PDF_GROUP_OVERRIDE,
   garnishmentFormulaOverrides:GARNISHMENT_FORMULA_OVERRIDE_PDF,
-  customGarnishmentTaxFormulas:GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF
+  customGarnishmentTaxFormulas:GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF,
+  pensionWhatIfTest: GENERATE_PENSION_WHAT_IF_TEST,
+  pensionWhatIfTaxes: GENERATE_PENSION_WHAT_IF_TEST_TAXES,
+}
+
+export const viewPDFButtonBar = {
+  pensionWhatIfTaxes: GENERATE_PENSION_WHAT_IF_TEST_CALCULATE_TAXES,
 }
 
 export const viewCalcPDFApiMap = {
@@ -348,7 +365,9 @@ export const deleteDataApiMap = {
   reciprocalOverride: DELETE_RECIPROCAL_OVERRIDE,
   garnishmentFormulaOverrides:DELETE_GARNISHMENT_FORMULA_OVERRIDE,
   optionalRateOverride:DELETE_OPTIONAL_RATE_OVERRIDE,
-  customGarnishmentTaxFormulas:DELETE_CUSTOM_GARNISHMENT_FORMULA
+  customGarnishmentTaxFormulas:DELETE_CUSTOM_GARNISHMENT_FORMULA,
+  pensionWhatIfTest: DELETE_PENSION_WHAT_IF_TEST,
+  pensionWhatIfTaxes: DELETE_PENSION_WHAT_IF_TEST_TAXES
 };
 export const deleteAllDataApiMap = {
   whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES,
@@ -387,7 +406,9 @@ export const saveDataApiMap = {
   whatifTaxes:SAVE_WHATIF_EMPLOYEE_TAX,
   reciprocalOverride: SAVE_RECIPROCAL_OVERRIDE,
   garnishmentFormulaOverrides:SAVE_GARNISHMENT_FORMULA_OVD,
-  customGarnishmentTaxFormulas:SAVE_CUSTOM_GARNISHMENT_FORMULA
+  customGarnishmentTaxFormulas:SAVE_CUSTOM_GARNISHMENT_FORMULA,
+  pensionWhatIfTest: SAVE_PENSION_WHAT_IF_TEST,
+  pensionWhatIfTaxes: SAVE_PENSION_WHAT_IF_TEST_TAXES
 };
 
 export const saveAsAPIMap = {
@@ -480,5 +501,7 @@ export const autoCompleteApiMap = {
   orOverrideAuth:GET_OPTIONAL_RATE_OVRD_AUTO_COMP_AUTH,
   orOverrideTaxType:GET_OPTIONAL_RATE_OVRD_AUTO_COMP_TAXT,
   orOverrideFormula:GET_OPTIONAL_RATE_OVRD_AUTO_COMP_FORM,
-  orOverrideBsiWage:GET_OPTIONAL_RATE_OVRD_BSI_WAGE
+  orOverrideBsiWage:GET_OPTIONAL_RATE_OVRD_BSI_WAGE,
+  taxTypeUserTaxType: AUTOCOMPLETE_PENSION_TAX_TYPE,
+  pensionFormula: WHATIF_GARN_AUTOCOMPLETE_FORMULAS
 };

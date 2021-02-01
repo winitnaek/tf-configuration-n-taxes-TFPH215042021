@@ -1,10 +1,15 @@
 import {appError, getAdminErrorMessage}  from "bsiuilib";
-import {viewPDFUrl, reqInfo, buildPdfInput,viewCalcPDFUrl} from "../../base/utils/tfUtils";
+import {viewPDFUrl, reqInfo, buildPdfInput,viewPDFUrlButtonBar, viewCalcPDFUrl} from "../../base/utils/tfUtils";
 import store from '../../tf-configuration-n-taxes';
 class getPdfDataAPI {
-  static getPdfData(pageid, data, mode) {
-    let url = viewPDFUrl(pageid);
-    let formInput = buildPdfInput(pageid, store, data, mode);
+  static getPdfData(pageid, data, mode, fromBar) {
+    let url;
+    if(fromBar) {
+     url = viewPDFUrlButtonBar(pageid);
+    } else {
+     url = viewPDFUrl(pageid);
+    }
+    let formInput = buildPdfInput(pageid, store, data, mode, fromBar);
     let tt = JSON.stringify(formInput);
     return fetch(url, reqInfo(tt))
       .then((response) => {

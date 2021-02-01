@@ -9,7 +9,8 @@ import {
   viewPDFMap,
   saveAsdatamap,
   deletealldatamap,
-  viewCalcPDFMap
+  viewCalcPDFMap,
+  viewPDFMapButtonBar,
 } from "../constants/TFTools";
 import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
@@ -28,6 +29,7 @@ import {optionalRateOverrideGridInput,buildOptionalRateOverrideDelete,getOrOverr
 import {customGarnishmentTaxFormulasGridInput,getUsrTaxInput,buildCustomGarnishmentTaxFormulasDelete,buildCustomGarnishmentTaxFormulasSaveInput,buildCustomGarnishmentTaxFormulasViewPDF} from './cgFormulasUtil';
 import {customPaymentTaxExceptionsGridInput} from './cpExceptionsUtil';
 import {whatIfGarnishmentsGridInput, getGformInput,getUsrTxTypInput,buildWhatIfTaxesDelete,whatifTaxesGridInput,buildWhatifEmpDeleteAll,buildWhatifDeductionBenefitsDeleteAll,buildWhatifEmpDelete,buildWhatIfTaxesSaveInput} from './tfWhatIfUtil';
+import {buildPensionWhatIfTestSaveInput,generatePensionWhatIfTaxesPDF,buildPensionWhatIfTestDelete,buildPensionWhatIfTaxesSaveInput,generatePensionWhatIfCalculateTaxesPDF,buildPensionWhatIfTestTaxesDelete} from './pwiTestUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -274,7 +276,6 @@ export function buildGridInputForPage(pageid, filterData, stDate, enDate) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    //companyCode: filterData.companyCode,
     companyCode: getCompanyCode(filterData),
     companyName: filterData.companyName,
     taxCode: getTaxCode(filterData),
@@ -302,7 +303,6 @@ export function buildGridInputForPage(pageid, filterData, stDate, enDate) {
     regPen: filterData.regPen,
     taxN: filterData.taxN,
     employee: filterData.employeeCode,
-    companyCode: filterData.cpycode,
     empGroup: filterData.id
   };
   return input;
@@ -616,7 +616,31 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   let input;
   if(pageid === "residentTaxTypelocal" || pageid === "residentTaxType" || pageid === "nonresidentTaxType" || pageid === "nonresidentTaxTypelocal") {
     input = {
-        "authCode": patten[0].authId
+        authCode: patten[0].authId
+    }
+
+    return input;
+  }
+
+  if(pageid === "taxTypeUserTaxType") {
+    input = {
+      pageId: pageid, 
+      dataset: appDataset(),
+      userId: appUserId(),
+      pattern: patten[0].bsiauth,
+      bsiauth: patten[0].bsiauth,
+    }
+
+    return input;
+  }
+
+  if(pageid === "pensionFormula") {
+    input = {
+      pageId: pageid, 
+      dataset: appDataset(),
+      userId: appUserId(),
+      authCode: formValues["usrauthcd"] && formValues["usrauthcd"].bsiauth,
+      taxType: patten
     }
 
     return input;
@@ -988,6 +1012,10 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildOptionalRateOverrideDelete(pageid, formdata, mode, state);
   } else if (pageid === "customGarnishmentTaxFormulas") {
     return buildCustomGarnishmentTaxFormulasDelete(pageid, formdata, mode, state);
+  }  else if (pageid === "pensionWhatIfTest") {
+      return buildPensionWhatIfTestDelete(pageid, formdata, mode, state);
+  } else if (pageid === "pensionWhatIfTaxes") {
+    return buildPensionWhatIfTestTaxesDelete(pageid, formdata, mode, state);
   } else {
     console.log("formdata");
     console.log(formdata);
@@ -1029,13 +1057,17 @@ export function buildDeleteAllInput(pageid, store, formdata, mode) {
   }
 }
 
-export function buildPdfInput(pageid, store, formdata, mode) {
+export function buildPdfInput(pageid, store, formdata, mode, fromBar) {
   const state = store.getState();
   const filterData = state.formFilterData;
   if(pageid==='garnishmentFormulaOverrides'){
     return generateGarnishmentFormulaOverridePDF(pageid, store, formdata, mode);
   }else if(pageid === "customGarnishmentTaxFormulas"){
     return buildCustomGarnishmentTaxFormulasViewPDF(pageid, state, formdata, mode);
+  }else if(pageid === "pensionWhatIfTaxes" && !fromBar){
+      return generatePensionWhatIfTaxesPDF(pageid, filterData, formdata, mode);
+  }else if(pageid === "pensionWhatIfTaxes" && fromBar){
+      return generatePensionWhatIfCalculateTaxesPDF(pageid, filterData, formdata, mode);
   }else{
     return {
       dataset: appDataset(),
@@ -1651,6 +1683,10 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildGarnishmentFormulaOverridesSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "customTaxFormulas") {
     return buildCustomTaxFormulasSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "pensionWhatIfTest") {
+    return buildPensionWhatIfTestSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "pensionWhatIfTaxes") {
+    return buildPensionWhatIfTaxesSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "optionalRateOverride") {
     return buildOptionalRateOverrideSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "customGarnishmentTaxFormulas") {
@@ -1673,8 +1709,10 @@ function buildOtherSaveInput(pageid, formdata, editMode) {
     payCode: formdata.userCode,
     payType: formdata.payType,
     payName: formdata.name,
-    e_taxability: formdata.taxability,
-    e_maxLimit: formdata.eemax,
+    er_taxability: formdata.employerTaxability,
+    p_aggStatus:formdata.aggregationStatus,
+    p_taxability: formdata.taxability,
+    p_maxLimit: formdata.eemax,
     taxCode: formdata.taxCode,
     taxName: formdata.name,
     calcMethod: formdata.cmName,
@@ -1888,6 +1926,25 @@ export function viewCalcPDFUrl(id) {
   });
   let url = generateUrl.buildURL(viewPdf.url);
   console.log("VIEW CALC PDF URL %s for page %s", url, id);
+  return url;
+}
+
+export function viewPDFUrlButtonBar(id) {
+  let viewPdf = viewPDFMapButtonBar.find(metadatam => {
+    if (id == metadatam.id) return metadatam;
+  });
+  let url = generateUrl.buildURL(viewPdf.url);
+  if (isMock()) {
+    if (mockDataMapper[id]) {
+      url = mockDataMapper[id];
+    } else {
+      let viewPdf = mockdelmap.find(metadatam => {
+        if (id == metadatam.id) return metadatam;
+      });
+      url = viewPdf.url;
+    }
+  }
+  console.log("VIEW PDF URL %s for page %s", url, id);
   return url;
 }
 
