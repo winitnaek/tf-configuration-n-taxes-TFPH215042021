@@ -192,3 +192,6 @@ export const AUTOCOMPLETE_PENSION_TAX_TYPE = '/WhatIfService/getPensionTaxTypeAu
 export const SAVE_PENSION_WHAT_IF_TEST_TAXES = '/WhatIfService/savePensionRecipientTax'
 export const DELETE_PENSION_WHAT_IF_TEST_TAXES = '/WhatIfService/deletePensionRecipientTax'
 export const GET_CUSTOM_NEXUS_COMPANY_DATA = '/CompanyService/getCustomNexusList'
+export const GET_CUSTOM_PAYMENT_EXCEPTIONS='/PaymentsService/getCustomPaymentExceptions'
+export const SAVE_CUSTOM_PAYMENT_EXCEPTION='/PaymentsService/saveCustomPaymentException'
+export const DELETE_CUSTOM_PAYMENT_EXCEPTION='/PaymentsService/deleteCustomPaymentException'

@@ -192,7 +192,10 @@ import {
   AUTOCOMPLETE_PENSION_TAX_TYPE,
   SAVE_PENSION_WHAT_IF_TEST_TAXES,
   DELETE_PENSION_WHAT_IF_TEST_TAXES,
-  GET_CUSTOM_NEXUS_COMPANY_DATA
+  GET_CUSTOM_NEXUS_COMPANY_DATA,
+  GET_CUSTOM_PAYMENT_EXCEPTIONS,
+  SAVE_CUSTOM_PAYMENT_EXCEPTION,
+  DELETE_CUSTOM_PAYMENT_EXCEPTION
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -275,7 +278,7 @@ export const metaDataApiMap = {
   customGarnishmentFormulas: GET_CUSTOM_FORMULAS,
   customGarnishmentTaxFormulas: GET_CUSTOM_GARNISHMENT_FORMULAS,
   customPaymentExceptions: GET_CUSTOM_PAYMENTS_LIST,
-  customPaymentTaxExceptions: GET_CUSTOM_PAYMENT,
+  customPaymentTaxExceptions: GET_CUSTOM_PAYMENT_EXCEPTIONS,
   customTaxPaymentOverrides: GET_CUSTOM_FORMULAS,
   customTaxPaymentOverride: GET_CUSTOM_TAX_FORMULAS,
   paymentOverrides: GET_EMPLOYEE_GROUPS,
@@ -367,7 +370,8 @@ export const deleteDataApiMap = {
   optionalRateOverride:DELETE_OPTIONAL_RATE_OVERRIDE,
   customGarnishmentTaxFormulas:DELETE_CUSTOM_GARNISHMENT_FORMULA,
   pensionWhatIfTest: DELETE_PENSION_WHAT_IF_TEST,
-  pensionWhatIfTaxes: DELETE_PENSION_WHAT_IF_TEST_TAXES
+  pensionWhatIfTaxes: DELETE_PENSION_WHAT_IF_TEST_TAXES,
+  customPaymentTaxExceptions:DELETE_CUSTOM_PAYMENT_EXCEPTION
 };
 export const deleteAllDataApiMap = {
   whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES,
@@ -408,7 +412,8 @@ export const saveDataApiMap = {
   garnishmentFormulaOverrides:SAVE_GARNISHMENT_FORMULA_OVD,
   customGarnishmentTaxFormulas:SAVE_CUSTOM_GARNISHMENT_FORMULA,
   pensionWhatIfTest: SAVE_PENSION_WHAT_IF_TEST,
-  pensionWhatIfTaxes: SAVE_PENSION_WHAT_IF_TEST_TAXES
+  pensionWhatIfTaxes: SAVE_PENSION_WHAT_IF_TEST_TAXES,
+  customPaymentTaxExceptions:SAVE_CUSTOM_PAYMENT_EXCEPTION
 };
 
 export const saveAsAPIMap = {
