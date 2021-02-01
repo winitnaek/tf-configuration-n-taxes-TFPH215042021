@@ -27,7 +27,7 @@ import {garnishmentFormulaOverrides,buildGarnishmentFormulaOverridesDelete,getGa
 import {buildCustomTaxFormulasSaveInput} from './cfFormulaUtil';
 import {optionalRateOverrideGridInput,buildOptionalRateOverrideDelete,getOrOverrideTaxTypeInput,getOrOverrideFormulaInput,buildOptionalRateOverrideSaveInput} from './orOverridesUtil';
 import {customGarnishmentTaxFormulasGridInput,getUsrTaxInput,buildCustomGarnishmentTaxFormulasDelete,buildCustomGarnishmentTaxFormulasSaveInput,buildCustomGarnishmentTaxFormulasViewPDF} from './cgFormulasUtil';
-import {customPaymentTaxExceptionsGridInput} from './cpExceptionsUtil';
+import {customPaymentTaxExceptionsGridInput,buildCustomPaymentTaxExceptionsDelete,buildCustomPaymentTaxExceptionsSaveInput} from './cpExceptionsUtil';
 import {whatIfGarnishmentsGridInput, getGformInput,getUsrTxTypInput,buildWhatIfTaxesDelete,whatifTaxesGridInput,buildWhatifEmpDeleteAll,buildWhatifDeductionBenefitsDeleteAll,buildWhatifEmpDelete,buildWhatIfTaxesSaveInput} from './tfWhatIfUtil';
 import {buildPensionWhatIfTestSaveInput,generatePensionWhatIfTaxesPDF,buildPensionWhatIfTestDelete,buildPensionWhatIfTaxesSaveInput,generatePensionWhatIfCalculateTaxesPDF,buildPensionWhatIfTestTaxesDelete} from './pwiTestUtil';
 /**
@@ -1016,6 +1016,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
       return buildPensionWhatIfTestDelete(pageid, formdata, mode, state);
   } else if (pageid === "pensionWhatIfTaxes") {
     return buildPensionWhatIfTestTaxesDelete(pageid, formdata, mode, state);
+  } else if (pageid === "customPaymentTaxExceptions") {
+    return buildCustomPaymentTaxExceptionsDelete(pageid, formdata, mode, state);
   } else {
     console.log("formdata");
     console.log(formdata);
@@ -1692,6 +1694,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildOptionalRateOverrideSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "customGarnishmentTaxFormulas") {
     return buildCustomGarnishmentTaxFormulasSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "customPaymentTaxExceptions") {
+    return buildCustomPaymentTaxExceptionsSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }
@@ -2139,6 +2143,11 @@ export function populateParentData(fieldInfo,initialValues, pageId) {
     const parentInfo  = state.parentInfo;
     initialValues.company = parentInfo.company;
     initialValues.companyName = parentInfo.companyName;
+  }else if (pageId === 'customPaymentTaxExceptions') {
+    const state = store.getState();
+    const parentInfo  = state.parentInfo;
+    initialValues.userCode = parentInfo.userCode;
+    initialValues.payType = parentInfo.payType;
   }
   return initialValues;
 }

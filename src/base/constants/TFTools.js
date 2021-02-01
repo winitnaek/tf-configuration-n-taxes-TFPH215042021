@@ -10,22 +10,6 @@ export const UI_EXTN = 'externallink';
 export const tftools = [
   ...tfScreens,
   {
-    value: 'TH',
-    label: 'Test Metadata',
-    desc: 'Test Metadata',
-    id: 'testHarness',
-    type: UI_TEST,
-    link: true
-  },
-  {
-    value: 'UQ',
-    label: 'Reporting',
-    desc: 'Reporting',
-    id: 'userDataQueries',
-    type: UI_PAGE,
-    link: true
-  },
-  {
     value: 'UQ',
     label: 'U.S. QuickFormulas',
     desc: 'U.S. QuickFormulas',
@@ -34,43 +18,6 @@ export const tftools = [
     link: false,
     href:"https://mybsiconnect.force.com/CustomLogin?startURL=%2Fpage_quickForms2%3Fd",
     section:'formulas'
-  },
-  {
-    value: 'UQ',
-    label: 'U.S. Pension QuickFormulas',
-    desc: 'U.S. Pension QuickFormulas',
-    id: 'USPensionQuickFormulas',
-    type: UI_EXTN,
-    link: false,
-    href:"https://mybsiconnect.force.com/CustomLogin?startURL=%2Fpage_quickForms2%3Fdirect%3Dwspenqf%252Fversion%252F10",
-    section:'formulas'
-  },
-  {
-    value: 'UQ',
-    label: 'U.S. WageAttachment QuickFormulas',
-    desc: 'U.S. WageAttachment QuickFormulas',
-    id: 'USWageAttachmentQuickFormulas',
-    type: UI_EXTN,
-    link: false,
-    href:"https://mybsiconnect.force.com/CustomLogin?startURL=%2Fpage_quickForms2%3Fdirect%3Dwswagqf%252Fversion%252F10",
-    section:'formulas'
-  },
- {
-    value: 'CO',
-    label: 'Companies',
-    desc: 'Companies',
-    id: 'companies',
-    type: UI_COMP,
-    link: false,
-    
-  },
-  {
-    value: 'MS',
-    label: 'Messages to Suppress',
-    desc: 'Messages to Suppress',
-    id: 'messageToSuppress',
-    type: 'page',
-    link: true
   }
 ];
 
