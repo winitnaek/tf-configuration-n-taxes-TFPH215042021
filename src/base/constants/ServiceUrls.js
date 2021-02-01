@@ -182,3 +182,6 @@ export const DELETE_ALL_WHHATIF_EMPLOYEE_GARN_DEDBENEFITS='/WhatIfService/delete
 export const GET_WHATIF_EMPLOYEEDETAIL_PDF='/WhatIfService/generateWhatIfEmployeeTaxDetailPDF'
 export const GET_WHATIF_EMPLOYEEGARN_PDF='/WhatIfService/generateWhatIfEmployeeGarnishmentPDF'
 export const CALCULATE_WHATIF_TAXES_PDF ='/WhatIfService/calculateWhatIfTaxesPDF'
+export const GET_CUSTOM_PAYMENT_EXCEPTIONS='/PaymentsService/getCustomPaymentExceptions'
+export const SAVE_CUSTOM_PAYMENT_EXCEPTION='/PaymentsService/saveCustomPaymentException'
+export const DELETE_CUSTOM_PAYMENT_EXCEPTION='/PaymentsService/deleteCustomPaymentException'

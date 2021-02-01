@@ -58,6 +58,8 @@ export function payTypeNamerenderer(ndex,
 		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${'Earning'}</div>`;
 	}else if(rowdata.payType==='C'){
 		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${'Credit'}</div>`;
+	}else if(rowdata.payType==='P'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${'Benefit Plan'}</div>`;
 	}
 }
 export function aggStatusNamerenderer(ndex,

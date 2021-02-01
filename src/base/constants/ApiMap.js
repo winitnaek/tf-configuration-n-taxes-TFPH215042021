@@ -182,7 +182,10 @@ import {
   DELETE_ALL_WHHATIF_EMPLOYEE_GARN_DEDBENEFITS,
   GET_WHATIF_EMPLOYEEDETAIL_PDF,
   GET_WHATIF_EMPLOYEEGARN_PDF,
-  CALCULATE_WHATIF_TAXES_PDF
+  CALCULATE_WHATIF_TAXES_PDF,
+  GET_CUSTOM_PAYMENT_EXCEPTIONS,
+  SAVE_CUSTOM_PAYMENT_EXCEPTION,
+  DELETE_CUSTOM_PAYMENT_EXCEPTION
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -265,7 +268,7 @@ export const metaDataApiMap = {
   customGarnishmentFormulas: GET_CUSTOM_FORMULAS,
   customGarnishmentTaxFormulas: GET_CUSTOM_GARNISHMENT_FORMULAS,
   customPaymentExceptions: GET_CUSTOM_PAYMENTS_LIST,
-  customPaymentTaxExceptions: GET_CUSTOM_PAYMENT,
+  customPaymentTaxExceptions: GET_CUSTOM_PAYMENT_EXCEPTIONS,
   customTaxPaymentOverrides: GET_CUSTOM_FORMULAS,
   customTaxPaymentOverride: GET_CUSTOM_TAX_FORMULAS,
   paymentOverrides: GET_EMPLOYEE_GROUPS,
@@ -348,7 +351,8 @@ export const deleteDataApiMap = {
   reciprocalOverride: DELETE_RECIPROCAL_OVERRIDE,
   garnishmentFormulaOverrides:DELETE_GARNISHMENT_FORMULA_OVERRIDE,
   optionalRateOverride:DELETE_OPTIONAL_RATE_OVERRIDE,
-  customGarnishmentTaxFormulas:DELETE_CUSTOM_GARNISHMENT_FORMULA
+  customGarnishmentTaxFormulas:DELETE_CUSTOM_GARNISHMENT_FORMULA,
+  customPaymentTaxExceptions:DELETE_CUSTOM_PAYMENT_EXCEPTION
 };
 export const deleteAllDataApiMap = {
   whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES,
@@ -387,7 +391,8 @@ export const saveDataApiMap = {
   whatifTaxes:SAVE_WHATIF_EMPLOYEE_TAX,
   reciprocalOverride: SAVE_RECIPROCAL_OVERRIDE,
   garnishmentFormulaOverrides:SAVE_GARNISHMENT_FORMULA_OVD,
-  customGarnishmentTaxFormulas:SAVE_CUSTOM_GARNISHMENT_FORMULA
+  customGarnishmentTaxFormulas:SAVE_CUSTOM_GARNISHMENT_FORMULA,
+  customPaymentTaxExceptions:SAVE_CUSTOM_PAYMENT_EXCEPTION
 };
 
 export const saveAsAPIMap = {
