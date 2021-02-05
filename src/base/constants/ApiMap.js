@@ -202,7 +202,14 @@ import {
   GENERATE_WHAT_IF_EMP_PDF,
   VIEW_PDF_WAGE_DETAILS,
   GENERATE_WHAT_IF_EMP_TAXES_PDF,
-  VIEW_PDF_WHAT_IF_GARNISHMENT
+  VIEW_PDF_WHAT_IF_GARNISHMENT,
+  GET_DISPOSABLE_OVERRIDE_LIST,
+  AUTO_COMP_DISP_OVRD_AUTHS,
+  AUTO_COMP_DISP_OVRD_GARNS,
+  AUTO_COMP_DISP_OVRD_CODES,
+  SAVE_DISPOSABLE_OVERRIDE,
+  DELETE_DISPOSABLE_OVERRIDE,
+  VIEW_DISPOSABLE_OVERRIDE
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -280,8 +287,8 @@ export const metaDataApiMap = {
   optionalRateOverrides: GET_COMPANIES,
   optionalRateOverride: GET_OPTIONAL_RATE_OVERRIDES,
   customNexusCompanyData: GET_CUSTOM_NEXUS_COMPANY_DATA,
-  disposableRateOverrides: GET_CUSTOM_FORMULAS,
-  disposableOverride: GET_CUSTOM_TAX_FORMULAS,
+  disposableRateOverrides: GET_GARNISHMENT_GROUPS,
+  disposableOverride: GET_DISPOSABLE_OVERRIDE_LIST,
   customGarnishmentFormulas: GET_CUSTOM_FORMULAS,
   customGarnishmentTaxFormulas: GET_CUSTOM_GARNISHMENT_FORMULAS,
   customPaymentExceptions: GET_CUSTOM_PAYMENTS_LIST,
@@ -292,7 +299,7 @@ export const metaDataApiMap = {
   paymentOverride: GET_PAYMENT_OVERRIDE,
   reciprocalOverrides: GET_CUSTOM_FORMULAS,
   reciprocalOverride: GET_CUSTOM_TAX_FORMULAS,
-  viewDisposableOverride: GET_CUSTOM_TAX_FORMULAS,
+  viewDisposableOverride: VIEW_DISPOSABLE_OVERRIDE,
   messageViewer: GET_MESSAGE_VIEWER,
   messagesViewer: GET_MESSAGES_VIEWER,
   messageViewListByMessageType: GET_MESSAGES_VIEWER_TYPE,
@@ -384,7 +391,8 @@ export const deleteDataApiMap = {
   pensionWhatIfTest: DELETE_PENSION_WHAT_IF_TEST,
   pensionWhatIfTaxes: DELETE_PENSION_WHAT_IF_TEST_TAXES,
   customPaymentTaxExceptions:DELETE_CUSTOM_PAYMENT_EXCEPTION,
-  customNexusCompanyData: DELETE_CUSTOM_NEXUS_DATA
+  customNexusCompanyData: DELETE_CUSTOM_NEXUS_DATA,
+  disposableOverride:DELETE_DISPOSABLE_OVERRIDE
 };
 export const deleteAllDataApiMap = {
   whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES,
@@ -426,7 +434,8 @@ export const saveDataApiMap = {
   pensionWhatIfTest: SAVE_PENSION_WHAT_IF_TEST,
   pensionWhatIfTaxes: SAVE_PENSION_WHAT_IF_TEST_TAXES,
   customPaymentTaxExceptions:SAVE_CUSTOM_PAYMENT_EXCEPTION,
-  customNexusCompanyData: SAVE_CUSTOM_NEXUS_DATA
+  customNexusCompanyData: SAVE_CUSTOM_NEXUS_DATA,
+  disposableOverride:SAVE_DISPOSABLE_OVERRIDE
 };
 
 export const saveAsAPIMap = {
@@ -523,5 +532,8 @@ export const autoCompleteApiMap = {
   orOverrideBsiWage:GET_OPTIONAL_RATE_OVRD_BSI_WAGE,
   taxTypeUserTaxType: AUTOCOMPLETE_PENSION_TAX_TYPE,
   pensionFormula: WHATIF_GARN_AUTOCOMPLETE_FORMULAS,
-  taxCode1: CUSTOM_NEXUS_DATA_AUTHORITY_AUTOCOMPLETE
+  taxCode1: CUSTOM_NEXUS_DATA_AUTHORITY_AUTOCOMPLETE,
+  dispOvrdAuthTaxCode:AUTO_COMP_DISP_OVRD_AUTHS,
+  garnishType:AUTO_COMP_DISP_OVRD_GARNS,
+  dispOvrdPaymentCode:AUTO_COMP_DISP_OVRD_CODES
 };

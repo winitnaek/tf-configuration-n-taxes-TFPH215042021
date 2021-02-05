@@ -19,6 +19,7 @@ import { compMetaData,populateParentData} from "../../base/utils/tfUtils";
 import {setParentInfo} from '../../app/actions/parentInfoActions';
 import store from "../../tf-configuration-n-taxes";
 import {calculateTaxesPDFInput} from '../../base/utils/tfWhatIfUtil'
+import {hasValidInputForView} from '../../base/utils/dsOverridesUtil';
 class CustomGrid extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +35,8 @@ class CustomGrid extends Component {
       showPDF: false,
       pdfData: {},
       viewPdfMode: false,
+      popgridstyle:gridStyles.modal,
+      modaltitle:''
     };
 
     this.renderGrid = pgData => {
@@ -69,6 +72,25 @@ class CustomGrid extends Component {
       }
     };
 
+    this.viewDisposableOverride = (event) => {
+      let element = document.querySelector("div.modal-footer button:last-child");
+      if (element && element.innerHTML==='View All Disposables' && event.target.innerHTML ==='View All Disposables') {
+        console.log(event);
+        event.stopPropagation();
+        event.preventDefault();
+        let state = store.getState();
+        let formData = state.formData;
+        if(formData && formData.mode=='New'){
+          let isTrue = hasValidInputForView();
+          if(isTrue=== true){
+            this.getViewAllDisposableData();
+          }
+        }else{
+          this.getViewAllDisposableData();
+        }
+      }
+    };
+
     this.handlePDF = async (event, fromBar) => {
       event.preventDefault();
         const { pageid, formData } = this.props;
@@ -99,7 +121,20 @@ class CustomGrid extends Component {
     this.setState({
       showAlert: !!metaInfo
     });
+    document.addEventListener('click',this.viewDisposableOverride, false);
   }
+
+  async getViewAllDisposableData(){
+    const data = await this.props.getDataForChildGrid({ pgid:'viewDisposableOverride', showSummary: this.state.showSummary });
+    this.setState({
+      modalGridData: data,
+      isOpen: true,
+      clickedPageId:'viewDisposableOverride',
+      popgridstyle:gridStyles.modallarge,
+      modaltitle:'All Disposable Overrides'
+    })
+  }
+
   handleHidePDF() {
     this.setState({ showPDF: false })
   }
@@ -279,8 +314,9 @@ class CustomGrid extends Component {
         ) : null}
         <ConfirmModal showConfirm={this.state.showAlert} handleOk={this.handleOk} {...metaInfo} />
 
-        <Modal isOpen={this.state.isOpen} size="lg" style={gridStyles.modal}>
+        <Modal isOpen={this.state.isOpen} size="lg" style={this.state.popgridstyle}>
           <ModalHeader toggle={this.toggle}>
+          {this.state.modaltitle}
           </ModalHeader>
           <ModalBody>
             <Row>

@@ -18,7 +18,7 @@ export const bold = {
 export const modal = {
   width: "1400px", marginTop: "175px"
 }
-
+export const modallarge = { 'max-width': window.innerWidth-200}
 
 export const modalBody = {
   display: "flex", margin: "0 auto", width: "70%", flexWrap: "wrap"

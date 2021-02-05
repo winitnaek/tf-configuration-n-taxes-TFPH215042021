@@ -31,6 +31,8 @@ import {customPaymentTaxExceptionsGridInput,buildCustomPaymentTaxExceptionsDelet
 import {whatIfGarnishmentsGridInput, getGformInput,getUsrTxTypInput,buildWhatIfTaxesDelete,whatifTaxesGridInput,buildWhatifEmpDeleteAll,buildWhatifDeductionBenefitsDeleteAll,buildWhatifEmpDelete,buildWhatIfTaxesSaveInput,generateWhatifEmpPDFInput,calculateTaxesPDFInput,wageDetailsGridInput,generatewageDetailsPDF,generatewhatifTaxesPDF,generateWhatIfGarnishmentPDF} from './tfWhatIfUtil';
 import {buildPensionWhatIfTestSaveInput,generatePensionWhatIfTaxesPDF,buildPensionWhatIfTestDelete,buildPensionWhatIfTaxesSaveInput,generatePensionWhatIfCalculateTaxesPDF,buildPensionWhatIfTestTaxesDelete} from './pwiTestUtil';
 import {buildCustomNexusCompanyDataSaveInput} from './cnDataUtil';
+import {disposableOverrideGridInput,garnishTypeInput,buildDisposableOverrideDelete,buildDisposableOverrideSaveInput,viewDisposableOverrideGridInput} from './dsOverridesUtil';
+
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -383,6 +385,10 @@ export function buildGridDataInput(pageid, store) {
     return customPaymentTaxExceptionsGridInput(pageid, filterData, stDate, enDate, state);
   } else if (pageid === 'wageDetails') {
     input = wageDetailsGridInput(pageid, filterData, stDate, enDate);
+  } else if (pageid === "disposableOverride") {
+    return disposableOverrideGridInput(pageid, filterData, stDate, enDate, state);
+  } else if (pageid === "viewDisposableOverride") {
+    return viewDisposableOverrideGridInput(pageid, filterData, stDate, enDate, state);
   } else {
     if (state.parentData) { //Reset Parent Data
       let parentData = {};
@@ -715,6 +721,9 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   if(pageid === 'gform' && formValues){
     return getGformInput(input,formValues);
   }
+  if(pageid === 'garnishType' && formValues){
+    return garnishTypeInput(input,formValues);
+  }
   if(pageid === 'formula' && formValues){
     input = {
       pageId: pageid,
@@ -1022,6 +1031,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildPensionWhatIfTestTaxesDelete(pageid, formdata, mode, state);
   } else if (pageid === "customPaymentTaxExceptions") {
     return buildCustomPaymentTaxExceptionsDelete(pageid, formdata, mode, state);
+  } else if (pageid === "disposableOverride") {
+    return buildDisposableOverrideDelete(pageid, formdata, mode, state);
   } else {
     console.log("formdata");
     console.log(formdata);
@@ -1732,6 +1743,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildCustomPaymentTaxExceptionsSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "customNexusCompanyData") {
     return buildCustomNexusCompanyDataSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "disposableOverride") {
+    return buildDisposableOverrideSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }

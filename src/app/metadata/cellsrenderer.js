@@ -173,3 +173,58 @@ export function placeCodeNameRenderer(ndex, datafield, value, defaultvalue, colu
 export function schoolDistrictNameRenderer(ndex, datafield, value, defaultvalue, column,rowdata) {
 	return rowdata.sdCounty+'| '+rowdata.sdName;
 }
+export function garnishTypeNamerenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	if(rowdata.garnishType && rowdata.garnishName){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.garnishType + '-' + rowdata.garnishName}</div>`;
+	}
+}
+export function paymentCodeNamerenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	if(rowdata.paymentCode && rowdata.paymentName){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.paymentCode + '-' + rowdata.paymentName}</div>`;
+	}
+}
+export function startDateEndDaterenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	if(rowdata.startDate && rowdata.endDate){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.startDate + '-' + rowdata.endDate}</div>`;
+	}
+}
+export function minMaxPctrenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	if(rowdata.minPercent && rowdata.minPercent >=0 && rowdata.maxPercent && rowdata.maxPercent >=0){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.minPercent + '-' + rowdata.maxPercent}</div>`;
+	}
+}
+export function minMaxAmtrenderer(ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+) {
+	if(rowdata.minAmount && rowdata.maxAmount){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.minAmount + '-' + rowdata.maxAmount}</div>`;
+	}
+}
