@@ -195,7 +195,14 @@ import {
   GET_CUSTOM_NEXUS_COMPANY_DATA,
   GET_CUSTOM_PAYMENT_EXCEPTIONS,
   SAVE_CUSTOM_PAYMENT_EXCEPTION,
-  DELETE_CUSTOM_PAYMENT_EXCEPTION
+  DELETE_CUSTOM_PAYMENT_EXCEPTION,
+  GET_DISPOSABLE_OVERRIDE_LIST,
+  AUTO_COMP_DISP_OVRD_AUTHS,
+  AUTO_COMP_DISP_OVRD_GARNS,
+  AUTO_COMP_DISP_OVRD_CODES,
+  SAVE_DISPOSABLE_OVERRIDE,
+  DELETE_DISPOSABLE_OVERRIDE,
+  VIEW_DISPOSABLE_OVERRIDE
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -273,8 +280,8 @@ export const metaDataApiMap = {
   optionalRateOverrides: GET_COMPANIES,
   optionalRateOverride: GET_OPTIONAL_RATE_OVERRIDES,
   customNexusCompanyData: GET_CUSTOM_NEXUS_COMPANY_DATA,
-  disposableRateOverrides: GET_CUSTOM_FORMULAS,
-  disposableOverride: GET_CUSTOM_TAX_FORMULAS,
+  disposableRateOverrides: GET_GARNISHMENT_GROUPS,
+  disposableOverride: GET_DISPOSABLE_OVERRIDE_LIST,
   customGarnishmentFormulas: GET_CUSTOM_FORMULAS,
   customGarnishmentTaxFormulas: GET_CUSTOM_GARNISHMENT_FORMULAS,
   customPaymentExceptions: GET_CUSTOM_PAYMENTS_LIST,
@@ -285,7 +292,7 @@ export const metaDataApiMap = {
   paymentOverride: GET_PAYMENT_OVERRIDE,
   reciprocalOverrides: GET_CUSTOM_FORMULAS,
   reciprocalOverride: GET_CUSTOM_TAX_FORMULAS,
-  viewDisposableOverride: GET_CUSTOM_TAX_FORMULAS,
+  viewDisposableOverride: VIEW_DISPOSABLE_OVERRIDE,
   messageViewer: GET_MESSAGE_VIEWER,
   messagesViewer: GET_MESSAGES_VIEWER,
   messageViewListByMessageType: GET_MESSAGES_VIEWER_TYPE,
@@ -371,7 +378,8 @@ export const deleteDataApiMap = {
   customGarnishmentTaxFormulas:DELETE_CUSTOM_GARNISHMENT_FORMULA,
   pensionWhatIfTest: DELETE_PENSION_WHAT_IF_TEST,
   pensionWhatIfTaxes: DELETE_PENSION_WHAT_IF_TEST_TAXES,
-  customPaymentTaxExceptions:DELETE_CUSTOM_PAYMENT_EXCEPTION
+  customPaymentTaxExceptions:DELETE_CUSTOM_PAYMENT_EXCEPTION,
+  disposableOverride:DELETE_DISPOSABLE_OVERRIDE
 };
 export const deleteAllDataApiMap = {
   whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES,
@@ -413,7 +421,8 @@ export const saveDataApiMap = {
   customGarnishmentTaxFormulas:SAVE_CUSTOM_GARNISHMENT_FORMULA,
   pensionWhatIfTest: SAVE_PENSION_WHAT_IF_TEST,
   pensionWhatIfTaxes: SAVE_PENSION_WHAT_IF_TEST_TAXES,
-  customPaymentTaxExceptions:SAVE_CUSTOM_PAYMENT_EXCEPTION
+  customPaymentTaxExceptions:SAVE_CUSTOM_PAYMENT_EXCEPTION,
+  disposableOverride:SAVE_DISPOSABLE_OVERRIDE
 };
 
 export const saveAsAPIMap = {
@@ -508,5 +517,8 @@ export const autoCompleteApiMap = {
   orOverrideFormula:GET_OPTIONAL_RATE_OVRD_AUTO_COMP_FORM,
   orOverrideBsiWage:GET_OPTIONAL_RATE_OVRD_BSI_WAGE,
   taxTypeUserTaxType: AUTOCOMPLETE_PENSION_TAX_TYPE,
-  pensionFormula: WHATIF_GARN_AUTOCOMPLETE_FORMULAS
+  pensionFormula: WHATIF_GARN_AUTOCOMPLETE_FORMULAS,
+  dispOvrdAuthTaxCode:AUTO_COMP_DISP_OVRD_AUTHS,
+  garnishType:AUTO_COMP_DISP_OVRD_GARNS,
+  dispOvrdPaymentCode:AUTO_COMP_DISP_OVRD_CODES
 };
