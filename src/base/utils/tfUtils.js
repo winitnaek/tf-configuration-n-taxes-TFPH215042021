@@ -28,8 +28,9 @@ import {buildCustomTaxFormulasSaveInput} from './cfFormulaUtil';
 import {optionalRateOverrideGridInput,buildOptionalRateOverrideDelete,getOrOverrideTaxTypeInput,getOrOverrideFormulaInput,buildOptionalRateOverrideSaveInput} from './orOverridesUtil';
 import {customGarnishmentTaxFormulasGridInput,getUsrTaxInput,buildCustomGarnishmentTaxFormulasDelete,buildCustomGarnishmentTaxFormulasSaveInput,buildCustomGarnishmentTaxFormulasViewPDF} from './cgFormulasUtil';
 import {customPaymentTaxExceptionsGridInput,buildCustomPaymentTaxExceptionsDelete,buildCustomPaymentTaxExceptionsSaveInput} from './cpExceptionsUtil';
-import {whatIfGarnishmentsGridInput, getGformInput,getUsrTxTypInput,buildWhatIfTaxesDelete,whatifTaxesGridInput,buildWhatifEmpDeleteAll,buildWhatifDeductionBenefitsDeleteAll,buildWhatifEmpDelete,buildWhatIfTaxesSaveInput} from './tfWhatIfUtil';
+import {whatIfGarnishmentsGridInput, getGformInput,getUsrTxTypInput,buildWhatIfTaxesDelete,whatifTaxesGridInput,buildWhatifEmpDeleteAll,buildWhatifDeductionBenefitsDeleteAll,buildWhatifEmpDelete,buildWhatIfTaxesSaveInput,generateWhatifEmpPDFInput,calculateTaxesPDFInput,wageDetailsGridInput,generatewageDetailsPDF,generatewhatifTaxesPDF,generateWhatIfGarnishmentPDF} from './tfWhatIfUtil';
 import {buildPensionWhatIfTestSaveInput,generatePensionWhatIfTaxesPDF,buildPensionWhatIfTestDelete,buildPensionWhatIfTaxesSaveInput,generatePensionWhatIfCalculateTaxesPDF,buildPensionWhatIfTestTaxesDelete} from './pwiTestUtil';
+import {buildCustomNexusCompanyDataSaveInput} from './cnDataUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -380,6 +381,8 @@ export function buildGridDataInput(pageid, store) {
     return customGarnishmentTaxFormulasGridInput(pageid, filterData, stDate, enDate, state);
   } else if (pageid === "customPaymentTaxExceptions") {
     return customPaymentTaxExceptionsGridInput(pageid, filterData, stDate, enDate, state);
+  } else if (pageid === 'wageDetails') {
+    input = wageDetailsGridInput(pageid, filterData, stDate, enDate);
   } else {
     if (state.parentData) { //Reset Parent Data
       let parentData = {};
@@ -787,10 +790,11 @@ export function buildWhatifWagDeleteInput(pageid, formdata, editMode, state) {
     btxtwge: {
       id: {
         dataset: appDataset(),
-        regpen: formFilterData.regPen,
+        regpen: formFilterData.regpen,
         empcode: formFilterData.empCode,
-        chkdt: formFilterData.checkDate,
-        taxn: formFilterData.taxN
+        chkdt: formFilterData.chkdt,
+        taxn: formFilterData.taxn,
+        seqn: formdata.seqn
       }
     },
     bwapay: {
@@ -1028,6 +1032,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
       pageId: pageid,
       dataset: appDataset(),
       userId: appUserId(),
+      company:formdata.company,
+      authority1:formdata.taxCode1,
       compCode: getCode(formdata, pageid),
       taxCode: formdata.taxCode,
       taxName: formdata.name,
@@ -1071,7 +1077,20 @@ export function buildPdfInput(pageid, store, formdata, mode, fromBar) {
       return generatePensionWhatIfTaxesPDF(pageid, filterData, formdata, mode);
   }else if(pageid === "pensionWhatIfTaxes" && fromBar){
       return generatePensionWhatIfCalculateTaxesPDF(pageid, filterData, formdata, mode);
-  }else{
+  }else if(pageid === "whatifEmp"){
+      return generateWhatifEmpPDFInput(pageid, state, formdata, mode);
+  }else if(pageid === "whatifTaxes" && fromBar){
+      return calculateTaxesPDFInput(pageid, false);
+  }else if(pageid === "whatifGarnishment" && fromBar){
+    return calculateTaxesPDFInput(pageid, true);
+  }else if(pageid === "wageDetails"){
+    return generatewageDetailsPDF(pageid, filterData, formdata, mode);
+  }else if(pageid === "whatifTaxes" && !fromBar){
+    return generatewhatifTaxesPDF(pageid, filterData, formdata, mode);
+  }else if(pageid === "whatifGarnishment" && !fromBar){
+    return generateWhatIfGarnishmentPDF(pageid, state, formdata, mode);
+  }
+  else{
     return {
       dataset: appDataset(),
       employee: filterData.employeeCode,
@@ -1170,22 +1189,29 @@ function buildWhatifDeductionBenefitsSaveInput(pageid, formdata, editMode, state
     editMode: editMode,
     amount: formdata.wamount,
     remncd: formdata.remncd,
-    garnwagepriority: 1 //formdata.gwPriority, Update when static select fixed in library.
+    garnwagepriority: formdata.gwPriority //Update when static select fixed in library.
   };
   return input;
 }
 
 function buildWhatifWageSaveInput(pageid, formdata, editMode, state) {
-  const filterFormData = state.formFilterData;
+  const filterFormData = state.parentInfo;
+  let names = formdata.wageCodedesc.split(' - ');
+  if (names.length === 1) {
+    names = formdata.wageCodedesc || formdata.code;
+  } else {
+    names = formdata.wageCodedesc.split(' - ')[formdata.wageCodedesc.split(' - ').length - 1];
+  }
 
   return {
     btxtwge: {
       id: {
         dataset: appDataset(),
-        regpen: filterFormData.regPen,
+        regpen: filterFormData.regpen,
         empcode: filterFormData.empCode,
-        chkdt: filterFormData.checkDate,
-        taxn: filterFormData.taxN
+        chkdt: filterFormData.chkdt,
+        taxn: filterFormData.taxn,
+        seqn: formdata.seqn
       },
       curern: formdata.currentEarning || 0.00,
       curcnt: formdata.currentContribution || 0.00,
@@ -1202,12 +1228,14 @@ function buildWhatifWageSaveInput(pageid, formdata, editMode, state) {
       eeind: formdata.employeeIndicator || 0,
       erind: formdata.employerIndicator || 0,
       catchupEI: formdata.catchupEI || 0,
-      remncd: formdata.wageCodedesc.split(' - ')[formdata.wageCodedesc.split(' - ').length - 1],
+      remncd: names,
       initdt: moment(formdata.initiationDate).format("MM/DD/YYYY")
     },
     bwapay: {
-      name: formdata.wageCodedesc
-    }
+      name: formdata.wageCodedesc,
+      paytype: formdata.paytype,
+    },
+    editMode : editMode
   }
 }
 /**
@@ -1223,6 +1251,12 @@ function buildWhatIfEmployeeGarnishmentSaveInput(pageid, formdata, editMode, sta
     editRec = "false";
   } else if (editMode == 2) {
     editRec = "true";
+  }
+  let taxtyp = formdata.usrtxtyp;
+  if (editMode == 1){
+    taxtyp = formdata.usrtxtyp;
+  } else if (editMode == 2) {
+    taxtyp = formdata.taxtype;
   }
   let parentInfo = state.parentInfo;
   let empcode = formdata.empcode ? formdata.empcode: parentInfo.empCode
@@ -1287,7 +1321,7 @@ function buildWhatIfEmployeeGarnishmentSaveInput(pageid, formdata, editMode, sta
       hassoe: formdata.hassoe?formdata.hassoe:0,
       useAlternateLimit: formdata.useAlternateLimit?formdata.useAlternateLimit:0,
       firstPayCode: formdata.firstPayCode?formdata.firstPayCode:0,
-      taxtype: formdata.usrtxtyp,
+      taxtype: taxtyp,
       grcvddt: formdata.grcvddt? moment(formdata.grcvddt).format("MM/DD/YYYY"): moment().format("MM/DD/YYYY"),
       gstrtdt: formdata.gstrtdt? moment(formdata.gstrtdt).format("MM/DD/YYYY"):moment().format("MM/DD/YYYY"),
       genddt: formdata.genddt? moment(formdata.genddt).format("MM/DD/YYYY"):moment().format("MM/DD/YYYY"),
@@ -1696,6 +1730,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildCustomGarnishmentTaxFormulasSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "customPaymentTaxExceptions") {
     return buildCustomPaymentTaxExceptionsSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "customNexusCompanyData") {
+    return buildCustomNexusCompanyDataSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }

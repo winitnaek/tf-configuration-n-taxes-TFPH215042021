@@ -195,7 +195,14 @@ import {
   GET_CUSTOM_NEXUS_COMPANY_DATA,
   GET_CUSTOM_PAYMENT_EXCEPTIONS,
   SAVE_CUSTOM_PAYMENT_EXCEPTION,
-  DELETE_CUSTOM_PAYMENT_EXCEPTION
+  DELETE_CUSTOM_PAYMENT_EXCEPTION,
+  CUSTOM_NEXUS_DATA_AUTHORITY_AUTOCOMPLETE,
+  SAVE_CUSTOM_NEXUS_DATA,
+  DELETE_CUSTOM_NEXUS_DATA,
+  GENERATE_WHAT_IF_EMP_PDF,
+  VIEW_PDF_WAGE_DETAILS,
+  GENERATE_WHAT_IF_EMP_TAXES_PDF,
+  VIEW_PDF_WHAT_IF_GARNISHMENT
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -328,17 +335,22 @@ export const viewPDFApiMap = {
   customGarnishmentTaxFormulas:GENERATE_CUSTOM_GARNISHMENT_FORMULA_PDF,
   pensionWhatIfTest: GENERATE_PENSION_WHAT_IF_TEST,
   pensionWhatIfTaxes: GENERATE_PENSION_WHAT_IF_TEST_TAXES,
+  whatifTaxes: GENERATE_WHAT_IF_EMP_TAXES_PDF,
+  whatifEmp: GENERATE_WHAT_IF_EMP_PDF,
+  wageDetails: VIEW_PDF_WAGE_DETAILS,
+  whatifGarnishment: VIEW_PDF_WHAT_IF_GARNISHMENT
 }
 
 export const viewPDFButtonBar = {
   pensionWhatIfTaxes: GENERATE_PENSION_WHAT_IF_TEST_CALCULATE_TAXES,
-}
-
-export const viewCalcPDFApiMap = {
   whatifTaxes:CALCULATE_WHATIF_TAXES_PDF,
   whatifGarnishment:CALCULATE_WHATIF_TAXES_PDF
 }
 
+export const viewCalcPDFApiMap = {
+  whatifTaxes:CALCULATE_WHATIF_TAXES_PDF
+}
+ 
 export const deleteDataApiMap = {
   customPayments: DELTE_CUSTOM_PAYMENT,
   customTaxCodes: DELETE_CUSTOM_TAX_CODES,
@@ -371,7 +383,8 @@ export const deleteDataApiMap = {
   customGarnishmentTaxFormulas:DELETE_CUSTOM_GARNISHMENT_FORMULA,
   pensionWhatIfTest: DELETE_PENSION_WHAT_IF_TEST,
   pensionWhatIfTaxes: DELETE_PENSION_WHAT_IF_TEST_TAXES,
-  customPaymentTaxExceptions:DELETE_CUSTOM_PAYMENT_EXCEPTION
+  customPaymentTaxExceptions:DELETE_CUSTOM_PAYMENT_EXCEPTION,
+  customNexusCompanyData: DELETE_CUSTOM_NEXUS_DATA
 };
 export const deleteAllDataApiMap = {
   whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES,
@@ -400,7 +413,6 @@ export const saveDataApiMap = {
   whatifDeductionBenefits:SAVE_WHAT_IF_DEDUCTION_BENEFITS,
   wageDetails: SAVE_WAGE_DETAILS,
   whatifGarnishment:SAVE_WHATIF_GARNISHMENT,
-  wageDetails: SAVE_WAGE_DETAILS,
   taxLocator: SAVE_TAX_LOCATOR,
   whatifLocations: SAVE_MANAGE_LOCATIONS,
   addressFromWorksite: SAVE_ADDRESS_FROM_WORKSITES,
@@ -413,7 +425,8 @@ export const saveDataApiMap = {
   customGarnishmentTaxFormulas:SAVE_CUSTOM_GARNISHMENT_FORMULA,
   pensionWhatIfTest: SAVE_PENSION_WHAT_IF_TEST,
   pensionWhatIfTaxes: SAVE_PENSION_WHAT_IF_TEST_TAXES,
-  customPaymentTaxExceptions:SAVE_CUSTOM_PAYMENT_EXCEPTION
+  customPaymentTaxExceptions:SAVE_CUSTOM_PAYMENT_EXCEPTION,
+  customNexusCompanyData: SAVE_CUSTOM_NEXUS_DATA
 };
 
 export const saveAsAPIMap = {
@@ -456,6 +469,7 @@ export const autoCompleteApiMap = {
   groupAsync: GET_GROUP_AUTOCOMPLETE,
   groupCode: GET_UDQ_AUTOCOMPLETE,
   garnishmentGroup: GET_UDQ_AUTOCOMPLETE,
+  garnishmentGrp: GET_GARNISHMENT_GROUPS,
   taxCodeUdq: GET_TAX_CODE_UDQ_AUTOCOMPLETE_MOCKDATA,
   typeOfData: GET_TYPEOF_DATA,
   userTax: GET_UDQ_AUTOCOMPLETE,
@@ -508,5 +522,6 @@ export const autoCompleteApiMap = {
   orOverrideFormula:GET_OPTIONAL_RATE_OVRD_AUTO_COMP_FORM,
   orOverrideBsiWage:GET_OPTIONAL_RATE_OVRD_BSI_WAGE,
   taxTypeUserTaxType: AUTOCOMPLETE_PENSION_TAX_TYPE,
-  pensionFormula: WHATIF_GARN_AUTOCOMPLETE_FORMULAS
+  pensionFormula: WHATIF_GARN_AUTOCOMPLETE_FORMULAS,
+  taxCode1: CUSTOM_NEXUS_DATA_AUTHORITY_AUTOCOMPLETE
 };

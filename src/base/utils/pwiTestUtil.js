@@ -143,7 +143,7 @@ export function generatePensionWhatIfTaxesPDF(pageId, filterFormData, formData, 
   }, 
   "editMode" : 1, 
   "taxcodetype" : "B", 
-  fymj :filterFormData.withholdingForm || "0,0",
+  fymj :formData.withholdingForm,
     };
     return input;
   }

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Row, Col, Container, UncontrolledTooltip, Alert, Button, ButtonGroup } from "reactstrap";
-import { CustomFile, CustomCheckbox } from "bsiuilib";
+import { CustomFile, CustomCheckbox, ViewPDF } from "bsiuilib";
 import generateReportAPI from "../api/generateReportAPI";
 import * as metaData from "../metadata/metaData";
 import * as styles from "../../base/constants/AppConstants";
@@ -21,10 +21,12 @@ class BatchTest extends Component {
         [uploadField.id]: uploadField.value,
         [modeField.id]: modeField.value || []
       },
-      cSelected: [1],
+      cSelected: [],
       rSelected: 1,
       testContent: '',
       fileName: '',
+      viewPdfMode: false,
+      file: "",
     };
     const toBase64 = file =>
       new Promise((resolve, reject) => {
@@ -84,6 +86,28 @@ class BatchTest extends Component {
     }
     this.setState({ cSelected: currSelected });
   }
+
+  this.downloadFile = (file) => {
+    const byteCharacters = atob(file.fileData);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const output = new Blob([byteArray]);
+    var anchor = document.createElement("a");
+    var url = window.URL || window.webkitURL;
+    anchor.href = url.createObjectURL(output);
+    var downloadFileName = file.fileName;
+    anchor.download = downloadFileName;
+    document.body.append(anchor);
+    anchor.click();
+
+    setTimeout(function () {
+      document.body.removeChild(anchor);
+      url.revokeObjectURL(anchor.href);
+    }, 100);
+  }
   }
 
   
@@ -118,14 +142,22 @@ class BatchTest extends Component {
             </UncontrolledTooltip>
           </span>
         </Row>
-         <Row>
+        {uploadResults && uploadResults.fileOutputs.length ? 
+        <Row>
           <Col>
             <div>
-              <UploadResults {...uploadResults} />
+              <UploadResults 
+                downloadFile={this.downloadFile} 
+                uploadResults={uploadResults.fileOutputs} 
+                fileName={this.state.fileName}
+                handlePdfView={(file) => this.setState({ file: file.fileData, viewPdfMode: !this.state.viewPdfMode})}
+                pdfData={this.state.file}
+                viewPdfMode={this.state.viewPdfMode}
+              />
             </div>
-            {/* {pgdef.disclaimer && <p>{pgdef.disclaimer}</p>} */}
           </Col>
-        </Row>
+        </Row>: null}
+        
         
         <Row>
           <div style={{ display: 'flex', marginBottom: '10px'}}>
@@ -224,7 +256,7 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(BatchTest);
 
 export const UploadResults = props => {
-  const { uploadStatus, batchStatus, instruction, results, resultType="success" } = props;
+  const { uploadResults, fileName, downloadFile, viewPdfMode, pdfData, handlePdfView } = props;
   const openMessageViewer = () => {
     const data = tfTools.find(tool => tool.id === "messageViewer");
     if (data) {
@@ -233,69 +265,42 @@ export const UploadResults = props => {
   };
 
   return (
-    // <Fragment>
-    //   <div className="border p-2 mb-3" 
-    //     style={{display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'space-between',
-    //     border: `2px solid ${resultType === 'success' ? 'green': 'red'} !important`,
-    //     color: `${resultType === 'success' ? 'green': 'red'}`,
-    //   }}>
-        /* <span> Test REsult for: JAJSJASJA.txt</span> */
+    <Fragment>
         <Alert color="success" style={{display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between', width: '80%',
             marginLeft: '120px' }}>
-          Test Result for:
-        <div style={{width: '100px',
+          Test Result for: {fileName}
+          <div style={{width: '400px',
           display: 'flex', color: ' rgb(76, 115, 146)', justifyContent: 'space-around'}}>
-        <span id="downloadResult" onClick={openMessageViewer}>
+          {uploadResults.map((file, index) => {
+            return (
+           <div style={{width: '100px',
+           display: 'flex', color: ' rgb(76, 115, 146)', justifyContent: 'space-around'}}>
+        <span id="downloadResult" onClick={() => downloadFile(file)}>
           <i class="fa fa-download" aria-hidden="true" />
           <UncontrolledTooltip placement="top" target="downloadResult">
             <span> Download Result </span>
           </UncontrolledTooltip>
         </span>
-        <span id="viewPdf" onClick={() => {}}>
+        <span id="viewPdf" onClick={() => handlePdfView(file, index)}>
           <i className="fa fa-file-pdf fa-lg" />
           <UncontrolledTooltip placement="bottom" target="viewPdf">
             <span> View Result as PDF</span>
           </UncontrolledTooltip>
         </span>
+        </div>   
+            )
+          })}
         <span id="messageViewer" onClick={openMessageViewer}>
           <i class="fa fa-eye" aria-hidden="true"></i>
           <UncontrolledTooltip placement="top" target="messageViewer">
             <span> View Result in MessageViewer</span>
           </UncontrolledTooltip>
         </span>
-        </div>
+         </div>
         </Alert>
-        /* <p>{uploadStatus}</p>
-        <p>{batchStatus}</p>
-        <p>{instruction}</p>
-        {results.map(result => (
-          <ResultRow {...result} />
-        ))} */
-    //   </div>
-    //  </Fragment>
-  );
-};
-
-export const ResultRow = props => {
-  const { label, link, linkLabel, size } = props;
-  return (
-    <Row>
-      <Col xs="6">
-        {label}
-        <a href={link} target="_blank">
-          {link}
-        </a>
-      </Col>
-      <Col xs="3">
-        <a className="text-danger" href={link} target="_blank">
-          {linkLabel}
-        </a>
-      </Col>
-      <Col xs="3">{size}</Col>
-    </Row>
+        <ViewPDF view={viewPdfMode} handleHidePDF={handlePdfView} pdfData={{ docData: pdfData}} />
+        </Fragment>
   );
 };
