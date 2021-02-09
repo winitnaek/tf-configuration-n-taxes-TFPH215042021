@@ -29,7 +29,7 @@ import {optionalRateOverrideGridInput,buildOptionalRateOverrideDelete,getOrOverr
 import {customGarnishmentTaxFormulasGridInput,getUsrTaxInput,buildCustomGarnishmentTaxFormulasDelete,buildCustomGarnishmentTaxFormulasSaveInput,buildCustomGarnishmentTaxFormulasViewPDF} from './cgFormulasUtil';
 import {customPaymentTaxExceptionsGridInput,buildCustomPaymentTaxExceptionsDelete,buildCustomPaymentTaxExceptionsSaveInput} from './cpExceptionsUtil';
 import {whatIfGarnishmentsGridInput, getGformInput,getUsrTxTypInput,buildWhatIfTaxesDelete,whatifTaxesGridInput,buildWhatifEmpDeleteAll,buildWhatifDeductionBenefitsDeleteAll,buildWhatifEmpDelete,buildWhatIfTaxesSaveInput,generateWhatifEmpPDFInput,calculateTaxesPDFInput,wageDetailsGridInput,generatewageDetailsPDF,generatewhatifTaxesPDF,generateWhatIfGarnishmentPDF} from './tfWhatIfUtil';
-import {buildPensionWhatIfTestSaveInput,generatePensionWhatIfTaxesPDF,buildPensionWhatIfTestDelete,buildPensionWhatIfTaxesSaveInput,generatePensionWhatIfCalculateTaxesPDF,buildPensionWhatIfTestTaxesDelete} from './pwiTestUtil';
+import {buildPensionWhatIfTestSaveInput,generatePensionWhatIfTaxesPDF,buildPensionWhatIfTestDelete,buildPensionWhatIfTaxesSaveInput,generatePensionWhatIfCalculateTaxesPDF,buildPensionWhatIfTestTaxesDelete,generatePensionWhatIfTestPDF} from './pwiTestUtil';
 import {buildCustomNexusCompanyDataSaveInput} from './cnDataUtil';
 import {disposableOverrideGridInput,garnishTypeInput,buildDisposableOverrideDelete,buildDisposableOverrideSaveInput,viewDisposableOverrideGridInput} from './dsOverridesUtil';
 
@@ -1088,6 +1088,8 @@ export function buildPdfInput(pageid, store, formdata, mode, fromBar) {
       return generatePensionWhatIfTaxesPDF(pageid, filterData, formdata, mode);
   }else if(pageid === "pensionWhatIfTaxes" && fromBar){
       return generatePensionWhatIfCalculateTaxesPDF(pageid, filterData, formdata, mode);
+  }else if(pageid === "pensionWhatIfTest"){
+      return generatePensionWhatIfTestPDF(pageid, filterData, formdata, mode);
   }else if(pageid === "whatifEmp"){
       return generateWhatifEmpPDFInput(pageid, state, formdata, mode);
   }else if(pageid === "whatifTaxes" && fromBar){
@@ -1208,10 +1210,10 @@ function buildWhatifDeductionBenefitsSaveInput(pageid, formdata, editMode, state
 function buildWhatifWageSaveInput(pageid, formdata, editMode, state) {
   const filterFormData = state.parentInfo;
   let names = formdata.wageCodedesc.split(' - ');
-  if (names.length === 1) {
-    names = formdata.wageCodedesc || formdata.code;
-  } else {
+  if (names.length === 3) {
     names = formdata.wageCodedesc.split(' - ')[formdata.wageCodedesc.split(' - ').length - 1];
+  } else {
+    names = formdata.code;
   }
 
   return {

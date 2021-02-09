@@ -209,3 +209,5 @@ export const AUTO_COMP_DISP_OVRD_CODES='/GarnishmentService/autocompleteDispOvrd
 export const SAVE_DISPOSABLE_OVERRIDE='/GarnishmentService/saveDisposableOverride'
 export const DELETE_DISPOSABLE_OVERRIDE='/GarnishmentService/deleteDisposableOverride'
 export const VIEW_DISPOSABLE_OVERRIDE='/GarnishmentService/viewAllDisposableOverrides'
+export const PENSION_WHATIF_AUTOCOMPLETE_AUTHS = '/TaxCodeService/getAutocompleteAuthorities'
+export const GET_COMPANY_AUTOCOMPLETE = '/CompanyService/getCompanyList'

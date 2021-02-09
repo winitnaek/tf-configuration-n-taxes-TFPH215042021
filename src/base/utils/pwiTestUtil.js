@@ -272,3 +272,36 @@ export function buildPensionWhatIfTestTaxesDelete(pageId, formData, editMode, st
   return input;
 
 }
+/**
+ * generatePensionWhatIfTestPDF
+ * @param {*} pageId 
+ * @param {*} store 
+ * @param {*} formdata 
+ * @param {*} mode 
+ */
+export function generatePensionWhatIfTestPDF(pageId, filterFormData, formdata, mode){
+  let input= {
+    pageId: pageId,      
+    dataset:appDataset(),
+    userId: appUserId(),  
+    empName: formdata.empName,
+    empCode: formdata.empCode,
+    checkDate: formdata.checkDate,
+    regPen: formdata.regPen, 
+    empGroup: formdata.empGroup,
+    companyCode: formdata.companyCode,
+    paymentType:formdata.paymentType,
+    payFreq: formdata.payFreq,
+    ytdPayPeriod: formdata.ytdPayPeriod,
+    estAnnualGrossAmt: formdata.estAnnualGrossAmt,
+    grossUpInd: formdata.grossUpInd,
+    rollOverElg: formdata.rollOverElg,
+    rollOverMonths: formdata.rollOverMonths,
+    companyPlan: formdata.companyPlan,
+    netWages: formdata.netWages,
+    disburseDate: formdata.disburseDate
+  };
+  
+  return input;
+
+}
