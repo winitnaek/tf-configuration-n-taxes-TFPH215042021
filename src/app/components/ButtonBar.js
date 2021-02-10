@@ -15,32 +15,32 @@ class ButtonBar extends Component {
   renderButtonBarForPage() {
     let taxLocator = (
       <Button id="taxLocator" size="sm" color="primary" style={{marginRight:'20px'}} onClick={() => this.props.handleTaxLocator()}>
-      <Badge color="secondary"><i class="fas fa-thumbtack fa-lg fa-2x"></i></Badge> Tax Locator
+      <i class="fas fa-thumbtack fa-lg fa-1x"></i> Tax Locator
       </Button>
     );
     let calculateTaxes = (
       <Button  id="calculateTaxes" size="sm" color="primary" style={{marginRight:'20px'}} onClick={(event) => this.props.handlePdf(event)}>
-      <Badge color="secondary"><i class="fas fa-calculator fa-lg fa-2x"></i></Badge> Calculate Taxes
+      <i class="fas fa-calculator fa-lg fa-1x"></i> Calculate Taxes
       </Button>
     );
     let runLocatorService = (
       <Button id="runLocatorService" size="sm" color="primary" style={{marginRight:'20px'}} onClick={() => this.props.handleRunLocator('runLocatorService')}>
-      <Badge color="secondary"><i class="fas fa-map-marker fa-lg fa-2x"></i></Badge> Run Locator Service
+      <i class="fas fa-map-marker fa-lg fa-1x"></i> Run Locator Service
       </Button>
     );
     let addressFromWorksite = (
         <Button id="addressFromWorksite" size="sm" color="primary" style={{marginRight:'20px'}} onClick={() => this.props.handleRunLocator("addressFromWorksite")}>
-        <Badge color="secondary"><i class="fas fa-address-card fa-lg fa-2x"></i></Badge> Get Address From Worksite
+        <i class="fas fa-address-card fa-lg fa-1x"></i> Get Address From Worksite
         </Button>
     );
     let deleteAll = (
       <Button id="deleteAll" color="primary" size="sm" style={{marginRight:'20px'}} onClick={() => this.props.handleDeleteAll(this.props.pageid)}>
-        <Badge color="secondary"><i class="fas fa-calendar-minus fa-lg fa-2x"></i></Badge> Delete All
+        <i class="fas fa-calendar-minus fa-lg fa-1x"></i> Delete All
       </Button>
     );
     let findRedundantOverrides = (
       <Button id="findRedundantOverrides" size="sm" color="primary" style={{marginRight:'20px'}} onClick={() => this.props.handleRunLocator("findRedundantOverrides")}>
-      <Badge color="secondary"><i class="fas fa-address-book fa-lg fa-2x"></i></Badge> Find Redundant Overrides
+      <i class="fas fa-address-book fa-lg fa-1x"></i> Find Redundant Overrides
       </Button>
     );
     if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionsBenefit' && this.props.pageid==='taxLocator'){ 
