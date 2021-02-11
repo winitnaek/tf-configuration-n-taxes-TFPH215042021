@@ -35,7 +35,7 @@ class CustomGrid extends Component {
       showPDF: false,
       pdfData: {},
       viewPdfMode: false,
-      popgridstyle:gridStyles.modal,
+      popgridstyle:gridStyles.modallarge,
       modaltitle:''
     };
 
@@ -139,8 +139,17 @@ class CustomGrid extends Component {
     this.setState({ showPDF: false })
   }
   handleRunLocator(clickPageId) {
+    let modaltitle=''
+    if(clickPageId==='findRedundantOverrides'){
+      modaltitle= 'Find Redundant Overrides';
+    }else if(clickPageId==='addressFromWorksite'){
+      modaltitle= 'Get Address From Worksite'
+    }else if(clickPageId==='runLocatorService'){
+      modaltitle= 'Run Locator Service'
+    }
     this.setState({
       clickedPageId: clickPageId,
+      modaltitle:modaltitle
     }, () => {
       this.getGridPopupData();
     });
