@@ -73,7 +73,7 @@ class CustomGrid extends Component {
     };
 
     this.viewDisposableOverride = (event) => {
-      let element = document.querySelector("div.modal-footer button:last-child");
+      let element = document.querySelector("#_viewAllBtnId");
       if (element && element.innerHTML==='View All Disposables' && event.target.innerHTML ==='View All Disposables') {
         console.log(event);
         event.stopPropagation();
