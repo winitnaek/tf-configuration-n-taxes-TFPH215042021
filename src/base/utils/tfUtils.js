@@ -32,6 +32,7 @@ import {whatIfGarnishmentsGridInput, getGformInput,getUsrTxTypInput,buildWhatIfT
 import {buildPensionWhatIfTestSaveInput,generatePensionWhatIfTaxesPDF,buildPensionWhatIfTestDelete,buildPensionWhatIfTaxesSaveInput,generatePensionWhatIfCalculateTaxesPDF,buildPensionWhatIfTestTaxesDelete,generatePensionWhatIfTestPDF} from './pwiTestUtil';
 import {buildCustomNexusCompanyDataSaveInput} from './cnDataUtil';
 import {disposableOverrideGridInput,garnishTypeInput,buildDisposableOverrideDelete,buildDisposableOverrideSaveInput,viewDisposableOverrideGridInput} from './dsOverridesUtil';
+import {buildCustomTaxPaymentOverrideDelete,buildCustomTaxPaymentOverrideSaveInput,getTaxTypesPymtOvrdInput} from './ctpOverridesUtil'
 
 /**
  * buildModuleAreaLinks
@@ -622,6 +623,7 @@ export function getPmtUsrCode(filterData) {
 
 export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   let state = store.getState();
+  const formData = state.formData.data || {};
   let input;
   if(pageid === "residentTaxTypelocal" || pageid === "residentTaxType" || pageid === "nonresidentTaxType" || pageid === "nonresidentTaxTypelocal") {
     input = {
@@ -636,8 +638,8 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       pageId: pageid, 
       dataset: appDataset(),
       userId: appUserId(),
-      pattern: patten[0].bsiauth,
-      bsiauth: patten[0].bsiauth,
+      pattern: patten[0].bsiauth || patten,
+      bsiauth: patten[0].bsiauth || patten,
     }
 
     return input;
@@ -648,7 +650,7 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       pageId: pageid, 
       dataset: appDataset(),
       userId: appUserId(),
-      authCode: formValues["usrauthcd"] && formValues["usrauthcd"].bsiauth,
+      authCode: formValues["usrauthcd"] && formValues["usrauthcd"].bsiauth || formData.bsiauth,
       taxType: patten
     }
 
@@ -717,6 +719,9 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   }
   if(pageid === 'usrtxtyp' && formValues){
     return getUsrTxTypInput(input,formValues);
+  }
+  if(pageid === 'taxTypesPymtOvrd' && formValues){
+    return getTaxTypesPymtOvrdInput(input,formValues);
   }
   if(pageid === 'gform' && formValues){
     return getGformInput(input,formValues);
@@ -1033,6 +1038,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildCustomPaymentTaxExceptionsDelete(pageid, formdata, mode, state);
   } else if (pageid === "disposableOverride") {
     return buildDisposableOverrideDelete(pageid, formdata, mode, state);
+  } else if (pageid === "customTaxPaymentOverride") {
+    return buildCustomTaxPaymentOverrideDelete(pageid, formdata, mode, state);
   } else {
     console.log("formdata");
     console.log(formdata);
@@ -1747,6 +1754,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildCustomNexusCompanyDataSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "disposableOverride") {
     return buildDisposableOverrideSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "customTaxPaymentOverride") {
+    return buildCustomTaxPaymentOverrideSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }

@@ -211,7 +211,12 @@ import {
   DELETE_DISPOSABLE_OVERRIDE,
   VIEW_DISPOSABLE_OVERRIDE,
   PENSION_WHATIF_AUTOCOMPLETE_AUTHS,
-  GET_COMPANY_AUTOCOMPLETE
+  GET_COMPANY_AUTOCOMPLETE,
+  GET_CUSTOM_TAX_PAYMENT_OVERRIDE,
+  CUSTOM_TAX_PAY_OVERRIDE_AUTOCOMPLETE,
+  CUSTOM_TAX_PAY_OVERRIDE_TAXTYPE_AUTOCOMPLETE,
+  DELETE_CUSTOM_TAX_PAY_OVERRIDE,
+  SAVE_CUSTOM_TAX_PAY_OVERRIDE
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -296,7 +301,7 @@ export const metaDataApiMap = {
   customPaymentExceptions: GET_CUSTOM_PAYMENTS_LIST,
   customPaymentTaxExceptions: GET_CUSTOM_PAYMENT_EXCEPTIONS,
   customTaxPaymentOverrides: GET_CUSTOM_FORMULAS,
-  customTaxPaymentOverride: GET_CUSTOM_TAX_FORMULAS,
+  customTaxPaymentOverride: GET_CUSTOM_TAX_PAYMENT_OVERRIDE,
   paymentOverrides: GET_EMPLOYEE_GROUPS,
   paymentOverride: GET_PAYMENT_OVERRIDE,
   reciprocalOverrides: GET_CUSTOM_FORMULAS,
@@ -394,7 +399,8 @@ export const deleteDataApiMap = {
   pensionWhatIfTaxes: DELETE_PENSION_WHAT_IF_TEST_TAXES,
   customPaymentTaxExceptions:DELETE_CUSTOM_PAYMENT_EXCEPTION,
   customNexusCompanyData: DELETE_CUSTOM_NEXUS_DATA,
-  disposableOverride:DELETE_DISPOSABLE_OVERRIDE
+  disposableOverride:DELETE_DISPOSABLE_OVERRIDE,
+  customTaxPaymentOverride: DELETE_CUSTOM_TAX_PAY_OVERRIDE
 };
 export const deleteAllDataApiMap = {
   whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES,
@@ -437,7 +443,8 @@ export const saveDataApiMap = {
   pensionWhatIfTaxes: SAVE_PENSION_WHAT_IF_TEST_TAXES,
   customPaymentTaxExceptions:SAVE_CUSTOM_PAYMENT_EXCEPTION,
   customNexusCompanyData: SAVE_CUSTOM_NEXUS_DATA,
-  disposableOverride:SAVE_DISPOSABLE_OVERRIDE
+  disposableOverride:SAVE_DISPOSABLE_OVERRIDE,
+  customTaxPaymentOverride: SAVE_CUSTOM_TAX_PAY_OVERRIDE
 };
 
 export const saveAsAPIMap = {
@@ -538,5 +545,7 @@ export const autoCompleteApiMap = {
   taxCode1: CUSTOM_NEXUS_DATA_AUTHORITY_AUTOCOMPLETE,
   dispOvrdAuthTaxCode:AUTO_COMP_DISP_OVRD_AUTHS,
   garnishType:AUTO_COMP_DISP_OVRD_GARNS,
-  dispOvrdPaymentCode:AUTO_COMP_DISP_OVRD_CODES
+  dispOvrdPaymentCode:AUTO_COMP_DISP_OVRD_CODES,
+  authorityname: CUSTOM_TAX_PAY_OVERRIDE_AUTOCOMPLETE,
+  taxTypesPymtOvrd: CUSTOM_TAX_PAY_OVERRIDE_TAXTYPE_AUTOCOMPLETE
 };
