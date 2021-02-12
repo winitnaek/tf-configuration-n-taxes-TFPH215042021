@@ -8,4 +8,4 @@ export const SET_PARENT_INFO = 'SET_PARENT_INFO';
 export const USAGE = 'USAGE'
 export const USAGE_SUCCESS = 'USAGE_SUCCESS'
 export const USAGE_FAILED = 'USAGE_FAILED'
-
+export const SET_CHILD_INFO = 'SET_CHILD_INFO';

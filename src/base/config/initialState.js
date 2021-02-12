@@ -32,5 +32,6 @@ export default {
     formdata: {}
   },
   parentData:{},
-  parentInfo:{}
+  parentInfo:{},
+  childInfo:{}
 };

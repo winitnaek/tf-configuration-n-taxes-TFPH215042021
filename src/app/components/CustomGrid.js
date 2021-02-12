@@ -16,7 +16,7 @@ import * as gridStyles from "../../base/constants/AppConstants";
 import ButtonBar from "./ButtonBar";
 import { Modal, ModalHeader, ModalBody, Row, Col } from "reactstrap";
 import { compMetaData,populateParentData} from "../../base/utils/tfUtils";
-import {setParentInfo} from '../../app/actions/parentInfoActions';
+import {setParentInfo,setChildInfo} from '../../app/actions/parentInfoActions';
 import store from "../../tf-configuration-n-taxes";
 import {calculateTaxesPDFInput} from '../../base/utils/tfWhatIfUtil'
 import {hasValidInputForView} from '../../base/utils/dsOverridesUtil';
@@ -106,6 +106,7 @@ class CustomGrid extends Component {
     this.toggle = this.toggle.bind(this);
     this.getGridPopupData = this.getGridPopupData.bind(this);
     this.parentInfoAction = this.parentInfoAction.bind(this);
+    this.childInfoAction = this.childInfoAction.bind(this);
     this.handleDeleteAll = this.handleDeleteAll.bind(this);
     this.handleConfirmDeleteOk = this.handleConfirmDeleteOk.bind(this);
     this.handleConfirmDeleteCancel = this.handleConfirmDeleteCancel.bind(this);
@@ -239,6 +240,9 @@ class CustomGrid extends Component {
   parentInfoAction(formData){
     this.props.setParentInfo(formData);
   };
+  childInfoAction(formData){
+    this.props.setChildInfo(formData);
+  };
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -273,7 +277,7 @@ class CustomGrid extends Component {
     const { pgdef, griddef } = metadata;
     const { metaInfo } = pgdef;
    
-    const { formAction, filterFormAction , parentInfoAction } = this;
+    const { formAction, filterFormAction , parentInfoAction,childInfoAction } = this;
     return (
       <Fragment>
         <ViewPDF view={this.state.viewPdfMode} handleHidePDF={() => this.setState({viewPdfMode: false })} pdfData={this.state.pdfData} />
@@ -304,6 +308,7 @@ class CustomGrid extends Component {
           getPdfDataAPI={getPdfDataAPI}
           clickCheckBox={this.clickCheckBox}
           setParentInfo={parentInfoAction}
+          setChildInfo={childInfoAction}
           fillParentInfo={populateParentData}
         />
         {griddef.hasButtonBar && griddef.hasButtonBar == true ? (
@@ -357,6 +362,7 @@ class CustomGrid extends Component {
                     hideModal={this.toggle}
                     getPdfDataAPI={getPdfDataAPI}
                     setParentInfo={this.parentInfoAction}
+                    setChildInfo={this.childInfoAction}
                     fillParentInfo={this.populateParentData}
                   />
                 ) : null}
@@ -375,12 +381,13 @@ function mapStateToProps(state) {
   return {
     formData: state.formData,
     formFilterData: state.formFilterData,
-    parentInfo:state.parentInfo
+    parentInfo:state.parentInfo,
+    childInfo:state.childInfo
   };
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setFilterFormData, setFormData, setParentInfo }, dispatch);
+  return bindActionCreators({ setFilterFormData, setFormData, setParentInfo,setChildInfo }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomGrid);
