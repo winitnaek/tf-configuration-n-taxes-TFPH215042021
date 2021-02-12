@@ -16,8 +16,9 @@ import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
 import * as metaData from "../../app/metadata/_metaData";
 import {
-  setParentData
+  setParentData,
 } from '../../app/actions/parentDataActions';
+import {setFilterFormData} from '../../app/actions/filterFormActions';
 import {
   generateUrl
 } from "bsiuilib";
@@ -318,18 +319,22 @@ export function buildGridInputForPage(pageid, filterData, stDate, enDate) {
  * @param {*} stDate 
  * @param {*} enDate 
  */
-function deductionBenefitsGridInput(pageid, filterData, stDate, enDate) {
+function deductionBenefitsGridInput(pageid, filterData, stDate, enDate,state) {
+  let parentInfo = state.parentInfo;
+  if(parentInfo){
+    store.dispatch(setFilterFormData(state.parentInfo));
+  }
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    empcode: filterData.empcode,
-    chkdt: filterData.chkdt,
-    usrauth: filterData.usrauth,
-    usrtxtyp: filterData.usrtxtyp,
-    gform: filterData.gform,
-    caseid: filterData.caseid,
-    docket: filterData.docket,
+    empcode: filterData.empcode ? filterData.empcode :parentInfo.empcode,
+    chkdt: filterData.chkdt?filterData.chkdt:parentInfo.chkdt,
+    usrauth: filterData.usrauth?filterData.usrauth:parentInfo.usrauth,
+    usrtxtyp: filterData.usrtxtyp?filterData.usrtxtyp:parentInfo.usrtxtyp,
+    gform: filterData.gform?filterData.gform:parentInfo.gform,
+    caseid: filterData.caseid?filterData.caseid:parentInfo.caseid,
+    docket: filterData.docket?filterData.docket:parentInfo.docket,
     regpen: "R"
   };
   return input;
@@ -369,7 +374,7 @@ export function buildGridDataInput(pageid, store) {
   } else if (pageid === 'whatifGarnishment') {
     input = whatIfGarnishmentsGridInput(pageid, filterData, stDate, enDate);
   } else if (pageid === 'whatifDeductionBenefits') {
-    input = deductionBenefitsGridInput(pageid, filterData, stDate, enDate);
+    input = deductionBenefitsGridInput(pageid, filterData, stDate, enDate, state);
   } else if (pageid === 'paymentOverrides') {
     input = paymentOverridesGridInput(pageid, filterData, stDate, enDate);
   } else if (pageid === 'paymentOverride') {
@@ -1192,6 +1197,7 @@ function buildWhatifDeductionBenefitsSaveInput(pageid, formdata, editMode, state
   } else if (editMode == 2) {
     editRec = "true";
   }
+  
   let formstate = state.formFilterData;
   let input = {
     id: {
