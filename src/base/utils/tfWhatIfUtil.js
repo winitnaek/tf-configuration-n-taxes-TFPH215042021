@@ -405,6 +405,10 @@ export function generateWhatifEmpPDFInput(pageid, state, formdata, mode) {
  */
 export function wageDetailsGridInput(pageid, filterData, stDate, enDate) {
   let state = store.getState();
+  let parentInfo = state.parentInfo;
+  if(parentInfo){
+    store.dispatch(setFilterFormData(state.parentInfo));
+  }
   let input = {
     pageId: pageid,
     dataset: appDataset(),
