@@ -1292,7 +1292,7 @@ function buildWhatIfEmployeeGarnishmentSaveInput(pageid, formdata, editMode, sta
         usrtxtyp: formdata.usrtxtyp && formdata.usrtxtyp.indexOf("BSI")>=0 ? formdata.usrtxtyp:'BSI'+formdata.usrtxtyp,
         gform: formdata.gform,
         caseid: formdata.caseid,
-        docket: formdata.docket,
+        docket: formdata.docket? formdata.docket :"",
       },
       mtdwage: formdata.mtdwage ? formdata.mtdwage:0.00,
       annsal: formdata.annsal? formdata.annsal:0.00,
