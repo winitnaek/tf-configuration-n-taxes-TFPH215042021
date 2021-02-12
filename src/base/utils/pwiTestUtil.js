@@ -159,11 +159,11 @@ export function generatePensionWhatIfTaxesPDF(pageId, filterFormData, formData, 
 export function buildPensionWhatIfTaxesSaveInput(pageId, formData, editMode, state) {
   const filterFormData = state.formFilterData;
   let authtyCode = 'BSI' + formData.usrauthcd;
-  if (editMode == 1) {
-    authtyCode = 'BSI' + formData.usrauthcd;
-  } else if (editMode == 2) {
-    authtyCode = formData.usrauthcd;
-  }
+  // if (editMode == 1) {
+  //   authtyCode = 'BSI' + formData.usrauthcd;
+  // } else if (editMode == 2) {
+  //   authtyCode = formData.usrauthcd;
+  // }
   let input = {
     btxttax : {
       id : {

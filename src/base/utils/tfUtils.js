@@ -276,12 +276,21 @@ export function format(fmt, ...args) {
  * @param {*} stDate 
  * @param {*} enDate 
  */
-export function buildGridInputForPage(pageid, filterData, stDate, enDate) {
+export function buildGridInputForPage(pageid, filterData, stDate, enDate, state) {
+  const parentInfo = state.parentInfo;
+  /* checkDate: "01/26/2021"
+      companyCode: "1"
+      companyPlan: 0
+      disburseDate: "01/26/2021"
+      empCode: "EMP1"
+      empGroup: "1"
+      empName: "EMPLOYEE EMP1"
+*/
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    companyCode: getCompanyCode(filterData),
+    companyCode: getCompanyCode(filterData) || parentInfo.companyCode,
     companyName: filterData.companyName,
     taxCode: getTaxCode(filterData),
     taxName: filterData.name,
@@ -301,13 +310,13 @@ export function buildGridInputForPage(pageid, filterData, stDate, enDate) {
     usrtax: filterData.userTax,
     runId: filterData.runid,
     messageType: filterData.messageType,
-    empCode: filterData.empCode,
-    checkDate: filterData.checkDate,
-    checkdate: filterData.checkDate,
-    empName: filterData.empName,
-    regPen: filterData.regPen,
+    empCode: filterData.empCode || parentInfo.empCode,
+    checkDate: filterData.checkDate || parentInfo.checkDate,
+    checkdate: filterData.checkDate || parentInfo.checkDate,
+    empName: filterData.empName || parentInfo.empName,
+    regPen: filterData.regPen || parentInfo.regPen,
     taxN: filterData.taxN,
-    employee: filterData.employeeCode,
+    employee: filterData.employeeCode || parentInfo.employeeCode,
     empGroup: filterData.id
   };
   return input;
@@ -395,12 +404,17 @@ export function buildGridDataInput(pageid, store) {
     return disposableOverrideGridInput(pageid, filterData, stDate, enDate, state);
   } else if (pageid === "viewDisposableOverride") {
     return viewDisposableOverrideGridInput(pageid, filterData, stDate, enDate, state);
-  } else {
+  }  else if(pageid === "pensionWhatIfTest"){
+    return {
+      pageId: pageid,
+      dataset: appDataset(),
+    }
+  }else {
     if (state.parentData) { //Reset Parent Data
       let parentData = {};
       store.dispatch(setParentData(parentData))
     }
-    input = buildGridInputForPage(pageid, filterData, stDate, enDate);
+    input = buildGridInputForPage(pageid, filterData, stDate, enDate, state);
   }
   return input;
 }
@@ -607,6 +621,8 @@ export function getCompanyCode(filterData) {
     return filterData.companyCode;
   } else if (filterData && filterData.location) {
     return filterData.location;
+  } else if (filterData && filterData.cpycode) {
+    return filterData.cpycode;
   }
 }
 export function getGroupcode(filterData) {
@@ -827,10 +843,11 @@ export function buildwhatifLocationsDelete(pageid, formdata, editMode, state) {
   const {
     formFilterData
   } = state;
+  const parentInfo = state.parentInfo;
   return {
     dataset: appDataset(),
-    employee: formFilterData.employeeCode,
-    checkdate: formFilterData.checkDate,
+    employee: parentInfo.employeeCode,
+    checkdate: parentInfo.checkDate,
     locnnumbr: formdata.locnnumbr,
   }
 }
@@ -1530,24 +1547,26 @@ function buildUnemploymentCompanyOverridesSaveInput(pageid, formdata, editMode, 
 
 function buildwhatifLocationsSaveInput(pageid, formdata, editMode, state) {
   const filterFormData = state.formFilterData;
+  const parentInfo = state.parentInfo;
 
   return {
     btxldetl: {
       id: {
         dataset: appDataset(),
-        employee: filterFormData.employeeCode,
-        checkdate: filterFormData.checkDate
+        employee: parentInfo.employeeCode,
+        checkdate: parentInfo.checkDate,
+        locnnumbr: formdata.locnnumbr
       },
       street1: formdata.street1,
       street2: formdata.street2,
       city: formdata.city,
-      county: formdata.county,
+      county: formdata.county.trim(),
       stateabb: formdata.state,
       zipcode: formdata.zip,
       eiccode: formdata.eicCode,
-      primews: formdata.primews
+      // primews: formdata.primews
     },
-    editMode: 1
+    editMode: editMode
 
   }
 }
@@ -1607,6 +1626,12 @@ if(editMode === 2) {
 }
 
 export function buildTaxLocatorSaveInput(pageId, formData, editMode) {
+  let createNew = "true";
+  if(editMode == 1){
+    createNew = "true";
+  }else if(editMode == 2){
+    createNew = "false";
+  }
   return {
     btxlemp: {
       id: {
@@ -1630,18 +1655,18 @@ export function buildTaxLocatorSaveInput(pageId, formData, editMode) {
       bylocation: 0,
       resicntry: formData.residentCountry,
       selstat: formData.selectedState,
-      cpycode: formData.companyCode,
+      cpycode: formData.companyCode.trim(),
       fed: formData.fedWthForEeLive,
       empltype: formData.employmentType || 0,
       wCompFlag: 0
     },
-    createNew: true,
+    createNew: createNew,
     checkDateYYYYMMDD: "20170119",
     hireDateYYYYMMDD: "",
     dateOfDeathYYYYMMDD: null,
     terminationDateYYYYMMDD: null,
     numberOfTaxEntries: 0,
-    numberOfLocationEntries: 0
+    numberOfLocationEntries: 0,
 
   }
 }
