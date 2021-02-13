@@ -13,9 +13,9 @@ export function calculateTaxesPDFInput(pageId,inclGarnishment) {
     pageId: pageId,
     dataset: appDataset(),
     userId: appUserId(),
-    empCode: parentInfo.empCode,
+    empCode: parentInfo.empCode ? parentInfo.empCode: parentInfo.empcode,
     checkDate: parentInfo.checkDate || parentInfo.chkdt,
-    empName: parentInfo.empName,
+    empName: parentInfo.empName?parentInfo.empName:'EMPLOYEE '+parentInfo.empcode,
     inclGarnishment: inclGarnishment,
     regPen: "R"
   };
