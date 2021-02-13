@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tftools } from "../../base/constants/TFTools";
-import { ReusableGrid, ConfirmModal, ViewPDF } from "bsiuilib";
+import { ReusableGrid, ConfirmModal, ViewPDF, ReusableAlert } from "bsiuilib";
 import { setFilterFormData } from "../actions/filterFormActions";
 import { setFormData } from "../actions/formActions";
 //import { getRecentUsage } from "../actions/usageActions";
@@ -36,7 +36,11 @@ class CustomGrid extends Component {
       pdfData: {},
       viewPdfMode: false,
       popgridstyle:gridStyles.modallarge,
-      modaltitle:''
+      modaltitle:'',
+      showActionAlert:false,
+      aheader:'',
+      abody:'',
+      abtnlbl:''
     };
 
     this.renderGrid = pgData => {
@@ -113,6 +117,8 @@ class CustomGrid extends Component {
     this.handleCalculateTaxes=this.handleCalculateTaxes.bind(this);
     this.handleHidePDF = this.handleHidePDF.bind(this);
     this.handleShowPDF = this.handleShowPDF.bind(this);
+    this.showActionMessage = this.showActionMessage.bind(this);
+    this.hideUIAlert=this.hideUIAlert.bind(this);
   }
 
   componentDidMount() {
@@ -230,7 +236,18 @@ class CustomGrid extends Component {
           showConfirm: !this.state.showConfirm
       });
   }
-  
+  hideUIAlert(){
+    this.setState({
+      showActionAlert:false
+    });
+  }
+  showActionMessage(type, action,message) {
+    this.setState({
+      showActionAlert: true,
+      aheader:action,
+      abody:message
+    });
+  }
   clickCheckBox(event) {
     this.setState({
       showSummary: event.target.value === "on",
@@ -243,6 +260,7 @@ class CustomGrid extends Component {
   childInfoAction(formData){
     this.props.setChildInfo(formData);
   };
+ 
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -310,6 +328,7 @@ class CustomGrid extends Component {
           setParentInfo={parentInfoAction}
           setChildInfo={childInfoAction}
           fillParentInfo={populateParentData}
+          showActionMessage={this.showActionMessage}
         />
         {griddef.hasButtonBar && griddef.hasButtonBar == true ? (
           <ButtonBar
@@ -364,6 +383,7 @@ class CustomGrid extends Component {
                     setParentInfo={this.parentInfoAction}
                     setChildInfo={this.childInfoAction}
                     fillParentInfo={this.populateParentData}
+                    showActionMessage={this.showActionMessage}
                   />
                 ) : null}
               </Col>
@@ -371,6 +391,7 @@ class CustomGrid extends Component {
           </ModalBody>
         </Modal>
        <ConfirmModal handleOk={this.handleConfirmDeleteOk} handleCancel={this.handleConfirmDeleteCancel}  showConfirm={this.state.showConfirm} cheader={this.state.cheader} cbody={this.state.cbody} okbtnlbl={'Ok'} cancelbtnlbl={'Cancel'}/>
+       <ReusableAlert handleClick={this.hideUIAlert}  showAlert={this.state.showActionAlert} aheader={this.state.aheader} abody={this.state.abody} abtnlbl={'Ok'}/>;
        {this.state.showPDF ? (<ViewPDF view={this.state.showPDF} title={this.state.title} handleHidePDF={this.handleHidePDF} pdfData={this.state.pdfData} />) : null}
       </Fragment>
     )
