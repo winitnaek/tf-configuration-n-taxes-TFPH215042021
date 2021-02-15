@@ -34,7 +34,7 @@ import {buildPensionWhatIfTestSaveInput,generatePensionWhatIfTaxesPDF,buildPensi
 import {buildCustomNexusCompanyDataSaveInput} from './cnDataUtil';
 import {disposableOverrideGridInput,garnishTypeInput,buildDisposableOverrideDelete,buildDisposableOverrideSaveInput,viewDisposableOverrideGridInput} from './dsOverridesUtil';
 import {buildCustomTaxPaymentOverrideDelete,buildCustomTaxPaymentOverrideSaveInput,getTaxTypesPymtOvrdInput} from './ctpOverridesUtil'
-
+import {generateTaxLocatorPDF,buildWhatIfLocationsDeleteAllInput} from './tLocatorUtil'
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -1103,6 +1103,12 @@ export function buildDeleteAllInput(pageid, store, formdata, mode) {
     return buildWhatifEmpDeleteAll(pageid, formdata, mode, state);
   }else if(pageid==='whatifDeductionBenefits'){
     return buildWhatifDeductionBenefitsDeleteAll(pageid, formdata, mode, state);
+  }else if(pageid==='whatifLocations'){
+    return buildWhatIfLocationsDeleteAllInput(pageid, formdata, mode, state);
+  }else{
+    return {
+      dataset: appDataset(),
+    }
   }
 }
 
@@ -1131,6 +1137,8 @@ export function buildPdfInput(pageid, store, formdata, mode, fromBar) {
     return generatewhatifTaxesPDF(pageid, filterData, formdata, mode);
   }else if(pageid === "whatifGarnishment" && !fromBar){
     return generateWhatIfGarnishmentPDF(pageid, state, formdata, mode);
+  }else if(pageid === "taxLocator"){
+    return generateTaxLocatorPDF(pageid, state, formdata, mode);
   }
   else{
     return {
@@ -1557,6 +1565,7 @@ function buildwhatifLocationsSaveInput(pageid, formdata, editMode, state) {
         checkdate: parentInfo.checkDate,
         locnnumbr: formdata.locnnumbr
       },
+      resident:formdata.liveWork,
       street1: formdata.street1,
       street2: formdata.street2,
       city: formdata.city,
@@ -1726,6 +1735,7 @@ function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
 
 export function buildWorkSiteSaveInput(pageid, formdata, editmode, state) {
   const filterFormData = state.formFilterData;
+  let parentInfo = state.parentInfo;
   const worksites = [];
   //TODO
   formdata.forEach(data => {
@@ -1734,8 +1744,8 @@ export function buildWorkSiteSaveInput(pageid, formdata, editmode, state) {
   })
   return {
     dataset: appDataset(),
-    empCode: filterFormData.employeeCode,
-    checkDate: filterFormData.checkDate,
+    empCode: parentInfo.employeeCode,
+    checkDate: parentInfo.checkDate,
     selectedWorksites: worksites
   }
 }

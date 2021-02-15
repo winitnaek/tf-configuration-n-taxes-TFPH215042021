@@ -208,6 +208,10 @@ class CustomGrid extends Component {
       this.showConfirm(true,'Warning!','Are you sure you want to delete all?');
     }else if(clickPageId==='whatifDeductionBenefits'){
       this.showConfirm(true,'Warning!','Are you sure you want to delete all?');
+    }else if(clickPageId==='whatifLocations'){
+      this.showConfirm(true,'Warning!','Are you sure you want to delete all?');
+    }else if(clickPageId==='taxLocator'){
+      this.showConfirm(true,'Warning!','Are you sure you want to delete all?');
     }
   }
   showConfirm(cshow, cheader, cbody){
@@ -221,7 +225,7 @@ class CustomGrid extends Component {
     this.setState({
       showConfirm: false
     });
-    if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionBenefits'){
+    if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionBenefits' || this.props.pageid==='whatifLocations' || this.props.pageid==='taxLocator'  ){
       deletegriddataAPI.deleteAllGridData(this.props.pageid).then().then((response) => response).then((repos) => {
         alert(repos.message)
         const data = tftools.find(tool => tool.id === this.props.pageid);

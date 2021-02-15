@@ -43,7 +43,7 @@ class ButtonBar extends Component {
       <i class="fas fa-address-book fa-lg fa-1x"></i> Find Redundant Overrides
       </Button>
     );
-    if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionsBenefit' && this.props.pageid==='taxLocator'){ 
+    if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionsBenefit' || this.props.pageid==='taxLocator'){ 
       //whatifEmp && whatifDeductionsBenefit && taxLocator
       taxLocator=null;
       calculateTaxes=null;
@@ -64,7 +64,6 @@ class ButtonBar extends Component {
     }else if(this.props.pageid==='whatifLocations'){ //taxLocatorLocation
       taxLocator=null;
       calculateTaxes=null;
-      deleteAll = null
       findRedundantOverrides=null;
     }else if(this.props.pageid==='addressOverrides'){ //addressOverrides
       taxLocator=null;

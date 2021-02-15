@@ -216,3 +216,5 @@ export const CUSTOM_TAX_PAY_OVERRIDE_AUTOCOMPLETE = '/EmployeeService/getGroupOv
 export const CUSTOM_TAX_PAY_OVERRIDE_TAXTYPE_AUTOCOMPLETE = '/UserDataQueriesService/getAutocomplete'
 export const DELETE_CUSTOM_TAX_PAY_OVERRIDE = '/TaxCodeService/deleteCustomTaxPaymentOverride'
 export const SAVE_CUSTOM_TAX_PAY_OVERRIDE = '/TaxCodeService/saveCustomTaxPaymentOverride'
+export const DELETE_ALL_WHAT_IF_MANAGE_LOCATIONS = '/TaxLocatorService/deleteAllTaxLocatorEmployeeLocations'
+export const DELETE_ALL_TAX_LOCATOR = '/TaxLocatorService/deleteAllTaxLocatorEmployees'
