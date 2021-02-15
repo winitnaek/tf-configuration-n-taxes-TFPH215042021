@@ -126,6 +126,26 @@ export function courtesyRenderer(
     return "";
   }
 }
+export function liveworkRenderer(
+	ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+  ) {
+	if (rowdata.liveWork == '0') {
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Live</div>`;
+	}else if(rowdata.liveWork == '1'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Work</div>`;
+	}else if(rowdata.liveWork == '4'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Resident on 1/1</div>`;
+	}else if(rowdata.liveWork == '5'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Work on 1/1</div>`;
+	}else if(rowdata.liveWork == '7'){
+		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Remote Employee</div>`;
+	}
+  }
 export function editCellsRenderer(
 	ndex,
 	datafield,
