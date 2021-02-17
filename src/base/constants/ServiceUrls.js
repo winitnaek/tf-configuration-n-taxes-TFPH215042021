@@ -218,3 +218,7 @@ export const DELETE_CUSTOM_TAX_PAY_OVERRIDE = '/TaxCodeService/deleteCustomTaxPa
 export const SAVE_CUSTOM_TAX_PAY_OVERRIDE = '/TaxCodeService/saveCustomTaxPaymentOverride'
 export const DELETE_ALL_WHAT_IF_MANAGE_LOCATIONS = '/TaxLocatorService/deleteAllTaxLocatorEmployeeLocations'
 export const DELETE_ALL_TAX_LOCATOR = '/TaxLocatorService/deleteAllTaxLocatorEmployees'
+export const GET_MAPPING_TAX_CODES = '/MappingToolsService/mapTaxCodes'
+export const GET_MAPPING_TAX_CODES_FOR_AUTHORITY = '/MappingToolsService/taxCodesMappedForAuthority'
+export const SAVE_MAPPING_TAX_CODES_FOR_AUTHORITY = '/MappingToolsService/createNewTaxCode'
+export const GET_TAX_CODE_USAGE = '/MappingToolsService/getUnempOverrideCompaniesList'

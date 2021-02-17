@@ -34,7 +34,8 @@ import {buildPensionWhatIfTestSaveInput,generatePensionWhatIfTaxesPDF,buildPensi
 import {buildCustomNexusCompanyDataSaveInput} from './cnDataUtil';
 import {disposableOverrideGridInput,garnishTypeInput,buildDisposableOverrideDelete,buildDisposableOverrideSaveInput,viewDisposableOverrideGridInput} from './dsOverridesUtil';
 import {buildCustomTaxPaymentOverrideDelete,buildCustomTaxPaymentOverrideSaveInput,getTaxTypesPymtOvrdInput} from './ctpOverridesUtil'
-import {generateTaxLocatorPDF,buildWhatIfLocationsDeleteAllInput} from './tLocatorUtil'
+import {generateTaxLocatorPDF,buildWhatIfLocationsDeleteAllInput} from './tLocatorUtil';
+import {mapTaxCodeGridInput,buildMapTaxCodeSaveInput} from './mappingtools/mapTaxCodesUtil'
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -278,22 +279,14 @@ export function format(fmt, ...args) {
  */
 export function buildGridInputForPage(pageid, filterData, stDate, enDate, state) {
   const parentInfo = state.parentInfo;
-  /* checkDate: "01/26/2021"
-      companyCode: "1"
-      companyPlan: 0
-      disburseDate: "01/26/2021"
-      empCode: "EMP1"
-      empGroup: "1"
-      empName: "EMPLOYEE EMP1"
-*/
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    companyCode: getCompanyCode(filterData) || parentInfo.companyCode,
-    companyName: filterData.companyName,
-    taxCode: getTaxCode(filterData),
-    taxName: filterData.name,
+    companyCode: (getCompanyCode(filterData) || parentInfo.companyCode || parentInfo.company || "").trim(),
+    companyName: filterData.companyName || parentInfo.companyName,
+    taxCode: getTaxCode(filterData) || parentInfo.taxCode,
+    taxName: filterData.name || parentInfo.name,
     startdate: stDate,
     endDate: enDate,
     riskClass: filterData.riskClass,
@@ -404,6 +397,8 @@ export function buildGridDataInput(pageid, store) {
     return disposableOverrideGridInput(pageid, filterData, stDate, enDate, state);
   } else if (pageid === "viewDisposableOverride") {
     return viewDisposableOverrideGridInput(pageid, filterData, stDate, enDate, state);
+  } else if (pageid === "mapTaxCode") {
+    return mapTaxCodeGridInput(pageid, filterData, stDate, enDate, state);
   }  else if(pageid === "pensionWhatIfTest"){
     return {
       pageId: pageid,
@@ -1797,6 +1792,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildDisposableOverrideSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "customTaxPaymentOverride") {
     return buildCustomTaxPaymentOverrideSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "mapTaxCode") {
+    return buildMapTaxCodeSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }

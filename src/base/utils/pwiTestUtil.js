@@ -157,6 +157,7 @@ export function generatePensionWhatIfTaxesPDF(pageId, filterFormData, formData, 
  * @param {*} state 
  */
 export function buildPensionWhatIfTaxesSaveInput(pageId, formData, editMode, state) {
+  let parentInfo = state.parentInfo;
   const filterFormData = state.formFilterData;
   let authtyCode = 'BSI' + formData.usrauthcd;
   // if (editMode == 1) {
@@ -169,8 +170,8 @@ export function buildPensionWhatIfTaxesSaveInput(pageId, formData, editMode, sta
       id : {
         dataset:appDataset(),
         regpen : "P",
-        empcode: filterFormData.empCode,
-        chkdt: filterFormData.checkDate,
+        empcode: parentInfo.empCode,
+        chkdt: parentInfo.checkDate,
         taxn: formData.taxn
       },
       btxtaxc : {
@@ -256,14 +257,15 @@ export function generatePensionWhatIfCalculateTaxesPDF(pageId, filterFormData, f
  * @param {*} mode 
  */
 export function buildPensionWhatIfTestTaxesDelete(pageId, formData, editMode, state){
+  let parentInfo = state.parentInfo;
   const filterFormData = state.formFilterData;
   let input= {
    btxttax: {
     id : {
       dataset:appDataset(),
         regpen : "P",
-        empcode: filterFormData.empCode,
-        chkdt: filterFormData.checkDate,
+        empcode: parentInfo.empCode,
+        chkdt: parentInfo.checkDate,
         taxn: formData.taxn
   }
     }      

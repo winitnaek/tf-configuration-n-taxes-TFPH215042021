@@ -274,7 +274,7 @@ class CustomGrid extends Component {
   async getGridPopupData(){
     const data = await this.props.getDataForChildGrid({ pgid: this.state.clickedPageId, showSummary: this.state.showSummary });
     this.setState({
-      modalGridData: data.length === 1 ? data[0].locationTaxes : data,
+      modalGridData: data && data[0] && data[0].locationTaxes ? data[0].locationTaxes : data,
       isOpen: true,
     })
   }

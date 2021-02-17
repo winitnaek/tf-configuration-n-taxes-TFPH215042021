@@ -586,7 +586,7 @@ export function generatewhatifTaxesPDF(pageId, filterFormData, formdata, mode) {
       ? moment(formdata.taxeffdate).format("MM/DD/YYYY")
       : "",
     txblhrs_out: formdata.txblhrs_out,
-    wages: null,
+    wages:  formdata.wages,
     rptTax: formdata.rptTax,
     fymj: formdata.fymj,
   };
