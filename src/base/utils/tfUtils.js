@@ -11,6 +11,7 @@ import {
   deletealldatamap,
   viewCalcPDFMap,
   viewPDFMapButtonBar,
+  updatedatamap,
 } from "../constants/TFTools";
 import mockDataMapper from "../../app/metadata/_mockDataMap";
 import mockAutoCompleteMap from "../../app/metadata/_mockAutoCompleteMap";
@@ -36,6 +37,7 @@ import {disposableOverrideGridInput,garnishTypeInput,buildDisposableOverrideDele
 import {buildCustomTaxPaymentOverrideDelete,buildCustomTaxPaymentOverrideSaveInput,getTaxTypesPymtOvrdInput} from './ctpOverridesUtil'
 import {generateTaxLocatorPDF,buildWhatIfLocationsDeleteAllInput} from './tLocatorUtil';
 import {mapTaxCodeGridInput,buildMapTaxCodeSaveInput} from './mappingtools/mapTaxCodesUtil'
+import {mapTaxTypeGridInput,buildMapTaxTypeSaveInput,buildMapTaxTypeUpdate} from './mappingtools/mapTaxTypesUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -88,7 +90,30 @@ export const cellbeginedit = (row, datafield) => {
   }
   return true;
 };
-
+export const cellendeditcheck = (row,datafield,value,defaultvalue) => {
+  let _id = document.querySelector("div[role='grid']").id;
+  const rowdata = $(`#${_id}`).jqxGrid("getrowdata", row);
+  const rows = $(`#${_id}`).jqxGrid("getrows");
+  let keepid ='';
+  if (datafield === "preferred") {
+    console.log(value);
+    if (rowdata.preferred === true) {
+      $(`#${_id}`).jqxGrid('setcellvalue', row, "preferred", false);
+  } else if (rowdata.preferred === false) {
+      $(`#${_id}`).jqxGrid('setcellvalue', row, "preferred", true);
+      keepid=row;
+  }
+  if(rows && rows.length >=0){
+    for(i=0; rows.length -1;i++){
+      if(rows[i]['preferred']==true && keepid != (i+1)){
+        $(`#${_id}`).jqxGrid('setcellvalue', row, "preferred", false);
+      }
+    }
+  }
+  }
+};
+export const cellendeditchecke = (event) => {
+}
 /**
  * compMetaData
  * @param {*} pageid
@@ -114,6 +139,12 @@ export function compMetaData(pageid, key) {
       if (pageid === "permissions") {
         metadata.griddef.columns.forEach(column => {
           column.cellbeginedit = cellbeginedit;
+        });
+      }else if(pageid === "mapTaxType"){
+        metadata.griddef.columns.forEach(column => {
+          if(column.datafield==='preferred'){
+            //column.cellendedit = cellendeditchecke;
+          }
         });
       }
       return metadata;
@@ -404,7 +435,9 @@ export function buildGridDataInput(pageid, store) {
       pageId: pageid,
       dataset: appDataset(),
     }
-  }else {
+  }else if (pageid === "mapTaxType") {
+    return mapTaxTypeGridInput(pageid, filterData, stDate, enDate, state);
+  } else {
     if (state.parentData) { //Reset Parent Data
       let parentData = {};
       store.dispatch(setParentData(parentData))
@@ -1106,6 +1139,16 @@ export function buildDeleteAllInput(pageid, store, formdata, mode) {
     }
   }
 }
+export function buildUpdateInput(pageid, store, formdata, mode) {
+  let state = store.getState();
+  if (pageid === 'mapTaxType') {
+    return buildMapTaxTypeUpdate(pageid, formdata, mode, state);
+  }else{
+    return {
+      dataset: appDataset(),
+    }
+  }
+}
 
 export function buildPdfInput(pageid, store, formdata, mode, fromBar) {
   const state = store.getState();
@@ -1794,6 +1837,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildCustomTaxPaymentOverrideSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "mapTaxCode") {
     return buildMapTaxCodeSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "mapTaxType") {
+    return buildMapTaxTypeSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }
@@ -2004,6 +2049,14 @@ export function deleteAllUrl(id) {
   });
   let url = generateUrl.buildURL(deldataallMap.url);
   console.log("Delete All URL %s for page %s", url, id);
+  return url;
+}
+export function updateUrl(id) {
+  let updateAllamap = updatedatamap.find(metadatam => {
+    if (id == metadatam.id) return metadatam;
+  });
+  let url = generateUrl.buildURL(updateAllamap.url);
+  console.log("Update URL %s for page %s", url, id);
   return url;
 }
 
