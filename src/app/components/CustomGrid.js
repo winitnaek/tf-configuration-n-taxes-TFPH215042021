@@ -119,8 +119,8 @@ class CustomGrid extends Component {
     this.handleShowPDF = this.handleShowPDF.bind(this);
     this.showActionMessage = this.showActionMessage.bind(this);
     this.hideUIAlert=this.hideUIAlert.bind(this);
+    this.handleUpdatePreferredStatus=this.handleUpdatePreferredStatus.bind(this);
   }
-
   componentDidMount() {
     const { metadata, pageid } = this.props;
     const { pgdef } = metadata;
@@ -129,7 +129,37 @@ class CustomGrid extends Component {
       showAlert: !!metaInfo
     });
     document.addEventListener('click',this.viewDisposableOverride, false);
+    let _id = document.querySelector("div[role='grid']").id;
+    $(`#${_id}`).jqxGrid().on('cellendedit', function (event) {
+      var args = event.args;
+      var dataField = event.args.datafield;
+      var rowData = args.row;
+      var rowBoundIndex = event.args.rowindex;
+      var value = args.value;
+      var doNotReset =-1;
+      if (dataField == "preferred") {
+          if (value ===true) {
+            $(`#${_id}`).jqxGrid('setcellvalue', rowBoundIndex, "preferred", true);
+            doNotReset = rowBoundIndex;
+        } else if (value ===false) {
+            $(`#${_id}`).jqxGrid('setcellvalue', rowBoundIndex, "preferred", false);
+        }
+      }
+      if(doNotReset >=0){
+        const rows = $(`#${_id}`).jqxGrid("getrows");
+        if(rows && rows.length >=0){
+          for(var i = 0; i < rows.length; i++){
+            if(i===doNotReset){
+            }else{
+              $(`#${_id}`).jqxGrid('setcellvalue',i, "preferred", false);
+            }
+          }
+        }
+      }
+  });
   }
+
+  
 
   async getViewAllDisposableData(){
     const data = await this.props.getDataForChildGrid({ pgid:'viewDisposableOverride', showSummary: this.state.showSummary });
@@ -141,7 +171,6 @@ class CustomGrid extends Component {
       modaltitle:'All Disposable Overrides'
     })
   }
-
   handleHidePDF() {
     this.setState({ showPDF: false })
   }
@@ -203,6 +232,16 @@ class CustomGrid extends Component {
       }
     }
   }
+  handleUpdatePreferredStatus(clickPageId){
+    if(clickPageId==='mapTaxType'){
+      let data={};
+      let mode='';
+      savegriddataAPI.updateGridData(this.props.pageid,data,mode).then().then((response) => response).then((repos) => {
+        //alert(repos.message)
+        this.showActionMessage('','Updated',repos.message);
+      });
+    }
+  }
   handleDeleteAll(clickPageId) {
     if(clickPageId==='whatifEmp'){
       this.showConfirm(true,'Warning!','Are you sure you want to delete all?');
@@ -244,6 +283,12 @@ class CustomGrid extends Component {
     this.setState({
       showActionAlert:false
     });
+    if(this.props.pageid==='mapTaxType'){
+      const data = tftools.find(tool => tool.id === 'mapTaxType');
+      if (data) {
+        renderTFConfigNTaxes("pageContainer", data);
+      }
+    }
   }
   showActionMessage(type, action,message) {
     this.setState({
@@ -346,6 +391,7 @@ class CustomGrid extends Component {
             handleGotoTaxLocator={this.handleGotoTaxLocator}
             handleCalculateTaxes={this.handleCalculateTaxes}
             handlePdf={(event) => this.handlePDF(event, true)}
+            handleUpdatePreferredStatus={this.handleUpdatePreferredStatus}
             handleTaxLocator={this.openTaxLocator}
           />
         ) : null}

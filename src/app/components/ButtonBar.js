@@ -43,6 +43,11 @@ class ButtonBar extends Component {
       <i class="fas fa-address-book fa-lg fa-1x"></i> Find Redundant Overrides
       </Button>
     );
+    let updatePreferredStatus= (
+      <Button id="updatePreferredStatus" size="sm" color="primary" style={{marginRight:'20px'}} onClick={() => this.props.handleUpdatePreferredStatus(this.props.pageid)}>
+      <i class="fas fa-pencil-alt fa-lg fa-1x"></i> Update Preferred Status
+      </Button>
+    );
     if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionsBenefit' || this.props.pageid==='taxLocator'){ 
       //whatifEmp && whatifDeductionsBenefit && taxLocator
       taxLocator=null;
@@ -50,27 +55,39 @@ class ButtonBar extends Component {
       runLocatorService=null;
       addressFromWorksite=null;
       findRedundantOverrides=null;
+      updatePreferredStatus=null;
     }else if(this.props.pageid==='whatifTaxes' || this.props.pageid==='pensionWhatIfTaxes'){ //whatifTaxes
       runLocatorService=null;
       addressFromWorksite=null;
       deleteAll=null;
       findRedundantOverrides=null;
+      updatePreferredStatus=null;
     }else if(this.props.pageid==='whatifGarnishment'){ //whatifEmpGarnishment
       taxLocator=null;
       runLocatorService=null;
       addressFromWorksite=null;
       findRedundantOverrides=null;
       deleteAll=null;
+      updatePreferredStatus=null;
     }else if(this.props.pageid==='whatifLocations'){ //taxLocatorLocation
       taxLocator=null;
       calculateTaxes=null;
       findRedundantOverrides=null;
+      updatePreferredStatus=null;
     }else if(this.props.pageid==='addressOverrides'){ //addressOverrides
       taxLocator=null;
       calculateTaxes=null;
       runLocatorService=null;
       addressFromWorksite=null;
       deleteAll=null;
+      updatePreferredStatus=null;
+    } else if(this.props.pageid==='mapTaxType'){//mapTaxType
+      taxLocator=null;
+      calculateTaxes=null;
+      runLocatorService=null;
+      addressFromWorksite=null;
+      deleteAll=null;
+      findRedundantOverrides=null;
     }
     if(this.props.pageid==='whatifDeductionBenefits'){//whatifDeductionBenefits
       taxLocator=null;
@@ -78,6 +95,7 @@ class ButtonBar extends Component {
       runLocatorService=null;
       addressFromWorksite=null;
       findRedundantOverrides=null;
+      updatePreferredStatus=null;
     }
     return (
       <Row className="justify-content-center" style={{ paddingTop: "3px",paddingBottom:'2px',marginTop:'15px',borderRadius:'0.25rem'}}>
@@ -87,6 +105,7 @@ class ButtonBar extends Component {
         {addressFromWorksite}
         {deleteAll}
         {findRedundantOverrides}
+        {updatePreferredStatus}
       </Row>
     );
   }

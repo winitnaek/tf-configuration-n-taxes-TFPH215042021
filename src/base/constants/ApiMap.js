@@ -218,7 +218,12 @@ import {
   DELETE_CUSTOM_TAX_PAY_OVERRIDE,
   SAVE_CUSTOM_TAX_PAY_OVERRIDE,
   DELETE_ALL_WHAT_IF_MANAGE_LOCATIONS,
-  DELETE_ALL_TAX_LOCATOR
+  DELETE_ALL_TAX_LOCATOR,
+  GET_MAP_TAX_TYPES,
+  GET_MAP_TAX_TYPES_FOR_AUTH,
+  CREATE_NEW_TAXTYPE,
+  UPDATE_PREFERRED_STATUS_TAXTYPE,
+  DELETE_TAXTYPE_MAPPING
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -321,8 +326,8 @@ export const metaDataApiMap = {
   mapPaymentCode: GET_CUSTOM_TAX_FORMULAS,
   mapTaxCodes: GET_CUSTOM_TAX_FORMULAS,
   mapTaxCode: GET_CUSTOM_TAX_FORMULAS,
-  mapTaxTypes: GET_CUSTOM_TAX_FORMULAS,
-  mapTaxType: GET_CUSTOM_TAX_FORMULAS,
+  mapTaxTypes: GET_MAP_TAX_TYPES,
+  mapTaxType: GET_MAP_TAX_TYPES_FOR_AUTH,
   taxCodeUsage: GET_CUSTOM_TAX_FORMULAS,
   taxTypeUsage: GET_CUSTOM_TAX_FORMULAS,
   paymentCodeUsage: GET_CUSTOM_TAX_FORMULAS,
@@ -402,7 +407,8 @@ export const deleteDataApiMap = {
   customPaymentTaxExceptions:DELETE_CUSTOM_PAYMENT_EXCEPTION,
   customNexusCompanyData: DELETE_CUSTOM_NEXUS_DATA,
   disposableOverride:DELETE_DISPOSABLE_OVERRIDE,
-  customTaxPaymentOverride: DELETE_CUSTOM_TAX_PAY_OVERRIDE
+  customTaxPaymentOverride: DELETE_CUSTOM_TAX_PAY_OVERRIDE,
+  mapTaxType:DELETE_TAXTYPE_MAPPING
 };
 export const deleteAllDataApiMap = {
   whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES,
@@ -411,7 +417,9 @@ export const deleteAllDataApiMap = {
   taxLocator: DELETE_ALL_TAX_LOCATOR
 
 };
-
+export const updateDataApiMap ={
+  mapTaxType:UPDATE_PREFERRED_STATUS_TAXTYPE
+}
 export const saveDataApiMap = {
   customPayments: SAVE_CUSTOM_PAYMENT,
   customTaxCodes: SAVE_CUSTOM_TAX_CODES,
@@ -449,7 +457,8 @@ export const saveDataApiMap = {
   customPaymentTaxExceptions:SAVE_CUSTOM_PAYMENT_EXCEPTION,
   customNexusCompanyData: SAVE_CUSTOM_NEXUS_DATA,
   disposableOverride:SAVE_DISPOSABLE_OVERRIDE,
-  customTaxPaymentOverride: SAVE_CUSTOM_TAX_PAY_OVERRIDE
+  customTaxPaymentOverride: SAVE_CUSTOM_TAX_PAY_OVERRIDE,
+  mapTaxType:CREATE_NEW_TAXTYPE
 };
 
 export const saveAsAPIMap = {
