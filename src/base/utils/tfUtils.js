@@ -37,7 +37,7 @@ import {disposableOverrideGridInput,garnishTypeInput,buildDisposableOverrideDele
 import {buildCustomTaxPaymentOverrideDelete,buildCustomTaxPaymentOverrideSaveInput,getTaxTypesPymtOvrdInput} from './ctpOverridesUtil'
 import {generateTaxLocatorPDF,buildWhatIfLocationsDeleteAllInput} from './tLocatorUtil';
 import {mapTaxCodeGridInput,buildMapTaxCodeSaveInput} from './mappingtools/mapTaxCodesUtil'
-import {mapTaxTypeGridInput,buildMapTaxTypeSaveInput,buildMapTaxTypeUpdate} from './mappingtools/mapTaxTypesUtil';
+import {mapTaxTypeGridInput,buildMapTaxTypeSaveInput,buildMapTaxTypeUpdate,buildMapTaxTypeDelete} from './mappingtools/mapTaxTypesUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -1090,6 +1090,8 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildDisposableOverrideDelete(pageid, formdata, mode, state);
   } else if (pageid === "customTaxPaymentOverride") {
     return buildCustomTaxPaymentOverrideDelete(pageid, formdata, mode, state);
+  } else if (pageid === "mapTaxType") {
+    return buildMapTaxTypeDelete(pageid, formdata, mode, state);
   } else {
     console.log("formdata");
     console.log(formdata);

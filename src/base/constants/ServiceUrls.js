@@ -227,3 +227,4 @@ export const GET_MAP_TAX_TYPES_FOR_AUTH='/MappingToolsService/taxTypesMappedForA
 export const CREATE_NEW_TAXTYPE='/MappingToolsService/createNewTaxType'
 export const UPDATE_PREFERRED_STATUS_TAXTYPE='/MappingToolsService/updatePreferredStatusTaxType'
 export const DELETE_TAXTYPE_MAPPING ='/MappingToolsService/deleteTaxTypeMapping'
+export const CREATE_DEFAULT_MAPPING_ALLTAXTYPE ='/MappingToolsService/createDefaultMappingForAllTaxTypes'

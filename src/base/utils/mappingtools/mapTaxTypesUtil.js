@@ -88,3 +88,23 @@ export function getCheckedValByPgId(pageId){
     return selectedVal;
   }
 }
+/**
+ * buildDisposableOverrideDelete
+ * @param {*} pageId 
+ * @param {*} formData 
+ * @param {*} mode 
+ * @param {*} state 
+ */
+export function buildMapTaxTypeDelete(pageId, formData, mode, state){
+  let parentInfo = state.parentInfo;
+  let taxType=formData.taxtype;
+  if(parentInfo && !taxType){
+    taxType = parentInfo.taxType ? parentInfo.taxType: parentInfo.taxtype 
+  }
+  let input = {
+    dataset: appDataset(),
+    userId: appUserId(),
+    usrtax: taxType
+  };
+  return input;
+}
