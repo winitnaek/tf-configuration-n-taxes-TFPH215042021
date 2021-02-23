@@ -242,7 +242,8 @@ import {
   DEFAULT_MAPPING_FOR_ALL_PAY_CODES,
   DEFAULT_MAPPING_FOR_PAYMENT_CODE,
   GET_TAX_TYPE_USAGE,
-  GET_PAYMENT_CODE_USAGE
+  GET_PAYMENT_CODE_USAGE,
+  GET_MAPPING_TOOLS_COUNTS
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -340,7 +341,7 @@ export const metaDataApiMap = {
   paServicesTaxReport: GET_PA_SERVICES_TAX_REPORT,
   paServiceTaxReport: GET_PA_SERVICE_TAX_REPORT,
   // Mapping Tools
-  mappingTools: GET_CUSTOM_TAX_FORMULAS,
+  mappingTools: GET_MAPPING_TOOLS_COUNTS,
   mapPaymentCodes: GET_MAP_PAYMENT_CODE,
   createDefaultPC:DEFAULT_MAPPING_FOR_ALL_PAY_CODES,
   mapPaymentCode: GET_MAP_PAYMENT_CODE_FOR_PAYCODE,

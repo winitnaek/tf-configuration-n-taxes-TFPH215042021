@@ -243,4 +243,5 @@ export const DEFAULT_MAPPING_FOR_PAYMENT_CODE = '/MappingToolsService/createDefa
 export const DELETE_TAX_CODE_USAGE = '/MappingToolsService/deleteTaxCodeMapping'
 export const GET_TAX_TYPE_USAGE = '/MappingToolsService/getTaxTypeUsage'
 export const GET_PAYMENT_CODE_USAGE = '/MappingToolsService/getPaymentCodeUsage'
+export const GET_MAPPING_TOOLS_COUNTS='/MappingToolsService/getCountMappingTools'
 

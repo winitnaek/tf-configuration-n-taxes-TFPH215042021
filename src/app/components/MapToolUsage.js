@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Col, Row, UncontrolledTooltip, Container, Button } from "reactstrap";
+import { Col, Row, UncontrolledTooltip, Container, Button, Card, CardHeader, CardBody,Alert} from "reactstrap";
 import { ConfirmModal } from "bsiuilib";
 import { setTemplateData } from "../../base/utils/tfUtils";
 import { UserDataQueries } from "./UserDataQueries";
@@ -122,8 +122,10 @@ class MapToolUsage extends UserDataQueries {
           ) : null}
         </Row>
         <Row>
-          <Col xs="12">
-            <p>{setTemplateData(pgsubtitle, formFilterData)}</p>
+          <Col xs="12" className='mt-2'>
+           <Alert color="info">
+            {setTemplateData(pgsubtitle, formFilterData)}
+          </Alert>
           </Col>
         </Row>
         <Row>
@@ -131,12 +133,16 @@ class MapToolUsage extends UserDataQueries {
             usageGroup.map((group, index) => {
               return (
                 <Col xs="6" style={{ marginBottom: "15px"}} key={index}>
-                  <span style={{ fontSize:'125%' }}>{group.title}</span>
+                <Card>
+                  <CardHeader>{group.title}</CardHeader>
+                  <CardBody>
                   {group.usageData && group.usageData.length ? (group.usageData.splice(0,3) || []).map(({ label,id }) => (
-                    <a key={id} style={{ display: "block", fontSize:'1rem'}} href="" onClick={(event) => this.navigate(event, group, id)}>{label}</a>
+                    <Button key={id} color="link"size="sm" onClick={(event) => this.navigate(event, group, id)}>{label}</Button>
                   )): <p>There is no Data for this Code</p>}
                   {group.usageData && group.usageData.length && group.usageData.length > 3 ? 
-                  <a key='more' style={{ display: "block", fontSize:'1rem'}} href="" onClick={(event) => this.navigateToParent(event, group)}>...More</a>: null}
+                    <Button key='more' color="link"size="sm" onClick={(event) => this.navigateToParent(event, group)}>...More</Button>: null}
+                  </CardBody>
+                </Card>
                 </Col>
               );
             })}

@@ -148,3 +148,14 @@ export function buildMapTaxTypeDelete(pageId, formData, mode, state){
   };
   return input;
 }
+/**
+ * getMappingToolsCountsInput
+ * @param {*} pageId 
+ */
+export function getMappingToolsCountsInput(pageId) {
+  let input = {
+    pageid:pageId,
+    dataset:appDataset()
+  };
+  return input;
+}

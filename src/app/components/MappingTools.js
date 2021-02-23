@@ -42,8 +42,46 @@ class MappingTools extends UserDataQueries {
   componentDidMount() {
     const { pgid } = this.props;
     const { tools } = this.state;
-    GeneralApi.getApiData(pgid).then(res => {
-
+    GeneralApi.getPageData(pgid).then(mapToolsData => {
+      let countData = mapToolsData;
+      let res = {
+        mapTaxCodes:[
+           {
+              "name":"Tax Codes",
+              "mapped":countData[0] && countData[0].value ? countData[0].value:0,
+              "notMapped":countData[1] && countData[1].value ? countData[1].value:0,
+           }
+        ],
+        mapTaxTypes:[
+           {
+              "name":"Tax Types",
+              "mapped":countData[2] && countData[2].value ? countData[2].value:0,
+              "notMapped":countData[3] && countData[3].value ? countData[3].value:0,
+           }
+        ],
+        mapPaymentCodes:[
+           {
+              "name":"Credit Codes",
+              "mapped":countData[4] && countData[4].value ? countData[4].value:0,
+              "notMapped":countData[5] && countData[5].value ? countData[5].value:0,
+           },
+           {
+              "name":"Deduction Codes",
+              "mapped":countData[6] && countData[6].value ? countData[6].value:0,
+              "notMapped":countData[7] && countData[7].value ? countData[7].value:0,
+           },
+           {
+              "name":"Plan Codes",
+              "mapped":countData[8] && countData[8].value ? countData[8].value:0,
+              "notMapped":countData[9] && countData[9].value ? countData[9].value:0,
+           },
+           {
+              "name":"Earning Codes",
+              "mapped":countData[10] && countData[10].value ? countData[10].value:0,
+              "notMapped":countData[10] && countData[10].value ? countData[10].value:0,
+           }
+        ]
+     }
       tftools.forEach(tool => {
         const { value, type, id, label } = tool;
         if (value === "MT" && type !== "page" && mappingTools.tools[id]) {
@@ -83,13 +121,10 @@ class MappingTools extends UserDataQueries {
           </span>
         </Row>
         <Row>
-          {tools.map(tool => (
-            <Col xs="12" key={tool.id}>
-              <Tool {...tool} toggle={() => this.openTool(tool.id)} />
-            </Col>
-          ))}
-        </Row>
-
+         {tools.map(tool => (
+             <Tool {...tool} toggle={() => this.openTool(tool.id)} />
+         ))}
+       </Row>
         {/* <ReusableModal
           open={this.state.isOpen}
           close={this.handleClose}

@@ -1,29 +1,42 @@
-import React from "react";
-import { Button } from "reactstrap";
+import React, { Component } from "react";
+import { Row, Col,UncontrolledTooltip, Button, Badge,Fragment, Card, CardHeader, CardFooter, CardBody,
+    CardTitle, CardText } from "reactstrap";
+class Tool extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        items: this.props.items
+    };
+  }
 
-const Tool = ({ label, id, title, subTitle, items, toggle }) => {
-  return (
-    <div>
-      <h4 className="border-bottom border-primary">{title}</h4>
-      <p>{subTitle}</p>
-      <ul>
-        {items && items.map(item => (
-          <li>
-            <p className="m-0">{item.name}:</p>
-            <ul>
-              <li>Mapped: {item.mapped}</li>
-              <li>Not mapped: {item.notMapped}</li>
-            </ul>
-          </li>
-        ))}
-      </ul>
-      <h3>
-        <Button color="link" onClick={() => toggle(id, label)}>
-          {label}
-        </Button>
-      </h3>
-    </div>
-  );
-};
+  componentDidMount() {}
 
+  render() {
+    const { label, id, title, subTitle, items, toggle} = this.props
+    return (
+        <Col style={{ maxWidth: "33.3%" }}>
+        <Card>
+        <CardHeader>{title}</CardHeader>
+        <CardBody>
+          <CardTitle tag="h5">{subTitle}</CardTitle>
+          <CardText>
+          <ul>
+            {items && items.map(item => (
+            <li>
+                <p className="m-0">{item.name}:</p>
+                <ul>
+                <li>Mapped: {item.mapped}</li>
+                <li>Not mapped: {item.notMapped}</li>
+                </ul>
+            </li>
+            ))}
+          </ul>
+          </CardText>
+        </CardBody>
+        <Button size="sm" className="ml-5 mr-5 mb-2" onClick={() => toggle(id, label)}>{label}</Button>
+      </Card>
+      </Col>
+    );
+  }
+}
 export default Tool;
