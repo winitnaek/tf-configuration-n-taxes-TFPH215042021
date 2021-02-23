@@ -11,6 +11,7 @@ import {setFilterFormData} from '../../app/actions/filterFormActions';
  * @param {*} state 
  */
 export function optionalRateOverrideGridInput(pageId, filterData, stDate, enDate, state) {
+  const mapUsage = localStorage.getItem('mapUsage');
   let company = state.parentInfo.company;
   if(company && !filterData.company){
     store.dispatch(setFilterFormData(state.parentInfo));
@@ -18,8 +19,8 @@ export function optionalRateOverrideGridInput(pageId, filterData, stDate, enDate
   let input = {
     pageId: pageId,
     dataset: appDataset(),
-    companyCode:filterData.company ? filterData.company: company
-  };
+    companyCode:filterData.company || company || mapUsage
+    };
   return input;
 }
 /**

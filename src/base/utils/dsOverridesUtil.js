@@ -11,6 +11,7 @@ import {setFilterFormData} from '../../app/actions/filterFormActions';
  * @param {*} state 
  */
 export function disposableOverrideGridInput(pageId, filterData, stDate, enDate, state) {
+  const mapUsage = localStorage.getItem('mapUsage');
   let parentInfo = state.parentInfo;
   let code = '';
   if(parentInfo && parentInfo.code){
@@ -26,7 +27,7 @@ export function disposableOverrideGridInput(pageId, filterData, stDate, enDate, 
   let input = {
     pageId: pageId,
     dataset: appDataset(),
-    garnishmentGroupCode:code
+    garnishmentGroupCode:code || mapUsage
   };
    return input;
 }

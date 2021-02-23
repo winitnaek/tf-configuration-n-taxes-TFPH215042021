@@ -30,6 +30,13 @@ class MappingTools extends UserDataQueries {
     this.OpenHelp = () => {
       this.props.help("mappingTools");
     };
+
+    this.openTool = (id) => {
+      const data = tftools.find(tool => tool.id === id);
+      if (data) {
+        renderTFConfigNTaxes("pageContainer", data);
+      }
+    }
   }
 
   componentDidMount() {
@@ -78,12 +85,12 @@ class MappingTools extends UserDataQueries {
         <Row>
           {tools.map(tool => (
             <Col xs="12" key={tool.id}>
-              <Tool {...tool} toggle={this.toggle} />
+              <Tool {...tool} toggle={() => this.openTool(tool.id)} />
             </Col>
           ))}
         </Row>
 
-        <ReusableModal
+        {/* <ReusableModal
           open={this.state.isOpen}
           close={this.handleClose}
           title={this.state.formTitle}
@@ -103,7 +110,7 @@ class MappingTools extends UserDataQueries {
             saveGridData={savegriddataAPI}
             styles={styles}
           />
-        </ReusableModal>
+        </ReusableModal> */}
       </Container>
     );
   }

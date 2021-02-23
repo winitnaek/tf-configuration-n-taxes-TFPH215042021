@@ -10,6 +10,7 @@ import {setParentData} from '../../app/actions/parentDataActions';
  * @param {*} state 
  */
 export function garnishmentFormulaOverrides(pageId, formData,stDate,enDate,state) {
+  const mapUsage = localStorage.getItem('mapUsage');
   let parentData = state.parentData;
   let group = parentData.code ?parentData.code: parentData.garnishmentGroup
   let groupCode = formData.garnishmentGroup ? formData.garnishmentGroup :group
@@ -18,7 +19,7 @@ export function garnishmentFormulaOverrides(pageId, formData,stDate,enDate,state
     pageId: pageId,
     dataset: appDataset(),
     userId: appUserId(),
-    garnishmentGroupCode: formData.code ? formData.code: groupCode,
+    garnishmentGroupCode: formData.code || groupCode || mapUsage
   };
   return input;
 }

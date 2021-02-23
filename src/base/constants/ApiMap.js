@@ -228,7 +228,21 @@ import {
   CREATE_NEW_TAXTYPE,
   UPDATE_PREFERRED_STATUS_TAXTYPE,
   DELETE_TAXTYPE_MAPPING,
-  CREATE_DEFAULT_MAPPING_ALLTAXTYPE
+  CREATE_DEFAULT_MAPPING_ALLTAXTYPE,
+  GET_MAP_PAYMENT_CODE,
+  GET_MAP_PAYMENT_CODE_FOR_PAYCODE,
+  SAVE_MAP_PAYMENT_CODE_FOR_PAYCODE,
+  DELETE_TAX_CODE_USAGE,
+  DEFAULT_MAPPING_FOR_TAX_CODE_AUTH,
+  DEFAULT_MAPPING_FOR_TAX_CODE_STATE_AUTH,
+  DEFAULT_MAPPING_FOR_MAP_TAX_CODES_AUTH,
+  DEFAULT_MAPPING_FOR_MAP_TAX_CODE_STATE_AUTH,
+  UPDATE_PREFERRED_STATUS_TAXCODE,
+  DEFAULT_MAPPING_FOR_ALL_TAX_TYPE,
+  DEFAULT_MAPPING_FOR_ALL_PAY_CODES,
+  DEFAULT_MAPPING_FOR_PAYMENT_CODE,
+  GET_TAX_TYPE_USAGE,
+  GET_PAYMENT_CODE_USAGE
 } from './ServiceUrls';
 
 export const metaDataApiMap = {
@@ -327,15 +341,22 @@ export const metaDataApiMap = {
   paServiceTaxReport: GET_PA_SERVICE_TAX_REPORT,
   // Mapping Tools
   mappingTools: GET_CUSTOM_TAX_FORMULAS,
-  mapPaymentCodes: GET_CUSTOM_TAX_FORMULAS,
-  mapPaymentCode: GET_CUSTOM_TAX_FORMULAS,
+  mapPaymentCodes: GET_MAP_PAYMENT_CODE,
+  createDefaultPC:DEFAULT_MAPPING_FOR_ALL_PAY_CODES,
+  mapPaymentCode: GET_MAP_PAYMENT_CODE_FOR_PAYCODE,
+  createMapPC:DEFAULT_MAPPING_FOR_PAYMENT_CODE,
   mapTaxCodes: GET_MAPPING_TAX_CODES,
+  createDefault: DEFAULT_MAPPING_FOR_TAX_CODE_AUTH,
+  createMap: DEFAULT_MAPPING_FOR_TAX_CODE_STATE_AUTH,
   mapTaxCode: GET_MAPPING_TAX_CODES_FOR_AUTHORITY,
   mapTaxTypes: GET_MAP_TAX_TYPES,
+  createDefaultTT:DEFAULT_MAPPING_FOR_ALL_TAX_TYPE,
   mapTaxType: GET_MAP_TAX_TYPES_FOR_AUTH,
+  createDefaultAuthority: DEFAULT_MAPPING_FOR_MAP_TAX_CODES_AUTH,
+  createMapAuthority: DEFAULT_MAPPING_FOR_MAP_TAX_CODE_STATE_AUTH,
   taxCodeUsage: GET_TAX_CODE_USAGE,
-  taxTypeUsage: GET_CUSTOM_TAX_FORMULAS,
-  paymentCodeUsage: GET_CUSTOM_TAX_FORMULAS,
+  taxTypeUsage: GET_TAX_TYPE_USAGE,
+  paymentCodeUsage: GET_PAYMENT_CODE_USAGE,
   taxHistory: GET_TAX_HISTORY,
   taxHistoryReport: GET_TAX_HISTORY_REPORT,
   messageToSuppress: GET_SUPPRESSED_MESSAGES,
@@ -350,7 +371,7 @@ export const metaDataApiMap = {
   reciprocalOverrides: GET_RECIPROCAL_OVERRIDES,
   reciprocalOverride: GET_RECIPROCAL_OVERRIDE,
   connectToDataSets: GET_CONNECT_TO_DATA_SETS,
-  pensionWhatIfTaxes: GET_PENSION_WHAT_IF_TAXES
+  pensionWhatIfTaxes: GET_PENSION_WHAT_IF_TAXES,
 };
 
 export const viewPDFApiMap = {
@@ -413,7 +434,9 @@ export const deleteDataApiMap = {
   customNexusCompanyData: DELETE_CUSTOM_NEXUS_DATA,
   disposableOverride:DELETE_DISPOSABLE_OVERRIDE,
   customTaxPaymentOverride: DELETE_CUSTOM_TAX_PAY_OVERRIDE,
-  mapTaxType:DELETE_TAXTYPE_MAPPING
+  taxTypeUsage:DELETE_TAXTYPE_MAPPING,
+  taxCodeUsage: DELETE_TAX_CODE_USAGE,
+  paymentCodeUsage: '/MappingToolsService/deletePaymentCodeMapping'
 };
 export const deleteAllDataApiMap = {
   whatifEmp:DELETEALL_WHAT_IF_EMPLOYEES,
@@ -423,7 +446,8 @@ export const deleteAllDataApiMap = {
 
 };
 export const updateDataApiMap ={
-  mapTaxType:UPDATE_PREFERRED_STATUS_TAXTYPE
+  mapTaxType:UPDATE_PREFERRED_STATUS_TAXTYPE,
+  mapTaxCode:UPDATE_PREFERRED_STATUS_TAXCODE
 }
 export const saveDataApiMap = {
   customPayments: SAVE_CUSTOM_PAYMENT,
@@ -464,7 +488,8 @@ export const saveDataApiMap = {
   disposableOverride:SAVE_DISPOSABLE_OVERRIDE,
   customTaxPaymentOverride: SAVE_CUSTOM_TAX_PAY_OVERRIDE,
   mapTaxCode: SAVE_MAPPING_TAX_CODES_FOR_AUTHORITY,
-  mapTaxType:CREATE_NEW_TAXTYPE
+  mapTaxType:CREATE_NEW_TAXTYPE,
+  mapPaymentCode: SAVE_MAP_PAYMENT_CODE_FOR_PAYCODE
 };
 
 export const saveAsAPIMap = {

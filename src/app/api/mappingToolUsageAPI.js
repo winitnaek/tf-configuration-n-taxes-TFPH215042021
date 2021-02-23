@@ -1,10 +1,10 @@
 import {appError, getAdminErrorMessage}  from "bsiuilib";
-import {getUrl, reqInfo} from "../../base/utils/tfUtils";
+import {getUrl, reqInfo, buildMapLinkDataInput} from "../../base/utils/tfUtils";
 
 class mappingToolUsageAPI {
   static getToolUsage(pageid, mappedTool) {
     let url = getUrl(pageid);
-    let tt = JSON.stringify(mappedTool);
+    let tt = JSON.stringify({ [mappedTool.key]: mappedTool.mappedId, dataset:appDataset() });
     return fetch(url, reqInfo(tt))
       .then(response => {
         if (response.ok) {
@@ -23,7 +23,7 @@ class mappingToolUsageAPI {
   static createDefaultMapping(pageid, action){
     // TODO: create a get URL for mapping tools like delete and save after payload format is ready
     let url = getUrl(pageid);
-    let tt = JSON.stringify(action);
+    let tt = JSON.stringify(buildMapLinkDataInput(pageid, action.formFilterData));
     return fetch(url, reqInfo(tt))
       .then(response => {
         if (response.ok) {

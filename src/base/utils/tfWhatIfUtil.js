@@ -229,6 +229,7 @@ export function buildWhatIfTaxesSaveInput(pageid, formdata, editMode, state) {
  * @param {*} enDate 
  */
 export function whatifTaxesGridInput(pageid, filterData, stDate, enDate) {
+  const mapUsage = localStorage.getItem('mapUsage');
   
   let empCode = filterData.empCode ? filterData.empCode : filterData.empcode;
   let checkDate = filterData.checkDate ? filterData.checkDate : filterData.chkdt;
@@ -247,9 +248,9 @@ export function whatifTaxesGridInput(pageid, filterData, stDate, enDate) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    empCode: empCode,
+    empCode: empCode || mapUsage,
     checkDate: moment(checkDate).format("MM/DD/YYYY"),
-    empName: filterData.empName ? filterData.empName:state.parentData.empName,
+    empName: filterData.empName || state.parentData.empName || `EMPLOYEE ${mapUsage}`,
     regPen: "R",
   };
   return input;

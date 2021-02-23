@@ -81,7 +81,7 @@ class ButtonBar extends Component {
       addressFromWorksite=null;
       deleteAll=null;
       updatePreferredStatus=null;
-    } else if(this.props.pageid==='mapTaxType'){//mapTaxType
+    } else if(this.props.pageid==='mapTaxType' || this.props.pageid=== 'mapTaxCode'){//mapTaxType
       taxLocator=null;
       calculateTaxes=null;
       runLocatorService=null;

@@ -3,6 +3,24 @@ import store from "../../../tf-configuration-n-taxes";
 import {setParentData} from '../../../app/actions/parentDataActions';
 import {setFilterFormData} from '../../../app/actions/filterFormActions';
 /**
+ * mapTaxTypesparent
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ * @param {*} state 
+ */
+
+export function mapTaxTypesParentGridInput(pageid, formData, stDate, enDate,state) {
+  let input = {
+    dataset:appDataset(),
+    mapMode:formData.mapMode,
+    pattern:formData.bsiCode || ''
+  };
+  return input;
+}
+
+/**
  * mapTaxTypeGridInput
  * @param {*} pageId 
  * @param {*} filterData 
@@ -21,6 +39,23 @@ export function mapTaxTypeGridInput(pageId, filterData, stDate, enDate, state) {
     pageId: pageId,
     dataset: appDataset(),
     taxType:taxType ? taxType: parentInfo.taxType
+  };
+  return input;
+}
+
+/**
+ * createDefaultTT
+ * @param {*} pageid 
+ * @param {*} filterData 
+ * @param {*} stDate 
+ * @param {*} enDate 
+ * @param {*} state 
+ */
+
+export function createDefaultTTLinkInput(pageid) {
+  let input = {
+    dataset:appDataset(),
+    userId: appUserId(),
   };
   return input;
 }
@@ -84,6 +119,11 @@ export function getCheckedValByPgId(pageId){
           return selectedVal = rows[i].userTax;
         }
       }
+        if(pageId==='mapTaxCode'){
+          if(rows[i].preferred===true){
+            return selectedVal = rows[i].taxCode;
+          }
+      }
     }
     return selectedVal;
   }
@@ -104,7 +144,7 @@ export function buildMapTaxTypeDelete(pageId, formData, mode, state){
   let input = {
     dataset: appDataset(),
     userId: appUserId(),
-    usrtax: taxType
+    usrtax: parentInfo.userTax
   };
   return input;
 }

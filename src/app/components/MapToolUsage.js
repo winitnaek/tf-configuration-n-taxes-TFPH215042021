@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Col, Row, UncontrolledTooltip, Container } from "reactstrap";
+import { Col, Row, UncontrolledTooltip, Container, Button } from "reactstrap";
+import { ConfirmModal } from "bsiuilib";
 import { setTemplateData } from "../../base/utils/tfUtils";
 import { UserDataQueries } from "./UserDataQueries";
 import * as metaData from "../metadata/metaData";
@@ -11,13 +12,19 @@ import { tftools } from "../../base/constants/TFTools";
 import { getRecentUsage } from "../actions/usageActions";
 import { setFilterFormData } from "../actions/filterFormActions";
 import mappingToolUsageAPI from "../api/mappingToolUsageAPI";
+import deletegriddataAPI from "../api/deletegriddataAPI";
 
 class MapToolUsage extends UserDataQueries {
   constructor() {
     super();
     this.state = {
-      usageGroup: []
+      usageGroup: [],
+      showConfirm: false,
+      cheader: 'Alert',
+      cbody: 'Are you sure you want to delete?'
     };
+    this.handleConfirmDeleteOk = this.handleConfirmDeleteOk.bind(this);
+    this.handleConfirmDeleteCancel = this.handleConfirmDeleteCancel.bind(this);
     this.OpenHelp = () => {
       this.props.help("mappingTools");
     };
@@ -30,23 +37,67 @@ class MapToolUsage extends UserDataQueries {
       });
       renderTFConfigNTaxes("pageContainer", pgData[0]);
     };
+
+    this.navigate = (event, group, id) => {
+      event.preventDefault();
+      localStorage.setItem('mapUsage', id);
+      const pgData = tftools.find(item => item.id === group.pageId);
+      renderTFConfigNTaxes("pageContainer", pgData);
+    }
+
+    this.navigateToParent = (event, group) => {
+      event.preventDefault();
+      const { pgdef } = metaData[group.pageId];
+      const { parentConfig } = pgdef;
+      const pgData = tftools.find(item => item.id === parentConfig.pgdef.pgid);
+      renderTFConfigNTaxes("pageContainer", pgData);
+    }
   }
 
   componentDidMount() {
     const { pgid, formFilterData } = this.props;
-    const { customCode, taxCode, customTaxType } = formFilterData;
-    mappingToolUsageAPI.getToolUsage(pgid, { mappedId: customCode || taxCode || customTaxType }).then(usageGroup => {
+    const { userCode, taxCode, userTax } = formFilterData;
+    let pageId = '';
+    let key;
+    if(taxCode) {
+      pageId = "taxCodeUsage";
+      key = "authCode";
+    } else if(userCode) {
+      pageId = "paymentCodeUsage";
+      key = "pmtUsrCode";
+    } else {
+      pageId = pgid;
+      key = "usrtax"
+    }
+    mappingToolUsageAPI.getToolUsage(pageId, { key, mappedId: userCode || taxCode || userTax }).then(usageGroup => {
       this.setState({
-        usageGroup: usageGroup instanceof Array ? usageGroup : []
+        usageGroup: usageGroup
       });
     });
   }
+
+  handleConfirmDeleteOk(parentConfig) {
+    this.setState({
+      showConfirm: false
+    });
+
+    deletegriddataAPI.deleteGridData(this.props.pgid, '', 'Edit');
+    this.renderParent(parentConfig);
+  }
+
+  handleConfirmDeleteCancel() {
+    this.setState({
+      showConfirm: false
+    });
+  }
+
 
   render() {
     const { pgid, formFilterData } = this.props;
     const { pgdef } = metaData[pgid];
     const { pgsubtitle, pgtitle, parentConfig } = pgdef;
     const { usageGroup } = this.state;
+    const usageGroupDataCount =  (usageGroup.length > 0) ? usageGroup.reduce((sum, data) => ({count : parseInt(sum.count) + parseInt(data.count)})).count : 0;
     return (
       <Container>
         <Row>
@@ -77,17 +128,28 @@ class MapToolUsage extends UserDataQueries {
         </Row>
         <Row>
           {usageGroup &&
-            usageGroup.map(({ title, groups }) => {
+            usageGroup.map((group, index) => {
               return (
-                <Col xs="6" key={id}>
-                  <h4 className="border-bottom border-primary">{title}</h4>
-                  {groups.map(({ name }) => (
-                    <p>{name}</p>
-                  ))}
+                <Col xs="6" style={{ marginBottom: "15px"}} key={index}>
+                  <span style={{ fontSize:'125%' }}>{group.title}</span>
+                  {group.usageData && group.usageData.length ? (group.usageData.splice(0,3) || []).map(({ label,id }) => (
+                    <a key={id} style={{ display: "block", fontSize:'1rem'}} href="" onClick={(event) => this.navigate(event, group, id)}>{label}</a>
+                  )): <p>There is no Data for this Code</p>}
+                  {group.usageData && group.usageData.length && group.usageData.length > 3 ? 
+                  <a key='more' style={{ display: "block", fontSize:'1rem'}} href="" onClick={(event) => this.navigateToParent(event, group)}>...More</a>: null}
                 </Col>
               );
             })}
         </Row>
+        <Row>
+          {
+            usageGroupDataCount === 0 &&
+            <Button id="runLocatorService" size="sm" color="primary" style={{width:'max-content',margin:'0 auto'}} onClick={() => this.setState({ showConfirm: true })}>
+            <i class="fas fa-trash-alt fa-lg fa-1x"></i> Delete
+            </Button>
+          }
+        </Row>
+        <ConfirmModal handleOk={() => this.handleConfirmDeleteOk(parentConfig)} handleCancel={this.handleConfirmDeleteCancel}  showConfirm={this.state.showConfirm} cheader={this.state.cheader} cbody={this.state.cbody} okbtnlbl={'Ok'} cancelbtnlbl={'Cancel'}/>
       </Container>
     );
   }

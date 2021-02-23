@@ -233,7 +233,7 @@ class CustomGrid extends Component {
     }
   }
   handleUpdatePreferredStatus(clickPageId){
-    if(clickPageId==='mapTaxType'){
+    if(clickPageId==='mapTaxType' || clickPageId==='mapTaxCode' ){
       let data={};
       let mode='';
       savegriddataAPI.updateGridData(this.props.pageid,data,mode).then().then((response) => response).then((repos) => {

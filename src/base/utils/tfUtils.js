@@ -36,8 +36,9 @@ import {buildCustomNexusCompanyDataSaveInput} from './cnDataUtil';
 import {disposableOverrideGridInput,garnishTypeInput,buildDisposableOverrideDelete,buildDisposableOverrideSaveInput,viewDisposableOverrideGridInput} from './dsOverridesUtil';
 import {buildCustomTaxPaymentOverrideDelete,buildCustomTaxPaymentOverrideSaveInput,getTaxTypesPymtOvrdInput} from './ctpOverridesUtil'
 import {generateTaxLocatorPDF,buildWhatIfLocationsDeleteAllInput} from './tLocatorUtil';
-import {mapTaxCodeGridInput,buildMapTaxCodeSaveInput} from './mappingtools/mapTaxCodesUtil'
-import {mapTaxTypeGridInput,buildMapTaxTypeSaveInput,buildMapTaxTypeUpdate,buildMapTaxTypeDelete} from './mappingtools/mapTaxTypesUtil';
+import {mapTaxTypeGridInput,buildMapTaxTypeSaveInput,buildMapTaxTypeUpdate,buildMapTaxTypeDelete,mapTaxTypesParentGridInput,createDefaultTTLinkInput} from './mappingtools/mapTaxTypesUtil';
+import {mapTaxCodeGridInput,buildMapTaxCodeSaveInput,buildTaxCodeUsageDelete,createDefaultLinkInput,createDefaultAuthorityLinkInput,mapTaxCodesParentGridInput,buildMapTaxCodeUpdate} from './mappingtools/mapTaxCodesUtil';
+import {mapPaymentCodeGridInput,buildMapPaymentCodeSaveInput,buildPaymentCodeUsageDelete,mapPaymentCodesParentGridInput,createDefaultPCLinkInput,createMapPCLinkInput} from './mappingtools/mapPaymentCodesUtil'
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -310,6 +311,7 @@ export function format(fmt, ...args) {
  */
 export function buildGridInputForPage(pageid, filterData, stDate, enDate, state) {
   const parentInfo = state.parentInfo;
+  const mapUsgeValue = localStorage.getItem('mapUsage')
   let input = {
     pageId: pageid,
     dataset: appDataset(),
@@ -326,7 +328,7 @@ export function buildGridInputForPage(pageid, filterData, stDate, enDate, state)
     courtesy: filterData.courtesy,
     authCode: getAuthCode(filterData),
     garnishmentGroupCode: filterData.garnishmentGroupCode,
-    groupCode: getGroupcode(filterData),
+    groupCode: getGroupcode(filterData) || mapUsgeValue,
     exemptStat: filterData.exemptionStatus,
     customTaxCode: filterData.customTaxCode === "ALL" ? "" : filterData.customTaxCode,
     pmtUsrCode: getPmtUsrCode(filterData),
@@ -341,7 +343,7 @@ export function buildGridInputForPage(pageid, filterData, stDate, enDate, state)
     regPen: filterData.regPen || parentInfo.regPen,
     taxN: filterData.taxN,
     employee: filterData.employeeCode || parentInfo.employeeCode,
-    empGroup: filterData.id
+    empGroup: filterData.id || mapUsgeValue
   };
   return input;
 }
@@ -388,6 +390,25 @@ function whatIfEmployeeGridInput(pageid, filterData, stDate, enDate) {
   };
   return input;
 }
+
+/**
+ * buildMapLinkDataInput
+ * @param {*} pageid
+ */
+export function buildMapLinkDataInput(pageid, formFilterData) {
+  if (pageid === "createDefault" || pageid === "createMap") {
+    return createDefaultLinkInput(pageid);
+  } else if (pageid === "createDefaultAuthority" || pageid === "createMapAuthority") {
+    return createDefaultAuthorityLinkInput(pageid, formFilterData);
+  } else if (pageid === "createDefaultTT") {
+    return createDefaultTTLinkInput(pageid);
+  } else if (pageid === "createDefaultPC") {
+    return createDefaultPCLinkInput(pageid);
+  } else if (pageid === "createMapPC") {
+    return createMapPCLinkInput(pageid, formFilterData);
+  }
+}
+
 /**
  * buildGridDataInput
  * @param {*} pageid
@@ -430,13 +451,21 @@ export function buildGridDataInput(pageid, store) {
     return viewDisposableOverrideGridInput(pageid, filterData, stDate, enDate, state);
   } else if (pageid === "mapTaxCode") {
     return mapTaxCodeGridInput(pageid, filterData, stDate, enDate, state);
-  }  else if(pageid === "pensionWhatIfTest"){
+  } else if (pageid === "mapTaxCodes") {
+    return mapTaxCodesParentGridInput(pageid, filterData, stDate, enDate, state);
+  } else if (pageid === "mapPaymentCode") {
+    return mapPaymentCodeGridInput(pageid, filterData, stDate, enDate, state);
+  } else if (pageid === "mapPaymentCodes") {
+    return mapPaymentCodesParentGridInput(pageid, filterData, stDate, enDate, state);
+  } else if(pageid === "pensionWhatIfTest"){
     return {
       pageId: pageid,
       dataset: appDataset(),
     }
   }else if (pageid === "mapTaxType") {
     return mapTaxTypeGridInput(pageid, filterData, stDate, enDate, state);
+  }else if (pageid === "mapTaxTypes") {
+    return mapTaxTypesParentGridInput(pageid, filterData, stDate, enDate, state);
   } else {
     if (state.parentData) { //Reset Parent Data
       let parentData = {};
@@ -470,11 +499,12 @@ function paymentOverridesGridInput(pageid, filterData, stDate, enDate) {
  */
 function paymentOverrideGridInput(pageid, filterData, stDate, enDate, state) {
   console.log(state);
+  const mapUsage = localStorage.getItem('mapUsage');
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    groupCode: filterData.id ? filterData.id : state.formFilterData.groupCode
+    groupCode: filterData.id || state.formFilterData.groupCode || mapUsage
   };
   return input;
 }
@@ -488,11 +518,12 @@ function paymentOverrideGridInput(pageid, filterData, stDate, enDate, state) {
  */
 function unemploymentCompanyOverridesGridInput(pageid, filterData, stDate, enDate, state) {
   console.log(state);
+  const mapUsage = localStorage.getItem('mapUsage');
   let input = {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    companyCode: filterData.company ? filterData.company : state.parentData.company
+    companyCode: filterData.company || state.parentData.company || mapUsage
   };
   return input;
 }
@@ -1090,8 +1121,12 @@ export function buildDeleteInput(pageid, store, formdata, mode) {
     return buildDisposableOverrideDelete(pageid, formdata, mode, state);
   } else if (pageid === "customTaxPaymentOverride") {
     return buildCustomTaxPaymentOverrideDelete(pageid, formdata, mode, state);
-  } else if (pageid === "mapTaxType") {
+  } else if (pageid === "taxTypeUsage") {
     return buildMapTaxTypeDelete(pageid, formdata, mode, state);
+  } else if (pageid === "taxCodeUsage") {
+    return buildTaxCodeUsageDelete(pageid, formdata, mode, state);
+  } else if (pageid === "paymentCodeUsage") {
+    return buildPaymentCodeUsageDelete(pageid, formdata, mode, state);
   } else {
     console.log("formdata");
     console.log(formdata);
@@ -1145,6 +1180,8 @@ export function buildUpdateInput(pageid, store, formdata, mode) {
   let state = store.getState();
   if (pageid === 'mapTaxType') {
     return buildMapTaxTypeUpdate(pageid, formdata, mode, state);
+  }else if (pageid === 'mapTaxCode') {
+    return buildMapTaxCodeUpdate(pageid, formdata, mode, state);
   }else{
     return {
       dataset: appDataset(),
@@ -1841,6 +1878,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildMapTaxCodeSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "mapTaxType") {
     return buildMapTaxTypeSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "mapPaymentCode") {
+    return buildMapPaymentCodeSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }
