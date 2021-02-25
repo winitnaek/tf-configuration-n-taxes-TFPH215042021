@@ -31,8 +31,8 @@ class generateReportApi {
           
         } else {
             var errorCode = response.status;
-            var errorMsg = 'Failed to get Company Audit Document. ' + ADMIN_ERROR_MSG;
-            throw new AppError(errorMsg, errorCode);
+            var errorMsg = 'Failed to get Company Audit Document. ';
+            return response.json();
         }
     })
     .then(response => { 
@@ -41,7 +41,7 @@ class generateReportApi {
     return response; 
     })
     .catch(error => {
-        throw error;
+        return error;
     });
   }
 }
