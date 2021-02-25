@@ -30,6 +30,7 @@ class BatchTest extends Component {
       file: "",
       loading: false,
       errorMsg: '',
+      emptyMsg:'&nbsp;'
     };
     const toBase64 = file =>
       new Promise((resolve, reject) => {
@@ -65,11 +66,13 @@ class BatchTest extends Component {
       if (fileName === '' && rSelected === 1) {
         this.setState({
           errorMsg: "Please upload valid file",
+          emptyMsg:''
         });
         return;
       } else if (testContent === '' && rSelected === 2) {
         this.setState({
           errorMsg: "Please upload valid test content",
+          emptyMsg:''
         });
         return;
       }
@@ -82,7 +85,8 @@ class BatchTest extends Component {
       this.setState({
         loading: true,
         errorMsg: '',
-        displayFileName:fileName
+        displayFileName:fileName,
+        emptyMsg:''
       })
       generateReportAPI.generate(pgid, payload).then(uploadResults => {
         if(uploadResults.code && uploadResults.code !== 200){
@@ -101,6 +105,7 @@ class BatchTest extends Component {
             errorMsg: '',
             fileName: '',
             testContent: '',
+            emptyMsg:'',
           });
         }
       })
@@ -254,7 +259,7 @@ class BatchTest extends Component {
         </div>
         </Row>
         </CardBody>
-        <CardFooter>&nbsp;
+        <CardFooter>{this.state.emptyMsg}
         {this.state.errorMsg && <div>{this.state.errorMsg}</div> }
         {this.state.loading && <i class="fas fa-spinner fa-spin fa-2x" style={{  color: 'green', width: 'max-content', margin: '0 auto', display: 'flex', }}></i> }
         {uploadResults && uploadResults.fileOutputs.length ? 
@@ -311,7 +316,7 @@ export const UploadResults = props => {
 
   return (
     <Fragment>
-          <p>Test result for {displayFileName}</p>
+          <p style={{paddingLeft:'87px'}}>Test result for {displayFileName}</p>
           <div style={{ display:'flex', color: ' rgb(76, 115, 146)', margin: '0 auto', justifyContent: 'center'}}>
           {uploadResults.map((file, index) => {
             return (
