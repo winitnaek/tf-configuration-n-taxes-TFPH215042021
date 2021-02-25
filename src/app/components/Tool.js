@@ -14,7 +14,7 @@ class Tool extends Component {
   render() {
     const { label, id, title, subTitle, items, toggle} = this.props
     return (
-        <Col style={{ maxWidth: "33.3%" }}>
+        <Col style={{ maxWidth: "33.3%" }} className='mt-2'>
         <Card>
         <CardHeader>{title}</CardHeader>
         <CardBody>
