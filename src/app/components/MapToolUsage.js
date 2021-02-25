@@ -95,7 +95,7 @@ class MapToolUsage extends UserDataQueries {
   render() {
     const { pgid, formFilterData } = this.props;
     const { pgdef } = metaData[pgid];
-    const { pgsubtitle, pgtitle, parentConfig } = pgdef;
+    const { pgsubtitle, pgtitle, parentConfig, subtitle } = pgdef;
     const { usageGroup } = this.state;
     const usageGroupDataCount =  (usageGroup.length > 0) ? usageGroup.reduce((sum, data) => ({count : parseInt(sum.count) + parseInt(data.count)})).count : 0;
     return (
@@ -125,6 +125,13 @@ class MapToolUsage extends UserDataQueries {
           <Col xs="12" className='mt-2'>
            <Alert color="info">
             {setTemplateData(pgsubtitle, formFilterData)}
+          </Alert>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12">
+           <Alert color="info">
+            {setTemplateData(subtitle, formFilterData)}
           </Alert>
           </Col>
         </Row>
