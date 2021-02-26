@@ -1,6 +1,7 @@
-import {appError, getAdminErrorMessage}  from "bsiuilib";
+import {appError, getAdminErrorMessage, generateUrl}  from "bsiuilib";
 import {saveUrl, reqInfo,buildSaveInput, saveAsUrl, buildSaveAsInput,updateUrl,buildUpdateInput} from "../../base/utils/tfUtils";
 import store from '../../tf-configuration-n-taxes';
+import { CONNECT_TO_DATA_SET } from '../../base/constants/ApiMap';
 class savegriddataAPI {
   static saveGridData(pageid, data, mode) {
     console.log("Made it to the savegriddata api");
@@ -64,6 +65,26 @@ class savegriddataAPI {
         }
       })
       .catch((error) => {
+        return error;
+      });
+  }
+
+  static setDataSet(datsetName) {
+    let url = generateUrl.buildURL(CONNECT_TO_DATA_SET);
+    let tt = JSON.stringify({ 
+      dataset: datsetName.toUpperCase(),
+      login: appUserId() });
+    return fetch(url, reqInfo(tt))
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          var errorCode = response.status;
+          var errorMsg = "Unable to get Data Records. " + getAdminErrorMessage();
+          return new appError(errorMsg, errorCode);
+        }
+      })
+      .catch(error => {
         return error;
       });
   }

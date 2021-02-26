@@ -105,6 +105,31 @@ class CustomGrid extends Component {
         });
     }
     
+    this.convertToNumber = (permission) => {
+      if(permission) return 1;
+      return 0;
+    }
+
+    this.updateDataSet = (data) => {
+      const existing = sessionStorage.getItem("up");
+      const profile =  JSON.parse(existing || '{}')
+      profile.dataset = data.dataset;
+      const rights = data.rights;
+      const newPermission = {};
+      rights.forEach(right => {
+        newPermission[right.toolId] = [
+          this.convertToNumber(right.viewPermission), 
+          this.convertToNumber(right.savePermission), 
+          this.convertToNumber(right.deletePermission),
+          this.convertToNumber(right.runPermission),
+          this.convertToNumber(right.auditPermission)
+        ]
+      })
+      profile.applications[0].permissions = newPermission;
+      sessionStorage.setItem('up', JSON.stringify(profile));
+      renderTFConfigNTaxes('appContent', 'renderTFHome');
+    }
+
     this.handleRunLocator = this.handleRunLocator.bind(this);
     this.clickCheckBox = this.clickCheckBox.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -378,6 +403,7 @@ class CustomGrid extends Component {
           setChildInfo={childInfoAction}
           fillParentInfo={populateParentData}
           showActionMessage={this.showActionMessage}
+          updateDataSet={this.updateDataSet}
         />
         {griddef.hasButtonBar && griddef.hasButtonBar == true ? (
           <ButtonBar
@@ -434,6 +460,7 @@ class CustomGrid extends Component {
                     setChildInfo={this.childInfoAction}
                     fillParentInfo={this.populateParentData}
                     showActionMessage={this.showActionMessage}
+                    updateDataSet={this.updateDataSet}
                   />
                 ) : null}
               </Col>

@@ -274,7 +274,7 @@ class BatchTest extends Component {
         </Row>: null}
         </CardFooter>
         </Card>
-        {uploadResults && uploadResults.fileOutputs.length && <Row style={{marginLeft:'0px'}}>
+        {uploadResults && uploadResults.fileOutputs.length && <Row style={{marginLeft:'0px', marginTop: '10px'}}>
           <strong>Open <a href="#" onClick={this.openMessageViewer}>Message Viewer</a> for details</strong>
         </Row> }
       </Container>
@@ -310,7 +310,7 @@ export const UploadResults = props => {
 
   return (
     <Fragment>
-          {/* <p style={{paddingLeft:'87px'}}>Test result for {displayFileName}</p> */}
+          <p style={{paddingLeft:'87px'}}>{displayFileName ? `See result below for ${displayFileName}` : 'See result below'}</p>
           <div style={{ display:'flex', color: ' rgb(76, 115, 146)', margin: '0 auto', justifyContent: 'center'}}>
           {uploadResults.map((file, index) => {
             return (

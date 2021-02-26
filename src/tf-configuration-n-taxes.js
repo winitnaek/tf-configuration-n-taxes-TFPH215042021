@@ -71,6 +71,12 @@ function renderTFConfigNTaxes(elem, renderName, renderCtx) {
   setAppUserIDAndDataset(dataset, userId);
   if (renderName === rname.RN_TF_HOME) {
     showPrgress(elem);
+    usrobj = JSON.parse(sessionStorage.getItem("up"));
+    dataset = usrobj.dataset;
+    userId = usrobj.userId;
+    setAppUserIDAndDataset(dataset, userId);
+    setModulePermissions(usrobj.applications);
+    moduleAreas = buildModuleAreaLinks(usrobj.applications);
     store.dispatch(setModuleAreas(moduleAreas));
     setTimeout(
       function () {
