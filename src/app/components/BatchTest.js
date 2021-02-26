@@ -30,7 +30,7 @@ class BatchTest extends Component {
       file: "",
       loading: false,
       errorMsg: '',
-      emptyMsg:'&nbsp;'
+      emptyMsg: "\xA0",
     };
     const toBase64 = file =>
       new Promise((resolve, reject) => {
@@ -104,7 +104,7 @@ class BatchTest extends Component {
             loading: false,
             errorMsg: '',
             fileName: '',
-            testContent: '',
+            // testContent: '',
             emptyMsg:'',
           });
         }
@@ -194,7 +194,6 @@ class BatchTest extends Component {
         <Card>
         <CardHeader> File Upload</CardHeader>
         <CardBody style={{marginLeft: '100px'}}>
-        <CardTitle tag="h5" style={{marginLeft:'-16px'}}>Please select file or use test content to upload</CardTitle>
         <Row>
           <div style={{ display: 'flex', marginBottom: '10px', marginTop: '20px'}}>
           <div 
@@ -205,32 +204,29 @@ class BatchTest extends Component {
               data-toggle="buttons"
             >
               <ButtonGroup>
-                <Button color="primary" onClick={() => this.setState({ rSelected:1, fileName: '', testContent: '', errorMsg: ''})} active={this.state.rSelected === 1}>File</Button>
-                <Button color="primary" onClick={() => this.setState({ rSelected:2, testContent: '', fileName: '', errorMsg: ''})} active={this.state.rSelected === 2}>Test Content</Button>
+                <Button color="primary" onClick={() => this.setState({ rSelected:1, fileName: '', testContent: '', errorMsg: ''})} active={this.state.rSelected === 1}>Upload File</Button>
+                <Button color="primary" onClick={() => this.setState({ rSelected:2, testContent: '', fileName: '', errorMsg: ''})} active={this.state.rSelected === 2}>Test Editor</Button>
               </ButtonGroup>
             </div>
           </div> 
         </Row>
         <Row>
         <div style={{ display: 'flex'}}>
-          {/* <span style={{     width: '50px',
-    display: 'inline-block',
-    textAlign: 'left'}}>Mode </span> : */}
           <div style={{ 
                 marginBottom: '15px',
               }}  
               data-toggle="buttons"
             >
             
-              <Button id="whatifCheckbox" style={{ marginRight: '10px' }} color="success" onClick={() => this.onCheckboxBtnClick(1)} active={this.state.cSelected.includes(1)}> {this.state.cSelected.includes(1) && <i class="fas fa-check-square"></i>} Export
+              <Button id="whatifCheckbox" style={{ marginRight: '10px' }} color="success" onClick={() => this.onCheckboxBtnClick(1)} active={this.state.cSelected.includes(1)}> {this.state.cSelected.includes(1) ? <i class="fas fa-check-square"></i>: <i class="far fa-square"></i>} Export
               <UncontrolledTooltip placement="top" target="whatifCheckbox">
                 <span> Export to What-if Test </span>
               </UncontrolledTooltip></Button>
-              <Button id="extendedCheckbox" style={{ marginRight: '10px' }} color="success" onClick={() => this.onCheckboxBtnClick(2)} active={this.state.cSelected.includes(2)}> {this.state.cSelected.includes(2) && <i class="fas fa-check-square"></i>} Extended Format
+              <Button id="extendedCheckbox" style={{ marginRight: '10px' }} color="success" onClick={() => this.onCheckboxBtnClick(2)} active={this.state.cSelected.includes(2)}> {this.state.cSelected.includes(2) ? <i class="fas fa-check-square"></i>: <i class="far fa-square"></i>} Extended Format
               <UncontrolledTooltip placement="top" target="extendedCheckbox">
                 <span> Output in Extended Format </span>
               </UncontrolledTooltip></Button>
-              <Button id="summaryCheckbox" color="success" onClick={() => this.onCheckboxBtnClick(3)} active={this.state.cSelected.includes(3)}> {this.state.cSelected.includes(3) && <i class="fas fa-check-square"></i>} Generate Summary
+              <Button id="summaryCheckbox" color="success" onClick={() => this.onCheckboxBtnClick(3)} active={this.state.cSelected.includes(3)}> {this.state.cSelected.includes(3) ? <i class="fas fa-check-square"></i>: <i class="far fa-square"></i>} Generate Summary
               <UncontrolledTooltip placement="top" target="summaryCheckbox">
                 <span> Generate Summary MNC file </span>
               </UncontrolledTooltip></Button>
@@ -240,9 +236,6 @@ class BatchTest extends Component {
         </Row>
         <Row>
         <div style={{ display: 'flex'}}>
-          {/* <span style={{     width: '50px',
-              display: 'inline-block',
-              textAlign: 'left'}}>File </span> : */}
           <div style={{
             display: 'flex', marginLeft: '-15px', marginTop: '10px',
             alignItems: `${this.state.rSelected === 1 ? 'flex-start' : 'flex-end'}`
@@ -250,16 +243,17 @@ class BatchTest extends Component {
             {
               this.state.rSelected === 1
               ? <CustomFile {...uploadField} accept='.tst' value={values[uploadField.id]} onChange={this.onFileSelect} />
-              : <textarea style={{ marginLeft: '15px'}} rows="4" cols="50" value={this.state.testContent} onChange={(event) => this.setState({ testContent: event.target.value})} />
+              : <textarea style={{ marginLeft: '15px'}} rows="4" cols="70" value={this.state.testContent} onChange={(event) => this.setState({ testContent: event.target.value})} />
             }
-              <Button disabled={this.state.loading} style={{ height: "36px", marginLeft: `${this.state.rSelected === 1 ? '-12px' : '10px'}`, marginRight: '10px'}} color="primary" onClick={this.onUpload}>
+              <Button disabled={this.state.loading} style={{ height: "36px", marginLeft: `${this.state.rSelected === 1 ? '44px' : '10px'}`, marginRight: '10px'}} color="primary" onClick={this.onUpload}>
                   Upload <i class="fas fa-cloud-upload-alt"></i>
               </Button>
           </div>
         </div>
         </Row>
         </CardBody>
-        <CardFooter>{this.state.emptyMsg}
+        <CardFooter>
+        {this.state.emptyMsg}
         {this.state.errorMsg && <div>{this.state.errorMsg}</div> }
         {this.state.loading && <i class="fas fa-spinner fa-spin fa-2x" style={{  color: 'green', width: 'max-content', margin: '0 auto', display: 'flex', }}></i> }
         {uploadResults && uploadResults.fileOutputs.length ? 
@@ -281,7 +275,7 @@ class BatchTest extends Component {
         </CardFooter>
         </Card>
         {uploadResults && uploadResults.fileOutputs.length && <Row style={{marginLeft:'0px'}}>
-          <div>Open <a href="#" onClick={this.openMessageViewer}>Message Viewer</a> for details</div>
+          <strong>Open <a href="#" onClick={this.openMessageViewer}>Message Viewer</a> for details</strong>
         </Row> }
       </Container>
     );
@@ -316,7 +310,7 @@ export const UploadResults = props => {
 
   return (
     <Fragment>
-          <p style={{paddingLeft:'87px'}}>Test result for {displayFileName}</p>
+          {/* <p style={{paddingLeft:'87px'}}>Test result for {displayFileName}</p> */}
           <div style={{ display:'flex', color: ' rgb(76, 115, 146)', margin: '0 auto', justifyContent: 'center'}}>
           {uploadResults.map((file, index) => {
             return (
