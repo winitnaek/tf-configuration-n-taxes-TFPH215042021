@@ -14,7 +14,7 @@ import TestHarness from "./app/test/TestHarness";
 import CustomComp from "./app/components/CustomComp";
 import MessageViewerContainer from "./app/components/MessageViewerContainer";
 import * as fieldData from "./app/metadata/fieldData";
-
+import { getFavoriteLinks } from "./app/home/actions/favoriteLinksActions";
 let store = configureStore();
 export default store;
 let MOCK = process.env.NODE_ENV === "development" ? false : false;
@@ -78,6 +78,7 @@ function renderTFConfigNTaxes(elem, renderName, renderCtx) {
     setModulePermissions(usrobj.applications);
     moduleAreas = buildModuleAreaLinks(usrobj.applications);
     store.dispatch(setModuleAreas(moduleAreas));
+    store.dispatch(getFavoriteLinks(userId,2));
     setTimeout(
       function () {
         renderTFHome(elem);
