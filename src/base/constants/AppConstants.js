@@ -21,7 +21,11 @@ export const modal = {
 export const modallarge = { 'max-width': window.innerWidth-200}
 
 export const modalBody = {
-  display: "flex", margin: "0 auto", width: "70%", flexWrap: "wrap"
+  display: "flex",
+  margin: "0 auto",
+  maxHeight: "500px",
+  overflowY: "auto",
+  flexWrap: "wrap",
 }
 
 export const helpicon = { paddingTop: "7px", color: "#4c7392" };

@@ -14,3 +14,11 @@
 .grid-modal .fa-calendar-plus{
   margin-left: -20px;
 }
+#formModalBody::-webkit-scrollbar {
+  width: 6px;
+  background-color: #f5f5f5;
+}
+#formModalBody::-webkit-scrollbar-thumb {
+  background-color: #808080;
+  border-radius: 6px;
+}
