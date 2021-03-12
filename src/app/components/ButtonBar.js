@@ -102,7 +102,7 @@ class ButtonBar extends Component {
       <Row className="justify-content-center" style={{ paddingTop: "3px",paddingBottom:'2px',marginTop:'15px',borderRadius:'0.25rem'}}>
         {taxLocator}
         {permissions && permissions.RUN ? (calculateTaxes):null}
-        {runLocatorService}
+        {permissions && permissions.RUN ? (runLocatorService):null}
         {addressFromWorksite}
         {permissions && permissions.DELETE ? (deleteAll):null}
         {findRedundantOverrides}
