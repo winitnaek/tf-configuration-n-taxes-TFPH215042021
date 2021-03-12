@@ -97,13 +97,14 @@ class ButtonBar extends Component {
       findRedundantOverrides=null;
       updatePreferredStatus=null;
     }
+    let permissions = this.props.permissions(this.props.pid);
     return (
       <Row className="justify-content-center" style={{ paddingTop: "3px",paddingBottom:'2px',marginTop:'15px',borderRadius:'0.25rem'}}>
         {taxLocator}
-        {calculateTaxes}
+        {permissions && permissions.RUN ? (calculateTaxes):null}
         {runLocatorService}
         {addressFromWorksite}
-        {deleteAll}
+        {permissions && permissions.DELETE ? (deleteAll):null}
         {findRedundantOverrides}
         {updatePreferredStatus}
       </Row>
