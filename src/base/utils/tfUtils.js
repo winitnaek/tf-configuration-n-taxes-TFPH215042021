@@ -39,6 +39,7 @@ import {generateTaxLocatorPDF,buildWhatIfLocationsDeleteAllInput} from './tLocat
 import {mapTaxTypeGridInput,buildMapTaxTypeSaveInput,buildMapTaxTypeUpdate,buildMapTaxTypeDelete,mapTaxTypesParentGridInput,createDefaultTTLinkInput} from './mappingtools/mapTaxTypesUtil';
 import {mapTaxCodeGridInput,buildMapTaxCodeSaveInput,buildTaxCodeUsageDelete,createDefaultLinkInput,createDefaultAuthorityLinkInput,mapTaxCodesParentGridInput,buildMapTaxCodeUpdate} from './mappingtools/mapTaxCodesUtil';
 import {mapPaymentCodeGridInput,buildMapPaymentCodeSaveInput,buildPaymentCodeUsageDelete,mapPaymentCodesParentGridInput,createDefaultPCLinkInput,createMapPCLinkInput} from './mappingtools/mapPaymentCodesUtil'
+import {getPlansInput} from './ptOverrideUtil';
 /**
  * buildModuleAreaLinks
  * @param {*} apps
@@ -820,6 +821,9 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       startdate:formValues.startdate ? moment(formValues.startdate).format("MM/DD/YYYY") : moment().format("MM/DD/YYYY"),
     }
     return input;
+  }
+  if(pageid === 'planId' && formValues){
+    return getPlansInput(input,formValues);
   }
   // return Object.assign(input, formValues);
   return input;
