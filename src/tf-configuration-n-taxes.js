@@ -37,7 +37,7 @@ import { UI_COMP, UI_PAGE, UI_TEST, tftools } from "./base/constants/TFTools";
 import griddataAPI from "./app/api/griddataAPI";
 //Temporary set user in session:======Comment this when deployed with MAC======
 if (!sessionStorage.getItem("up")) {
-  var userProfile = '{"userId":"vinit","dataset":"VINIT","securitytokn":"6d976b4e3ef843119dc1b66017160837","branding":"base64ImageData","userTheme":"Default","roles":["ER"],"applications":[{"id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc","name":"TaxFactory","accessIds":[{"id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8","visible":true}],"permissions":{"TT":[1,1,1,1,0],"CPO":[1,1,1,1,0],"DBC":[1,1,1,1,0],"PT":[1,1,1,1,0],"LR":[1,1,1,1,0],"YA":[1,1,1,1,0],"YB":[1,1,1,1,0],"YC":[1,1,1,1,0],"YD":[1,1,1,1,0],"YE":[1,1,1,1,0],"YF":[1,1,1,1,0],"YG":[1,1,1,1,0],"HW":[1,1,1,1,0],"YH":[1,1,1,1,0],"YI":[1,1,1,1,0],"YJ":[1,1,1,1,0],"YK":[1,1,1,1,0],"QF":[1,1,1,1,0],"MF":[1,1,1,1,0],"AO":[1,1,1,1,0],"UP":[1,1,1,1,0],"UQ":[1,1,1,1,0],"UR":[1,1,1,1,0],"MS":[1,1,1,1,0],"MV":[1,1,1,1,0],"WQF":[1,1,1,1,0],"ET":[1,1,1,1,0],"RB":[1,1,1,1,0],"RO":[1,1,1,1,0],"NX":[1,1,1,1,0],"BT":[1,1,1,1,0],"WM":[0,1,1,1,0],"GC":[1,1,1,1,0],"CB":[1,1,1,1,0],"GF":[1,1,1,1,0],"CC":[0,0,0,0,0],"GG":[1,1,1,1,0],"CF":[1,1,1,1,0],"CGF":[1,1,1,1,0],"OR":[1,1,1,1,0],"CG":[1,1,1,1,0],"PQF":[1,1,1,1,0],"GO":[1,1,1,1,0],"CR":[1,1,1,1,0],"TC":[1,1,1,1,0],"TD":[1,1,1,1,0],"CT":[1,1,1,1,0],"CP":[1,1,1,1,1],"PA":[1,1,1,1,0],"PC":[1,1,1,1,0],"PD":[1,1,1,1,0],"TH":[1,1,1,1,0],"LB":[1,1,1,1,0],"TL":[1,1,1,1,0],"DB":[1,1,1,1,0],"DO":[1,1,1,1,0],"PN":[1,1,1,1,0],"TR":[1,1,1,1,0],"PO":[1,1,1,1,0],"MT":[1,1,1,1,0]}}],"themeList":[{"id":"Default","name":"Default"},{"id":"HighContrast","name":"HighContrast"},{"id":"WhiteOnBlack","name":"WhiteOnBlack"},{"id":"BlackOnWhite","name":"BlackOnWhite"}]}';
+  var userProfile = '{"userId":"vinit","dataset":"VINIT","securitytokn":"6d976b4e3ef843119dc1b66017160837","branding":"base64ImageData","userTheme":"Default","roles":["ER"],"applications":[{"id":"73b9a516-c0ca-43c0-b0ae-190e08d77bcc","name":"TaxFactory","accessIds":[{"id":"162ebe14-8d87-44e1-a786-c9365c9d5cd8","visible":true}],"permissions":{"TT":[1,1,1,1,0],"CPO":[1,1,1,1,0],"DBC":[1,1,1,1,0],"PT":[1,1,1,1,0],"LR":[1,1,1,1,0],"YA":[1,1,1,1,0],"YB":[1,1,1,1,0],"YC":[1,1,1,1,0],"YD":[1,1,1,1,0],"YE":[1,1,1,1,0],"YF":[1,1,1,1,0],"YG":[1,1,1,1,0],"HW":[1,1,1,1,0],"YH":[1,1,1,1,0],"YI":[1,1,1,1,0],"YJ":[1,1,1,1,0],"YK":[1,1,1,1,0],"QF":[1,1,1,1,0],"MF":[1,1,1,1,0],"AO":[1,1,1,1,0],"UP":[1,1,1,1,0],"UQ":[1,1,1,1,0],"UR":[1,1,1,1,0],"MS":[1,1,1,1,0],"MV":[1,1,1,1,0],"WQF":[1,1,1,1,0],"ET":[1,1,1,1,0],"RB":[1,1,1,1,0],"RO":[1,1,1,1,0],"NX":[1,1,1,1,0],"BT":[1,1,1,1,0],"WM":[0,1,1,1,0],"GC":[1,1,1,1,0],"CB":[1,1,1,1,0],"GF":[1,1,1,1,0],"CC":[0,0,0,0,0],"GG":[1,1,1,1,0],"CF":[1,1,1,1,0],"CGF":[1,1,1,1,0],"OR":[1,1,1,1,0],"CG":[1,1,1,1,0],"PQF":[1,1,1,1,0],"GO":[1,1,1,1,0],"CR":[1,1,1,1,0],"TC":[1,1,1,1,0],"TD":[1,1,1,1,0],"CT":[1,1,1,1,0],"CP":[1,1,1,1,1],"PA":[1,1,1,1,0],"PC":[1,1,1,1,0],"PD":[1,1,1,1,0],"TH":[1,1,1,1,0],"LB":[1,1,1,1,0],"TL":[1,1,1,1,0],"DB":[1,1,1,1,0],"DO":[1,1,1,1,0],"PN":[1,1,1,1,0],"TR":[1,1,1,1,0],"PO":[1,1,1,1,0]}}],"themeList":[{"id":"Default","name":"Default"},{"id":"HighContrast","name":"HighContrast"},{"id":"WhiteOnBlack","name":"WhiteOnBlack"},{"id":"BlackOnWhite","name":"BlackOnWhite"}]}';
   var userdata = JSON.parse(userProfile);
   if (isMock()) {
     let thPerm = [1, 1, 1, 1, 0];
@@ -53,10 +53,15 @@ if (!sessionStorage.getItem("up")) {
 }
 //==============================================================================
 let usrobj = JSON.parse(sessionStorage.getItem("up"));
-let thPerm = [1, 1, 1, 1, 0];
+const thPerm = [1, 1, 1, 1, 0];
 var dataset = usrobj.dataset;
 var userId = usrobj.userId;
-usrobj.applications[0].permissions["MT"] = thPerm;
+let TT_RGTS = usrobj.applications[0].permissions["TT"];
+let TC_RGTS = usrobj.applications[0].permissions["TC"];
+let PC_RGTS = usrobj.applications[0].permissions["PC"];
+if((TT_RGTS && TT_RGTS[0]===1)|| (TC_RGTS && TC_RGTS[0]===1) || (PC_RGTS && PC_RGTS[0]===1)){
+  usrobj.applications[0].permissions["MT"] = thPerm;
+}
 setModulePermissions(usrobj.applications);
 let moduleAreas = buildModuleAreaLinks(usrobj.applications);
 
@@ -365,7 +370,7 @@ var CP_RIGHTS, CT_RIGHTS, CF_RIGHTS, CFC_RIGHTS, WS_RIGHTS, UQ_RIGHTS, ALL_RIGHT
 //************Right & Permissions******************/
 var BT_RIGHTS,CC_RIGHTS,NX_RIGHTS,OR_RIGHTS,UR_RIGHTS,WM_RIGHTS,GC_RIGHTS,GO_RIGHTS,
 PO_RIGHTS,RO_RIGHTS,CG_RIGHTS,GG_RIGHTS,DO_RIGHTS,GF_RIGHTS,CGF_RIGHTS,CPO_RIGHTS,
-PT_RIGHTS,TL_RIGHTS,ET_RIGHTS,AO_RIGHTS,TC_RIGHTS,TT_RIGHTS,PC_RIGHTS,TD_RIGHTS, MT_RIGHTS;
+PT_RIGHTS,TL_RIGHTS,ET_RIGHTS,AO_RIGHTS,TC_RIGHTS,TT_RIGHTS,PC_RIGHTS,TD_RIGHTS,MT_RIGHTS;
 function setBTRights(perm) {
   BT_RIGHTS = setPerms(perm['BT']);
 }
@@ -529,7 +534,7 @@ function hasTDRights() {
   return TD_RIGHTS;
 }
 function setMTRights(perm) {
-  MT_RIGHTS = setPerms(perm['MT']);
+  MT_RIGHTS = setPerms(perm);
 }
 function hasMTRights() {
   return MT_RIGHTS;
@@ -571,10 +576,18 @@ function setModulePermissions(apps) {
           setTTRights(app.permissions);
           setPCRights(app.permissions);
           setTDRights(app.permissions);
-          setMTRights(app.permissions);
+          if((app.permissions.PC && app.permissions.PC[0]=== 1)||(app.permissions.TT && app.permissions.TT[0]=== 1)||(app.permissions.TC && app.permissions.TC[0]=== 1)){
+            setMTRights(thPerm);
+            let TT_RGTS = usrobj.applications[0].permissions["TT"];
+            let TC_RGTS = usrobj.applications[0].permissions["TC"];
+            let PC_RGTS = usrobj.applications[0].permissions["PC"];
+            if((TT_RGTS && TT_RGTS[0]===1)|| (TC_RGTS && TC_RGTS[0]===1) || (PC_RGTS && PC_RGTS[0]===1)){
+              usrobj.applications[0].permissions["MT"] = thPerm;
+            }
+          }
           setCGFRights(app.permissions);
           setCPORights(app.permissions);
-          setAlRights(app.permissions);
+          setAlRights(usrobj.applications[0].permissions);
         }
       });
     }
