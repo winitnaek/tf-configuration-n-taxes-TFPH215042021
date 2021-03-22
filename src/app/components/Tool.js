@@ -12,7 +12,7 @@ class Tool extends Component {
   componentDidMount() {}
 
   render() {
-    const { label, id, title, subTitle, items, toggle} = this.props
+    const { label, id, title, subTitle, items, toggle,showButton} = this.props
     return (
         <Col style={{ maxWidth: "33.3%" }} className='mt-2'>
         <Card>
@@ -33,7 +33,7 @@ class Tool extends Component {
           </ul>
           </CardText>
         </CardBody>
-        <Button size="sm" className="ml-5 mr-5 mb-2" onClick={() => toggle(id, label)}>{label}</Button>
+        {showButton==true ? (<Button size="sm" className="ml-5 mr-5 mb-2" onClick={() => toggle(id, label)}>{label}</Button>):null}
       </Card>
       </Col>
     );
