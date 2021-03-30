@@ -158,6 +158,8 @@ class BatchTest extends Component {
     const { values, uploadResults, type, mode } = this.state;
     const { pgdef } = metaData[pgid];
     const [uploadField, modeField] = fieldData[pgid];
+    let perms = getAllRights();
+    const permission = perms[pgid];
     return (
       <Container>
         <Row>
@@ -245,9 +247,9 @@ class BatchTest extends Component {
               ? <CustomFile {...uploadField} accept='.tst' value={values[uploadField.id]} onChange={this.onFileSelect} />
               : <textarea style={{ marginLeft: '15px'}} rows="4" cols="70" value={this.state.testContent} onChange={(event) => this.setState({ testContent: event.target.value})} />
             }
-              <Button disabled={this.state.loading} style={{ height: "36px", marginLeft: `${this.state.rSelected === 1 ? '44px' : '10px'}`, marginRight: '10px'}} color="primary" onClick={this.onUpload}>
+            {permission && permission.RUN ?(<Button disabled={this.state.loading} style={{ height: "36px", marginLeft: `${this.state.rSelected === 1 ? '44px' : '10px'}`, marginRight: '10px'}} color="primary" onClick={this.onUpload}>
                   Upload <i class="fas fa-cloud-upload-alt"></i>
-              </Button>
+            </Button>):null}
           </div>
         </div>
         </Row>

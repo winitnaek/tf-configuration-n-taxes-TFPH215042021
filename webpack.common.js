@@ -88,6 +88,11 @@ const commonConfig = {
         /* PDF.js build*/ context: "./res/pdfjs/build",
         from: "**/*",
         to: "../dist/pdfjs/build"
+      },
+      {
+        context: "./src/deps/export",
+        from: "**/*",
+        to: "../dist",
       }
     ]),
     new CleanWebpackPlugin(["dist/*.*", "dist/res", "dist/src", "dist/pdfjs"]),

@@ -85,7 +85,15 @@ class MappingTools extends UserDataQueries {
       tftools.forEach(tool => {
         const { value, type, id, label } = tool;
         if (value === "MT" && type !== "page" && mappingTools.tools[id]) {
-          tools.push(Object.assign({ label, id, type, value }, mappingTools.tools[id], { items: res[id] || [] }));
+          let showButton = true;
+          if(id==='mapTaxTypes'){
+            showButton = hasTTRights().VIEW;
+          }else if(id==='mapTaxCodes'){
+            showButton = hasTCRights().VIEW;
+          }else if(id==='mapPaymentCodes'){
+            showButton = hasPCRights().VIEW;
+          }
+          tools.push(Object.assign({ label, id, type, value, showButton }, mappingTools.tools[id], { items: res[id] || [] }));
         }
       });
       this.setState({

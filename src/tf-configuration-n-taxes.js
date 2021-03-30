@@ -53,9 +53,15 @@ if (!sessionStorage.getItem("up")) {
 }
 //==============================================================================
 let usrobj = JSON.parse(sessionStorage.getItem("up"));
-
+const thPerm = [1, 1, 1, 1, 0];
 var dataset = usrobj.dataset;
 var userId = usrobj.userId;
+let TT_RGTS = usrobj.applications[0].permissions["TT"];
+let TC_RGTS = usrobj.applications[0].permissions["TC"];
+let PC_RGTS = usrobj.applications[0].permissions["PC"];
+if((TT_RGTS && TT_RGTS[0]===1)|| (TC_RGTS && TC_RGTS[0]===1) || (PC_RGTS && PC_RGTS[0]===1)){
+  usrobj.applications[0].permissions["MT"] = thPerm;
+}
 setModulePermissions(usrobj.applications);
 let moduleAreas = buildModuleAreaLinks(usrobj.applications);
 
@@ -364,7 +370,7 @@ var CP_RIGHTS, CT_RIGHTS, CF_RIGHTS, CFC_RIGHTS, WS_RIGHTS, UQ_RIGHTS, ALL_RIGHT
 //************Right & Permissions******************/
 var BT_RIGHTS,CC_RIGHTS,NX_RIGHTS,OR_RIGHTS,UR_RIGHTS,WM_RIGHTS,GC_RIGHTS,GO_RIGHTS,
 PO_RIGHTS,RO_RIGHTS,CG_RIGHTS,GG_RIGHTS,DO_RIGHTS,GF_RIGHTS,CGF_RIGHTS,CPO_RIGHTS,
-PT_RIGHTS,TL_RIGHTS,ET_RIGHTS,AO_RIGHTS,TC_RIGHTS,TT_RIGHTS,PC_RIGHTS,TD_RIGHTS;
+PT_RIGHTS,TL_RIGHTS,ET_RIGHTS,AO_RIGHTS,TC_RIGHTS,TT_RIGHTS,PC_RIGHTS,TD_RIGHTS,MT_RIGHTS;
 function setBTRights(perm) {
   BT_RIGHTS = setPerms(perm['BT']);
 }
@@ -527,6 +533,12 @@ function setTDRights(perm) {
 function hasTDRights() {
   return TD_RIGHTS;
 }
+function setMTRights(perm) {
+  MT_RIGHTS = setPerms(perm);
+}
+function hasMTRights() {
+  return MT_RIGHTS;
+}
 function setAlRights(perm) {
   ALL_RIGHTS = perm;
 }
@@ -564,9 +576,18 @@ function setModulePermissions(apps) {
           setTTRights(app.permissions);
           setPCRights(app.permissions);
           setTDRights(app.permissions);
+          if((app.permissions.PC && app.permissions.PC[0]=== 1)||(app.permissions.TT && app.permissions.TT[0]=== 1)||(app.permissions.TC && app.permissions.TC[0]=== 1)){
+            setMTRights(thPerm);
+            let TT_RGTS = usrobj.applications[0].permissions["TT"];
+            let TC_RGTS = usrobj.applications[0].permissions["TC"];
+            let PC_RGTS = usrobj.applications[0].permissions["PC"];
+            if((TT_RGTS && TT_RGTS[0]===1)|| (TC_RGTS && TC_RGTS[0]===1) || (PC_RGTS && PC_RGTS[0]===1)){
+              usrobj.applications[0].permissions["MT"] = thPerm;
+            }
+          }
           setCGFRights(app.permissions);
           setCPORights(app.permissions);
-          setAlRights(app.permissions);
+          setAlRights(usrobj.applications[0].permissions);
         }
       });
     }
@@ -742,6 +763,8 @@ module.exports = hasPCRights;
 window.hasPCRights = hasPCRights;
 module.exports = hasTDRights;
 window.hasTDRights = hasTDRights;
+module.exports = hasMTRights;
+window.hasMTRights = hasMTRights;
 //************Right & Permissions******************/
 module.exports = getAllRights;
 window.getAllRights = getAllRights;
