@@ -343,7 +343,7 @@ export function buildGridInputForPage(pageid, filterData, stDate, enDate, state)
     regPen: filterData.regPen || parentInfo.regPen,
     taxN: filterData.taxN,
     employee: filterData.employeeCode || parentInfo.employeeCode,
-    empGroup: filterData.id || mapUsgeValue
+    empGroup: parentInfo.id || mapUsgeValue
   };
   return input;
 }
@@ -1072,7 +1072,7 @@ function buildGroupOverrideDelete(pageid, formdata, mode, state) {
        
       },
       rescind :  moment(formdata.endDate).format("YYYYMMDD"),
-      overtype : formdata.overrideType,
+      overtype : formdata.overtype,
       amount : formdata.flatAmunt || 0,
       rate : formdata.rate || 0,
      
@@ -1781,7 +1781,7 @@ function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
           }    
         },
         rescind :  moment(formData.endDate).format("YYYYMMDD"),
-        overtype : formData.overrideType,
+        overtype : formData.overtype,
         amount : formData.flatAmunt || 0,
         rate : formData.rate || 0,
         btxovfrs : [ {

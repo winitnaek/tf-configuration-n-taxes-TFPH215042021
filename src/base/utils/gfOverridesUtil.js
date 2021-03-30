@@ -12,14 +12,15 @@ import {setParentData} from '../../app/actions/parentDataActions';
 export function garnishmentFormulaOverrides(pageId, formData,stDate,enDate,state) {
   const mapUsage = localStorage.getItem('mapUsage');
   let parentData = state.parentData;
-  let group = parentData.code ?parentData.code: parentData.garnishmentGroup
-  let groupCode = formData.garnishmentGroup ? formData.garnishmentGroup :group
+  let group = parentData.code ?parentData.code: parentData.garnishmentGroup;
+  let groupCode = formData.garnishmentGroup ? formData.garnishmentGroup :group;
+  let parentInfo = state.parentInfo;
   console.log(state);
   let input = {
     pageId: pageId,
     dataset: appDataset(),
     userId: appUserId(),
-    garnishmentGroupCode: formData.code || groupCode || mapUsage
+    garnishmentGroupCode: parentInfo.code || groupCode || mapUsage
   };
   return input;
 }
@@ -67,11 +68,12 @@ export function buildGarnishmentFormulaOverridesSaveInput(pageid, formdata, edit
     editRec = "true";
   }
   let parentData = state.formFilterData;
-  let gg = parentData.code ?parentData.code: parentData.garnishmentGroup
+  let gg = parentData.code ?parentData.code: parentData.garnishmentGroup;
+  let parentInfo = state.parentInfo;
   let input = {
     dataset: appDataset(),
     userId: appUserId(),
-    garnishmentGroup: formdata.garnishmentGroup ? formdata.garnishmentGroup: gg,
+    garnishmentGroup: parentInfo.code,
     taxCode: formdata.authority.indexOf("BSI")>=0 ? formdata.authority: 'BSI'+formdata.authority,
     userTaxType: null,
     auth: formdata.authority.indexOf("BSI")>=0 ? formdata.authority.substring(3, 11):formdata.authority,
