@@ -11,6 +11,7 @@ import {setParentData} from '../../app/actions/parentDataActions';
  */
 export function buildCustomNexusCompanyDataSaveInput(pageId, formData, editMode, state) {
   const filterFormData = state.formFilterData;
+  let parentInfo = state.parentInfo;
   let authtyCode = 'BSI' + formData.taxCode1;
   if (editMode == 1) {
     authtyCode = 'BSI' + formData.taxCode1;
@@ -22,11 +23,11 @@ export function buildCustomNexusCompanyDataSaveInput(pageId, formData, editMode,
         pageId: pageId,
         dataset:appDataset(),
         userId: appUserId(),
-        company : filterFormData.company,
+        company : parentInfo.company,
         authority1 : authtyCode,
       },  
      
-      nxind : formData.nxind,
+      dcCourtesy : formData.dcCourtesy === "" ? false : formData.dcCourtesy,
       startdate : formData.startdate,
       rescind : moment(formData.rescind).format("MM/DD/YYYY"),
       editMode : editMode
