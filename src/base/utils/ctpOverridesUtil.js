@@ -32,13 +32,14 @@ export function buildCustomTaxPaymentOverrideDelete(pageId, formData, editMode, 
  */
 export function buildCustomTaxPaymentOverrideSaveInput(pageId, formData, editMode, state) {
     const filterFormData = state.formFilterData;
+    let parentInfo = state.parentInfo;
     let input = 
     {
        id : {
         dataset:appDataset(),
         userId: appUserId(),
-        taxcode : filterFormData.taxCode,
-        startdate : formData.startdate,
+        taxcode : parentInfo.taxCode,
+        startdate : moment(formData.startdate).format("MM/DD/YYYY"),
          
        },
           

@@ -248,3 +248,18 @@ export function minMaxAmtrenderer(ndex,
 		return `<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">${rowdata.minAmount + '-' + rowdata.maxAmount}</div>`;
 	}
 }
+
+export function dcCourtesyRenderer(
+	ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+  ) {
+	if (rowdata.dcCourtesy == '1') {
+	  return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">On</div>';
+	} else {
+		return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Off</div>';
+	}
+  }

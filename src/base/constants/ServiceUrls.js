@@ -245,4 +245,8 @@ export const GET_TAX_TYPE_USAGE = '/MappingToolsService/getTaxTypeUsage'
 export const GET_PAYMENT_CODE_USAGE = '/MappingToolsService/getPaymentCodeUsage'
 export const GET_MAPPING_TOOLS_COUNTS='/MappingToolsService/getCountMappingTools'
 export const CONNECT_TO_DATASET_URL = '/DatasetService/connectDataset'
+export const GET_COUNTY_NAME_AUTOCOMPLETE = '/UserDataQueriesService/getAutocomplete'
+export const GET_ADDRESS_PLACE_NAME_AUTOCOMPLETE = '/UserDataQueriesService/getAutocomplete'
+export const GET_ADDRESS_SCHOOL_DISTRICT_AUTOCOMPLETE = '/UserDataQueriesService/getAutocomplete'
+export const DELETE_ALL_PENSION_WHAT_IF_TEST = '/WhatIfService/deleteAllPensionWhatIfEmployees'
 

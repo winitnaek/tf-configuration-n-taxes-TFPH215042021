@@ -48,7 +48,7 @@ class ButtonBar extends Component {
       <i class="fas fa-pencil-alt fa-lg fa-1x"></i> Update Preferred Status
       </Button>
     );
-    if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionsBenefit' || this.props.pageid==='taxLocator'){ 
+    if(this.props.pageid==='whatifEmp' || this.props.pageid==='whatifDeductionsBenefit' || this.props.pageid==='taxLocator' || this.props.pageid==='pensionWhatIfTest' ){ 
       //whatifEmp && whatifDeductionsBenefit && taxLocator
       taxLocator=null;
       calculateTaxes=null;

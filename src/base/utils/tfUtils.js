@@ -344,7 +344,7 @@ export function buildGridInputForPage(pageid, filterData, stDate, enDate, state)
     regPen: filterData.regPen || parentInfo.regPen,
     taxN: filterData.taxN,
     employee: filterData.employeeCode || parentInfo.employeeCode,
-    empGroup: filterData.id || mapUsgeValue
+    empGroup: parentInfo.id || mapUsgeValue
   };
   return input;
 }
@@ -726,6 +726,41 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
     return input;
   }
 
+  if(pageid === "countyName") {
+    input = {
+      pageId: "counties", 
+      dataset: appDataset(),
+      userId: appUserId(),
+      state: patten
+
+    }
+    return input;
+  }
+
+  if(pageid === "placeName") {
+    input = {
+      pageId: "placeCode", 
+      dataset: appDataset(),
+      userId: appUserId(),
+      state: formValues.state,
+      // countyName: formValues.countyName,
+      countyName: "WYANDOT",
+      pattern: patten 
+    }
+    return input;
+  }
+
+  if(pageid === "sdName") {
+    input = {
+      pageId: "schoolDistrict", 
+      dataset: appDataset(),
+      userId: appUserId(),
+      state: formValues.state,
+      pattern: patten 
+    }
+    return input;
+  }
+
   if(pageid === "pensionFormula") {
     input = {
       pageId: pageid, 
@@ -1053,30 +1088,31 @@ function buildGroupOverrideDelete(pageid, formdata, mode, state) {
   const {
     formFilterData
   } = state;
+  let parentInfo = state.parentInfo;
   return {
-    "btxover" : {
-      "id" : {
+    btxover : {
+      id : {
         dataset : appDataset(),
         userID : appUserId(),
-        empgroup : formFilterData.id,
+        empgroup : parentInfo.id,
         taxcode : formdata.taxCode,
         taxtype : formdata.code,
         formula : formdata.formula,
         startdate : moment(formdata.startDate).format("YYYYMMDD"),
-        resident : false
+        "resident" : false
       },
-      "btxtaxt" : {
+      btxtaxt : {
         taxtype : formdata.code,
       },
-      "btxtaxc" : {
-        "id" : null,
-        "btxauth" : {
+      btxtaxc : {
+        id : null,
+        btxauth : {
           bsiauth : formdata.taxCode,
         }   
        
       },
       rescind :  moment(formdata.endDate).format("YYYYMMDD"),
-      overtype : formdata.overrideType,
+      overtype : formdata.overtype,
       amount : formdata.flatAmunt || 0,
       rate : formdata.rate || 0,
      
@@ -1177,6 +1213,7 @@ export function buildDeleteAllInput(pageid, store, formdata, mode) {
   }else{
     return {
       dataset: appDataset(),
+      pageId: pageid
     }
   }
 }
@@ -1763,13 +1800,14 @@ export function buildTaxLocatorSaveInput(pageId, formData, editMode) {
 
 function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
   const filterFormData = state.formFilterData;
+  let parentInfo = state.parentInfo;
 
   return {
-      "btxover" : {
-        "id" : {
+      btxover : {
+        id : {
           dataset : appDataset(),
           userID : appUserId(),
-          empgroup : filterFormData.id,
+          empgroup : parentInfo.id,
           taxcode : `BSI${formData.authority}`,
           taxtype : formData.taxType,
           formula : formData.formulaTitle,
@@ -1778,14 +1816,14 @@ function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
         btxtaxt : {
           taxtype : formData.taxType,
         },
-        "btxtaxc" : {
-          "id" : null,
+        btxtaxc : {
+          id : null,
           btxauth : {
             bsiauth : formData.authority,
           }    
         },
         rescind :  moment(formData.endDate).format("YYYYMMDD"),
-        overtype : formData.overrideType,
+        overtype : formData.overtype,
         amount : formData.flatAmunt || 0,
         rate : formData.rate || 0,
         btxovfrs : [ {
@@ -1810,7 +1848,7 @@ function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
         } ]
       },
       editMode : 1,
-      residency : formData.residentType
+      residency : formData.residency
     }
 }
 
