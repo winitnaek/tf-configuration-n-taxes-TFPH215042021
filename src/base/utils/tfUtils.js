@@ -1871,6 +1871,35 @@ export function buildWorkSiteSaveInput(pageid, formdata, editmode, state) {
   }
 }
 
+export function buildCustomPaymentSaveInput(pageid, formdata, editMode, state) {
+  let input = {
+    pageId: pageid,
+    dataset: appDataset(),
+    userId: appUserId(),
+    payCode: formdata.userCode,
+    payType: formdata.payType,
+    payName: formdata.name,
+    e_taxability:formdata.e_taxability,
+    e_maxLimit:(formdata.e_taxability === "100" || formdata.e_taxability === "101" || formdata.e_taxability === "102") ? formdata.eemax : formdata.e_taxability ,
+    editMode: editMode
+  };
+  let formValues = {};
+  if (formdata.payType && formdata.payType === "E") {
+    formValues = {
+      e_taxability:formdata.e_taxability,
+      e_maxLimit:(formdata.e_taxability === "100" || formdata.e_taxability === "101" || formdata.e_taxability === "102") ? formdata.eemax : formdata.e_taxability ,
+    };
+  } else {
+    formValues = {
+      p_aggStatus:formdata.aggregationStatus,
+      p_taxability: formdata.e_taxability,
+      p_maxLimit: formdata.eemax,
+      er_taxability: formdata.employerTaxability == null ? "0" : formdata.employerTaxability ,
+    };
+  }
+  return Object.assign(input, formValues);
+}
+
 export function buildSaveInputForPage(pageid, formdata, editMode, state) {
   if (pageid === "wageDetails") {
     return buildWhatifWageSaveInput(pageid, formdata, editMode, state);
@@ -1924,6 +1953,8 @@ export function buildSaveInputForPage(pageid, formdata, editMode, state) {
     return buildMapTaxTypeSaveInput(pageid, formdata, editMode, state);
   } else if (pageid === "mapPaymentCode") {
     return buildMapPaymentCodeSaveInput(pageid, formdata, editMode, state);
+  } else if (pageid === "customPayments") {
+    return buildCustomPaymentSaveInput(pageid, formdata, editMode, state);
   } else {
     return buildOtherSaveInput(pageid, formdata, editMode);
   }
@@ -1947,7 +1978,6 @@ function buildOtherSaveInput(pageid, formdata, editMode) {
     p_taxability: formdata.e_taxability,
     p_maxLimit: formdata.eemax,
     e_taxability:formdata.e_taxability,
-    e_maxLimit:(formdata.e_taxability === "100" || formdata.e_taxability === "101" || formdata.e_taxability === "102") ? formdata.eemax : formdata.e_taxability ,
     taxCode: formdata.taxCode,
     taxName: formdata.name,
     calcMethod: formdata.cmName,
