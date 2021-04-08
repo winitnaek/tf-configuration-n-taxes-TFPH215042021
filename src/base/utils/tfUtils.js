@@ -1118,6 +1118,7 @@ function buildGroupOverrideDelete(pageid, formdata, mode, state) {
      
     },
     formulaTitle : formdata.formulaTitle,
+    residency : formdata.residency
   }
 }
 
@@ -1531,11 +1532,11 @@ function buildPaymentOverrideSaveInput(pageid, formdata, editMode, state) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    code: formdata.groupCode,
-    authority: formdata.authTaxCode,
+    code: state.parentInfo.id,
+    authority: `BSI${formdata.authTaxCode}`,
     taxCode: formdata.authTaxCode.substring(3, 11),
     taxType: formdata.taxType,
-    payCode: formdata.planId,
+    payCode: (formdata.planId || "").split('-')[0],
     type: formdata.payType,
     startDate: moment(formdata.startDate).format("MM/DD/YYYY"),
     endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
@@ -1831,24 +1832,25 @@ function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
             empgroup : filterFormData.id,
             taxcode : `BSI${formData.authority}`,
             taxtype : formData.taxType,
-            formula : formData.formulaTitle,
+            formula : formData.regularFormula || formData.cumulativeFormula || formData.supplementalFormula || formData.vacationFormula,
             startdate : moment(formData.startDate).format("YYYYMMDD"),
-            resident : true,
+            resident : formData.residency === 'N' ? false : true,
             paytype : formData.paymentType || 0
           },
           btxover : null,
-          "calcmeth" : 14,
-          "ovfrtax" : 0.05,
-          "ovfrmaxw" : 51.0,
-          "ovfrminw" : 520.0,
-          "ovfrmaxt" : 535.0,
-          "ovfrflat" : 5455.0,
-          "ovfrround" : 1,
+          calcmeth : formData.calculationMethod,
+          ovfrtax : formData.taxRate,
+          "ovfrmaxw" : formData.maximumWage,
+          "ovfrminw" : formData.minimumWage,
+          "ovfrmaxt" : formData.maximumTax,
+          ovfrflat : formData.flatAmount,
+          ovfrround : formData.roundingMethod,
           "rescind" : null
         } ]
       },
       editMode : 1,
-      residency : formData.residency
+      residency : formData.residency,
+      formulaTitle: formData.formulaTitle
     }
 }
 
@@ -1942,10 +1944,10 @@ function buildOtherSaveInput(pageid, formdata, editMode) {
     payName: formdata.name,
     er_taxability: formdata.employerTaxability,
     p_aggStatus:formdata.aggregationStatus,
-    p_taxability: formdata.taxability,
+    p_taxability: formdata.e_taxability,
     p_maxLimit: formdata.eemax,
-    e_taxability:formdata.taxability,
-    e_maxLimit:formdata.eemax ,
+    e_taxability:formdata.e_taxability,
+    e_maxLimit:(formdata.e_taxability === "100" || formdata.e_taxability === "101" || formdata.e_taxability === "102") ? formdata.eemax : formdata.e_taxability ,
     taxCode: formdata.taxCode,
     taxName: formdata.name,
     calcMethod: formdata.cmName,
