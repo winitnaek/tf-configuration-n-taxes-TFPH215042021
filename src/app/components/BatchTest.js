@@ -159,7 +159,7 @@ class BatchTest extends Component {
     const { pgdef } = metaData[pgid];
     const [uploadField, modeField] = fieldData[pgid];
     let perms = getAllRights();
-    const permission = perms[pgid];
+    const permission = hasBTRights();
     return (
       <Container>
         <Row>
