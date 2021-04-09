@@ -1099,7 +1099,7 @@ function buildGroupOverrideDelete(pageid, formdata, mode, state) {
         taxtype : formdata.code,
         formula : formdata.formula,
         startdate : moment(formdata.startDate).format("YYYYMMDD"),
-        "resident" : false
+        "resident" : true
       },
       btxtaxt : {
         taxtype : formdata.code,
@@ -1810,6 +1810,7 @@ function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
           userID : appUserId(),
           empgroup : parentInfo.id,
           taxcode : `BSI${formData.authority}`,
+          resident : formData.residency === 'N' ? false : true,
           taxtype : formData.taxType,
           formula : formData.formulaTitle,
           startdate : moment(formData.startDate).format("YYYYMMDD"),
@@ -1832,7 +1833,7 @@ function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
             empgroup : filterFormData.id,
             taxcode : `BSI${formData.authority}`,
             taxtype : formData.taxType,
-            formula : formData.regularFormula || formData.cumulativeFormula || formData.supplementalFormula || formData.vacationFormula,
+            formula : formData.regularFormula || formData.cumulativeFormula || formData.supplementalFormula || formData.vacationFormula || '0',
             startdate : moment(formData.startDate).format("YYYYMMDD"),
             resident : formData.residency === 'N' ? false : true,
             paytype : formData.paymentType || 0
@@ -1843,7 +1844,7 @@ function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
           "ovfrmaxw" : formData.maximumWage,
           "ovfrminw" : formData.minimumWage,
           "ovfrmaxt" : formData.maximumTax,
-          ovfrflat : formData.flatAmount,
+          ovfrflat : formData.flatAmount || '0',
           ovfrround : formData.roundingMethod,
           "rescind" : null
         } ]

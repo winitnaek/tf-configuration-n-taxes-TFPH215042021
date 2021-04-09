@@ -92,7 +92,7 @@ export function buildMapTaxCodeSaveInput(pageId, formData, editMode, state) {
     bsiAuth: parentInfo.bsiCode,
     name: parentInfo.name,
     taxCode: formData.taxCode,
-    locReturn: formData.locReturn  ? "Y" : "" 
+    locReturn: formData.preferred == true  ? "Y" : "" 
    };
   return input;
 }
