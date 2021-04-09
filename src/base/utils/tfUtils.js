@@ -329,7 +329,7 @@ export function buildGridInputForPage(pageid, filterData, stDate, enDate, state)
     courtesy: filterData.courtesy,
     authCode: getAuthCode(filterData),
     garnishmentGroupCode: filterData.garnishmentGroupCode,
-    groupCode: getGroupcode(filterData) || mapUsgeValue,
+    groupCode: getGroupcode(filterData) || mapUsgeValue || parentInfo.id,
     exemptStat: filterData.exemptionStatus,
     customTaxCode: filterData.customTaxCode === "ALL" ? "" : filterData.customTaxCode,
     pmtUsrCode: getPmtUsrCode(filterData),
@@ -505,7 +505,7 @@ function paymentOverrideGridInput(pageid, filterData, stDate, enDate, state) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    groupCode: filterData.id || state.formFilterData.groupCode || mapUsage
+    groupCode: filterData.id || state.formFilterData.groupCode || mapUsage || state.parentInfo.id
   };
   return input;
 }
@@ -743,8 +743,7 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       dataset: appDataset(),
       userId: appUserId(),
       state: formValues.state,
-      // countyName: formValues.countyName,
-      countyName: "WYANDOT",
+      countyName: formValues.countyName.substring(formValues.countyName.indexOf('(') + 1 , formValues.countyName.length - 1),
       pattern: patten 
     }
     return input;
@@ -1010,7 +1009,7 @@ function buildPaymentOverrideDelete(pageid, formdata, editMode, state) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    code: state.formFilterData.id,
+    code: state.formFilterData.id || state.parentInfo.id,
     authority: formdata.authTaxCode,
     taxCode: formdata.authTaxCode.substring(3, 11),
     taxType: formdata.taxType,
@@ -1533,22 +1532,22 @@ function buildPaymentOverrideSaveInput(pageid, formdata, editMode, state) {
     dataset: appDataset(),
     userId: appUserId(),
     code: state.parentInfo.id,
-    authority: `BSI${formdata.authTaxCode}`,
-    taxCode: formdata.authTaxCode.substring(3, 11),
+    authority: editMode == 1 ? `BSI${formdata.authTaxCode}` : formdata.authTaxCode,
+    taxCode: formdata.authTaxCode,
     taxType: formdata.taxType,
-    payCode: (formdata.planId || "").split('-')[0],
-    type: formdata.payType,
+    payCode: formdata.planId,
+    type: formdata.planId.substr(3,1),
     startDate: moment(formdata.startDate).format("MM/DD/YYYY"),
     endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
     ee_Max: formdata.eeMaxAmount,
     editMode: editMode,
   };
   let formValues = {};
-  if (formdata.payType && formdata.payType === "E") {
+  if (formdata.planId.substr(3,1) && formdata.planId.substr(3,1) === "E") {
     formValues = {
-      ee_Max: formdata.eeMaxAmount,
-      taxability: formdata.taxability,
-      aggStatus: formdata.aggStatus
+      ee_Max: formdata.earn_eeMaxAmount,
+      taxability: formdata.earn_taxability,
+      aggStatus: formdata.aggStatus || 'L'
     };
   } else {
     formValues = {
