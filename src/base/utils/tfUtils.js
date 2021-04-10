@@ -492,6 +492,14 @@ export function buildUsageGridDataInput(pageid, store,item) {
       userId: appUserId(),
       companyCode:item.code 
     };
+  }else if(pageid==='reciprocalOverride' || pageid==='groupOverride'){
+    input = {
+      pageId: pageid,
+      dataset: appDataset(),
+      userId: appUserId(),
+      empGroup:item.code,
+      groupCode:item.code
+    }
   }
   return input;
 }
