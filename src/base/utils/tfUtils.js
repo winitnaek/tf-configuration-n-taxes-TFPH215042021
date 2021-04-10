@@ -500,6 +500,14 @@ export function buildUsageGridDataInput(pageid, store,item) {
       empGroup:item.code,
       groupCode:item.code
     }
+  }else if(pageid==='customTaxFormulas' || pageid==='customTaxPaymentOverride' || pageid==='disposableRateOverrides' || pageid==='garnishmentFormulasOverride' || pageid==='customGarnishmentFormulas'){
+    input = {
+      pageId: pageid,
+      dataset: appDataset(),
+      userId: appUserId(),
+      taxCode:item.code,
+      taxName:item.code
+    }
   }
   return input;
 }
