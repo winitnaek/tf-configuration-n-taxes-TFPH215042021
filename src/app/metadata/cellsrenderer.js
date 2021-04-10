@@ -257,9 +257,43 @@ export function dcCourtesyRenderer(
 	column,
 	rowdata
   ) {
-	if (rowdata.dcCourtesy == '1') {
+	if (rowdata.dcCourtesy == true) {
 	  return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">On</div>';
 	} else {
 		return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Off</div>';
+	}
+  }
+
+  export function residencyRenderer(
+	ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+  ) {
+	if (rowdata.residency === "R") {
+	  return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Resident</div>';
+	} else if (rowdata.residency === "N") {
+		return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Non Resident</div>';
+	}
+  }
+
+  export function overtypeRenderer(
+	ndex,
+	datafield,
+	value,
+	defaultvalue,
+	column,
+	rowdata
+  ) {
+	if (rowdata.overtype === "R") {
+	  return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Rate Only</div>';
+	} else if (rowdata.overtype === "F") {
+		return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Formula</div>';
+	} else if (rowdata.overtype === "A") {
+		return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Adjustment</div>';
+	} else if (rowdata.overtype === "T") {
+		return '<div style="text-align:left;padding-top:5px;padding-left:3px" class="align-self-center align-middle">Additional</div>';
 	}
   }

@@ -28,7 +28,7 @@ export function buildCustomNexusCompanyDataSaveInput(pageId, formData, editMode,
       },  
      
       dcCourtesy : formData.dcCourtesy === "" ? false : formData.dcCourtesy,
-      startdate : formData.startdate,
+      startdate : moment( formData.startdate).format("MM/DD/YYYY"),
       rescind : moment(formData.rescind).format("MM/DD/YYYY"),
       editMode : editMode
  };
