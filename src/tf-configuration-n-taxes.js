@@ -28,7 +28,8 @@ import {
   compPermissions,
   buildGridDataInput,
   decorateData,
-  formatFieldData
+  formatFieldData,
+  buildUsageGridDataInput
 } from "./base/utils/tfUtils";
 import { setModuleAreas } from "./app/home/actions/moduleLinksActions";
 import CustomGrid from "./app/components/CustomGrid";
@@ -194,6 +195,78 @@ function renderComponent(elem, pageid, pid) {
         griddatanew = griddatanew[0];
       }
       
+      ReactDOM.render(
+        <Provider store={store}>
+          <Fragment>
+            {!isSingleTable ? (
+              griddatanew.map((data, key) => (
+                <CustomGrid
+                  pageid={pageid}
+                  metadata={compMetaData(pageid, key)}
+                  pid={pid}
+                  permissions={compPermissions}
+                  griddata={data}
+                  help={openHelp}
+                  gridProps={gridProps}
+                  fieldData={fieldDataX}
+                  className={key !== 0 ? "mt-3" : ""}
+                  getDataForChildGrid={getGridData}
+                />
+              ))
+            ) : (
+              <CustomGrid
+                pageid={pageid}
+                metadata={compMetaData(pageid)}
+                pid={pid}
+                permissions={compPermissions}
+                griddata={griddatanew}
+                help={openHelp}
+                gridProps={gridProps}
+                fieldData={fieldDataX}
+                getDataForChildGrid={getGridData}
+              />
+            )}
+          </Fragment>
+        </Provider>,
+        document.querySelector("#" + elem)
+      );
+      // }
+    });
+}
+
+/**
+ * renderUsageComponent
+ * @param {*} elem
+ */
+function renderUsageComponent(elem, pageid, pid,item) {
+  ReactDOM.unmountComponentAtNode(document.querySelector("#" + elem));
+  showPrgress(elem);
+  let gridInput = buildUsageGridDataInput(pageid, store,item);
+
+  const state = store.getState();
+  const dispatch = store.dispatch;
+
+  const renderGrid = renderTFConfigNTaxes;
+  const gridProps = {
+    state,
+    dispatch,
+    closeForm,
+    setFormData,
+    setFilterFormData,
+    renderGrid
+  };
+
+  griddataAPI
+    .getGridData(pageid, gridInput)
+    .then(response => response)
+    .then(griddata => {
+      const metaData = getMetaData(pageid);
+      let griddatanew = decorateData(griddata, pageid);
+      const fieldDataX = formatFieldData(fieldData[pageid], pageid, appUserId());
+      const isSingleTable = !(metaData instanceof Array);
+      if (isSingleTable && griddatanew[0] instanceof Array) {
+        griddatanew = griddatanew[0];
+      }
       ReactDOM.render(
         <Provider store={store}>
           <Fragment>
@@ -701,6 +774,9 @@ const unMountNMountContainerNode = () => {
 
 module.exports = renderTFConfigNTaxes;
 window.renderTFConfigNTaxes = renderTFConfigNTaxes;
+
+module.exports = renderUsageComponent;
+window.renderUsageComponent = renderUsageComponent;
 
 module.exports = appDataset;
 window.appDataset = appDataset;

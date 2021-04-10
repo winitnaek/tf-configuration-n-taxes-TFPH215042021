@@ -477,6 +477,25 @@ export function buildGridDataInput(pageid, store) {
   return input;
 }
 /**
+ * buildGridDataInput
+ * @param {*} pageid
+ * @param {*} store
+ */
+export function buildUsageGridDataInput(pageid, store,item) {
+  let state = store.getState();
+  console.log(state);
+  let input;
+  if (pageid === 'unemploymentCompanyOverrides' || pageid === 'customNexusCompanyData') {
+    input = {
+      pageId: pageid,
+      dataset: appDataset(),
+      userId: appUserId(),
+      companyCode:item.code 
+    };
+  }
+  return input;
+}
+/**
  * paymentOverridesGridInput
  * @param {*} pageid 
  * @param {*} filterData 
@@ -882,7 +901,7 @@ export function buildUsageDataInput(pageid, store, formdata, mode) {
 }
 export function getUsageCode(formdata) {
   if (formdata && formdata.id) {
-    return formdata.company;
+    return formdata.id;
   } else if (formdata && formdata.code) {
     return formdata.code;
   }
