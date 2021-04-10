@@ -492,7 +492,7 @@ export function buildUsageGridDataInput(pageid, store,item) {
       userId: appUserId(),
       companyCode:item.code 
     };
-  }else if(pageid==='reciprocalOverride' || pageid==='groupOverride'){
+  }else if(pageid==='reciprocalOverride' || pageid==='groupOverride' || pageid==='paymentOverride'){
     input = {
       pageId: pageid,
       dataset: appDataset(),
