@@ -762,7 +762,8 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       dataset: appDataset(),
       userId: appUserId(),
       state: formValues.state,
-      countyName: formValues.countyName.substring(formValues.countyName.indexOf('(') + 1 , formValues.countyName.length - 1),
+      countyName: formValues.countyName,
+      // countyName: formValues.countyName.substring(formValues.countyName.indexOf('(') + 1 , formValues.countyName.length - 1),
       pattern: patten 
     }
     return input;
@@ -1117,7 +1118,7 @@ function buildGroupOverrideDelete(pageid, formdata, mode, state) {
         taxtype : formdata.code,
         formula : formdata.formula,
         startdate : moment(formdata.startDate).format("YYYYMMDD"),
-        "resident" : true
+        resident : formdata.residency === 'N' ? false : true
       },
       btxtaxt : {
         taxtype : formdata.code,
@@ -1602,29 +1603,29 @@ function buildAddressOverridesSaveInput(pageid, formdata, editMode, state) {
     streetName: formdata.fname,
     state: formdata.state,
     countyName: formdata.countyName,
-    placeCode: formdata.placeCode,
+    placeCode: formdata.placeName,
     sdName: formdata.sdName,
     postDirection: formdata.fpost,
     startNumber: formdata.fadd,
     endNumber: formdata.tadd,
     snt: formdata.snt,
     secUnit: formdata.sunit,
-    placesCode: formdata.placeCode,
+    placesCode: formdata.placeName,
     parity: formdata.parity,
     addChangeDate: moment().format("YYYYMMDD"),
     streetType: formdata.ftype,
     preDirection: formdata.fpre,
     showMessage: formdata.showmsg,
     sdCountyName: "FAIRFIELD",
-    taxCode: "BSI00391899",
-    county: "175",
-    placeName: "WYANDOT",
+    taxCode: formdata.sdName || "",
+    county: formdata.countyName,
+    placeName: formdata.placeName,
     classCode: formdata.classCode,
     postalCode: formdata.fzip,
-    placeCodeAutoCompl: "U6 | 86716 | WYANDOT",
-    classesCode: formdata.classCode,
+    placeCodeAutoCompl: formdata.placeName,
+    classesCode: formdata.classCode || "",
     placesName: "",
-    schoolDistrictAutoCompl: "AMANDA-CLEARCREEK LSD | BSI00391899 | FAIRFIELD",
+    schoolDistrictAutoCompl: formdata.sdName,
     sdCode: "",
     schooldistrictCode: "",
     schooldistrictName: "",
@@ -1827,19 +1828,19 @@ function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
           dataset : appDataset(),
           userID : appUserId(),
           empgroup : parentInfo.id,
-          taxcode : `BSI${formData.authority}`,
+          taxcode : editMode == 1 ?`BSI${formData.authority}`  : formData.taxCode,
           resident : formData.residency === 'N' ? false : true,
-          taxtype : formData.taxType,
-          formula : formData.formulaTitle,
+          taxtype : editMode == 1 ? formData.taxType : formData.code,
+          formula : editMode == 1 ? formData.formulaTitle : formData.formula,
           startdate : moment(formData.startDate).format("YYYYMMDD"),
         },
         btxtaxt : {
-          taxtype : formData.taxType,
+          taxtype : editMode == 1 ? formData.taxType : formData.code,
         },
         btxtaxc : {
           id : null,
           btxauth : {
-            bsiauth : formData.authority,
+            bsiauth : editMode == 1 ? formData.authority : formData.taxCode.substring(3,11),
           }    
         },
         rescind :  moment(formData.endDate).format("YYYYMMDD"),
@@ -1849,27 +1850,27 @@ function buildGroupOverrideSaveInput(pageid, formData, editMode, state) {
         btxovfrs : [ {
           id : {
             empgroup : filterFormData.id,
-            taxcode : `BSI${formData.authority}`,
-            taxtype : formData.taxType,
-            formula : formData.regularFormula || formData.cumulativeFormula || formData.supplementalFormula || formData.vacationFormula || '0',
+            taxcode : editMode == 1 ?`BSI${formData.authority}`  : formData.taxCode,
+            taxtype : editMode == 1 ? formData.taxType : formData.code,
+            formula : editMode == 1 ? formData.formulaTitle : formData.formula,
             startdate : moment(formData.startDate).format("YYYYMMDD"),
             resident : formData.residency === 'N' ? false : true,
             paytype : formData.paymentType || 0
           },
           btxover : null,
-          calcmeth : formData.calculationMethod,
-          ovfrtax : formData.taxRate,
-          "ovfrmaxw" : formData.maximumWage,
-          "ovfrminw" : formData.minimumWage,
-          "ovfrmaxt" : formData.maximumTax,
+          calcmeth : formData.calculationMethod || '0',
+          ovfrtax : formData.taxRate || '0',
+          "ovfrmaxw" : formData.maximumWage || '0',
+          "ovfrminw" : formData.minimumWage || '0',
+          "ovfrmaxt" : formData.maximumTax || '0',
           ovfrflat : formData.flatAmount || '0',
-          ovfrround : formData.roundingMethod,
+          ovfrround : formData.roundingMethod || '0',
           "rescind" : null
         } ]
       },
-      editMode : 1,
+      editMode : editMode,
       residency : formData.residency,
-      formulaTitle: formData.formulaTitle
+      formulaTitle: editMode == 1 ? formData.formulaTitle : formData.formula
     }
 }
 
