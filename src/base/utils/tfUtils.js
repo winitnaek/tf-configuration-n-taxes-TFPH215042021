@@ -987,13 +987,14 @@ export function buildwhatifLocationsDelete(pageid, formdata, editMode, state) {
 
 export function buildReciprocalOverrideDelete(pageid, formdata, editMode, state) {
   const {
-    formFilterData
+    formFilterData,
+    parentInfo
   } = state;
   return {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    emplGroup: formFilterData.id,
+    emplGroup: parentInfo.id,
     startDate: formdata.startDate,
     resTaxCode: formdata.resAuthDisplay.split('\n')[0],
     resAuth: formdata.resAuth,
