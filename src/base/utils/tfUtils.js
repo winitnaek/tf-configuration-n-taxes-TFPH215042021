@@ -1761,6 +1761,11 @@ if(editMode === 2) {
     editMode,
 }
 } else {
+  let resTaxCode1 = formdata.taxCodeToBeOverridden || formdata.taxCodeToBeOverriddenlocal;
+  resTaxCode1 = resTaxCode1.indexOf("BSI")>=0 ? resTaxCode1: 'BSI'+resTaxCode1;
+  let nonResTaxCode1 = formdata.taxCodeToReciprocate || formdata.taxCodeToReciprocatelocal;
+  nonResTaxCode1 = nonResTaxCode1.indexOf("BSI")>=0 ? nonResTaxCode1: 'BSI'+nonResTaxCode1;
+  let cm = (formdata.calculationMethod && formdata.calculationMethod.length==1  ? formdata.calculationMethod:formdata.calculationMthd) || formdata.calculationMthd;
   return {
     pageId: pageid,
     dataset: appDataset(),
@@ -1768,16 +1773,16 @@ if(editMode === 2) {
     emplGroup: filterFormData.id,
     ovrType: formdata.ovrType,
     startDate: moment(formdata.startDate).format("MM/DD/YYYY"), 
-    resTaxCode: formdata.taxCodeToBeOverridden || formdata.taxCodeToBeOverriddenlocal,
+    resTaxCode: resTaxCode1,
     resAuth:  formdata.taxCodeToBeOverridden || formdata.taxCodeToBeOverriddenlocal,
     resOvrFltr:"0",
     resTaxType:formdata.residentTaxType || formdata.residentTaxTypelocal,
-    nonResTaxCode: formdata.taxCodeToReciprocate || formdata.taxCodeToReciprocatelocal,
+    nonResTaxCode: nonResTaxCode1,
     nonResAuth: formdata.taxCodeToReciprocate || formdata.taxCodeToReciprocatelocal,
     nonResOvrFltr:"0",
     nonResTaxType: formdata.nonresidentTaxType || formdata.nonresidentTaxTypelocal,
     endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
-    "method": formdata.calculationMethod || formdata.calculationMthd,
+    method: cm,
     rate: formdata.rate,
     calcMsg: editMode === 2 ? (formdata.calcMsgDisplay === "N" ? "false": "true") : formdata.showcalcmesg,
     wgRpt: formdata.wageReportingMethod,
