@@ -324,6 +324,9 @@ class CustomGrid extends Component {
       abody:message
     });
   }
+  renderUsageData(pageContainer, data,item){
+    renderUsageComponent("pageContainer", data.id,data.value,item);
+  }
   clickCheckBox(event) {
     this.setState({
       showSummary: event.target.value === "on",
@@ -406,6 +409,7 @@ class CustomGrid extends Component {
           fillParentInfo={populateParentData}
           showActionMessage={this.showActionMessage}
           updateDataSet={this.updateDataSet}
+          renderUsageData={this.renderUsageData}
         />
         {griddef.hasButtonBar && griddef.hasButtonBar == true ? (
           <ButtonBar
@@ -463,6 +467,7 @@ class CustomGrid extends Component {
                     fillParentInfo={this.populateParentData}
                     showActionMessage={this.showActionMessage}
                     updateDataSet={this.updateDataSet}
+                    renderUsageData={this.renderUsageData}
                   />
                 ) : null}
               </Col>
