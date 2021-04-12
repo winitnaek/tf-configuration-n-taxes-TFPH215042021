@@ -708,7 +708,7 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
   let input;
   if(pageid === "residentTaxTypelocal" || pageid === "residentTaxType" || pageid === "nonresidentTaxType" || pageid === "nonresidentTaxTypelocal") {
     input = {
-        authCode: patten[0].authId
+        authCode: patten[0].authId || formValues.resAuth
     }
 
     return input;
@@ -731,7 +731,7 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       pageId: "counties", 
       dataset: appDataset(),
       userId: appUserId(),
-      state: patten
+      state: formValues.state || patten
 
     }
     return input;
@@ -1584,29 +1584,29 @@ function buildAddressOverridesSaveInput(pageid, formdata, editMode, state) {
     streetName: formdata.fname,
     state: formdata.state,
     countyName: formdata.countyName,
-    placeCode: formdata.placeName,
-    sdName: formdata.sdName,
+    placeCode: editMode == 1 ? formdata.placeName: formdata.classCode,
+    sdName: editMode == 1 ? formdata.sdName : formdata.schoolDistrictTaxCode,
     postDirection: formdata.fpost,
-    startNumber: formdata.fadd,
-    endNumber: formdata.tadd,
+    startNumber: formdata.fadd || formdata.alphaNumericStartingNumber,
+    endNumber: formdata.tadd || formdata.alphaNumericEndingNumber,
     snt: formdata.snt,
     secUnit: formdata.sunit,
-    placesCode: formdata.placeName,
+    placesCode: editMode == 1 ? formdata.placeName: formdata.classCode,
     parity: formdata.parity,
     addChangeDate: moment().format("YYYYMMDD"),
     streetType: formdata.ftype,
     preDirection: formdata.fpre,
     showMessage: formdata.showmsg,
     sdCountyName: "FAIRFIELD",
-    taxCode: formdata.sdName || "",
+    taxCode: editMode == 1 ? formdata.sdName : formdata.schoolDistrictTaxCode,
     county: formdata.countyName,
-    placeName: formdata.placeName,
-    classCode: formdata.classCode,
+    placeName: editMode == 1 ? formdata.placeName: formdata.classCode,
+    classCode: formdata.placeName,
     postalCode: formdata.fzip,
-    placeCodeAutoCompl: formdata.placeName,
+    placeCodeAutoCompl: editMode == 1 ? formdata.placeName: formdata.classCode,
     classesCode: formdata.classCode || "",
     placesName: "",
-    schoolDistrictAutoCompl: formdata.sdName,
+    schoolDistrictAutoCompl: editMode == 1 ? formdata.sdName : formdata.schoolDistrictTaxCode,
     sdCode: "",
     schooldistrictCode: "",
     schooldistrictName: "",
