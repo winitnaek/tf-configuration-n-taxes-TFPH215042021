@@ -1737,12 +1737,13 @@ function buildwhatifLocationsSaveInput(pageid, formdata, editMode, state) {
 
 function buildReciprocalOverrideSaveInput(pageid, formdata, editMode, state) {
   const filterFormData = state.formFilterData;
+  const parentInfo = state.parentInfo;
 if(editMode === 2) {
   return {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    emplGroup: filterFormData.id,
+    emplGroup: filterFormData.id ? filterFormData.id: parentInfo.id,
     ovrType: formdata.ovrType,
     startDate: moment(formdata.startDate).format("MM/DD/YYYY"), 
     resTaxCode: formdata.resAuthDisplay && formdata.resAuthDisplay.split('\n')[0],
@@ -1754,7 +1755,7 @@ if(editMode === 2) {
     nonResOvrFltr:"0",
     nonResTaxType: formdata.nonResTaxTypeDisplay && formdata.nonResTaxTypeDisplay.split('\n')[0],
     endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
-    method:"Z",
+    method:formdata.method? formdata.method: "N",
     rate: formdata.rate,
     calcMsg: editMode === 2 ? (formdata.calcMsgDisplay === "N" ? "false": "true") : formdata.showcalcmesg,
     wgRpt: formdata.wageReportingMethod,
