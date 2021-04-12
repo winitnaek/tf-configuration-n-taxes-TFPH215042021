@@ -485,7 +485,7 @@ export function buildUsageGridDataInput(pageid, store,item) {
   let state = store.getState();
   console.log(state);
   let input;
-  if (pageid === 'unemploymentCompanyOverrides' || pageid === 'customNexusCompanyData') {
+  if (pageid === 'unemploymentCompanyOverrides' || pageid === 'customNexusCompanyData' || pageid==='worksiteCompanies') {
     input = {
       pageId: pageid,
       dataset: appDataset(),
@@ -507,6 +507,12 @@ export function buildUsageGridDataInput(pageid, store,item) {
       userId: appUserId(),
       taxCode:item.code,
       taxName:item.code
+    }
+  }else if(pageid==='whatifEmp'){
+    input = {
+      pageId: pageid,
+      dataset: appDataset(),
+      userId: appUserId()
     }
   }
   return input;
