@@ -1778,7 +1778,7 @@ if(editMode === 2) {
     pageId: pageid,
     dataset: appDataset(),
     userId: appUserId(),
-    emplGroup: filterFormData.id,
+    emplGroup: filterFormData.id ? filterFormData.id: parentInfo.id,
     ovrType: formdata.ovrType,
     startDate: moment(formdata.startDate).format("MM/DD/YYYY"), 
     resTaxCode: resTaxCode1,
