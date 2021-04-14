@@ -772,7 +772,8 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       pageId: "counties", 
       dataset: appDataset(),
       userId: appUserId(),
-      state: formValues.state || patten
+      // state: formValues.state || patten,
+      state: patten
 
     }
     return input;
@@ -783,8 +784,8 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       pageId: "placeCode", 
       dataset: appDataset(),
       userId: appUserId(),
-      state: formValues.state,
-      countyName: formValues.countyName,
+      state: formValues.state || formData.state,
+      countyName: formValues.countyName || formData.countyName,
       // countyName: formValues.countyName.substring(formValues.countyName.indexOf('(') + 1 , formValues.countyName.length - 1),
       pattern: patten 
     }
@@ -796,7 +797,7 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       pageId: "schoolDistrict", 
       dataset: appDataset(),
       userId: appUserId(),
-      state: formValues.state,
+      state: formValues.state || formData.state,
       pattern: patten 
     }
     return input;
@@ -1626,29 +1627,29 @@ function buildAddressOverridesSaveInput(pageid, formdata, editMode, state) {
     streetName: formdata.fname,
     state: formdata.state,
     countyName: formdata.countyName,
-    placeCode: editMode == 1 ? formdata.placeName: formdata.classCode,
-    sdName: editMode == 1 ? formdata.sdName : formdata.schoolDistrictTaxCode,
+    placeCode: (placesplit[1] || '').trim() || formdata.placecode,
+    sdName: formdata.sdName.indexOf('BSI') !== -1 ? formdata.sdName : formdata.schoolDistrictTaxCode,
     postDirection: formdata.fpost,
     startNumber: formdata.fadd || formdata.alphaNumericStartingNumber,
     endNumber: formdata.tadd || formdata.alphaNumericEndingNumber,
     snt: formdata.snt,
     secUnit: formdata.sunit,
-    placesCode: editMode == 1 ? formdata.placeName: formdata.classCode,
+    placesCode: useplaceName ? placesplit[0].trim() : formdata.classCode,
     parity: formdata.parity,
     addChangeDate: moment().format("YYYYMMDD"),
     streetType: formdata.ftype,
     preDirection: formdata.fpre,
     showMessage: formdata.showmsg,
     sdCountyName: "FAIRFIELD",
-    taxCode: editMode == 1 ? formdata.sdName : formdata.schoolDistrictTaxCode,
+    taxCode: formdata.sdName.indexOf('BSI') !== -1 ? formdata.sdName : formdata.schoolDistrictTaxCode,
     county: formdata.countyName,
-    placeName: editMode == 1 ? formdata.placeName: formdata.classCode,
-    classCode: formdata.placeName,
+    placeName: (placesplit[2] || '').trim() || formdata.placeName,
+    classCode: useplaceName ? (placesplit[0] || '').trim() : formdata.classCode,
     postalCode: formdata.fzip,
-    placeCodeAutoCompl: editMode == 1 ? formdata.placeName: formdata.classCode,
-    classesCode: formdata.classCode || "",
+    placeCodeAutoCompl: useplaceName ? formdata.placeName : (formdata.classCode + ' | ' + formdata.placecode + ' | ' + formdata.placeName),
+    classesCode: "",
     placesName: "",
-    schoolDistrictAutoCompl: editMode == 1 ? formdata.sdName : formdata.schoolDistrictTaxCode,
+    schoolDistrictAutoCompl: formdata.sdName.indexOf('BSI') !== -1 ? formdata.sdName : formdata.schoolDistrictTaxCode,
     sdCode: "",
     schooldistrictCode: "",
     schooldistrictName: "",
