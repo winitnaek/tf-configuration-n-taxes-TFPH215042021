@@ -1620,6 +1620,9 @@ function buildAddressOverridesSaveInput(pageid, formdata, editMode, state) {
   } else if (editMode == 2) {
     editRec = "true";
   }
+  const placesplit = formdata.placeName.split('|');
+  const useplaceName = formdata.placeName.indexOf('|') !== -1;
+
   let input = {
     pageId: pageid,
     dataset: appDataset(),
