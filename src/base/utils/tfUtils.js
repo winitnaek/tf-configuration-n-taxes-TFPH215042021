@@ -1750,6 +1750,13 @@ function buildReciprocalOverrideSaveInput(pageid, formdata, editMode, state) {
   const filterFormData = state.formFilterData;
   const parentInfo = state.parentInfo;
 if(editMode === 2) {
+  let mtds='N';
+  if(formdata.ovrType==1){
+    mtds = formdata.calculationMethod;
+  }else if(formdata.ovrType==2){
+    mtds = formdata.calculationMthd;
+  }
+   
   return {
     pageId: pageid,
     dataset: appDataset(),
@@ -1766,11 +1773,11 @@ if(editMode === 2) {
     nonResOvrFltr:"0",
     nonResTaxType: formdata.nonResTaxTypeDisplay && formdata.nonResTaxTypeDisplay.split('\n')[0],
     endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
-    method:formdata.method? formdata.method: "N",
+    method:mtds,
     rate: formdata.rate,
-    calcMsg: editMode === 2 ? (formdata.calcMsgDisplay === "N" ? "false": "true") : formdata.showcalcmesg,
+    calcMsg: editMode === 2 ? (formdata.showreportmesg === false ? "false": "true") : formdata.showcalcmesg,
     wgRpt: formdata.wageReportingMethod,
-    rptMsg: editMode === 2 ? (formdata.rptMsgDisplay === "N" ? "false" : "true") : formdata.showreportmesg,
+    rptMsg: editMode === 2 ? (formdata.showreportmesg === false ? "false" : "true") : formdata.showreportmesg,
     editMode,
 }
 } else {
