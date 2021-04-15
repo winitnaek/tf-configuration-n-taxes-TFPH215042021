@@ -197,7 +197,17 @@ export function decorateData(griddata, pageid) {
       value.authorityCode = filterData.authorityCodeNoall;
     });
     return griddata;
-  } else {
+  }if (pageid == "reciprocalOverride") {
+    griddata.forEach(function (value) {
+      if(value.calcMsgDisplay==='Y'){
+        value.calcMsg=true;
+      }
+      if(value.rptMsgDisplay==='Y'){
+        value.rptMsg=true;
+      }  
+    });
+    return griddata;
+  }else {
     return griddata;
   }
 }
@@ -1775,9 +1785,9 @@ if(editMode === 2) {
     endDate: moment(formdata.endDate).format("MM/DD/YYYY"),
     method:mtds,
     rate: formdata.rate,
-    calcMsg: editMode === 2 ? (formdata.showreportmesg === false ? "false": "true") : formdata.showcalcmesg,
+    calcMsg: editMode === 2 ? (formdata.showcalcmesg === false ? false: true) : formdata.showcalcmesg,
     wgRpt: formdata.wageReportingMethod,
-    rptMsg: editMode === 2 ? (formdata.showreportmesg === false ? "false" : "true") : formdata.showreportmesg,
+    rptMsg: editMode === 2 ? (formdata.showreportmesg === false ? false : true) : formdata.showreportmesg,
     editMode,
 }
 } else {
