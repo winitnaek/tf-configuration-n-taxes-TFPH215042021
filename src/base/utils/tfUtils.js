@@ -808,7 +808,8 @@ export function buildAutoCompSelInput(pageid, store, patten, formValues = {}) {
       pageId: pageid, 
       dataset: appDataset(),
       userId: appUserId(),
-      authCode: formValues["usrauthcd"] && formValues["usrauthcd"].bsiauth || formData.bsiauth,
+      // authCode: formValues["usrauthcd"] && formValues["usrauthcd"].bsiauth || formData.bsiauth,
+      authCode: formValues.usrauthcd,
       taxType: patten
     }
 
